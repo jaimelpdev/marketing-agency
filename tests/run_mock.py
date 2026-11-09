@@ -1,6 +1,6 @@
 """
 Prueba completa sin internet: simula Groq, Pollinations e Instagram.
-Uso:  python tests/run_mock.py   (trabaja sobre una copia temporal del repositorio)
+Uso:  python tests/run_mock.py   (trabaja sobre una copia temporal; simula también el servidor de la agencia)
 """
 import http.server
 import json
@@ -52,6 +52,64 @@ def mock_routes(page):
 
 
 import subprocess  # noqa: E402
+calls = []
+STATUS = {}
+USERS = [
+    {"id": "u_ana", "name": "Ana", "ig": {"connected": True, "username": "ana_academia"},
+     "config": {"marca": {"name": "Academia Ana", "about": "Clases de simracing", "ig": "@ana_academia", "acc": "#ff3b30", "bg": "#0b0d12", "style": "racing"},
+                "visual": {"bgMode": "ai", "imgPer": "scene", "agentVisuals": True},
+                "plan": {"modo": "smart", "auto": True, "max_por_dia": 2, "max_semana": 5, "formatos": ["reel", "historia", "post", "carrusel"], "zona_horaria": "Europe/Madrid"}}},
+    {"id": "u_luis", "name": "Luis", "ig": {"connected": False}, "config": {"marca": {"name": "Luis"}}},
+]
+
+
+class H(http.server.SimpleHTTPRequestHandler):
+    def __init__(self, *a, **k):
+        super().__init__(*a, directory=str(work / "docs"), **k)
+
+    def log_message(self, *a):
+        pass
+
+    def _json(self, obj, code=200):
+        b = json.dumps(obj).encode()
+        self.send_response(code)
+        self.send_header("content-type", "application/json")
+        self.end_headers()
+        self.wfile.write(b)
+
+    def _auth(self):
+        return self.headers.get("authorization") == "Bearer admin-test"
+
+    def do_GET(self):
+        if self.path.startswith("/admin/"):
+            if not self._auth():
+                return self._json({"error": {"message": "no"}}, 401)
+            if self.path == "/admin/users":
+                return self._json({"users": USERS})
+        return super().do_GET()
+
+    def do_PUT(self):
+        n = int(self.headers.get("content-length", 0))
+        body = json.loads(self.rfile.read(n) or b"{}")
+        if self.path.startswith("/admin/status/") and self._auth():
+            STATUS[self.path.rsplit("/", 1)[1]] = body
+            return self._json({"ok": True})
+        self._json({"error": {"message": "?"}}, 404)
+
+    def do_POST(self):
+        n = int(self.headers.get("content-length", 0))
+        body = json.loads(self.rfile.read(n) or b"{}")
+        if self.path == "/admin/ig" and self._auth():
+            calls.append((body["userId"], body["action"], json.dumps(body.get("params", body.get("id")))[:110]))
+            if body["action"] == "status":
+                return self._json({"status_code": "FINISHED"})
+            return self._json({"id": f"c{len(calls)}"})
+        self._json({"error": {"message": "?"}}, 404)
+
+
+srv = http.server.ThreadingHTTPServer(("127.0.0.1", 8765), H)
+threading.Thread(target=srv.serve_forever, daemon=True).start()
+os.environ.update({"AGENCIA_API": "http://127.0.0.1:8765", "AGENCIA_ADMIN_TOKEN": "admin-test", "PAGES_URL": "http://127.0.0.1:8765"})
 import daily  # noqa: E402
 daily.install_routes = mock_routes
 # voz simulada: un tono cuya duración depende del número de palabras
@@ -65,61 +123,31 @@ subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-f", "lavfi", "-i", "sine
 os.environ["POLLINATIONS_TOKEN"] = "x"
 daily.main()
 
-queue = json.loads((work / "content/queue.json").read_text())
-print("\nCOLA:")
-for q in queue:
-    if q["media"][0].endswith(".mp4"):
-        r = subprocess.run(["ffprobe", "-v", "error", "-show_entries", "stream=codec_name,codec_type:format=duration", "-of", "compact", str(work / "docs" / q["media"][0])], capture_output=True, text=True)
-        print("  ", q["tipo"], r.stdout.strip().replace("\n", " | "))
+qpath = work / "content/users/u_ana/queue.json"
+queue = json.loads(qpath.read_text())
+assert not (work / "content/users/u_luis").exists(), "Luis no tiene Instagram: no se planifica"
+print("\nCOLA DE ANA:")
 for q in queue:
     print(" ", q["publishAt"], q["tipo"], q["media"])
     for m in q["media"]:
         assert (work / "docs" / m).exists(), m
+    if q["media"][0].endswith(".mp4"):
+        r = subprocess.run(["ffprobe", "-v", "error", "-show_entries", "stream=codec_name,codec_type:format=duration", "-of", "compact", str(work / "docs" / q["media"][0])], capture_output=True, text=True)
+        print("    ", r.stdout.strip().replace("\n", " | "))
+assert "u_ana" in STATUS and STATUS["u_ana"]["queue"], "la app recibe el estado"
 
-# ---- publicar contra una API de Instagram simulada ----
-calls = []
-
-
-class H(http.server.SimpleHTTPRequestHandler):
-    def __init__(self, *a, **k):
-        super().__init__(*a, directory=str(work / "docs"), **k)
-
-    def log_message(self, *a):
-        pass
-
-    def do_POST(self):
-        n = int(self.headers.get("content-length", 0))
-        body = self.rfile.read(n).decode()
-        calls.append(("POST", self.path, body[:160]))
-        self.send_response(200)
-        self.send_header("content-type", "application/json")
-        self.end_headers()
-        self.wfile.write(json.dumps({"id": f"c{len(calls)}"}).encode())
-
-    def do_GET(self):
-        if self.path.startswith("/v23.0/"):
-            calls.append(("GET", self.path[:60], ""))
-            self.send_response(200)
-            self.send_header("content-type", "application/json")
-            self.end_headers()
-            self.wfile.write(b'{"status_code":"FINISHED"}')
-        else:
-            super().do_GET()
-
-
-srv = http.server.ThreadingHTTPServer(("127.0.0.1", 8765), H)
-threading.Thread(target=srv.serve_forever, daemon=True).start()
 tz = ZoneInfo("Europe/Madrid")
-for q in queue:  # todo vence ya
+for q in queue:
     q["publishAt"] = (datetime.now(tz) - timedelta(minutes=5)).isoformat()
-(work / "content/queue.json").write_text(json.dumps(queue))
-os.environ.update({"IG_USER_ID": "17840000", "IG_ACCESS_TOKEN": "tok", "IG_API_HOST": "http://127.0.0.1:8765", "PAGES_URL": "http://127.0.0.1:8765"})
+qpath.write_text(json.dumps(queue))
 import publish  # noqa: E402
 publish.main()
 srv.shutdown()
-final = json.loads((work / "content/queue.json").read_text())
+final = json.loads(qpath.read_text())
 print("\nESTADOS:", [(q["tipo"], q["status"], q.get("error", "")) for q in final])
-print("LLAMADAS A INSTAGRAM:")
+assert all(q["status"] == "published" for q in final)
+print("LLAMADAS AL SERVIDOR (Instagram):")
 for c in calls:
     print("  ", c)
-print("\nCarpeta de prueba:", work)
+print("\nESTADO ENVIADO A LA APP:", [(x["tipo"], x["status"]) for x in STATUS["u_ana"]["queue"]])
+print("\n✓ Todo el recorrido funciona. Carpeta de prueba:", work)

@@ -1,0 +1,31 @@
+name = "agencia-marketing"
+main = "src/index.js"
+compatibility_date = "2026-01-01"
+
+# Renueva los tokens de Instagram cada día a las 04:23 UTC
+[triggers]
+crons = ["23 4 * * *"]
+
+# 1) Crea el almacén:  npx wrangler kv namespace create KV
+# 2) Pega aquí el id que te devuelve:
+[[kv_namespaces]]
+binding = "KV"
+id = "PEGA_AQUI_EL_ID_DEL_KV"
+
+[vars]
+# Dirección de tu app en GitHub Pages (a donde vuelve el usuario tras conectar Instagram)
+APP_URL = "https://jaimelpdev.github.io/marketing-agency/"
+# Orígenes que pueden usar el servidor (separados por comas)
+APP_ORIGINS = "https://jaimelpdev.github.io"
+GROQ_MODEL = "openai/gpt-oss-120b"
+# Límites diarios por persona
+LLM_PER_DAY = "60"
+IMG_PER_DAY = "300"
+
+# Secretos (NO van aquí). Créalos con:  npx wrangler secret put NOMBRE
+#   GROQ_API_KEY        tu clave de Groq
+#   POLLINATIONS_TOKEN  tu token de Pollinations (opcional)
+#   ADMIN_TOKEN         una contraseña larga inventada (la usa GitHub Actions)
+#   INVITE_CODES        códigos de invitación separados por comas, p. ej. "jaime-2026,ana-xyz"
+#   IG_APP_ID           id de tu app de Instagram (Meta for Developers)
+#   IG_APP_SECRET       secreto de tu app de Instagram

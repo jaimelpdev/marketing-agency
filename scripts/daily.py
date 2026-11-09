@@ -1,16 +1,15 @@
 """
-Agencia de marketing IA · tarea diaria
---------------------------------------
+Agencia de marketing IA · tarea diaria (multiusuario)
+------------------------------------------------------
+Para cada persona de la agencia (con marca configurada e Instagram conectado):
 1. Abre la web de la agencia (docs/index.html) en un Chrome sin ventana.
-2. Le pide a Groq el plan del día (reels, historias, posts, carruseles) con tu marca.
-3. Genera las imágenes de fondo (Pollinations) y renderiza cada pieza:
-   reels/historias -> MP4 (H.264 + AAC), posts/carruseles -> JPG.
-4. Guarda los archivos en docs/media/ (se publican en GitHub Pages con enlace público)
-   y añade cada pieza a content/queue.json con su hora de publicación.
+2. Pide a la IA el plan (qué días publicar, formatos, horas, sonido) respetando sus límites.
+3. Genera imágenes, locución y música y renderiza: reels/historias -> MP4, posts/carruseles -> JPG.
+4. Guarda los archivos en docs/media/<persona>/ (GitHub Pages les da un enlace público)
+   y añade cada pieza a content/users/<persona>/queue.json.
 
-Variables de entorno:
-  GROQ_API_KEY        (obligatoria)
-  POLLINATIONS_TOKEN  (opcional, más rápido y sin marca de agua)
+Variables de entorno: GROQ_API_KEY, POLLINATIONS_TOKEN (opcional), AGENCIA_API, AGENCIA_ADMIN_TOKEN,
+FORCE=1 (rehacer el plan), ONLY_USER=<id> (solo una persona).
 """
 import base64
 import json
@@ -26,12 +25,11 @@ from zoneinfo import ZoneInfo
 
 from playwright.sync_api import sync_playwright
 
+from common import api, summarize
+
 ROOT = Path(__file__).resolve().parent.parent
 DOCS = ROOT / "docs"
 CONTENT = ROOT / "content"
-CONFIG = ROOT / "agency.config.json"
-QUEUE = CONTENT / "queue.json"
-HISTORY = CONTENT / "history.json"
 MUSIC_DIR = ROOT / "assets" / "music"
 FPS = 30
 CORS = {
@@ -209,37 +207,32 @@ window.__agRender = {
 """
 
 
-def main():
-    conf = load_json(CONFIG, None)
-    if not conf:
-        sys.exit("Falta agency.config.json en la raíz del repositorio.")
-    key = os.environ.get("GROQ_API_KEY", "").strip()
-    if not key:
-        sys.exit("Falta el secreto GROQ_API_KEY.")
+def plan_user(browser, user, key):
+    """Planifica y crea el contenido de una persona. Devuelve True si hizo un plan nuevo."""
+    uid, conf = user["id"], user.get("config") or {}
+    udir = CONTENT / "users" / uid
+    queue_path, hist_path = udir / "queue.json", udir / "history.json"
     plan_conf = conf.get("plan", {})
     tz = ZoneInfo(plan_conf.get("zona_horaria", "Europe/Madrid"))
-    today = datetime.now(tz).date().isoformat()
-    queue = load_json(QUEUE, [])
-    modo = str(plan_conf.get("modo", "smart"))
     now = datetime.now(tz)
+    today = now.date().isoformat()
+    queue = load_json(queue_path, [])
+    modo = str(plan_conf.get("modo", "smart"))
     if not os.environ.get("FORCE"):
         if any(q.get("date") == today and q.get("source") == "auto" for q in queue):
-            log("Ya se planificó hoy. Usa FORCE=1 para rehacerlo.")
-            return
-        if modo == "smart":
-            future = [q for q in queue if q.get("status") == "pending" and datetime.fromisoformat(q["publishAt"]) > now + timedelta(hours=24)]
-            if future:
-                log(f"Plan de la semana en marcha ({len(future)} piezas programadas más allá de mañana). Hoy no hace falta planificar.")
-                return
-    history = load_json(HISTORY, {"items": []})
-    allowed = plan_conf.get("formatos", ["reel", "historia", "post", "carrusel"])
+            log("  Ya se planificó hoy.")
+            return False
+        future = [q for q in queue if q.get("status") == "pending" and datetime.fromisoformat(q["publishAt"]) > now + timedelta(hours=24)]
+        if modo == "smart" and future:
+            log(f"  Plan en marcha ({len(future)} piezas más allá de mañana). Hoy no hace falta planificar.")
+            return False
+    history = load_json(hist_path, {"items": []})
+    allowed = plan_conf.get("formatos") or ["reel", "historia", "post", "carrusel"]
     voices = {**VOICES, **conf.get("voces", {})}
-
     cfg = dict(conf.get("marca", {}))
     cfg["v"] = dict(conf.get("visual", {}))
-    if cfg["v"].get("bgMode") == "stock":
-        cfg["v"]["bgMode"] = "ai"  # en el servidor solo usamos imágenes IA (no clips de stock)
-
+    if cfg["v"].get("bgMode") in ("stock", "media"):
+        cfg["v"]["bgMode"] = "ai"
     init = {
         "ma_cfg": json.dumps(cfg),
         "ma_groq_key": json.dumps(key),
@@ -247,59 +240,44 @@ def main():
         "ma_hist": json.dumps(history),
         "ma_poll_token": json.dumps(os.environ.get("POLLINATIONS_TOKEN", "")),
     }
-    init_js = "try{localStorage.clear();" + "".join(
+    init_js = "window.__AGENCIA_SERVER=true;try{localStorage.clear();" + "".join(
         f"localStorage.setItem({json.dumps(k)},{json.dumps(v)});" for k, v in init.items()) + "}catch(e){}"
 
-    with sync_playwright() as pw:
-        browser = pw.chromium.launch(args=["--no-sandbox", "--autoplay-policy=no-user-gesture-required"],
-                                     executable_path=os.environ.get("CHROME_PATH") or None)
-        page = browser.new_page(viewport={"width": 480, "height": 900})
-        page.on("pageerror", lambda e: log("Error en la página:", e))
+    page = browser.new_page(viewport={"width": 480, "height": 900})
+    try:
+        page.on("pageerror", lambda e: log("  Error en la página:", e))
         install_routes(page)
         page.add_init_script(init_js)
         page.goto((DOCS / "index.html").as_uri())
         page.wait_for_function("typeof S!=='undefined' && typeof buildScenes==='function'")
         page.evaluate("ensureFonts()")
         page.wait_for_timeout(1500)
-
-        # Sin clips de stock ni fotos propias en el servidor; formatos permitidos
-        page.evaluate("""(allowed)=>{
-          delete FONDOS.stock; delete FONDOS.mis;
-          window.__allowed = allowed;
-        }""", allowed)
+        page.evaluate("(allowed)=>{ delete FONDOS.stock; delete FONDOS.mis; window.__allowed = allowed; }", allowed)
         page.evaluate("a=>{S.count=a[0]; PLAN_LIMITS={maxDia:a[1],maxSemana:a[2]}; AUDIO_CAPS=true;}",
-                      [modo, int(plan_conf.get("max_por_dia", 2)), int(plan_conf.get("max_semana", 7))])
-
-        log("Pidiendo el plan del día a Groq…")
+                      [modo, int(plan_conf.get("max_por_dia", 2)), int(plan_conf.get("max_semana", 5))])
+        log("  Pidiendo el plan a la IA…")
         page.click("#genBtn")
         page.wait_for_function("!document.querySelector('#genBtn').disabled", timeout=300_000)
         status = page.inner_text("#genStatus")
-        n = page.evaluate("(S.today&&S.today.videos||[]).length")
         if "recomienda no publicar" in status:
-            log(status)
-            browser.close()
-            return
+            log("  " + status)
+            return False
+        n = page.evaluate("(S.today&&S.today.videos||[]).length")
         if not n or "No he podido" in status:
-            browser.close()
-            sys.exit("No se pudo crear el plan: " + status)
-        log("Estrategia:", page.evaluate("S.today.estrategia"))
-
-        # Ajustes para publicación automática: formatos permitidos y stickers (la API no los admite)
+            raise RuntimeError("No se pudo crear el plan: " + status)
         page.evaluate("""()=>{
           S.today.videos = S.today.videos.filter(p=>window.__allowed.includes(p.tipo));
           S.today.videos.forEach(p=>{ if(p.tipo==='historia' && p.sticker){ p.cta = p.sticker.texto + ' · respóndeme por DM'; p.sticker=null; } });
         }""")
         n = page.evaluate("S.today.videos.length")
-        log(f"{n} piezas en el plan.")
-
-        log("Generando imágenes de fondo…")
+        log("  Estrategia:", page.evaluate("S.today.estrategia"))
+        log(f"  {n} piezas. Generando imágenes…")
         page.evaluate("prefetchAll()")
         page.wait_for_function("typeof pendingA==='undefined' || pendingA.size===0", timeout=1_200_000, polling=2000)
         page.wait_for_timeout(1000)
         page.evaluate(RENDER_JS)
-
         pieces = page.evaluate("JSON.parse(JSON.stringify(S.today.videos))")
-        out_root = DOCS / "media" / today
+        out_root = DOCS / "media" / uid / today
         if out_root.exists():
             shutil.rmtree(out_root)
         out_root.mkdir(parents=True, exist_ok=True)
@@ -309,7 +287,7 @@ def main():
             folder = out_root / pid
             folder.mkdir(parents=True, exist_ok=True)
             info = page.evaluate("i=>__agRender.info(i)", i)
-            log(f"[{i + 1}/{n}] {p['tipo']} · {p.get('hora', '')} · {p.get('tema', '')}")
+            log(f"  [{i + 1}/{n}] {p['tipo']} · {p.get('hora', '')} · {p.get('tema', '')}")
             media = []
             if info["video"]:
                 with tempfile.TemporaryDirectory() as td:
@@ -318,13 +296,13 @@ def main():
                     if p.get("audio") == "voz_y_musica":
                         try:
                             voice_clips, vname = make_voice(page, i, p, tdp, voices)
-                            log(f"  voz: {vname} ({len(voice_clips)} frases)")
+                            log(f"    voz: {vname} ({len(voice_clips)} frases)")
                         except Exception as e:
-                            log("  ⚠ No se pudo generar la voz, va solo con música:", e)
+                            log("    ⚠ No se pudo generar la voz, va solo con música:", e)
                             page.evaluate("i=>{delete S.today.videos[i]._durs;}", i)
                             voice_clips = []
                     music = pick_music(p.get("musica"))
-                    log(f"  música: {music.relative_to(MUSIC_DIR) if music else 'ninguna (añade pistas en assets/music/)'} · ambiente {p.get('musica') or '-'}")
+                    log(f"    música: {music.relative_to(MUSIC_DIR) if music else 'ninguna'} · ambiente {p.get('musica') or '-'}")
                     total = float(page.evaluate("i=>buildScenes(S.today.videos[i]).total", i))
                     count = int(total * FPS + 0.999)
                     f = 0
@@ -350,23 +328,65 @@ def main():
             })
         hist = page.evaluate("S.hist")
         estrategia = page.evaluate("S.today.estrategia")
-        browser.close()
+    finally:
+        page.close()
 
     queue = [q for q in queue if not (q.get("date") == today and q.get("source") == "auto")] + new_items
     queue.sort(key=lambda q: q["publishAt"])
-    save_json(QUEUE, queue)
-    save_json(HISTORY, hist)
-    save_json(CONTENT / "plans" / f"{today}.json", {"date": today, "estrategia": estrategia, "piezas": pieces})
+    save_json(queue_path, queue)
+    save_json(hist_path, hist)
+    save_json(udir / "plans" / f"{today}.json", {"date": today, "estrategia": estrategia, "piezas": pieces})
+    try:
+        api("PUT", f"/admin/status/{uid}", {"estrategia": estrategia, "queue": summarize(queue)})
+    except Exception as e:
+        log("  ⚠ No se pudo avisar a la app:", e)
 
-    # Limpieza: borra media antigua ya publicada para no llenar el repositorio
+    # Limpieza de archivos antiguos ya publicados
     keep = int(plan_conf.get("dias_guardar_media", 10))
-    limit = (datetime.now(tz) - timedelta(days=keep)).date().isoformat()
-    busy = {m.split("/")[1] for q in queue if q.get("status") == "pending" for m in q.get("media", []) if m.count("/") >= 2}
-    for d in (DOCS / "media").glob("*"):
+    limit = (now - timedelta(days=keep)).date().isoformat()
+    busy = {m.split("/")[2] for q in queue if q.get("status") == "pending" for m in q.get("media", []) if m.count("/") >= 3}
+    for d in (DOCS / "media" / uid).glob("*"):
         if d.is_dir() and d.name < limit and d.name not in busy:
             shutil.rmtree(d)
-            log("Borrada media antigua:", d.name)
-    log("Listo:", len(new_items), "piezas en la cola.")
+    log(f"  Listo: {len(new_items)} piezas en la cola.")
+    return True
+
+
+def main():
+    key = os.environ.get("GROQ_API_KEY", "").strip()
+    if not key:
+        sys.exit("Falta el secreto GROQ_API_KEY.")
+    users = api("GET", "/admin/users").get("users", [])
+    only = os.environ.get("ONLY_USER", "").strip()
+    log(f"{len(users)} personas en la agencia.")
+    errors = 0
+    with sync_playwright() as pw:
+        browser = pw.chromium.launch(args=["--no-sandbox", "--autoplay-policy=no-user-gesture-required"],
+                                     executable_path=os.environ.get("CHROME_PATH") or None)
+        for u in users:
+            if only and u["id"] != only:
+                continue
+            conf = u.get("config") or {}
+            marca = conf.get("marca") or {}
+            label = f"{u.get('name')} ({u['id']})"
+            if not (marca.get("name") or marca.get("about")):
+                log(f"— {label}: sin marca configurada, se salta.")
+                continue
+            if not (u.get("ig") or {}).get("connected"):
+                log(f"— {label}: sin Instagram conectado, se salta.")
+                continue
+            if (conf.get("plan") or {}).get("auto") is False:
+                log(f"— {label}: piloto automático en pausa.")
+                continue
+            log(f"▶ {label}")
+            try:
+                plan_user(browser, u, key)
+            except Exception as e:
+                errors += 1
+                log(f"  ✗ Error con {label}:", e)
+        browser.close()
+    if errors:
+        sys.exit(f"{errors} persona(s) con errores; revisa el registro.")
 
 
 if __name__ == "__main__":

@@ -27,10 +27,8 @@ jobs:
 
       - name: Publicar lo que toca
         env:
-          IG_USER_ID: ${{ secrets.IG_USER_ID }}
-          IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
-          IG_API_HOST: ${{ vars.IG_API_HOST }}
-          IG_API_VERSION: ${{ vars.IG_API_VERSION }}
+          AGENCIA_API: ${{ vars.AGENCIA_API }}
+          AGENCIA_ADMIN_TOKEN: ${{ secrets.AGENCIA_ADMIN_TOKEN }}
           PAGES_URL: ${{ vars.PAGES_URL }}
           DRY_RUN: ${{ vars.DRY_RUN }}
         run: python scripts/publish.py
@@ -39,5 +37,5 @@ jobs:
         run: |
           git config user.name "agencia-bot"
           git config user.email "agencia-bot@users.noreply.github.com"
-          git add content/queue.json
+          git add content
           git diff --cached --quiet || (git commit -m "📤 Publicación $(date -u +%FT%H:%M)" && git pull --rebase && git push)

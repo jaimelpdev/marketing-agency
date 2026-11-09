@@ -9,6 +9,10 @@ on:
         description: "Rehacer el plan aunque ya haya uno en marcha"
         type: boolean
         default: false
+      only_user:
+        description: "Solo esta persona (id u_…); vacío = todas"
+        type: string
+        default: ""
 
 permissions:
   contents: write
@@ -40,6 +44,9 @@ jobs:
         env:
           GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
           POLLINATIONS_TOKEN: ${{ secrets.POLLINATIONS_TOKEN }}
+          AGENCIA_API: ${{ vars.AGENCIA_API }}
+          AGENCIA_ADMIN_TOKEN: ${{ secrets.AGENCIA_ADMIN_TOKEN }}
+          ONLY_USER: ${{ github.event.inputs.only_user }}
           FORCE: ${{ github.event.inputs.force == 'true' && '1' || '' }}
         run: python scripts/daily.py
 

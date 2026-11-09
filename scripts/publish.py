@@ -1,16 +1,11 @@
 """
-Agencia de marketing IA · publicación en Instagram
----------------------------------------------------
-Revisa content/queue.json y publica en Instagram las piezas cuya hora ya ha llegado,
-usando la API oficial de Instagram (Graph API). Los archivos se leen desde GitHub Pages.
+Agencia de marketing IA · publicación en Instagram (multiusuario)
+------------------------------------------------------------------
+Revisa la cola de cada persona (content/users/<id>/queue.json) y publica lo que ya toca.
+Los tokens de Instagram están en el servidor de la agencia: este script le pide al servidor
+que cree y publique cada pieza. Los archivos se leen desde GitHub Pages.
 
-Variables de entorno:
-  IG_USER_ID        id de tu cuenta profesional de Instagram (obligatoria)
-  IG_ACCESS_TOKEN   token de larga duración (obligatoria)
-  IG_API_HOST       graph.instagram.com (por defecto) o graph.facebook.com si tu token es de Facebook Login
-  IG_API_VERSION    v23.0 por defecto
-  PAGES_URL         URL pública de tu GitHub Pages (si no, se deduce de GITHUB_REPOSITORY)
-  DRY_RUN=1         simula sin publicar
+Variables de entorno: AGENCIA_API, AGENCIA_ADMIN_TOKEN, PAGES_URL (opcional), DRY_RUN=1 (simula).
 """
 import json
 import os
@@ -22,9 +17,9 @@ from zoneinfo import ZoneInfo
 
 import requests
 
+from common import api, pages_url, summarize
+
 ROOT = Path(__file__).resolve().parent.parent
-QUEUE = ROOT / "content" / "queue.json"
-CONFIG = ROOT / "agency.config.json"
 MAX_ATTEMPTS = 4
 MAX_DELAY_HOURS = 20  # si una pieza lleva más de 20 h de retraso, se descarta
 
@@ -33,47 +28,18 @@ def log(*a):
     print("[publicar]", *a, flush=True)
 
 
-def pages_url():
-    url = os.environ.get("PAGES_URL", "").strip().rstrip("/")
-    if url:
-        return url
-    repo = os.environ.get("GITHUB_REPOSITORY", "")
-    if "/" not in repo:
-        sys.exit("Define PAGES_URL (la dirección de tu GitHub Pages).")
-    owner, name = repo.split("/", 1)
-    if name.lower() == f"{owner.lower()}.github.io":
-        return f"https://{owner.lower()}.github.io"
-    return f"https://{owner.lower()}.github.io/{name}"
-
-
 class IG:
-    def __init__(self):
-        self.uid = os.environ.get("IG_USER_ID", "").strip()
-        self.token = os.environ.get("IG_ACCESS_TOKEN", "").strip()
-        host = os.environ.get("IG_API_HOST", "graph.instagram.com").strip()
-        ver = os.environ.get("IG_API_VERSION", "v23.0").strip()
-        self.base = (host if host.startswith("http") else "https://" + host).rstrip("/") + "/" + ver
-        if not self.uid or not self.token:
-            sys.exit("Faltan los secretos IG_USER_ID y/o IG_ACCESS_TOKEN.")
-
-    def _check(self, r):
-        try:
-            j = r.json()
-        except Exception:
-            j = {}
-        if r.status_code >= 400 or "error" in j:
-            msg = (j.get("error") or {}).get("message") or r.text[:300]
-            raise RuntimeError(f"Instagram {r.status_code}: {msg}")
-        return j
+    """Instagram a través del servidor de la agencia (los tokens nunca salen de allí)."""
+    def __init__(self, user_id):
+        self.uid = user_id
 
     def container(self, **params):
-        params["access_token"] = self.token
-        return self._check(requests.post(f"{self.base}/{self.uid}/media", data=params, timeout=120))["id"]
+        return api("POST", "/admin/ig", {"userId": self.uid, "action": "container", "params": params})["id"]
 
     def wait(self, cid, timeout=600):
         t0 = time.time()
         while time.time() - t0 < timeout:
-            j = self._check(requests.get(f"{self.base}/{cid}", params={"fields": "status_code,status", "access_token": self.token}, timeout=60))
+            j = api("POST", "/admin/ig", {"userId": self.uid, "action": "status", "id": cid})
             st = j.get("status_code")
             if st in ("FINISHED", "PUBLISHED"):
                 return
@@ -83,8 +49,7 @@ class IG:
         raise RuntimeError("Instagram tardó demasiado en procesar el vídeo")
 
     def publish(self, cid):
-        j = self._check(requests.post(f"{self.base}/{self.uid}/media_publish", data={"creation_id": cid, "access_token": self.token}, timeout=120))
-        return j.get("id")
+        return api("POST", "/admin/ig", {"userId": self.uid, "action": "publish", "id": cid}).get("id")
 
 
 def url_ok(url):
@@ -130,27 +95,21 @@ def publish_item(ig, item, base):
     return ig.publish(cid)
 
 
-def main():
-    conf = json.loads(CONFIG.read_text(encoding="utf-8")) if CONFIG.exists() else {}
-    tz = ZoneInfo(conf.get("plan", {}).get("zona_horaria", "Europe/Madrid"))
-    queue = json.loads(QUEUE.read_text(encoding="utf-8")) if QUEUE.exists() else []
-    now = datetime.now(tz)
-    due = [q for q in queue if q.get("status") == "pending" and datetime.fromisoformat(q["publishAt"]) <= now]
+def publish_user(udir, base, dry):
+    uid = udir.name
+    qpath = udir / "queue.json"
+    queue = json.loads(qpath.read_text(encoding="utf-8")) if qpath.exists() else []
+    due = [q for q in queue if q.get("status") == "pending" and datetime.fromisoformat(q["publishAt"]) <= datetime.now(ZoneInfo("UTC"))]
     if not due:
-        log("Nada que publicar ahora.")
         return
-    dry = bool(os.environ.get("DRY_RUN"))
-    ig = None if dry else IG()
-    base = pages_url()
-    changed = False
+    ig = IG(uid)
     for item in due:
         when = datetime.fromisoformat(item["publishAt"])
-        if now - when > timedelta(hours=MAX_DELAY_HOURS):
+        if datetime.now(ZoneInfo("UTC")) - when > timedelta(hours=MAX_DELAY_HOURS):
             item["status"] = "expired"
             item["error"] = "Demasiado retraso; no se publicó."
-            changed = True
             continue
-        log(f"Publicando {item['tipo']} «{item.get('tema', '')}» ({item['id']})")
+        log(f"[{uid}] Publicando {item['tipo']} «{item.get('tema', '')}»")
         if dry:
             log("  DRY_RUN: se publicaría", [f"{base}/{m}" for m in item["media"]])
             continue
@@ -158,7 +117,7 @@ def main():
             mid = publish_item(ig, item, base)
             item["status"] = "published"
             item["igMediaId"] = mid
-            item["publishedAt"] = datetime.now(tz).isoformat()
+            item["publishedAt"] = datetime.now(ZoneInfo("UTC")).isoformat()
             item.pop("error", None)
             log("  ✓ Publicado:", mid)
         except Exception as e:
@@ -167,9 +126,25 @@ def main():
             if item["attempts"] >= MAX_ATTEMPTS:
                 item["status"] = "failed"
             log("  ✗", e)
-        changed = True
-    if changed:
-        QUEUE.write_text(json.dumps(queue, ensure_ascii=False, indent=2), encoding="utf-8")
+    if dry:
+        return
+    qpath.write_text(json.dumps(queue, ensure_ascii=False, indent=2), encoding="utf-8")
+    try:
+        api("PUT", f"/admin/status/{uid}", {"queue": summarize(queue)})
+    except Exception as e:
+        log("  ⚠ No se pudo avisar a la app:", e)
+
+
+def main():
+    users_dir = ROOT / "content" / "users"
+    dirs = [d for d in users_dir.glob("*") if d.is_dir()] if users_dir.exists() else []
+    if not dirs:
+        log("Nadie tiene contenido en cola todavía.")
+        return
+    dry = bool(os.environ.get("DRY_RUN"))
+    base = pages_url()
+    for d in dirs:
+        publish_user(d, base, dry)
 
 
 if __name__ == "__main__":

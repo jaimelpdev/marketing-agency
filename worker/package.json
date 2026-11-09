@@ -1,0 +1,12 @@
+{
+  "name": "agencia-marketing-worker",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "deploy": "wrangler deploy",
+    "test": "node test/worker.test.mjs"
+  },
+  "devDependencies": {
+    "wrangler": "^4"
+  }
+}

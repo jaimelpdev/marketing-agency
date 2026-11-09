@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Agencia de marketing IA (Groq)</title>
+<title>Agencia de marketing IA</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=Fredoka:wght@600;700&family=Playfair+Display:wght@900&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -171,6 +171,21 @@
   .seg button{white-space:nowrap}
   .day.rest{font-size:17px;opacity:.55;margin:12px 0 4px}
   #gModal{z-index:60}
+
+  #loginOv .card2{background:var(--glass);border:1px solid var(--line);border-radius:22px;padding:18px;margin-top:10px}
+  .acct-sec{background:rgba(0,0,0,.28);border:1px solid var(--line);border-radius:16px;padding:12px 14px;margin-top:12px}
+  .acct-sec h4{margin:0 0 8px;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--accent2)}
+  .igrow{display:flex;align-items:center;gap:10px;justify-content:space-between}
+  .ok-dot{display:inline-block;width:9px;height:9px;border-radius:50%;background:var(--ok);margin-right:6px}
+  .no-dot{display:inline-block;width:9px;height:9px;border-radius:50%;background:#ff6b61;margin-right:6px}
+  .qitem{display:flex;gap:10px;padding:7px 0;border-bottom:1px solid var(--line);font-size:13px;align-items:center}
+  .qitem:last-child{border:0}
+  .qitem .w{color:var(--muted);flex:none;width:96px;font-size:12px}
+  .qitem .s{margin-left:auto;font-size:11.5px;font-weight:800;white-space:nowrap}
+  .sched{background:linear-gradient(135deg,rgba(48,209,88,.12),rgba(255,255,255,.02));border:1px solid var(--line);border-radius:20px;padding:14px 16px;margin-bottom:16px}
+  .sched h3{margin:0 0 6px;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--ok)}
+  .keybox{display:flex;gap:8px;align-items:center}
+  .keybox code{flex:1;background:rgba(0,0,0,.4);border:1px solid var(--line);border-radius:10px;padding:9px 10px;font-size:12px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 </style>
 </head>
 <body>
@@ -181,7 +196,8 @@
     <div class="logo" id="logo">M</div>
     <div><div class="hname" id="hName">Agencia de marketing</div><div class="hsub" id="hSub">Tu contenido de Instagram, en automático</div></div>
     <div class="sp"></div>
-    <button class="pill" id="openGroq" title="Conexiones">⚡</button>
+    <button class="pill" id="openGroq" title="Conexiones" hidden>⚡</button>
+    <button class="pill" id="openAcct">👤 <span id="acctLabel">Cuenta</span></button>
     <button class="pill" id="openBrand">✦ Mi marca</button>
   </header>
 
@@ -212,6 +228,7 @@
     <div class="status" id="genStatus"></div>
   </section>
 
+  <div id="schedBox"></div>
   <div id="stratBox"></div>
   <div class="grid" id="videos"></div>
 
@@ -281,7 +298,6 @@ https://apps.apple.com/…
       <button class="go" id="saveBrand">Todo listo →</button>
       <div class="status" id="brStatus"></div>
       <button class="ghost" id="backPaste">← Volver a analizar desde mi web</button>
-      <button class="ghost" id="exportCfg">⬇ Descargar agency.config.json (para GitHub)</button>
     </div>
   </div>
 </div>
@@ -306,6 +322,54 @@ https://apps.apple.com/…
     <input type="text" id="gPexels" placeholder="Gratis en pexels.com/api" autocomplete="off" spellcheck="false" style="-webkit-text-security:disc">
     <div class="mbtns"><button id="gTest">Probar</button><button class="p" id="gSave">Guardar</button></div>
     <div class="status" id="gStatus"></div>
+  </div>
+</div>
+
+
+<!-- LOGIN -->
+<div class="ov" id="loginOv">
+  <div class="ovin">
+    <div class="eyebrow">Agencia de marketing IA</div>
+    <h2 class="big">Tu agencia <span class="grad">en automático</span></h2>
+    <p class="lead">Planifica, crea y publica en tu Instagram sin que tengas que hacer nada. Entra con tu código de invitación.</p>
+    <div class="card2" id="joinBox">
+      <label class="f" for="lgCode">Código de invitación</label><input type="text" id="lgCode" placeholder="Te lo da quien gestiona la agencia" autocomplete="off">
+      <label class="f" for="lgName">Tu nombre</label><input type="text" id="lgName" placeholder="Ej.: Laura">
+      <button class="go" id="lgJoin">Entrar →</button>
+      <button class="ghost" id="lgHaveKey">Ya tengo una clave de acceso</button>
+    </div>
+    <div class="card2" id="keyBox" hidden>
+      <label class="f" for="lgKey">Clave de acceso</label><input type="text" id="lgKey" placeholder="ak_…" autocomplete="off" spellcheck="false">
+      <button class="go" id="lgKeyBtn">Entrar →</button>
+      <button class="ghost" id="lgBack">← Tengo un código de invitación</button>
+    </div>
+    <div class="status" id="lgStatus"></div>
+  </div>
+</div>
+
+<!-- CUENTA -->
+<div class="modal" id="acctModal">
+  <div class="mbox">
+    <div class="mtop"><strong id="acName">Tu cuenta</strong><button class="x" id="acClose" aria-label="Cerrar">×</button></div>
+    <div class="acct-sec"><h4>📸 Instagram</h4>
+      <div class="igrow"><span id="acIg">—</span><button class="pill" id="acIgBtn">Conectar</button></div>
+      <div class="note" id="acIgNote">Necesitas una cuenta profesional (de empresa o de creador). Si es la primera vez, pide que te añadan como tester de la app.</div>
+    </div>
+    <div class="acct-sec"><h4>🤖 Piloto automático</h4>
+      <div class="chips" id="acAuto"></div>
+      <div class="og"><div class="t">Máximo de publicaciones por semana</div><div class="chips" id="acWeek"></div></div>
+      <div class="og"><div class="t">Máximo por día</div><div class="chips" id="acDay"></div></div>
+      <div class="og"><div class="t">Formatos que puede usar</div><div class="chips" id="acFmt"></div></div>
+      <div class="note">La agencia elige qué días publicar dentro de estos límites y descansa cuando conviene.</div>
+    </div>
+    <div class="acct-sec"><h4>📅 Programado</h4><div id="acQueue"></div></div>
+    <div class="acct-sec"><h4>🔑 Clave de acceso</h4>
+      <div class="keybox"><code id="acKey">—</code><button class="pill" id="acCopy">Copiar</button></div>
+      <div class="note">Guárdala: con ella entras desde otro móvil u ordenador. No la compartas.</div>
+      <div class="note" id="acUsage"></div>
+    </div>
+    <div class="mbtns"><button id="acLogout">Cerrar sesión</button></div>
+    <div class="status" id="acStatus"></div>
   </div>
 </div>
 
@@ -1020,12 +1084,128 @@ if(RETIRED.includes(ls("ma_groq_model"))) ls("ma_groq_model",DEFAULT_MODEL);
 S.sample=groqSample;
 S.downloads={save:async({filename,data})=>{ const url=URL.createObjectURL(data); const a=document.createElement("a"); a.href=url; a.download=filename; document.body.appendChild(a); a.click(); a.remove(); setTimeout(()=>URL.revokeObjectURL(url),60000); return {status:"saved"}; }};
 
-$("#exportCfg").addEventListener("click",async()=>{
+if($("#exportCfg"))$("#exportCfg").addEventListener("click",async()=>{
   BF.forEach(k=>{const i=$("#b_"+k);if(i)S.cfg[k]=i.value.trim();}); S.cfg=normCfg(S.cfg);
   const conf={marca:{name:S.cfg.name,web:S.cfg.web,app:S.cfg.app,ig:S.cfg.ig,cta:S.cfg.cta,about:S.cfg.about,aud:S.cfg.aud,pillars:S.cfg.pillars,tone:S.cfg.tone,acc:S.cfg.acc,bg:S.cfg.bg,style:S.cfg.style},visual:S.cfg.v,
     plan:{modo:"smart",max_por_dia:2,max_semana:7,zona_horaria:Intl.DateTimeFormat().resolvedOptions().timeZone||"Europe/Madrid",formatos:["reel","historia","post","carrusel"],dias_guardar_media:10},modelo:ls("ma_groq_model")||"openai/gpt-oss-120b"};
   try{ await S.downloads.save({filename:"agency.config.json",data:JSON.stringify(conf,null,2)}); setStatus($("#brStatus"),"Descargado ✓ Súbelo a la raíz de tu repositorio.","ok"); }catch(e){ setStatus($("#brStatus"),"No se pudo descargar.","err"); }
 });
+
+
+/* ============ MODO MULTIUSUARIO (servidor de la agencia) ============ */
+let API = "";
+const HOST = { key: ls("ma_key") || "", me: null, plan: { modo: "smart", auto: true, max_por_dia: 2, max_semana: 5, formatos: ["reel", "historia", "post", "carrusel"], dias_guardar_media: 10, zona_horaria: (Intl.DateTimeFormat().resolvedOptions().timeZone || "Europe/Madrid") } };
+async function api(path, opts = {}) {
+  let r;
+  try {
+    r = await fetch(API + path, { method: opts.method || "GET", headers: { ...(opts.body ? { "content-type": "application/json" } : {}), ...(HOST.key ? { authorization: "Bearer " + HOST.key } : {}) }, body: opts.body ? JSON.stringify(opts.body) : undefined });
+  } catch (e) { const er = new Error("No hay conexión con el servidor de la agencia"); er.code = "offline"; throw er; }
+  const j = await r.json().catch(() => ({}));
+  if (!r.ok) { const e = new Error((j.error && j.error.message) || ("Error " + r.status)); e.code = (j.error && j.error.code) || ("http_" + r.status); e.status = r.status; if (r.status === 401 && HOST.key) logout(true); throw e; }
+  return j;
+}
+function confFromState() {
+  const c = S.cfg;
+  return { marca: { name: c.name, web: c.web, app: c.app, ig: c.ig, cta: c.cta, about: c.about, aud: c.aud, pillars: c.pillars, tone: c.tone, acc: c.acc, bg: c.bg, style: c.style }, visual: c.v, plan: HOST.plan, modelo: "openai/gpt-oss-120b" };
+}
+function showLogin(msg) { $("#loginOv").classList.add("on"); setStatus($("#lgStatus"), msg || "", msg ? "err" : ""); }
+function logout(expired) { HOST.key = ""; HOST.me = null; ls("ma_key", ""); try { localStorage.removeItem("ma_key"); localStorage.removeItem("ma_cfg"); localStorage.removeItem("ma_today"); localStorage.removeItem("ma_hist"); } catch (e) { } $("#acctModal").classList.remove("on"); showLogin(expired ? "Tu sesión ha caducado. Vuelve a entrar." : ""); }
+function fmtWhen(iso) { try { const d = new Date(iso); return d.toLocaleDateString("es-ES", { weekday: "short", day: "numeric" }) + " " + d.toLocaleTimeString("es-ES", { hour: "2-digit", minute: "2-digit" }); } catch (e) { return iso; } }
+const QSTATE = { pending: ["🕒 programado", "var(--muted)"], published: ["✅ publicado", "var(--ok)"], failed: ["⚠️ falló", "#ff6b61"], expired: ["⏭ omitido", "var(--muted)"] };
+function queueList(box, q) {
+  box.innerHTML = "";
+  if (!q || !q.length) { box.appendChild(el("div", { class: "note", text: HOST.me && HOST.me.ig.connected ? "Aún no hay nada programado. La agencia planifica cada mañana." : "Conecta Instagram y la agencia empezará a planificar y publicar." })); return; }
+  q.forEach(it => { const st = QSTATE[it.status] || [it.status, "var(--muted)"]; const row = el("div", { class: "qitem" }, [el("span", { class: "w", text: fmtWhen(it.publishAt) }), el("span", { text: (TYPES[it.tipo] ? TYPES[it.tipo].icon + " " : "") + (it.tema || "") }), el("span", { class: "s", style: "color:" + st[1], text: st[0] })]); if (it.error) row.title = it.error; box.appendChild(row); });
+}
+function renderSchedule() {
+  const b = $("#schedBox"); b.innerHTML = ""; const me = HOST.me; if (!me) return;
+  const q = (me.status && me.status.queue) || [];
+  if (!me.ig.connected) { b.appendChild(el("div", { class: "sched" }, [el("h3", { text: "📸 Falta un paso" }), el("p", { style: "margin:0 0 10px", text: "Conecta tu Instagram para que la agencia publique sola." }), el("button", { class: "pill", text: "Conectar Instagram", onclick: () => openAcct() })])); return; }
+  if (!q.length) return;
+  const box = el("div"); queueList(box, q.filter(x => x.status === "pending").slice(0, 6).concat(q.filter(x => x.status !== "pending").slice(-3)));
+  b.appendChild(el("div", { class: "sched" }, [el("h3", { text: "🤖 Piloto automático" + (HOST.plan.auto === false ? " (en pausa)" : "") }), me.status.estrategia ? el("p", { style: "margin:0 0 8px;font-size:14px", text: me.status.estrategia }) : null, box]));
+}
+function chipRow(box, items, isOn, onClick) { box.innerHTML = ""; items.forEach(([v, t]) => { const b = el("button", { class: "chip sm" + (isOn(v) ? " on" : ""), text: t }); b.addEventListener("click", () => onClick(v)); box.appendChild(b); }); }
+function renderAcct() {
+  const me = HOST.me; if (!me) return;
+  $("#acName").textContent = "👤 " + me.name; $("#acctLabel").textContent = me.name.split(" ")[0];
+  $("#acIg").innerHTML = ""; $("#acIg").appendChild(el("span", { class: me.ig.connected ? "ok-dot" : "no-dot" })); $("#acIg").append(me.ig.connected ? "@" + me.ig.username : "Sin conectar");
+  $("#acIgBtn").textContent = me.ig.connected ? "Desconectar" : "Conectar Instagram"; $("#acIgNote").hidden = me.ig.connected;
+  const P = HOST.plan;
+  chipRow($("#acAuto"), [[true, "▶ Activado"], [false, "⏸ En pausa"]], v => (P.auto !== false) === v, v => { P.auto = v; saveCfg(); renderAcct(); renderSchedule(); });
+  chipRow($("#acWeek"), [[3, "3"], [5, "5"], [7, "7"], [10, "10"]], v => P.max_semana === v, v => { P.max_semana = v; saveCfg(); renderAcct(); });
+  chipRow($("#acDay"), [[1, "1"], [2, "2"], [3, "3"]], v => P.max_por_dia === v, v => { P.max_por_dia = v; saveCfg(); renderAcct(); });
+  chipRow($("#acFmt"), Object.entries(TYPES).map(([k, T]) => [k, T.icon + " " + T.name]), v => P.formatos.includes(v), v => { if (P.formatos.includes(v)) { if (P.formatos.length > 1) P.formatos = P.formatos.filter(x => x !== v); } else P.formatos = P.formatos.concat(v); saveCfg(); renderAcct(); });
+  queueList($("#acQueue"), (me.status && me.status.queue) || []);
+  $("#acKey").textContent = HOST.key.slice(0, 10) + "…" + HOST.key.slice(-4);
+  $("#acUsage").textContent = "Uso de hoy: " + (me.usage.llm || 0) + " peticiones de IA · " + (me.usage.img || 0) + " imágenes.";
+}
+async function openAcct() { $("#acctModal").classList.add("on"); renderAcct(); try { HOST.me = await api("/api/me"); renderAcct(); renderSchedule(); } catch (e) { } }
+async function loadMe() {
+  HOST.me = await api("/api/me");
+  const c = HOST.me.config;
+  if (c && c.marca) {
+    S.cfg = normCfg({ ...c.marca, v: c.visual || {} }); HOST.plan = { ...HOST.plan, ...(c.plan || {}) }; ls("ma_cfg", S.cfg);
+    applyBrand(); renderOpts(); renderVideos(); closeOv();
+  } else if (!S.cfg.name && !S.cfg.about) openOv(1, false);
+  else saveCfg();
+  $("#loginOv").classList.remove("on"); $("#acctLabel").textContent = HOST.me.name.split(" ")[0]; renderSchedule();
+}
+if (!window.__AGENCIA_SERVER) {
+  delete FONDOS.stock; OPTS[0].items = OPTS[0].items.filter(x => x[0] !== "stock"); if (S.cfg.v.bgMode === "stock") S.cfg.v.bgMode = "ai";
+  S.sample = async (prompt) => { const j = await api("/api/llm", { method: "POST", body: { prompt } }); return { text: j.text }; };
+  let lastImg = 0;
+  loadPollinations = async function (q) {
+    const wait = lastImg + 1200 - Date.now(); if (wait > 0) await sleep(wait); lastImg = Date.now();
+    const prompt = q + ", vertical photo, cinematic lighting, vibrant, high detail, no text, no watermark";
+    const r = await fetch(API + "/api/image?q=" + encodeURIComponent(prompt) + "&seed=" + hashStr(q), { headers: { authorization: "Bearer " + HOST.key } });
+    if (!r.ok) throw new Error("imagen " + r.status);
+    const blob = await r.blob(); const im = new Image(); im.src = URL.createObjectURL(blob); await im.decode(); return { kind: "image", el: im };
+  };
+  let cfgTimer = null;
+  saveCfg = async function () { ls("ma_cfg", S.cfg); if (!HOST.key || !API) return; clearTimeout(cfgTimer); cfgTimer = setTimeout(async () => { try { await api("/api/config", { method: "PUT", body: { config: confFromState() } }); } catch (e) { setStatus($("#genStatus"), "No se pudo guardar en el servidor: " + e.message, "err"); } }, 600); };
+  $("#openAcct").addEventListener("click", openAcct);
+  $("#acClose").addEventListener("click", () => $("#acctModal").classList.remove("on"));
+  $("#acctModal").addEventListener("click", e => { if (e.target.id === "acctModal") $("#acctModal").classList.remove("on"); });
+  $("#acCopy").addEventListener("click", async () => { try { await navigator.clipboard.writeText(HOST.key); setStatus($("#acStatus"), "Clave copiada ✓", "ok"); } catch (e) { setStatus($("#acStatus"), "Tu clave: " + HOST.key); } });
+  $("#acLogout").addEventListener("click", () => logout(false));
+  $("#acIgBtn").addEventListener("click", async () => {
+    const st = $("#acStatus");
+    try {
+      if (HOST.me.ig.connected) { await api("/api/ig/disconnect", { method: "POST" }); HOST.me = await api("/api/me"); renderAcct(); renderSchedule(); setStatus(st, "Instagram desconectado.", "ok"); }
+      else { setStatus(st, "Abriendo Instagram…"); const j = await api("/api/ig/start", { method: "POST" }); window.location.href = j.url; }
+    } catch (e) { setStatus(st, e.message, "err"); }
+  });
+  $("#lgHaveKey").addEventListener("click", () => { $("#joinBox").hidden = true; $("#keyBox").hidden = false; });
+  $("#lgBack").addEventListener("click", () => { $("#joinBox").hidden = false; $("#keyBox").hidden = true; });
+  $("#lgJoin").addEventListener("click", async () => {
+    const st = $("#lgStatus"); const code = $("#lgCode").value.trim(), name = $("#lgName").value.trim();
+    if (!code || !name) { setStatus(st, "Pon tu código y tu nombre.", "err"); return; }
+    setStatus(st, "Entrando…");
+    try { const j = await api("/api/join", { method: "POST", body: { code, name } }); HOST.key = j.key; ls("ma_key", j.key); try { localStorage.removeItem("ma_cfg"); localStorage.removeItem("ma_today"); localStorage.removeItem("ma_hist"); } catch (e) { } S.cfg = normCfg({}); S.today = { date: null, estrategia: "", videos: [] }; S.hist = { items: [] }; await loadMe(); renderVideos(); }
+    catch (e) { setStatus(st, e.message, "err"); }
+  });
+  $("#lgKeyBtn").addEventListener("click", async () => {
+    const st = $("#lgStatus"); const k = $("#lgKey").value.trim();
+    if (!k.startsWith("ak_")) { setStatus(st, "La clave empieza por ak_", "err"); return; }
+    HOST.key = k; ls("ma_key", k); setStatus(st, "Entrando…");
+    try { await loadMe(); } catch (e) { setStatus(st, e.message, "err"); }
+  });
+  $("#saveBrand").addEventListener("click", () => setTimeout(() => { if (HOST.me && !HOST.me.ig.connected) openAcct(); }, 500));
+  setTimeout(async function hostedBoot() {
+    try { const c = await fetch("config.json", { cache: "no-store" }).then(r => r.json()); API = String(c.api || "").replace(/\/+$/, ""); } catch (e) { API = ""; }
+    if (!API) API = String(ls("ma_api") || "").replace(/\/+$/, "");
+    if (!API || /PEGA|TU-SUBDOMINIO/.test(API)) { showLogin("La agencia aún no está configurada: falta la dirección del servidor en docs/config.json."); return; }
+    const hash = location.hash;
+    if (hash === "#ig-ok" || hash === "#ig-error") { try { history.replaceState(null, "", location.pathname + location.search); } catch (e) { } }
+    if (!HOST.key) { showLogin(); return; }
+    try {
+      await loadMe();
+      if (hash === "#ig-ok") { setStatus($("#genStatus"), "✅ Instagram conectado. La agencia empezará a planificar y publicar.", "ok"); }
+      if (hash === "#ig-error") { openAcct(); setStatus($("#acStatus"), "No se pudo conectar Instagram. Revisa que sea una cuenta profesional y que te hayan añadido como tester.", "err"); }
+    } catch (e) { if (e.status !== 401) setStatus($("#genStatus"), e.message, "err"); }
+  }, 0);
+}
 
 /* ============ INIT ============ */
 (function initLocal(){
@@ -1033,8 +1213,8 @@ $("#exportCfg").addEventListener("click",async()=>{
   const t=ls("ma_today");if(t&&Array.isArray(t.videos)){t.videos=t.videos.map(normPiece);S.today={estrategia:"",...t};}
   const h=ls("ma_hist");if(h&&Array.isArray(h.items))S.hist=h;
   applyBrand();renderOpts();renderVideos();renderHist();
-  if(!S.cfg.name&&!S.cfg.about)openOv(1,false);
-  if(!ls("ma_groq_key")) setTimeout(openGroq,300);
+  if(!S.cfg.name&&!S.cfg.about&&window.__AGENCIA_SERVER)openOv(1,false);
+  if(window.__AGENCIA_SERVER&&!ls("ma_groq_key")) setTimeout(openGroq,300);
   setTimeout(prefetchAll,800);
 })();
 (async function initClaude(){
