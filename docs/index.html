@@ -185,6 +185,7 @@
   .danger{border-color:rgba(255,107,97,.45)!important;color:#ff8a82!important}
   .busy-note{font-size:13px;margin:6px 0;color:var(--accent2)}
   .qitem.clk{cursor:pointer}
+  .qthumb{width:42px;height:64px;object-fit:cover;border-radius:8px;flex:none;background:#000}
   .qprev{display:flex;gap:8px;overflow-x:auto;padding:6px 0 10px}
   .qprev video,.qprev img{height:340px;border-radius:14px;background:#000;flex:none}
   .autohide{display:none!important}
@@ -420,7 +421,7 @@ https://apps.apple.com/…
 
 <script>
 /* ============ STATE ============ */
-const DEF_V={bgMode:"anim",font:"impact",anim:"pop",size:"m",pos:"center",pace:"normal",length:"medium",kind:"mix",progress:true,badge:true,emoji:false,brand:true,arrow:true,agentVisuals:true};
+const DEF_V={bgMode:"anim",font:"impact",anim:"pop",size:"m",pos:"center",pace:"normal",length:"medium",kind:"mix",progress:true,badge:true,emoji:false,brand:true,arrow:true,agentVisuals:true,stickers:true};
 const DEF_CFG={name:"",web:"",app:"",ig:"",cta:"",about:"",aud:"",pillars:[],tone:"Cercano y directo",acc:"#ff3b30",bg:"#0b0d12",style:"racing",v:{...DEF_V}};
 const TONES=["Cercano y directo","Energético y motivador","Experto y serio","Divertido y desenfadado"];
 const PALETTES=[["#ff3b30","#0b0d12"],["#00e5ff","#0a0618"],["#c6ff00","#0f1115"],["#ffc83d","#111111"],["#a855f7","#0c0a1a"],["#ff4d8d","#140a10"],["#30d158","#07120b"],["#ff9f0a","#120c05"]];
@@ -439,7 +440,7 @@ const OPTS=[
   {k:"length",label:"Cantidad de texto",items:[["short","Poco"],["medium","Medio"],["long","Mucho"]]},
   {k:"kind",label:"Enfoque del contenido",items:[["mix","Variado"],["tips","Tips"],["error","Errores comunes"],["myth","Mito vs realidad"],["list","Checklist"],["question","Pregunta polémica"],["story","Antes y después"],["promo","Promo de la academia"]]}
 ];
-const TOGGLES=[["agentVisuals","La agencia elige fondo y estilo"],["progress","Barra de progreso"],["badge","Número de escena"],["emoji","Emojis"],["brand","Nombre de marca"],["arrow","Flecha final"]];
+const TOGGLES=[["stickers","Stickers animados (cochecitos, iconos…)"],["agentVisuals","La agencia elige fondo y estilo"],["progress","Barra de progreso"],["badge","Número de escena"],["emoji","Emojis"],["brand","Nombre de marca"],["arrow","Flecha final"]];
 const FONTS={impact:{h:"Anton",hw:"400",b:"Inter",bw:"800",up:true},modern:{h:"Inter",hw:"900",b:"Inter",bw:"700",up:false},elegant:{h:"Playfair Display",hw:"900",b:"Inter",bw:"600",up:false},round:{h:"Fredoka",hw:"700",b:"Fredoka",bw:"600",up:false}};
 const DEMO={tipo:"reel",tema:"Demo",formato:"tips",gancho:"El *truco* que nadie te cuenta",escenas:[{titulo:"Empieza aquí",texto:"Practica *10 minutos* al día y verás resultados en una semana",emoji:"🔥"}],cta:"Más en el link de la bio",caption:"",hashtags:""};
 /* puntos de extensión (la versión Groq añade imágenes IA y vídeos de stock) */
@@ -460,7 +461,7 @@ function normPiece(v,i){
     tema:String(v.tema||v.gancho||""),formato:String(v.formato||""),gancho:String(v.gancho||""),visual:String(v.visual||""),
     escenas:(Array.isArray(v.escenas)?v.escenas:[]).slice(0,7).map(e=>({titulo:String(e.titulo||""),texto:String(e.texto||""),emoji:String(e.emoji||""),visual:String(e.visual||"")})),
     cta:String(v.cta||""),sticker:st,fondo:String(v.fondo||""),estilo:String(v.estilo||""),caption:String(v.caption||""),hashtags:Array.isArray(v.hashtags)?v.hashtags.join(" "):String(v.hashtags||""),
-    audio:String(v.audio||""),voz:String(v.voz||""),ritmo_voz:String(v.ritmo_voz||""),musica:String(v.musica||""),guion:Array.isArray(v.guion)?v.guion.map(String):[],...(Array.isArray(v._durs)?{_durs:v._durs}:{})};
+    audio:String(v.audio||""),voz:String(v.voz||""),ritmo_voz:String(v.ritmo_voz||""),musica:String(v.musica||""),guion:Array.isArray(v.guion)?v.guion.map(String):[],stickers:(Array.isArray(v.stickers)?v.stickers:[]).map(x=>String(x).trim()).filter(x=>x&&x.length<=12&&!/[A-Za-z0-9]/.test(x)).slice(0,5),...(Array.isArray(v._durs)?{_durs:v._durs}:{})};
 }
 
 /* ============ BRANDING UI ============ */
@@ -636,7 +637,8 @@ CRITERIOS DE AGENCIA (calidad antes que cantidad; nunca satures a la audiencia)
 - "objetivo": alcance | interacción | tráfico | autoridad | ventas. "razon": por qué esta pieza hoy, como mucho 14 palabras.
 - "gancho": como mucho 8 palabras que frenen el scroll. En carruseles es la portada.
 - Cada escena tiene un "titulo" de como mucho 4 palabras y un "texto" de como mucho ${LEN} palabras, concretos y útiles. Marca 1 o 2 palabras clave con *asteriscos*.${O.emoji?' Añade "emoji" (uno solo) a cada escena.':''}
-- "cta": como mucho 8 palabras y lleva a ${dest}.
+- "cta": como mucho 8 palabras y lleva a ${dest}.${O.stickers!==false?`
+- "stickers": de 3 a 5 emojis que salen animados en el vídeo como pegatinas (cochecitos que cruzan la pantalla, iconos que rebotan…). Tienen que ilustrar el tema de forma visual y divertida, el primero es la "mascota" de la pieza. Ejemplos: conducción → ["🏎️","🏁","🛞","⚡"]; dinero → ["💰","📈","🤑"]; estudio → ["📚","🧠","✅"]. Nada de banderas de países ni símbolos raros.`:''}
 - "fondo": elige el mejor para cada pieza entre: ${fondos.map(f=>f+" ("+FONDO_DESC[f]+")").join("; ")}.
 - "estilo": racing | neon | pop | minimal. Mantén coherencia de marca, aunque puedes variar si la pieza lo pide (la marca usa "${c.style}").${needVis?'\n- "visual" (en cada pieza y en cada escena): descripción en INGLÉS, de 6 a 14 palabras, de una foto o clip de fondo realista y llamativo que ilustre ese momento. Sin texto, sin logos y sin personas famosas.':''}
 - "caption": de 2 a 4 frases con pocos emojis, que termine con el CTA (en historias déjalo vacío). "hashtags": de 5 a 8 (en historias, []).
@@ -649,7 +651,7 @@ AUDIO (solo reels e historias; los vídeos llevan locución real)
 - "guion" (solo si hay voz): lista de frases habladas, UNA por pantalla y en orden: gancho, cada escena y cierre (o el texto del sticker en historias). Lenguaje hablado natural que complemente el texto en pantalla, como mucho 22 palabras por frase, sin emojis, asteriscos ni hashtags.`:''}
 
 Responde SOLO con JSON válido:
-{"estrategia":"2 o 3 frases: qué días se publica, cuáles se descansa y por qué","piezas":[{"dia":0,"hora":"19:30","tipo":"reel","objetivo":"…","razon":"…","tema":"…","formato":"…","gancho":"…"${needVis?',"visual":"…"':''},"escenas":[{"titulo":"…","texto":"…"${needVis?',"visual":"…"':''}${O.emoji?',"emoji":"…"':''}}],"cta":"…","sticker":null,"fondo":"…","estilo":"…"${AUDIO_CAPS?',"audio":"…","voz":"…","ritmo_voz":"…","musica":"…","guion":["…"]':''},"caption":"…","hashtags":["#…"]}]}`;
+{"estrategia":"2 o 3 frases: qué días se publica, cuáles se descansa y por qué","piezas":[{"dia":0,"hora":"19:30","tipo":"reel","objetivo":"…","razon":"…","tema":"…","formato":"…","gancho":"…"${needVis?',"visual":"…"':''},"escenas":[{"titulo":"…","texto":"…"${needVis?',"visual":"…"':''}${O.emoji?',"emoji":"…"':''}}],"cta":"…"${O.stickers!==false?',"stickers":["…","…","…"]':''},"sticker":null,"fondo":"…","estilo":"…"${AUDIO_CAPS?',"audio":"…","voz":"…","ritmo_voz":"…","musica":"…","guion":["…"]':''},"caption":"…","hashtags":["#…"]}]}`;
 }
 $("#genBtn").addEventListener("click",async()=>{
   const st=$("#genStatus"),btn=$("#genBtn");
@@ -825,8 +827,9 @@ function drawBg(t,si,lt,dur){
   return false;
 }
 function setSize(w,h){W=w;H=h;const c=ctx.canvas;if(c.width!==w)c.width=w;if(c.height!==h)c.height=h;}
+let BLK=null;
 function drawFrame(SC,t,slide){
-  setSize(SC.w,SC.h);CUR_SC=SC;
+  setSize(SC.w,SC.h);CUR_SC=SC;BLK=null;
   const{scenes}=SC;const isImg=SC.type==="post"||SC.type==="carrusel";
   let si=slide!=null?slide:scenes.findIndex(s=>t<s.start+s.dur);if(si<0)si=scenes.length-1;
   const s=scenes[si];let lt=t-s.start;if(slide!=null)lt=s.dur-0.3;
@@ -839,17 +842,17 @@ function drawFrame(SC,t,slide){
   const out=0.22,a=!isImg&&lt>s.dur-out&&si<n-1?clamp((s.dur-lt)/out,0,1):1;
   ctx.save();ctx.globalAlpha=a;ctx.translate(0,(1-a)*-50);
   if(s.kind==="post"){
-    const gapB=s.B?50:0,ctaH=110;const block=s.T.h+gapB+(s.B?s.B.h:0);let y=clamp(H*(PF-0.04)-block/2,TOP+40,H-ctaH-120-block);
+    const gapB=s.B?50:0,ctaH=110;const block=s.T.h+gapB+(s.B?s.B.h:0);let y=clamp(H*(PF-0.04)-block/2,TOP+40,H-ctaH-120-block);BLK=[y,y+block+30];
     drawBlock(s.T,W/2,y,lt,0,0,T.text,T);ctx.fillStyle=T.arrow;roundRect(W/2-90,y+s.T.h+14,180,10,5);ctx.fill();
     if(s.B)drawBlock(s.B,W/2,y+s.T.h+gapB,lt,0,0,T.text,T);
     const sub=s.cta||S.cfg.ig||"";if(sub){ctx.save();ctx.font="800 38px Inter";const tw=Math.min(ctx.measureText(sub).width,W-200);ctx.fillStyle=T.pill;roundRect(W/2-tw/2-36,H-ctaH-60,tw+72,ctaH-20,45);ctx.fill();ctx.fillStyle=T.pillText;ctx.textAlign="center";ctx.textBaseline="middle";ctx.fillText(sub,W/2,H-ctaH-60+(ctaH-20)/2+2,W-200);ctx.restore();}
   }else if(s.kind==="hook"){
     const zoom=O.anim==="pop"&&!STATIC?1+0.08*(1-easeOut(clamp(lt/0.35,0,1))):1;const cy=H*PF;ctx.translate(W/2,cy);ctx.scale(zoom,zoom);ctx.translate(-W/2,-cy);
-    const y=clamp(cy-s.L.h/2,TOP,BOT-s.L.h);const k=drawBlock(s.L,W/2,y,lt,0.05,0.09,T.text,T);
+    const y=clamp(cy-s.L.h/2,TOP,BOT-s.L.h);BLK=[y,y+s.L.h+60];const k=drawBlock(s.L,W/2,y,lt,0.05,0.09,T.text,T);
     const bp=STATIC?1:easeOut(clamp((lt-0.1-k*0.09)/0.4,0,1));ctx.fillStyle=T.arrow;roundRect(W/2-170*bp,y+s.L.h+40,Math.max(1,340*bp),14,7);ctx.fill();
     if(s.swipe){ctx.save();ctx.font="800 40px Inter";const lab="DESLIZA  →";const tw=ctx.measureText(lab).width;ctx.fillStyle=T.pill;roundRect(W/2-tw/2-40,H-200,tw+80,96,48);ctx.fill();ctx.fillStyle=T.pillText;ctx.textAlign="center";ctx.textBaseline="middle";ctx.fillText(lab,W/2,H-150);ctx.restore();}
   }else if(s.kind==="tip"){
-    const useEmoji=O.emoji&&s.emoji,showB=O.badge||useEmoji;const badge=showB?150:0,gap1=showB?50:0,gap2=46;const block=badge+gap1+s.T.h+gap2+s.B.h;let y=clamp(H*PF-block/2,TOP,Math.max(TOP,BOT-block));
+    const useEmoji=O.emoji&&s.emoji,showB=O.badge||useEmoji;const badge=showB?150:0,gap1=showB?50:0,gap2=46;const block=badge+gap1+s.T.h+gap2+s.B.h;let y=clamp(H*PF-block/2,TOP,Math.max(TOP,BOT-block));BLK=[y,y+block];
     const bp=STATIC?1:easeBack(clamp(lt/0.35,0,1));ctx.save();ctx.translate(W/2,y+badge/2);ctx.scale(bp,bp);
     if(!showB){ctx.globalAlpha=0;}
     else if(useEmoji){ctx.font='130px "Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji",sans-serif';ctx.textAlign="center";ctx.textBaseline="middle";ctx.fillText(s.emoji,0,8);ctx.restore();ctx.save();ctx.globalAlpha=0;}
@@ -858,14 +861,100 @@ function drawFrame(SC,t,slide){
     ctx.fillStyle=T.badgeText;ctx.font='400 92px "Anton"';ctx.textAlign="center";ctx.textBaseline="middle";ctx.fillText(String(s.n),0,6);ctx.restore();
     y+=badge+gap1;const k=drawBlock(s.T,W/2,y,lt,0.15,0.08,T.text,T);y+=s.T.h+gap2;drawBlock(s.B,W/2,y,lt,0.25+k*0.08,0.055,T.text,T);
   }else{
-    const stick=!!s.sticker;const subH=s.sub?150:0,stickH=stick?300:0,block=s.L.h+subH+stickH;let y=clamp(H*(stick?PF-0.08:PF)-block/2,TOP,Math.max(TOP,H-440-block));
+    const stick=!!s.sticker;const subH=s.sub?150:0,stickH=stick?300:0,block=s.L.h+subH+stickH;let y=clamp(H*(stick?PF-0.08:PF)-block/2,TOP,Math.max(TOP,H-440-block));BLK=[y,y+block+(stick?120:200)];
     drawBlock(s.L,W/2,y,lt,0.05,0.08,T.text,T);
     if(s.sub){const p=STATIC?1:easeBack(clamp((lt-0.5)/0.4,0,1));ctx.save();ctx.font="800 50px Inter";const tw=ctx.measureText(s.sub).width;ctx.translate(W/2,y+s.L.h+90);ctx.scale(p,p);ctx.fillStyle=T.pill;if(T.neon){ctx.shadowColor=S.cfg.acc;ctx.shadowBlur=40;}roundRect(-tw/2-40,-50,tw+80,100,50);ctx.fill();ctx.shadowBlur=0;ctx.fillStyle=T.pillText;ctx.textAlign="center";ctx.textBaseline="middle";ctx.fillText(s.sub,0,3);ctx.restore();}
-    if(stick&&(s.stk&&s.stk.auto||window.AUTO_STICKERS)){drawSticker(s.stk||{tipo:s.sticker,opciones:[]},y+s.L.h+subH+50,lt,T);return void ctx.restore();}
+    if(stick&&(s.stk&&s.stk.auto||window.AUTO_STICKERS)){drawSticker(s.stk||{tipo:s.sticker,opciones:[]},y+s.L.h+subH+50,lt,T);ctx.restore();drawStickers(SC,si,s,lt,a);return;}
     const bob=STATIC?0:Math.sin(lt*6)*16,ap=O.arrow||stick?(STATIC?1:clamp((lt-0.8)/0.3,0,1)):0;
     if(SC.type!=="carrusel"||true){ctx.save();ctx.globalAlpha*=ap;ctx.fillStyle=T.arrow;ctx.translate(W/2,y+s.L.h+subH+(stick?90:170)+bob);ctx.beginPath();ctx.moveTo(-50,-25);ctx.lineTo(50,-25);ctx.lineTo(0,35);ctx.closePath();ctx.fill();ctx.restore();}
   }
   ctx.restore();
+  drawStickers(SC,si,s,lt,a);
+}
+/* ===== Stickers animados (emojis recortados como pegatinas) ===== */
+const EMOJI_FONT='"Noto Color Emoji","Apple Color Emoji","Segoe UI Emoji",sans-serif';
+const VEHICLES=new Set(["🏎️","🏎","🚗","🚙","🚕","🚓","🏍️","🏍","🛵","🚲","🛴","🚀","✈️","🚁","🚌","🚚","🛻","🚜","🚑","🚒","🛩️","⛵","🚤"]);
+const STK_CACHE=new Map();
+function stickerImg(e,size){
+  const key=e+"|"+size;if(STK_CACHE.has(key))return STK_CACHE.get(key);
+  const pad=Math.round(size*0.16),dim=size+pad*2;
+  const a=document.createElement("canvas");a.width=a.height=dim;const ax=a.getContext("2d");
+  ax.font=size*0.82+"px "+EMOJI_FONT;ax.textAlign="center";ax.textBaseline="middle";ax.fillText(e,dim/2,dim/2+size*0.06);
+  // ¿se ha dibujado algo? (si la fuente de emojis aún no está, no se guarda en caché)
+  let ink=false;try{const d=ax.getImageData(0,0,dim,dim).data;for(let i=3;i<d.length;i+=64)if(d[i]>20){ink=true;break;}}catch(_){ink=true;}
+  const b=document.createElement("canvas");b.width=b.height=dim;const bx=b.getContext("2d");const r=Math.max(4,size*0.055);
+  for(let k=0;k<20;k++){const an=k/20*Math.PI*2;bx.drawImage(a,Math.cos(an)*r,Math.sin(an)*r);}
+  bx.globalCompositeOperation="source-in";bx.fillStyle="#ffffff";bx.fillRect(0,0,dim,dim);bx.globalCompositeOperation="source-over";bx.drawImage(a,0,0);
+  const out={c:b,dim};if(ink)STK_CACHE.set(key,out);return out;
+}
+function putSticker(e,x,y,size,rot,scale,alpha,flip){
+  if(scale<=0.01||alpha<=0.01||!e)return;const sz=Math.max(16,Math.round(size/8)*8),f=size/sz,im=stickerImg(e,sz),d=im.dim*f;
+  ctx.save();ctx.globalAlpha*=alpha;ctx.translate(x,y);ctx.rotate(rot||0);ctx.scale((flip?-1:1)*scale,scale);
+  ctx.shadowColor="rgba(0,0,0,.38)";ctx.shadowBlur=size*0.12;ctx.shadowOffsetY=size*0.05;
+  ctx.drawImage(im.c,-d/2,-d/2,d,d);ctx.restore();
+}
+function pieceStickers(p){
+  let st=(p&&Array.isArray(p.stickers)?p.stickers:[]).filter(Boolean);
+  if(!st.length&&p&&p.escenas)st=p.escenas.map(e=>e.emoji).filter(Boolean);
+  return st.length?st:["🔥","💡","✅"];
+}
+function drawStickers(SC,si,s,lt,alpha){
+  const O=S.cfg.v;if(O.stickers===false||!SC.piece)return;
+  const st=pieceStickers(SC.piece),isVid=TYPES[SC.type].video,stat=STATIC||!isVid,n=st.length;
+  const TOP=Math.round(H*0.13),LOW=Math.round(H*(isVid?0.84:0.86));
+  const b0=BLK?BLK[0]:H*0.35,b1=BLK?BLK[1]:H*0.62;
+  const topSp=b0-TOP-20,botSp=LOW-b1-20;
+  const zoneTop=botSp<220&&topSp>botSp;const sp=zoneTop?topSp:botSp;
+  const size=clamp(sp*0.78,170,isVid?400:280);
+  const cy=zoneTop?clamp(b0-20-size*0.55,TOP+size*0.5,b0):clamp(b1+20+size*0.55,b1,LOW-size*0.5);
+  const tt=stat?2:lt,a=alpha==null?1:alpha;
+  const pop=d=>stat?1:easeBack(clamp((tt-d)/0.45,0,1));
+  const wob=k=>stat?(k%2?0.12:-0.1):Math.sin(tt*2.6+k)*0.12;
+  const flo=k=>stat?0:Math.sin(tt*2.2+k*1.7)*size*0.06;
+  const main=st[si%n],second=st[(si+1)%n],mascot=st[0];
+  if(s.kind==="hook"&&isVid&&STATIC){
+    // PORTADA (miniatura): halo de color y mascota enorme abajo, con dos pegatinas alrededor
+    const big=clamp((H*0.9-b1)*0.82,340,620),y=clamp(b1+40+big*0.5,b1+big*0.35,H*0.86-big*0.5);
+    const g=ctx.createRadialGradient(W/2,y,big*0.1,W/2,y,big*1.15);g.addColorStop(0,hexA(S.cfg.acc,0.55));g.addColorStop(1,hexA(S.cfg.acc,0));
+    ctx.save();ctx.globalAlpha*=a;ctx.fillStyle=g;ctx.fillRect(0,y-big*1.2,W,big*2.4);
+    ctx.translate(W/2,y);ctx.strokeStyle=hexA(S.cfg.acc,0.5);ctx.lineWidth=10;ctx.lineCap="round";
+    for(let k=0;k<12;k++){const an=k/12*Math.PI*2;ctx.beginPath();ctx.moveTo(Math.cos(an)*big*0.62,Math.sin(an)*big*0.62);ctx.lineTo(Math.cos(an)*big*0.8,Math.sin(an)*big*0.8);ctx.stroke();}
+    ctx.restore();
+    putSticker(mascot,W/2,y,big,-0.08,1,a);
+    putSticker(second,W/2+big*0.62,y-big*0.42,big*0.42,0.14,1,a);
+    if(n>2)putSticker(st[2],W/2-big*0.64,y+big*0.3,big*0.38,-0.12,1,a);
+    return;
+  }
+  if(s.kind==="hook"||s.kind==="post"){
+    // mascota grande + otra pegatina más pequeña al lado
+    putSticker(mascot,W/2-size*0.32,cy+flo(0),size*1.1,wob(0),pop(0.15),a);
+    putSticker(second,W/2+size*0.62,cy-size*0.25+flo(1),size*0.6,wob(1),pop(0.45),a);
+    if(isVid&&!stat){const veh=st.find(e=>VEHICLES.has(e));if(veh)driveBy(veh,tt,s.dur,LOW+(H-LOW)*0.05,size*0.75,a);}
+    return;
+  }
+  if(s.kind==="tip"){
+    if(VEHICLES.has(main)&&isVid&&!stat){driveBy(main,tt,s.dur,cy,size,a);putSticker(second,W-size*0.55,TOP+size*0.2+flo(2),size*0.55,wob(2),pop(0.6),a*0.95);return;}
+    const left=si%2===0;const x=left?W*0.36:W*0.64;
+    putSticker(main,x,cy+flo(si),size,wob(si),pop(0.2),a);
+    putSticker(second,left?W*0.76:W*0.24,cy-size*0.2+flo(si+2),size*0.5,wob(si+1),pop(0.5),a);
+    return;
+  }
+  if(s.kind==="cta"){
+    const b=stat?0:-Math.abs(Math.sin(tt*4))*size*0.18;
+    const yy=zoneTop?cy:Math.min(cy,LOW-size*0.5);
+    putSticker(mascot,W/2,yy+b,size*0.9,wob(3)*0.6,pop(0.25),a);
+    putSticker(st[(n>2?2:1)%n],W/2-size*0.95,yy+size*0.15,size*0.5,wob(4),pop(0.55),a);
+    putSticker(second,W/2+size*0.95,yy+size*0.15,size*0.5,wob(5),pop(0.7),a);
+  }
+}
+function hexA(h,al){const m=/^#?([0-9a-f]{6})$/i.exec(h||"");if(!m)return "rgba(255,59,48,"+al+")";const v=parseInt(m[1],16);return "rgba("+(v>>16&255)+","+(v>>8&255)+","+(v&255)+","+al+")";}
+function driveBy(e,tt,dur,y,size,a){
+  // el vehículo cruza de derecha a izquierda (los emojis miran a la izquierda) con líneas de velocidad
+  const span=Math.min(2.4,Math.max(1.4,dur*0.7)),start=0.3,k=clamp((tt-start)/span,0,1);if(k<=0||k>=1)return;
+  const ease=k<0.5?2*k*k:1-Math.pow(-2*k+2,2)/2,x=W+size-ease*(W+size*2),bob=Math.sin(tt*18)*size*0.025;
+  ctx.save();ctx.globalAlpha*=a*0.7;ctx.strokeStyle=S.cfg.acc;ctx.lineCap="round";
+  for(let i=0;i<3;i++){const ly=y-size*0.18+i*size*0.18,len=size*(0.5+0.3*((i+1)%2));ctx.lineWidth=Math.max(4,size*0.04);ctx.beginPath();ctx.moveTo(x+size*0.55,ly);ctx.lineTo(x+size*0.55+len,ly);ctx.stroke();}
+  ctx.restore();putSticker(e,x,y+bob,size,-0.04,1,a);
 }
 /* Sticker dibujado dentro de la historia (la API de Instagram no permite stickers interactivos) */
 function drawSticker(st,y,lt,T){
@@ -900,7 +989,7 @@ function renderThumb(v,small){
 
 /* ============ PLAYER ============ */
 let anim=null,curIdx=0,recording=false,fontsReady=null,slideIdx=0;
-function ensureFonts(){if(!fontsReady)fontsReady=Promise.all(['400 120px "Anton"','800 60px "Inter"','900 60px "Inter"','700 60px "Inter"','600 60px "Inter"','900 60px "Playfair Display"','700 60px "Fredoka"','600 60px "Fredoka"'].map(f=>document.fonts.load(f).catch(()=>{})));return fontsReady;}
+function ensureFonts(){if(!fontsReady)fontsReady=Promise.all(['100px "Noto Color Emoji"','400 120px "Anton"','800 60px "Inter"','900 60px "Inter"','700 60px "Inter"','600 60px "Inter"','900 60px "Playfair Display"','700 60px "Fredoka"','600 60px "Fredoka"'].map(f=>document.fonts.load(f).catch(()=>{})));return fontsReady;}
 function curP(){return S.today.videos[curIdx];}
 function field(labelTxt,value,onInput,multi){const inp=multi?el("textarea",{rows:"3"}):el("input",{type:"text"});inp.value=value;inp.addEventListener("input",()=>{onInput(inp.value);saveToday();previewStill();});return[el("label",{class:"f",text:labelTxt}),inp];}
 function buildEditor(v){
@@ -1175,14 +1264,15 @@ function queueList(box, q) {
     const upcoming = (it.status === "pending" || it.status === "scheduled") && new Date(it.publishAt) > new Date();
     const busy = redoing.includes(it.id) || (R.replan && upcoming);
     const st = busy ? ["🔄 rehaciendo…", "var(--accent2)"] : (QSTATE[it.status] || [it.status, "var(--muted)"]);
-    const row = el("div", { class: "qitem" }, [el("span", { class: "w", text: fmtWhen(it.publishAt) }), el("span", { text: (TYPES[it.tipo] ? TYPES[it.tipo].icon + " " : "") + (it.tema || "") }), el("span", { class: "s", style: "color:" + st[1], text: st[0] })]);
+    const thumb = it.cover || (it.media && it.media[0] && !/\.mp4$/i.test(it.media[0]) ? it.media[0] : "");
+    const row = el("div", { class: "qitem" }, [thumb ? el("img", { class: "qthumb", src: thumb, alt: "", loading: "lazy" }) : null, el("span", { class: "w", text: fmtWhen(it.publishAt) }), el("span", { text: (TYPES[it.tipo] ? TYPES[it.tipo].icon + " " : "") + (it.tema || "") }), el("span", { class: "s", style: "color:" + st[1], text: st[0] })]);
     if (upcoming && !busy && it.id) row.appendChild(el("button", { class: "rd", title: "Rehacer esta pieza", text: "🔄", onclick: e => { e.stopPropagation(); askRedo(it); } }));
     if (it.error) row.title = it.error; box.appendChild(row);
     if (it.media && it.media.length) {
       row.classList.add("clk"); row.title = it.error || "Toca para ver la pieza";
       row.addEventListener("click", () => {
         const nx = row.nextSibling; if (nx && nx.classList && nx.classList.contains("qprev")) { nx.remove(); return; }
-        const pv = el("div", { class: "qprev" }, it.media.map(m => /\.mp4$/i.test(m) ? el("video", { src: m, controls: "", playsinline: "", preload: "metadata" }) : el("img", { src: m, loading: "lazy", alt: it.tema || "" })));
+        const pv = el("div", { class: "qprev" }, it.media.map(m => /\.mp4$/i.test(m) ? el("video", { src: m, controls: "", playsinline: "", preload: "metadata", ...(it.cover ? { poster: it.cover } : {}) }) : el("img", { src: m, loading: "lazy", alt: it.tema || "" })));
         row.after(pv);
       });
     }

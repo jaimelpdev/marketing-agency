@@ -230,6 +230,12 @@ window.__agRender = {
     finally{ ctx=prev; }
     return out;
   },
+  cover(i){
+    // portada: el gancho con todo ya visible (texto y pegatinas), para la miniatura
+    const p=S.today.videos[i]; const SC=buildScenes(p); const prev=ctx; ctx=this.canvas.getContext('2d'); STATIC=true;
+    try{ drawFrame(SC,0,0); } finally{ STATIC=false; ctx=prev; }
+    return this.canvas.toDataURL('image/jpeg',0.92);
+  },
   slide(i, k){
     const p=S.today.videos[i]; const SC=buildScenes(p); const prev=ctx; ctx=this.canvas.getContext('2d'); STATIC=true;
     try{ drawFrame(SC,0,k); } finally{ STATIC=false; ctx=prev; }
@@ -238,6 +244,8 @@ window.__agRender = {
 };
 """
 
+
+COVER_FRAMES = 6
 
 MIME = {".mp4": "video/mp4", ".jpg": "image/jpeg", ".jpeg": "image/jpeg", ".png": "image/png"}
 
@@ -295,7 +303,8 @@ def zernio_schedule(user, item, piece, tz):
         body["tags"] = [h.strip("#") for h in str(piece.get("hashtags", "")).split() if h.startswith("#")][:10]
     if any(p["platform"] == "tiktok" for p in platforms):
         body["tiktokSettings"] = {"privacy_level": "PUBLIC_TO_EVERYONE", "allow_comment": True, "allow_duet": True, "allow_stitch": True,
-                                  "content_preview_confirmed": True, "express_consent_given": True, "media_type": "video"}
+                                  "content_preview_confirmed": True, "express_consent_given": True, "media_type": "video",
+                                  "videoCoverTimestampMs": 0}  # el primer fotograma es la portada
     r = api("POST", "/admin/zernio", {"method": "POST", "path": "/posts", "body": body})
     post = r.get("post") or r
     return post.get("_id") or post.get("id") or "ok"
@@ -430,6 +439,9 @@ def plan_user(browser, user, key, force=False, redo=None):
                     credit = music_lib.credit(track)
                     log(f"    música: {(track or {}).get('title', 'ninguna')} · ambiente {p.get('musica') or '-'} · audio {p.get('audio') or '-'}")
                     total = float(page.evaluate("i=>buildScenes(S.today.videos[i]).total", i))
+                    cover_url = page.evaluate("i=>__agRender.cover(i)", i)
+                    cover_bytes = base64.b64decode(cover_url.split(",", 1)[1])
+                    (folder / "cover.jpg").write_bytes(cover_bytes)
                     count = int(total * FPS + 0.999)
                     f = 0
                     while f < count:
@@ -438,6 +450,8 @@ def plan_user(browser, user, key, force=False, redo=None):
                             break
                         write_dataurls(batch, tdp, f)
                         f += len(batch)
+                    for k in range(min(COVER_FRAMES, count)):  # los primeros fotogramas son la portada (miniatura)
+                        (tdp / f"f_{k:05d}.jpg").write_bytes(cover_bytes)
                     encode_video(tdp, total, folder / "video.mp4", voice_clips, music, credit if p["tipo"] == "historia" else "")
                 media.append(str((folder / "video.mp4").relative_to(DOCS)))
             else:
@@ -460,6 +474,7 @@ def plan_user(browser, user, key, force=False, redo=None):
                 "id": pid, "date": today, "source": "redo" if redo else "auto", "tipo": p["tipo"], "tema": p.get("tema", ""),
                 "publishAt": when.isoformat(),
                 "caption": caption[:2200], "media": media, "status": "pending", "attempts": 0,
+                **({"cover": str((folder / "cover.jpg").relative_to(DOCS))} if (folder / "cover.jpg").exists() else {}),
             })
         hist = page.evaluate("S.hist")
         estrategia = page.evaluate("S.today.estrategia")

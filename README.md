@@ -124,6 +124,10 @@ Guarda tu **clave de acceso** (en Cuenta) para entrar desde otro dispositivo.
 - **Voz:** locuciones neuronales gratuitas de Microsoft (edge-tts), con el guion que escribe la agencia.
 - **Música:** si pones tus pistas en `assets/music/<ambiente>/` (energetica, chill, epica, emotiva, divertida, tension) se usan esas. Si no, la agencia busca **canciones reales con licencia libre para uso comercial** (CC0 o CC BY, sobre todo de Jamendo, a través de Openverse) según el ambiente de cada vídeo, empieza la canción ya dentro (sin la intro lenta) y nivela el volumen. Con CC BY se acredita al artista en el texto del post (o abajo del todo en las historias). Las pistas se guardan en `content/music/` y se van reutilizando.
 
+## 🏎️ Pegatinas animadas y portadas
+- En cada pieza la agencia elige de 3 a 5 emojis que ilustran el tema (por ejemplo 🏎️ 🏁 🛞 para tips de conducción) y salen en el vídeo **recortados como pegatinas** (borde blanco y sombra): rebotan, flotan, aparecen con un pop y los vehículos **cruzan la pantalla** con líneas de velocidad. Se pueden quitar en *Personaliza → Stickers animados*.
+- **Portada:** cada reel lleva una portada llamativa (el gancho con la "mascota" enorme y un halo de color). Va como primer fotograma del vídeo, que es el que Instagram y TikTok usan de miniatura, y también se ve en la app.
+
 ## 📊 Stickers en historias
 Instagram no deja que ningún programa ponga stickers interactivos de verdad (encuestas, preguntas, enlaces): ni esta agencia ni Metricool, Zernio o similares. Por eso la agencia **dibuja el sticker dentro de la historia** (una pregunta abierta para responder por mensaje directo, «link en la bio» o cuenta atrás; nada de encuestas, porque no se podrían votar), y la historia se publica sola.
 
