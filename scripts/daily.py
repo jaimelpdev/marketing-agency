@@ -353,10 +353,14 @@ def plan_user(browser, user, key):
 
 
 def main():
+    users = api("GET", "/admin/users").get("users", [])
+    ready = [u for u in users if (u.get("ig") or {}).get("connected") and ((u.get("config") or {}).get("marca") or {}).get("name")]
+    if not ready:
+        log(f"{len(users)} personas en la agencia; ninguna tiene aún marca e Instagram conectado. Nada que planificar.")
+        return
     key = os.environ.get("GROQ_API_KEY", "").strip()
     if not key:
         sys.exit("Falta el secreto GROQ_API_KEY.")
-    users = api("GET", "/admin/users").get("users", [])
     only = os.environ.get("ONLY_USER", "").strip()
     log(f"{len(users)} personas en la agencia.")
     errors = 0
