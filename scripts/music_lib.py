@@ -89,7 +89,11 @@ def credit(track):
 
 def get_track(mood, cache_root, log=print):
     """Devuelve (ruta, info) de una pista para el ambiente, o (None, None) si no hay ninguna disponible."""
-    mood = mood if mood in QUERIES else "energetica"
+    import unicodedata
+    m = unicodedata.normalize("NFKD", str(mood or "")).encode("ascii", "ignore").decode().lower().strip()
+    m = {"energica": "energetica", "energico": "energetica", "emocional": "emotiva", "emotivo": "emotiva", "epico": "epica",
+         "tranquila": "chill", "relajada": "chill", "divertido": "divertida", "tenso": "tension", "suspense": "tension"}.get(m, m)
+    mood = m if m in QUERIES else "energetica"
     folder = Path(cache_root) / mood
     folder.mkdir(parents=True, exist_ok=True)
     have = _index(folder)
