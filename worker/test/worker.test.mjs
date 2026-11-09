@@ -10,7 +10,7 @@ const KV = {
   async list({ prefix }) { return { keys: [...store.keys()].filter(k => k.startsWith(prefix)).map(name => ({ name })), list_complete: true }; },
 };
 const env = { KV, GROQ_API_KEY: "gsk_secreta", POLLINATIONS_TOKEN: "pt", ADMIN_TOKEN: "admin123", INVITE_CODES: "hola-2026",
-  IG_APP_ID: "999", IG_APP_SECRET: "sec", APP_URL: "https://x.github.io/app/", APP_ORIGINS: "https://x.github.io", LLM_PER_DAY: "2" };
+  IG_APP_SECRET: "sec", APP_URL: "https://x.github.io/app/", APP_ORIGINS: "https://x.github.io", LLM_PER_DAY: "2" };
 
 const calls = [];
 globalThis.fetch = async (url, init = {}) => {
@@ -23,11 +23,11 @@ globalThis.fetch = async (url, init = {}) => {
     return J({ choices: [{ message: { content: '{"ok":true,"model":"' + b.model + '"}' } }] });
   }
   if (url.includes("image.pollinations.ai")) { assert.ok(url.includes("token=pt")); return new Response("JPEG", { headers: { "content-type": "image/jpeg" } }); }
-  if (url.includes("api.instagram.com/oauth/access_token")) return J({ access_token: "short", user_id: 1 });
-  if (url.includes("/access_token?grant_type=ig_exchange_token")) return J({ access_token: "LONG", expires_in: 5184000 });
-  if (url.includes("/me?")) return J({ user_id: "1784", username: "academia_demo" });
+  if (url.includes("graph.facebook.com/v23.0/oauth/access_token")) { assert.ok(url.includes("client_secret=sec") && url.includes("client_id=1803279604212539")); return J({ access_token: "LONG" }); }
+  if (url.includes("/debug_token?")) return J({ data: { granular_scopes: [{ scope: "instagram_basic", target_ids: ["1784"] }, { scope: "instagram_content_publish", target_ids: ["1784"] }] } });
+  if (url.includes("graph.facebook.com/v23.0/1784?")) return J({ username: "academia_demo", id: "1784" });
   if (url.includes("/media_publish")) return J({ id: "PUB1" });
-  if (url.includes("/1784/media")) { assert.ok(String(init.body).includes("access_token=LONG")); return J({ id: "CONT1" }); }
+  if (url.includes("graph.facebook.com/v23.0/1784/media")) { assert.ok(String(init.body).includes("access_token=LONG")); return J({ id: "CONT1" }); }
   if (url.includes("/CONT1?")) return J({ status_code: "FINISHED" });
   if (url.includes("refresh_access_token")) return J({ access_token: "LONG2", expires_in: 5184000 });
   throw new Error("fetch inesperado " + url);
@@ -57,7 +57,7 @@ assert.ok(!JSON.stringify(r.j).includes("gsk_secreta"), "la clave nunca sale");
 await call("POST", "/api/llm", { key, body: { prompt: "hola" } });
 r = await call("POST", "/api/llm", { key, body: { prompt: "hola" } }); assert.equal(r.s, 429, "límite diario");
 r = await call("GET", "/api/image?q=coche&seed=5", { key }); assert.equal(r.s, 200); assert.equal(r.j, "JPEG");
-r = await call("POST", "/api/ig/start", { key }); assert.ok(r.j.url.includes("client_id=999"));
+r = await call("POST", "/api/ig/start", { key }); assert.ok(r.j.url.includes("client_id=1803279604212539") && r.j.url.includes("config_id=1809862283611437") && r.j.url.startsWith("https://www.facebook.com/"));
 const state = new URL(r.j.url).searchParams.get("state");
 const cb = await worker.fetch(new Request(B + "/auth/instagram/callback?code=abc&state=" + state + "#_"), env);
 assert.equal(cb.status, 302); assert.ok(cb.headers.get("location").endsWith("#ig-ok"));
@@ -73,6 +73,6 @@ r = await call("GET", "/api/me", { key }); assert.equal(r.j.status.queue.length,
 r = await call("POST", "/admin/invite", { key: "admin123" }); const inv = r.j.code;
 r = await call("POST", "/api/join", { body: { code: inv, name: "Luis" } }); assert.equal(r.s, 200);
 r = await call("POST", "/api/join", { body: { code: inv, name: "Luis2" } }); assert.equal(r.s, 403);
-r = await call("POST", "/admin/refresh-tokens", { key: "admin123" }); assert.equal(r.j.results[0].ok, true);
+r = await call("POST", "/admin/refresh-tokens", { key: "admin123" }); assert.equal(r.j.results.length, 0, "los tokens de empresa no se renuevan");
 r = await call("OPTIONS", "/api/llm"); assert.equal(r.s, 204);
 console.log("✓ Servidor: todas las pruebas pasan");

@@ -47,19 +47,17 @@ Al terminar te dará una dirección como `https://agencia-marketing.TU-SUBDOMINI
 - Revisa en `worker/wrangler.toml` que `APP_URL` y `APP_ORIGINS` apunten a tu GitHub Pages.
 - Pon esa dirección en **`docs/config.json`** (campo `api`) y súbelo.
 
-### 2. App de Instagram (Meta for Developers)
-1. Entra en developers.facebook.com y crea una app. Añade el producto **Instagram** con la opción **API con inicio de sesión de Instagram**.
-2. En la configuración de inicio de sesión, añade esta **URL de redirección**:
-   `https://agencia-marketing.TU-SUBDOMINIO.workers.dev/auth/instagram/callback`
-3. Copia el **ID** y el **secreto** de la app de Instagram y guárdalos en el servidor:
-   ```bash
-   npx wrangler secret put IG_APP_ID
-   npx wrangler secret put IG_APP_SECRET
-   ```
-4. Mientras la app esté **en modo desarrollo**, solo pueden conectarse las cuentas que añadas como **testers de Instagram** (en *Roles de la app*). Cada persona acepta la invitación desde Instagram: Configuración → Apps y sitios web. Para abrirlo a cualquiera sin añadirlo a mano, Meta exige pasar la **revisión de la app** (permisos `instagram_business_basic` e `instagram_business_content_publish`).
-5. Las cuentas tienen que ser **profesionales** (de empresa o de creador).
+### 2. App de Meta (Instagram con inicio de sesión unificado)
+Meta ya no permite en apps nuevas el inicio de sesión "solo Instagram". Se usa el **inicio de sesión unificado** (Facebook Login para empresas):
+1. developers.facebook.com → crea una app con el caso de uso **Administrar mensajes y contenido en Instagram** y vincúlala a tu porfolio empresarial.
+2. En *Casos de uso → API de Instagram → API setup with Unified login*: crea la configuración (plantilla) y registra la URL de redirección
+   `https://TU-WORKER.workers.dev/auth/instagram/callback`.
+3. Guarda en el servidor el **secreto de la app** (*Configuración de la app → Información básica → Clave secreta*):
+   `npx wrangler secret put IG_APP_SECRET`
+   (El ID de la app y el de la configuración ya vienen en `worker/src/index.js`; si creas otra app, cámbialos con las variables `IG_APP_ID` y `META_CONFIG_ID`).
+4. Mientras la app no pase la revisión de Meta, solo pueden conectarse personas con un **rol en la app** (*Roles de la app → Roles → Testers*). Cada persona necesita una cuenta de Instagram **profesional** vinculada a un porfolio empresarial que administre.
 
-Los tokens de Instagram se guardan en el servidor y se renuevan solos cada día (cron del Worker), antes de que caduquen a los 60 días.
+Los tokens de este sistema no caducan.
 
 ### 3. GitHub
 - **Settings → Pages → Source: GitHub Actions.** Tu web queda en `https://jaimelpdev.github.io/marketing-agency/`.

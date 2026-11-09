@@ -10,7 +10,13 @@
  */
 
 const IG_GRAPH = "https://graph.instagram.com";
+const FB_GRAPH = "https://graph.facebook.com";
 const IG_VER = "v23.0";
+// App de Meta (inicio de sesión unificado / Facebook Login para empresas). No son secretos.
+const DEFAULT_META_APP_ID = "1803279604212539";
+const DEFAULT_META_CONFIG_ID = "1809862283611437";
+const appId = env => String(env.IG_APP_ID || DEFAULT_META_APP_ID).trim();
+const configId = env => String(env.META_CONFIG_ID || DEFAULT_META_CONFIG_ID).trim();
 const FALLBACK_MODELS = ["openai/gpt-oss-120b", "openai/gpt-oss-20b", "qwen/qwen3.6-27b"];
 
 // ---------- utilidades ----------
@@ -115,8 +121,8 @@ async function askLLM(env, prompt) {
 }
 
 // ---------- Instagram ----------
-async function igCall(method, path, token, params = {}) {
-  const url = new URL(`${IG_GRAPH}/${IG_VER}/${path}`);
+async function igCall(method, path, token, params = {}, host = IG_GRAPH) {
+  const url = new URL(`${host}/${IG_VER}/${path}`);
   let init = { method };
   if (method === "GET") {
     Object.entries({ ...params, access_token: token }).forEach(([k, v]) => url.searchParams.set(k, v));
@@ -134,7 +140,7 @@ async function refreshIgTokens(env, force = false) {
   const out = [];
   for (const id of await listUserIds(env)) {
     const u = await getUser(env, id);
-    if (!u || !u.ig || !u.ig.token) continue;
+    if (!u || !u.ig || !u.ig.token || u.ig.host === FB_GRAPH || !u.ig.expires) continue; // los tokens de Facebook para empresas no caducan
     const left = (u.ig.expires || 0) - Date.now();
     if (!force && left > 20 * 86400e3) continue;
     try {
@@ -225,14 +231,15 @@ async function handle(req, env) {
     }
 
     if (p === "/api/ig/start" && method === "POST") {
-      if (!env.IG_APP_ID) return err(501, "not_configured", "Instagram aún no está configurado en el servidor.");
+      if (!env.IG_APP_SECRET) return err(501, "not_configured", "Instagram aún no está configurado en el servidor (falta IG_APP_SECRET).");
       const state = randomId(16);
       await env.KV.put("oauth:" + state, u.id, { expirationTtl: 900 });
-      const auth = new URL("https://www.instagram.com/oauth/authorize");
-      auth.searchParams.set("client_id", env.IG_APP_ID);
+      const auth = new URL(`https://www.facebook.com/${IG_VER}/dialog/oauth`);
+      auth.searchParams.set("client_id", appId(env));
+      auth.searchParams.set("config_id", configId(env));
       auth.searchParams.set("redirect_uri", `${url.origin}/auth/instagram/callback`);
       auth.searchParams.set("response_type", "code");
-      auth.searchParams.set("scope", "instagram_business_basic,instagram_business_content_publish");
+      auth.searchParams.set("override_default_response_type", "true");
       auth.searchParams.set("state", state);
       return json({ url: auth.toString() });
     }
@@ -261,21 +268,30 @@ async function handle(req, env) {
     const u = await getUser(env, uid);
     if (!u) return back("ig-error");
     try {
-      const r1 = await fetch("https://api.instagram.com/oauth/access_token", {
-        method: "POST",
-        body: new URLSearchParams({
-          client_id: env.IG_APP_ID, client_secret: env.IG_APP_SECRET, grant_type: "authorization_code",
-          redirect_uri: `${url.origin}/auth/instagram/callback`, code: code.replace(/#_$/, ""),
-        }),
-      });
-      const j1 = await r1.json();
-      const short = j1.access_token || (j1.data && j1.data[0] && j1.data[0].access_token);
-      if (!short) throw new Error((j1.error_message || j1.error?.message || "sin token"));
-      const r2 = await fetch(`${IG_GRAPH}/access_token?grant_type=ig_exchange_token&client_secret=${encodeURIComponent(env.IG_APP_SECRET)}&access_token=${encodeURIComponent(short)}`);
-      const j2 = await r2.json();
-      if (!j2.access_token) throw new Error(j2.error?.message || "sin token largo");
-      const me = await igCall("GET", "me", j2.access_token, { fields: "user_id,username" });
-      u.ig = { id: String(me.user_id || me.id), username: me.username, token: j2.access_token, expires: Date.now() + (j2.expires_in || 5184000) * 1000, connected: new Date().toISOString() };
+      const secret = String(env.IG_APP_SECRET || "").trim();
+      const tok = await fetch(`${FB_GRAPH}/${IG_VER}/oauth/access_token?` + new URLSearchParams({
+        client_id: appId(env), client_secret: secret, redirect_uri: `${url.origin}/auth/instagram/callback`, code,
+      }));
+      const tj = await tok.json();
+      if (!tj.access_token) throw new Error(tj.error?.message || "sin token");
+      const token = tj.access_token;
+      // Cuentas de Instagram que la persona ha concedido
+      let igIds = [];
+      try {
+        const dbg = await fetch(`${FB_GRAPH}/${IG_VER}/debug_token?` + new URLSearchParams({ input_token: token, access_token: `${appId(env)}|${secret}` }));
+        const dj = await dbg.json();
+        const scopes = (dj.data && dj.data.granular_scopes) || [];
+        const pick = s => (scopes.find(x => x.scope === s) || {}).target_ids || [];
+        igIds = [...pick("instagram_content_publish"), ...pick("instagram_basic")];
+      } catch (e) { }
+      if (!igIds.length) {
+        const pages = await igCall("GET", "me/accounts", token, { fields: "instagram_business_account" }, FB_GRAPH).catch(() => ({ data: [] }));
+        igIds = (pages.data || []).map(p => p.instagram_business_account && p.instagram_business_account.id).filter(Boolean);
+      }
+      if (!igIds.length) throw new Error("No se concedió ninguna cuenta de Instagram");
+      const igId = String(igIds[0]);
+      const info = await igCall("GET", igId, token, { fields: "username" }, FB_GRAPH).catch(() => ({}));
+      u.ig = { id: igId, username: info.username || igId, token, host: FB_GRAPH, expires: tj.expires_in ? Date.now() + tj.expires_in * 1000 : null, connected: new Date().toISOString() };
       await putUser(env, u);
       return back("ig-ok");
     } catch (e) {
@@ -307,9 +323,10 @@ async function handle(req, env) {
       if (!u || !u.ig || !u.ig.token) return err(400, "no_instagram", "Este usuario no tiene Instagram conectado.");
       try {
         let r;
-        if (b.action === "container") r = await igCall("POST", `${u.ig.id}/media`, u.ig.token, b.params || {});
-        else if (b.action === "status") r = await igCall("GET", String(b.id), u.ig.token, { fields: "status_code,status" });
-        else if (b.action === "publish") r = await igCall("POST", `${u.ig.id}/media_publish`, u.ig.token, { creation_id: String(b.id) });
+        const host = u.ig.host || IG_GRAPH;
+        if (b.action === "container") r = await igCall("POST", `${u.ig.id}/media`, u.ig.token, b.params || {}, host);
+        else if (b.action === "status") r = await igCall("GET", String(b.id), u.ig.token, { fields: "status_code,status" }, host);
+        else if (b.action === "publish") r = await igCall("POST", `${u.ig.id}/media_publish`, u.ig.token, { creation_id: String(b.id) }, host);
         else return err(400, "bad_request", "Acción desconocida.");
         return json(r);
       } catch (e) { return err(502, "instagram_error", String(e.message || e)); }
