@@ -184,6 +184,10 @@
   .qitem .rd:hover{background:rgba(255,255,255,.14)}
   .danger{border-color:rgba(255,107,97,.45)!important;color:#ff8a82!important}
   .busy-note{font-size:13px;margin:6px 0;color:var(--accent2)}
+  .qitem.clk{cursor:pointer}
+  .qprev{display:flex;gap:8px;overflow-x:auto;padding:6px 0 10px}
+  .qprev video,.qprev img{height:340px;border-radius:14px;background:#000;flex:none}
+  .autohide{display:none!important}
   .qitem .w{color:var(--muted);flex:none;width:96px;font-size:12px}
   .qitem .s{margin-left:auto;font-size:11.5px;font-weight:800;white-space:nowrap}
   .sched{background:linear-gradient(135deg,rgba(48,209,88,.12),rgba(255,255,255,.02));border:1px solid var(--line);border-radius:20px;padding:14px 16px;margin-bottom:16px}
@@ -1171,8 +1175,16 @@ function queueList(box, q) {
     const busy = redoing.includes(it.id) || (R.replan && upcoming);
     const st = busy ? ["🔄 rehaciendo…", "var(--accent2)"] : (QSTATE[it.status] || [it.status, "var(--muted)"]);
     const row = el("div", { class: "qitem" }, [el("span", { class: "w", text: fmtWhen(it.publishAt) }), el("span", { text: (TYPES[it.tipo] ? TYPES[it.tipo].icon + " " : "") + (it.tema || "") }), el("span", { class: "s", style: "color:" + st[1], text: st[0] })]);
-    if (upcoming && !busy && it.id) row.appendChild(el("button", { class: "rd", title: "Rehacer esta pieza", text: "🔄", onclick: () => askRedo(it) }));
+    if (upcoming && !busy && it.id) row.appendChild(el("button", { class: "rd", title: "Rehacer esta pieza", text: "🔄", onclick: e => { e.stopPropagation(); askRedo(it); } }));
     if (it.error) row.title = it.error; box.appendChild(row);
+    if (it.media && it.media.length) {
+      row.classList.add("clk"); row.title = it.error || "Toca para ver la pieza";
+      row.addEventListener("click", () => {
+        const nx = row.nextSibling; if (nx && nx.classList && nx.classList.contains("qprev")) { nx.remove(); return; }
+        const pv = el("div", { class: "qprev" }, it.media.map(m => /\.mp4$/i.test(m) ? el("video", { src: m, controls: "", playsinline: "", preload: "metadata" }) : el("img", { src: m, loading: "lazy", alt: it.tema || "" })));
+        row.after(pv);
+      });
+    }
   });
 }
 const NET = { instagram: "📸 Instagram", tiktok: "🎵 TikTok", youtube: "▶️ YouTube" };
@@ -1189,7 +1201,11 @@ function renderSchedule() {
   const b = $("#schedBox"); b.innerHTML = ""; const me = HOST.me; if (!me) return;
   const q = (me.status && me.status.queue) || [];
   if (!isConnected()) { b.appendChild(el("div", { class: "sched" }, [el("h3", { text: "📲 Falta un paso" }), el("p", { style: "margin:0 0 10px", text: "Conecta tu Instagram, TikTok o YouTube para que la agencia publique sola." }), el("button", { class: "pill", text: "Conectar redes", onclick: () => openAcct() })])); return; }
-  if (!q.length) { if (reqs().reset) b.appendChild(el("div", { class: "sched" }, [el("div", { class: "busy-note", text: "♻️ Reiniciando la cuenta: en unos minutos se anula lo programado y se borran los archivos." })])); return; }
+  if (!q.length) {
+    const R0 = reqs();
+    const msg = R0.reset ? "♻️ Reiniciando la cuenta: en unos minutos se anula lo programado y se borran los archivos." : R0.replan ? "🚀 La agencia está creando tus vídeos y programándolos en tus redes. Tarda entre 20 y 40 minutos; no tienes que hacer nada." : "La agencia crea y publica sola cada semana. Pulsa el botón para que empiece ya.";
+    b.appendChild(el("div", { class: "sched" }, [el("h3", { text: "🤖 Piloto automático" }), el("div", { class: "busy-note", text: msg })])); return;
+  }
   const box = el("div"); queueList(box, q.filter(x => x.status === "pending" || x.status === "scheduled").slice(0, 6).concat(q.filter(x => x.status !== "pending" && x.status !== "scheduled").slice(-3)));
   const R = reqs();
   b.appendChild(el("div", { class: "sched" }, [el("h3", { text: "🤖 Piloto automático" + (HOST.plan.auto === false ? " (en pausa)" : "") }), R.replan ? el("div", { class: "busy-note", text: "🔄 Rehaciendo la semana… estará lista en 20-40 minutos." }) : null, me.status.estrategia ? el("p", { style: "margin:0 0 8px;font-size:14px", text: me.status.estrategia }) : null, box]));
@@ -1214,6 +1230,23 @@ function renderAcct() {
   $("#acKey").textContent = HOST.key.slice(0, 10) + "…" + HOST.key.slice(-4);
   $("#acUsage").textContent = "Uso de hoy: " + (me.usage.llm || 0) + " peticiones de IA · " + (me.usage.img || 0) + " imágenes.";
 }
+function hasBrand() { return !!(S.cfg && (S.cfg.name || S.cfg.about)); }
+async function planNow(silent) {
+  const st = $("#genStatus");
+  if (!hasBrand()) { openOv(1, false); return; }
+  if (!isConnected()) { openAcct(); setStatus(st, "Conecta al menos una red para que la agencia pueda publicar.", "err"); return; }
+  try {
+    const j = await api("/api/replan", { method: "POST" }); HOST.me.requests = j.requests; renderSchedule(); if ($("#acctModal").classList.contains("on")) renderAcct();
+    setStatus(st, "🚀 Hecho. La agencia está creando tus vídeos y los programará sola en tus redes (20-40 min). Puedes cerrar la página.", "ok");
+  } catch (e) { if (!silent) setStatus(st, e.message, "err"); }
+}
+async function maybeKickoff() {
+  // Primera vez con marca y redes: que empiece ya en vez de esperar a mañana
+  const me = HOST.me; if (!me || !hasBrand() || !isConnected() || HOST.plan.auto === false) return;
+  if ((me.status && me.status.queue && me.status.queue.length) || (me.requests && (me.requests.replan || me.requests.reset))) return;
+  const last = Number(ls("ma_kick") || 0); if (Date.now() - last < 6 * 3600e3) return;
+  ls("ma_kick", Date.now()); await planNow(true);
+}
 async function openAcct() { $("#acctModal").classList.add("on"); renderAcct(); try { HOST.me = await api("/api/me"); await loadSocial(); renderAcct(); renderSchedule(); } catch (e) { } }
 async function loadMe() {
   HOST.me = await api("/api/me");
@@ -1226,7 +1259,7 @@ async function loadMe() {
     if (HOST.me.resetAt) { try { ["ma_cfg", "ma_today", "ma_hist"].forEach(k => localStorage.removeItem(k)); } catch (e) { } S.cfg = normCfg({}); S.today = { date: null, estrategia: "", videos: [] }; S.hist = { items: [] }; applyBrand(); renderOpts(); renderVideos(); }
     openOv(1, false);
   } else saveCfg();
-  $("#loginOv").classList.remove("on"); $("#acctLabel").textContent = HOST.me.name.split(" ")[0]; await loadSocial(); renderSchedule();
+  $("#loginOv").classList.remove("on"); $("#acctLabel").textContent = HOST.me.name.split(" ")[0]; await loadSocial(); renderSchedule(); maybeKickoff();
 }
 if (!window.__AGENCIA_SERVER) {
   delete FONDOS.stock; OPTS[0].items = OPTS[0].items.filter(x => x[0] !== "stock"); if (S.cfg.v.bgMode === "stock") S.cfg.v.bgMode = "ai";
@@ -1242,6 +1275,12 @@ if (!window.__AGENCIA_SERVER) {
   let cfgTimer = null;
   saveCfg = async function () { ls("ma_cfg", S.cfg); if (!HOST.key || !API) return; clearTimeout(cfgTimer); cfgTimer = setTimeout(async () => { try { await api("/api/config", { method: "PUT", body: { config: confFromState() } }); } catch (e) { setStatus($("#genStatus"), "No se pudo guardar en el servidor: " + e.message, "err"); } }, 600); };
   $("#openAcct").addEventListener("click", openAcct);
+  // Modo automático: el botón principal pide al servidor que cree y publique; nada de crear piezas a mano
+  ["#seg", "#segNote", "#videos", "#histSec", "#mediaGroup"].forEach(sel => { const n = $(sel); if (n) n.classList.add("autohide"); });
+  { const sg = $("#seg"), lb = sg && sg.previousElementSibling; if (lb && lb.classList.contains("lbl")) lb.classList.add("autohide"); }
+  { const mi = $("#musicIn"); if (mi && mi.closest(".og")) mi.closest(".og").classList.add("autohide"); }
+  { const old = $("#genBtn"), nb = old.cloneNode(true); nb.textContent = "🚀 Que la agencia cree y publique mi semana"; old.replaceWith(nb); nb.addEventListener("click", () => planNow(false)); }
+  renderVideos = function () { };
   $("#acClose").addEventListener("click", () => $("#acctModal").classList.remove("on"));
   $("#acctModal").addEventListener("click", e => { if (e.target.id === "acctModal") $("#acctModal").classList.remove("on"); });
   document.querySelectorAll("#acNets button").forEach(b => b.addEventListener("click", async () => {
@@ -1293,7 +1332,7 @@ if (!window.__AGENCIA_SERVER) {
     HOST.key = k; ls("ma_key", k); setStatus(st, "Entrando…");
     try { await loadMe(); } catch (e) { setStatus(st, e.message, "err"); }
   });
-  $("#saveBrand").addEventListener("click", () => setTimeout(() => { if (HOST.me && !HOST.me.ig.connected) openAcct(); }, 500));
+  $("#saveBrand").addEventListener("click", () => setTimeout(() => { if (!HOST.me) return; if (!isConnected()) openAcct(); else maybeKickoff(); }, 900));
   setTimeout(async function hostedBoot() {
     try { const c = await fetch("config.json", { cache: "no-store" }).then(r => r.json()); API = String(c.api || "").replace(/\/+$/, ""); } catch (e) { API = ""; }
     if (!API) API = String(ls("ma_api") || "").replace(/\/+$/, "");
@@ -1303,7 +1342,7 @@ if (!window.__AGENCIA_SERVER) {
     if (!HOST.key) { showLogin(); return; }
     try {
       await loadMe();
-      if (hash === "#social-ok") { openAcct(); setStatus($("#genStatus"), "✅ Red conectada. La agencia la usará en las próximas publicaciones.", "ok"); }
+      if (hash === "#social-ok") { openAcct(); setStatus($("#genStatus"), "✅ Red conectada. La agencia la usará en las próximas publicaciones.", "ok"); maybeKickoff(); }
       if (hash === "#ig-ok") { setStatus($("#genStatus"), "✅ Instagram conectado. La agencia empezará a planificar y publicar.", "ok"); }
       if (hash === "#ig-error") { openAcct(); setStatus($("#acStatus"), "No se pudo conectar Instagram. Revisa que sea una cuenta profesional y que te hayan añadido como tester.", "err"); }
     } catch (e) { if (e.status !== 401) setStatus($("#genStatus"), e.message, "err"); }

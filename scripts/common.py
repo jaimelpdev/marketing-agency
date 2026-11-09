@@ -43,5 +43,8 @@ def summarize(queue):
     done = [q for q in queue if not upcoming(q)][-8:]
     out = []
     for q in done + pend:
-        out.append({k: q.get(k) for k in ("id", "tipo", "tema", "publishAt", "status", "error") if q.get(k) is not None})
+        item = {k: q.get(k) for k in ("id", "tipo", "tema", "publishAt", "status", "error") if q.get(k) is not None}
+        if q.get("media"):
+            item["media"] = [m for m in q["media"] if isinstance(m, str) and m.startswith("media/")][:6]
+        out.append(item)
     return out
