@@ -114,7 +114,7 @@ Guarda tu **clave de acceso** (en Cuenta) para entrar desde otro dispositivo.
 - **Música:** si pones tus pistas en `assets/music/<ambiente>/` (energetica, chill, epica, emotiva, divertida, tension) se usan esas. Si no, la agencia busca **canciones reales con licencia libre para uso comercial** (CC0 o CC BY, sobre todo de Jamendo, a través de Openverse) según el ambiente de cada vídeo, empieza la canción ya dentro (sin la intro lenta) y nivela el volumen. Con CC BY se acredita al artista en el texto del post (o abajo del todo en las historias). Las pistas se guardan en `content/music/` y se van reutilizando.
 
 ## 📊 Stickers en historias
-Instagram no deja que ningún programa ponga stickers interactivos de verdad (encuestas, preguntas, enlaces): ni esta agencia ni Metricool, Zernio o similares. Por eso la agencia **dibuja el sticker dentro de la historia** (encuesta con sus opciones, quiz, pregunta, enlace o cuenta atrás) e invita a responder por mensaje directo, y la historia se publica sola.
+Instagram no deja que ningún programa ponga stickers interactivos de verdad (encuestas, preguntas, enlaces): ni esta agencia ni Metricool, Zernio o similares. Por eso la agencia **dibuja el sticker dentro de la historia** (una pregunta abierta para responder por mensaje directo, «link en la bio» o cuenta atrás; nada de encuestas, porque no se podrían votar), y la historia se publica sola.
 
 ## 🔄 Rehacer y reiniciar
 - **🔄 en una pieza programada:** la agencia la vuelve a crear distinta (mismo formato y hora) y sustituye la anterior también en las redes.

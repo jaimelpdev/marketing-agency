@@ -620,7 +620,7 @@ ${past}
 
 TIPOS DE PIEZA
 - "reel": vídeo vertical de 15 a 30 s con texto animado. Sirve para alcance y seguidores nuevos. Lleva de 3 a 5 escenas.
-- "historia": vídeo vertical corto de 5 a 12 s. Sirve para cercanía, interacción y llevar tráfico. Lleva 1 o 2 escenas y SIEMPRE un "sticker" ({"tipo":"encuesta|pregunta|quiz|cuenta atrás|enlace","texto":"…","opciones":["…","…"]}). "opciones" solo en encuesta y quiz: 2 opciones de como mucho 3 palabras (en quiz, la correcta primero).
+- "historia": vídeo vertical corto de 5 a 12 s. Sirve para cercanía, interacción y llevar tráfico. Lleva 1 o 2 escenas y SIEMPRE un "sticker" ({"tipo":"pregunta|enlace|cuenta atrás","texto":"…"})${window.AUTO_STICKERS||window.__AGENCIA_SERVER?'. Se publica en automático y la gente NO puede pulsar el sticker, así que nada de encuestas ni quiz: usa "pregunta" con una pregunta abierta y concreta sobre el tema de la historia que apetezca contestar por mensaje directo (por ejemplo "¿Qué es lo que más te cuesta de X?"), "enlace" para llevar a la web o la app, o "cuenta atrás" solo si hay un lanzamiento real':' (también puedes usar "encuesta" o "quiz")'}.
 - "post": imagen única con una frase potente. Sirve para guardados y compartidos. Lleva 1 escena con el texto de apoyo.
 - "carrusel": de 3 a 6 diapositivas educativas. Sirve para guardados y autoridad.
 
@@ -870,7 +870,8 @@ function drawFrame(SC,t,slide){
 /* Sticker dibujado dentro de la historia (la API de Instagram no permite stickers interactivos) */
 function drawSticker(st,y,lt,T){
   const p=STATIC?1:easeBack(clamp((lt-0.55)/0.45,0,1));if(p<=0)return;
-  const tipo=String(st.tipo||"pregunta").toLowerCase(),acc=S.cfg.acc,w=780,x=W/2;
+  let tipo=String(st.tipo||"pregunta").toLowerCase();const acc=S.cfg.acc,w=780,x=W/2;
+  if(tipo==="encuesta"||tipo==="quiz")tipo="pregunta"; // en automático no se puede votar: se responde por DM
   const HEAD={encuesta:"📊 ENCUESTA",quiz:"🧠 QUIZ",pregunta:"💬 PREGÚNTAME",enlace:"🔗 ENLACE","cuenta atrás":"⏳ CUENTA ATRÁS"};
   let ops=(st.opciones||[]).slice(0,3);if((tipo==="encuesta"||tipo==="quiz")&&ops.length<2)ops=["Sí","No"];
   if(tipo==="quiz"&&ops.length){const seed=hashStr(ops.join("|"))%ops.length;ops=ops.slice(seed).concat(ops.slice(0,seed));}
