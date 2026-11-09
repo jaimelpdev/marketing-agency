@@ -14,7 +14,7 @@ const FB_GRAPH = "https://graph.facebook.com";
 const IG_VER = "v23.0";
 // App de Meta (inicio de sesión unificado / Facebook Login para empresas). No son secretos.
 const DEFAULT_META_APP_ID = "1803279604212539";
-const DEFAULT_META_CONFIG_ID = "1809862283611437";
+const DEFAULT_META_CONFIG_ID = "1282938940682283";
 const appId = env => String(env.IG_APP_ID || DEFAULT_META_APP_ID).trim();
 const configId = env => String(env.META_CONFIG_ID || DEFAULT_META_CONFIG_ID).trim();
 const FALLBACK_MODELS = ["openai/gpt-oss-120b", "openai/gpt-oss-20b", "qwen/qwen3.6-27b"];

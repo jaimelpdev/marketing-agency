@@ -57,7 +57,7 @@ assert.ok(!JSON.stringify(r.j).includes("gsk_secreta"), "la clave nunca sale");
 await call("POST", "/api/llm", { key, body: { prompt: "hola" } });
 r = await call("POST", "/api/llm", { key, body: { prompt: "hola" } }); assert.equal(r.s, 429, "límite diario");
 r = await call("GET", "/api/image?q=coche&seed=5", { key }); assert.equal(r.s, 200); assert.equal(r.j, "JPEG");
-r = await call("POST", "/api/ig/start", { key }); assert.ok(r.j.url.includes("client_id=1803279604212539") && r.j.url.includes("config_id=1809862283611437") && r.j.url.startsWith("https://www.facebook.com/"));
+r = await call("POST", "/api/ig/start", { key }); assert.ok(r.j.url.includes("client_id=1803279604212539") && r.j.url.includes("config_id=1282938940682283") && r.j.url.startsWith("https://www.facebook.com/"));
 const state = new URL(r.j.url).searchParams.get("state");
 const cb = await worker.fetch(new Request(B + "/auth/instagram/callback?code=abc&state=" + state + "#_"), env);
 assert.equal(cb.status, 302); assert.ok(cb.headers.get("location").endsWith("#ig-ok"));
