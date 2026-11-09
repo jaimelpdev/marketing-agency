@@ -451,7 +451,7 @@ function parseJSON(t){t=String(t||"").replace(/```json|```/g,"");const a=t.index
 function normCfg(c){c={...DEF_CFG,...c};if(typeof c.pillars==="string")c.pillars=c.pillars.split(/[,\n]/).map(x=>x.trim()).filter(Boolean);if(!Array.isArray(c.pillars))c.pillars=[];if(!/^#[0-9a-f]{6}$/i.test(c.acc))c.acc=DEF_CFG.acc;if(!/^#[0-9a-f]{6}$/i.test(c.bg))c.bg=DEF_CFG.bg;if(!STYLES.some(s=>s.id===c.style))c.style="racing";c.v={...DEF_V,...(c.v||{})};return c;}
 function normPiece(v,i){
   const tipo=TYPES[v.tipo]?v.tipo:"reel";
-  const st=v.sticker&&typeof v.sticker==="object"&&v.sticker.texto?{tipo:String(v.sticker.tipo||"pregunta"),texto:String(v.sticker.texto)}:null;
+  const st=v.sticker&&typeof v.sticker==="object"&&v.sticker.texto?{tipo:String(v.sticker.tipo||"pregunta"),texto:String(v.sticker.texto),opciones:(Array.isArray(v.sticker.opciones)?v.sticker.opciones:[]).map(o=>String(o).slice(0,22)).filter(Boolean).slice(0,3)}:null;
   return {id:v.id||("p"+Date.now().toString(36)+"_"+i),dia:Math.max(0,Math.min(6,parseInt(v.dia)||0)),hora:String(v.hora||""),tipo,objetivo:String(v.objetivo||""),razon:String(v.razon||""),
     tema:String(v.tema||v.gancho||""),formato:String(v.formato||""),gancho:String(v.gancho||""),visual:String(v.visual||""),
     escenas:(Array.isArray(v.escenas)?v.escenas:[]).slice(0,7).map(e=>({titulo:String(e.titulo||""),texto:String(e.texto||""),emoji:String(e.emoji||""),visual:String(e.visual||"")})),
@@ -616,7 +616,7 @@ ${past}
 
 TIPOS DE PIEZA
 - "reel": vídeo vertical de 15 a 30 s con texto animado. Sirve para alcance y seguidores nuevos. Lleva de 3 a 5 escenas.
-- "historia": vídeo vertical corto de 5 a 12 s. Sirve para cercanía, interacción y llevar tráfico. Lleva 1 o 2 escenas y SIEMPRE un "sticker" ({"tipo":"encuesta|pregunta|quiz|cuenta atrás|enlace","texto":"…"}).
+- "historia": vídeo vertical corto de 5 a 12 s. Sirve para cercanía, interacción y llevar tráfico. Lleva 1 o 2 escenas y SIEMPRE un "sticker" ({"tipo":"encuesta|pregunta|quiz|cuenta atrás|enlace","texto":"…","opciones":["…","…"]}). "opciones" solo en encuesta y quiz: 2 opciones de como mucho 3 palabras (en quiz, la correcta primero).
 - "post": imagen única con una frase potente. Sirve para guardados y compartidos. Lleva 1 escena con el texto de apoyo.
 - "carrusel": de 3 a 6 diapositivas educativas. Sirve para guardados y autoridad.
 
@@ -780,7 +780,7 @@ function buildScenes(p){
     const hook=fit(p.gancho,F.h,F.hw,150*kk,80*kk,930,5,F.up,1.12);sc.push({kind:"hook",L:hook,swipe:type==="carrusel",dur:clamp(1.6+hook.count*0.16,2.4,3.6)*pc});
     const esc=type==="historia"?p.escenas.slice(0,2):p.escenas;
     esc.forEach((s,i)=>{const T=fit(s.titulo,F.h,F.hw,112*kk,66*kk,930,2,F.up,1.12);const B=fit(s.texto,F.b,F.bw,64*kk,38*kk,920,isImg?7:8,false,1.32);sc.push({kind:"tip",n:i+1,emoji:s.emoji||"",T,B,dur:clamp(1.6+(words(s.titulo)+words(s.texto))*0.24,3,8)*pc*(type==="historia"?0.85:1)});});
-    if(type==="historia"&&p.sticker){const C=fit(p.sticker.texto,F.h,F.hw,104*kk,64*kk,930,4,F.up,1.12);sc.push({kind:"cta",L:C,sub:"",sticker:p.sticker.tipo,dur:3.6});}
+    if(type==="historia"&&p.sticker){const C=fit(p.sticker.texto,F.h,F.hw,104*kk,64*kk,930,4,F.up,1.12);sc.push({kind:"cta",L:C,sub:"",sticker:p.sticker.tipo,stk:p.sticker,dur:3.6});}
     else{const C=fit(p.cta,F.h,F.hw,120*kk,70*kk,930,4,F.up,1.12);sc.push({kind:"cta",L:C,sub:S.cfg.ig||S.cfg.web||S.cfg.name||"",dur:3.4*Math.max(pc,0.85)});}
   }
   HOOKS.attachAssets(p,sc);
@@ -857,10 +857,35 @@ function drawFrame(SC,t,slide){
     const stick=!!s.sticker;const subH=s.sub?150:0,stickH=stick?300:0,block=s.L.h+subH+stickH;let y=clamp(H*(stick?PF-0.08:PF)-block/2,TOP,Math.max(TOP,H-440-block));
     drawBlock(s.L,W/2,y,lt,0.05,0.08,T.text,T);
     if(s.sub){const p=STATIC?1:easeBack(clamp((lt-0.5)/0.4,0,1));ctx.save();ctx.font="800 50px Inter";const tw=ctx.measureText(s.sub).width;ctx.translate(W/2,y+s.L.h+90);ctx.scale(p,p);ctx.fillStyle=T.pill;if(T.neon){ctx.shadowColor=S.cfg.acc;ctx.shadowBlur=40;}roundRect(-tw/2-40,-50,tw+80,100,50);ctx.fill();ctx.shadowBlur=0;ctx.fillStyle=T.pillText;ctx.textAlign="center";ctx.textBaseline="middle";ctx.fillText(s.sub,0,3);ctx.restore();}
+    if(stick&&(s.stk&&s.stk.auto||window.AUTO_STICKERS)){drawSticker(s.stk||{tipo:s.sticker,opciones:[]},y+s.L.h+subH+50,lt,T);return void ctx.restore();}
     const bob=STATIC?0:Math.sin(lt*6)*16,ap=O.arrow||stick?(STATIC?1:clamp((lt-0.8)/0.3,0,1)):0;
     if(SC.type!=="carrusel"||true){ctx.save();ctx.globalAlpha*=ap;ctx.fillStyle=T.arrow;ctx.translate(W/2,y+s.L.h+subH+(stick?90:170)+bob);ctx.beginPath();ctx.moveTo(-50,-25);ctx.lineTo(50,-25);ctx.lineTo(0,35);ctx.closePath();ctx.fill();ctx.restore();}
   }
   ctx.restore();
+}
+/* Sticker dibujado dentro de la historia (la API de Instagram no permite stickers interactivos) */
+function drawSticker(st,y,lt,T){
+  const p=STATIC?1:easeBack(clamp((lt-0.55)/0.45,0,1));if(p<=0)return;
+  const tipo=String(st.tipo||"pregunta").toLowerCase(),acc=S.cfg.acc,w=780,x=W/2;
+  const HEAD={encuesta:"📊 ENCUESTA",quiz:"🧠 QUIZ",pregunta:"💬 PREGÚNTAME",enlace:"🔗 ENLACE","cuenta atrás":"⏳ CUENTA ATRÁS"};
+  let ops=(st.opciones||[]).slice(0,3);if((tipo==="encuesta"||tipo==="quiz")&&ops.length<2)ops=["Sí","No"];
+  if(tipo==="quiz"&&ops.length){const seed=hashStr(ops.join("|"))%ops.length;ops=ops.slice(seed).concat(ops.slice(0,seed));}
+  const body=(tipo==="encuesta"||tipo==="quiz")?ops.length*112:120,h=96+body+28;
+  ctx.save();ctx.translate(x,y+h/2);ctx.scale(p,p);ctx.rotate(-0.025);
+  ctx.shadowColor="rgba(0,0,0,.35)";ctx.shadowBlur=40;ctx.shadowOffsetY=12;ctx.fillStyle="#ffffff";roundRect(-w/2,-h/2,w,h,44);ctx.fill();ctx.shadowColor="transparent";
+  ctx.fillStyle=acc;roundRect(-w/2,-h/2,w,84,44);ctx.fill();ctx.fillRect(-w/2,-h/2+44,w,40);
+  ctx.fillStyle="#fff";ctx.font="900 40px Inter";ctx.textAlign="center";ctx.textBaseline="middle";ctx.fillText(HEAD[tipo]||"💬 RESPONDE",0,-h/2+44);
+  let yy=-h/2+96+14;
+  if(tipo==="encuesta"||tipo==="quiz"){
+    ops.forEach((o,i)=>{ctx.fillStyle="#f1f1f4";roundRect(-w/2+30,yy,w-60,92,46);ctx.fill();ctx.fillStyle="#16161c";ctx.font="800 44px Inter";ctx.textAlign="left";ctx.fillText((tipo==="quiz"?String.fromCharCode(65+i)+"  ":"")+o,-w/2+70,yy+48);
+      ctx.textAlign="right";ctx.fillStyle=acc;ctx.font="900 40px Inter";ctx.fillText(tipo==="quiz"?"?":"○",w/2-70,yy+48);yy+=112;});
+  }else{
+    const txt=tipo==="enlace"?"👆 Link en mi bio":tipo==="cuenta atrás"?"Muy pronto · activa avisos 🔔":"Escríbeme por DM ✍️";
+    ctx.fillStyle="#f1f1f4";roundRect(-w/2+30,yy,w-60,96,30);ctx.fill();ctx.fillStyle="#6b6b78";ctx.font="700 44px Inter";ctx.textAlign="center";ctx.fillText(txt,0,yy+50);
+  }
+  ctx.restore();
+  if(tipo==="encuesta"||tipo==="quiz"||tipo==="pregunta"){const q=STATIC?1:clamp((lt-1.1)/0.4,0,1);ctx.save();ctx.globalAlpha*=q;ctx.fillStyle=T.text;ctx.font="800 42px Inter";ctx.textAlign="center";ctx.textBaseline="middle";
+    ctx.fillText(tipo==="pregunta"?"Respóndeme por mensaje directo 📩":"Vota respondiendo por DM 📩",W/2,y+h+70);ctx.restore();}
 }
 function renderThumb(v,small){
   const prev=ctx;ctx=offCtx;
@@ -900,7 +925,7 @@ async function openPlayer(i){
   $("#stage").classList.toggle("r45",!T.video);$("#vidBtns").hidden=!T.video;$("#mBarWrap").hidden=!T.video;$("#imgBtns").hidden=T.video;$("#cnav").hidden=p.tipo!=="carrusel";$("#iAll").hidden=p.tipo!=="carrusel";
   $("#mCopy").textContent=p.tipo==="historia"?"📋 Copiar texto del sticker":"📋 Copiar texto del post";
   const tip=$("#mTip");
-  if(p.tipo==="historia"&&p.sticker){tip.hidden=false;tip.innerHTML="";tip.append("Al subirla, añade el sticker de ");tip.appendChild(el("b",{text:p.sticker.tipo}));tip.append(": “"+p.sticker.texto+"” justo donde apunta la flecha."+(S.cfg.web||S.cfg.app?" Si es de enlace, usa: "+(S.cfg.web||S.cfg.app):""));}
+  if(p.tipo==="historia"&&p.sticker&&!window.AUTO_STICKERS){tip.hidden=false;tip.innerHTML="";tip.append("Al subirla, añade el sticker de ");tip.appendChild(el("b",{text:p.sticker.tipo}));tip.append(": “"+p.sticker.texto+"” justo donde apunta la flecha."+(S.cfg.web||S.cfg.app?" Si es de enlace, usa: "+(S.cfg.web||S.cfg.app):""));}
   else if(p.tipo==="carrusel"){tip.hidden=false;tip.textContent="Guarda todas las diapositivas y súbelas juntas, en orden, como una sola publicación.";}
   else tip.hidden=true;
   previewStill();
@@ -1110,6 +1135,7 @@ if($("#exportCfg"))$("#exportCfg").addEventListener("click",async()=>{
 
 
 /* ============ MODO MULTIUSUARIO (servidor de la agencia) ============ */
+window.AUTO_STICKERS = true; // la publicación es automática: el sticker va dibujado dentro de la historia
 let API = "";
 const DEFAULT_PLAN = () => ({ modo: "smart", auto: true, max_por_dia: 2, max_semana: 5, formatos: ["reel", "historia", "post", "carrusel"], audio: "auto", dias_guardar_media: 10, zona_horaria: (Intl.DateTimeFormat().resolvedOptions().timeZone || "Europe/Madrid") });
 const HOST = { key: ls("ma_key") || "", me: null, social: [], socialEnabled: true, plan: DEFAULT_PLAN() };

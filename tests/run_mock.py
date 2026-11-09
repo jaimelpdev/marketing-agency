@@ -54,6 +54,7 @@ def mock_routes(page):
 
 import subprocess  # noqa: E402
 calls = []
+OV = []
 PROMPTS = []
 DONE = []
 zcalls = []
@@ -87,6 +88,15 @@ class H(http.server.SimpleHTTPRequestHandler):
         return self.headers.get("authorization") == "Bearer admin-test"
 
     def do_GET(self):
+        if self.path.startswith("/ov/audio/"):
+            OV.append(self.path)
+            return self._json({"results": [{"id": f"trk{len(OV)}", "title": "Sunny Ride", "creator": "Band X", "license": "by", "license_version": "4.0",
+                                            "url": "http://127.0.0.1:8765/ov/track.mp3", "duration": 95000, "filetype": "mp3", "source": "jamendo",
+                                            "foreign_landing_url": "https://jamendo.com/x"}]})
+        if self.path == "/ov/track.mp3":
+            data = TRACK.read_bytes()
+            self.send_response(200); self.send_header("content-type", "audio/mpeg"); self.send_header("content-length", str(len(data))); self.end_headers()
+            return self.wfile.write(data)
         if self.path.startswith("/admin/"):
             if not self._auth():
                 return self._json({"error": {"message": "no"}}, 401)
@@ -140,7 +150,10 @@ def fake_tts(text, voice, rate, out):
     d = max(1.0, len(text.split()) * 0.33)
     subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-f", "lavfi", "-i", f"sine=frequency=440:duration={d}", "-ar", "24000", str(out)], check=True)
 daily.tts = fake_tts
-# sin pistas propias: la música se genera
+# sin pistas propias: la música se busca en Openverse (simulado)
+TRACK = work / "track.mp3"
+subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-f", "lavfi", "-i", "sine=frequency=330:duration=90", "-ac", "2", str(TRACK)], check=True)
+os.environ["OPENVERSE_API"] = "http://127.0.0.1:8765/ov"
 # acelerar Pollinations en la prueba
 os.environ["POLLINATIONS_TOKEN"] = "x"
 daily.main()
@@ -176,6 +189,10 @@ def loudness(path):
     r = subprocess.run(["ffmpeg", "-hide_banner", "-i", str(path), "-af", "volumedetect", "-f", "null", "-"], capture_output=True, text=True)
     import re
     return float(re.search(r"mean_volume: (-?[0-9.]+)", r.stderr).group(1))
+assert OV, "busca música libre"
+assert (work / "content/music").exists() and list((work / "content/music").rglob("index.json")), "guarda las pistas"
+reel_item = next(q for q in final if q["tipo"] == "reel")
+assert "Sunny Ride" in reel_item["caption"] and "CC BY 4.0" in reel_item["caption"], "acredita al artista"
 hist_item = next(q for q in final if q["tipo"] == "historia")
 lv = loudness(work / "docs" / hist_item["media"][0])
 print("\nHistoria solo música, volumen medio:", lv, "dB")
@@ -185,6 +202,8 @@ assert lv > -40, "la historia tiene música generada (no es silencio)"
 old_reel = next(q for q in final if q["tipo"] == "reel")
 USERS[0]["requests"] = {"redo": [old_reel["id"]]}
 USERS[0]["config"]["plan"]["audio"] = "voz"
+import shutil as _sh
+_sh.copy(work / "docs" / hist_item["media"][0], "/tmp/historia_mock.mp4")
 zcalls.clear()
 daily.main()
 q2 = json.loads(qpath.read_text())

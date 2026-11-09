@@ -111,7 +111,10 @@ Guarda tu **clave de acceso** (en Cuenta) para entrar desde otro dispositivo.
 ## 🔊 Sonido
 - En **👤 Cuenta → Sonido de los vídeos** cada persona elige: 🤖 que decida la agencia, 🎙 solo voz, 🎵 solo música o 🎙+🎵 voz y música.
 - **Voz:** locuciones neuronales gratuitas de Microsoft (edge-tts), con el guion que escribe la agencia.
-- **Música:** si pones tus pistas en `assets/music/<ambiente>/` (energetica, chill, epica, emotiva, divertida, tension) se usan esas; si no, la agencia **compone una pista original** para cada vídeo según su ambiente (`scripts/music.py`), sin derechos de autor.
+- **Música:** si pones tus pistas en `assets/music/<ambiente>/` (energetica, chill, epica, emotiva, divertida, tension) se usan esas. Si no, la agencia busca **canciones reales con licencia libre para uso comercial** (CC0 o CC BY, sobre todo de Jamendo, a través de Openverse) según el ambiente de cada vídeo, empieza la canción ya dentro (sin la intro lenta) y nivela el volumen. Con CC BY se acredita al artista en el texto del post (o abajo del todo en las historias). Las pistas se guardan en `content/music/` y se van reutilizando.
+
+## 📊 Stickers en historias
+Instagram no deja que ningún programa ponga stickers interactivos de verdad (encuestas, preguntas, enlaces): ni esta agencia ni Metricool, Zernio o similares. Por eso la agencia **dibuja el sticker dentro de la historia** (encuesta con sus opciones, quiz, pregunta, enlace o cuenta atrás) e invita a responder por mensaje directo, y la historia se publica sola.
 
 ## 🔄 Rehacer y reiniciar
 - **🔄 en una pieza programada:** la agencia la vuelve a crear distinta (mismo formato y hora) y sustituye la anterior también en las redes.
@@ -126,7 +129,7 @@ Guarda tu **clave de acceso** (en Cuenta) para entrar desde otro dispositivo.
 - Al guardar tokens de Instagram de otras personas, eres responsable de custodiarlos. Cada persona puede desconectar su cuenta desde la app cuando quiera.
 
 ## ⚠️ Límites conocidos
-- **Historias:** la API de Instagram no permite stickers. En automático, la historia termina invitando a responder por mensaje directo.
+- **Historias:** la API de Instagram no permite stickers interactivos; van dibujados dentro de la historia (ver arriba).
 - **Horarios:** GitHub puede retrasar unos minutos las tareas programadas, así que la publicación puede salir entre 5 y 30 minutos después de la hora prevista.
 - **Servicios gratuitos:** Groq, Pollinations y edge-tts son gratuitos con límites y pueden cambiar sus condiciones. Con muchas personas, el cupo de Groq se comparte entre todas.
 - **El repositorio es público** (lo exige Pages gratis): los vídeos y las colas de publicación son visibles, aunque de todos modos se van a publicar en Instagram.

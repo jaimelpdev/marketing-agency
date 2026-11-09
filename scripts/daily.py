@@ -115,7 +115,7 @@ def probe_duration(path):
 
 
 def pick_music(mood, workdir=None):
-    """Música para la pieza: primero tus pistas de assets/music/<ambiente>; si no hay, se genera una original."""
+    """Música para la pieza: primero tus pistas de assets/music/<ambiente>; si no, música libre real (Openverse)."""
     pools = []
     if mood:
         pools.append([p for p in (MUSIC_DIR / mood).glob("*") if p.suffix.lower() in MUSIC_EXT])
@@ -123,35 +123,46 @@ def pick_music(mood, workdir=None):
     pools.append([p for p in MUSIC_DIR.rglob("*") if p.suffix.lower() in MUSIC_EXT])
     for pool in pools:
         if pool:
-            return random.choice(pool)
-    if workdir is None:
-        return None
-    import music
-    out = Path(workdir) / f"musica_{mood or 'energetica'}.wav"
-    return music.make(mood if mood in music.MOODS else "energetica", out, 40, random.randrange(1 << 30))
+            return random.choice(pool), {"license": "own", "title": pool[0].stem}
+    import music_lib
+    return music_lib.get_track(mood, CONTENT / "music", lambda *a: log(*a))
 
 
-def encode_video(frames_dir, total, out_path, voice_clips=(), music=None):
+def ff_text(t):
+    return str(t).replace("\\", "\\\\").replace(":", "\\:").replace("'", "\u2019").replace("%", "\\%")
+
+
+def encode_video(frames_dir, total, out_path, voice_clips=(), music=None, credit=""):
     cmd = ["ffmpeg", "-y", "-loglevel", "error", "-framerate", str(FPS), "-i", str(frames_dir / "f_%05d.jpg")]
     for clip, _ in voice_clips:
         cmd += ["-i", str(clip)]
     if music:
-        cmd += ["-stream_loop", "-1", "-i", str(music)]
+        mdur = probe_duration(music)
+        # empezar ya dentro de la canción (se salta la intro lenta) si es larga
+        start = round(min(mdur * 0.18, max(0.0, mdur - total - 2)), 2) if mdur > total + 20 else 0
+        cmd += ["-stream_loop", "-1", "-ss", str(start), "-i", str(music)]
     else:
         cmd += ["-f", "lavfi", "-i", "anullsrc=r=48000:cl=stereo"]
     m_idx = len(voice_clips) + 1
     has_voice = bool(voice_clips)
-    music_vol = 0.13 if has_voice else 0.85
+    music_vol = 0.16 if has_voice else 0.9
     fade_start = max(0.0, total - 1.2)
     parts, labels = [], []
     for k, (_, start_s) in enumerate(voice_clips):
         ms = int(start_s * 1000)
         parts.append(f"[{k + 1}:a]aresample=48000,adelay={ms}:all=1,volume=1.15[v{k}]")
         labels.append(f"[v{k}]")
-    parts.append(f"[{m_idx}:a]aresample=48000,volume={music_vol},afade=t=in:d=0.4,afade=t=out:st={fade_start:.2f}:d=1.2[mu]")
+    norm = "loudnorm=I=-16:TP=-1.5:LRA=11," if music else ""
+    parts.append(f"[{m_idx}:a]aresample=48000,{norm}volume={music_vol},afade=t=in:d=0.4,afade=t=out:st={fade_start:.2f}:d=1.2[mu]")
     labels.append("[mu]")
     parts.append("".join(labels) + f"amix=inputs={len(labels)}:normalize=0:duration=longest,alimiter=limit=0.95[aout]")
-    cmd += ["-filter_complex", ";".join(parts), "-map", "0:v", "-map", "[aout]", "-t", f"{total:.3f}",
+    vmap = "0:v"
+    font = "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf"
+    if credit and Path(font).exists():
+        parts.append(f"[0:v]drawtext=fontfile={font}:text='{ff_text(credit.replace("🎵", "♪"))}':fontsize=22:fontcolor=white@0.85:"
+                     f"box=1:boxcolor=black@0.35:boxborderw=8:x=(w-text_w)/2:y=h-70[vout]")
+        vmap = "[vout]"
+    cmd += ["-filter_complex", ";".join(parts), "-map", vmap, "-map", "[aout]", "-t", f"{total:.3f}",
             "-c:v", "libx264", "-preset", "medium", "-crf", "20", "-pix_fmt", "yuv420p", "-profile:v", "high", "-r", str(FPS),
             "-c:a", "aac", "-b:a", "160k", "-ar", "48000", "-movflags", "+faststart", str(out_path)]
     subprocess.run(cmd, check=True)
@@ -357,7 +368,7 @@ def plan_user(browser, user, key, force=False, redo=None):
         page.evaluate("""()=>{
           S.today.videos = S.today.videos.filter(p=>window.__allowed.includes(p.tipo));
           if (window.__origBP) S.today.videos = S.today.videos.slice(0, 1);
-          S.today.videos.forEach(p=>{ if(p.tipo==='historia' && p.sticker){ p.cta = p.sticker.texto + ' · respóndeme por DM'; p.sticker=null; } });
+          S.today.videos.forEach(p=>{ if(p.tipo==='historia' && p.sticker){ p.sticker.auto = true; } });
         }""")
         n = page.evaluate("S.today.videos.length")
         if redo and not n:
@@ -385,6 +396,7 @@ def plan_user(browser, user, key, force=False, redo=None):
             info = page.evaluate("i=>__agRender.info(i)", i)
             log(f"  [{i + 1}/{n}] {p['tipo']} · {p.get('hora', '')} · {p.get('tema', '')}")
             media = []
+            credit = ""
             if info["video"]:
                 with tempfile.TemporaryDirectory() as td:
                     tdp = Path(td)
@@ -397,8 +409,10 @@ def plan_user(browser, user, key, force=False, redo=None):
                             log("    ⚠ No se pudo generar la voz, va solo con música:", e)
                             page.evaluate("i=>{delete S.today.videos[i]._durs;}", i)
                             voice_clips = []
-                    music = None if p.get("audio") == "solo_voz" else pick_music(p.get("musica"), tdp)
-                    log(f"    música: {music.name if music else 'ninguna'} · ambiente {p.get('musica') or '-'} · audio {p.get('audio') or '-'}")
+                    music, track = (None, None) if p.get("audio") == "solo_voz" else pick_music(p.get("musica"), tdp)
+                    import music_lib
+                    credit = music_lib.credit(track)
+                    log(f"    música: {(track or {}).get('title', 'ninguna')} · ambiente {p.get('musica') or '-'} · audio {p.get('audio') or '-'}")
                     total = float(page.evaluate("i=>buildScenes(S.today.videos[i]).total", i))
                     count = int(total * FPS + 0.999)
                     f = 0
@@ -408,7 +422,7 @@ def plan_user(browser, user, key, force=False, redo=None):
                             break
                         write_dataurls(batch, tdp, f)
                         f += len(batch)
-                    encode_video(tdp, total, folder / "video.mp4", voice_clips, music)
+                    encode_video(tdp, total, folder / "video.mp4", voice_clips, music, credit if p["tipo"] == "historia" else "")
                 media.append(str((folder / "video.mp4").relative_to(DOCS)))
             else:
                 for k in range(int(info["slides"])):
@@ -417,6 +431,8 @@ def plan_user(browser, user, key, force=False, redo=None):
                     path.write_bytes(base64.b64decode(url.split(",", 1)[1]))
                     media.append(str(path.relative_to(DOCS)))
             caption = (p.get("caption", "") + "\n\n" + p.get("hashtags", "")).strip() if p["tipo"] != "historia" else ""
+            if caption and info["video"] and credit:
+                caption += "\n\n" + credit
             when = publish_time(today, p.get("dia", 0), p.get("hora"), tz, i)
             if redo:
                 when = datetime.fromisoformat(redo["publishAt"]).astimezone(tz)
