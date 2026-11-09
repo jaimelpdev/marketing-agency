@@ -60,6 +60,17 @@ Zernio hace de intermediario aprobado por Instagram, TikTok y YouTube, así que 
 
 Cada persona tiene su propio perfil en Zernio. La agencia sube los vídeos e imágenes y deja cada pieza **programada** a su hora: reels y vídeos van a las tres redes (TikTok y YouTube solo admiten vídeo), posts, carruseles e historias solo a Instagram.
 
+### 3. Que la agencia arranque al momento (recomendado)
+GitHub a veces retrasa horas (o no lanza) las tareas programadas de un repositorio nuevo. Con este token el servidor pone a trabajar a la agencia en cuanto alguien pulsa un botón en la app, y cada mañana lanza la planificación diaria:
+1. github.com → *Settings → Developer settings → Personal access tokens → Fine-grained tokens → Generate new token*.
+2. *Repository access*: **Only select repositories** → `marketing-agency`. *Permissions → Actions*: **Read and write**. Caducidad: la que quieras (al caducar, crea otro).
+3. Guárdalo en el servidor y despliega:
+   ```bash
+   cd worker
+   npx wrangler secret put GITHUB_TOKEN
+   npx wrangler deploy
+   ```
+
 ### 2b. Alternativa: app propia de Meta (solo Instagram, opcional)
 Meta ya no permite en apps nuevas el inicio de sesión "solo Instagram". Se usa el **inicio de sesión unificado** (Facebook Login para empresas):
 1. developers.facebook.com → crea una app con el caso de uso **Administrar mensajes y contenido en Instagram** y vincúlala a tu porfolio empresarial.

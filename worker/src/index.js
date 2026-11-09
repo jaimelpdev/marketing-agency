@@ -199,6 +199,22 @@ async function refreshIgTokens(env, force = false) {
 }
 
 // ---------- rutas ----------
+// Pone a trabajar a la agencia en GitHub Actions al momento (si hay GITHUB_TOKEN); si no, lo hará la revisión periódica.
+async function kickAgency(env) {
+  if (!env.GITHUB_TOKEN) return false;
+  if (await env.KV.get("kick:recent")) return true; // ya se lanzó hace nada: esa ejecución lo atenderá
+  const repo = env.GITHUB_REPO || "jaimelpdev/marketing-agency";
+  try {
+    const r = await fetch(`https://api.github.com/repos/${repo}/actions/workflows/planificar.yml/dispatches`, {
+      method: "POST",
+      headers: { authorization: "Bearer " + env.GITHUB_TOKEN, accept: "application/vnd.github+json", "user-agent": "agencia-marketing-ia", "content-type": "application/json" },
+      body: JSON.stringify({ ref: env.GITHUB_BRANCH || "main" }),
+    });
+    if (r.status === 204) { await env.KV.put("kick:recent", "1", { expirationTtl: 90 }); return true; }
+  } catch (e) { }
+  return false;
+}
+
 async function handle(req, env) {
   const url = new URL(req.url);
   const p = url.pathname.replace(/\/+$/, "") || "/";
@@ -289,12 +305,12 @@ async function handle(req, env) {
       if (redo.length >= 10) return err(429, "rate_limited", "Ya hay muchas piezas rehaciéndose. Espera a que terminen.");
       u.requests.redo = redo.concat(id);
       await putUser(env, u);
-      return json({ ok: true, requests: u.requests });
+      return json({ ok: true, requests: u.requests, started: await kickAgency(env) });
     }
     if (p === "/api/replan" && method === "POST") {
       u.requests = { ...(u.requests || {}), replan: new Date().toISOString(), redo: [] };
       await putUser(env, u);
-      return json({ ok: true, requests: u.requests });
+      return json({ ok: true, requests: u.requests, started: await kickAgency(env) });
     }
     if (p === "/api/cancel-request" && method === "POST") {
       const b = await req.json().catch(() => ({}));
@@ -313,7 +329,7 @@ async function handle(req, env) {
       u.resetAt = u.requests.reset;
       u.updated = new Date().toISOString();
       await putUser(env, u);
-      return json({ ok: true });
+      return json({ ok: true, started: await kickAgency(env) });
     }
 
     if (p === "/api/social" && method === "GET") {
@@ -497,6 +513,8 @@ export default {
     return new Response(res.body, { status: res.status, headers: h });
   },
   async scheduled(event, env, ctx) {
-    ctx.waitUntil(refreshIgTokens(env));
+    // Una vez al día (wrangler.toml): renueva tokens y pone en marcha la planificación diaria,
+    // aunque GitHub retrase o no lance sus tareas programadas. Si ya hay plan, la agencia no hace nada.
+    ctx.waitUntil(Promise.all([refreshIgTokens(env), env.KV.delete("kick:recent").then(() => kickAgency(env))]));
   },
 };

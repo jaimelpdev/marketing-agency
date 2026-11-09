@@ -14,9 +14,11 @@ const env = { KV, GROQ_API_KEY: "gsk_secreta", POLLINATIONS_TOKEN: "pt", ADMIN_T
 
 const calls = [];
 const zcalls = [];
+const gh = [];
 globalThis.fetch = async (url, init = {}) => {
   url = String(url); calls.push(url);
   const J = (o, s = 200) => new Response(JSON.stringify(o), { status: s, headers: { "content-type": "application/json" } });
+  if (url.includes("api.github.com")) { assert.equal(init.headers.authorization, "Bearer ghtok"); gh.push(url); return new Response(null, { status: 204 }); }
   if (url.includes("api.groq.com")) {
     const b = JSON.parse(init.body);
     assert.equal(init.headers.authorization, "Bearer gsk_secreta");
@@ -102,7 +104,12 @@ r = await call("PUT", "/admin/status/" + uid, { key: "admin123", body: { estrate
 r = await call("GET", "/pending"); assert.equal(r.j.pending, false);
 r = await call("POST", "/api/redo", { key, body: { id: "p0" } }); assert.equal(r.s, 400, "lo publicado no se rehace");
 r = await call("POST", "/api/redo", { key, body: { id: "nada" } }); assert.equal(r.s, 404);
-r = await call("POST", "/api/redo", { key, body: { id: "p1" } }); assert.equal(r.s, 200); assert.deepEqual(r.j.requests.redo, ["p1"]);
+r = await call("POST", "/api/redo", { key, body: { id: "p1" } }); assert.equal(r.s, 200); assert.deepEqual(r.j.requests.redo, ["p1"]); assert.equal(r.j.started, false, "sin GITHUB_TOKEN no lanza nada");
+env.GITHUB_TOKEN = "ghtok";
+r = await call("POST", "/api/replan", { key }); assert.equal(r.j.started, true, "lanza la agencia al momento");
+assert.ok(gh.length === 1 && gh[0].includes("/repos/jaimelpdev/marketing-agency/actions/workflows/planificar.yml/dispatches"));
+r = await call("POST", "/api/replan", { key }); assert.equal(gh.length, 1, "no lanza dos veces seguidas");
+delete env.GITHUB_TOKEN; await call("POST", "/api/cancel-request", { key, body: {} }); await call("POST", "/api/redo", { key, body: { id: "p1" } });
 r = await call("GET", "/pending"); assert.equal(r.j.pending, true);
 r = await call("GET", "/admin/users", { key: "admin123" }); assert.deepEqual(r.j.users.find(x => x.id === uid).requests.redo, ["p1"]);
 r = await call("POST", "/admin/requests/" + uid + "/done", { key: "admin123", body: { redo: ["p1"] } }); assert.equal(r.j.requests, null);

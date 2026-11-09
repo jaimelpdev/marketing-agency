@@ -103,9 +103,25 @@ MUSIC_EXT = (".mp3", ".m4a", ".wav", ".aac", ".ogg")
 
 def tts(text, voice, rate, out_path):
     """Locución gratuita con las voces neuronales de Microsoft (edge-tts)."""
+    # Playwright (modo síncrono) ya tiene un bucle asyncio en este hilo: la voz se genera en otro hilo.
     import asyncio
+    import threading
     import edge_tts
-    asyncio.run(edge_tts.Communicate(text, voice, rate=rate).save(str(out_path)))
+    err = []
+
+    def run():
+        try:
+            asyncio.run(edge_tts.Communicate(text, voice, rate=rate).save(str(out_path)))
+        except Exception as e:  # noqa: BLE001
+            err.append(e)
+    for intento in range(3):
+        err.clear()
+        t = threading.Thread(target=run)
+        t.start()
+        t.join(90)
+        if not err and Path(out_path).exists() and Path(out_path).stat().st_size > 0:
+            return
+    raise RuntimeError(f"edge-tts falló: {err[0] if err else 'sin respuesta'}")
 
 
 def probe_duration(path):
@@ -434,6 +450,8 @@ def plan_user(browser, user, key, force=False, redo=None):
             if caption and info["video"] and credit:
                 caption += "\n\n" + credit
             when = publish_time(today, p.get("dia", 0), p.get("hora"), tz, i)
+            if when < now + timedelta(minutes=15):  # la hora de hoy ya pasó: se publica en un rato
+                when = now + timedelta(minutes=15 + 20 * i)
             if redo:
                 when = datetime.fromisoformat(redo["publishAt"]).astimezone(tz)
                 if when < now + timedelta(minutes=20):
