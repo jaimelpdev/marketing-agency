@@ -4,7 +4,8 @@
   "type": "module",
   "scripts": {
     "deploy": "wrangler deploy",
-    "test": "node test/worker.test.mjs"
+    "test": "node test/worker.test.mjs",
+    "setup": "node setup.mjs"
   },
   "devDependencies": {
     "wrangler": "^4"

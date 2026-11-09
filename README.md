@@ -23,6 +23,15 @@ Todo funciona con planes gratuitos: GitHub Actions y Pages, Cloudflare Workers, 
 
 ### 1. Servidor (Cloudflare Workers, gratis)
 Necesitas Node.js instalado y una cuenta gratuita de Cloudflare.
+
+**Opción rápida (recomendada):** un instalador lo hace todo y te va pidiendo las claves:
+```bash
+cd worker
+npm install
+npm run setup
+```
+
+**Opción manual:**
 ```bash
 cd worker
 npm install
