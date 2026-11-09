@@ -41,6 +41,42 @@
       "tema": "Pista favorita",
       "formato": "vertical",
       "tipo": "historia"
+    },
+    {
+      "date": "2026-11-09",
+      "tema": "Gestión de neumáticos",
+      "formato": "historia",
+      "tipo": "historia"
+    },
+    {
+      "date": "2026-11-10",
+      "tema": "Suspensión para curvas rápidas",
+      "formato": "carrusel",
+      "tipo": "carrusel"
+    },
+    {
+      "date": "2026-11-11",
+      "tema": "Entrenamiento mental",
+      "formato": "historia",
+      "tipo": "historia"
+    },
+    {
+      "date": "2026-11-12",
+      "tema": "Calentamiento rápido",
+      "formato": "post",
+      "tipo": "post"
+    },
+    {
+      "date": "2026-11-13",
+      "tema": "Comparativa de volantes",
+      "formato": "historia",
+      "tipo": "historia"
+    },
+    {
+      "date": "2026-11-15",
+      "tema": "Estrategia de pit‑stop",
+      "formato": "reel",
+      "tipo": "reel"
     }
   ]
 }

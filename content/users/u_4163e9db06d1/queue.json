@@ -1,65 +1,101 @@
 [
   {
-    "id": "2026-11-09-01-historia",
-    "date": "2026-11-09",
+    "id": "2026-11-10-01-historia",
+    "date": "2026-11-10",
     "source": "auto",
     "tipo": "historia",
-    "tema": "Calibración del volante",
-    "publishAt": "2026-11-11T09:00:00+01:00",
+    "tema": "Gestión de neumáticos",
+    "publishAt": "2026-11-10T09:00:00+01:00",
     "caption": "",
     "media": [
-      "media/u_4163e9db06d1/2026-11-09/2026-11-09-01-historia/video.mp4"
+      "media/u_4163e9db06d1/2026-11-10/2026-11-10-01-historia/video.mp4"
     ],
     "status": "scheduled",
     "attempts": 0,
-    "cover": "media/u_4163e9db06d1/2026-11-09/2026-11-09-01-historia/cover.jpg",
-    "zernioPostId": "6af23e49112caa19b08b69df"
+    "cover": "media/u_4163e9db06d1/2026-11-10/2026-11-10-01-historia/cover.jpg",
+    "zernioPostId": "6af25a7695020483d5f5e827"
   },
   {
-    "id": "2026-11-09-02-post",
-    "date": "2026-11-09",
+    "id": "2026-11-10-02-carrusel",
+    "date": "2026-11-10",
+    "source": "auto",
+    "tipo": "carrusel",
+    "tema": "Suspensión para curvas rápidas",
+    "publishAt": "2026-11-11T13:30:00+01:00",
+    "caption": "Domina la suspensión y siente la diferencia en cada curva. Guarda este carrusel y comparte con tu escuadrón de pilotos. #simracing #suspension #circuitos #consejos #racing\n\n#simracing #suspension #circuitos #consejos #racing",
+    "media": [
+      "media/u_4163e9db06d1/2026-11-10/2026-11-10-02-carrusel/01.jpg",
+      "media/u_4163e9db06d1/2026-11-10/2026-11-10-02-carrusel/02.jpg",
+      "media/u_4163e9db06d1/2026-11-10/2026-11-10-02-carrusel/03.jpg",
+      "media/u_4163e9db06d1/2026-11-10/2026-11-10-02-carrusel/04.jpg",
+      "media/u_4163e9db06d1/2026-11-10/2026-11-10-02-carrusel/05.jpg",
+      "media/u_4163e9db06d1/2026-11-10/2026-11-10-02-carrusel/06.jpg"
+    ],
+    "status": "scheduled",
+    "attempts": 0,
+    "zernioPostId": "6af25a7e2a6a31a4fb3e9c05"
+  },
+  {
+    "id": "2026-11-10-03-historia",
+    "date": "2026-11-10",
+    "source": "auto",
+    "tipo": "historia",
+    "tema": "Entrenamiento mental",
+    "publishAt": "2026-11-12T09:30:00+01:00",
+    "caption": "",
+    "media": [
+      "media/u_4163e9db06d1/2026-11-10/2026-11-10-03-historia/video.mp4"
+    ],
+    "status": "scheduled",
+    "attempts": 0,
+    "cover": "media/u_4163e9db06d1/2026-11-10/2026-11-10-03-historia/cover.jpg",
+    "zernioPostId": "6af25a8395020483d5f5e876"
+  },
+  {
+    "id": "2026-11-10-04-post",
+    "date": "2026-11-10",
     "source": "auto",
     "tipo": "post",
-    "tema": "Visualiza la vuelta perfecta",
+    "tema": "Calentamiento rápido",
     "publishAt": "2026-11-13T14:00:00+01:00",
-    "caption": "La mente dirige al volante. 🧠\nVisualiza cada paso antes de la pista y mejora tu rendimiento.\nLink en bio.\n\n#MentalTraining #Visualización #SimRacing #RedlineClub #RacingMindset",
+    "caption": "Prepara tu cuerpo antes de cada sesión. Un buen calentamiento mejora reflejos y evita lesiones. 🚀 #simracing #calentamiento #racing #tips #gaming\n\n#simracing #calentamiento #racing #tips #gaming",
     "media": [
-      "media/u_4163e9db06d1/2026-11-09/2026-11-09-02-post/01.jpg"
+      "media/u_4163e9db06d1/2026-11-10/2026-11-10-04-post/01.jpg"
     ],
     "status": "scheduled",
     "attempts": 0,
-    "zernioPostId": "6af23e4bd92e682917aab2f0"
+    "zernioPostId": "6af25a8595020483d5f5e88d"
   },
   {
-    "id": "2026-11-09-03-historia",
-    "date": "2026-11-09",
+    "id": "2026-11-10-05-historia",
+    "date": "2026-11-10",
     "source": "auto",
     "tipo": "historia",
-    "tema": "Acceso anticipado",
-    "publishAt": "2026-11-14T11:00:00+01:00",
+    "tema": "Comparativa de volantes",
+    "publishAt": "2026-11-14T09:00:00+01:00",
     "caption": "",
     "media": [
-      "media/u_4163e9db06d1/2026-11-09/2026-11-09-03-historia/video.mp4"
+      "media/u_4163e9db06d1/2026-11-10/2026-11-10-05-historia/video.mp4"
     ],
     "status": "scheduled",
     "attempts": 0,
-    "cover": "media/u_4163e9db06d1/2026-11-09/2026-11-09-03-historia/cover.jpg",
-    "zernioPostId": "6af23e4dffe19e1c714737a3"
+    "cover": "media/u_4163e9db06d1/2026-11-10/2026-11-10-05-historia/cover.jpg",
+    "zernioPostId": "6af25a882a6a31a4fb3e9c2c"
   },
   {
-    "id": "2026-11-09-04-historia",
-    "date": "2026-11-09",
+    "id": "2026-11-10-06-reel",
+    "date": "2026-11-10",
     "source": "auto",
-    "tipo": "historia",
-    "tema": "Pista favorita",
-    "publishAt": "2026-11-15T09:30:00+01:00",
-    "caption": "",
+    "tipo": "reel",
+    "tema": "Estrategia de pit‑stop",
+    "publishAt": "2026-11-16T11:30:00+01:00",
+    "caption": "Domina la pista sin perder tiempo en boxes. Cada segundo cuenta para la victoria. 🚦 #simracing #pitstop #estrategia #racing\n\n#simracing #pitstop #estrategia #racing #tips\n\n🎵 «Mystical Horror Trailer» de Soundrider/Dope (CC BY 3.0)",
     "media": [
-      "media/u_4163e9db06d1/2026-11-09/2026-11-09-04-historia/video.mp4"
+      "media/u_4163e9db06d1/2026-11-10/2026-11-10-06-reel/video.mp4"
     ],
     "status": "scheduled",
     "attempts": 0,
-    "cover": "media/u_4163e9db06d1/2026-11-09/2026-11-09-04-historia/cover.jpg",
-    "zernioPostId": "6af23e50d92e682917aab31f"
+    "cover": "media/u_4163e9db06d1/2026-11-10/2026-11-10-06-reel/cover.jpg",
+    "zernioPostId": "6af25a8a2a6a31a4fb3e9c3e"
   }
 ]
