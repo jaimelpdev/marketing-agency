@@ -148,7 +148,7 @@ def ff_text(t):
     return str(t).replace("\\", "\\\\").replace(":", "\\:").replace("'", "\u2019").replace("%", "\\%")
 
 
-def encode_video(frames_dir, total, out_path, voice_clips=(), music=None, credit=""):
+def encode_video(frames_dir, total, out_path, voice_clips=(), music=None, credit="", sfx_track=None):
     cmd = ["ffmpeg", "-y", "-loglevel", "error", "-framerate", str(FPS), "-i", str(frames_dir / "f_%05d.jpg")]
     for clip, _ in voice_clips:
         cmd += ["-i", str(clip)]
@@ -168,6 +168,10 @@ def encode_video(frames_dir, total, out_path, voice_clips=(), music=None, credit
         ms = int(start_s * 1000)
         parts.append(f"[{k + 1}:a]aresample=48000,adelay={ms}:all=1,volume=1.15[v{k}]")
         labels.append(f"[v{k}]")
+    if sfx_track:
+        cmd += ["-i", str(sfx_track)]
+        parts.append(f"[{m_idx + 1}:a]aresample=48000,volume={0.32 if has_voice else 0.42}[fx]")
+        labels.append("[fx]")
     norm = "loudnorm=I=-16:TP=-1.5:LRA=11," if music else ""
     parts.append(f"[{m_idx}:a]aresample=48000,{norm}volume={music_vol},afade=t=in:d=0.4,afade=t=out:st={fade_start:.2f}:d=1.2[mu]")
     labels.append("[mu]")
@@ -452,7 +456,14 @@ def plan_user(browser, user, key, force=False, redo=None):
                         f += len(batch)
                     for k in range(min(COVER_FRAMES, count)):  # los primeros fotogramas son la portada (miniatura)
                         (tdp / f"f_{k:05d}.jpg").write_bytes(cover_bytes)
-                    encode_video(tdp, total, folder / "video.mp4", voice_clips, music, credit if p["tipo"] == "historia" else "")
+                    sfx_path = None
+                    try:
+                        import sfx
+                        events = page.evaluate("i=>sceneEvents(buildScenes(S.today.videos[i]))", i)
+                        sfx_path = sfx.track(events, total, tdp / "sfx.wav")
+                    except Exception as e:
+                        log("    ⚠ Sin efectos de sonido:", e)
+                    encode_video(tdp, total, folder / "video.mp4", voice_clips, music, credit if p["tipo"] == "historia" else "", sfx_path)
                 media.append(str((folder / "video.mp4").relative_to(DOCS)))
             else:
                 for k in range(int(info["slides"])):

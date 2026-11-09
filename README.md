@@ -124,6 +124,13 @@ Guarda tu **clave de acceso** (en Cuenta) para entrar desde otro dispositivo.
 - **Voz:** locuciones neuronales gratuitas de Microsoft (edge-tts), con el guion que escribe la agencia.
 - **Música:** si pones tus pistas en `assets/music/<ambiente>/` (energetica, chill, epica, emotiva, divertida, tension) se usan esas. Si no, la agencia busca **canciones reales con licencia libre para uso comercial** (CC0 o CC BY, sobre todo de Jamendo, a través de Openverse) según el ambiente de cada vídeo, empieza la canción ya dentro (sin la intro lenta) y nivela el volumen. Con CC BY se acredita al artista en el texto del post (o abajo del todo en las historias). Las pistas se guardan en `content/music/` y se van reutilizando.
 
+## 🎬 Vídeos animados
+- **Gráficos animados en cada consejo** (como los creadores de vídeos educativos): comparación ❌/✅ que entra deslizando, checklist que se va marcando, velocímetro con aguja, barra de progreso, ruta con el coche recorriéndola, diana con flecha y contador. La agencia elige el que mejor explica cada escena.
+- **Transiciones** con barrido de color entre escenas, zoom de impacto, acercamiento lento de cámara y partículas de fondo.
+- **Efectos de sonido** sincronizados (whoosh en las transiciones, pop al aparecer pegatinas, ding al marcar un paso, golpe de la flecha), mezclados por debajo de la voz y la música.
+- Los guiones siguen el estilo de los mejores reels: gancho en el primer segundo, una idea por escena y cierre con recompensa.
+- Todo se puede desactivar en *Personaliza*.
+
 ## 🏎️ Pegatinas animadas y portadas
 - En cada pieza la agencia elige de 3 a 5 emojis que ilustran el tema (por ejemplo 🏎️ 🏁 🛞 para tips de conducción) y salen en el vídeo **recortados como pegatinas** (borde blanco y sombra): rebotan, flotan, aparecen con un pop y los vehículos **cruzan la pantalla** con líneas de velocidad. Se pueden quitar en *Personaliza → Stickers animados*.
 - **Portada:** cada reel lleva una portada llamativa (el gancho con la "mascota" enorme y un halo de color). Va como primer fotograma del vídeo, que es el que Instagram y TikTok usan de miniatura, y también se ve en la app.
