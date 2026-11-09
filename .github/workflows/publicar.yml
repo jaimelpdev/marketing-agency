@@ -13,9 +13,30 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
+  revisar:
+    runs-on: ubuntu-latest
+    outputs:
+      due: ${{ steps.check.outputs.due }}
+    steps:
+      - uses: actions/checkout@v4
+      - id: check
+        name: ¿Hay algo que publicar ya?
+        run: |
+          python3 - <<'PY' >> "$GITHUB_OUTPUT"
+          import json, glob
+          from datetime import datetime, timezone
+          now = datetime.now(timezone.utc)
+          due = any(q.get("status") == "pending" and datetime.fromisoformat(q["publishAt"]) <= now
+                    for f in glob.glob("content/users/*/queue.json") for q in json.load(open(f)))
+          print("due=" + ("true" if due else "false"))
+          PY
+
   publicar:
+    needs: revisar
+    if: needs.revisar.outputs.due == 'true' || github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
     timeout-minutes: 30
+    environment: github-pages
     steps:
       - uses: actions/checkout@v4
 
