@@ -53,13 +53,16 @@ def mock_routes(page):
 
 import subprocess  # noqa: E402
 calls = []
+zcalls = []
+uploads = []
 STATUS = {}
 USERS = [
-    {"id": "u_ana", "name": "Ana", "ig": {"connected": True, "username": "ana_academia"},
+    {"id": "u_ana", "name": "Ana", "ig": {"connected": False}, "zernioProfileId": "prof_ana",
+     "social": [{"id": "acc_ig", "platform": "instagram", "username": "ana_ig"}, {"id": "acc_tt", "platform": "tiktok", "username": "ana_tt"}, {"id": "acc_yt", "platform": "youtube", "username": "ana_yt"}],
      "config": {"marca": {"name": "Academia Ana", "about": "Clases de simracing", "ig": "@ana_academia", "acc": "#ff3b30", "bg": "#0b0d12", "style": "racing"},
                 "visual": {"bgMode": "ai", "imgPer": "scene", "agentVisuals": True},
                 "plan": {"modo": "smart", "auto": True, "max_por_dia": 2, "max_semana": 5, "formatos": ["reel", "historia", "post", "carrusel"], "zona_horaria": "Europe/Madrid"}}},
-    {"id": "u_luis", "name": "Luis", "ig": {"connected": False}, "config": {"marca": {"name": "Luis"}}},
+    {"id": "u_luis", "name": "Luis", "ig": {"connected": False}, "social": [], "config": {"marca": {"name": "Luis"}}},
 ]
 
 
@@ -90,6 +93,10 @@ class H(http.server.SimpleHTTPRequestHandler):
 
     def do_PUT(self):
         n = int(self.headers.get("content-length", 0))
+        if self.path.startswith("/upload/"):
+            uploads.append((self.path, n, self.headers.get("content-type")))
+            self.rfile.read(n)
+            return self._json({})
         body = json.loads(self.rfile.read(n) or b"{}")
         if self.path.startswith("/admin/status/") and self._auth():
             STATUS[self.path.rsplit("/", 1)[1]] = body
@@ -99,6 +106,13 @@ class H(http.server.SimpleHTTPRequestHandler):
     def do_POST(self):
         n = int(self.headers.get("content-length", 0))
         body = json.loads(self.rfile.read(n) or b"{}")
+        if self.path == "/admin/zernio" and self._auth():
+            zcalls.append(body)
+            if body["path"] == "/media/presign":
+                n = len(zcalls)
+                return self._json({"uploadUrl": f"http://127.0.0.1:8765/upload/{n}", "publicUrl": f"https://cdn.zernio.test/{n}/{body['body']['filename']}"})
+            if body["path"] == "/posts":
+                return self._json({"post": {"_id": f"post_{len(zcalls)}"}})
         if self.path == "/admin/ig" and self._auth():
             calls.append((body["userId"], body["action"], json.dumps(body.get("params", body.get("id")))[:110]))
             if body["action"] == "status":
@@ -136,18 +150,20 @@ for q in queue:
         print("    ", r.stdout.strip().replace("\n", " | "))
 assert "u_ana" in STATUS and STATUS["u_ana"]["queue"], "la app recibe el estado"
 
-tz = ZoneInfo("Europe/Madrid")
-for q in queue:
-    q["publishAt"] = (datetime.now(tz) - timedelta(minutes=5)).isoformat()
-qpath.write_text(json.dumps(queue))
+posts = [c["body"] for c in zcalls if c["path"] == "/posts"]
+print("\nPUBLICACIONES PROGRAMADAS EN ZERNIO:")
+for pb in posts:
+    print("  ", pb["scheduledFor"], [p["platform"] + ("(story)" if p.get("platformSpecificData") else "") for p in pb["platforms"]], [m["type"] for m in pb["mediaItems"]], "· yt:", pb.get("title", "-"))
+print("  archivos subidos:", len(uploads), [u[2] for u in uploads][:5])
+assert posts and all(q["status"] == "scheduled" for q in queue), [q["status"] for q in queue]
+reel = next(pb for pb in posts if len(pb["platforms"]) == 3)
+assert {p["platform"] for p in reel["platforms"]} == {"instagram", "tiktok", "youtube"} and reel["tiktokSettings"]["media_type"] == "video"
+story = next(pb for pb in posts if any(p.get("platformSpecificData") for p in pb["platforms"]))
+assert story["content"] == "" and len(story["platforms"]) == 1
 import publish  # noqa: E402
-publish.main()
-srv.shutdown()
+publish.main()  # no debe tocar las piezas ya programadas en Zernio
 final = json.loads(qpath.read_text())
-print("\nESTADOS:", [(q["tipo"], q["status"], q.get("error", "")) for q in final])
-assert all(q["status"] == "published" for q in final)
-print("LLAMADAS AL SERVIDOR (Instagram):")
-for c in calls:
-    print("  ", c)
+assert all(q["status"] == "scheduled" for q in final)
+srv.shutdown()
 print("\nESTADO ENVIADO A LA APP:", [(x["tipo"], x["status"]) for x in STATUS["u_ana"]["queue"]])
 print("\n✓ Todo el recorrido funciona. Carpeta de prueba:", work)

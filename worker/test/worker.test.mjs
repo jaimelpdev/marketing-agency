@@ -10,9 +10,10 @@ const KV = {
   async list({ prefix }) { return { keys: [...store.keys()].filter(k => k.startsWith(prefix)).map(name => ({ name })), list_complete: true }; },
 };
 const env = { KV, GROQ_API_KEY: "gsk_secreta", POLLINATIONS_TOKEN: "pt", ADMIN_TOKEN: "admin123", INVITE_CODES: "hola-2026",
-  IG_APP_SECRET: "sec", APP_URL: "https://x.github.io/app/", APP_ORIGINS: "https://x.github.io", LLM_PER_DAY: "2" };
+  IG_APP_SECRET: "sec", APP_URL: "https://x.github.io/app/", APP_ORIGINS: "https://x.github.io", LLM_PER_DAY: "2", ZERNIO_API_KEY: "zk" };
 
 const calls = [];
+const zcalls = [];
 globalThis.fetch = async (url, init = {}) => {
   url = String(url); calls.push(url);
   const J = (o, s = 200) => new Response(JSON.stringify(o), { status: s, headers: { "content-type": "application/json" } });
@@ -30,6 +31,17 @@ globalThis.fetch = async (url, init = {}) => {
   if (url.includes("graph.facebook.com/v23.0/1784/media")) { assert.ok(String(init.body).includes("access_token=LONG")); return J({ id: "CONT1" }); }
   if (url.includes("/CONT1?")) return J({ status_code: "FINISHED" });
   if (url.includes("refresh_access_token")) return J({ access_token: "LONG2", expires_in: 5184000 });
+  if (url.startsWith("https://zernio.com/api/v1")) {
+    assert.equal(init.headers.authorization, "Bearer zk");
+    const path = url.slice("https://zernio.com/api/v1".length);
+    zcalls.push((init.method || "GET") + " " + path);
+    if (path.startsWith("/profiles?externalId")) return J({ profiles: [] });
+    if (path === "/profiles") return J({ profile: { _id: "prof1" } });
+    if (path.startsWith("/connect/tiktok")) { assert.ok(path.includes("profileId=prof1") && path.includes("redirect_url=")); return J({ authUrl: "https://zernio.com/oauth/tiktok?x=1" }); }
+    if (path.startsWith("/accounts?profileId=prof1")) return J({ accounts: [{ _id: "acc_tt", platform: "tiktok", username: "ana_tt", isActive: true }] });
+    if (path.startsWith("/accounts/acc_tt") && init.method === "DELETE") return J({ ok: true });
+    if (path === "/posts") return J({ post: { _id: "post1" } });
+  }
   throw new Error("fetch inesperado " + url);
 };
 
@@ -75,4 +87,13 @@ r = await call("POST", "/api/join", { body: { code: inv, name: "Luis" } }); asse
 r = await call("POST", "/api/join", { body: { code: inv, name: "Luis2" } }); assert.equal(r.s, 403);
 r = await call("POST", "/admin/refresh-tokens", { key: "admin123" }); assert.equal(r.j.results.length, 0, "los tokens de empresa no se renuevan");
 r = await call("OPTIONS", "/api/llm"); assert.equal(r.s, 204);
+// Zernio
+r = await call("POST", "/api/social/connect", { key, body: { platform: "tiktok" } }); assert.equal(r.s, 200); assert.ok(r.j.url.includes("zernio.com/oauth/tiktok"));
+r = await call("POST", "/api/social/connect", { key, body: { platform: "myspace" } }); assert.equal(r.s, 400);
+r = await call("GET", "/api/social", { key }); assert.equal(r.j.accounts[0].platform, "tiktok");
+r = await call("GET", "/admin/users", { key: "admin123" }); assert.equal(r.j.users.find(x => x.zernioProfileId).social[0].id, "acc_tt");
+r = await call("POST", "/admin/zernio", { key: "admin123", body: { method: "POST", path: "/posts", body: { content: "x" } } }); assert.equal(r.j.post._id, "post1");
+r = await call("POST", "/admin/zernio", { key: "admin123", body: { method: "POST", path: "/profiles/../../billing", body: {} } }); assert.equal(r.s, 400, "solo rutas permitidas");
+r = await call("POST", "/api/social/disconnect", { key, body: { accountId: "otra" } }); assert.equal(r.s, 404, "no se puede borrar una cuenta ajena");
+r = await call("POST", "/api/social/disconnect", { key, body: { accountId: "acc_tt" } }); assert.equal(r.s, 200);
 console.log("✓ Servidor: todas las pruebas pasan");

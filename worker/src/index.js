@@ -136,6 +136,42 @@ async function igCall(method, path, token, params = {}, host = IG_GRAPH) {
   return j;
 }
 
+// ---------- Zernio (conector de redes: Instagram, TikTok, YouTube…) ----------
+const ZERNIO = "https://zernio.com/api/v1";
+const SOCIAL_PLATFORMS = ["instagram", "tiktok", "youtube"];
+async function zernio(env, method, path, body) {
+  if (!env.ZERNIO_API_KEY) throw new Error("El conector de redes aún no está configurado (falta ZERNIO_API_KEY).");
+  const r = await fetch(ZERNIO + path, {
+    method, headers: { authorization: "Bearer " + String(env.ZERNIO_API_KEY).trim(), ...(body ? { "content-type": "application/json" } : {}) },
+    body: body ? JSON.stringify(body) : undefined,
+  });
+  const j = await r.json().catch(() => ({}));
+  if (!r.ok) throw new Error((j.error && (j.error.message || j.error)) || j.message || ("Zernio HTTP " + r.status));
+  return j;
+}
+async function ensureProfile(env, u) {
+  if (u.zernioProfileId) return u.zernioProfileId;
+  let id = null;
+  try {
+    const found = await zernio(env, "GET", "/profiles?externalId=" + encodeURIComponent(u.id));
+    const list = found.profiles || found.data || (Array.isArray(found) ? found : []);
+    if (list[0]) id = list[0]._id || list[0].id;
+  } catch (e) { }
+  if (!id) {
+    const c = await zernio(env, "POST", "/profiles", { name: (u.name || u.id).slice(0, 60), externalId: u.id });
+    id = (c.profile && (c.profile._id || c.profile.id)) || c._id || c.id;
+  }
+  u.zernioProfileId = id;
+  await putUser(env, u);
+  return id;
+}
+async function socialAccounts(env, u) {
+  if (!u.zernioProfileId || !env.ZERNIO_API_KEY) return [];
+  const r = await zernio(env, "GET", "/accounts?profileId=" + encodeURIComponent(u.zernioProfileId));
+  const list = r.accounts || r.data || (Array.isArray(r) ? r : []);
+  return list.filter(a => a.isActive !== false).map(a => ({ id: a._id || a.id, platform: a.platform, username: a.username || a.displayName || "" }));
+}
+
 async function refreshIgTokens(env, force = false) {
   const out = [];
   for (const id of await listUserIds(env)) {
@@ -230,6 +266,33 @@ async function handle(req, env) {
       return new Response(r.body, { status: 200, headers: { "content-type": r.headers.get("content-type") || "image/jpeg", "cache-control": "private, max-age=86400" } });
     }
 
+    if (p === "/api/social" && method === "GET") {
+      try { return json({ enabled: !!env.ZERNIO_API_KEY, accounts: await socialAccounts(env, u) }); }
+      catch (e) { return err(502, "social_error", String(e.message || e)); }
+    }
+    if (p === "/api/social/connect" && method === "POST") {
+      const b = await req.json().catch(() => ({}));
+      const platform = String(b.platform || "");
+      if (!SOCIAL_PLATFORMS.includes(platform)) return err(400, "bad_request", "Red no soportada.");
+      try {
+        const profileId = await ensureProfile(env, u);
+        const back = String(env.APP_URL || "").replace(/#.*$/, "") + "#social-ok";
+        const r = await zernio(env, "GET", `/connect/${platform}?profileId=${encodeURIComponent(profileId)}&redirect_url=${encodeURIComponent(back)}`);
+        const authUrl = r.authUrl || r.url || (r.data && r.data.authUrl);
+        if (!authUrl) throw new Error("Zernio no devolvió el enlace de conexión.");
+        return json({ url: authUrl });
+      } catch (e) { return err(502, "social_error", String(e.message || e)); }
+    }
+    if (p === "/api/social/disconnect" && method === "POST") {
+      const b = await req.json().catch(() => ({}));
+      try {
+        const mine = await socialAccounts(env, u);
+        if (!mine.some(a => a.id === b.accountId)) return err(404, "not_found", "Cuenta no encontrada.");
+        await zernio(env, "DELETE", "/accounts/" + encodeURIComponent(b.accountId));
+        return json({ ok: true });
+      } catch (e) { return err(502, "social_error", String(e.message || e)); }
+    }
+
     if (p === "/api/ig/start" && method === "POST") {
       if (!env.IG_APP_SECRET) return err(501, "not_configured", "Instagram aún no está configurado en el servidor (falta IG_APP_SECRET).");
       const state = randomId(16);
@@ -308,7 +371,10 @@ async function handle(req, env) {
       const out = [];
       for (const id of await listUserIds(env)) {
         const u = await getUser(env, id);
-        if (u) out.push({ id: u.id, name: u.name, config: u.config, ig: { connected: !!(u.ig && u.ig.token), username: u.ig && u.ig.username } });
+        if (!u) continue;
+        let social = [];
+        try { social = await socialAccounts(env, u); } catch (e) { }
+        out.push({ id: u.id, name: u.name, config: u.config, ig: { connected: !!(u.ig && u.ig.token), username: u.ig && u.ig.username }, zernioProfileId: u.zernioProfileId || null, social });
       }
       return json({ users: out });
     }
@@ -339,6 +405,14 @@ async function handle(req, env) {
       u.status = { updated: new Date().toISOString(), estrategia: String(b.estrategia || (u.status && u.status.estrategia) || ""), queue: Array.isArray(b.queue) ? b.queue.slice(0, 60) : [] };
       await putUser(env, u);
       return json({ ok: true });
+    }
+    if (p === "/admin/zernio" && method === "POST") {
+      const b = await req.json().catch(() => ({}));
+      const m = String(b.method || "GET").toUpperCase(), path = String(b.path || "");
+      const okPath = /^\/(posts(\/[\w-]+)?|media\/presign|accounts(\/[\w-]+)?)(\?[\w=&%.-]*)?$/.test(path) && !path.includes("..");
+      if (!okPath || !["GET", "POST", "PUT", "DELETE"].includes(m)) return err(400, "bad_request", "Ruta de Zernio no permitida.");
+      try { return json(await zernio(env, m, path, b.body)); }
+      catch (e) { return err(502, "social_error", String(e.message || e)); }
     }
     if (p === "/admin/refresh-tokens" && method === "POST") return json({ results: await refreshIgTokens(env, true) });
     return err(404, "not_found", "Ruta no encontrada.");

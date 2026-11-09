@@ -207,6 +207,68 @@ window.__agRender = {
 """
 
 
+MIME = {".mp4": "video/mp4", ".jpg": "image/jpeg", ".jpeg": "image/jpeg", ".png": "image/png"}
+
+
+def zernio_upload(path):
+    """Sube un archivo al almacenamiento de Zernio y devuelve su URL pública."""
+    import requests
+    ct = MIME.get(Path(path).suffix.lower(), "application/octet-stream")
+    pre = api("POST", "/admin/zernio", {"method": "POST", "path": "/media/presign", "body": {"filename": Path(path).name, "contentType": ct}})
+    up, pub = pre.get("uploadUrl"), pre.get("publicUrl")
+    if not up or not pub:
+        raise RuntimeError("Zernio no devolvió la URL de subida")
+    r = requests.put(up, data=Path(path).read_bytes(), headers={"Content-Type": ct}, timeout=600)
+    if r.status_code >= 300:
+        raise RuntimeError(f"Subida a Zernio falló ({r.status_code})")
+    return pub
+
+
+def zernio_schedule(user, item, piece, tz):
+    """Programa la pieza en Zernio para las redes conectadas. Devuelve el id del post o None."""
+    social = user.get("social") or []
+    by = {}
+    for a in social:
+        by.setdefault(a.get("platform"), a)
+    tipo = item["tipo"]
+    platforms = []
+    if "instagram" in by:
+        pl = {"platform": "instagram", "accountId": by["instagram"]["id"]}
+        if tipo == "historia":
+            pl["platformSpecificData"] = {"contentType": "story"}
+        platforms.append(pl)
+    if tipo == "reel":
+        if "tiktok" in by:
+            platforms.append({"platform": "tiktok", "accountId": by["tiktok"]["id"]})
+        if "youtube" in by:
+            platforms.append({"platform": "youtube", "accountId": by["youtube"]["id"]})
+    if not platforms:
+        return None
+    urls = [zernio_upload(DOCS / m) for m in item["media"]]
+    when = datetime.fromisoformat(item["publishAt"])
+    soon = datetime.now(tz) + timedelta(minutes=10)
+    if when < soon:
+        when = soon
+    body = {
+        "profileId": user.get("zernioProfileId"),
+        "content": "" if tipo == "historia" else item.get("caption", ""),
+        "platforms": platforms,
+        "mediaItems": [{"type": "video" if u.lower().split("?")[0].endswith(".mp4") else "image", "url": u} for u in urls],
+        "scheduledFor": when.isoformat(),
+        "timezone": str(tz),
+    }
+    if any(p["platform"] == "youtube" for p in platforms):
+        body["title"] = (piece.get("tema") or piece.get("gancho") or "Nuevo vídeo")[:95]
+        body["visibility"] = "public"
+        body["tags"] = [h.strip("#") for h in str(piece.get("hashtags", "")).split() if h.startswith("#")][:10]
+    if any(p["platform"] == "tiktok" for p in platforms):
+        body["tiktokSettings"] = {"privacy_level": "PUBLIC_TO_EVERYONE", "allow_comment": True, "allow_duet": True, "allow_stitch": True,
+                                  "content_preview_confirmed": True, "express_consent_given": True, "media_type": "video"}
+    r = api("POST", "/admin/zernio", {"method": "POST", "path": "/posts", "body": body})
+    post = r.get("post") or r
+    return post.get("_id") or post.get("id") or "ok"
+
+
 def plan_user(browser, user, key):
     """Planifica y crea el contenido de una persona. Devuelve True si hizo un plan nuevo."""
     uid, conf = user["id"], user.get("config") or {}
@@ -222,12 +284,15 @@ def plan_user(browser, user, key):
         if any(q.get("date") == today and q.get("source") == "auto" for q in queue):
             log("  Ya se planificó hoy.")
             return False
-        future = [q for q in queue if q.get("status") == "pending" and datetime.fromisoformat(q["publishAt"]) > now + timedelta(hours=24)]
+        future = [q for q in queue if q.get("status") in ("pending", "scheduled") and datetime.fromisoformat(q["publishAt"]) > now + timedelta(hours=24)]
         if modo == "smart" and future:
             log(f"  Plan en marcha ({len(future)} piezas más allá de mañana). Hoy no hace falta planificar.")
             return False
     history = load_json(hist_path, {"items": []})
     allowed = plan_conf.get("formatos") or ["reel", "historia", "post", "carrusel"]
+    nets = {a.get("platform") for a in (user.get("social") or [])}
+    if not (user.get("ig") or {}).get("connected") and "instagram" not in nets:
+        allowed = [f for f in allowed if f == "reel"] or ["reel"]  # solo TikTok/YouTube: solo vídeo
     voices = {**VOICES, **conf.get("voces", {})}
     cfg = dict(conf.get("marca", {}))
     cfg["v"] = dict(conf.get("visual", {}))
@@ -331,6 +396,22 @@ def plan_user(browser, user, key):
     finally:
         page.close()
 
+    if user.get("social"):
+        for it, piece in zip(new_items, pieces):
+            try:
+                pid_z = zernio_schedule(user, it, piece, tz)
+                if pid_z:
+                    it["status"] = "scheduled"
+                    it["zernioPostId"] = pid_z
+                    log(f"  📅 Programado en redes: {it['tipo']} · {it['publishAt']}")
+                elif not (user.get("ig") or {}).get("connected"):
+                    it["status"] = "expired"
+                    it["error"] = "Ninguna red conectada admite este formato."
+            except Exception as e:
+                log("  ✗ No se pudo programar en Zernio:", e)
+                if not (user.get("ig") or {}).get("connected"):
+                    it["status"] = "failed"
+                    it["error"] = str(e)[:300]
     queue = [q for q in queue if not (q.get("date") == today and q.get("source") == "auto")] + new_items
     queue.sort(key=lambda q: q["publishAt"])
     save_json(queue_path, queue)
@@ -354,7 +435,7 @@ def plan_user(browser, user, key):
 
 def main():
     users = api("GET", "/admin/users").get("users", [])
-    ready = [u for u in users if (u.get("ig") or {}).get("connected") and ((u.get("config") or {}).get("marca") or {}).get("name")]
+    ready = [u for u in users if ((u.get("ig") or {}).get("connected") or u.get("social")) and ((u.get("config") or {}).get("marca") or {}).get("name")]
     if not ready:
         log(f"{len(users)} personas en la agencia; ninguna tiene aún marca e Instagram conectado. Nada que planificar.")
         return
@@ -376,8 +457,8 @@ def main():
             if not (marca.get("name") or marca.get("about")):
                 log(f"— {label}: sin marca configurada, se salta.")
                 continue
-            if not (u.get("ig") or {}).get("connected"):
-                log(f"— {label}: sin Instagram conectado, se salta.")
+            if not (u.get("ig") or {}).get("connected") and not u.get("social"):
+                log(f"— {label}: sin redes conectadas, se salta.")
                 continue
             if (conf.get("plan") or {}).get("auto") is False:
                 log(f"— {label}: piloto automático en pausa.")

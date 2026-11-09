@@ -351,7 +351,12 @@ https://apps.apple.com/…
 <div class="modal" id="acctModal">
   <div class="mbox">
     <div class="mtop"><strong id="acName">Tu cuenta</strong><button class="x" id="acClose" aria-label="Cerrar">×</button></div>
-    <div class="acct-sec"><h4>📸 Instagram</h4>
+    <div class="acct-sec"><h4>📲 Redes sociales</h4>
+      <div id="acSocial"></div>
+      <div class="chips" id="acNets" style="margin-top:8px"><button class="chip sm" data-net="instagram">＋ Instagram</button><button class="chip sm" data-net="tiktok">＋ TikTok</button><button class="chip sm" data-net="youtube">＋ YouTube</button></div>
+      <div class="note">Conecta cualquier cuenta con un clic. Instagram tiene que ser profesional (empresa o creador). En TikTok y YouTube Shorts se publican los reels.</div>
+    </div>
+    <div class="acct-sec" hidden><h4>📸 Instagram</h4>
       <div class="igrow"><span id="acIg">—</span><button class="pill" id="acIgBtn">Conectar</button></div>
       <div class="note" id="acIgNote">Necesitas una cuenta profesional (de empresa o de creador). Si es la primera vez, pide que te añadan como tester de la app.</div>
     </div>
@@ -1094,7 +1099,7 @@ if($("#exportCfg"))$("#exportCfg").addEventListener("click",async()=>{
 
 /* ============ MODO MULTIUSUARIO (servidor de la agencia) ============ */
 let API = "";
-const HOST = { key: ls("ma_key") || "", me: null, plan: { modo: "smart", auto: true, max_por_dia: 2, max_semana: 5, formatos: ["reel", "historia", "post", "carrusel"], dias_guardar_media: 10, zona_horaria: (Intl.DateTimeFormat().resolvedOptions().timeZone || "Europe/Madrid") } };
+const HOST = { key: ls("ma_key") || "", me: null, social: [], socialEnabled: true, plan: { modo: "smart", auto: true, max_por_dia: 2, max_semana: 5, formatos: ["reel", "historia", "post", "carrusel"], dias_guardar_media: 10, zona_horaria: (Intl.DateTimeFormat().resolvedOptions().timeZone || "Europe/Madrid") } };
 async function api(path, opts = {}) {
   let r;
   try {
@@ -1111,18 +1116,28 @@ function confFromState() {
 function showLogin(msg) { $("#loginOv").classList.add("on"); setStatus($("#lgStatus"), msg || "", msg ? "err" : ""); }
 function logout(expired) { HOST.key = ""; HOST.me = null; ls("ma_key", ""); try { localStorage.removeItem("ma_key"); localStorage.removeItem("ma_cfg"); localStorage.removeItem("ma_today"); localStorage.removeItem("ma_hist"); } catch (e) { } $("#acctModal").classList.remove("on"); showLogin(expired ? "Tu sesión ha caducado. Vuelve a entrar." : ""); }
 function fmtWhen(iso) { try { const d = new Date(iso); return d.toLocaleDateString("es-ES", { weekday: "short", day: "numeric" }) + " " + d.toLocaleTimeString("es-ES", { hour: "2-digit", minute: "2-digit" }); } catch (e) { return iso; } }
-const QSTATE = { pending: ["🕒 programado", "var(--muted)"], published: ["✅ publicado", "var(--ok)"], failed: ["⚠️ falló", "#ff6b61"], expired: ["⏭ omitido", "var(--muted)"] };
+const QSTATE = { scheduled: ["📅 programado", "var(--ok)"], pending: ["🕒 programado", "var(--muted)"], published: ["✅ publicado", "var(--ok)"], failed: ["⚠️ falló", "#ff6b61"], expired: ["⏭ omitido", "var(--muted)"] };
 function queueList(box, q) {
   box.innerHTML = "";
-  if (!q || !q.length) { box.appendChild(el("div", { class: "note", text: HOST.me && HOST.me.ig.connected ? "Aún no hay nada programado. La agencia planifica cada mañana." : "Conecta Instagram y la agencia empezará a planificar y publicar." })); return; }
+  if (!q || !q.length) { box.appendChild(el("div", { class: "note", text: isConnected() ? "Aún no hay nada programado. La agencia planifica cada mañana." : "Conecta tus redes y la agencia empezará a planificar y publicar." })); return; }
   q.forEach(it => { const st = QSTATE[it.status] || [it.status, "var(--muted)"]; const row = el("div", { class: "qitem" }, [el("span", { class: "w", text: fmtWhen(it.publishAt) }), el("span", { text: (TYPES[it.tipo] ? TYPES[it.tipo].icon + " " : "") + (it.tema || "") }), el("span", { class: "s", style: "color:" + st[1], text: st[0] })]); if (it.error) row.title = it.error; box.appendChild(row); });
+}
+const NET = { instagram: "📸 Instagram", tiktok: "🎵 TikTok", youtube: "▶️ YouTube" };
+function isConnected() { return !!(HOST.social.length || (HOST.me && HOST.me.ig.connected)); }
+async function loadSocial() { try { const j = await api("/api/social"); HOST.social = j.accounts || []; HOST.socialEnabled = j.enabled !== false; } catch (e) { HOST.social = []; } }
+function renderSocial() {
+  const box = $("#acSocial"); if (!box) return; box.innerHTML = "";
+  if (!HOST.socialEnabled) { box.appendChild(el("div", { class: "note", text: "El conector de redes aún no está activado en el servidor." })); return; }
+  if (!HOST.social.length) box.appendChild(el("div", { class: "note", text: "Aún no hay redes conectadas." }));
+  HOST.social.forEach(a => { box.appendChild(el("div", { class: "igrow", style: "margin:4px 0" }, [el("span", {}, [el("span", { class: "ok-dot" }), el("span", { text: (NET[a.platform] || a.platform) + (a.username ? " · @" + a.username : "") })]), el("button", { class: "pill", text: "Quitar", onclick: async () => { if (!window.__confirmQuitar || window.__confirmQuitar !== a.id) { window.__confirmQuitar = a.id; setStatus($("#acStatus"), "Pulsa otra vez «Quitar» para desconectar " + (NET[a.platform] || a.platform) + "."); return; } try { await api("/api/social/disconnect", { method: "POST", body: { accountId: a.id } }); await loadSocial(); renderSocial(); renderSchedule(); setStatus($("#acStatus"), "Desconectada.", "ok"); } catch (e) { setStatus($("#acStatus"), e.message, "err"); } } })])); });
+  document.querySelectorAll("#acNets button").forEach(b => { const has = HOST.social.some(a => a.platform === b.dataset.net); b.textContent = (has ? "✓ " : "＋ ") + (NET[b.dataset.net] || b.dataset.net).replace(/^\S+ /, ""); b.classList.toggle("on", has); });
 }
 function renderSchedule() {
   const b = $("#schedBox"); b.innerHTML = ""; const me = HOST.me; if (!me) return;
   const q = (me.status && me.status.queue) || [];
-  if (!me.ig.connected) { b.appendChild(el("div", { class: "sched" }, [el("h3", { text: "📸 Falta un paso" }), el("p", { style: "margin:0 0 10px", text: "Conecta tu Instagram para que la agencia publique sola." }), el("button", { class: "pill", text: "Conectar Instagram", onclick: () => openAcct() })])); return; }
+  if (!isConnected()) { b.appendChild(el("div", { class: "sched" }, [el("h3", { text: "📲 Falta un paso" }), el("p", { style: "margin:0 0 10px", text: "Conecta tu Instagram, TikTok o YouTube para que la agencia publique sola." }), el("button", { class: "pill", text: "Conectar redes", onclick: () => openAcct() })])); return; }
   if (!q.length) return;
-  const box = el("div"); queueList(box, q.filter(x => x.status === "pending").slice(0, 6).concat(q.filter(x => x.status !== "pending").slice(-3)));
+  const box = el("div"); queueList(box, q.filter(x => x.status === "pending" || x.status === "scheduled").slice(0, 6).concat(q.filter(x => x.status !== "pending" && x.status !== "scheduled").slice(-3)));
   b.appendChild(el("div", { class: "sched" }, [el("h3", { text: "🤖 Piloto automático" + (HOST.plan.auto === false ? " (en pausa)" : "") }), me.status.estrategia ? el("p", { style: "margin:0 0 8px;font-size:14px", text: me.status.estrategia }) : null, box]));
 }
 function chipRow(box, items, isOn, onClick) { box.innerHTML = ""; items.forEach(([v, t]) => { const b = el("button", { class: "chip sm" + (isOn(v) ? " on" : ""), text: t }); b.addEventListener("click", () => onClick(v)); box.appendChild(b); }); }
@@ -1136,11 +1151,12 @@ function renderAcct() {
   chipRow($("#acWeek"), [[3, "3"], [5, "5"], [7, "7"], [10, "10"]], v => P.max_semana === v, v => { P.max_semana = v; saveCfg(); renderAcct(); });
   chipRow($("#acDay"), [[1, "1"], [2, "2"], [3, "3"]], v => P.max_por_dia === v, v => { P.max_por_dia = v; saveCfg(); renderAcct(); });
   chipRow($("#acFmt"), Object.entries(TYPES).map(([k, T]) => [k, T.icon + " " + T.name]), v => P.formatos.includes(v), v => { if (P.formatos.includes(v)) { if (P.formatos.length > 1) P.formatos = P.formatos.filter(x => x !== v); } else P.formatos = P.formatos.concat(v); saveCfg(); renderAcct(); });
+  renderSocial();
   queueList($("#acQueue"), (me.status && me.status.queue) || []);
   $("#acKey").textContent = HOST.key.slice(0, 10) + "…" + HOST.key.slice(-4);
   $("#acUsage").textContent = "Uso de hoy: " + (me.usage.llm || 0) + " peticiones de IA · " + (me.usage.img || 0) + " imágenes.";
 }
-async function openAcct() { $("#acctModal").classList.add("on"); renderAcct(); try { HOST.me = await api("/api/me"); renderAcct(); renderSchedule(); } catch (e) { } }
+async function openAcct() { $("#acctModal").classList.add("on"); renderAcct(); try { HOST.me = await api("/api/me"); await loadSocial(); renderAcct(); renderSchedule(); } catch (e) { } }
 async function loadMe() {
   HOST.me = await api("/api/me");
   const c = HOST.me.config;
@@ -1149,7 +1165,7 @@ async function loadMe() {
     applyBrand(); renderOpts(); renderVideos(); closeOv();
   } else if (!S.cfg.name && !S.cfg.about) openOv(1, false);
   else saveCfg();
-  $("#loginOv").classList.remove("on"); $("#acctLabel").textContent = HOST.me.name.split(" ")[0]; renderSchedule();
+  $("#loginOv").classList.remove("on"); $("#acctLabel").textContent = HOST.me.name.split(" ")[0]; await loadSocial(); renderSchedule();
 }
 if (!window.__AGENCIA_SERVER) {
   delete FONDOS.stock; OPTS[0].items = OPTS[0].items.filter(x => x[0] !== "stock"); if (S.cfg.v.bgMode === "stock") S.cfg.v.bgMode = "ai";
@@ -1167,6 +1183,11 @@ if (!window.__AGENCIA_SERVER) {
   $("#openAcct").addEventListener("click", openAcct);
   $("#acClose").addEventListener("click", () => $("#acctModal").classList.remove("on"));
   $("#acctModal").addEventListener("click", e => { if (e.target.id === "acctModal") $("#acctModal").classList.remove("on"); });
+  document.querySelectorAll("#acNets button").forEach(b => b.addEventListener("click", async () => {
+    const st = $("#acStatus"); setStatus(st, "Abriendo " + (NET[b.dataset.net] || b.dataset.net) + "…");
+    try { const j = await api("/api/social/connect", { method: "POST", body: { platform: b.dataset.net } }); window.location.href = j.url; }
+    catch (e) { setStatus(st, e.message, "err"); }
+  }));
   $("#acCopy").addEventListener("click", async () => { try { await navigator.clipboard.writeText(HOST.key); setStatus($("#acStatus"), "Clave copiada ✓", "ok"); } catch (e) { setStatus($("#acStatus"), "Tu clave: " + HOST.key); } });
   $("#acLogout").addEventListener("click", () => logout(false));
   $("#acIgBtn").addEventListener("click", async () => {
@@ -1197,10 +1218,11 @@ if (!window.__AGENCIA_SERVER) {
     if (!API) API = String(ls("ma_api") || "").replace(/\/+$/, "");
     if (!API || /PEGA|TU-SUBDOMINIO/.test(API)) { showLogin("La agencia aún no está configurada: falta la dirección del servidor en docs/config.json."); return; }
     const hash = location.hash;
-    if (hash === "#ig-ok" || hash === "#ig-error") { try { history.replaceState(null, "", location.pathname + location.search); } catch (e) { } }
+    if (hash === "#ig-ok" || hash === "#ig-error" || hash === "#social-ok") { try { history.replaceState(null, "", location.pathname + location.search); } catch (e) { } }
     if (!HOST.key) { showLogin(); return; }
     try {
       await loadMe();
+      if (hash === "#social-ok") { openAcct(); setStatus($("#genStatus"), "✅ Red conectada. La agencia la usará en las próximas publicaciones.", "ok"); }
       if (hash === "#ig-ok") { setStatus($("#genStatus"), "✅ Instagram conectado. La agencia empezará a planificar y publicar.", "ok"); }
       if (hash === "#ig-error") { openAcct(); setStatus($("#acStatus"), "No se pudo conectar Instagram. Revisa que sea una cuenta profesional y que te hayan añadido como tester.", "err"); }
     } catch (e) { if (e.status !== 401) setStatus($("#genStatus"), e.message, "err"); }

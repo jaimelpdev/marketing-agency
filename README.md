@@ -4,9 +4,9 @@ Una agencia de marketing que funciona sola para varias personas a la vez:
 
 1. **Planifica la semana** como una agencia de verdad: qué días publicar y cuáles descansar, qué formato usar (reel, historia, post o carrusel) y a qué hora, sin saturar a la audiencia.
 2. **Crea el contenido:** textos, imágenes con IA, vídeos animados, **locución** cuando el vídeo explica algo y **música** acorde a cada pieza.
-3. **Publica en Instagram** de cada persona a la hora elegida, sin que nadie tenga que abrir nada.
+3. **Publica en Instagram, TikTok y YouTube** de cada persona a la hora elegida, sin que nadie tenga que abrir nada.
 
-Cada persona solo tiene que **entrar en la web con un código de invitación**, pegar su web para que la agencia saque su ADN de marca y pulsar **Conectar Instagram**. La IA, las imágenes y la publicación usan **tus** claves, que están guardadas en el servidor y nunca llegan al navegador.
+Cada persona solo tiene que **entrar en la web con un código de invitación**, pegar su web para que la agencia saque su ADN de marca y conectar sus redes con un clic (cualquier cuenta de Instagram, TikTok o YouTube). La IA, las imágenes y la publicación usan **tus** claves, que están guardadas en el servidor y nunca llegan al navegador.
 
 ```
  Web (GitHub Pages)  ──►  Servidor (Cloudflare Worker)  ◄──  GitHub Actions
@@ -15,7 +15,7 @@ Cada persona solo tiene que **entrar en la web con un código de invitación**, 
  conecta Instagram
 ```
 
-Todo funciona con planes gratuitos: GitHub Actions y Pages, Cloudflare Workers, Groq, Pollinations, las voces de Microsoft (edge-tts) y la API oficial de Instagram.
+Todo funciona con planes gratuitos: GitHub Actions y Pages, Cloudflare Workers, Groq, Pollinations, las voces de Microsoft (edge-tts) y y [Zernio](https://zernio.com) para publicar en redes (gratis para las 2 primeras cuentas conectadas, publicaciones ilimitadas).
 
 ---
 
@@ -47,7 +47,20 @@ Al terminar te dará una dirección como `https://agencia-marketing.TU-SUBDOMINI
 - Revisa en `worker/wrangler.toml` que `APP_URL` y `APP_ORIGINS` apunten a tu GitHub Pages.
 - Pon esa dirección en **`docs/config.json`** (campo `api`) y súbelo.
 
-### 2. App de Meta (Instagram con inicio de sesión unificado)
+### 2. Redes sociales (Zernio, recomendado)
+Zernio hace de intermediario aprobado por Instagram, TikTok y YouTube, así que **cualquier cuenta** se conecta con un clic, sin apps de Meta ni revisiones.
+1. Crea una cuenta gratis en [zernio.com](https://zernio.com) y genera una **API key** (*Settings → API Keys*).
+2. Guárdala en el servidor y vuelve a desplegar:
+   ```bash
+   cd worker
+   npx wrangler secret put ZERNIO_API_KEY
+   npx wrangler deploy
+   ```
+3. Listo: en la web, **👤 Cuenta → 📲 Redes sociales → ＋ Instagram / ＋ TikTok / ＋ YouTube**.
+
+Cada persona tiene su propio perfil en Zernio. La agencia sube los vídeos e imágenes y deja cada pieza **programada** a su hora: reels y vídeos van a las tres redes (TikTok y YouTube solo admiten vídeo), posts, carruseles e historias solo a Instagram.
+
+### 2b. Alternativa: app propia de Meta (solo Instagram, opcional)
 Meta ya no permite en apps nuevas el inicio de sesión "solo Instagram". Se usa el **inicio de sesión unificado** (Facebook Login para empresas):
 1. developers.facebook.com → crea una app con el caso de uso **Administrar mensajes y contenido en Instagram** y vincúlala a tu porfolio empresarial.
 2. En *Casos de uso → API de Instagram → API setup with Unified login*: crea la configuración (plantilla) y registra la URL de redirección

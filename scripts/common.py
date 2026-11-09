@@ -36,8 +36,11 @@ def pages_url():
 
 def summarize(queue):
     """Resumen de la cola para mostrar en la app (sin textos largos)."""
-    pend = [q for q in queue if q.get("status") == "pending"]
-    done = [q for q in queue if q.get("status") != "pending"][-8:]
+    from datetime import datetime, timezone
+    now = datetime.now(timezone.utc)
+    upcoming = lambda q: q.get("status") in ("pending", "scheduled") and datetime.fromisoformat(q["publishAt"]) > now
+    pend = [q for q in queue if upcoming(q)]
+    done = [q for q in queue if not upcoming(q)][-8:]
     out = []
     for q in done + pend:
         out.append({k: q.get(k) for k in ("id", "tipo", "tema", "publishAt", "status", "error") if q.get(k) is not None})
