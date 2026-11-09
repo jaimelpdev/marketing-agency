@@ -1,0 +1,22 @@
+{
+  "items": [
+    {
+      "date": "2026-11-09",
+      "tema": "Configuración de hardware",
+      "formato": "reel",
+      "tipo": "reel"
+    },
+    {
+      "date": "2026-11-11",
+      "tema": "Ergonomía del piloto",
+      "formato": "carrusel",
+      "tipo": "carrusel"
+    },
+    {
+      "date": "2026-11-13",
+      "tema": "Análisis de curva",
+      "formato": "reel",
+      "tipo": "reel"
+    }
+  ]
+}

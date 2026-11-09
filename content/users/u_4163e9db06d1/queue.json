@@ -1,0 +1,51 @@
+[
+  {
+    "id": "2026-11-09-01-reel",
+    "date": "2026-11-09",
+    "source": "auto",
+    "tipo": "reel",
+    "tema": "Configuración de hardware",
+    "publishAt": "2026-11-09T19:30:00+01:00",
+    "caption": "¿Listo para llevar tu wheel al siguiente nivel? Ajusta estos tres pasos y siente la diferencia. 👉 Entra al link en bio y profundiza.\n\n#simracing #racingwheel #gamingtips #redlineclub #virtualracing\n\n🎵 «Mystical Horror Trailer» de Soundrider/Dope (CC BY 3.0)",
+    "media": [
+      "media/u_4163e9db06d1/2026-11-09/2026-11-09-01-reel/video.mp4"
+    ],
+    "status": "scheduled",
+    "attempts": 0,
+    "zernioPostId": "6af21fb9b15c0921afb864d2"
+  },
+  {
+    "id": "2026-11-09-02-carrusel",
+    "date": "2026-11-09",
+    "source": "auto",
+    "tipo": "carrusel",
+    "tema": "Ergonomía del piloto",
+    "publishAt": "2026-11-11T13:30:00+01:00",
+    "caption": "Una buena postura reduce la fatiga y mejora tus tiempos. Aplica estos ajustes y siente la diferencia en la pista. #linkenbio\n\n#simracing #ergonomia #gaming #redlineclub #racingtips",
+    "media": [
+      "media/u_4163e9db06d1/2026-11-09/2026-11-09-02-carrusel/01.jpg",
+      "media/u_4163e9db06d1/2026-11-09/2026-11-09-02-carrusel/02.jpg",
+      "media/u_4163e9db06d1/2026-11-09/2026-11-09-02-carrusel/03.jpg",
+      "media/u_4163e9db06d1/2026-11-09/2026-11-09-02-carrusel/04.jpg",
+      "media/u_4163e9db06d1/2026-11-09/2026-11-09-02-carrusel/05.jpg"
+    ],
+    "status": "scheduled",
+    "attempts": 0,
+    "zernioPostId": "6af21fc1e8b2629faf9bcca5"
+  },
+  {
+    "id": "2026-11-09-03-reel",
+    "date": "2026-11-09",
+    "source": "auto",
+    "tipo": "reel",
+    "tema": "Análisis de curva",
+    "publishAt": "2026-11-13T19:45:00+01:00",
+    "caption": "Domina cada curva con esta técnica de tres pasos. Practica y siente la diferencia en tus tiempos. 👉 Link en bio para más.\n\n#simracing #circuittips #monza #redlineclub #racing\n\n🎵 «AleXZavesa - Man mountain (Electro House)» de AlexZavesa (CC BY 3.0)",
+    "media": [
+      "media/u_4163e9db06d1/2026-11-09/2026-11-09-03-reel/video.mp4"
+    ],
+    "status": "scheduled",
+    "attempts": 0,
+    "zernioPostId": "6af21fcae8b2629faf9bcd8b"
+  }
+]

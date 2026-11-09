@@ -1,0 +1,145 @@
+{
+  "date": "2026-11-09",
+  "estrategia": "Publicamos lunes, miércoles y viernes reels/carrusel para alcance y autoridad, y martes y sábado historias para interacción. Jueves y domingo descansamos para evitar saturación.",
+  "piezas": [
+    {
+      "id": "pmw9nntq7_0",
+      "dia": 0,
+      "hora": "19:30",
+      "tipo": "reel",
+      "objetivo": "alcance",
+      "razon": "Primer contenido fuerte para captar seguidores nuevos",
+      "tema": "Configuración de hardware",
+      "formato": "reel",
+      "gancho": "¿Tu volante está listo para la pista?",
+      "visual": "Close‑up of a racing wheel with RGB lighting on a desk",
+      "escenas": [
+        {
+          "titulo": "Conecta el wheel",
+          "texto": "Asegúrate del *USB* firme y sin interferencias",
+          "emoji": "",
+          "visual": "Wheel plugged into PC with cable visible"
+        },
+        {
+          "titulo": "Ajusta la fuerza",
+          "texto": "Configura *force feedback* medio para mayor control",
+          "emoji": "",
+          "visual": "Force feedback settings screen on sim racing software"
+        },
+        {
+          "titulo": "Calibra los pedales",
+          "texto": "Usa *deadzone* bajo y rango completo",
+          "emoji": "",
+          "visual": "Pedal calibration sliders in game menu"
+        }
+      ],
+      "cta": "Descubre más en el link en bio",
+      "sticker": null,
+      "fondo": "animado",
+      "estilo": "racing",
+      "caption": "¿Listo para llevar tu wheel al siguiente nivel? Ajusta estos tres pasos y siente la diferencia. 👉 Entra al link en bio y profundiza.",
+      "hashtags": "#simracing #racingwheel #gamingtips #redlineclub #virtualracing",
+      "audio": "voz_y_musica",
+      "voz": "hombre",
+      "ritmo_voz": "energetico",
+      "musica": "epica",
+      "guion": [
+        "¿Tu volante está listo para la pista?",
+        "Asegúrate del USB firme y sin interferencias",
+        "Configura force feedback medio para mayor control",
+        "Usa deadzone bajo y rango completo, ¡acelera tu setup!"
+      ]
+    },
+    {
+      "id": "pmw9nntq7_2",
+      "dia": 2,
+      "hora": "13:30",
+      "tipo": "carrusel",
+      "objetivo": "autoridad",
+      "razon": "Educar postura para mejor rendimiento",
+      "tema": "Ergonomía del piloto",
+      "formato": "carrusel",
+      "gancho": "Optimiza tu posición",
+      "visual": "Driver seat view with perfect ergonomics",
+      "escenas": [
+        {
+          "titulo": "Altura del asiento",
+          "texto": "Mantén rodillas ligeramente flexionadas, *ángulo* cómodo",
+          "emoji": "",
+          "visual": "Side view of driver seat with wheel height adjusted"
+        },
+        {
+          "titulo": "Distancia del wheel",
+          "texto": "Los brazos deben estar ligeramente flexionados, *reach* natural",
+          "emoji": "",
+          "visual": "Overhead view showing distance between seat and wheel"
+        },
+        {
+          "titulo": "Ángulo del pedal",
+          "texto": "Pedales a nivel de cadera, evita *esfuerzo*",
+          "emoji": "",
+          "visual": "Foot position on pedal set with hip level reference"
+        }
+      ],
+      "cta": "Guarda este carrusel y mejora tu postura",
+      "sticker": null,
+      "fondo": "ia",
+      "estilo": "racing",
+      "caption": "Una buena postura reduce la fatiga y mejora tus tiempos. Aplica estos ajustes y siente la diferencia en la pista. #linkenbio",
+      "hashtags": "#simracing #ergonomia #gaming #redlineclub #racingtips",
+      "audio": "",
+      "voz": "",
+      "ritmo_voz": "",
+      "musica": "",
+      "guion": []
+    },
+    {
+      "id": "pmw9nntq7_3",
+      "dia": 4,
+      "hora": "19:45",
+      "tipo": "reel",
+      "objetivo": "alcance",
+      "razon": "Mostrar tip de pista para atraer a fans de circuitos",
+      "tema": "Análisis de curva",
+      "formato": "reel",
+      "gancho": "Domina la curva S en Monza",
+      "visual": "Aerial view of Monza S‑curve",
+      "escenas": [
+        {
+          "titulo": "Frena antes",
+          "texto": "Reduce velocidad al *frenar* 30% antes de la curva",
+          "emoji": "",
+          "visual": "Brake pedal being pressed in game"
+        },
+        {
+          "titulo": "Apunta al apex",
+          "texto": "Busca el *apex* interior para trazado limpio",
+          "emoji": "",
+          "visual": "Racing line displayed on track"
+        },
+        {
+          "titulo": "Acelera al salir",
+          "texto": "Aplica potencia al *salida* para máxima velocidad",
+          "emoji": "",
+          "visual": "Car exiting curve with speed boost"
+        }
+      ],
+      "cta": "Mira el tutorial completo en bio",
+      "sticker": null,
+      "fondo": "animado",
+      "estilo": "racing",
+      "caption": "Domina cada curva con esta técnica de tres pasos. Practica y siente la diferencia en tus tiempos. 👉 Link en bio para más.",
+      "hashtags": "#simracing #circuittips #monza #redlineclub #racing",
+      "audio": "voz_y_musica",
+      "voz": "hombre",
+      "ritmo_voz": "normal",
+      "musica": "energetica",
+      "guion": [
+        "Domina la curva S en Monza",
+        "Reduce velocidad al frenar 30% antes de la curva",
+        "Busca el apex interior para trazado limpio",
+        "Aplica potencia al salir para máxima velocidad"
+      ]
+    }
+  ]
+}
