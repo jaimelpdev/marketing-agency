@@ -96,4 +96,21 @@ r = await call("POST", "/admin/zernio", { key: "admin123", body: { method: "POST
 r = await call("POST", "/admin/zernio", { key: "admin123", body: { method: "POST", path: "/profiles/../../billing", body: {} } }); assert.equal(r.s, 400, "solo rutas permitidas");
 r = await call("POST", "/api/social/disconnect", { key, body: { accountId: "otra" } }); assert.equal(r.s, 404, "no se puede borrar una cuenta ajena");
 r = await call("POST", "/api/social/disconnect", { key, body: { accountId: "acc_tt" } }); assert.equal(r.s, 200);
+// Rehacer y reiniciar
+const fut = new Date(Date.now() + 864e5).toISOString(), past = new Date(Date.now() - 864e5).toISOString();
+r = await call("PUT", "/admin/status/" + uid, { key: "admin123", body: { estrategia: "E", queue: [{ id: "p1", tipo: "reel", status: "scheduled", publishAt: fut }, { id: "p0", tipo: "post", status: "published", publishAt: past }] } });
+r = await call("GET", "/pending"); assert.equal(r.j.pending, false);
+r = await call("POST", "/api/redo", { key, body: { id: "p0" } }); assert.equal(r.s, 400, "lo publicado no se rehace");
+r = await call("POST", "/api/redo", { key, body: { id: "nada" } }); assert.equal(r.s, 404);
+r = await call("POST", "/api/redo", { key, body: { id: "p1" } }); assert.equal(r.s, 200); assert.deepEqual(r.j.requests.redo, ["p1"]);
+r = await call("GET", "/pending"); assert.equal(r.j.pending, true);
+r = await call("GET", "/admin/users", { key: "admin123" }); assert.deepEqual(r.j.users.find(x => x.id === uid).requests.redo, ["p1"]);
+r = await call("POST", "/admin/requests/" + uid + "/done", { key: "admin123", body: { redo: ["p1"] } }); assert.equal(r.j.requests, null);
+r = await call("POST", "/api/replan", { key }); const rp = r.j.requests.replan; assert.ok(rp);
+r = await call("POST", "/api/cancel-request", { key, body: {} }); assert.equal(r.j.requests.replan, undefined);
+r = await call("POST", "/api/reset", { key }); assert.equal(r.s, 200);
+r = await call("GET", "/api/me", { key }); assert.equal(r.j.config, null); assert.equal(r.j.status, null); assert.ok(r.j.requests.reset, "la clave sigue valiendo");
+r = await call("POST", "/admin/requests/" + uid + "/done", { key: "admin123", body: { reset: "otra-fecha" } }); assert.ok(r.j.requests.reset, "no borra una petición distinta");
+r = await call("POST", "/admin/requests/" + uid + "/done", { key: "admin123", body: { reset: (await call("GET", "/api/me", { key })).j.requests.reset } }); assert.equal(r.j.requests, null);
+r = await call("POST", "/admin/requests/" + uid + "/done", { key }); assert.equal(r.s, 401);
 console.log("✓ Servidor: todas las pruebas pasan");

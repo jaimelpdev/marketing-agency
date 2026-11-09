@@ -114,7 +114,8 @@ def probe_duration(path):
     return float(r.stdout.strip())
 
 
-def pick_music(mood):
+def pick_music(mood, workdir=None):
+    """Música para la pieza: primero tus pistas de assets/music/<ambiente>; si no hay, se genera una original."""
     pools = []
     if mood:
         pools.append([p for p in (MUSIC_DIR / mood).glob("*") if p.suffix.lower() in MUSIC_EXT])
@@ -123,7 +124,11 @@ def pick_music(mood):
     for pool in pools:
         if pool:
             return random.choice(pool)
-    return None
+    if workdir is None:
+        return None
+    import music
+    out = Path(workdir) / f"musica_{mood or 'energetica'}.wav"
+    return music.make(mood if mood in music.MOODS else "energetica", out, 40, random.randrange(1 << 30))
 
 
 def encode_video(frames_dir, total, out_path, voice_clips=(), music=None):
@@ -269,8 +274,21 @@ def zernio_schedule(user, item, piece, tz):
     return post.get("_id") or post.get("id") or "ok"
 
 
-def plan_user(browser, user, key):
-    """Planifica y crea el contenido de una persona. Devuelve True si hizo un plan nuevo."""
+AUDIO_MODES = {"voz": "solo_voz", "musica": "solo_musica", "ambos": "voz_y_musica"}
+
+
+def zernio_cancel(item):
+    """Anula en Zernio una pieza que estaba programada (si lo estaba)."""
+    if item.get("zernioPostId") and item.get("status") == "scheduled":
+        try:
+            api("POST", "/admin/zernio", {"method": "DELETE", "path": "/posts/" + item["zernioPostId"]})
+        except Exception as e:
+            log("  ⚠ No se pudo anular en Zernio:", e)
+
+
+def plan_user(browser, user, key, force=False, redo=None):
+    """Planifica y crea el contenido de una persona. Devuelve True si hizo un plan nuevo.
+    force: rehace la semana entera. redo: pieza de la cola que hay que rehacer (solo esa)."""
     uid, conf = user["id"], user.get("config") or {}
     udir = CONTENT / "users" / uid
     queue_path, hist_path = udir / "queue.json", udir / "history.json"
@@ -280,7 +298,7 @@ def plan_user(browser, user, key):
     today = now.date().isoformat()
     queue = load_json(queue_path, [])
     modo = str(plan_conf.get("modo", "smart"))
-    if not os.environ.get("FORCE"):
+    if not (force or redo or os.environ.get("FORCE")):
         if any(q.get("date") == today and q.get("source") == "auto" for q in queue):
             log("  Ya se planificó hoy.")
             return False
@@ -319,7 +337,13 @@ def plan_user(browser, user, key):
         page.wait_for_timeout(1500)
         page.evaluate("(allowed)=>{ delete FONDOS.stock; delete FONDOS.mis; window.__allowed = allowed; }", allowed)
         page.evaluate("a=>{S.count=a[0]; PLAN_LIMITS={maxDia:a[1],maxSemana:a[2]}; AUDIO_CAPS=true;}",
-                      [modo, int(plan_conf.get("max_por_dia", 2)), int(plan_conf.get("max_semana", 5))])
+                      ["1" if redo else modo, max(1, int(plan_conf.get("max_por_dia", 2))), max(1, int(plan_conf.get("max_semana", 5)))])
+        if redo:
+            hora = datetime.fromisoformat(redo["publishAt"]).astimezone(tz).strftime("%H:%M")
+            page.evaluate("""r=>{ window.__allowed=[r.tipo]; const orig=window.__origBP||buildPrompt; window.__origBP=orig;
+              window.buildPrompt=()=>orig("1").replace(/exactamente 1 pieza\\(s\\) para HOY \\(dia 0, [^)]*\\)\\. Elige tú el tipo\\./,
+                'UNA sola pieza de tipo "'+r.tipo+'" para el dia 0 a las '+r.hora+'. Sustituye a otra pieza que no gustó (tema: "'+r.tema+'"): haz algo claramente distinto y mejor, con otro gancho y otro enfoque.'); }""",
+                          {"tipo": redo["tipo"], "hora": hora, "tema": redo.get("tema", "")})
         log("  Pidiendo el plan a la IA…")
         page.click("#genBtn")
         page.wait_for_function("!document.querySelector('#genBtn').disabled", timeout=300_000)
@@ -332,9 +356,15 @@ def plan_user(browser, user, key):
             raise RuntimeError("No se pudo crear el plan: " + status)
         page.evaluate("""()=>{
           S.today.videos = S.today.videos.filter(p=>window.__allowed.includes(p.tipo));
+          if (window.__origBP) S.today.videos = S.today.videos.slice(0, 1);
           S.today.videos.forEach(p=>{ if(p.tipo==='historia' && p.sticker){ p.cta = p.sticker.texto + ' · respóndeme por DM'; p.sticker=null; } });
         }""")
         n = page.evaluate("S.today.videos.length")
+        if redo and not n:
+            raise RuntimeError("La IA no devolvió una pieza del tipo pedido.")
+        audio_pref = AUDIO_MODES.get(str(plan_conf.get("audio", "auto")))
+        if audio_pref:
+            page.evaluate("a=>S.today.videos.forEach(p=>{p.audio=a;})", audio_pref)
         log("  Estrategia:", page.evaluate("S.today.estrategia"))
         log(f"  {n} piezas. Generando imágenes…")
         page.evaluate("prefetchAll()")
@@ -343,13 +373,14 @@ def plan_user(browser, user, key):
         page.evaluate(RENDER_JS)
         pieces = page.evaluate("JSON.parse(JSON.stringify(S.today.videos))")
         out_root = DOCS / "media" / uid / today
-        if out_root.exists():
-            shutil.rmtree(out_root)
         out_root.mkdir(parents=True, exist_ok=True)
+        stamp = now.strftime("%H%M%S")
         new_items = []
         for i, p in enumerate(pieces):
-            pid = f"{today}-{i + 1:02d}-{p['tipo']}"
+            pid = f"{today}-r{stamp}-{p['tipo']}" if redo else f"{today}-{i + 1:02d}-{p['tipo']}"
             folder = out_root / pid
+            if folder.exists():
+                shutil.rmtree(folder)
             folder.mkdir(parents=True, exist_ok=True)
             info = page.evaluate("i=>__agRender.info(i)", i)
             log(f"  [{i + 1}/{n}] {p['tipo']} · {p.get('hora', '')} · {p.get('tema', '')}")
@@ -358,7 +389,7 @@ def plan_user(browser, user, key):
                 with tempfile.TemporaryDirectory() as td:
                     tdp = Path(td)
                     voice_clips = []
-                    if p.get("audio") == "voz_y_musica":
+                    if p.get("audio") in ("voz_y_musica", "solo_voz"):
                         try:
                             voice_clips, vname = make_voice(page, i, p, tdp, voices)
                             log(f"    voz: {vname} ({len(voice_clips)} frases)")
@@ -366,8 +397,8 @@ def plan_user(browser, user, key):
                             log("    ⚠ No se pudo generar la voz, va solo con música:", e)
                             page.evaluate("i=>{delete S.today.videos[i]._durs;}", i)
                             voice_clips = []
-                    music = pick_music(p.get("musica"))
-                    log(f"    música: {music.relative_to(MUSIC_DIR) if music else 'ninguna'} · ambiente {p.get('musica') or '-'}")
+                    music = None if p.get("audio") == "solo_voz" else pick_music(p.get("musica"), tdp)
+                    log(f"    música: {music.name if music else 'ninguna'} · ambiente {p.get('musica') or '-'} · audio {p.get('audio') or '-'}")
                     total = float(page.evaluate("i=>buildScenes(S.today.videos[i]).total", i))
                     count = int(total * FPS + 0.999)
                     f = 0
@@ -386,9 +417,14 @@ def plan_user(browser, user, key):
                     path.write_bytes(base64.b64decode(url.split(",", 1)[1]))
                     media.append(str(path.relative_to(DOCS)))
             caption = (p.get("caption", "") + "\n\n" + p.get("hashtags", "")).strip() if p["tipo"] != "historia" else ""
+            when = publish_time(today, p.get("dia", 0), p.get("hora"), tz, i)
+            if redo:
+                when = datetime.fromisoformat(redo["publishAt"]).astimezone(tz)
+                if when < now + timedelta(minutes=20):
+                    when = now + timedelta(minutes=30)
             new_items.append({
-                "id": pid, "date": today, "source": "auto", "tipo": p["tipo"], "tema": p.get("tema", ""),
-                "publishAt": publish_time(today, p.get("dia", 0), p.get("hora"), tz, i).isoformat(),
+                "id": pid, "date": today, "source": "redo" if redo else "auto", "tipo": p["tipo"], "tema": p.get("tema", ""),
+                "publishAt": when.isoformat(),
                 "caption": caption[:2200], "media": media, "status": "pending", "attempts": 0,
             })
         hist = page.evaluate("S.hist")
@@ -396,6 +432,16 @@ def plan_user(browser, user, key):
     finally:
         page.close()
 
+    # Lo que se sustituye: la pieza rehecha o, si se rehace la semana, todo lo que aún no se ha publicado
+    if redo:
+        replaced = [q for q in queue if q.get("id") == redo["id"]]
+    elif force:
+        replaced = [q for q in queue if q.get("status") in ("pending", "scheduled") and datetime.fromisoformat(q["publishAt"]) > now]
+    else:
+        replaced = [q for q in queue if q.get("date") == today and q.get("source") == "auto" and q.get("status") in ("pending", "scheduled")]
+    for q in replaced:
+        zernio_cancel(q)
+    gone = {q["id"] for q in replaced}
     if user.get("social"):
         for it, piece in zip(new_items, pieces):
             try:
@@ -412,13 +458,16 @@ def plan_user(browser, user, key):
                 if not (user.get("ig") or {}).get("connected"):
                     it["status"] = "failed"
                     it["error"] = str(e)[:300]
-    queue = [q for q in queue if not (q.get("date") == today and q.get("source") == "auto")] + new_items
+    if not redo:
+        gone |= {q["id"] for q in queue if q.get("date") == today and q.get("source") == "auto"}
+    queue = [q for q in queue if q["id"] not in gone] + new_items
     queue.sort(key=lambda q: q["publishAt"])
     save_json(queue_path, queue)
     save_json(hist_path, hist)
-    save_json(udir / "plans" / f"{today}.json", {"date": today, "estrategia": estrategia, "piezas": pieces})
+    if not redo:
+        save_json(udir / "plans" / f"{today}.json", {"date": today, "estrategia": estrategia, "piezas": pieces})
     try:
-        api("PUT", f"/admin/status/{uid}", {"estrategia": estrategia, "queue": summarize(queue)})
+        api("PUT", f"/admin/status/{uid}", {"estrategia": "" if redo else estrategia, "queue": summarize(queue)})
     except Exception as e:
         log("  ⚠ No se pudo avisar a la app:", e)
 
@@ -429,15 +478,80 @@ def plan_user(browser, user, key):
     for d in (DOCS / "media" / uid).glob("*"):
         if d.is_dir() and d.name < limit and d.name not in busy:
             shutil.rmtree(d)
-    log(f"  Listo: {len(new_items)} piezas en la cola.")
+    log(f"  Listo: {len(new_items)} pieza(s) {'rehecha' if redo else 'en la cola'}.")
     return True
+
+
+def reset_user(user):
+    """Reinicio de cuenta: anula lo programado y borra cola, historial y archivos de esa persona."""
+    uid = user["id"]
+    udir = CONTENT / "users" / uid
+    for q in load_json(udir / "queue.json", []):
+        zernio_cancel(q)
+    for d in (udir, DOCS / "media" / uid):
+        if d.exists():
+            shutil.rmtree(d)
+    log("  Cuenta reiniciada: cola, historial y archivos borrados.")
+
+
+def ready(u):
+    conf = u.get("config") or {}
+    marca = conf.get("marca") or {}
+    return bool((marca.get("name") or marca.get("about")) and ((u.get("ig") or {}).get("connected") or u.get("social")))
+
+
+def process_requests(browser, users, key):
+    """Peticiones hechas desde la app: reiniciar cuenta, rehacer la semana o rehacer piezas sueltas."""
+    errors = 0
+    for u in users:
+        r = u.get("requests") or {}
+        if not (r.get("reset") or r.get("replan") or r.get("redo")):
+            continue
+        label = f"{u.get('name')} ({u['id']})"
+        done = {}
+        try:
+            if r.get("reset"):
+                log(f"♻ {label}: reiniciar cuenta")
+                reset_user(u)
+                done = {"reset": r["reset"], "replan": r.get("replan"), "redo": r.get("redo") or []}
+            elif not ready(u):
+                log(f"— {label}: hay peticiones pero falta marca o redes; se descartan.")
+                done = {"replan": r.get("replan"), "redo": r.get("redo") or []}
+            elif r.get("replan"):
+                log(f"🔄 {label}: rehacer la semana")
+                plan_user(browser, u, key, force=True)
+                done = {"replan": r["replan"], "redo": r.get("redo") or []}
+            else:
+                queue = load_json(CONTENT / "users" / u["id"] / "queue.json", [])
+                done = {"redo": []}
+                for rid in r.get("redo") or []:
+                    item = next((q for q in queue if q.get("id") == rid), None)
+                    done["redo"].append(rid)
+                    if not item or item.get("status") not in ("pending", "scheduled"):
+                        log(f"— {label}: la pieza {rid} ya no se puede rehacer.")
+                        continue
+                    log(f"🔄 {label}: rehacer {item['tipo']} «{item.get('tema', '')}»")
+                    try:
+                        plan_user(browser, u, key, redo=item)
+                    except Exception as e:
+                        errors += 1
+                        log(f"  ✗ No se pudo rehacer {rid}:", e)
+                    queue = load_json(CONTENT / "users" / u["id"] / "queue.json", [])
+        except Exception as e:
+            errors += 1
+            log(f"  ✗ Error con {label}:", e)
+        try:
+            api("POST", f"/admin/requests/{u['id']}/done", {k: v for k, v in done.items() if v})
+        except Exception as e:
+            log("  ⚠ No se pudo marcar la petición como hecha:", e)
+    return errors
 
 
 def main():
     users = api("GET", "/admin/users").get("users", [])
-    ready = [u for u in users if ((u.get("ig") or {}).get("connected") or u.get("social")) and ((u.get("config") or {}).get("marca") or {}).get("name")]
-    if not ready:
-        log(f"{len(users)} personas en la agencia; ninguna tiene aún marca e Instagram conectado. Nada que planificar.")
+    has_requests = any((u.get("requests") or {}) for u in users)
+    if not has_requests and not any(ready(u) for u in users):
+        log(f"{len(users)} personas en la agencia; ninguna tiene aún marca y redes conectadas. Nada que planificar.")
         return
     key = os.environ.get("GROQ_API_KEY", "").strip()
     if not key:
@@ -448,6 +562,9 @@ def main():
     with sync_playwright() as pw:
         browser = pw.chromium.launch(args=["--no-sandbox", "--autoplay-policy=no-user-gesture-required"],
                                      executable_path=os.environ.get("CHROME_PATH") or None)
+        if has_requests:
+            errors += process_requests(browser, users, key)
+            users = api("GET", "/admin/users").get("users", [])
         for u in users:
             if only and u["id"] != only:
                 continue

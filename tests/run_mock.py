@@ -41,6 +41,7 @@ def mock_routes(page):
     def groq(route, request):
         if request.method == "OPTIONS":
             return route.fulfill(status=204, headers=daily.CORS)
+        PROMPTS.append(request.post_data or "")
         route.fulfill(status=200, headers={**daily.CORS, "content-type": "application/json"},
                       body=json.dumps({"choices": [{"message": {"content": json.dumps(PLAN)}}]}))
 
@@ -53,6 +54,8 @@ def mock_routes(page):
 
 import subprocess  # noqa: E402
 calls = []
+PROMPTS = []
+DONE = []
 zcalls = []
 uploads = []
 STATUS = {}
@@ -106,6 +109,12 @@ class H(http.server.SimpleHTTPRequestHandler):
     def do_POST(self):
         n = int(self.headers.get("content-length", 0))
         body = json.loads(self.rfile.read(n) or b"{}")
+        if self.path.startswith("/admin/requests/") and self._auth():
+            DONE.append((self.path, body))
+            for u in USERS:
+                if f"/{u['id']}/" in self.path:
+                    u["requests"] = None
+            return self._json({"ok": True})
         if self.path == "/admin/zernio" and self._auth():
             zcalls.append(body)
             if body["path"] == "/media/presign":
@@ -131,8 +140,7 @@ def fake_tts(text, voice, rate, out):
     d = max(1.0, len(text.split()) * 0.33)
     subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-f", "lavfi", "-i", f"sine=frequency=440:duration={d}", "-ar", "24000", str(out)], check=True)
 daily.tts = fake_tts
-mdir = work / "assets/music/energetica"; mdir.mkdir(parents=True, exist_ok=True)
-subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-f", "lavfi", "-i", "sine=frequency=220:duration=8", str(mdir / "pista.mp3")], check=True)
+# sin pistas propias: la música se genera
 # acelerar Pollinations en la prueba
 os.environ["POLLINATIONS_TOKEN"] = "x"
 daily.main()
@@ -164,6 +172,42 @@ import publish  # noqa: E402
 publish.main()  # no debe tocar las piezas ya programadas en Zernio
 final = json.loads(qpath.read_text())
 assert all(q["status"] == "scheduled" for q in final)
+def loudness(path):
+    r = subprocess.run(["ffmpeg", "-hide_banner", "-i", str(path), "-af", "volumedetect", "-f", "null", "-"], capture_output=True, text=True)
+    import re
+    return float(re.search(r"mean_volume: (-?[0-9.]+)", r.stderr).group(1))
+hist_item = next(q for q in final if q["tipo"] == "historia")
+lv = loudness(work / "docs" / hist_item["media"][0])
+print("\nHistoria solo música, volumen medio:", lv, "dB")
+assert lv > -40, "la historia tiene música generada (no es silencio)"
+
+# — Rehacer una pieza desde la app —
+old_reel = next(q for q in final if q["tipo"] == "reel")
+USERS[0]["requests"] = {"redo": [old_reel["id"]]}
+USERS[0]["config"]["plan"]["audio"] = "voz"
+zcalls.clear()
+daily.main()
+q2 = json.loads(qpath.read_text())
+new_reel = [q for q in q2 if q["tipo"] == "reel"]
+print("\nREHACER:", old_reel["id"], "→", [q["id"] for q in new_reel])
+assert old_reel["id"] not in [q["id"] for q in q2] and len(new_reel) == 1 and "-r" in new_reel[0]["id"]
+assert new_reel[0]["publishAt"] == old_reel["publishAt"] or new_reel[0]["publishAt"] > old_reel["publishAt"]
+assert any(c["method"] == "DELETE" and c["path"] == "/posts/" + old_reel["zernioPostId"] for c in zcalls), "anula el reel antiguo en Zernio"
+assert "Sustituye a otra pieza" in PROMPTS[-1] and "3 errores" in PROMPTS[-1]
+assert len(q2) == len(final), "las demás piezas siguen igual"
+assert DONE and DONE[-1][1].get("redo") == [old_reel["id"]]
+r = subprocess.run(["ffprobe", "-v", "error", "-show_entries", "stream=codec_type", "-of", "csv=p=0", str(work / "docs" / new_reel[0]["media"][0])], capture_output=True, text=True)
+assert "audio" in r.stdout
+
+# — Reiniciar cuenta —
+USERS[0]["requests"] = {"reset": "2026-11-09T19:00:00Z"}
+USERS[0]["config"] = None
+zcalls.clear()
+daily.main()
+assert not (work / "content/users/u_ana").exists() and not (work / "docs/media/u_ana").exists(), "reinicio borra todo"
+assert sum(1 for c in zcalls if c["method"] == "DELETE") == len(q2), "anula todo lo programado"
+assert DONE[-1][1].get("reset")
+print("REINICIO: cola y archivos borrados, publicaciones anuladas ✓")
 srv.shutdown()
 print("\nESTADO ENVIADO A LA APP:", [(x["tipo"], x["status"]) for x in STATUS["u_ana"]["queue"]])
 print("\n✓ Todo el recorrido funciona. Carpeta de prueba:", work)

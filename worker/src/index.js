@@ -76,6 +76,8 @@ function publicUser(u) {
     id: u.id, name: u.name, created: u.created, config: u.config || null,
     ig: u.ig ? { connected: true, username: u.ig.username, expires: u.ig.expires } : { connected: false },
     status: u.status || null,
+    requests: u.requests || null,
+    resetAt: u.config ? null : (u.resetAt || null),
     usage: u.usage && u.usage.day === today() ? u.usage : { day: today(), llm: 0, img: 0 },
   };
 }
@@ -203,6 +205,15 @@ async function handle(req, env) {
   const method = req.method;
 
   if (p === "/" || p === "/health") return json({ ok: true, service: "agencia-marketing-ia" });
+  if (p === "/pending" && method === "GET") {
+    // Solo dice si hay trabajo pendiente (lo consulta GitHub Actions cada 20 min). No expone datos.
+    for (const id of await listUserIds(env)) {
+      const u = await getUser(env, id);
+      const r = u && u.requests;
+      if (r && (r.reset || r.replan || (r.redo && r.redo.length))) return json({ pending: true });
+    }
+    return json({ pending: false });
+  }
 
   // ===== cuentas =====
   if (p === "/api/join" && method === "POST") {
@@ -264,6 +275,45 @@ async function handle(req, env) {
       const r = await fetch(src, { headers: env.POLLINATIONS_TOKEN ? { authorization: "Bearer " + env.POLLINATIONS_TOKEN } : {} });
       if (!r.ok) return err(r.status === 429 ? 429 : 502, "image_error", "El generador de imágenes no respondió (" + r.status + ").");
       return new Response(r.body, { status: 200, headers: { "content-type": r.headers.get("content-type") || "image/jpeg", "cache-control": "private, max-age=86400" } });
+    }
+
+    // ===== peticiones que procesa GitHub Actions (rehacer, reiniciar) =====
+    if (p === "/api/redo" && method === "POST") {
+      const b = await req.json().catch(() => ({}));
+      const id = String(b.id || "");
+      const item = ((u.status && u.status.queue) || []).find(q => q.id === id);
+      if (!item) return err(404, "not_found", "No encuentro esa pieza.");
+      if (!["pending", "scheduled"].includes(item.status) || new Date(item.publishAt) < new Date()) return err(400, "bad_request", "Solo se pueden rehacer piezas que aún no se han publicado.");
+      u.requests = u.requests || {};
+      const redo = (u.requests.redo || []).filter(x => x !== id);
+      if (redo.length >= 10) return err(429, "rate_limited", "Ya hay muchas piezas rehaciéndose. Espera a que terminen.");
+      u.requests.redo = redo.concat(id);
+      await putUser(env, u);
+      return json({ ok: true, requests: u.requests });
+    }
+    if (p === "/api/replan" && method === "POST") {
+      u.requests = { ...(u.requests || {}), replan: new Date().toISOString(), redo: [] };
+      await putUser(env, u);
+      return json({ ok: true, requests: u.requests });
+    }
+    if (p === "/api/cancel-request" && method === "POST") {
+      const b = await req.json().catch(() => ({}));
+      if (u.requests) {
+        if (b.id) u.requests.redo = (u.requests.redo || []).filter(x => x !== b.id);
+        else { delete u.requests.replan; u.requests.redo = []; }
+        await putUser(env, u);
+      }
+      return json({ ok: true, requests: u.requests || null });
+    }
+    if (p === "/api/reset" && method === "POST") {
+      // Se borra la marca, el plan y el historial. Se conservan la clave de acceso y las redes conectadas.
+      u.config = null;
+      u.status = null;
+      u.requests = { reset: new Date().toISOString() };
+      u.resetAt = u.requests.reset;
+      u.updated = new Date().toISOString();
+      await putUser(env, u);
+      return json({ ok: true });
     }
 
     if (p === "/api/social" && method === "GET") {
@@ -374,9 +424,23 @@ async function handle(req, env) {
         if (!u) continue;
         let social = [];
         try { social = await socialAccounts(env, u); } catch (e) { }
-        out.push({ id: u.id, name: u.name, config: u.config, ig: { connected: !!(u.ig && u.ig.token), username: u.ig && u.ig.username }, zernioProfileId: u.zernioProfileId || null, social });
+        out.push({ id: u.id, name: u.name, config: u.config, requests: u.requests || null, ig: { connected: !!(u.ig && u.ig.token), username: u.ig && u.ig.username }, zernioProfileId: u.zernioProfileId || null, social });
       }
       return json({ users: out });
+    }
+    const rd = p.match(/^\/admin\/requests\/([\w-]+)\/done$/);
+    if (rd && method === "POST") {
+      const u = await getUser(env, rd[1]);
+      if (!u) return err(404, "not_found", "Usuario no encontrado.");
+      const b = await req.json().catch(() => ({}));
+      const r = u.requests || {};
+      if (b.reset && r.reset === b.reset) delete r.reset;
+      if (b.replan && r.replan === b.replan) delete r.replan;
+      if (Array.isArray(b.redo)) r.redo = (r.redo || []).filter(x => !b.redo.includes(x));
+      if (Array.isArray(r.redo) && !r.redo.length) delete r.redo;
+      u.requests = Object.keys(r).length ? r : null;
+      await putUser(env, u);
+      return json({ ok: true, requests: u.requests });
     }
     if (p === "/admin/invite" && method === "POST") {
       const code = "inv-" + randomId(4);

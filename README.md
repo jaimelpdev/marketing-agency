@@ -109,7 +109,15 @@ Guarda tu **clave de acceso** (en Cuenta) para entrar desde otro dispositivo.
 - Para probar sin publicar: crea la variable `DRY_RUN` con valor `1`.
 
 ## 🔊 Sonido
-Para cada reel o historia, la agencia decide si lleva **voz y música** (vídeos que explican algo) o **solo música** (piezas rápidas o emocionales). También elige la voz, el ritmo y el ambiente musical. Cada pantalla dura lo que tarda la voz en decir su frase.
+- En **👤 Cuenta → Sonido de los vídeos** cada persona elige: 🤖 que decida la agencia, 🎙 solo voz, 🎵 solo música o 🎙+🎵 voz y música.
+- **Voz:** locuciones neuronales gratuitas de Microsoft (edge-tts), con el guion que escribe la agencia.
+- **Música:** si pones tus pistas en `assets/music/<ambiente>/` (energetica, chill, epica, emotiva, divertida, tension) se usan esas; si no, la agencia **compone una pista original** para cada vídeo según su ambiente (`scripts/music.py`), sin derechos de autor.
+
+## 🔄 Rehacer y reiniciar
+- **🔄 en una pieza programada:** la agencia la vuelve a crear distinta (mismo formato y hora) y sustituye la anterior también en las redes.
+- **🔄 Rehacer la semana:** rehace todo lo que aún no se ha publicado.
+- **♻️ Reiniciar cuenta:** borra marca, plan, historial y archivos, y anula lo programado. Se mantienen la clave de acceso y las redes conectadas.
+- Las peticiones se atienden solas: cada 20 minutos GitHub mira si hay alguna y pone a trabajar a la agencia (tarda entre 20 y 40 minutos en total).
 
 ## 🔒 Seguridad
 - Tus claves de Groq y Pollinations y los tokens de Instagram **solo existen en el servidor** (secretos y KV de Cloudflare). La web y el repositorio no los contienen.

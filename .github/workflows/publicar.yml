@@ -17,6 +17,7 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       due: ${{ steps.check.outputs.due }}
+      requests: ${{ steps.req.outputs.pending }}
     steps:
       - uses: actions/checkout@v4
       - id: check
@@ -30,6 +31,32 @@ jobs:
                     for f in glob.glob("content/users/*/queue.json") for q in json.load(open(f)))
           print("due=" + ("true" if due else "false"))
           PY
+      - id: req
+        name: ¿Alguien ha pedido rehacer o reiniciar algo desde la app?
+        env:
+          AGENCIA_API: ${{ vars.AGENCIA_API || 'https://agencia-marketing.lopezsimrace29.workers.dev' }}
+        run: |
+          p=$(curl -fsS --max-time 20 "$AGENCIA_API/pending" | python3 -c "import sys,json;print('true' if json.load(sys.stdin).get('pending') else 'false')" || echo false)
+          echo "pending=$p" >> "$GITHUB_OUTPUT"
+
+  peticiones:
+    needs: revisar
+    if: needs.revisar.outputs.requests == 'true'
+    runs-on: ubuntu-latest
+    permissions:
+      actions: write
+    steps:
+      - name: Lanzar la agencia para atender las peticiones
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          busy=$(gh api "repos/${{ github.repository }}/actions/workflows/planificar.yml/runs?status=in_progress" --jq '.total_count')
+          queued=$(gh api "repos/${{ github.repository }}/actions/workflows/planificar.yml/runs?status=queued" --jq '.total_count')
+          if [ "$busy" = "0" ] && [ "$queued" = "0" ]; then
+            gh api -X POST "repos/${{ github.repository }}/actions/workflows/planificar.yml/dispatches" -f ref=main
+          else
+            echo "La agencia ya está trabajando; se atenderá en esa ejecución o en la siguiente."
+          fi
 
   publicar:
     needs: revisar
