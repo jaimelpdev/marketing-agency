@@ -27,7 +27,7 @@ jobs:
 
       - name: Publicar lo que toca
         env:
-          AGENCIA_API: ${{ vars.AGENCIA_API }}
+          AGENCIA_API: ${{ vars.AGENCIA_API || 'https://agencia-marketing.lopezsimrace29.workers.dev' }}
           AGENCIA_ADMIN_TOKEN: ${{ secrets.AGENCIA_ADMIN_TOKEN }}
           PAGES_URL: ${{ vars.PAGES_URL }}
           DRY_RUN: ${{ vars.DRY_RUN }}

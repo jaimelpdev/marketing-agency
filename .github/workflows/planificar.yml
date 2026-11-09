@@ -44,7 +44,7 @@ jobs:
         env:
           GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
           POLLINATIONS_TOKEN: ${{ secrets.POLLINATIONS_TOKEN }}
-          AGENCIA_API: ${{ vars.AGENCIA_API }}
+          AGENCIA_API: ${{ vars.AGENCIA_API || 'https://agencia-marketing.lopezsimrace29.workers.dev' }}
           AGENCIA_ADMIN_TOKEN: ${{ secrets.AGENCIA_ADMIN_TOKEN }}
           ONLY_USER: ${{ github.event.inputs.only_user }}
           FORCE: ${{ github.event.inputs.force == 'true' && '1' || '' }}
