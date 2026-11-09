@@ -17,6 +17,30 @@
       "tema": "Análisis de curva",
       "formato": "reel",
       "tipo": "reel"
+    },
+    {
+      "date": "2026-11-11",
+      "tema": "Calibración del volante",
+      "formato": "vertical",
+      "tipo": "historia"
+    },
+    {
+      "date": "2026-11-13",
+      "tema": "Visualiza la vuelta perfecta",
+      "formato": "vertical",
+      "tipo": "post"
+    },
+    {
+      "date": "2026-11-14",
+      "tema": "Acceso anticipado",
+      "formato": "vertical",
+      "tipo": "historia"
+    },
+    {
+      "date": "2026-11-15",
+      "tema": "Pista favorita",
+      "formato": "vertical",
+      "tipo": "historia"
     }
   ]
 }

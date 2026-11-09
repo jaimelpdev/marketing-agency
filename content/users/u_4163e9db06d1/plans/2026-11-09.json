@@ -1,144 +1,164 @@
 {
   "date": "2026-11-09",
-  "estrategia": "Publicamos lunes, miércoles y viernes reels/carrusel para alcance y autoridad, y martes y sábado historias para interacción. Jueves y domingo descansamos para evitar saturación.",
+  "estrategia": "Publicaremos contenido de valor en días alternos, descansando los días con mayor actividad reciente. Se combinan 1 post, 3 historias y 1 carrusel para mantener el límite de 7 piezas semanales y maximizar alcance, interacción y tráfico.",
   "piezas": [
     {
-      "id": "pmw9nntq7_0",
-      "dia": 0,
-      "hora": "19:30",
-      "tipo": "reel",
-      "objetivo": "alcance",
-      "razon": "Primer contenido fuerte para captar seguidores nuevos",
-      "tema": "Configuración de hardware",
-      "formato": "reel",
-      "gancho": "¿Tu volante está listo para la pista?",
-      "visual": "Close‑up of a racing wheel with RGB lighting on a desk",
+      "id": "pmw9scvbr_0",
+      "dia": 2,
+      "hora": "09:00",
+      "tipo": "historia",
+      "objetivo": "interacción",
+      "razon": "generar preguntas directas y DM",
+      "tema": "Calibración del volante",
+      "formato": "vertical",
+      "gancho": "¿Qué te cuesta calibrar?",
+      "visual": "Animated background with a wheel and measurement lines.",
       "escenas": [
         {
-          "titulo": "Conecta el wheel",
-          "texto": "Asegúrate del *USB* firme y sin interferencias",
+          "titulo": "Pregunta",
+          "texto": "Cuéntanos tu mayor reto al calibrar el volante.",
           "emoji": "",
-          "visual": "Wheel plugged into PC with cable visible"
-        },
-        {
-          "titulo": "Ajusta la fuerza",
-          "texto": "Configura *force feedback* medio para mayor control",
-          "emoji": "",
-          "visual": "Force feedback settings screen on sim racing software"
-        },
-        {
-          "titulo": "Calibra los pedales",
-          "texto": "Usa *deadzone* bajo y rango completo",
-          "emoji": "",
-          "visual": "Pedal calibration sliders in game menu"
+          "visual": "Close-up of a wheel with a question mark overlay."
         }
       ],
-      "cta": "Descubre más en el link en bio",
-      "sticker": null,
-      "fondo": "animado",
+      "cta": "",
+      "sticker": {
+        "tipo": "pregunta",
+        "texto": "¿Qué te cuesta calibrar?",
+        "opciones": [],
+        "auto": true
+      },
+      "fondo": "color",
       "estilo": "racing",
-      "caption": "¿Listo para llevar tu wheel al siguiente nivel? Ajusta estos tres pasos y siente la diferencia. 👉 Entra al link en bio y profundiza.",
-      "hashtags": "#simracing #racingwheel #gamingtips #redlineclub #virtualracing",
-      "audio": "voz_y_musica",
-      "voz": "hombre",
-      "ritmo_voz": "energetico",
-      "musica": "epica",
-      "guion": [
-        "¿Tu volante está listo para la pista?",
-        "Asegúrate del USB firme y sin interferencias",
-        "Configura force feedback medio para mayor control",
-        "Usa deadzone bajo y rango completo, ¡acelera tu setup!"
+      "caption": "",
+      "hashtags": "",
+      "audio": "solo_musica",
+      "voz": "",
+      "ritmo_voz": "",
+      "musica": "energica",
+      "guion": [],
+      "stickers": [
+        "🏎️",
+        "🛞",
+        "⚡"
       ]
     },
     {
-      "id": "pmw9nntq7_2",
-      "dia": 2,
-      "hora": "13:30",
-      "tipo": "carrusel",
+      "id": "pmw9scvbs_1",
+      "dia": 4,
+      "hora": "14:00",
+      "tipo": "post",
       "objetivo": "autoridad",
-      "razon": "Educar postura para mejor rendimiento",
-      "tema": "Ergonomía del piloto",
-      "formato": "carrusel",
-      "gancho": "Optimiza tu posición",
-      "visual": "Driver seat view with perfect ergonomics",
+      "razon": "aportar valor mental y fomentar visualización",
+      "tema": "Visualiza la vuelta perfecta",
+      "formato": "vertical",
+      "gancho": "Imagina tu mejor vuelta",
+      "visual": "Minimalist background with a ghost car tracing a line on a track.",
       "escenas": [
         {
-          "titulo": "Altura del asiento",
-          "texto": "Mantén rodillas ligeramente flexionadas, *ángulo* cómodo",
+          "titulo": "Frase",
+          "texto": "Cierra los ojos, visualiza cada curva y acelera con confianza.",
           "emoji": "",
-          "visual": "Side view of driver seat with wheel height adjusted"
-        },
-        {
-          "titulo": "Distancia del wheel",
-          "texto": "Los brazos deben estar ligeramente flexionados, *reach* natural",
-          "emoji": "",
-          "visual": "Overhead view showing distance between seat and wheel"
-        },
-        {
-          "titulo": "Ángulo del pedal",
-          "texto": "Pedales a nivel de cadera, evita *esfuerzo*",
-          "emoji": "",
-          "visual": "Foot position on pedal set with hip level reference"
+          "visual": "Ghost car on a neon track silhouette."
         }
       ],
-      "cta": "Guarda este carrusel y mejora tu postura",
+      "cta": "Accede a más mental tips en bio",
       "sticker": null,
-      "fondo": "ia",
+      "fondo": "color",
       "estilo": "racing",
-      "caption": "Una buena postura reduce la fatiga y mejora tus tiempos. Aplica estos ajustes y siente la diferencia en la pista. #linkenbio",
-      "hashtags": "#simracing #ergonomia #gaming #redlineclub #racingtips",
-      "audio": "",
+      "caption": "La mente dirige al volante. 🧠\nVisualiza cada paso antes de la pista y mejora tu rendimiento.\nLink en bio.",
+      "hashtags": "#MentalTraining #Visualización #SimRacing #RedlineClub #RacingMindset",
+      "audio": "solo_musica",
       "voz": "",
       "ritmo_voz": "",
-      "musica": "",
-      "guion": []
+      "musica": "chill",
+      "guion": [],
+      "stickers": [
+        "🧠",
+        "📚",
+        "✅"
+      ]
     },
     {
-      "id": "pmw9nntq7_3",
-      "dia": 4,
-      "hora": "19:45",
-      "tipo": "reel",
-      "objetivo": "alcance",
-      "razon": "Mostrar tip de pista para atraer a fans de circuitos",
-      "tema": "Análisis de curva",
-      "formato": "reel",
-      "gancho": "Domina la curva S en Monza",
-      "visual": "Aerial view of Monza S‑curve",
+      "id": "pmw9scvbs_2",
+      "dia": 5,
+      "hora": "11:00",
+      "tipo": "historia",
+      "objetivo": "tráfico",
+      "razon": "redirigir a la web de pre‑registro",
+      "tema": "Acceso anticipado",
+      "formato": "vertical",
+      "gancho": "¡Reserva tu acceso anticipado!",
+      "visual": "Animated neon background with a countdown timer.",
       "escenas": [
         {
-          "titulo": "Frena antes",
-          "texto": "Reduce velocidad al *frenar* 30% antes de la curva",
+          "titulo": "Enlace",
+          "texto": "Haz clic y asegura tu plaza en Redline Club.",
           "emoji": "",
-          "visual": "Brake pedal being pressed in game"
-        },
-        {
-          "titulo": "Apunta al apex",
-          "texto": "Busca el *apex* interior para trazado limpio",
-          "emoji": "",
-          "visual": "Racing line displayed on track"
-        },
-        {
-          "titulo": "Acelera al salir",
-          "texto": "Aplica potencia al *salida* para máxima velocidad",
-          "emoji": "",
-          "visual": "Car exiting curve with speed boost"
+          "visual": "Button graphic pointing to link icon."
         }
       ],
-      "cta": "Mira el tutorial completo en bio",
-      "sticker": null,
+      "cta": "",
+      "sticker": {
+        "tipo": "enlace",
+        "texto": "Acceso anticipado",
+        "opciones": [],
+        "auto": true
+      },
       "fondo": "animado",
       "estilo": "racing",
-      "caption": "Domina cada curva con esta técnica de tres pasos. Practica y siente la diferencia en tus tiempos. 👉 Link en bio para más.",
-      "hashtags": "#simracing #circuittips #monza #redlineclub #racing",
-      "audio": "voz_y_musica",
-      "voz": "hombre",
-      "ritmo_voz": "normal",
-      "musica": "energetica",
-      "guion": [
-        "Domina la curva S en Monza",
-        "Reduce velocidad al frenar 30% antes de la curva",
-        "Busca el apex interior para trazado limpio",
-        "Aplica potencia al salir para máxima velocidad"
+      "caption": "",
+      "hashtags": "",
+      "audio": "solo_musica",
+      "voz": "",
+      "ritmo_voz": "",
+      "musica": "emocional",
+      "guion": [],
+      "stickers": [
+        "🏎️",
+        "🛞",
+        "⚡"
+      ]
+    },
+    {
+      "id": "pmw9scvbs_3",
+      "dia": 6,
+      "hora": "09:30",
+      "tipo": "historia",
+      "objetivo": "interacción",
+      "razon": "fomentar conversación y recopilar preferencias",
+      "tema": "Pista favorita",
+      "formato": "vertical",
+      "gancho": "¿Tu pista favorita?",
+      "visual": "Animated neon map of a famous circuit.",
+      "escenas": [
+        {
+          "titulo": "Pregunta",
+          "texto": "Comparte la pista que más te gusta del simulador.",
+          "emoji": "",
+          "visual": "Circuit outline with glowing markers."
+        }
+      ],
+      "cta": "",
+      "sticker": {
+        "tipo": "pregunta",
+        "texto": "¿Cuál es tu pista favorita?",
+        "opciones": [],
+        "auto": true
+      },
+      "fondo": "animado",
+      "estilo": "racing",
+      "caption": "",
+      "hashtags": "",
+      "audio": "solo_musica",
+      "voz": "",
+      "ritmo_voz": "",
+      "musica": "divertida",
+      "guion": [],
+      "stickers": [
+        "🏎️",
+        "🏁",
+        "⚡"
       ]
     }
   ]
