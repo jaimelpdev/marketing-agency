@@ -43,6 +43,7 @@ globalThis.fetch = async (url, init = {}) => {
     if (path.startsWith("/accounts?profileId=prof1")) return J({ accounts: [{ _id: "acc_tt", platform: "tiktok", username: "ana_tt", isActive: true }] });
     if (path.startsWith("/accounts/acc_tt") && init.method === "DELETE") return J({ ok: true });
     if (path === "/posts") return J({ post: { _id: "post1" } });
+    if (path === "/accounts/acc_tt/posts") return J({ status: "ok", posts: [] });
   }
   throw new Error("fetch inesperado " + url);
 };
@@ -96,6 +97,8 @@ r = await call("GET", "/api/social", { key }); assert.equal(r.j.accounts[0].plat
 r = await call("GET", "/admin/users", { key: "admin123" }); assert.equal(r.j.users.find(x => x.zernioProfileId).social[0].id, "acc_tt");
 r = await call("POST", "/admin/zernio", { key: "admin123", body: { method: "POST", path: "/posts", body: { content: "x" } } }); assert.equal(r.j.post._id, "post1");
 r = await call("POST", "/admin/zernio", { key: "admin123", body: { method: "POST", path: "/profiles/../../billing", body: {} } }); assert.equal(r.s, 400, "solo rutas permitidas");
+r = await call("POST", "/admin/zernio", { key: "admin123", body: { method: "GET", path: "/accounts/acc_tt/posts" } }); assert.equal(r.s, 200, "puede leer lo publicado");
+r = await call("POST", "/admin/zernio", { key: "admin123", body: { method: "GET", path: "/accounts/acc_tt/billing" } }); assert.equal(r.s, 400);
 r = await call("POST", "/api/social/disconnect", { key, body: { accountId: "otra" } }); assert.equal(r.s, 404, "no se puede borrar una cuenta ajena");
 r = await call("POST", "/api/social/disconnect", { key, body: { accountId: "acc_tt" } }); assert.equal(r.s, 200);
 // Rehacer y reiniciar

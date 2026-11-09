@@ -124,6 +124,9 @@ Guarda tu **clave de acceso** (en Cuenta) para entrar desde otro dispositivo.
 - **Voz:** locuciones neuronales gratuitas de Microsoft (edge-tts), con el guion que escribe la agencia.
 - **Música:** si pones tus pistas en `assets/music/<ambiente>/` (energetica, chill, epica, emotiva, divertida, tension) se usan esas. Si no, la agencia busca **canciones reales con licencia libre para uso comercial** (CC0 o CC BY, sobre todo de Jamendo, a través de Openverse) según el ambiente de cada vídeo, empieza la canción ya dentro (sin la intro lenta) y nivela el volumen. Con CC BY se acredita al artista en el texto del post (o abajo del todo en las historias). Las pistas se guardan en `content/music/` y se van reutilizando.
 
+## 🔎 No repetir contenido
+Antes de planificar, la agencia lee las últimas publicaciones de cada red conectada (Instagram, TikTok y YouTube, **incluido lo que subiste a mano**) con sus me gusta y comentarios, y lo junta con lo que ya creó o programó ella. Con eso evita repetir temas, ganchos o enfoques, y aprovecha lo que mejor funciona con ángulos nuevos.
+
 ## 🎬 Vídeos animados
 - **Gráficos animados en cada consejo** (como los creadores de vídeos educativos): comparación ❌/✅ que entra deslizando, checklist que se va marcando, velocímetro con aguja, barra de progreso, ruta con el coche recorriéndola, diana con flecha y contador. La agencia elige el que mejor explica cada escena.
 - **Transiciones** con barrido de color entre escenas, zoom de impacto, acercamiento lento de cámara y partículas de fondo.

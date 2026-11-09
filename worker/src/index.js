@@ -489,7 +489,7 @@ async function handle(req, env) {
     if (p === "/admin/zernio" && method === "POST") {
       const b = await req.json().catch(() => ({}));
       const m = String(b.method || "GET").toUpperCase(), path = String(b.path || "");
-      const okPath = /^\/(posts(\/[\w-]+)?|media\/presign|accounts(\/[\w-]+)?)(\?[\w=&%.-]*)?$/.test(path) && !path.includes("..");
+      const okPath = /^\/(posts(\/[\w-]+)?|media\/presign|accounts(\/[\w-]+(\/posts)?)?)(\?[\w=&%.-]*)?$/.test(path) && !path.includes("..");
       if (!okPath || !["GET", "POST", "PUT", "DELETE"].includes(m)) return err(400, "bad_request", "Ruta de Zernio no permitida.");
       try { return json(await zernio(env, m, path, b.body)); }
       catch (e) { return err(502, "social_error", String(e.message || e)); }

@@ -127,6 +127,8 @@ class H(http.server.SimpleHTTPRequestHandler):
             return self._json({"ok": True})
         if self.path == "/admin/zernio" and self._auth():
             zcalls.append(body)
+            if body.get("method") == "GET" and body["path"].endswith("/posts"):
+                return self._json({"status": "ok", "posts": [{"id": "x1", "platform": "instagram", "message": "Cómo elegir tu primer volante de simracing #simracing", "mediaType": "VIDEO", "createdTime": "2026-11-01T18:00:00Z", "likeCount": 87, "commentCount": 9}]})
             if body["path"] == "/media/presign":
                 n = len(zcalls)
                 return self._json({"uploadUrl": f"http://127.0.0.1:8765/upload/{n}", "publicUrl": f"https://cdn.zernio.test/{n}/{body['body']['filename']}"})
@@ -189,6 +191,7 @@ def loudness(path):
     r = subprocess.run(["ffmpeg", "-hide_banner", "-i", str(path), "-af", "volumedetect", "-f", "null", "-"], capture_output=True, text=True)
     import re
     return float(re.search(r"mean_volume: (-?[0-9.]+)", r.stderr).group(1))
+assert any("primer volante de simracing" in pr and "87" in pr for pr in PROMPTS), "la IA ve lo ya publicado en las redes"
 assert OV, "busca música libre"
 assert (work / "content/music").exists() and list((work / "content/music").rglob("index.json")), "guarda las pistas"
 reel_item = next(q for q in final if q["tipo"] == "reel")

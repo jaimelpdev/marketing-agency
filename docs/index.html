@@ -616,8 +616,9 @@ Temas de contenido: ${c.pillars.join("; ")||"-"}
 Tono: ${c.tone}
 Objetivo de negocio: llevar a la gente a ${dest}.
 ${O.kind!=="mix"?"Enfoque preferido por el dueño: "+KN[O.kind]+".\n":""}
-YA PUBLICADO (no lo repitas ni hagas variaciones obvias):
+YA PUBLICADO O PROGRAMADO en sus redes (incluye lo que el dueño subió a mano en Instagram, TikTok o YouTube; entre corchetes, la red y sus me gusta y comentarios):
 ${past}
+Revísalo todo antes de planificar: no repitas temas, ganchos, ejemplos ni enfoques que ya estén ahí, ni hagas variaciones obvias. Si un tema funcionó muy bien (muchos me gusta o comentarios), puedes tratar un ángulo nuevo y distinto de ese tema, nunca el mismo contenido.
 
 TIPOS DE PIEZA
 - "reel": vídeo vertical de 15 a 30 s con texto animado. Sirve para alcance y seguidores nuevos. Lleva de 3 a 5 escenas.
@@ -952,7 +953,7 @@ function drawGraphic(g,x,y,w,h,lt,T,SC){
     ctx.strokeStyle="#fff";ctx.lineWidth=7;ctx.setLineDash([26,22]);ctx.lineDashOffset=-lt*80;ctx.stroke();ctx.setLineDash([]);ctx.restore();
     const a0=easeBack(pr(lt,t0,0.3)),a1=easeBack(pr(lt,t0+1.3,0.4));
     if(a0>0){ctx.save();ctx.globalAlpha*=clamp(a0,0,1);gText("📍 "+g.desde,pts[0][0]+10,pts[0][1]+80,40,txt,900,"left",w*0.45);ctx.restore();}
-    if(a1>0){putSticker("🏁",pts[3][0]-10,pts[3][1]-70,110,0.1,a1,1);gText(g.hasta,pts[3][0]-10,pts[3][1]+70,40,txt,900,"right",w*0.45);}
+    if(a1>0){putSticker("🏁",pts[3][0]+10,pts[3][1]-75,110,0.1,a1,1);ctx.save();ctx.globalAlpha*=clamp(a1,0,1);ctx.fillStyle=S.cfg.acc;ctx.font="900 40px Inter";const tw=Math.min(ctx.measureText(g.hasta).width,w*0.5);roundRect(pts[3][0]-tw-60,pts[3][1]-170,tw+50,64,32);ctx.fill();ctx.restore();ctx.save();ctx.globalAlpha*=clamp(a1,0,1);gText(g.hasta,pts[3][0]-35-tw/2,pts[3][1]-137,40,onAccent(S.cfg.acc),900,"center",w*0.5);ctx.restore();}
     const veh=pieceStickers(SC.piece).find(e=>VEHICLES.has(e))||"🏎️",q=B(easeOut(p)*0.98),q2=B(Math.min(1,easeOut(p)*0.98+0.02));
     putSticker(veh,q[0],q[1]-20,130,Math.atan2(q2[1]-q[1],q2[0]-q[0]),1,1,true);
   }else if(g.tipo==="objetivo"){

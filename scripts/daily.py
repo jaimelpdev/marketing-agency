@@ -314,6 +314,56 @@ def zernio_schedule(user, item, piece, tz):
     return post.get("_id") or post.get("id") or "ok"
 
 
+NET_SHORT = {"instagram": "IG", "tiktok": "TikTok", "youtube": "YouTube"}
+
+
+def _norm_text(t):
+    import re
+    import unicodedata
+    t = unicodedata.normalize("NFKD", str(t or "")).encode("ascii", "ignore").decode().lower()
+    t = re.sub(r"#\w+|@\w+|https?://\S+", " ", t)
+    return re.sub(r"[^a-z0-9 ]+", " ", re.sub(r"\s+", " ", t)).strip()
+
+
+def fetch_published(user):
+    """Lo que ya hay publicado en las redes conectadas (también lo subido a mano), para no repetir temas."""
+    import re
+    out = []
+    for acc in user.get("social") or []:
+        try:
+            r = api("POST", "/admin/zernio", {"method": "GET", "path": f"/accounts/{acc['id']}/posts"})
+        except Exception as e:
+            log(f"  ⚠ No se pudo leer lo publicado en {acc.get('platform')}: {e}")
+            continue
+        for p in (r.get("posts") or [])[:25]:
+            text = str(p.get("title") or p.get("message") or "").strip()
+            text = re.sub(r"\s+", " ", re.sub(r"#\w+", "", text)).strip()
+            if not text:
+                continue
+            mt = str(p.get("mediaType") or "").lower()
+            tipo = "reel" if any(k in mt for k in ("video", "reel", "short")) else "carrusel" if "carousel" in mt or "album" in mt else "post"
+            likes, comments = p.get("likeCount"), p.get("commentCount")
+            eng = f" · ❤️{likes}" if likes is not None else ""
+            eng += f" 💬{comments}" if comments else ""
+            out.append({"date": str(p.get("createdTime") or "")[:10], "tipo": tipo, "src": "red",
+                        "tema": f"[{NET_SHORT.get(acc.get('platform'), acc.get('platform'))}{eng}] {text[:140]}"})
+    return out
+
+
+def merge_history(history, published):
+    """Añade lo publicado en redes al historial sin duplicar (la misma pieza en varias redes cuenta una vez)."""
+    items = [h for h in history.get("items", []) if h.get("src") != "red"]
+    seen = {_norm_text(h.get("tema"))[:60] for h in items}
+    for p in sorted(published, key=lambda x: x.get("date") or ""):
+        key = _norm_text(p["tema"].split("] ", 1)[-1])[:60]
+        if not key or any(key[:40] in k or k[:40] in key for k in seen if k):
+            continue
+        seen.add(key)
+        items.append(p)
+    items.sort(key=lambda h: h.get("date") or "")
+    return {"items": items[-120:]}
+
+
 AUDIO_MODES = {"voz": "solo_voz", "musica": "solo_musica", "ambos": "voz_y_musica"}
 
 
@@ -347,6 +397,10 @@ def plan_user(browser, user, key, force=False, redo=None):
             log(f"  Plan en marcha ({len(future)} piezas más allá de mañana). Hoy no hace falta planificar.")
             return False
     history = load_json(hist_path, {"items": []})
+    published = fetch_published(user)
+    if published:
+        history = merge_history(history, published)
+        log(f"  Revisado lo ya publicado en sus redes: {len(published)} publicaciones.")
     allowed = plan_conf.get("formatos") or ["reel", "historia", "post", "carrusel"]
     nets = {a.get("platform") for a in (user.get("social") or [])}
     if not (user.get("ig") or {}).get("connected") and "instagram" not in nets:
