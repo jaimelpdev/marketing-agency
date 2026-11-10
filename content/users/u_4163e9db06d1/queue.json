@@ -4,8 +4,8 @@
     "date": "2026-11-10",
     "source": "auto",
     "tipo": "historia",
-    "tema": "Gestión de neumáticos",
-    "publishAt": "2026-11-10T09:00:00+01:00",
+    "tema": "Telemetría de Simracing",
+    "publishAt": "2026-11-10T14:37:11.115826+01:00",
     "caption": "",
     "media": [
       "media/u_4163e9db06d1/2026-11-10/2026-11-10-01-historia/video.mp4"
@@ -13,89 +13,72 @@
     "status": "scheduled",
     "attempts": 0,
     "cover": "media/u_4163e9db06d1/2026-11-10/2026-11-10-01-historia/cover.jpg",
-    "zernioPostId": "6af25a7695020483d5f5e827"
+    "zernioPostId": "6af31b34481d79f7da6befd9"
   },
   {
-    "id": "2026-11-10-02-carrusel",
-    "date": "2026-11-10",
-    "source": "auto",
-    "tipo": "carrusel",
-    "tema": "Suspensión para curvas rápidas",
-    "publishAt": "2026-11-11T13:30:00+01:00",
-    "caption": "Domina la suspensión y siente la diferencia en cada curva. Guarda este carrusel y comparte con tu escuadrón de pilotos. #simracing #suspension #circuitos #consejos #racing\n\n#simracing #suspension #circuitos #consejos #racing",
-    "media": [
-      "media/u_4163e9db06d1/2026-11-10/2026-11-10-02-carrusel/01.jpg",
-      "media/u_4163e9db06d1/2026-11-10/2026-11-10-02-carrusel/02.jpg",
-      "media/u_4163e9db06d1/2026-11-10/2026-11-10-02-carrusel/03.jpg",
-      "media/u_4163e9db06d1/2026-11-10/2026-11-10-02-carrusel/04.jpg",
-      "media/u_4163e9db06d1/2026-11-10/2026-11-10-02-carrusel/05.jpg",
-      "media/u_4163e9db06d1/2026-11-10/2026-11-10-02-carrusel/06.jpg"
-    ],
-    "status": "scheduled",
-    "attempts": 0,
-    "zernioPostId": "6af25a7e2a6a31a4fb3e9c05"
-  },
-  {
-    "id": "2026-11-10-03-historia",
+    "id": "2026-11-10-02-historia",
     "date": "2026-11-10",
     "source": "auto",
     "tipo": "historia",
-    "tema": "Entrenamiento mental",
+    "tema": "App Redline Club: preview",
     "publishAt": "2026-11-12T09:30:00+01:00",
     "caption": "",
     "media": [
-      "media/u_4163e9db06d1/2026-11-10/2026-11-10-03-historia/video.mp4"
+      "media/u_4163e9db06d1/2026-11-10/2026-11-10-02-historia/video.mp4"
     ],
     "status": "scheduled",
     "attempts": 0,
-    "cover": "media/u_4163e9db06d1/2026-11-10/2026-11-10-03-historia/cover.jpg",
-    "zernioPostId": "6af25a8395020483d5f5e876"
+    "cover": "media/u_4163e9db06d1/2026-11-10/2026-11-10-02-historia/cover.jpg",
+    "zernioPostId": "6af31b364094b19029b20a17"
+  },
+  {
+    "id": "2026-11-10-03-reel",
+    "date": "2026-11-10",
+    "source": "auto",
+    "tipo": "reel",
+    "tema": "Setup para lluvia",
+    "publishAt": "2026-11-14T11:00:00+01:00",
+    "caption": "Domina la lluvia con estos ajustes. 🌧️💨 #simracing #rainsetup #tips #racing #redlineclub\n\n#simracing #rainsetup #tips #racing #redlineclub\n\n🎵 «Fat Frank» de Jake Evans Producer (CC BY 3.0)",
+    "media": [
+      "media/u_4163e9db06d1/2026-11-10/2026-11-10-03-reel/video.mp4"
+    ],
+    "status": "scheduled",
+    "attempts": 0,
+    "cover": "media/u_4163e9db06d1/2026-11-10/2026-11-10-03-reel/cover.jpg",
+    "zernioPostId": "6af31b39481d79f7da6bf02d"
   },
   {
     "id": "2026-11-10-04-post",
     "date": "2026-11-10",
     "source": "auto",
     "tipo": "post",
-    "tema": "Calentamiento rápido",
-    "publishAt": "2026-11-13T14:00:00+01:00",
-    "caption": "Prepara tu cuerpo antes de cada sesión. Un buen calentamiento mejora reflejos y evita lesiones. 🚀 #simracing #calentamiento #racing #tips #gaming\n\n#simracing #calentamiento #racing #tips #gaming",
+    "tema": "Mentalidad para overtaking",
+    "publishAt": "2026-11-15T13:00:00+01:00",
+    "caption": "El adelantamiento empieza en la cabeza. Prepárate y ejecuta. 💡 #overtaking #simracing #mindset #tips #redlineclub\n\n#overtaking #simracing #mindset #tips #redlineclub",
     "media": [
       "media/u_4163e9db06d1/2026-11-10/2026-11-10-04-post/01.jpg"
     ],
     "status": "scheduled",
     "attempts": 0,
-    "zernioPostId": "6af25a8595020483d5f5e88d"
+    "zernioPostId": "6af31b3d481d79f7da6bf03b"
   },
   {
-    "id": "2026-11-10-05-historia",
+    "id": "2026-11-10-05-carrusel",
     "date": "2026-11-10",
     "source": "auto",
-    "tipo": "historia",
-    "tema": "Comparativa de volantes",
-    "publishAt": "2026-11-14T09:00:00+01:00",
-    "caption": "",
+    "tipo": "carrusel",
+    "tema": "App: comparte setups",
+    "publishAt": "2026-11-16T13:30:00+01:00",
+    "caption": "Nuestra app llega para centralizar todo tu contenido y comunidad. 🚀 #simracing #app #redlineclub #gaming #tech\n\n#simracing #app #redlineclub #gaming #tech",
     "media": [
-      "media/u_4163e9db06d1/2026-11-10/2026-11-10-05-historia/video.mp4"
+      "media/u_4163e9db06d1/2026-11-10/2026-11-10-05-carrusel/01.jpg",
+      "media/u_4163e9db06d1/2026-11-10/2026-11-10-05-carrusel/02.jpg",
+      "media/u_4163e9db06d1/2026-11-10/2026-11-10-05-carrusel/03.jpg",
+      "media/u_4163e9db06d1/2026-11-10/2026-11-10-05-carrusel/04.jpg",
+      "media/u_4163e9db06d1/2026-11-10/2026-11-10-05-carrusel/05.jpg"
     ],
     "status": "scheduled",
     "attempts": 0,
-    "cover": "media/u_4163e9db06d1/2026-11-10/2026-11-10-05-historia/cover.jpg",
-    "zernioPostId": "6af25a882a6a31a4fb3e9c2c"
-  },
-  {
-    "id": "2026-11-10-06-reel",
-    "date": "2026-11-10",
-    "source": "auto",
-    "tipo": "reel",
-    "tema": "Estrategia de pit‑stop",
-    "publishAt": "2026-11-16T11:30:00+01:00",
-    "caption": "Domina la pista sin perder tiempo en boxes. Cada segundo cuenta para la victoria. 🚦 #simracing #pitstop #estrategia #racing\n\n#simracing #pitstop #estrategia #racing #tips\n\n🎵 «Mystical Horror Trailer» de Soundrider/Dope (CC BY 3.0)",
-    "media": [
-      "media/u_4163e9db06d1/2026-11-10/2026-11-10-06-reel/video.mp4"
-    ],
-    "status": "scheduled",
-    "attempts": 0,
-    "cover": "media/u_4163e9db06d1/2026-11-10/2026-11-10-06-reel/cover.jpg",
-    "zernioPostId": "6af25a8a2a6a31a4fb3e9c3e"
+    "zernioPostId": "6af31b444776fb83fff08db9"
   }
 ]

@@ -77,6 +77,36 @@
       "tema": "Estrategia de pit‑stop",
       "formato": "reel",
       "tipo": "reel"
+    },
+    {
+      "date": "2026-11-10",
+      "tema": "Telemetría de Simracing",
+      "formato": "historia",
+      "tipo": "historia"
+    },
+    {
+      "date": "2026-11-12",
+      "tema": "App Redline Club: preview",
+      "formato": "historia",
+      "tipo": "historia"
+    },
+    {
+      "date": "2026-11-14",
+      "tema": "Setup para lluvia",
+      "formato": "reel",
+      "tipo": "reel"
+    },
+    {
+      "date": "2026-11-15",
+      "tema": "Mentalidad para overtaking",
+      "formato": "post",
+      "tipo": "post"
+    },
+    {
+      "date": "2026-11-16",
+      "tema": "App: comparte setups",
+      "formato": "carrusel",
+      "tipo": "carrusel"
     }
   ]
 }
