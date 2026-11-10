@@ -4,8 +4,8 @@
     "date": "2026-11-10",
     "source": "auto",
     "tipo": "historia",
-    "tema": "Telemetría de Simracing",
-    "publishAt": "2026-11-10T14:37:11.115826+01:00",
+    "tema": "Desafío de reacción",
+    "publishAt": "2026-11-11T09:00:00+01:00",
     "caption": "",
     "media": [
       "media/u_4163e9db06d1/2026-11-10/2026-11-10-01-historia/video.mp4"
@@ -13,104 +13,94 @@
     "status": "scheduled",
     "attempts": 0,
     "cover": "media/u_4163e9db06d1/2026-11-10/2026-11-10-01-historia/cover.jpg",
-    "zernioPostId": "6af31b34481d79f7da6befd9"
+    "zernioPostId": "6af38a2ff2de708c3db7e1c0"
   },
   {
-    "id": "2026-11-10-c212952-reel",
-    "date": "2026-11-10",
-    "source": "chat",
-    "tipo": "reel",
-    "tema": "Lanzamiento de la app Redline Club – cómo usarla y sus ventajas",
-    "publishAt": "2026-11-11T12:00:00+01:00",
-    "caption": "¿Listo para romper tus límites? Con la nueva app de Redline Club tienes todo el control de tus entrenos y telemetría al alcance de un toque. Descubre cómo acelerar tu mejora y comparte tus tiempos con la comunidad. ¿Cuál es tu mayor reto en pista? 👉 Link en bio\n\n#RedlineClub #SimRacing #AppLaunch #MejoraTuTiempo #RacingLife #Gamers\n\n🎵 «Diagnosed Crazy Psychedelic Sunshine Pop - Lenny Wiles Lionstar» de Lenny Wiles Lionstar GALAXY BANDSTAND (CC BY 3.0)",
-    "media": [
-      "media/u_4163e9db06d1/2026-11-10/2026-11-10-c212952-reel/video.mp4"
-    ],
-    "status": "scheduled",
-    "attempts": 0,
-    "cover": "media/u_4163e9db06d1/2026-11-10/2026-11-10-c212952-reel/cover.jpg",
-    "zernioPostId": "6af37f216b08ec0d01c7bc9e"
-  },
-  {
-    "id": "2026-11-10-c213131-reel",
-    "date": "2026-11-10",
-    "source": "chat",
-    "tipo": "reel",
-    "tema": "Lanzamiento de la app Redline Club – cómo usarla y sus ventajas",
-    "publishAt": "2026-11-11T12:00:00+01:00",
-    "caption": "¿Quieres romper tus récords en pista? La nueva app Redline Club te muestra cada detalle para acelerar tu progreso. Cuéntanos, ¿qué función te emociona más? 👉 Visita la bio y descarga la app.\n\n#RedlineClub #SimRacing #MejoraTuTiempo #AppNueva #Gaming #RacingLife #Entrenamiento\n\n🎵 «Spencer Newton - Lucky Number 8 (Original Mix)(Electro House)» de Spencer Newton (CC BY 3.0)",
-    "media": [
-      "media/u_4163e9db06d1/2026-11-10/2026-11-10-c213131-reel/video.mp4"
-    ],
-    "status": "scheduled",
-    "attempts": 0,
-    "cover": "media/u_4163e9db06d1/2026-11-10/2026-11-10-c213131-reel/cover.jpg",
-    "zernioPostId": "6af37f76158d92d78a2de8ed"
-  },
-  {
-    "id": "2026-11-10-02-historia",
-    "date": "2026-11-10",
-    "source": "auto",
-    "tipo": "historia",
-    "tema": "App Redline Club: preview",
-    "publishAt": "2026-11-12T09:30:00+01:00",
-    "caption": "",
-    "media": [
-      "media/u_4163e9db06d1/2026-11-10/2026-11-10-02-historia/video.mp4"
-    ],
-    "status": "scheduled",
-    "attempts": 0,
-    "cover": "media/u_4163e9db06d1/2026-11-10/2026-11-10-02-historia/cover.jpg",
-    "zernioPostId": "6af31b364094b19029b20a17"
-  },
-  {
-    "id": "2026-11-10-03-reel",
+    "id": "2026-11-10-02-reel",
     "date": "2026-11-10",
     "source": "auto",
     "tipo": "reel",
-    "tema": "Setup para lluvia",
-    "publishAt": "2026-11-14T11:00:00+01:00",
-    "caption": "Domina la lluvia con estos ajustes. 🌧️💨 #simracing #rainsetup #tips #racing #redlineclub\n\n#simracing #rainsetup #tips #racing #redlineclub\n\n🎵 «Fat Frank» de Jake Evans Producer (CC BY 3.0)",
+    "tema": "Entrenamiento de reacción de 1 segundo para arrancadas",
+    "publishAt": "2026-11-11T19:30:00+01:00",
+    "caption": "Un segundo puede marcar la diferencia en cada vuelta. 💨 ¿Ya lo pruebas? Guarda y comparte. 👉 Link en bio\n\n#simracing #drill #reactiontime #racingtips #redlineclub\n\n🎵 «Spencer Newton - Lucky Number 8 (Original Mix)(Electro House)» de Spencer Newton (CC BY 3.0)",
     "media": [
-      "media/u_4163e9db06d1/2026-11-10/2026-11-10-03-reel/video.mp4"
+      "media/u_4163e9db06d1/2026-11-10/2026-11-10-02-reel/video.mp4"
     ],
     "status": "scheduled",
     "attempts": 0,
-    "cover": "media/u_4163e9db06d1/2026-11-10/2026-11-10-03-reel/cover.jpg",
-    "zernioPostId": "6af31b39481d79f7da6bf02d"
+    "cover": "media/u_4163e9db06d1/2026-11-10/2026-11-10-02-reel/cover.jpg",
+    "zernioPostId": "6af38a31f2de708c3db7e1cc"
   },
   {
-    "id": "2026-11-10-04-post",
-    "date": "2026-11-10",
-    "source": "auto",
-    "tipo": "post",
-    "tema": "Mentalidad para overtaking",
-    "publishAt": "2026-11-15T13:00:00+01:00",
-    "caption": "El adelantamiento empieza en la cabeza. Prepárate y ejecuta. 💡 #overtaking #simracing #mindset #tips #redlineclub\n\n#overtaking #simracing #mindset #tips #redlineclub",
-    "media": [
-      "media/u_4163e9db06d1/2026-11-10/2026-11-10-04-post/01.jpg"
-    ],
-    "status": "scheduled",
-    "attempts": 0,
-    "zernioPostId": "6af31b3d481d79f7da6bf03b"
-  },
-  {
-    "id": "2026-11-10-05-carrusel",
+    "id": "2026-11-10-03-carrusel",
     "date": "2026-11-10",
     "source": "auto",
     "tipo": "carrusel",
-    "tema": "App: comparte setups",
-    "publishAt": "2026-11-16T13:30:00+01:00",
-    "caption": "Nuestra app llega para centralizar todo tu contenido y comunidad. 🚀 #simracing #app #redlineclub #gaming #tech\n\n#simracing #app #redlineclub #gaming #tech",
+    "tema": "Estrategia de neumáticos para 2‑hour endurance",
+    "publishAt": "2026-11-12T13:30:00+01:00",
+    "caption": "Domina la gestión de neumáticos y ahorra segundos críticos. 💡 ¿Cuál aplicarás primero? 👉 Link en bio\n\n#neumáticos #endurance #simracingtips #redlineclub #racingstrategy",
     "media": [
-      "media/u_4163e9db06d1/2026-11-10/2026-11-10-05-carrusel/01.jpg",
-      "media/u_4163e9db06d1/2026-11-10/2026-11-10-05-carrusel/02.jpg",
-      "media/u_4163e9db06d1/2026-11-10/2026-11-10-05-carrusel/03.jpg",
-      "media/u_4163e9db06d1/2026-11-10/2026-11-10-05-carrusel/04.jpg",
-      "media/u_4163e9db06d1/2026-11-10/2026-11-10-05-carrusel/05.jpg"
+      "media/u_4163e9db06d1/2026-11-10/2026-11-10-03-carrusel/01.jpg",
+      "media/u_4163e9db06d1/2026-11-10/2026-11-10-03-carrusel/02.jpg",
+      "media/u_4163e9db06d1/2026-11-10/2026-11-10-03-carrusel/03.jpg",
+      "media/u_4163e9db06d1/2026-11-10/2026-11-10-03-carrusel/04.jpg",
+      "media/u_4163e9db06d1/2026-11-10/2026-11-10-03-carrusel/05.jpg",
+      "media/u_4163e9db06d1/2026-11-10/2026-11-10-03-carrusel/06.jpg"
     ],
     "status": "scheduled",
     "attempts": 0,
-    "zernioPostId": "6af31b444776fb83fff08db9"
+    "zernioPostId": "6af38a39f2de708c3db7e1df"
+  },
+  {
+    "id": "2026-11-10-04-reel",
+    "date": "2026-11-10",
+    "source": "auto",
+    "tipo": "reel",
+    "tema": "Vista previa de la app: objetivos personalizados",
+    "publishAt": "2026-11-14T11:00:00+01:00",
+    "caption": "Tu entrenamiento, ahora con datos que hablan. 🚀 ¿Qué objetivo te pones? 👉 Link en bio\n\n#apppreview #simracing #training #redlineclub #gamingtips\n\n🎵 «High hopes» de zero-project (CC BY 3.0)",
+    "media": [
+      "media/u_4163e9db06d1/2026-11-10/2026-11-10-04-reel/video.mp4"
+    ],
+    "status": "scheduled",
+    "attempts": 0,
+    "cover": "media/u_4163e9db06d1/2026-11-10/2026-11-10-04-reel/cover.jpg",
+    "zernioPostId": "6af38a3ef2de708c3db7e1f4"
+  },
+  {
+    "id": "2026-11-10-05-post",
+    "date": "2026-11-10",
+    "source": "auto",
+    "tipo": "post",
+    "tema": "Mentalidad para adelantar sin miedo",
+    "publishAt": "2026-11-15T14:00:00+01:00",
+    "caption": "El secreto no está en el coche, sino en tu mente. ¿Listo para adelantar sin miedo? 💥 Comenta OVERTAKE. 👉 Link en bio\n\n#overtake #mindset #simracing #racingtips #redlineclub",
+    "media": [
+      "media/u_4163e9db06d1/2026-11-10/2026-11-10-05-post/01.jpg"
+    ],
+    "status": "scheduled",
+    "attempts": 0,
+    "zernioPostId": "6af38a40f36fcef5f7386070"
+  },
+  {
+    "id": "2026-11-10-06-carrusel",
+    "date": "2026-11-10",
+    "source": "auto",
+    "tipo": "carrusel",
+    "tema": "Top 5 setups compartidos para Spa",
+    "publishAt": "2026-11-16T13:00:00+01:00",
+    "caption": "Los mejores setups de la comunidad para Spa. 🏎️ ¿Cuál probarás? 👉 Link en bio\n\n#spa #setup #simracing #community #redlineclub",
+    "media": [
+      "media/u_4163e9db06d1/2026-11-10/2026-11-10-06-carrusel/01.jpg",
+      "media/u_4163e9db06d1/2026-11-10/2026-11-10-06-carrusel/02.jpg",
+      "media/u_4163e9db06d1/2026-11-10/2026-11-10-06-carrusel/03.jpg",
+      "media/u_4163e9db06d1/2026-11-10/2026-11-10-06-carrusel/04.jpg",
+      "media/u_4163e9db06d1/2026-11-10/2026-11-10-06-carrusel/05.jpg",
+      "media/u_4163e9db06d1/2026-11-10/2026-11-10-06-carrusel/06.jpg",
+      "media/u_4163e9db06d1/2026-11-10/2026-11-10-06-carrusel/07.jpg"
+    ],
+    "status": "scheduled",
+    "attempts": 0,
+    "zernioPostId": "6af38a48f36fcef5f73860d9"
   }
 ]

@@ -178,9 +178,17 @@
     },
     {
       "date": "2026-11-10",
+      "tema": "Lanzamiento de la app Redline Club – cómo usarla y sus ventajas",
+      "formato": "tutorial paso a paso",
+      "tipo": "reel",
+      "layout": "lista",
+      "plantilla": 666
+    },
+    {
+      "date": "2026-11-10",
       "tipo": "reel",
       "src": "red",
-      "tema": "[IG · ❤️23] En iRacing, una caída bien ajustada puede mejorar el apoyo en curva, pero el exceso castiga el neumático. Compara dos valores y mide tras ci"
+      "tema": "[IG · ❤️24] En iRacing, una caída bien ajustada puede mejorar el apoyo en curva, pero el exceso castiga el neumático. Compara dos valores y mide tras ci"
     },
     {
       "date": "2026-11-11",
@@ -267,12 +275,52 @@
       "tipo": "carrusel"
     },
     {
-      "date": "2026-11-10",
-      "tema": "Lanzamiento de la app Redline Club – cómo usarla y sus ventajas",
-      "formato": "tutorial paso a paso",
+      "date": "2026-11-11",
+      "tema": "Desafío de reacción",
+      "formato": "pregunta provocativa",
+      "tipo": "historia",
+      "layout": "clasico",
+      "plantilla": 272
+    },
+    {
+      "date": "2026-11-11",
+      "tema": "Entrenamiento de reacción de 1 segundo para arrancadas",
+      "formato": "desafio de tiempo",
       "tipo": "reel",
-      "layout": "lista",
-      "plantilla": 666
+      "layout": "chat",
+      "plantilla": 1937
+    },
+    {
+      "date": "2026-11-12",
+      "tema": "Estrategia de neumáticos para 2‑hour endurance",
+      "formato": "analisis de caso",
+      "tipo": "carrusel",
+      "layout": "tarjeta",
+      "plantilla": 904
+    },
+    {
+      "date": "2026-11-14",
+      "tema": "Vista previa de la app: objetivos personalizados",
+      "formato": "exploración de datos",
+      "tipo": "reel",
+      "layout": "clasico",
+      "plantilla": 2175
+    },
+    {
+      "date": "2026-11-15",
+      "tema": "Mentalidad para adelantar sin miedo",
+      "formato": "historia de éxito",
+      "tipo": "post",
+      "layout": "clasico",
+      "plantilla": 1139
+    },
+    {
+      "date": "2026-11-16",
+      "tema": "Top 5 setups compartidos para Spa",
+      "formato": "guia de configuración",
+      "tipo": "carrusel",
+      "layout": "dividido",
+      "plantilla": 2188
     }
   ]
 }

@@ -1,277 +1,439 @@
 {
   "date": "2026-11-10",
-  "estrategia": "Publicamos en días 0,2,4,5 y 6 para mantener ritmo constante y descansamos los días 1 y 3, evitando saturar.",
+  "estrategia": "Publicamos 2 reels, 2 carruseles y 1 post en 5 de los 7 días, dejando descansos los días 0 y 3 para no saturar y respetar el ritmo de 18 h entre publicaciones de feed. Las historias complementan los reels los días de mayor actividad y generan interacción directa.",
   "piezas": [
     {
-      "id": "pmwapz9jk_0",
-      "dia": 0,
+      "id": "pmwb6vpii_1",
+      "dia": 1,
       "hora": "09:00",
       "tipo": "historia",
       "objetivo": "interacción",
-      "razon": "Fomentar preguntas sobre telemetría",
-      "tema": "Telemetría de Simracing",
-      "formato": "historia",
-      "gancho": "¿Qué te cuesta la telemetría?",
-      "visual": "realistic cockpit dashboard with data graphs",
+      "razon": "Invitar a la audiencia a compartir su mayor dificultad al reaccionar",
+      "tema": "Desafío de reacción",
+      "formato": "pregunta provocativa",
+      "gancho": "¿Cuál es tu mayor reto en reacción?",
+      "visual": "driver ready at start line",
       "escenas": [
         {
-          "titulo": "Dato clave",
-          "texto": "Usa *telemetría* para afinar cada vuelta",
+          "titulo": "Reto rápido",
+          "texto": "Cuéntame tu mayor dificultad al frenar",
           "emoji": "",
-          "visual": "close‑up of cockpit screen showing telemetry graphs",
-          "grafico": {
-            "tipo": "checklist",
-            "items": [
-              "recopila",
-              "analiza",
-              "aplica"
-            ]
-          }
+          "visual": "hand hovering over brake pedal",
+          "grafico": null
         }
       ],
-      "cta": "Síguenos para más trucos",
+      "cta": "",
       "sticker": {
         "tipo": "pregunta",
-        "texto": "¿Qué te cuesta la telemetría?",
-        "opciones": [],
-        "auto": true
-      },
-      "fondo": "animado",
-      "estilo": "racing",
-      "caption": "",
-      "hashtags": "",
-      "audio": "solo_musica",
-      "voz": "",
-      "ritmo_voz": "",
-      "musica": "energica",
-      "guion": [],
-      "stickers": [
-        "🏎️",
-        "📊",
-        "🧭"
-      ]
-    },
-    {
-      "id": "pmwapz9jk_1",
-      "dia": 2,
-      "hora": "09:30",
-      "tipo": "historia",
-      "objetivo": "tráfico",
-      "razon": "Dirigir a la web con sneak peek de la app",
-      "tema": "App Redline Club: preview",
-      "formato": "historia",
-      "gancho": "¿Listo para la app definitiva?",
-      "visual": "screen mockup of app interface with racing icons",
-      "escenas": [
-        {
-          "titulo": "Vista previa",
-          "texto": "Explora *recursos* y comunidad en un solo lugar",
-          "emoji": "",
-          "visual": "tablet displaying app home screen with vibrant colors",
-          "grafico": {
-            "tipo": "objetivo",
-            "etiqueta": "todo en uno"
-          }
-        }
-      ],
-      "cta": "Visita el link en bio",
-      "sticker": {
-        "tipo": "enlace",
-        "texto": "https://redline-club.pages.dev",
+        "texto": "¿Qué te cuesta reaccionar en pista?",
         "opciones": [],
         "auto": true
       },
       "fondo": "color",
-      "estilo": "neon",
+      "estilo": "racing",
       "caption": "",
       "hashtags": "",
-      "audio": "solo_musica",
-      "voz": "",
-      "ritmo_voz": "",
-      "musica": "epica",
-      "guion": [],
-      "stickers": [
-        "🏁",
-        "💻",
-        "🚀"
-      ]
-    },
-    {
-      "id": "pmwapz9jk_2",
-      "dia": 4,
-      "hora": "11:00",
-      "tipo": "reel",
-      "objetivo": "alcance",
-      "razon": "Atraer nuevos seguidores con tip de lluvia",
-      "tema": "Setup para lluvia",
-      "formato": "reel",
-      "gancho": "El error que arruina tu lluvia",
-      "visual": "wet race track with splashing water",
-      "escenas": [
-        {
-          "titulo": "Presión",
-          "texto": "Reduce presión del neumático *5%* para mejor agarre",
-          "emoji": "",
-          "visual": "close‑up of tire pressure gauge wet",
-          "grafico": {
-            "tipo": "comparacion",
-            "mal": "alta presión",
-            "bien": "baja presión"
-          }
-        },
-        {
-          "titulo": "Ajuste",
-          "texto": "Ajusta la *suspensión* más blanda para evitar deslizamiento",
-          "emoji": "",
-          "visual": "car body over wet surface",
-          "grafico": {
-            "tipo": "comparacion",
-            "mal": "suspensión rígida",
-            "bien": "suspensión blanda"
-          }
-        },
-        {
-          "titulo": "Control",
-          "texto": "Usa *frenada* progresiva para evitar bloqueos",
-          "emoji": "",
-          "visual": "driver foot on brake pedal with rain droplets",
-          "grafico": {
-            "tipo": "checklist",
-            "items": [
-              "frena",
-              "reduce",
-              "mantén"
-            ]
-          }
-        }
-      ],
-      "cta": "Guarda y comparte",
-      "sticker": null,
-      "fondo": "animado",
-      "estilo": "racing",
-      "caption": "Domina la lluvia con estos ajustes. 🌧️💨 #simracing #rainsetup #tips #racing #redlineclub",
-      "hashtags": "#simracing #rainsetup #tips #racing #redlineclub",
-      "audio": "voz_y_musica",
-      "voz": "hombre",
-      "ritmo_voz": "energico",
-      "musica": "divertida",
-      "guion": [
-        "El error que arruina tu lluvia",
-        "Reduce presión del neumático cinco por ciento",
-        "Ajusta la suspensión más blanda",
-        "Usa frenada progresiva",
-        "Guarda este tip y mejora tu tiempo"
-      ],
-      "stickers": [
-        "🏎️",
-        "🌧️",
-        "⚡"
-      ]
-    },
-    {
-      "id": "pmwapz9jk_3",
-      "dia": 5,
-      "hora": "13:00",
-      "tipo": "post",
-      "objetivo": "autoridad",
-      "razon": "Compartir mentalidad de overtaking",
-      "tema": "Mentalidad para overtaking",
-      "formato": "post",
-      "gancho": "La mente del adelantador",
-      "visual": "driver silhouette overtaking on straight line",
-      "escenas": [
-        {
-          "titulo": "Enfoque",
-          "texto": "Visualiza la *línea* antes de atacar, controla tu ritmo",
-          "emoji": "",
-          "visual": "aerial view of track with overtaking line",
-          "grafico": {
-            "tipo": "ruta",
-            "desde": "posición actual",
-            "hasta": "punto de adelantam"
-          }
-        }
-      ],
-      "cta": "Síguenos para más estrategias",
-      "sticker": null,
-      "fondo": "color",
-      "estilo": "racing",
-      "caption": "El adelantamiento empieza en la cabeza. Prepárate y ejecuta. 💡 #overtaking #simracing #mindset #tips #redlineclub",
-      "hashtags": "#overtaking #simracing #mindset #tips #redlineclub",
       "audio": "solo_musica",
       "voz": "",
       "ritmo_voz": "",
       "musica": "chill",
-      "guion": [],
+      "guion": [
+        "¿Cuál es tu mayor reto en reacción?"
+      ],
+      "anim": "pop",
+      "plantilla": 272,
+      "layout": "clasico",
       "stickers": [
         "🏎️",
-        "🚀",
-        "🧠"
+        "❓",
+        "🗨️"
       ]
     },
     {
-      "id": "pmwapz9jk_4",
-      "dia": 6,
-      "hora": "13:30",
-      "tipo": "carrusel",
-      "objetivo": "autoridad",
-      "razon": "Educar sobre funciones clave de la app",
-      "tema": "App: comparte setups",
-      "formato": "carrusel",
-      "gancho": "3 funciones que transformarán tu entrenamiento",
-      "visual": "tablet screen showing app with racing data",
+      "id": "pmwb6vpii_0",
+      "dia": 1,
+      "hora": "19:30",
+      "tipo": "reel",
+      "objetivo": "alcance",
+      "razon": "Atraer nuevos seguidores con un drill de reacción ultra rápido",
+      "tema": "Entrenamiento de reacción de 1 segundo para arrancadas",
+      "formato": "desafio de tiempo",
+      "gancho": "¿Listo para acelerar tu reacción en 1 segundo?",
+      "visual": "high‑speed racing cockpit with a focused driver",
       "escenas": [
         {
-          "titulo": "Biblioteca",
-          "texto": "Guarda y accede a *setups* desde cualquier dispositivo",
+          "titulo": "Desafío 1s",
+          "texto": "Mide tu tiempo de reacción al frenar",
           "emoji": "",
-          "visual": "app library screen with setups",
+          "visual": "close‑up of brake pedal lighting up",
+          "grafico": {
+            "tipo": "contador",
+            "valor": 1,
+            "unidad": "segundos"
+          }
+        },
+        {
+          "titulo": "Ejercicio",
+          "texto": "Practica con luz verde y suelta el freno al instante",
+          "emoji": "",
+          "visual": "driver's hand releasing brake",
           "grafico": {
             "tipo": "checklist",
             "items": [
-              "crea",
-              "etiqueta",
-              "compartir"
+              "Enciende luz",
+              "Respira",
+              "Suéltalo"
             ]
           }
         },
         {
-          "titulo": "Comunidad",
-          "texto": "Conecta con pilotos, comenta y mejora juntos",
+          "titulo": "Error común",
+          "texto": "Esperar demasiado y perder velocidad",
           "emoji": "",
-          "visual": "chat group of racers on mobile",
+          "visual": "car slipping",
           "grafico": {
-            "tipo": "objetivo",
-            "etiqueta": "colaboración"
+            "tipo": "comparacion",
+            "mal": "espera",
+            "bien": "reacción"
           }
         },
         {
-          "titulo": "Desafíos",
-          "texto": "Participa en retos semanales y gana recompensas",
+          "titulo": "Resultado",
+          "texto": "Mejora 0.2s en cada curva",
           "emoji": "",
-          "visual": "challenge badge on app interface",
+          "visual": "lap time dropping",
           "grafico": {
-            "tipo": "contador",
-            "valor": 7,
-            "unidad": "retos"
+            "tipo": "progreso",
+            "valor": 20,
+            "etiqueta": "mejora %"
           }
         }
       ],
-      "cta": "Descubre más en el link",
+      "cta": "Guarda este drill y comenta REACCIÓN",
       "sticker": null,
-      "fondo": "ia",
+      "fondo": "animado",
       "estilo": "neon",
-      "caption": "Nuestra app llega para centralizar todo tu contenido y comunidad. 🚀 #simracing #app #redlineclub #gaming #tech",
-      "hashtags": "#simracing #app #redlineclub #gaming #tech",
-      "audio": "solo_musica",
+      "caption": "Un segundo puede marcar la diferencia en cada vuelta. 💨 ¿Ya lo pruebas? Guarda y comparte. 👉 Link en bio",
+      "hashtags": "#simracing #drill #reactiontime #racingtips #redlineclub",
+      "audio": "voz_y_musica",
+      "voz": "hombre",
+      "ritmo_voz": "energetico",
+      "musica": "energetica",
+      "guion": [
+        "¿Listo para acelerar tu reacción en 1 segundo?",
+        "Mide tu tiempo de reacción al frenar con este drill",
+        "Practica con la luz verde y suelta el freno al instante",
+        "No cometas el error de esperar demasiado, pierdes velocidad",
+        "Al final ganarás 0.2 segundos por curva, siente la diferencia",
+        "Guarda este drill y comenta REACCIÓN"
+      ],
+      "anim": "slide",
+      "plantilla": 1937,
+      "layout": "chat",
+      "stickers": [
+        "🏎️",
+        "⚡",
+        "🛞"
+      ]
+    },
+    {
+      "id": "pmwb6vpii_2",
+      "dia": 2,
+      "hora": "13:30",
+      "tipo": "carrusel",
+      "objetivo": "autoridad",
+      "razon": "Educar sobre gestión de neumáticos en carreras de resistencia",
+      "tema": "Estrategia de neumáticos para 2‑hour endurance",
+      "formato": "analisis de caso",
+      "gancho": "3 claves para cuidar tus neumáticos en maratón",
+      "visual": "aerial view of race track with tire marks",
+      "escenas": [
+        {
+          "titulo": "Temperatura",
+          "texto": "Mantén la pista < 90°C para evitar desgaste rápido",
+          "emoji": "",
+          "visual": "thermal map of track",
+          "grafico": {
+            "tipo": "contador",
+            "valor": 90,
+            "unidad": "°C"
+          }
+        },
+        {
+          "titulo": "Presión",
+          "texto": "Ajusta 2 psi menos que en pruebas cortas",
+          "emoji": "",
+          "visual": "tire pressure gauge",
+          "grafico": {
+            "tipo": "checklist",
+            "items": [
+              "Revisa presión",
+              "Reduce 2 psi",
+              "Confirma"
+            ]
+          }
+        },
+        {
+          "titulo": "Desgaste",
+          "texto": "Cambia al menos cada 20 vueltas en alta carga",
+          "emoji": "",
+          "visual": "tire wear close‑up",
+          "grafico": {
+            "tipo": "progreso",
+            "valor": 20,
+            "etiqueta": "vuelta"
+          }
+        },
+        {
+          "titulo": "Ventaja final",
+          "texto": "Ganas hasta 1.5s por pit‑stop inteligente",
+          "emoji": "",
+          "visual": "pit stop fast",
+          "grafico": {
+            "tipo": "velocimetro",
+            "valor": 85,
+            "etiqueta": "ganancia %"
+          }
+        }
+      ],
+      "cta": "Descarga la guía completa en la bio",
+      "sticker": null,
+      "fondo": "animado",
+      "estilo": "racing",
+      "caption": "Domina la gestión de neumáticos y ahorra segundos críticos. 💡 ¿Cuál aplicarás primero? 👉 Link en bio",
+      "hashtags": "#neumáticos #endurance #simracingtips #redlineclub #racingstrategy",
+      "audio": "",
       "voz": "",
       "ritmo_voz": "",
-      "musica": "emotiva",
+      "musica": "",
       "guion": [],
+      "anim": "pop",
+      "plantilla": 904,
+      "layout": "tarjeta",
+      "stickers": [
+        "🛞",
+        "⏱️",
+        "🏁"
+      ]
+    },
+    {
+      "id": "pmwb6vpij_3",
+      "dia": 4,
+      "hora": "11:00",
+      "tipo": "reel",
+      "objetivo": "tráfico",
+      "razon": "Mostrar la nueva función de objetivos personalizados de la app",
+      "tema": "Vista previa de la app: objetivos personalizados",
+      "formato": "exploración de datos",
+      "gancho": "La función oculta que hará tu entrenamiento inteligente",
+      "visual": "tablet screen showing app dashboard with graphs",
+      "escenas": [
+        {
+          "titulo": "Dashboard",
+          "texto": "Mira tu progreso en tiempo real",
+          "emoji": "",
+          "visual": "app main screen",
+          "grafico": {
+            "tipo": "objetivo",
+            "etiqueta": "progreso"
+          }
+        },
+        {
+          "titulo": "Objetivo diario",
+          "texto": "Define metas de tiempo y consistencia",
+          "emoji": "",
+          "visual": "goal setting screen",
+          "grafico": {
+            "tipo": "checklist",
+            "items": [
+              "Selecciona pista",
+              "Establece tiempo",
+              "Activa alerta"
+            ]
+          }
+        },
+        {
+          "titulo": "Feedback instantáneo",
+          "texto": "Recibe alertas cuando superas el límite",
+          "emoji": "",
+          "visual": "notification pop‑up",
+          "grafico": {
+            "tipo": "comparacion",
+            "mal": "sin alerta",
+            "bien": "con alerta"
+          }
+        },
+        {
+          "titulo": "Comparativa",
+          "texto": "Mira tu mejora vs semana anterior",
+          "emoji": "",
+          "visual": "graph line climbing",
+          "grafico": {
+            "tipo": "progreso",
+            "valor": 30,
+            "etiqueta": "mejora %"
+          }
+        },
+        {
+          "titulo": "Únete ahora",
+          "texto": "Accede a contenido exclusivo",
+          "emoji": "",
+          "visual": "app login button",
+          "grafico": null
+        }
+      ],
+      "cta": "Descubre más en la bio",
+      "sticker": null,
+      "fondo": "color",
+      "estilo": "pop",
+      "caption": "Tu entrenamiento, ahora con datos que hablan. 🚀 ¿Qué objetivo te pones? 👉 Link en bio",
+      "hashtags": "#apppreview #simracing #training #redlineclub #gamingtips",
+      "audio": "voz_y_musica",
+      "voz": "mujer",
+      "ritmo_voz": "normal",
+      "musica": "divertida",
+      "guion": [
+        "La función oculta que hará tu entrenamiento inteligente",
+        "Mira tu progreso en tiempo real con el nuevo dashboard",
+        "Define metas diarias de tiempo y consistencia en segundos",
+        "Recibe alertas instantáneas cuando superas tu límite",
+        "Compara tu mejora semana a semana y celebra",
+        "Accede a contenido exclusivo, link en bio"
+      ],
+      "anim": "type",
+      "plantilla": 2175,
+      "layout": "clasico",
       "stickers": [
         "📱",
+        "⚙️",
+        "🚀"
+      ]
+    },
+    {
+      "id": "pmwb6vpij_4",
+      "dia": 5,
+      "hora": "14:00",
+      "tipo": "post",
+      "objetivo": "interacción",
+      "razon": "Fomentar conversación sobre la mentalidad de overtaking",
+      "tema": "Mentalidad para adelantar sin miedo",
+      "formato": "historia de éxito",
+      "gancho": "El truco mental que te da la pista",
+      "visual": "driver silhouette over racing line, glowing",
+      "escenas": [
+        {
+          "titulo": "Mentalidad Overtake",
+          "texto": "Visualiza la salida, respira, ataca en el momento justo",
+          "emoji": "",
+          "visual": "driver silhouette over racing line, glowing",
+          "grafico": null
+        }
+      ],
+      "cta": "Comenta OVERTAKE y comparte tu experiencia",
+      "sticker": null,
+      "fondo": "color",
+      "estilo": "racing",
+      "caption": "El secreto no está en el coche, sino en tu mente. ¿Listo para adelantar sin miedo? 💥 Comenta OVERTAKE. 👉 Link en bio",
+      "hashtags": "#overtake #mindset #simracing #racingtips #redlineclub",
+      "audio": "",
+      "voz": "",
+      "ritmo_voz": "",
+      "musica": "",
+      "guion": [],
+      "anim": "fade",
+      "plantilla": 1139,
+      "layout": "clasico",
+      "stickers": [
+        "🏎️",
+        "💡",
+        "🔥"
+      ]
+    },
+    {
+      "id": "pmwb6vpij_5",
+      "dia": 6,
+      "hora": "13:00",
+      "tipo": "carrusel",
+      "objetivo": "autoridad",
+      "razon": "Compartir los mejores setups de la comunidad para Spa y generar engagement",
+      "tema": "Top 5 setups compartidos para Spa",
+      "formato": "guia de configuración",
+      "gancho": "5 setups de Spa que ganan segundos",
+      "visual": "Spa track aerial view",
+      "escenas": [
+        {
+          "titulo": "Setup 1",
+          "texto": "Alineación ligera, ángulo 7°, presión 24 psi",
+          "emoji": "",
+          "visual": "car on Spa corner",
+          "grafico": {
+            "tipo": "checklist",
+            "items": [
+              "Ángulo 7°",
+              "Presión 24 psi",
+              "Alineación ligera"
+            ]
+          }
+        },
+        {
+          "titulo": "Setup 2",
+          "texto": "Suspensión rígida, rear camber -2°",
+          "emoji": "",
+          "visual": "car rear view",
+          "grafico": null
+        },
+        {
+          "titulo": "Setup 3",
+          "texto": "Reducción de peso en frenos 10%",
+          "emoji": "",
+          "visual": "brake disc",
+          "grafico": {
+            "tipo": "contador",
+            "valor": 10,
+            "unidad": "%"
+          }
+        },
+        {
+          "titulo": "Setup 4",
+          "texto": "Mapeo de throttle 85%",
+          "emoji": "",
+          "visual": "throttle curve",
+          "grafico": {
+            "tipo": "progreso",
+            "valor": 85,
+            "etiqueta": "throttle"
+          }
+        },
+        {
+          "titulo": "Setup 5",
+          "texto": "Gear ratios optimizados para alta velocidad",
+          "emoji": "",
+          "visual": "gearbox diagram",
+          "grafico": {
+            "tipo": "ruta",
+            "desde": "1ª",
+            "hasta": "6ª"
+          }
+        }
+      ],
+      "cta": "Comparte tu setup favorito en la bio",
+      "sticker": null,
+      "fondo": "animado",
+      "estilo": "minimal",
+      "caption": "Los mejores setups de la comunidad para Spa. 🏎️ ¿Cuál probarás? 👉 Link en bio",
+      "hashtags": "#spa #setup #simracing #community #redlineclub",
+      "audio": "",
+      "voz": "",
+      "ritmo_voz": "",
+      "musica": "",
+      "guion": [],
+      "anim": "pop",
+      "plantilla": 2188,
+      "layout": "dividido",
+      "stickers": [
         "🏁",
-        "🎮"
+        "⚙️",
+        "🛞"
       ]
     }
   ]
