@@ -1,46 +1,154 @@
 {
   "items": [
     {
+      "date": "2026-09-20",
+      "tipo": "reel",
+      "src": "red",
+      "tema": "[IG · ❤️47] ¿Vale la pena invertir en un volante de alta tasa de refresco? Descubre cómo puede transformar tu pilotaje y afina cada detalle en pista."
+    },
+    {
+      "date": "2026-09-21",
+      "tipo": "reel",
+      "src": "red",
+      "tema": "[IG · ❤️29 💬1] ¿Sabías que un mal cableado puede arruinar tu precisión en pista? Descubre cómo optimizar tus periféricos y ganar esas décimas."
+    },
+    {
+      "date": "2026-09-22",
+      "tipo": "reel",
+      "src": "red",
+      "tema": "[IG · ❤️12] ¿Notas inconsistencia en tus giros? El sensor magnético en el volante es el cambio que tu sim necesita. Precisión y control reales en cada c"
+    },
+    {
+      "date": "2026-09-23",
+      "tipo": "reel",
+      "src": "red",
+      "tema": "[IG · ❤️17] ¿Sabías que una mala configuración del centro del volante arruina tu precisión? Ajusta bien y domina cada curva."
+    },
+    {
+      "date": "2026-09-24",
+      "tipo": "reel",
+      "src": "red",
+      "tema": "[IG · ❤️38] ¿Realmente los volantes con feedback en frenadas marcan la diferencia? Descubre la verdad y optimiza tu control"
+    },
+    {
+      "date": "2026-09-27",
+      "tipo": "reel",
+      "src": "red",
+      "tema": "[IG · ❤️12] ¿Vale la pena apostar por encoders ópticos en tu volante de SimRacing? Descubre si precisión y durabilidad realmente van de la mano."
+    },
+    {
+      "date": "2026-09-29",
+      "tipo": "reel",
+      "src": "red",
+      "tema": "[IG · ❤️10] ¿Curvo o plano? Descubre cómo el tipo de monitor puede cambiar tu experiencia y precisión al volante. ¿Cuál prefieres para simracing?"
+    },
+    {
+      "date": "2026-10-01",
+      "tipo": "reel",
+      "src": "red",
+      "tema": "[IG · ❤️35] ¿Directo o indirecto? Descubre cómo el tipo de force feedback del volante transforma tu experiencia en SimRacing. ¿Tú con cuál te quedas?"
+    },
+    {
+      "date": "2026-10-04",
+      "tipo": "reel",
+      "src": "red",
+      "tema": "[IG · ❤️21] ¿Sabías que un mal ajuste del embrague puede arruinar tus cambios y control? Descubre cómo calibrarlo correctamente y optimiza tu pilotaje."
+    },
+    {
+      "date": "2026-10-06",
+      "tipo": "reel",
+      "src": "red",
+      "tema": "[IG · ❤️84] ¿Frenas fuerte y pierdes el control? Aprende cómo la transferencia de peso afecta la tracción en SimRacing. Domina la técnica y mejora tu ti"
+    },
+    {
+      "date": "2026-10-08",
+      "tipo": "reel",
+      "src": "red",
+      "tema": "[IG · ❤️30] ¿Realismo extremo o fatiga innecesaria? Analizamos los simuladores de movimiento y sus efectos en el simracing."
+    },
+    {
+      "date": "2026-10-11",
+      "tipo": "reel",
+      "src": "red",
+      "tema": "[IG · ❤️97] ¿5 Nm o 12 Nm? La diferencia es clave en sensaciones, fatiga y control. Elige tu base con criterio y domina cada curva."
+    },
+    {
+      "date": "2026-10-13",
+      "tipo": "reel",
+      "src": "red",
+      "tema": "[IG · ❤️22] Optimiza tu ritmo en Spa con el Toyota GR010 en Le Mans Ultimate. Ajusta el reparto híbrido y gana tiempo en cada vuelta."
+    },
+    {
+      "date": "2026-10-15",
+      "tipo": "reel",
+      "src": "red",
+      "tema": "[IG · ❤️34 💬3] ¿Pensando en tu próximo upgrade? Compara pedales de célula de carga y hidráulicos y elige lo que realmente necesitas en tu cockpit."
+    },
+    {
+      "date": "2026-10-18",
+      "tipo": "reel",
+      "src": "red",
+      "tema": "[IG · ❤️58] ¿Buscas mayor control en GT3? Triple pantalla vs VR: ventajas reales para tu próxima compra. Elige mejor tu equipo."
+    },
+    {
+      "date": "2026-10-20",
+      "tipo": "reel",
+      "src": "red",
+      "tema": "[IG · ❤️52] Direct Drive o correa: la diferencia no es solo potencia. Descubre qué cambia en el control y cuál encaja con tu forma de correr."
+    },
+    {
+      "date": "2026-10-22",
+      "tipo": "reel",
+      "src": "red",
+      "tema": "[IG · ❤️92] En Assetto Corsa, unos milímetros pueden evitar que la zaga golpee al atacar bordillos agresivos. Prueba el ajuste con método."
+    },
+    {
+      "date": "2026-10-25",
+      "tipo": "reel",
+      "src": "red",
+      "tema": "[IG · ❤️67 💬1] ¿La trasera se descoloca en las eses? Prueba este ajuste de barras en iRacing GT4 y gana estabilidad sin perder ritmo."
+    },
+    {
+      "date": "2026-10-27",
+      "tipo": "reel",
+      "src": "red",
+      "tema": "[IG · ❤️60] En Spa, una entrada limpia a boxes puede salvarte tiempo y evitar una penalización. Guarda este consejo para tu próxima sesión."
+    },
+    {
+      "date": "2026-10-29",
+      "tipo": "reel",
+      "src": "red",
+      "tema": "[IG · ❤️87] En Daytona, el rebufo puede darte la pasada o dejarte sin tracción. Aprende a elegir el momento y la línea para adelantar con control."
+    },
+    {
+      "date": "2026-11-01",
+      "tipo": "reel",
+      "src": "red",
+      "tema": "[IG · ❤️69] El coche de delante cambia tu frenada, aunque la curva sea la misma. Prueba esta referencia en iRacing y gana control en tráfico."
+    },
+    {
+      "date": "2026-11-03",
+      "tipo": "reel",
+      "src": "red",
+      "tema": "[IG · ❤️67] Una relación final más corta no siempre es más rápida. Compara estas dos en Mugello y guarda el método para tu próxima sesión."
+    },
+    {
+      "date": "2026-11-05",
+      "tipo": "reel",
+      "src": "red",
+      "tema": "[IG · ❤️60] Si el rival ya apunta al interior, defender tarde en Monza suele acabar en contacto. Aprende cuándo cubrir y cómo frenar con margen."
+    },
+    {
+      "date": "2026-11-08",
+      "tipo": "reel",
+      "src": "red",
+      "tema": "[IG · ❤️6] En iRacing, una referencia fija evita que frenes tarde o demasiado pronto. Prueba este método en tu próxima sesión y guarda el dato."
+    },
+    {
       "date": "2026-11-09",
       "tema": "Configuración de hardware",
       "formato": "reel",
       "tipo": "reel"
-    },
-    {
-      "date": "2026-11-11",
-      "tema": "Ergonomía del piloto",
-      "formato": "carrusel",
-      "tipo": "carrusel"
-    },
-    {
-      "date": "2026-11-13",
-      "tema": "Análisis de curva",
-      "formato": "reel",
-      "tipo": "reel"
-    },
-    {
-      "date": "2026-11-11",
-      "tema": "Calibración del volante",
-      "formato": "vertical",
-      "tipo": "historia"
-    },
-    {
-      "date": "2026-11-13",
-      "tema": "Visualiza la vuelta perfecta",
-      "formato": "vertical",
-      "tipo": "post"
-    },
-    {
-      "date": "2026-11-14",
-      "tema": "Acceso anticipado",
-      "formato": "vertical",
-      "tipo": "historia"
-    },
-    {
-      "date": "2026-11-15",
-      "tema": "Pista favorita",
-      "formato": "vertical",
-      "tipo": "historia"
     },
     {
       "date": "2026-11-09",
@@ -55,6 +163,38 @@
       "tipo": "carrusel"
     },
     {
+      "date": "2026-11-10",
+      "tema": "Telemetría de Simracing",
+      "formato": "historia",
+      "tipo": "historia"
+    },
+    {
+      "date": "2026-11-10",
+      "tema": "Lanzamiento de la app Redline Club – cómo usarla y sus ventajas",
+      "formato": "antes y después",
+      "tipo": "reel",
+      "layout": "tarjeta",
+      "plantilla": 1551
+    },
+    {
+      "date": "2026-11-10",
+      "tipo": "reel",
+      "src": "red",
+      "tema": "[IG · ❤️23] En iRacing, una caída bien ajustada puede mejorar el apoyo en curva, pero el exceso castiga el neumático. Compara dos valores y mide tras ci"
+    },
+    {
+      "date": "2026-11-11",
+      "tema": "Ergonomía del piloto",
+      "formato": "carrusel",
+      "tipo": "carrusel"
+    },
+    {
+      "date": "2026-11-11",
+      "tema": "Calibración del volante",
+      "formato": "vertical",
+      "tipo": "historia"
+    },
+    {
       "date": "2026-11-11",
       "tema": "Entrenamiento mental",
       "formato": "historia",
@@ -67,32 +207,50 @@
       "tipo": "post"
     },
     {
-      "date": "2026-11-13",
-      "tema": "Comparativa de volantes",
-      "formato": "historia",
-      "tipo": "historia"
-    },
-    {
-      "date": "2026-11-15",
-      "tema": "Estrategia de pit‑stop",
-      "formato": "reel",
-      "tipo": "reel"
-    },
-    {
-      "date": "2026-11-10",
-      "tema": "Telemetría de Simracing",
-      "formato": "historia",
-      "tipo": "historia"
-    },
-    {
       "date": "2026-11-12",
       "tema": "App Redline Club: preview",
       "formato": "historia",
       "tipo": "historia"
     },
     {
+      "date": "2026-11-13",
+      "tema": "Análisis de curva",
+      "formato": "reel",
+      "tipo": "reel"
+    },
+    {
+      "date": "2026-11-13",
+      "tema": "Visualiza la vuelta perfecta",
+      "formato": "vertical",
+      "tipo": "post"
+    },
+    {
+      "date": "2026-11-13",
+      "tema": "Comparativa de volantes",
+      "formato": "historia",
+      "tipo": "historia"
+    },
+    {
+      "date": "2026-11-14",
+      "tema": "Acceso anticipado",
+      "formato": "vertical",
+      "tipo": "historia"
+    },
+    {
       "date": "2026-11-14",
       "tema": "Setup para lluvia",
+      "formato": "reel",
+      "tipo": "reel"
+    },
+    {
+      "date": "2026-11-15",
+      "tema": "Pista favorita",
+      "formato": "vertical",
+      "tipo": "historia"
+    },
+    {
+      "date": "2026-11-15",
+      "tema": "Estrategia de pit‑stop",
       "formato": "reel",
       "tipo": "reel"
     },
@@ -107,6 +265,14 @@
       "tema": "App: comparte setups",
       "formato": "carrusel",
       "tipo": "carrusel"
+    },
+    {
+      "date": "2026-11-10",
+      "tema": "Lanzamiento de la app Redline Club – cómo usarla y sus ventajas",
+      "formato": "tutorial paso a paso",
+      "tipo": "reel",
+      "layout": "lista",
+      "plantilla": 666
     }
   ]
 }
