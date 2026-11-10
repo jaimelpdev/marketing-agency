@@ -424,6 +424,26 @@ def zernio_cancel(item):
             log("  ⚠ No se pudo anular en Zernio:", e)
 
 
+def think_only(user, key, queue):
+    """Sin plan nuevo: el estratega igualmente revisa resultados y actualiza la memoria (una vez por semana)."""
+    uid = user["id"]
+    mem_path = CONTENT / "users" / uid / "memoria.json"
+    mem = brain.load(mem_path)
+    if not brain.needs_reflection(mem):
+        return
+    history = load_json(CONTENT / "users" / uid / "history.json", {"items": []})
+    published = fetch_published(user)
+    if published:
+        history = merge_history(history, published)
+    try:
+        mem = brain.reflect(mem, user, history, published, key, lambda *a: log(*a))
+        brain.save(mem_path, mem)
+        log(f"  🧠 Estrategia semana {mem['semana']}: fase {mem['fase']} · arco «{mem['arco_semana'].get('tema', '')}» · series: {', '.join(x['nombre'] for x in mem['series']) or '-'}")
+        api("PUT", f"/admin/status/{uid}", {"estrategia": "", "queue": summarize(queue), "memoria": brain.public(mem)})
+    except Exception as e:
+        log("  ⚠ El estratega no pudo actualizar la memoria:", e)
+
+
 def plan_user(browser, user, key, force=False, redo=None):
     """Planifica y crea el contenido de una persona. Devuelve True si hizo un plan nuevo.
     force: rehace la semana entera. redo: pieza de la cola que hay que rehacer (solo esa)."""
@@ -439,10 +459,12 @@ def plan_user(browser, user, key, force=False, redo=None):
     if not (force or redo or os.environ.get("FORCE")):
         if any(q.get("date") == today and q.get("source") == "auto" for q in queue):
             log("  Ya se planificó hoy.")
+            think_only(user, key, queue)
             return False
         future = [q for q in queue if q.get("status") in ("pending", "scheduled") and datetime.fromisoformat(q["publishAt"]) > now + timedelta(hours=24)]
         if modo == "smart" and future:
             log(f"  Plan en marcha ({len(future)} piezas más allá de mañana). Hoy no hace falta planificar.")
+            think_only(user, key, queue)
             return False
     history = load_json(hist_path, {"items": []})
     published = fetch_published(user)
