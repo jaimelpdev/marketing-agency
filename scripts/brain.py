@@ -130,7 +130,8 @@ CÓMO PIENSAS
 3. Crea 2-4 SERIES recurrentes que den identidad y hábito (por ejemplo "El error de la semana", "Setup del seguidor", "Mito o realidad"), con su formato y día. Mantén las que funcionan y numera los episodios.
 4. Aprende de los resultados: qué formatos, temas, ganchos y horas funcionan mejor, y qué evitar. Sé concreto ("los reels de errores tienen 3× más comentarios que los posts de app").
 5. Lleva una lista de promesas pendientes (si se dijo "comenta X y te paso la guía", o "el próximo vídeo…", hay que cumplirlo) y de ideas para próximas semanas.
-6. Define el arco de la semana: un tema o historia que conecte las piezas de la semana para que la gente quiera ver la siguiente.
+6. No inventes nada: ni seguidores, ni testimonios, ni ofertas, descuentos, precios o lanzamientos que no estén en la marca o en las notas del dueño. Las series que dependan de la comunidad empiezan pidiendo participación.
+7. Define el arco de la semana: un tema o historia que conecte las piezas de la semana para que la gente quiera ver la siguiente.
 
 Responde SOLO con JSON válido:
 {{"fase":"descubrimiento|confianza|comunidad|conversion","objetivo_mes":"…","arco_semana":{{"tema":"…","porque":"…"}},"mezcla":{{"alcance":0,"confianza":0,"comunidad":0,"conversion":0}},"series":[{{"nombre":"…","formato":"reel|historia|post|carrusel","cuando":"día o frecuencia","descripcion":"…","episodios":0}}],"aprendizajes":["…"],"que_evitar":["…"],"promesas_pendientes":["…"],"ideas":["…"],"tono_comunidad":"cómo hablarle a la comunidad","hitos":["próximos hitos de la marca"],"resumen_para_dueño":"2-3 frases explicando la estrategia de esta semana"}}"""
