@@ -15,15 +15,37 @@ import requests
 API = os.environ.get("OPENVERSE_API", "https://api.openverse.org/v1").rstrip("/")
 UA = {"user-agent": "agencia-marketing-ia/1.0 (+https://github.com)"}
 QUERIES = {
-    "energetica": ["upbeat electronic", "energetic pop", "electro house", "upbeat rock"],
-    "chill": ["lofi hip hop", "chillhop", "chill lounge", "lofi beat"],
-    "epica": ["epic cinematic", "epic orchestral", "trailer cinematic"],
-    "emotiva": ["emotional piano", "inspiring piano", "inspirational ambient"],
-    "divertida": ["happy ukulele", "happy upbeat", "funny quirky"],
-    "tension": ["suspense cinematic", "dark tension", "thriller suspense"],
+    "energetica": ["upbeat electronic", "energetic pop", "electro house", "upbeat rock", "sport workout", "dance pop", "power upbeat", "edm energetic"],
+    "chill": ["lofi hip hop", "chillhop", "chill lounge", "lofi beat", "chill electronic", "relaxing groove", "jazzy lofi"],
+    "epica": ["epic cinematic", "epic orchestral", "trailer cinematic", "heroic epic", "epic drums"],
+    "emotiva": ["emotional piano", "inspiring piano", "inspirational ambient", "motivational", "uplifting cinematic"],
+    "divertida": ["happy ukulele", "happy upbeat", "funny quirky", "whistle happy", "playful"],
+    "tension": ["suspense cinematic", "dark tension", "thriller suspense", "dark electronic"],
+    "hiphop": ["hip hop beat", "trap beat", "boom bap", "hip hop instrumental"],
+    "rock": ["rock instrumental", "indie rock", "garage rock", "guitar rock"],
+    "electronica": ["synthwave", "electronic", "future bass", "retrowave"],
+    "funk": ["funk groove", "disco funk", "funky bass"],
+    "latina": ["reggaeton instrumental", "latin", "tropical house", "latin groove"],
+    "ambiental": ["ambient", "atmospheric", "calm ambient"],
 }
-POOL = 8           # pistas que se guardan por ambiente antes de empezar a reutilizar
-REUSE_CHANCE = 0.7  # con la reserva llena, probabilidad de reutilizar en vez de buscar otra
+POOL = 24           # pistas que se guardan por ambiente antes de empezar a reutilizar
+REUSE_CHANCE = 0.35  # con la reserva llena, probabilidad de reutilizar en vez de buscar otra
+NO_REPEAT = 30      # no repetir una canción en las últimas N piezas
+
+
+def _usage(cache_root):
+    try:
+        return json.loads((Path(cache_root) / "usage.json").read_text())[-200:]
+    except Exception:
+        return []
+
+
+def _mark_used(cache_root, track):
+    u = _usage(cache_root) + [track.get("file")]
+    try:
+        (Path(cache_root) / "usage.json").write_text(json.dumps(u[-200:]))
+    except Exception:
+        pass
 
 
 def _probe(path):
@@ -46,7 +68,7 @@ def _index(folder):
 
 def _search(mood, log):
     q = random.choice(QUERIES.get(mood) or QUERIES["energetica"])
-    params = {"q": q, "category": "music", "license": "cc0,by", "page_size": 20, "page": random.randint(1, 3)}
+    params = {"q": q, "category": "music", "license": "cc0,by", "page_size": 20, "page": random.randint(1, 5)}
     r = requests.get(API + "/audio/", params=params, headers=UA, timeout=30)
     r.raise_for_status()
     res = [x for x in r.json().get("results", [])
@@ -92,13 +114,18 @@ def get_track(mood, cache_root, log=print):
     import unicodedata
     m = unicodedata.normalize("NFKD", str(mood or "")).encode("ascii", "ignore").decode().lower().strip()
     m = {"energica": "energetica", "energico": "energetica", "emocional": "emotiva", "emotivo": "emotiva", "epico": "epica",
-         "tranquila": "chill", "relajada": "chill", "divertido": "divertida", "tenso": "tension", "suspense": "tension"}.get(m, m)
+         "tranquila": "chill", "relajada": "chill", "divertido": "divertida", "tenso": "tension", "suspense": "tension",
+         "hip hop": "hiphop", "trap": "hiphop", "electronico": "electronica", "synthwave": "electronica", "lofi": "chill", "reggaeton": "latina",
+         "latino": "latina", "ambient": "ambiental", "cinematica": "epica"}.get(m, m)
     mood = m if m in QUERIES else "energetica"
     folder = Path(cache_root) / mood
     folder.mkdir(parents=True, exist_ok=True)
     have = _index(folder)
-    if have and (len(have) >= POOL and random.random() < REUSE_CHANCE):
-        t = random.choice(have)
+    recent = set(_usage(cache_root)[-NO_REPEAT:])
+    fresh = [t for t in have if t["file"] not in recent]
+    if fresh and (len(have) >= POOL and random.random() < REUSE_CHANCE):
+        t = random.choice(fresh)
+        _mark_used(cache_root, t)
         return folder / t["file"], t
     try:
         known = {Path(t["file"]).stem for t in have}
@@ -113,11 +140,13 @@ def get_track(mood, cache_root, log=print):
             have.append(t)
             have = have[-POOL * 2:]
             (folder / "index.json").write_text(json.dumps(have, ensure_ascii=False, indent=1))
+            _mark_used(cache_root, t)
             return folder / t["file"], t
     except Exception as e:
         log(f"    ⚠ No se pudo buscar música nueva: {e}")
     if have:
-        t = random.choice(have)
+        t = random.choice([x for x in have if x["file"] not in recent] or have)
+        _mark_used(cache_root, t)
         return folder / t["file"], t
     for other in Path(cache_root).glob("*/index.json"):  # cualquier pista guardada antes que el silencio
         alt = _index(other.parent)

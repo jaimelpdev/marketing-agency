@@ -97,11 +97,22 @@ def write_dataurls(urls, folder, start):
 
 
 VOICES = {"mujer": "es-ES-ElviraNeural", "hombre": "es-ES-AlvaroNeural"}
-RATES = {"tranquilo": "-6%", "normal": "+4%", "energico": "+14%"}
+# Catálogo de voces que se puede elegir en la app (si una falla, se usa la de respaldo de su género)
+VOICE_CATALOG = {
+    "alvaro": ("es-ES-AlvaroNeural", "hombre"), "elvira": ("es-ES-ElviraNeural", "mujer"), "ximena": ("es-ES-XimenaNeural", "mujer"),
+    "jorge": ("es-MX-JorgeNeural", "hombre"), "dalia": ("es-MX-DaliaNeural", "mujer"),
+    "andrew": ("en-US-AndrewMultilingualNeural", "hombre"), "ava": ("en-US-AvaMultilingualNeural", "mujer"),
+    "brian": ("en-US-BrianMultilingualNeural", "hombre"), "emma": ("en-US-EmmaMultilingualNeural", "mujer"),
+}
+RATES = {"tranquilo": "-4%", "normal": "+8%", "energico": "+16%"}
+PITCH = {"tranquilo": "-2Hz", "normal": "+0Hz", "energico": "+3Hz"}
+# Cadena de "micro de creador": limpia graves, comprime, da presencia y brillo
+VOICE_FX = ("highpass=f=85,equalizer=f=220:t=q:w=1:g=-2,equalizer=f=3200:t=q:w=1.3:g=3.5,equalizer=f=9000:t=q:w=1.5:g=2,"
+            "acompressor=threshold=-20dB:ratio=3.5:attack=4:release=90:makeup=3,alimiter=limit=0.92")
 MUSIC_EXT = (".mp3", ".m4a", ".wav", ".aac", ".ogg")
 
 
-def tts(text, voice, rate, out_path):
+def tts(text, voice, rate, out_path, pitch="+0Hz", fallback=None):
     """Locución gratuita con las voces neuronales de Microsoft (edge-tts).
     Devuelve los tiempos de cada palabra [(inicio_s, duración_s, palabra)] para los subtítulos dinámicos."""
     # Playwright (modo síncrono) ya tiene un bucle asyncio en este hilo: la voz se genera en otro hilo.
@@ -109,12 +120,13 @@ def tts(text, voice, rate, out_path):
     import threading
     import edge_tts
     err, words = [], []
+    use_voice = [voice]
 
     async def go():
         try:
-            com = edge_tts.Communicate(text, voice, rate=rate, boundary="WordBoundary")
+            com = edge_tts.Communicate(text, use_voice[0], rate=rate, pitch=pitch, boundary="WordBoundary")
         except TypeError:  # versiones antiguas: ya dan WordBoundary por defecto
-            com = edge_tts.Communicate(text, voice, rate=rate)
+            com = edge_tts.Communicate(text, use_voice[0], rate=rate)
         with open(out_path, "wb") as fh:
             async for ch in com.stream():
                 if ch.get("type") == "audio":
@@ -128,6 +140,8 @@ def tts(text, voice, rate, out_path):
         except Exception as e:  # noqa: BLE001
             err.append(e)
     for intento in range(3):
+        if intento == 2 and fallback and fallback != use_voice[0]:
+            use_voice[0] = fallback  # la voz elegida no responde: voz de respaldo
         err.clear()
         words.clear()
         t = threading.Thread(target=run)
@@ -180,7 +194,7 @@ def encode_video(frames_dir, total, out_path, voice_clips=(), music=None, credit
     parts, labels = [], []
     for k, (_, start_s) in enumerate(voice_clips):
         ms = int(start_s * 1000)
-        parts.append(f"[{k + 1}:a]aresample=48000,adelay={ms}:all=1,volume=1.15[v{k}]")
+        parts.append(f"[{k + 1}:a]aresample=48000,{VOICE_FX},adelay={ms}:all=1,volume=1.1[v{k}]")
         labels.append(f"[v{k}]")
     if sfx_track:
         cmd += ["-i", str(sfx_track)]
@@ -216,8 +230,12 @@ def make_voice(page, i, p, workdir, voices):
       return SC.scenes.map(s=>s.kind==='hook'?p.gancho:s.kind==='tip'?(()=>{const e=esc[k++]||{};return (e.titulo||'')+'. '+(e.texto||'');})():(p.sticker?p.sticker.texto:p.cta));}""", i)
     guion = [g for g in (p.get("guion") or []) if str(g).strip()]
     lines = [clean_speech(guion[k] if k < len(guion) else texts[k]) for k in range(len(texts))]
-    voice = voices.get(p.get("voz") or "mujer", VOICES["mujer"])
-    rate = RATES.get(p.get("ritmo_voz") or "normal", "+4%")
+    gender = p.get("voz") if p.get("voz") in ("mujer", "hombre") else "mujer"
+    chosen = VOICE_CATALOG.get(str(voices.get("_elegida") or ""))
+    voice = chosen[0] if chosen else voices.get(gender, VOICES["mujer"])
+    fallback = VOICES[chosen[1] if chosen else gender]
+    rate = RATES.get(p.get("ritmo_voz") or "normal", "+8%")
+    pitch = PITCH.get(p.get("ritmo_voz") or "normal", "+0Hz")
     clips, durs, caps = [], [], []
     for k, line in enumerate(lines):
         if not line:
@@ -226,7 +244,7 @@ def make_voice(page, i, p, workdir, voices):
             caps.append([])
             continue
         out = workdir / f"voz_{k:02d}.mp3"
-        wb = tts(line, voice, rate, out) or []
+        wb = tts(line, voice, rate, out, pitch, fallback) or []
         caps.append([{"t": round(a + 0.18, 3), "d": round(b, 3), "w": w} for a, b, w in wb if str(w).strip()])
         d = probe_duration(out)
         clips.append(out)
@@ -421,7 +439,7 @@ def plan_user(browser, user, key, force=False, redo=None):
     nets = {a.get("platform") for a in (user.get("social") or [])}
     if not (user.get("ig") or {}).get("connected") and "instagram" not in nets:
         allowed = [f for f in allowed if f == "reel"] or ["reel"]  # solo TikTok/YouTube: solo vídeo
-    voices = {**VOICES, **conf.get("voces", {})}
+    voices = {**VOICES, **conf.get("voces", {}), "_elegida": plan_conf.get("voz_elegida") or ""}
     cfg = dict(conf.get("marca", {}))
     cfg["v"] = dict(conf.get("visual", {}))
     if cfg["v"].get("bgMode") in ("stock", "media"):

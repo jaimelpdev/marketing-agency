@@ -400,6 +400,7 @@ https://apps.apple.com/…
       <div class="og"><div class="t">Máximo por día</div><div class="chips" id="acDay"></div></div>
       <div class="og"><div class="t">Formatos que puede usar</div><div class="chips" id="acFmt"></div></div>
       <div class="og"><div class="t">Sonido de los vídeos</div><div class="chips" id="acAudio"></div></div>
+      <div class="og"><div class="t">Voz</div><div class="chips" id="acVoz"></div><div class="note">✨ = voces multilingües, las más expresivas (pueden tener un ligero acento).</div></div>
       <div class="note">La agencia elige qué días publicar dentro de estos límites y descansa cuando conviene.</div>
     </div>
     <div class="acct-sec"><h4>📅 Programado</h4><div id="acBusy"></div><div id="acQueue"></div>
@@ -486,7 +487,7 @@ function normPiece(v,i){
     tema:String(v.tema||v.gancho||""),formato:String(v.formato||""),gancho:String(v.gancho||""),visual:String(v.visual||""),
     escenas:(Array.isArray(v.escenas)?v.escenas:[]).slice(0,7).map(e=>({titulo:String(e.titulo||""),texto:String(e.texto||""),emoji:String(e.emoji||""),visual:String(e.visual||""),grafico:normGraf(e.grafico)})),
     cta:String(v.cta||""),sticker:st,fondo:String(v.fondo||""),estilo:String(v.estilo||""),caption:String(v.caption||""),hashtags:Array.isArray(v.hashtags)?v.hashtags.join(" "):String(v.hashtags||""),
-    audio:String(v.audio||""),voz:String(v.voz||""),ritmo_voz:String(v.ritmo_voz||""),musica:String(v.musica||""),guion:Array.isArray(v.guion)?v.guion.map(String):[],anim:["pop","slide","type","fade"].includes(v.anim)?v.anim:"",layout:LAYOUTS.includes(String(v.layout||"").toLowerCase())?String(v.layout).toLowerCase():"",stickers:(Array.isArray(v.stickers)?v.stickers:[]).map(x=>String(x).trim()).filter(x=>x&&x.length<=12&&!/[A-Za-z0-9]/.test(x)).slice(0,5),...(Array.isArray(v._durs)?{_durs:v._durs}:{})};
+    audio:String(v.audio||""),voz:String(v.voz||""),ritmo_voz:String(v.ritmo_voz||""),musica:String(v.musica||""),guion:Array.isArray(v.guion)?v.guion.map(String):[],anim:["pop","slide","type","fade"].includes(v.anim)?v.anim:"",plantilla:Number.isInteger(+v.plantilla)&&+v.plantilla>=0&&+v.plantilla<TPL_TOTAL?+v.plantilla:null,layout:LAYOUTS.includes(String(v.layout||"").toLowerCase())?String(v.layout).toLowerCase():"",stickers:(Array.isArray(v.stickers)?v.stickers:[]).map(x=>String(x).trim()).filter(x=>x&&x.length<=12&&!/[A-Za-z0-9]/.test(x)).slice(0,5),...(Array.isArray(v._durs)?{_durs:v._durs}:{})};
 }
 
 /* ============ BRANDING UI ============ */
@@ -689,8 +690,8 @@ ${O.graficos!==false?`- "grafico" (en cada escena de reels e historias): una ani
 AUDIO (solo reels e historias; los vídeos llevan locución real)
 - "audio": "voz_y_musica" para vídeos que explican algo (tips, errores, mitos, checklist, antes y después) o "solo_musica" para historias rápidas, piezas estéticas o emocionales y promos muy visuales. Decide según el contenido.
 - "voz": "mujer" o "hombre". Mantén la misma voz en toda la marca salvo que el contenido pida otra. "ritmo_voz": "tranquilo" | "normal" | "energico", según el tono de la pieza.
-- "musica": energetica | chill | epica | emotiva | divertida | tension. Tiene que encajar con el tono de la pieza.
-- "guion" (solo si hay voz): lista de frases habladas, UNA por pantalla y en orden: gancho, cada escena y cierre (o el texto del sticker en historias). Lenguaje hablado natural que complemente el texto en pantalla, como mucho 22 palabras por frase, sin emojis, asteriscos ni hashtags.`:''}
+- "musica": energetica | chill | epica | emotiva | divertida | tension | hiphop | rock | electronica | funk | latina | ambiental. Tiene que encajar con el tono de la pieza y variar entre piezas.
+- "guion" (solo si hay voz): lista de frases habladas, UNA por pantalla y en orden: gancho, cada escena y cierre (o el texto del sticker en historias). Tiene que sonar a creador hablando a cámara, no a texto leído: frases cortas, tuteo, exclamaciones y preguntas retóricas ("¿Sabes por qué?"), pausas con comas y puntos suspensivos, conectores de conversación ("mira", "ojo", "y aquí viene lo bueno"). Nada de "en primer lugar". Números pequeños con letra. Como mucho 22 palabras por frase, sin emojis, asteriscos ni hashtags.`:''}
 
 Responde SOLO con JSON válido:
 {"estrategia":"2 o 3 frases: qué días se publica, cuáles se descansa y por qué","piezas":[{"dia":0,"hora":"19:30","tipo":"reel","objetivo":"…","razon":"…","tema":"…","formato":"…","gancho":"…"${needVis?',"visual":"…"':''},"escenas":[{"titulo":"…","texto":"…"${needVis?',"visual":"…"':''}${O.emoji?',"emoji":"…"':''}${O.graficos!==false?',"grafico":{"tipo":"…"}':''}}],"cta":"…","layout":"…"${O.stickers!==false?',"stickers":["…","…","…"]':''},"sticker":null,"fondo":"…","estilo":"…"${AUDIO_CAPS?',"audio":"…","voz":"…","ritmo_voz":"…","musica":"…","guion":["…"]':''},"caption":"…","hashtags":["#…"]}]}`;
@@ -712,7 +713,7 @@ $("#genBtn").addEventListener("click",async()=>{
     if(!vids.length&&n!=="auto")throw new Error("no llegó el plan");
     vids.sort((a,b)=>a.dia-b.dia||String(a.hora).localeCompare(String(b.hora)));
     S.today={date:isoDay(),estrategia:String(data.estrategia||""),videos:vids};
-    vids.forEach(v=>S.hist.items.push({date:isoDay(v.dia),tema:v.tema,formato:v.formato,tipo:v.tipo,layout:v.layout}));S.hist.items=S.hist.items.slice(-200);
+    vids.forEach(v=>S.hist.items.push({date:isoDay(v.dia),tema:v.tema,formato:v.formato,tipo:v.tipo,layout:v.layout,plantilla:v.plantilla}));S.hist.items=S.hist.items.slice(-200);
     renderVideos(); saveToday(true); saveHist(); renderHist(); HOOKS.afterGenerate();
     const cnt={};vids.forEach(v=>cnt[v.tipo]=(cnt[v.tipo]||0)+1);const days=new Set(vids.map(v=>v.dia)).size;
     if(!vids.length){setStatus(st,"😌 La agencia recomienda no publicar hoy. "+(S.today.estrategia||""),"ok");return;}
@@ -738,9 +739,14 @@ function diversify(vids){
     if(!pool.includes(p.layout)||recent.slice(-1)[0]===p.layout||(recent.includes(p.layout)&&recent.length<pool.length)){
       const cand=pool.filter(x=>!recent.includes(x));const c=cand.length?cand:pool.filter(x=>x!==recent.slice(-1)[0]);p.layout=c[(seed+i)%c.length];}
     lastBy[p.tipo]=recent.concat(p.layout).slice(-3);});
+  // plantilla visual: distinta de las ya usadas y con patrón y color diferentes a la pieza anterior
+  const usedT=new Set((S.hist&&S.hist.items||[]).map(h=>h.plantilla).filter(x=>x!=null));let prevT=null;
+  vids.forEach((p,i)=>{let tries=0,n=p.plantilla!=null?p.plantilla:(seed*7919+i*104729)%TPL_TOTAL;
+    while(tries<60&&(usedT.has(n)||(prevT&&(decodeTpl(n).pat===prevT.pat||decodeTpl(n).tint===prevT.tint||decodeTpl(n).tr===prevT.tr)))){n=(n*48271+12345+tries*977)%TPL_TOTAL;tries++;}
+    p.plantilla=n;usedT.add(n);prevT=decodeTpl(n);});
   const anims=["pop","slide","pop","type","fade","pop","slide"];vids.forEach((p,i)=>{p.anim=i===0?(O.anim||"pop"):anims[(seed+i)%anims.length];});
-  const moods=["energetica","divertida","epica","chill","emotiva","tension"];let pm=null;
-  const mc={};const fit=["energetica","divertida","epica","chill"];
+  const moods=["energetica","divertida","epica","chill","emotiva","tension","hiphop","rock","electronica","funk","latina","ambiental"];let pm=null;
+  const mc={};const fit=["energetica","hiphop","divertida","electronica","rock","funk","latina","epica","chill"];
   vids.filter(p=>TYPES[p.tipo]&&TYPES[p.tipo].video).forEach(p=>{if(!moods.includes(p.musica)||p.musica===pm||(mc[p.musica]||0)>=2)p.musica=fit.concat(moods).filter(m=>m!==pm).sort((a,b)=>(mc[a]||0)-(mc[b]||0))[0];mc[p.musica]=(mc[p.musica]||0)+1;pm=p.musica;});
   vids.forEach(p=>{let pg=null;(p.escenas||[]).forEach(e=>{if(e.grafico&&pg&&e.grafico.tipo===pg)e.grafico=null;pg=e.grafico?e.grafico.tipo:null;});});
   return vids;
@@ -831,6 +837,7 @@ function drawBlock(L,cx,y,lt,delay,stagger,color,T){
       if(p>0){const sc=md==="pop"&&!STATIC?(wd.hl?1.8-0.8*easeBack(p):1.35-0.35*easeBack(p)):1;const dy=md==="slide"?(1-easeOut(p))*80:0;ctx.save();ctx.globalAlpha*=md==="type"?1:easeOut(p);ctx.translate(x+wd.w/2,yc+dy);ctx.scale(sc,sc);
         if(wd.hl&&T.hl==="box"){const padX=L.size*0.16,hh=L.size*1.08;ctx.fillStyle=T.hlFill;roundRect(-wd.w/2-padX,-hh/2,wd.w+padX*2,hh,L.size*0.14);ctx.fill();ctx.fillStyle=T.hlText;}
         else if(wd.hl&&T.hl==="glow"){ctx.fillStyle=T.hlText;ctx.shadowColor=T.hlFill;ctx.shadowBlur=40;ctx.fillText(wd.txt,-wd.w/2,0);ctx.shadowBlur=14;}
+        else if(wd.hl&&T.hl==="marker"){ctx.save();ctx.rotate(-0.035);ctx.fillStyle=T.hlFill||S.cfg.acc;ctx.globalAlpha*=0.92;roundRect(-wd.w/2-L.size*0.2,-L.size*0.42,wd.w+L.size*0.4,L.size*0.86,L.size*0.08);ctx.fill();ctx.restore();ctx.fillStyle=onAccent(S.cfg.acc);}
         else if(wd.hl&&T.hl==="under"){ctx.fillStyle=T.hlFill;ctx.globalAlpha*=0.9;roundRect(-wd.w/2-6,L.size*0.18,wd.w+12,L.size*0.28,6);ctx.fill();ctx.globalAlpha/=0.9;ctx.fillStyle=T.text;}
         else{ctx.fillStyle=color;if(T.shadow){ctx.shadowColor=T.neon?"rgba(255,255,255,.35)":"rgba(0,0,0,.45)";ctx.shadowBlur=T.neon?16:18;}}
         ctx.fillText(wd.txt,-wd.w/2,0);ctx.restore();}
@@ -871,7 +878,7 @@ function buildScenes(p){
   if(Array.isArray(p._durs))sc.forEach((s,i)=>{const d=+p._durs[i];if(d>0)s.dur=Math.max(1.6,d);});
   if(Array.isArray(p._caps)&&S.cfg.v.subtitulos!==false)sc.forEach((s,i)=>{if(Array.isArray(p._caps[i])&&p._caps[i].length)s.caps=p._caps[i];});
   let t=0;sc.forEach(s=>{s.start=t;t+=s.dur;});
-  return{scenes:sc,total:t,type,w:SZ[0],h:SZ[1],style:effStyle(p),bm:effBM(p),piece:p,layout:type==="post"?(["tarjeta","dividido"].includes(p.layout)?p.layout:"clasico"):(LAYOUTS.includes(p.layout)?p.layout:"clasico")};
+  return{scenes:sc,total:t,type,w:SZ[0],h:SZ[1],style:effStyle(p),bm:effBM(p),piece:p,tpl:p.plantilla!=null?decodeTpl(p.plantilla):null,layout:type==="post"?(["tarjeta","dividido"].includes(p.layout)?p.layout:"clasico"):(LAYOUTS.includes(p.layout)?p.layout:"clasico")};
 }
 function drawMedia(m,zoom){const e=m.el;const iw=m.kind==="video"?e.videoWidth:e.naturalWidth,ih=m.kind==="video"?e.videoHeight:e.naturalHeight;if(!iw||!ih)return false;const s=Math.max(W/iw,H/ih)*zoom,dw=iw*s,dh=ih*s;try{ctx.drawImage(e,(W-dw)/2,(H-dh)/2,dw,dh);return true;}catch(_){return false;}}
 function darken(){ctx.fillStyle="rgba(0,0,0,.5)";ctx.fillRect(0,0,W,H);const v=ctx.createLinearGradient(0,0,0,H);v.addColorStop(0,"rgba(0,0,0,.4)");v.addColorStop(.5,"rgba(0,0,0,.05)");v.addColorStop(1,"rgba(0,0,0,.65)");ctx.fillStyle=v;ctx.fillRect(0,0,W,H);}
@@ -912,7 +919,8 @@ function drawFrame(SC,t,slide){
   const{scenes}=SC;const isImg=SC.type==="post"||SC.type==="carrusel";
   let si=slide!=null?slide:scenes.findIndex(s=>t<s.start+s.dur);if(si<0)si=scenes.length-1;
   const s=scenes[si];let lt=t-s.start;if(slide!=null)lt=s.dur-0.3;
-  const hasMedia=drawBg(slide!=null?s.start+lt:t,si,lt,s.dur);const T=theme(hasMedia);
+  const hasMedia=drawBg(slide!=null?s.start+lt:t,si,lt,s.dur);let T=theme(hasMedia);
+  const TPL=SC.tpl;if(TPL&&T.text==="#ffffff"){if(!hasMedia){drawPattern(TPL.pat,slide!=null?s.start+lt:t,T);drawTint(TPL.tint);}T={...T,hl:TPL.hl};}
   const O=S.cfg.v,PF={top:0.34,center:0.47,bottom:0.6}[O.pos]||0.47;
   const TOP=Math.round(H*0.115),BOT=H-360,n=scenes.length;
   if(O.progress&&SC.type==="reel"){const gap=10,x0=60,segW=(W-120-gap*(n-1))/n;for(let i=0;i<n;i++){const x=x0+i*(segW+gap);ctx.fillStyle=T.track;roundRect(x,70,segW,10,5);ctx.fill();const f=i<si?1:i>si?0:clamp(lt/s.dur,0,1);if(f>0){ctx.fillStyle=T.fill;roundRect(x,70,Math.max(10,segW*f),10,5);ctx.fill();}}}
@@ -1064,6 +1072,27 @@ function drawPostAlt(SC,s,lt,T,O,TOP){
     const LT=lightT(T);let y=cy-ch/2+90;drawBlock(s.T,W/2,y,lt,0,0,"#15151b",LT);y+=s.T.h+60;if(s.B)drawBlock(s.B,W/2,y,lt,0,0,"#15151b",LT);BLK=[cy-ch/2,cy+ch/2];}
   const sub=s.cta||S.cfg.ig||"";if(sub){ctx.save();ctx.font="800 38px Inter";const tw=Math.min(ctx.measureText(sub).width,W-200);ctx.fillStyle=T.pill;roundRect(W/2-tw/2-36,H-170,tw+72,90,45);ctx.fill();ctx.fillStyle=T.pillText;ctx.textAlign="center";ctx.textBaseline="middle";ctx.fillText(sub,W/2,H-125,W-200);ctx.restore();}
 }
+/* ===== Plantillas visuales (2.304 combinaciones: patrón × color × resaltado × transición × subtítulos) ===== */
+const TPL_PARTS=[8,6,4,4,3],TPL_TOTAL=TPL_PARTS.reduce((a,b)=>a*b,1);
+const TPL_HL=["box","glow","under","marker"],TPL_PAT=["ninguno","rayos","rejilla","puntos","ondas","rayas","burbujas","velocidad"],TPL_TINT=["marca","duotono","atardecer","oceano","lima","vineta"];
+function decodeTpl(n){n=((+n%TPL_TOTAL)+TPL_TOTAL)%TPL_TOTAL;const d=[];TPL_PARTS.forEach(k=>{d.push(n%k);n=Math.floor(n/k);});return{pat:d[0],tint:d[1],hl:TPL_HL[d[2]],tr:d[3],cap:d[4],id:d};}
+function drawPattern(k,t,T){
+  if(!k)return;const acc=S.cfg.acc;ctx.save();ctx.globalAlpha=0.16;ctx.strokeStyle=acc;ctx.fillStyle=acc;
+  if(k===1){ctx.translate(W/2,H*0.62);ctx.rotate(t*0.12);for(let i=0;i<18;i++){ctx.rotate(Math.PI*2/18);ctx.beginPath();ctx.moveTo(0,0);ctx.lineTo(-90,-H);ctx.lineTo(90,-H);ctx.closePath();if(i%2)ctx.fill();}}
+  else if(k===2){ctx.lineWidth=3;const hz=H*0.62,off=(t*120)%120;for(let i=0;i<14;i++){const y=hz+Math.pow((i*120+off)/1680,1.8)*(H-hz)*1.6;ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(W,y);ctx.stroke();}for(let i=-12;i<=12;i++){ctx.beginPath();ctx.moveTo(W/2+i*30,hz);ctx.lineTo(W/2+i*260,H);ctx.stroke();}}
+  else if(k===3){const g=54,off=(t*20)%g;for(let y=-g;y<H+g;y+=g)for(let x=0;x<W+g;x+=g){const r=4+4*Math.sin((x+y)/180+t*1.5);ctx.beginPath();ctx.arc(x+((y/g)%2?g/2:0),y+off,Math.max(1,r),0,Math.PI*2);ctx.fill();}}
+  else if(k===4){ctx.lineWidth=5;for(let j=0;j<9;j++){ctx.beginPath();for(let x=0;x<=W;x+=20){const y=H*0.12+j*H*0.1+Math.sin(x/140+t*1.6+j)*34;x?ctx.lineTo(x,y):ctx.moveTo(x,y);}ctx.stroke();}}
+  else if(k===5){const g=110,off=(t*60)%(g*2);ctx.translate(-H*0.3,0);ctx.rotate(-0.5);for(let x=-H;x<W+H*2;x+=g*2)ctx.fillRect(x+off,-H,g,H*3);}
+  else if(k===6){ctx.globalAlpha=0.2;for(let i=0;i<6;i++){const x=W*(0.15+0.7*((i*0.37)%1))+Math.sin(t*0.5+i)*80,y=H*(0.1+0.8*((i*0.61)%1))+Math.cos(t*0.4+i*1.3)*90,r=160+70*(i%3);const g=ctx.createRadialGradient(x,y,0,x,y,r);g.addColorStop(0,i%2?acc:"#ffffff");g.addColorStop(1,"rgba(0,0,0,0)");ctx.fillStyle=g;ctx.beginPath();ctx.arc(x,y,r,0,Math.PI*2);ctx.fill();}}
+  else if(k===7){ctx.lineCap="round";for(let i=0;i<26;i++){const sd=(i*7919)%1000/1000,y=H*sd,len=200+sd*500,x=W-((t*(900+sd*900)+sd*3000)%(W+len*2));ctx.lineWidth=3+sd*6;ctx.beginPath();ctx.moveTo(x,y);ctx.lineTo(x+len,y);ctx.stroke();}}
+  ctx.restore();
+}
+function drawTint(k){
+  if(!k)return;ctx.save();
+  if(k===5){const g=ctx.createRadialGradient(W/2,H/2,H*0.2,W/2,H/2,H*0.8);g.addColorStop(0,"rgba(0,0,0,0)");g.addColorStop(1,"rgba(0,0,0,.7)");ctx.fillStyle=g;ctx.fillRect(0,0,W,H);ctx.restore();return;}
+  const C={1:[S.cfg.acc,"#000000"],2:["#ff7a00","#ff2d55"],3:["#00c6ff","#7b2ff7"],4:["#a8ff00","#00b894"]}[k];
+  const g=ctx.createLinearGradient(0,0,W,H);g.addColorStop(0,hexA(C[0],0.32));g.addColorStop(1,hexA(C[1],0.26));ctx.globalCompositeOperation="source-over";ctx.fillStyle=g;ctx.fillRect(0,0,W,H);ctx.restore();
+}
 /* ===== Motion graphics ===== */
 const pr=(lt,t0,d)=>clamp((lt-t0)/d,0,1);
 function cardFill(T){return T.text==="#ffffff"?"rgba(255,255,255,.09)":"rgba(0,0,0,.07)";}
@@ -1156,9 +1185,12 @@ function drawCaptions(caps,cx,cy,lt,T,maxW,big){
   let x=-tw/2;const acc=S.cfg.acc;
   words.forEach((w,i)=>{const c=chunk[i],ww=ctx.measureText(w).width,on=STATIC?i===0:lt>=c.t,act=on&&(i===chunk.length-1||lt<chunk[i+1].t);
     ctx.save();ctx.translate(x+ww/2,0);if(act&&!STATIC){const k=clamp((lt-c.t)/0.12,0,1);const sc=1.22-0.1*easeOut(k);ctx.scale(sc,sc);ctx.rotate(-0.03);}
-    if(act){ctx.fillStyle=acc;roundRect(-ww/2-size*0.18,-size*0.62,ww+size*0.36,size*1.24,size*0.2);ctx.fill();}
+    const cs=(CUR_SC&&CUR_SC.tpl)?CUR_SC.tpl.cap:0;
+    if(act&&cs===0){ctx.fillStyle=acc;roundRect(-ww/2-size*0.18,-size*0.62,ww+size*0.36,size*1.24,size*0.2);ctx.fill();}
+    if(act&&cs===2){ctx.fillStyle=acc;roundRect(-ww/2,size*0.42,ww,size*0.16,size*0.08);ctx.fill();}
     ctx.lineWidth=size*0.16;ctx.strokeStyle="rgba(0,0,0,.75)";if(!act)ctx.strokeText(w,-ww/2,size*0.04);
-    ctx.fillStyle=act?onAccent(acc):(on?"#ffffff":"rgba(255,255,255,.55)");ctx.fillText(w,-ww/2,size*0.04);ctx.restore();x+=ww+gap;});
+    const csx=(CUR_SC&&CUR_SC.tpl)?CUR_SC.tpl.cap:0;if(act&&csx!==0)ctx.strokeText(w,-ww/2,size*0.04);
+    ctx.fillStyle=act?(csx===1?(T.text==="#ffffff"?acc:acc):csx===2?"#ffffff":onAccent(acc)):(on?"#ffffff":"rgba(255,255,255,.55)");ctx.fillText(w,-ww/2,size*0.04);ctx.restore();x+=ww+gap;});
   ctx.restore();
 }
 function hookBurst(lt,cy){
@@ -1175,7 +1207,14 @@ function drawConfetti(lt){
 }
 /* ===== Transiciones y movimiento de fondo ===== */
 function drawWipe(si,n,lt,dur){
-  const D=0.24,sk=320;let xa=null,xb=null;
+  const tr=CUR_SC&&CUR_SC.tpl?CUR_SC.tpl.tr:0,D=0.24;
+  if(tr>0){let e=null,out=false;if(si<n-1&&lt>dur-D){e=easeOut((lt-(dur-D))/D);out=true;}else if(si>0&&lt<D)e=easeOut(lt/D);if(e==null)return;
+    ctx.save();ctx.fillStyle=S.cfg.acc;
+    if(tr===1){const h=out?e*H:(1-e)*H;ctx.fillRect(0,out?H-h:0,W,h);ctx.fillStyle="rgba(255,255,255,.85)";ctx.fillRect(0,out?H-h-16:h,W,16);}
+    else if(tr===2){const r=(out?e:1-e)*Math.hypot(W,H)*0.6;ctx.beginPath();ctx.arc(W/2,H/2,r,0,Math.PI*2);ctx.fill();}
+    else{ctx.globalAlpha=out?e*0.95:(1-e)*0.95;ctx.fillStyle="#ffffff";ctx.fillRect(0,0,W,H);}
+    ctx.restore();return;}
+  const sk=320;let xa=null,xb=null;
   if(si<n-1&&lt>dur-D){const e=easeOut((lt-(dur-D))/D);xa=-sk-100;xb=-sk+e*(W+sk*2);}
   else if(si>0&&lt<D){const e=easeOut(lt/D);xa=-sk-100+e*(W+sk*2+100);xb=W+sk;}
   if(xa==null)return;ctx.save();ctx.fillStyle=S.cfg.acc;ctx.beginPath();ctx.moveTo(xa,0);ctx.lineTo(xb+sk,0);ctx.lineTo(xb,H);ctx.lineTo(xa-sk,H);ctx.closePath();ctx.fill();
@@ -1644,6 +1683,7 @@ function renderAcct() {
   chipRow($("#acDay"), [[1, "1"], [2, "2"], [3, "3"]], v => P.max_por_dia === v, v => { P.max_por_dia = v; saveCfg(); renderAcct(); });
   chipRow($("#acFmt"), Object.entries(TYPES).map(([k, T]) => [k, T.icon + " " + T.name]), v => P.formatos.includes(v), v => { if (P.formatos.includes(v)) { if (P.formatos.length > 1) P.formatos = P.formatos.filter(x => x !== v); } else P.formatos = P.formatos.concat(v); saveCfg(); renderAcct(); });
   chipRow($("#acAudio"), [["auto", "🤖 Que decida la agencia"], ["voz", "🎙 Solo voz"], ["musica", "🎵 Solo música"], ["ambos", "🎙+🎵 Voz y música"]], v => (P.audio || "auto") === v, v => { P.audio = v; saveCfg(); renderAcct(); });
+  chipRow($("#acVoz"), [["", "🤖 Que elija la agencia"], ["alvaro", "Álvaro"], ["elvira", "Elvira"], ["ximena", "Ximena"], ["jorge", "Jorge 🇲🇽"], ["dalia", "Dalia 🇲🇽"], ["andrew", "Andrew ✨"], ["ava", "Ava ✨"], ["brian", "Brian ✨"], ["emma", "Emma ✨"]], v => (P.voz_elegida || "") === v, v => { P.voz_elegida = v; saveCfg(); renderAcct(); });
   renderSocial();
   const R = reqs();
   $("#acBusy").innerHTML = ""; if (R.replan) $("#acBusy").appendChild(el("div", { class: "busy-note" }, [el("span", { text: "🔄 Rehaciendo la semana… " }), el("button", { class: "rd", text: "Cancelar", onclick: async () => { try { const j = await api("/api/cancel-request", { method: "POST", body: {} }); HOST.me.requests = j.requests; renderAcct(); renderSchedule(); } catch (e) { setStatus($("#acStatus"), e.message, "err"); } } })]));
