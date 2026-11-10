@@ -189,6 +189,44 @@
   .qprev{display:flex;gap:8px;overflow-x:auto;padding:6px 0 10px}
   .qprev video,.qprev img{height:340px;border-radius:14px;background:#000;flex:none}
   .autohide{display:none!important}
+  /* ===== Diseño tipo app: pestañas abajo ===== */
+  body.tabs #app{padding-bottom:96px}
+  #tabbar{position:fixed;left:0;right:0;bottom:0;z-index:45;display:none;grid-template-columns:repeat(5,1fr);gap:2px;padding:8px 8px calc(8px + env(safe-area-inset-bottom));background:rgba(12,12,16,.92);backdrop-filter:blur(14px);border-top:1px solid var(--line)}
+  body.tabs #tabbar{display:grid}
+  #tabbar button{border:0;background:none;color:var(--muted);font:inherit;font-size:11px;font-weight:800;display:flex;flex-direction:column;align-items:center;gap:3px;padding:6px 0;border-radius:14px;cursor:pointer}
+  #tabbar button i{font-style:normal;font-size:22px;line-height:1}
+  #tabbar button.on{color:#fff;background:rgba(255,255,255,.08)}
+  #tabbar button .dot{position:absolute;margin-left:22px;margin-top:-2px;width:9px;height:9px;border-radius:50%;background:var(--accent)}
+  .page{display:none}.page.on{display:block;animation:pgIn .22s ease}
+  @keyframes pgIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+  .pcard{background:var(--card,rgba(255,255,255,.04));border:1px solid var(--line);border-radius:22px;padding:16px;margin:0 0 14px}
+  .pcard h3{margin:0 0 10px;font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent2)}
+  .hello h2{margin:4px 0 2px;font-size:26px}.hello p{margin:0;color:var(--muted)}
+  .next{display:flex;gap:14px;align-items:center}
+  .next img,.next .ph{width:92px;height:140px;border-radius:14px;object-fit:cover;background:#000;flex:none;display:flex;align-items:center;justify-content:center;font-size:34px}
+  .next .when{font-size:13px;color:var(--accent2);font-weight:800}.next .tt{font-size:18px;font-weight:800;margin:4px 0}
+  .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+  .stat{background:rgba(255,255,255,.05);border-radius:16px;padding:12px 8px;text-align:center}.stat b{display:block;font-size:22px}.stat span{font-size:12px;color:var(--muted)}
+  .quick{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .quick button{border:1px solid var(--line);background:rgba(255,255,255,.05);color:inherit;border-radius:18px;padding:14px 12px;font:inherit;font-weight:800;font-size:14px;text-align:left;cursor:pointer;display:flex;gap:10px;align-items:center}
+  .quick button i{font-style:normal;font-size:22px}
+  .quick button.main{grid-column:1/-1;background:linear-gradient(135deg,var(--accent),var(--accent2));border:0;color:#fff;justify-content:center;font-size:16px;padding:16px}
+  .warn{border-color:rgba(255,190,60,.5)!important;background:rgba(255,190,60,.08)!important}
+  .day{font-size:13px;font-weight:900;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin:16px 4px 8px}
+  .pc{display:flex;gap:12px;background:rgba(255,255,255,.04);border:1px solid var(--line);border-radius:20px;padding:10px;margin-bottom:10px}
+  .pc .th{width:74px;height:112px;border-radius:12px;object-fit:cover;background:#000;flex:none;display:flex;align-items:center;justify-content:center;font-size:28px;cursor:pointer}
+  .pc .bd{flex:1;min-width:0;display:flex;flex-direction:column}
+  .pc .tt{font-weight:800;font-size:15px;line-height:1.3;margin:2px 0 4px;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
+  .pc .mt{font-size:12.5px;color:var(--muted)}
+  .pc .ac{display:flex;gap:6px;margin-top:auto;padding-top:8px;flex-wrap:wrap}
+  .pc .ac button{flex:1;min-width:70px;min-height:40px;border-radius:12px;border:1px solid var(--line);background:rgba(255,255,255,.06);color:inherit;font:inherit;font-weight:800;font-size:13px;cursor:pointer}
+  .pc .ac button.danger{color:#ff8a82}
+  .pc.past{opacity:.6}
+  .pv{margin:-4px 0 12px;display:flex;gap:8px;overflow-x:auto}.pv video,.pv img{height:420px;max-width:100%;border-radius:16px;background:#000}
+  body.tabs #chatModal{position:static;display:block;background:none;padding:0;backdrop-filter:none}
+  body.tabs #chatModal .mbox{height:calc(100dvh - 230px);max-width:none;border-radius:22px}
+  body.tabs #chClose{display:none}
+  body.tabs #acctModal .mbox>.mhead{display:none}
   #chatFab{position:fixed;right:18px;bottom:18px;z-index:40;width:64px;height:64px;border-radius:50%;border:0;background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;font-size:30px;box-shadow:0 10px 30px rgba(0,0,0,.45);cursor:pointer}
   #chatModal .mbox{display:flex;flex-direction:column;height:min(86vh,760px);max-width:520px;padding:0}
   .chHead{display:flex;align-items:center;justify-content:space-between;padding:14px 16px;border-bottom:1px solid var(--line)}
@@ -369,6 +407,15 @@ https://apps.apple.com/…
     <div class="status" id="lgStatus"></div>
   </div>
 </div>
+
+<!-- PESTAÑAS -->
+<nav id="tabbar">
+  <button data-t="inicio"><i>🏠</i>Inicio</button>
+  <button data-t="cal"><i>📅</i>Calendario</button>
+  <button data-t="chat"><i>💬</i>Chat</button>
+  <button data-t="marca"><i>🧠</i>Marca</button>
+  <button data-t="ajustes"><i>⚙️</i>Ajustes</button>
+</nav>
 
 <!-- CHAT CON LA AGENCIA -->
 <button id="chatFab" aria-label="Hablar con la agencia" hidden>💬</button>
@@ -1837,6 +1884,118 @@ function renderMemory() {
   if (!notas.length) nb.appendChild(el("div", { class: "note", style: "margin-top:2px", text: "Sin notas todavía. También puedes decírselo al chat: «recuerda que…»." }));
   notas.forEach((n, i) => nb.appendChild(el("div", { class: "qitem" }, [el("span", { text: "📝 " + (n.t || n) }), el("button", { class: "rd", text: "✖", title: "Olvidar", onclick: () => { HOST.plan.notas.splice(i, 1); saveCfg(); renderMemory(); } })])));
 }
+/* ============ APP CON PESTAÑAS ============ */
+const TABS = ["inicio", "cal", "chat", "marca", "ajustes"];
+let CUR_TAB = "inicio";
+function showTab(t) {
+  if (!TABS.includes(t)) t = "inicio"; CUR_TAB = t;
+  document.querySelectorAll(".page").forEach(p => p.classList.toggle("on", p.id === "pg-" + t));
+  document.querySelectorAll("#tabbar button").forEach(b => b.classList.toggle("on", b.dataset.t === t));
+  try { history.replaceState(null, "", "#" + t); } catch (e) { }
+  window.scrollTo({ top: 0 });
+  if (t === "ajustes" || t === "marca") renderAcct();
+  if (t === "chat") { chatRender(); }
+  if (t === "inicio" || t === "cal") renderSchedule();
+}
+async function delPiece(it, b) {
+  b.disabled = true; const old = b.textContent; b.textContent = "…";
+  try { const j = await api("/api/delete", { method: "POST", body: { id: it.id } }); HOST.me.requests = j.requests; if (j.status) HOST.me.status = j.status; renderSchedule(); setStatus($("#genStatus"), "🗑 Eliminada «" + (it.tema || it.tipo) + "». Ya no se publicará.", "ok"); }
+  catch (er) { b.disabled = false; b.textContent = old; setStatus($("#genStatus"), er.message, "err"); }
+}
+function upcomingQ() { const q = (HOST.me && HOST.me.status && HOST.me.status.queue) || []; return q.filter(x => (x.status === "pending" || x.status === "scheduled") && new Date(x.publishAt) > new Date()).sort((a, b) => new Date(a.publishAt) - new Date(b.publishAt)); }
+function thumbOf(it, cls) { const src = it.cover || (it.media && it.media[0] && !/\.mp4$/i.test(it.media[0]) ? it.media[0] : ""); return src ? el("img", { class: cls, src, alt: "", loading: "lazy" }) : el("div", { class: cls + " ph", text: (TYPES[it.tipo] || {}).icon || "🎬" }); }
+function relWhen(iso) { const d = (new Date(iso) - new Date()) / 36e5; if (d < 1) return "en menos de 1 hora"; if (d < 24) return "en " + Math.round(d) + " h"; const n = Math.round(d / 24); return "en " + n + (n === 1 ? " día" : " días"); }
+function busyNotes() {
+  const R = reqs(), out = [], nc = (R.create || []).length, nr = (R.redo || []).length;
+  if (R.reset) out.push("♻️ Reiniciando la cuenta…"); if (R.replan) out.push("🔄 Rehaciendo la semana… (unos minutos)");
+  if (nc) out.push("📝 Creando " + (nc === 1 ? "la publicación" : nc + " publicaciones") + " que pediste…"); if (nr) out.push("🔄 Rehaciendo " + nr + (nr === 1 ? " pieza" : " piezas") + "…");
+  return out;
+}
+function renderHome() {
+  const box = $("#homeDash"); if (!box) return; box.innerHTML = ""; const me = HOST.me || {}, m = me.status && me.status.memoria, up = upcomingQ();
+  const FASE = { descubrimiento: "🔭 Descubrimiento", confianza: "🤝 Confianza", comunidad: "👥 Comunidad", conversion: "💰 Conversión" };
+  box.appendChild(el("div", { class: "pcard hello" }, [el("h2", { text: "Hola, " + String(me.name || "").split(" ")[0] + " 👋" }),
+    el("p", { text: (HOST.plan.auto === false ? "⏸ Piloto automático en pausa" : "✅ Tu agencia trabaja sola") + (m ? " · " + (FASE[m.fase] || m.fase) + " · semana " + (m.semana || 1) : "") })]));
+  if (!hasBrand()) box.appendChild(el("div", { class: "pcard warn" }, [el("b", { text: "Falta configurar tu marca" }), el("div", { class: "quick", style: "margin-top:10px" }, [el("button", { class: "main", text: "✏️ Configurar mi marca", onclick: () => openOv(1, false) })])]));
+  else if (!isConnected()) box.appendChild(el("div", { class: "pcard warn" }, [el("b", { text: "Conecta al menos una red para que la agencia publique" }), el("div", { class: "quick", style: "margin-top:10px" }, [el("button", { class: "main", text: "📲 Conectar redes", onclick: () => showTab("ajustes") })])]));
+  busyNotes().forEach(t => box.appendChild(el("div", { class: "pcard busy-note", style: "margin-bottom:10px", text: t })));
+  const nx = up[0];
+  if (nx) box.appendChild(el("div", { class: "pcard" }, [el("h3", { text: "Próxima publicación" }), el("div", { class: "next", style: "cursor:pointer", onclick: () => showTab("cal") }, [thumbOf(nx, ""),
+    el("div", {}, [el("div", { class: "when", text: fmtWhen(nx.publishAt) + " · " + relWhen(nx.publishAt) }), el("div", { class: "tt", text: nx.tema || nx.tipo }), el("div", { class: "note", style: "margin:0", text: ((TYPES[nx.tipo] || {}).name || nx.tipo) + " · toca para ver el calendario" })])])]));
+  const q = (me.status && me.status.queue) || [], week = Date.now() - 7 * 864e5;
+  box.appendChild(el("div", { class: "pcard" }, [el("div", { class: "stats" }, [
+    el("div", { class: "stat" }, [el("b", { text: String(up.length) }), el("span", { text: "programadas" })]),
+    el("div", { class: "stat" }, [el("b", { text: String(q.filter(x => x.status === "published" && new Date(x.publishAt) > week).length) }), el("span", { text: "publicadas (7 días)" })]),
+    el("div", { class: "stat" }, [el("b", { text: String(HOST.social.length) }), el("span", { text: HOST.social.length === 1 ? "red conectada" : "redes conectadas" })])])]));
+  const gb = HOST.genBtn || (HOST.genBtn = $("#genBtn")); if (!gb) return; gb.textContent = up.length ? "🔄 Rehacer y publicar mi semana" : "🚀 Que la agencia cree mi semana"; gb.className = "main";
+  box.appendChild(el("div", { class: "pcard" }, [el("h3", { text: "Acciones rápidas" }), el("div", { class: "quick" }, [gb,
+    el("button", { onclick: () => { showTab("chat"); $("#chText").value = "Hazme un reel sobre "; $("#chText").focus(); } }, [el("i", { text: "📝" }), el("span", { text: "Pedir una publicación" })]),
+    el("button", { onclick: () => showTab("cal") }, [el("i", { text: "📅" }), el("span", { text: "Ver calendario" })]),
+    el("button", { onclick: () => showTab("marca") }, [el("i", { text: "🧠" }), el("span", { text: "Estrategia y memoria" })]),
+    el("button", { onclick: () => showTab("ajustes") }, [el("i", { text: "📲" }), el("span", { text: "Redes y ajustes" })])])]));
+  const strat = (m && m["resumen_para_dueño"]) || (me.status && me.status.estrategia);
+  if (strat && strat.length > 3) box.appendChild(el("div", { class: "pcard" }, [el("h3", { text: "🎯 Estrategia de la semana" }), el("div", { style: "font-size:15px;line-height:1.45", text: strat })]));
+}
+function renderCal() {
+  const box = $("#calBox"); if (!box) return; box.innerHTML = ""; const q = ((HOST.me && HOST.me.status && HOST.me.status.queue) || []).slice().sort((a, b) => new Date(a.publishAt) - new Date(b.publishAt));
+  const R = reqs(), redoing = R.redo || [];
+  const head = el("div", { class: "pcard" }, [el("h3", { text: "📅 Calendario" }), el("div", { class: "note", style: "margin:0 0 10px", text: "Toca una pieza para verla. 🔄 la rehace distinta y 🗑 la quita de tus redes." }),
+    el("div", { class: "quick" }, [el("button", { class: "main", text: R.replan ? "🔄 Rehaciendo la semana…" : "🔄 Rehacer toda la semana", onclick: async e => { e.currentTarget.disabled = true; try { const j = await api("/api/replan", { method: "POST" }); HOST.me.requests = j.requests; renderSchedule(); setStatus($("#genStatus"), "🔄 Rehaciendo la semana. Lo nuevo sustituye a lo programado en unos minutos.", "ok"); } catch (er) { setStatus($("#genStatus"), er.message, "err"); } } })])]);
+  { const rb = head.querySelector(".quick .main"); rb.disabled = !!R.replan || !isConnected(); }
+  box.appendChild(head); busyNotes().forEach(t => box.appendChild(el("div", { class: "pcard busy-note", style: "margin-bottom:10px", text: t })));
+  const up = q.filter(x => (x.status === "pending" || x.status === "scheduled" || x.status === "failed") && new Date(x.publishAt) > new Date(Date.now() - 864e5) && x.status !== "published");
+  const past = q.filter(x => !up.includes(x)).reverse();
+  if (!up.length) box.appendChild(el("div", { class: "pcard note", style: "margin-top:0", text: "No hay nada programado. Pulsa «Rehacer toda la semana» o pídele algo al chat." }));
+  let lastDay = "";
+  const dayLabel = d => { const t = new Date(); const a = new Date(d); const diff = Math.round((new Date(a.toDateString()) - new Date(t.toDateString())) / 864e5); const base = a.toLocaleDateString("es-ES", { weekday: "long", day: "numeric", month: "long" }); return diff === 0 ? "Hoy · " + base : diff === 1 ? "Mañana · " + base : base; };
+  const card = (it, isPast) => {
+    const st = (redoing.includes(it.id) || (R.replan && !isPast)) ? ["🔄 rehaciendo…", "var(--accent2)"] : (QSTATE[it.status] || [it.status, "var(--muted)"]);
+    const hm = new Date(it.publishAt).toLocaleTimeString("es-ES", { hour: "2-digit", minute: "2-digit" });
+    const th = thumbOf(it, "th"); const c = el("div", { class: "pc" + (isPast ? " past" : "") }, [th, el("div", { class: "bd" }, [
+      el("div", { class: "mt", text: ((TYPES[it.tipo] || {}).icon || "") + " " + ((TYPES[it.tipo] || {}).name || it.tipo) + " · " + hm }),
+      el("div", { class: "tt", text: it.tema || "" }), el("div", { class: "mt", style: "color:" + st[1] + ";font-weight:800", text: st[0] + (it.error ? " · " + it.error : "") })])]);
+    const ac = el("div", { class: "ac" }); c.querySelector(".bd").appendChild(ac);
+    const toggle = () => { const nx = c.nextSibling; if (nx && nx.classList && nx.classList.contains("pv")) { nx.remove(); return; } if (!(it.media && it.media.length)) return;
+      c.after(el("div", { class: "pv" }, it.media.map(m => /\.mp4$/i.test(m) ? el("video", { src: m, controls: "", playsinline: "", preload: "metadata", ...(it.cover ? { poster: it.cover } : {}) }) : el("img", { src: m, loading: "lazy" })))); };
+    th.addEventListener("click", toggle);
+    if (it.media && it.media.length) ac.appendChild(el("button", { text: "▶ Ver", onclick: toggle }));
+    const canEdit = !isPast && (it.status === "pending" || it.status === "scheduled") && new Date(it.publishAt) > new Date() && !st[0].includes("rehaciendo");
+    if (canEdit) ac.appendChild(el("button", { text: "🔄 Rehacer", onclick: () => askRedo(it) }));
+    if (!isPast && (canEdit || it.status === "failed")) { let armed = 0; ac.appendChild(el("button", { class: "danger", text: "🗑 Eliminar", onclick: e => { const b = e.currentTarget; if (Date.now() - armed > 5000) { armed = Date.now(); b.textContent = "¿Seguro? Toca otra vez"; setTimeout(() => { if (Date.now() - armed >= 5000) b.textContent = "🗑 Eliminar"; }, 5100); return; } delPiece(it, b); } })); }
+    return c;
+  };
+  up.forEach(it => { const dl = dayLabel(it.publishAt); if (dl !== lastDay) { box.appendChild(el("div", { class: "day", text: dl })); lastDay = dl; } box.appendChild(card(it, false)); });
+  if (past.length) { const d = el("details", { class: "pcard", style: "margin-top:16px" }, [el("summary", { style: "font-weight:800;cursor:pointer", text: "✅ Ya publicado (" + past.length + ")" })]); past.slice(0, 30).forEach(it => d.appendChild(card(it, true))); box.appendChild(d); }
+}
+function setupTabs() {
+  document.body.classList.add("tabs");
+  const app = $("#app"), hdr = app.querySelector("header"), hero = $("#genBtn").closest("section");
+  const pages = el("div", { id: "pages" }); hdr.after(pages);
+  const mk = id => { const p = el("section", { class: "page", id: "pg-" + id }); pages.appendChild(p); return p; };
+  const pIni = mk("inicio"), pCal = mk("cal"), pChat = mk("chat"), pMar = mk("marca"), pAj = mk("ajustes");
+  pages.before($("#genStatus"));
+  pIni.appendChild(el("div", { id: "homeDash" }));
+  pCal.appendChild(el("div", { id: "calBox" }));
+  // chat a pantalla completa
+  pChat.appendChild($("#chatModal")); $("#chatFab").classList.add("autohide");
+  // marca: memoria, notas, estilo y opciones visuales
+  const mbox = $("#acctModal .mbox"), secs = Array.from(mbox.querySelectorAll(":scope > .acct-sec"));
+  const memSec = secs.find(x => x.querySelector("#acMem")), progSec = secs.find(x => x.querySelector("#acQueue"));
+  pMar.appendChild(el("div", { class: "pcard" }, [el("h3", { text: "✏️ Tu marca" }), el("div", { class: "note", style: "margin:0 0 10px", text: "Nombre, qué enseñas, a quién, enlaces y colores." }), el("div", { class: "quick" }, [el("button", { class: "main", text: "Editar datos de la marca", onclick: () => $("#openBrand").click() })])]));
+  if (memSec) { memSec.classList.add("pcard"); pMar.appendChild(memSec); }
+  const sty = el("div", { class: "pcard" }, [el("h3", { text: "🎨 Estilo de los vídeos" })]); const lbl = $("#styles").previousElementSibling;
+  if (lbl && lbl.classList.contains("lbl")) lbl.classList.add("autohide"); sty.appendChild($("#styles")); sty.appendChild($("#optsWrap")); pMar.appendChild(sty);
+  // ajustes: todo lo demás de la cuenta
+  if (progSec) { progSec.classList.add("autohide"); pAj.appendChild(progSec); }
+  Array.from(mbox.children).forEach(ch => { if (ch.classList.contains("mtop")) return; if (ch.classList.contains("acct-sec")) ch.classList.add("pcard"); pAj.appendChild(ch); });
+  hero.classList.add("autohide"); ["#stratBox", "#schedBox"].forEach(q => { const n = $(q); if (n) n.classList.add("autohide"); });
+  ["#openAcct", "#openBrand"].forEach(q => { const n = $(q); if (n) n.style.display = "none"; });
+  openAcct = async function () { showTab("ajustes"); try { HOST.me = await api("/api/me"); await loadSocial(); renderAcct(); renderSchedule(); } catch (e) { } };
+  HOST.genBtn = $("#genBtn");
+  const oldRS = renderSchedule; renderSchedule = function () { try { oldRS(); } catch (e) { } try { renderHome(); } catch (e) { console.error(e); } try { renderCal(); } catch (e) { console.error(e); } const dot = busyNotes().length; const cb = document.querySelector('#tabbar [data-t="cal"]'); if (cb) { const d0 = cb.querySelector(".dot"); if (dot && !d0) cb.appendChild(el("span", { class: "dot" })); if (!dot && d0) d0.remove(); } };
+  document.querySelectorAll("#tabbar button").forEach(b => b.addEventListener("click", () => showTab(b.dataset.t)));
+  showTab((location.hash || "").replace("#", "").split(/[?&]/)[0] || "inicio");
+}
 function hasBrand() { return !!(S.cfg && (S.cfg.name || S.cfg.about)); }
 async function planNow(silent) {
   const st = $("#genStatus");
@@ -1883,6 +2042,7 @@ if (!window.__AGENCIA_SERVER) {
   saveCfg = async function () { ls("ma_cfg", S.cfg); if (!HOST.key || !API) return; clearTimeout(cfgTimer); cfgTimer = setTimeout(async () => { try { await api("/api/config", { method: "PUT", body: { config: confFromState() } }); } catch (e) { setStatus($("#genStatus"), "No se pudo guardar en el servidor: " + e.message, "err"); } }, 600); };
   $("#openAcct").addEventListener("click", openAcct);
   setupChat();
+  setupTabs();
   // Modo automático: el botón principal pide al servidor que cree y publique; nada de crear piezas a mano
   ["#seg", "#segNote", "#videos", "#histSec", "#mediaGroup"].forEach(sel => { const n = $(sel); if (n) n.classList.add("autohide"); });
   { const sg = $("#seg"), lb = sg && sg.previousElementSibling; if (lb && lb.classList.contains("lbl")) lb.classList.add("autohide"); }
