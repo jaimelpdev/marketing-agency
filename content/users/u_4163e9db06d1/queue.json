@@ -1,106 +1,85 @@
 [
   {
-    "id": "2026-11-10-01-historia",
-    "date": "2026-11-10",
-    "source": "auto",
-    "tipo": "historia",
-    "tema": "Desafío de reacción",
-    "publishAt": "2026-11-11T09:00:00+01:00",
-    "caption": "",
-    "media": [
-      "media/u_4163e9db06d1/2026-11-10/2026-11-10-01-historia/video.mp4"
-    ],
-    "status": "scheduled",
-    "attempts": 0,
-    "cover": "media/u_4163e9db06d1/2026-11-10/2026-11-10-01-historia/cover.jpg",
-    "zernioPostId": "6af38a2ff2de708c3db7e1c0"
-  },
-  {
-    "id": "2026-11-10-02-reel",
+    "id": "2026-11-10-01-reel",
     "date": "2026-11-10",
     "source": "auto",
     "tipo": "reel",
-    "tema": "Entrenamiento de reacción de 1 segundo para arrancadas",
-    "publishAt": "2026-11-11T19:30:00+01:00",
-    "caption": "Un segundo puede marcar la diferencia en cada vuelta. 💨 ¿Ya lo pruebas? Guarda y comparte. 👉 Link en bio\n\n#simracing #drill #reactiontime #racingtips #redlineclub\n\n🎵 «Spencer Newton - Lucky Number 8 (Original Mix)(Electro House)» de Spencer Newton (CC BY 3.0)",
+    "tema": "Error de telemetría: frenado tardío por falta de freno motor",
+    "publishAt": "2026-11-10T22:57:55.297646+01:00",
+    "caption": "¿Te ha pasado perder tiempo por no usar el freno motor? 🚗💨 Cuéntanos y guarda este tip.\n\n#simracing #telemetria #tips #LAPRIQ #racingcoach\n\n🎵 «AleXZavesa - Lo squalo (EDM)» de AlexZavesa (CC BY 3.0)",
     "media": [
-      "media/u_4163e9db06d1/2026-11-10/2026-11-10-02-reel/video.mp4"
+      "media/u_4163e9db06d1/2026-11-10/2026-11-10-01-reel/video.mp4"
     ],
     "status": "scheduled",
     "attempts": 0,
-    "cover": "media/u_4163e9db06d1/2026-11-10/2026-11-10-02-reel/cover.jpg",
-    "zernioPostId": "6af38a31f2de708c3db7e1cc"
+    "cover": "media/u_4163e9db06d1/2026-11-10/2026-11-10-01-reel/cover.jpg",
+    "zernioPostId": "6af390f6fed4d40f10c88510"
   },
   {
-    "id": "2026-11-10-03-carrusel",
+    "id": "2026-11-10-02-carrusel",
     "date": "2026-11-10",
     "source": "auto",
     "tipo": "carrusel",
-    "tema": "Estrategia de neumáticos para 2‑hour endurance",
-    "publishAt": "2026-11-12T13:30:00+01:00",
-    "caption": "Domina la gestión de neumáticos y ahorra segundos críticos. 💡 ¿Cuál aplicarás primero? 👉 Link en bio\n\n#neumáticos #endurance #simracingtips #redlineclub #racingstrategy",
+    "tema": "Mito vs realidad: más downforce siempre es mejor",
+    "publishAt": "2026-11-11T13:30:00+01:00",
+    "caption": "¿Crees que más alerón siempre ayuda? Descubre la verdad y ajusta tu coche.\n\n#simracing #downforce #mitos #LAPRIQ #coaching",
     "media": [
-      "media/u_4163e9db06d1/2026-11-10/2026-11-10-03-carrusel/01.jpg",
-      "media/u_4163e9db06d1/2026-11-10/2026-11-10-03-carrusel/02.jpg",
-      "media/u_4163e9db06d1/2026-11-10/2026-11-10-03-carrusel/03.jpg",
-      "media/u_4163e9db06d1/2026-11-10/2026-11-10-03-carrusel/04.jpg",
-      "media/u_4163e9db06d1/2026-11-10/2026-11-10-03-carrusel/05.jpg",
-      "media/u_4163e9db06d1/2026-11-10/2026-11-10-03-carrusel/06.jpg"
+      "media/u_4163e9db06d1/2026-11-10/2026-11-10-02-carrusel/01.jpg",
+      "media/u_4163e9db06d1/2026-11-10/2026-11-10-02-carrusel/02.jpg",
+      "media/u_4163e9db06d1/2026-11-10/2026-11-10-02-carrusel/03.jpg",
+      "media/u_4163e9db06d1/2026-11-10/2026-11-10-02-carrusel/04.jpg",
+      "media/u_4163e9db06d1/2026-11-10/2026-11-10-02-carrusel/05.jpg",
+      "media/u_4163e9db06d1/2026-11-10/2026-11-10-02-carrusel/06.jpg"
     ],
     "status": "scheduled",
     "attempts": 0,
-    "zernioPostId": "6af38a39f2de708c3db7e1df"
+    "zernioPostId": "6af390fdfed4d40f10c8855d"
   },
   {
-    "id": "2026-11-10-04-reel",
+    "id": "2026-11-10-03-reel",
     "date": "2026-11-10",
     "source": "auto",
     "tipo": "reel",
-    "tema": "Vista previa de la app: objetivos personalizados",
-    "publishAt": "2026-11-14T11:00:00+01:00",
-    "caption": "Tu entrenamiento, ahora con datos que hablan. 🚀 ¿Qué objetivo te pones? 👉 Link en bio\n\n#apppreview #simracing #training #redlineclub #gamingtips\n\n🎵 «High hopes» de zero-project (CC BY 3.0)",
+    "tema": "Setup del seguidor: optimizamos el setup de @juan para Spa",
+    "publishAt": "2026-11-12T19:45:00+01:00",
+    "caption": "¿Tu coche sufre en Spa? Mándanos tu setup y mejora tu tiempo.\n\n#simracing #setup #Spa #LAPRIQ #coaching\n\n🎵 «Vox Vs. Uke (Unreal_DM Mix)» de ccMixter (CC BY 3.0)",
     "media": [
-      "media/u_4163e9db06d1/2026-11-10/2026-11-10-04-reel/video.mp4"
+      "media/u_4163e9db06d1/2026-11-10/2026-11-10-03-reel/video.mp4"
     ],
     "status": "scheduled",
     "attempts": 0,
-    "cover": "media/u_4163e9db06d1/2026-11-10/2026-11-10-04-reel/cover.jpg",
-    "zernioPostId": "6af38a3ef2de708c3db7e1f4"
+    "cover": "media/u_4163e9db06d1/2026-11-10/2026-11-10-03-reel/cover.jpg",
+    "zernioPostId": "6af39103fed4d40f10c8859d"
   },
   {
-    "id": "2026-11-10-05-post",
+    "id": "2026-11-10-04-post",
     "date": "2026-11-10",
     "source": "auto",
     "tipo": "post",
-    "tema": "Mentalidad para adelantar sin miedo",
-    "publishAt": "2026-11-15T14:00:00+01:00",
-    "caption": "El secreto no está en el coche, sino en tu mente. ¿Listo para adelantar sin miedo? 💥 Comenta OVERTAKE. 👉 Link en bio\n\n#overtake #mindset #simracing #racingtips #redlineclub",
+    "tema": "Pregunta a la comunidad: zona de frenado más difícil",
+    "publishAt": "2026-11-13T13:00:00+01:00",
+    "caption": "Muchos pilotos pierden tiempo en la misma zona. Cuéntanos la tuya y mejora con LAPRIQ.\n\n#simracing #frenado #comunidad #LAPRIQ #coaching",
     "media": [
-      "media/u_4163e9db06d1/2026-11-10/2026-11-10-05-post/01.jpg"
+      "media/u_4163e9db06d1/2026-11-10/2026-11-10-04-post/01.jpg"
     ],
     "status": "scheduled",
     "attempts": 0,
-    "zernioPostId": "6af38a40f36fcef5f7386070"
+    "zernioPostId": "6af3910679318834f8b93f68"
   },
   {
-    "id": "2026-11-10-06-carrusel",
+    "id": "2026-11-10-05-historia",
     "date": "2026-11-10",
     "source": "auto",
-    "tipo": "carrusel",
-    "tema": "Top 5 setups compartidos para Spa",
-    "publishAt": "2026-11-16T13:00:00+01:00",
-    "caption": "Los mejores setups de la comunidad para Spa. 🏎️ ¿Cuál probarás? 👉 Link en bio\n\n#spa #setup #simracing #community #redlineclub",
+    "tipo": "historia",
+    "tema": "Promoción Black Friday: 15 días de garantía + 20% descuento",
+    "publishAt": "2026-11-15T09:00:00+01:00",
+    "caption": "",
     "media": [
-      "media/u_4163e9db06d1/2026-11-10/2026-11-10-06-carrusel/01.jpg",
-      "media/u_4163e9db06d1/2026-11-10/2026-11-10-06-carrusel/02.jpg",
-      "media/u_4163e9db06d1/2026-11-10/2026-11-10-06-carrusel/03.jpg",
-      "media/u_4163e9db06d1/2026-11-10/2026-11-10-06-carrusel/04.jpg",
-      "media/u_4163e9db06d1/2026-11-10/2026-11-10-06-carrusel/05.jpg",
-      "media/u_4163e9db06d1/2026-11-10/2026-11-10-06-carrusel/06.jpg",
-      "media/u_4163e9db06d1/2026-11-10/2026-11-10-06-carrusel/07.jpg"
+      "media/u_4163e9db06d1/2026-11-10/2026-11-10-05-historia/video.mp4"
     ],
     "status": "scheduled",
     "attempts": 0,
-    "zernioPostId": "6af38a48f36fcef5f73860d9"
+    "cover": "media/u_4163e9db06d1/2026-11-10/2026-11-10-05-historia/cover.jpg",
+    "zernioPostId": "6af39108fed4d40f10c885cd"
   }
 ]

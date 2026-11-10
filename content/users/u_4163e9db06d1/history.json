@@ -145,182 +145,60 @@
       "tema": "[IG · ❤️6] En iRacing, una referencia fija evita que frenes tarde o demasiado pronto. Prueba este método en tu próxima sesión y guarda el dato."
     },
     {
-      "date": "2026-11-09",
-      "tema": "Configuración de hardware",
-      "formato": "reel",
-      "tipo": "reel"
-    },
-    {
-      "date": "2026-11-09",
-      "tema": "Gestión de neumáticos",
-      "formato": "historia",
-      "tipo": "historia"
-    },
-    {
-      "date": "2026-11-10",
-      "tema": "Suspensión para curvas rápidas",
-      "formato": "carrusel",
-      "tipo": "carrusel"
-    },
-    {
-      "date": "2026-11-10",
-      "tema": "Telemetría de Simracing",
-      "formato": "historia",
-      "tipo": "historia"
-    },
-    {
-      "date": "2026-11-10",
-      "tema": "Lanzamiento de la app Redline Club – cómo usarla y sus ventajas",
-      "formato": "antes y después",
-      "tipo": "reel",
-      "layout": "tarjeta",
-      "plantilla": 1551
-    },
-    {
-      "date": "2026-11-10",
-      "tema": "Lanzamiento de la app Redline Club – cómo usarla y sus ventajas",
-      "formato": "tutorial paso a paso",
-      "tipo": "reel",
-      "layout": "lista",
-      "plantilla": 666
-    },
-    {
       "date": "2026-11-10",
       "tipo": "reel",
       "src": "red",
-      "tema": "[IG · ❤️24] En iRacing, una caída bien ajustada puede mejorar el apoyo en curva, pero el exceso castiga el neumático. Compara dos valores y mide tras ci"
+      "tema": "[IG · ❤️25] En iRacing, una caída bien ajustada puede mejorar el apoyo en curva, pero el exceso castiga el neumático. Compara dos valores y mide tras ci"
     },
     {
-      "date": "2026-11-11",
-      "tema": "Ergonomía del piloto",
-      "formato": "carrusel",
-      "tipo": "carrusel"
-    },
-    {
-      "date": "2026-11-11",
-      "tema": "Calibración del volante",
-      "formato": "vertical",
-      "tipo": "historia"
-    },
-    {
-      "date": "2026-11-11",
-      "tema": "Entrenamiento mental",
-      "formato": "historia",
-      "tipo": "historia"
-    },
-    {
-      "date": "2026-11-12",
-      "tema": "Calentamiento rápido",
-      "formato": "post",
-      "tipo": "post"
-    },
-    {
-      "date": "2026-11-12",
-      "tema": "App Redline Club: preview",
-      "formato": "historia",
-      "tipo": "historia"
-    },
-    {
-      "date": "2026-11-13",
-      "tema": "Análisis de curva",
-      "formato": "reel",
-      "tipo": "reel"
-    },
-    {
-      "date": "2026-11-13",
-      "tema": "Visualiza la vuelta perfecta",
-      "formato": "vertical",
-      "tipo": "post"
-    },
-    {
-      "date": "2026-11-13",
-      "tema": "Comparativa de volantes",
-      "formato": "historia",
-      "tipo": "historia"
-    },
-    {
-      "date": "2026-11-14",
-      "tema": "Acceso anticipado",
-      "formato": "vertical",
-      "tipo": "historia"
-    },
-    {
-      "date": "2026-11-14",
-      "tema": "Setup para lluvia",
-      "formato": "reel",
-      "tipo": "reel"
-    },
-    {
-      "date": "2026-11-15",
-      "tema": "Pista favorita",
-      "formato": "vertical",
-      "tipo": "historia"
-    },
-    {
-      "date": "2026-11-15",
-      "tema": "Estrategia de pit‑stop",
-      "formato": "reel",
-      "tipo": "reel"
-    },
-    {
-      "date": "2026-11-15",
-      "tema": "Mentalidad para overtaking",
-      "formato": "post",
-      "tipo": "post"
-    },
-    {
-      "date": "2026-11-16",
-      "tema": "App: comparte setups",
-      "formato": "carrusel",
-      "tipo": "carrusel"
-    },
-    {
-      "date": "2026-11-11",
-      "tema": "Desafío de reacción",
-      "formato": "pregunta provocativa",
-      "tipo": "historia",
-      "layout": "clasico",
-      "plantilla": 272
-    },
-    {
-      "date": "2026-11-11",
-      "tema": "Entrenamiento de reacción de 1 segundo para arrancadas",
-      "formato": "desafio de tiempo",
+      "date": "2026-11-10",
+      "tema": "Error de telemetría: frenado tardío por falta de freno motor",
+      "formato": "el error que todos cometen",
       "tipo": "reel",
-      "layout": "chat",
-      "plantilla": 1937
+      "layout": "lista",
+      "plantilla": 1551,
+      "serie": "Error de la semana",
+      "objetivo": "alcance"
     },
     {
-      "date": "2026-11-12",
-      "tema": "Estrategia de neumáticos para 2‑hour endurance",
-      "formato": "analisis de caso",
+      "date": "2026-11-11",
+      "tema": "Mito vs realidad: más downforce siempre es mejor",
+      "formato": "mito vs realidad",
       "tipo": "carrusel",
       "layout": "tarjeta",
-      "plantilla": 904
+      "plantilla": 1937,
+      "serie": "Mito o realidad",
+      "objetivo": "confianza"
     },
     {
-      "date": "2026-11-14",
-      "tema": "Vista previa de la app: objetivos personalizados",
-      "formato": "exploración de datos",
+      "date": "2026-11-12",
+      "tema": "Setup del seguidor: optimizamos el setup de @juan para Spa",
+      "formato": "antes y después",
       "tipo": "reel",
+      "layout": "dividido",
+      "plantilla": 904,
+      "serie": "Setup del seguidor",
+      "objetivo": "comunidad"
+    },
+    {
+      "date": "2026-11-13",
+      "tema": "Pregunta a la comunidad: zona de frenado más difícil",
+      "formato": "pregunta directa",
+      "tipo": "post",
       "layout": "clasico",
-      "plantilla": 2175
+      "plantilla": 2175,
+      "serie": "",
+      "objetivo": "comunidad"
     },
     {
       "date": "2026-11-15",
-      "tema": "Mentalidad para adelantar sin miedo",
-      "formato": "historia de éxito",
-      "tipo": "post",
+      "tema": "Promoción Black Friday: 15 días de garantía + 20% descuento",
+      "formato": "mini anuncio",
+      "tipo": "historia",
       "layout": "clasico",
-      "plantilla": 1139
-    },
-    {
-      "date": "2026-11-16",
-      "tema": "Top 5 setups compartidos para Spa",
-      "formato": "guia de configuración",
-      "tipo": "carrusel",
-      "layout": "dividido",
-      "plantilla": 2188
+      "plantilla": 1139,
+      "serie": "",
+      "objetivo": ""
     }
   ]
 }

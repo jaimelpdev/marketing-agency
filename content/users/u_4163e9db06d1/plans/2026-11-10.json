@@ -1,439 +1,350 @@
 {
   "date": "2026-11-10",
-  "estrategia": "Publicamos 2 reels, 2 carruseles y 1 post en 5 de los 7 días, dejando descansos los días 0 y 3 para no saturar y respetar el ritmo de 18 h entre publicaciones de feed. Las historias complementan los reels los días de mayor actividad y generan interacción directa.",
+  "estrategia": "Publicaremos 4 piezas de feed distribuidas de martes a viernes (reel, carrusel, reel y post) y una historia el domingo. Se alternan formatos y objetivos para combinar alcance, autoridad y comunidad, respetando descansos los lunes y sábados.",
   "piezas": [
     {
-      "id": "pmwb6vpii_1",
-      "dia": 1,
-      "hora": "09:00",
-      "tipo": "historia",
-      "objetivo": "interacción",
-      "razon": "Invitar a la audiencia a compartir su mayor dificultad al reaccionar",
-      "tema": "Desafío de reacción",
-      "formato": "pregunta provocativa",
-      "gancho": "¿Cuál es tu mayor reto en reacción?",
-      "visual": "driver ready at start line",
+      "id": "pmwb7wt8c_0",
+      "dia": 0,
+      "hora": "19:30",
+      "tipo": "reel",
+      "objetivo": "alcance",
+      "razon": "Inicia la semana con tip técnico que atrae a nuevos seguidores",
+      "tema": "Error de telemetría: frenado tardío por falta de freno motor",
+      "formato": "el error que todos cometen",
+      "gancho": "El error que te hace perder 0.3s por curva",
+      "visual": "animated racing dashboard with red warning",
       "escenas": [
         {
-          "titulo": "Reto rápido",
-          "texto": "Cuéntame tu mayor dificultad al frenar",
+          "titulo": "Freno motor ausente",
+          "texto": "Sin freno motor pierdes tracción al entrar en curva",
           "emoji": "",
-          "visual": "hand hovering over brake pedal",
-          "grafico": null
+          "visual": "close‑up of car braking zone",
+          "grafico": {
+            "tipo": "checklist",
+            "items": [
+              "activar freno motor",
+              "ajustar umbral",
+              "ver telemetría"
+            ]
+          }
+        },
+        {
+          "titulo": "Pero ojo…",
+          "texto": "Muchos usan solo freno de pie y sobrecargan neumáticos",
+          "emoji": "",
+          "visual": "tires skidding",
+          "grafico": {
+            "tipo": "comparacion",
+            "mal": "solo pie",
+            "bien": "motor+pie"
+          }
+        },
+        {
+          "titulo": "Último truco",
+          "texto": "Activa freno motor 50% antes, gana 0.3s",
+          "emoji": "",
+          "visual": "telemetry graph showing improvement",
+          "grafico": {
+            "tipo": "progreso",
+            "valor": 70,
+            "etiqueta": "ganancia"
+          }
         }
       ],
-      "cta": "",
+      "cta": "Comenta FRENOMOTOR y descarga la app en bio",
+      "sticker": null,
+      "fondo": "animado",
+      "estilo": "racing",
+      "caption": "¿Te ha pasado perder tiempo por no usar el freno motor? 🚗💨 Cuéntanos y guarda este tip.",
+      "hashtags": "#simracing #telemetria #tips #LAPRIQ #racingcoach",
+      "audio": "voz_y_musica",
+      "voz": "hombre",
+      "ritmo_voz": "energico",
+      "musica": "energetica",
+      "guion": [
+        "El error que te hace perder 0.3s por curva",
+        "Sin freno motor pierdes tracción al entrar en curva",
+        "Muchos usan solo freno de pie y sobrecargan neumáticos",
+        "Activa freno motor 50% antes, gana 0.3s",
+        "Comenta FRENOMOTOR y descarga la app en bio"
+      ],
+      "anim": "pop",
+      "serie": "Error de la semana",
+      "episodio": 1,
+      "plantilla": 1551,
+      "layout": "lista",
+      "stickers": [
+        "🏎️",
+        "⚙️",
+        "💨"
+      ]
+    },
+    {
+      "id": "pmwb7wt8d_1",
+      "dia": 1,
+      "hora": "13:30",
+      "tipo": "carrusel",
+      "objetivo": "confianza",
+      "razon": "Desmitificar creencias para ganar autoridad",
+      "tema": "Mito vs realidad: más downforce siempre es mejor",
+      "formato": "mito vs realidad",
+      "gancho": "¿Mito o realidad? Downforce extremo",
+      "visual": "animated infographic of car with varying wings",
+      "escenas": [
+        {
+          "titulo": "Mito: Más downforce = más velocidad",
+          "texto": "Crees que más alerón siempre te hace ir más rápido",
+          "emoji": "",
+          "visual": "car with huge wing",
+          "grafico": {
+            "tipo": "comparacion",
+            "mal": "más alerón",
+            "bien": "exceso"
+          }
+        },
+        {
+          "titulo": "Realidad",
+          "texto": "Exceso de downforce aumenta resistencia y frena en rectas",
+          "emoji": "",
+          "visual": "speedometer dropping",
+          "grafico": {
+            "tipo": "velocimetro",
+            "valor": 55,
+            "etiqueta": "resistencia"
+          }
+        },
+        {
+          "titulo": "Pero ojo…",
+          "texto": "En circuitos con muchas curvas, un poco más ayuda",
+          "emoji": "",
+          "visual": "tight circuit map",
+          "grafico": {
+            "tipo": "checklist",
+            "items": [
+              "circuito con curvas",
+              "añadir 10% downforce"
+            ]
+          }
+        },
+        {
+          "titulo": "Último consejo",
+          "texto": "Ajusta downforce 5‑10% según longitud de rectas",
+          "emoji": "",
+          "visual": "setup screen showing downforce slider",
+          "grafico": {
+            "tipo": "objetivo",
+            "etiqueta": "ajuste óptimo"
+          }
+        }
+      ],
+      "cta": "Guarda este carrusel y prueba el ajuste en tu próximo lap",
+      "sticker": null,
+      "fondo": "color",
+      "estilo": "neon",
+      "caption": "¿Crees que más alerón siempre ayuda? Descubre la verdad y ajusta tu coche.",
+      "hashtags": "#simracing #downforce #mitos #LAPRIQ #coaching",
+      "audio": "",
+      "voz": "",
+      "ritmo_voz": "",
+      "musica": "",
+      "guion": [],
+      "anim": "slide",
+      "serie": "Mito o realidad",
+      "episodio": 1,
+      "plantilla": 1937,
+      "layout": "tarjeta",
+      "stickers": [
+        "🏁",
+        "📊",
+        "⚖️"
+      ]
+    },
+    {
+      "id": "pmwb7wt8d_2",
+      "dia": 2,
+      "hora": "19:45",
+      "tipo": "reel",
+      "objetivo": "comunidad",
+      "razon": "Involucrar seguidores mostrando mejora real",
+      "tema": "Setup del seguidor: optimizamos el setup de @juan para Spa",
+      "formato": "antes y después",
+      "gancho": "¿Qué le pasa a tu setup en Spa?",
+      "visual": "animated split‑screen of car telemetry",
+      "escenas": [
+        {
+          "titulo": "Setup original",
+          "texto": "Juan tenía balance neutro y frenos tardíos",
+          "emoji": "",
+          "visual": "telemetry screenshot",
+          "grafico": {
+            "tipo": "checklist",
+            "items": [
+              "balance neutro",
+              "frenos tardíos"
+            ]
+          }
+        },
+        {
+          "titulo": "Pero ojo…",
+          "texto": "Ignoró la zona de frenado de la curva 1",
+          "emoji": "",
+          "visual": "track map Spa curve 1",
+          "grafico": {
+            "tipo": "ruta",
+            "desde": "curva 1",
+            "hasta": "curva 2"
+          }
+        },
+        {
+          "titulo": "Ajuste clave",
+          "texto": "Añadimos +5% rear bias y freno motor 40%",
+          "emoji": "",
+          "visual": "setup panel",
+          "grafico": {
+            "tipo": "comparacion",
+            "mal": "neutro",
+            "bien": "+5% rear"
+          }
+        },
+        {
+          "titulo": "Resultado final",
+          "texto": "Ganó 0.45s y estabilidad en curvas rápidas",
+          "emoji": "",
+          "visual": "lap time comparison",
+          "grafico": {
+            "tipo": "progreso",
+            "valor": 65,
+            "etiqueta": "ganancia"
+          }
+        }
+      ],
+      "cta": "Etiqueta tu setup y recibe mejora, descarga la app",
+      "sticker": null,
+      "fondo": "animado",
+      "estilo": "racing",
+      "caption": "¿Tu coche sufre en Spa? Mándanos tu setup y mejora tu tiempo.",
+      "hashtags": "#simracing #setup #Spa #LAPRIQ #coaching",
+      "audio": "voz_y_musica",
+      "voz": "hombre",
+      "ritmo_voz": "normal",
+      "musica": "divertida",
+      "guion": [
+        "¿Qué le pasa a tu setup en Spa?",
+        "Juan tenía balance neutro y frenos tardíos",
+        "Ignoró la zona de frenado de la curva 1",
+        "Añadimos +5% rear bias y freno motor 40%",
+        "Ganó 0.45s y estabilidad en curvas rápidas",
+        "Etiqueta tu setup y recibe mejora, descarga la app"
+      ],
+      "anim": "pop",
+      "serie": "Setup del seguidor",
+      "episodio": 1,
+      "plantilla": 904,
+      "layout": "dividido",
+      "stickers": [
+        "🏎️",
+        "🔧",
+        "🚀"
+      ]
+    },
+    {
+      "id": "pmwb7wt8d_3",
+      "dia": 3,
+      "hora": "13:00",
+      "tipo": "post",
+      "objetivo": "comunidad",
+      "razon": "Fomentar interacción y comentarios",
+      "tema": "Pregunta a la comunidad: zona de frenado más difícil",
+      "formato": "pregunta directa",
+      "gancho": "¿Cuál es tu zona de frenado más dura?",
+      "visual": "color background with bold text overlay",
+      "escenas": [
+        {
+          "titulo": "Zona crítica",
+          "texto": "Muchos pierden tiempo en la misma zona de frenado",
+          "emoji": "",
+          "visual": "abstract racing line illustration",
+          "grafico": {
+            "tipo": "checklist",
+            "items": [
+              "identificar zona",
+              "ajustar freno",
+              "practicar"
+            ]
+          }
+        }
+      ],
+      "cta": "Comenta abajo y descarga la app para entrenar esa zona",
+      "sticker": null,
+      "fondo": "color",
+      "estilo": "minimal",
+      "caption": "Muchos pilotos pierden tiempo en la misma zona. Cuéntanos la tuya y mejora con LAPRIQ.",
+      "hashtags": "#simracing #frenado #comunidad #LAPRIQ #coaching",
+      "audio": "",
+      "voz": "",
+      "ritmo_voz": "",
+      "musica": "",
+      "guion": [],
+      "anim": "type",
+      "serie": "",
+      "episodio": 0,
+      "plantilla": 2175,
+      "layout": "clasico",
+      "stickers": []
+    },
+    {
+      "id": "pmwb7wt8d_4",
+      "dia": 5,
+      "hora": "09:00",
+      "tipo": "historia",
+      "objetivo": "",
+      "razon": "Recordar descuento Black Friday y dirigir a la bio",
+      "tema": "Promoción Black Friday: 15 días de garantía + 20% descuento",
+      "formato": "mini anuncio",
+      "gancho": "¡Black Friday llega a LAPRIQ!",
+      "visual": "ia background showing racing helmet with sale badge",
+      "escenas": [
+        {
+          "titulo": "Oferta limitada",
+          "texto": "15 días de garantía y 20% de descuento en todos los planes",
+          "emoji": "",
+          "visual": "dynamic sale banner",
+          "grafico": {
+            "tipo": "contador",
+            "valor": 20,
+            "unidad": "%"
+          }
+        }
+      ],
+      "cta": "Desliza arriba",
       "sticker": {
-        "tipo": "pregunta",
-        "texto": "¿Qué te cuesta reaccionar en pista?",
+        "tipo": "enlace",
+        "texto": "Descarga la app ahora",
         "opciones": [],
         "auto": true
       },
-      "fondo": "color",
+      "fondo": "ia",
       "estilo": "racing",
       "caption": "",
       "hashtags": "",
       "audio": "solo_musica",
       "voz": "",
       "ritmo_voz": "",
-      "musica": "chill",
+      "musica": "epica",
       "guion": [
-        "¿Cuál es tu mayor reto en reacción?"
+        "¡Black Friday llega a LAPRIQ!",
+        "15 días de garantía y 20% de descuento en planes",
+        "Descarga la app ahora"
       ],
-      "anim": "pop",
-      "plantilla": 272,
-      "layout": "clasico",
-      "stickers": [
-        "🏎️",
-        "❓",
-        "🗨️"
-      ]
-    },
-    {
-      "id": "pmwb6vpii_0",
-      "dia": 1,
-      "hora": "19:30",
-      "tipo": "reel",
-      "objetivo": "alcance",
-      "razon": "Atraer nuevos seguidores con un drill de reacción ultra rápido",
-      "tema": "Entrenamiento de reacción de 1 segundo para arrancadas",
-      "formato": "desafio de tiempo",
-      "gancho": "¿Listo para acelerar tu reacción en 1 segundo?",
-      "visual": "high‑speed racing cockpit with a focused driver",
-      "escenas": [
-        {
-          "titulo": "Desafío 1s",
-          "texto": "Mide tu tiempo de reacción al frenar",
-          "emoji": "",
-          "visual": "close‑up of brake pedal lighting up",
-          "grafico": {
-            "tipo": "contador",
-            "valor": 1,
-            "unidad": "segundos"
-          }
-        },
-        {
-          "titulo": "Ejercicio",
-          "texto": "Practica con luz verde y suelta el freno al instante",
-          "emoji": "",
-          "visual": "driver's hand releasing brake",
-          "grafico": {
-            "tipo": "checklist",
-            "items": [
-              "Enciende luz",
-              "Respira",
-              "Suéltalo"
-            ]
-          }
-        },
-        {
-          "titulo": "Error común",
-          "texto": "Esperar demasiado y perder velocidad",
-          "emoji": "",
-          "visual": "car slipping",
-          "grafico": {
-            "tipo": "comparacion",
-            "mal": "espera",
-            "bien": "reacción"
-          }
-        },
-        {
-          "titulo": "Resultado",
-          "texto": "Mejora 0.2s en cada curva",
-          "emoji": "",
-          "visual": "lap time dropping",
-          "grafico": {
-            "tipo": "progreso",
-            "valor": 20,
-            "etiqueta": "mejora %"
-          }
-        }
-      ],
-      "cta": "Guarda este drill y comenta REACCIÓN",
-      "sticker": null,
-      "fondo": "animado",
-      "estilo": "neon",
-      "caption": "Un segundo puede marcar la diferencia en cada vuelta. 💨 ¿Ya lo pruebas? Guarda y comparte. 👉 Link en bio",
-      "hashtags": "#simracing #drill #reactiontime #racingtips #redlineclub",
-      "audio": "voz_y_musica",
-      "voz": "hombre",
-      "ritmo_voz": "energetico",
-      "musica": "energetica",
-      "guion": [
-        "¿Listo para acelerar tu reacción en 1 segundo?",
-        "Mide tu tiempo de reacción al frenar con este drill",
-        "Practica con la luz verde y suelta el freno al instante",
-        "No cometas el error de esperar demasiado, pierdes velocidad",
-        "Al final ganarás 0.2 segundos por curva, siente la diferencia",
-        "Guarda este drill y comenta REACCIÓN"
-      ],
-      "anim": "slide",
-      "plantilla": 1937,
-      "layout": "chat",
-      "stickers": [
-        "🏎️",
-        "⚡",
-        "🛞"
-      ]
-    },
-    {
-      "id": "pmwb6vpii_2",
-      "dia": 2,
-      "hora": "13:30",
-      "tipo": "carrusel",
-      "objetivo": "autoridad",
-      "razon": "Educar sobre gestión de neumáticos en carreras de resistencia",
-      "tema": "Estrategia de neumáticos para 2‑hour endurance",
-      "formato": "analisis de caso",
-      "gancho": "3 claves para cuidar tus neumáticos en maratón",
-      "visual": "aerial view of race track with tire marks",
-      "escenas": [
-        {
-          "titulo": "Temperatura",
-          "texto": "Mantén la pista < 90°C para evitar desgaste rápido",
-          "emoji": "",
-          "visual": "thermal map of track",
-          "grafico": {
-            "tipo": "contador",
-            "valor": 90,
-            "unidad": "°C"
-          }
-        },
-        {
-          "titulo": "Presión",
-          "texto": "Ajusta 2 psi menos que en pruebas cortas",
-          "emoji": "",
-          "visual": "tire pressure gauge",
-          "grafico": {
-            "tipo": "checklist",
-            "items": [
-              "Revisa presión",
-              "Reduce 2 psi",
-              "Confirma"
-            ]
-          }
-        },
-        {
-          "titulo": "Desgaste",
-          "texto": "Cambia al menos cada 20 vueltas en alta carga",
-          "emoji": "",
-          "visual": "tire wear close‑up",
-          "grafico": {
-            "tipo": "progreso",
-            "valor": 20,
-            "etiqueta": "vuelta"
-          }
-        },
-        {
-          "titulo": "Ventaja final",
-          "texto": "Ganas hasta 1.5s por pit‑stop inteligente",
-          "emoji": "",
-          "visual": "pit stop fast",
-          "grafico": {
-            "tipo": "velocimetro",
-            "valor": 85,
-            "etiqueta": "ganancia %"
-          }
-        }
-      ],
-      "cta": "Descarga la guía completa en la bio",
-      "sticker": null,
-      "fondo": "animado",
-      "estilo": "racing",
-      "caption": "Domina la gestión de neumáticos y ahorra segundos críticos. 💡 ¿Cuál aplicarás primero? 👉 Link en bio",
-      "hashtags": "#neumáticos #endurance #simracingtips #redlineclub #racingstrategy",
-      "audio": "",
-      "voz": "",
-      "ritmo_voz": "",
-      "musica": "",
-      "guion": [],
-      "anim": "pop",
-      "plantilla": 904,
-      "layout": "tarjeta",
-      "stickers": [
-        "🛞",
-        "⏱️",
-        "🏁"
-      ]
-    },
-    {
-      "id": "pmwb6vpij_3",
-      "dia": 4,
-      "hora": "11:00",
-      "tipo": "reel",
-      "objetivo": "tráfico",
-      "razon": "Mostrar la nueva función de objetivos personalizados de la app",
-      "tema": "Vista previa de la app: objetivos personalizados",
-      "formato": "exploración de datos",
-      "gancho": "La función oculta que hará tu entrenamiento inteligente",
-      "visual": "tablet screen showing app dashboard with graphs",
-      "escenas": [
-        {
-          "titulo": "Dashboard",
-          "texto": "Mira tu progreso en tiempo real",
-          "emoji": "",
-          "visual": "app main screen",
-          "grafico": {
-            "tipo": "objetivo",
-            "etiqueta": "progreso"
-          }
-        },
-        {
-          "titulo": "Objetivo diario",
-          "texto": "Define metas de tiempo y consistencia",
-          "emoji": "",
-          "visual": "goal setting screen",
-          "grafico": {
-            "tipo": "checklist",
-            "items": [
-              "Selecciona pista",
-              "Establece tiempo",
-              "Activa alerta"
-            ]
-          }
-        },
-        {
-          "titulo": "Feedback instantáneo",
-          "texto": "Recibe alertas cuando superas el límite",
-          "emoji": "",
-          "visual": "notification pop‑up",
-          "grafico": {
-            "tipo": "comparacion",
-            "mal": "sin alerta",
-            "bien": "con alerta"
-          }
-        },
-        {
-          "titulo": "Comparativa",
-          "texto": "Mira tu mejora vs semana anterior",
-          "emoji": "",
-          "visual": "graph line climbing",
-          "grafico": {
-            "tipo": "progreso",
-            "valor": 30,
-            "etiqueta": "mejora %"
-          }
-        },
-        {
-          "titulo": "Únete ahora",
-          "texto": "Accede a contenido exclusivo",
-          "emoji": "",
-          "visual": "app login button",
-          "grafico": null
-        }
-      ],
-      "cta": "Descubre más en la bio",
-      "sticker": null,
-      "fondo": "color",
-      "estilo": "pop",
-      "caption": "Tu entrenamiento, ahora con datos que hablan. 🚀 ¿Qué objetivo te pones? 👉 Link en bio",
-      "hashtags": "#apppreview #simracing #training #redlineclub #gamingtips",
-      "audio": "voz_y_musica",
-      "voz": "mujer",
-      "ritmo_voz": "normal",
-      "musica": "divertida",
-      "guion": [
-        "La función oculta que hará tu entrenamiento inteligente",
-        "Mira tu progreso en tiempo real con el nuevo dashboard",
-        "Define metas diarias de tiempo y consistencia en segundos",
-        "Recibe alertas instantáneas cuando superas tu límite",
-        "Compara tu mejora semana a semana y celebra",
-        "Accede a contenido exclusivo, link en bio"
-      ],
-      "anim": "type",
-      "plantilla": 2175,
-      "layout": "clasico",
-      "stickers": [
-        "📱",
-        "⚙️",
-        "🚀"
-      ]
-    },
-    {
-      "id": "pmwb6vpij_4",
-      "dia": 5,
-      "hora": "14:00",
-      "tipo": "post",
-      "objetivo": "interacción",
-      "razon": "Fomentar conversación sobre la mentalidad de overtaking",
-      "tema": "Mentalidad para adelantar sin miedo",
-      "formato": "historia de éxito",
-      "gancho": "El truco mental que te da la pista",
-      "visual": "driver silhouette over racing line, glowing",
-      "escenas": [
-        {
-          "titulo": "Mentalidad Overtake",
-          "texto": "Visualiza la salida, respira, ataca en el momento justo",
-          "emoji": "",
-          "visual": "driver silhouette over racing line, glowing",
-          "grafico": null
-        }
-      ],
-      "cta": "Comenta OVERTAKE y comparte tu experiencia",
-      "sticker": null,
-      "fondo": "color",
-      "estilo": "racing",
-      "caption": "El secreto no está en el coche, sino en tu mente. ¿Listo para adelantar sin miedo? 💥 Comenta OVERTAKE. 👉 Link en bio",
-      "hashtags": "#overtake #mindset #simracing #racingtips #redlineclub",
-      "audio": "",
-      "voz": "",
-      "ritmo_voz": "",
-      "musica": "",
-      "guion": [],
       "anim": "fade",
+      "serie": "",
+      "episodio": 0,
       "plantilla": 1139,
       "layout": "clasico",
       "stickers": [
+        "💰",
         "🏎️",
-        "💡",
-        "🔥"
-      ]
-    },
-    {
-      "id": "pmwb6vpij_5",
-      "dia": 6,
-      "hora": "13:00",
-      "tipo": "carrusel",
-      "objetivo": "autoridad",
-      "razon": "Compartir los mejores setups de la comunidad para Spa y generar engagement",
-      "tema": "Top 5 setups compartidos para Spa",
-      "formato": "guia de configuración",
-      "gancho": "5 setups de Spa que ganan segundos",
-      "visual": "Spa track aerial view",
-      "escenas": [
-        {
-          "titulo": "Setup 1",
-          "texto": "Alineación ligera, ángulo 7°, presión 24 psi",
-          "emoji": "",
-          "visual": "car on Spa corner",
-          "grafico": {
-            "tipo": "checklist",
-            "items": [
-              "Ángulo 7°",
-              "Presión 24 psi",
-              "Alineación ligera"
-            ]
-          }
-        },
-        {
-          "titulo": "Setup 2",
-          "texto": "Suspensión rígida, rear camber -2°",
-          "emoji": "",
-          "visual": "car rear view",
-          "grafico": null
-        },
-        {
-          "titulo": "Setup 3",
-          "texto": "Reducción de peso en frenos 10%",
-          "emoji": "",
-          "visual": "brake disc",
-          "grafico": {
-            "tipo": "contador",
-            "valor": 10,
-            "unidad": "%"
-          }
-        },
-        {
-          "titulo": "Setup 4",
-          "texto": "Mapeo de throttle 85%",
-          "emoji": "",
-          "visual": "throttle curve",
-          "grafico": {
-            "tipo": "progreso",
-            "valor": 85,
-            "etiqueta": "throttle"
-          }
-        },
-        {
-          "titulo": "Setup 5",
-          "texto": "Gear ratios optimizados para alta velocidad",
-          "emoji": "",
-          "visual": "gearbox diagram",
-          "grafico": {
-            "tipo": "ruta",
-            "desde": "1ª",
-            "hasta": "6ª"
-          }
-        }
-      ],
-      "cta": "Comparte tu setup favorito en la bio",
-      "sticker": null,
-      "fondo": "animado",
-      "estilo": "minimal",
-      "caption": "Los mejores setups de la comunidad para Spa. 🏎️ ¿Cuál probarás? 👉 Link en bio",
-      "hashtags": "#spa #setup #simracing #community #redlineclub",
-      "audio": "",
-      "voz": "",
-      "ritmo_voz": "",
-      "musica": "",
-      "guion": [],
-      "anim": "pop",
-      "plantilla": 2188,
-      "layout": "dividido",
-      "stickers": [
-        "🏁",
-        "⚙️",
-        "🛞"
+        "⚡"
       ]
     }
   ]

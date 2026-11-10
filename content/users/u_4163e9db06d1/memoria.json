@@ -1,0 +1,138 @@
+{
+ "version": 1,
+ "creada": "2026-11-10T21:43:01",
+ "actualizada": "2026-11-10T21:43:01",
+ "semana": 1,
+ "fase": "descubrimiento",
+ "objetivo_mes": "Aumentar el alcance y posicionar a LAPRIQ como referencia de tips técnicos y coaching en sim‑racing",
+ "arco_semana": {
+  "tema": "Optimiza tu setup para cada circuito",
+  "porque": "Conecta los reels de ajustes de coche y gestión de box con contenido educativo que invite a probar la metodología de LAPRIQ"
+ },
+ "mezcla": {
+  "alcance": 55,
+  "confianza": 25,
+  "comunidad": 15,
+  "conversion": 5
+ },
+ "series": [
+  {
+   "nombre": "Error de la semana",
+   "formato": "reel",
+   "cuando": "lunes",
+   "descripcion": "Se muestra un error típico de telemetría y cómo corregirlo",
+   "episodios": 1
+  },
+  {
+   "nombre": "Setup del seguidor",
+   "formato": "reel",
+   "cuando": "jueves",
+   "descripcion": "Analizamos el setup enviado por un seguidor y lo mejoramos en tiempo real",
+   "episodios": 1
+  },
+  {
+   "nombre": "Mito o realidad",
+   "formato": "carrusel",
+   "cuando": "miércoles",
+   "descripcion": "Desmentimos creencias comunes del sim‑racing con datos y ejemplos",
+   "episodios": 1
+  }
+ ],
+ "aprendizajes": [
+  "Los reels con datos concretos (Nm, mm, tiempos) generan >80% más engagement",
+  "Los contenidos de ajuste de coche y estrategia de boxes reciben más likes y guardados",
+  "Los posts con llamada a comentar aumentan los comentarios en 3×"
+ ],
+ "que_evitar": [
+  "Promociones genéricas de hardware sin vínculo técnico",
+  "Temas demasiado genéricos o fuera de la telemetría",
+  "Capturas largas sin gancho visual"
+ ],
+ "promesas_pendientes": [],
+ "ideas": [
+  "Crear un reto mensual de telemetría con leaderboard",
+  "Entrevista en IG Live a un piloto pro usando la app",
+  "Publicar caso de éxito de un alumno que pasó de Rookie a PadDock"
+ ],
+ "tono_comunidad": "Autoridad experta pero cercana; lenguaje técnico simplificado, invita a la interacción y celebra los logros de la comunidad",
+ "hitos": [
+  "Lanzar versión beta de la app con 500 usuarios testeando",
+  "Alcanzar 10 000 seguidores en IG",
+  "Publicar el primer caso de estudio con resultados medibles"
+ ],
+ "metricas": {
+  "publicaciones_medidas": 25,
+  "media_por_formato": {
+   "reel": 45.8
+  },
+  "mejores": [
+   {
+    "tipo": "reel",
+    "date": "2026-10-11",
+    "eng": 97,
+    "likes": 97,
+    "com": 0,
+    "tema": "¿5 Nm o 12 Nm? La diferencia es clave en sensaciones, fatiga y control. Elige tu base con criterio y domina ca"
+   },
+   {
+    "tipo": "reel",
+    "date": "2026-10-22",
+    "eng": 92,
+    "likes": 92,
+    "com": 0,
+    "tema": "En Assetto Corsa, unos milímetros pueden evitar que la zaga golpee al atacar bordillos agresivos. Prueba el aj"
+   },
+   {
+    "tipo": "reel",
+    "date": "2026-10-29",
+    "eng": 87,
+    "likes": 87,
+    "com": 0,
+    "tema": "En Daytona, el rebufo puede darte la pasada o dejarte sin tracción. Aprende a elegir el momento y la línea par"
+   },
+   {
+    "tipo": "reel",
+    "date": "2026-10-06",
+    "eng": 84,
+    "likes": 84,
+    "com": 0,
+    "tema": "¿Frenas fuerte y pierdes el control? Aprende cómo la transferencia de peso afecta la tracción en SimRacing. Do"
+   },
+   {
+    "tipo": "reel",
+    "date": "2026-10-25",
+    "eng": 70,
+    "likes": 67,
+    "com": 1,
+    "tema": "¿La trasera se descoloca en las eses? Prueba este ajuste de barras en iRacing GT4 y gana estabilidad sin perde"
+   }
+  ],
+  "peores": [
+   {
+    "tipo": "reel",
+    "date": "2026-09-22",
+    "eng": 12,
+    "likes": 12,
+    "com": 0,
+    "tema": "¿Notas inconsistencia en tus giros? El sensor magnético en el volante es el cambio que tu sim necesita. Precis"
+   },
+   {
+    "tipo": "reel",
+    "date": "2026-09-29",
+    "eng": 10,
+    "likes": 10,
+    "com": 0,
+    "tema": "¿Curvo o plano? Descubre cómo el tipo de monitor puede cambiar tu experiencia y precisión al volante. ¿Cuál pr"
+   },
+   {
+    "tipo": "reel",
+    "date": "2026-11-08",
+    "eng": 6,
+    "likes": 6,
+    "com": 0,
+    "tema": "En iRacing, una referencia fija evita que frenes tarde o demasiado pronto. Prueba este método en tu próxima se"
+   }
+  ]
+ },
+ "resumen_para_dueño": "Esta semana nos centramos en consolidar el descubrimiento mediante contenido técnico de alto valor y lanzar tres series semanales que fomenten la interacción. La mezcla prioriza alcance y confianza, manteniendo la comunidad al 15 % y una mínima conversión para no saturar."
+}
