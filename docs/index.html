@@ -1637,6 +1637,13 @@ function queueList(box, q) {
     const thumb = it.cover || (it.media && it.media[0] && !/\.mp4$/i.test(it.media[0]) ? it.media[0] : "");
     const row = el("div", { class: "qitem" }, [thumb ? el("img", { class: "qthumb", src: thumb, alt: "", loading: "lazy" }) : null, el("span", { class: "w", text: fmtWhen(it.publishAt) }), el("span", { text: (TYPES[it.tipo] ? TYPES[it.tipo].icon + " " : "") + (it.tema || "") }), el("span", { class: "s", style: "color:" + st[1], text: st[0] })]);
     if (upcoming && !busy && it.id) row.appendChild(el("button", { class: "rd", title: "Rehacer esta pieza", text: "🔄", onclick: e => { e.stopPropagation(); askRedo(it); } }));
+    if ((upcoming || it.status === "failed") && it.id) { let armed = 0; row.appendChild(el("button", { class: "rd danger", title: "Eliminar esta pieza", text: "🗑", onclick: async e => {
+      e.stopPropagation(); const b = e.currentTarget;
+      if (Date.now() - armed > 5000) { armed = Date.now(); b.textContent = "¿Seguro?"; setTimeout(() => { if (Date.now() - armed >= 5000) b.textContent = "🗑"; }, 5100); return; }
+      b.disabled = true; b.textContent = "…";
+      try { const j = await api("/api/delete", { method: "POST", body: { id: it.id } }); HOST.me.requests = j.requests; if (j.status) HOST.me.status = j.status; renderSchedule(); if ($("#acctModal").classList.contains("on")) renderAcct(); setStatus($("#genStatus"), "🗑 Eliminada «" + (it.tema || it.tipo) + "». Ya no se publicará.", "ok"); }
+      catch (er) { b.disabled = false; b.textContent = "🗑"; setStatus($("#genStatus"), er.message, "err"); }
+    } })); }
     if (it.error) row.title = it.error; box.appendChild(row);
     if (it.media && it.media.length) {
       row.classList.add("clk"); row.title = it.error || "Toca para ver la pieza";
@@ -1720,6 +1727,7 @@ ${chatContext()}
 ACCIONES DISPONIBLES (propón solo las que el dueño pida o claramente quiera; si falta un dato importante, pregúntalo en vez de inventarlo)
 - {"tipo":"crear","formato":"reel|historia|post|carrusel|auto","tema":"…","notas":"indicaciones concretas del dueño (enfoque, gancho, tono, CTA…)","cuando":"ISO 8601 con zona, o null para publicarla en cuanto esté lista"}
 - {"tipo":"rehacer","id":"id de una pieza programada","notas":"…"}
+- {"tipo":"eliminar","id":"id de una pieza programada"} (no se publicará y se borra)
 - {"tipo":"rehacer_semana"}
 - {"tipo":"pausar"} · {"tipo":"reanudar"}
 - {"tipo":"ajustes","max_semana":3|5|7|10,"max_por_dia":1|2|3,"audio":"auto|voz|musica|ambos","formatos":["reel","historia","post","carrusel"]} (incluye solo lo que cambie)
@@ -1730,16 +1738,17 @@ DUEÑO: ${userMsg}
 
 Responde SOLO con JSON válido: {"respuesta":"texto para el dueño","acciones":[ … ]}`;
 }
-const ACT_LABEL = { crear: "📝 Crear publicación", rehacer: "🔄 Rehacer pieza", rehacer_semana: "🔄 Rehacer la semana", pausar: "⏸ Pausar piloto automático", reanudar: "▶ Reanudar piloto automático", ajustes: "⚙️ Cambiar ajustes" };
+const ACT_LABEL = { eliminar: "🗑 Eliminar pieza", crear: "📝 Crear publicación", rehacer: "🔄 Rehacer pieza", rehacer_semana: "🔄 Rehacer la semana", pausar: "⏸ Pausar piloto automático", reanudar: "▶ Reanudar piloto automático", ajustes: "⚙️ Cambiar ajustes" };
 function actDesc(a) {
   if (a.tipo === "crear") return (a.formato && a.formato !== "auto" ? a.formato : "formato a elegir") + " · " + (a.tema || "") + (a.cuando ? " · " + fmtWhen(a.cuando) : " · en cuanto esté lista") + (a.notas ? "\n" + a.notas : "");
-  if (a.tipo === "rehacer") { const it = (((HOST.me || {}).status || {}).queue || []).find(x => x.id === a.id); return it ? (it.tipo + " · " + (it.tema || "") + " · " + fmtWhen(it.publishAt)) : a.id; }
+  if (a.tipo === "rehacer" || a.tipo === "eliminar") { const it = (((HOST.me || {}).status || {}).queue || []).find(x => x.id === a.id); return it ? (it.tipo + " · " + (it.tema || "") + " · " + fmtWhen(it.publishAt)) : a.id; }
   if (a.tipo === "ajustes") return Object.entries(a).filter(([k]) => k !== "tipo").map(([k, v]) => k + ": " + (Array.isArray(v) ? v.join(", ") : v)).join(" · ");
   return "";
 }
 async function runAction(a) {
   const P = HOST.plan;
   if (a.tipo === "crear") { const j = await api("/api/create", { method: "POST", body: { tipo: a.formato || "auto", tema: a.tema || "", notas: a.notas || "", cuando: a.cuando || null } }); HOST.me.requests = j.requests; return "📝 En marcha: la agencia la está creando" + (a.cuando ? " y la programará para " + fmtWhen(a.cuando) : " y la publicará en cuanto esté lista") + "."; }
+  if (a.tipo === "eliminar") { const j = await api("/api/delete", { method: "POST", body: { id: a.id } }); HOST.me.requests = j.requests; if (j.status) HOST.me.status = j.status; return "🗑 Eliminada. Ya no se publicará."; }
   if (a.tipo === "rehacer") { const j = await api("/api/redo", { method: "POST", body: { id: a.id } }); HOST.me.requests = j.requests; return "🔄 Rehaciendo la pieza."; }
   if (a.tipo === "rehacer_semana") { const j = await api("/api/replan", { method: "POST" }); HOST.me.requests = j.requests; return "🔄 Rehaciendo la semana."; }
   if (a.tipo === "pausar" || a.tipo === "reanudar") { P.auto = a.tipo === "reanudar"; saveCfg(); return P.auto ? "▶ Piloto automático activado." : "⏸ Piloto automático en pausa."; }

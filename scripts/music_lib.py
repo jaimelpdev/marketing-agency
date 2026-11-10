@@ -67,15 +67,39 @@ def _index(folder):
 
 
 def _search(mood, log):
-    q = random.choice(QUERIES.get(mood) or QUERIES["energetica"])
+    q = random.choice(QUERIES.get(mood) or QUERIES["energetica"]) + random.choice(["", " instrumental", " background"])
     params = {"q": q, "category": "music", "license": "cc0,by", "page_size": 20, "page": random.randint(1, 5)}
     r = requests.get(API + "/audio/", params=params, headers=UA, timeout=30)
     r.raise_for_status()
     res = [x for x in r.json().get("results", [])
-           if x.get("url") and 60_000 <= (x.get("duration") or 0) <= 480_000 and not x.get("mature")]
+           if x.get("url") and 75_000 <= (x.get("duration") or 0) <= 360_000 and not x.get("mature") and not _bad(x)]
+    # primero las que se etiquetan como instrumentales / de fondo (suenan mejor bajo la voz)
     random.shuffle(res)
+    res.sort(key=lambda x: -_score(x))
     log(f"    música: «{q}» → {len(res)} candidatas")
     return res
+
+
+BAD_WORDS = ("horror", "psyched", "vocal", "sing", "song with", "lyrics", "christmas", "xmas", "meditat", "noise", "demo",
+             "karaoke", "acapella", "a cappella", "spoken", "poem", "podcast", "sad", "funeral", "drone", "experimental", "test",
+             "remix contest", "live", "rehearsal", "lullaby", "anthem", "national", "religious", "church")
+GOOD_WORDS = ("instrumental", "background", "corporate", "advertising", "commercial", "youtube", "vlog", "upbeat", "motivational",
+              "inspiring", "sport", "positive", "happy", "beat", "groove", "energetic")
+
+
+def _words(x):
+    tags = " ".join(str(t.get("name", "")) for t in (x.get("tags") or []) if isinstance(t, dict))
+    return f"{x.get('title', '')} {tags} {' '.join(map(str, x.get('genres') or []))}".lower()
+
+
+def _bad(x):
+    w = _words(x)
+    return any(b in w for b in BAD_WORDS)
+
+
+def _score(x):
+    w = _words(x)
+    return sum(2 for g in GOOD_WORDS if g in w) + (1 if (x.get("source") == "jamendo") else 0)
 
 
 def _download(item, folder):

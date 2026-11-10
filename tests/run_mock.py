@@ -148,7 +148,7 @@ os.environ.update({"AGENCIA_API": "http://127.0.0.1:8765", "AGENCIA_ADMIN_TOKEN"
 import daily  # noqa: E402
 daily.install_routes = mock_routes
 # voz simulada: un tono cuya duración depende del número de palabras
-def fake_tts(text, voice, rate, out):
+def fake_tts(text, voice, rate, out, *a, **k):
     d = max(1.0, len(text.split()) * 0.33)
     subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-f", "lavfi", "-i", f"sine=frequency=440:duration={d}", "-ar", "24000", str(out)], check=True)
 daily.tts = fake_tts

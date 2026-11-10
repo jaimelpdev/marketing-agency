@@ -226,7 +226,7 @@ async function handle(req, env) {
     for (const id of await listUserIds(env)) {
       const u = await getUser(env, id);
       const r = u && u.requests;
-      if (r && (r.reset || r.replan || (r.redo && r.redo.length) || (r.create && r.create.length))) return json({ pending: true });
+      if (r && (r.reset || r.replan || (r.redo && r.redo.length) || (r.create && r.create.length) || (r.remove && r.remove.length))) return json({ pending: true });
     }
     return json({ pending: false });
   }
@@ -324,6 +324,25 @@ async function handle(req, env) {
       u.requests.create = list.concat(item);
       await putUser(env, u);
       return json({ ok: true, item, requests: u.requests, started: await kickAgency(env) });
+    }
+    if (p === "/api/delete" && method === "POST") {
+      // Eliminar una pieza programada: se anula ya en las redes y la agencia borra sus archivos
+      const b = await req.json().catch(() => ({}));
+      const id = String(b.id || "");
+      const q = (u.status && u.status.queue) || [];
+      const item = q.find(x => x.id === id);
+      if (!item) return err(404, "not_found", "No encuentro esa pieza.");
+      if (!["pending", "scheduled", "failed"].includes(item.status)) return err(400, "bad_request", "Esa pieza ya está publicada; bórrala desde la propia red social.");
+      if (item.zernioPostId && env.ZERNIO_API_KEY) {
+        try { await zernio(env, "DELETE", "/posts/" + encodeURIComponent(item.zernioPostId)); }
+        catch (e) { if (!/404|not found/i.test(String(e.message))) return err(502, "upstream", "Zernio no ha podido anular la publicación. Prueba otra vez."); }
+      }
+      u.status.queue = q.filter(x => x.id !== id);
+      u.requests = u.requests || {};
+      u.requests.remove = (u.requests.remove || []).filter(x => x !== id).concat(id).slice(-50);
+      u.requests.redo = (u.requests.redo || []).filter(x => x !== id);
+      await putUser(env, u);
+      return json({ ok: true, requests: u.requests, status: u.status, started: await kickAgency(env) });
     }
     if (p === "/api/replan" && method === "POST") {
       u.requests = { ...(u.requests || {}), replan: new Date().toISOString(), redo: [] };
@@ -471,6 +490,8 @@ async function handle(req, env) {
       if (b.reset && r.reset === b.reset) delete r.reset;
       if (b.replan && r.replan === b.replan) delete r.replan;
       if (Array.isArray(b.redo)) r.redo = (r.redo || []).filter(x => !b.redo.includes(x));
+      if (Array.isArray(b.remove)) r.remove = (r.remove || []).filter(x => !b.remove.includes(x));
+      if (Array.isArray(r.remove) && !r.remove.length) delete r.remove;
       if (Array.isArray(b.create)) r.create = (r.create || []).filter(x => !b.create.includes(x.id));
       if (Array.isArray(r.create) && !r.create.length) delete r.create;
       if (Array.isArray(r.redo) && !r.redo.length) delete r.redo;
@@ -502,7 +523,7 @@ async function handle(req, env) {
       const u = await getUser(env, m[1]);
       if (!u) return err(404, "not_found", "Usuario no encontrado.");
       const b = await req.json().catch(() => ({}));
-      u.status = { updated: new Date().toISOString(), estrategia: String(b.estrategia || (u.status && u.status.estrategia) || ""), queue: Array.isArray(b.queue) ? b.queue.slice(0, 60) : [] };
+      u.status = { updated: new Date().toISOString(), estrategia: String(b.estrategia || (u.status && u.status.estrategia) || ""), queue: (Array.isArray(b.queue) ? b.queue.slice(0, 60) : []).filter(x => !new Set((u.requests && u.requests.remove) || []).has(x && x.id)) }; // las eliminadas no vuelven
       await putUser(env, u);
       return json({ ok: true });
     }

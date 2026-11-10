@@ -189,21 +189,32 @@ def encode_video(frames_dir, total, out_path, voice_clips=(), music=None, credit
         cmd += ["-f", "lavfi", "-i", "anullsrc=r=48000:cl=stereo"]
     m_idx = len(voice_clips) + 1
     has_voice = bool(voice_clips)
-    music_vol = 0.16 if has_voice else 0.9
+    music_vol = 0.42 if has_voice else 1.3  # con voz, la música baja sola cuando se habla (sidechain)
     fade_start = max(0.0, total - 1.2)
     parts, labels = [], []
     for k, (_, start_s) in enumerate(voice_clips):
         ms = int(start_s * 1000)
-        parts.append(f"[{k + 1}:a]aresample=48000,{VOICE_FX},adelay={ms}:all=1,volume=1.1[v{k}]")
-        labels.append(f"[v{k}]")
+        parts.append(f"[{k + 1}:a]aresample=48000,aformat=channel_layouts=stereo,{VOICE_FX},adelay={ms}:all=1,volume=1.1[v{k}]")
     if sfx_track:
         cmd += ["-i", str(sfx_track)]
-        parts.append(f"[{m_idx + 1}:a]aresample=48000,volume={0.32 if has_voice else 0.42}[fx]")
+        parts.append(f"[{m_idx + 1}:a]aresample=48000,aformat=channel_layouts=stereo,volume={0.3 if has_voice else 0.4}[fx]")
+    norm = "loudnorm=I=-18:TP=-2:LRA=9," if music else ""
+    parts.append(f"[{m_idx}:a]aresample=48000,aformat=channel_layouts=stereo,{norm}aresample=48000,volume={music_vol},"
+                 f"afade=t=in:d=0.6,afade=t=out:st={fade_start:.2f}:d=1.2[mu]")
+    if has_voice:
+        n = len(voice_clips)
+        vin = "".join(f"[v{k}]" for k in range(n))
+        parts.append(f"{vin}amix=inputs={n}:normalize=0:duration=longest[vx]" if n > 1 else "[v0]anull[vx]")
+        parts.append("[vx]asplit=2[vox][vsc]")
+        # la música se aparta mientras habla la voz y vuelve en las pausas
+        parts.append("[mu][vsc]sidechaincompress=threshold=0.03:ratio=9:attack=15:release=350:makeup=1[mud]")
+        labels += ["[vox]", "[mud]"]
+    else:
+        labels.append("[mu]")
+    if sfx_track:
         labels.append("[fx]")
-    norm = "loudnorm=I=-16:TP=-1.5:LRA=11," if music else ""
-    parts.append(f"[{m_idx}:a]aresample=48000,{norm}volume={music_vol},afade=t=in:d=0.4,afade=t=out:st={fade_start:.2f}:d=1.2[mu]")
-    labels.append("[mu]")
-    parts.append("".join(labels) + f"amix=inputs={len(labels)}:normalize=0:duration=longest,alimiter=limit=0.95[aout]")
+    parts.append("".join(labels) + f"amix=inputs={len(labels)}:normalize=0:duration=longest,"
+                 "alimiter=limit=0.84:attack=3:release=60:level=false,aformat=channel_layouts=stereo[aout]")
     vmap = "0:v"
     font = "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf"
     if credit and Path(font).exists():
@@ -212,7 +223,7 @@ def encode_video(frames_dir, total, out_path, voice_clips=(), music=None, credit
         vmap = "[vout]"
     cmd += ["-filter_complex", ";".join(parts), "-map", vmap, "-map", "[aout]", "-t", f"{total:.3f}",
             "-c:v", "libx264", "-preset", "medium", "-crf", "20", "-pix_fmt", "yuv420p", "-profile:v", "high", "-r", str(FPS),
-            "-c:a", "aac", "-b:a", "160k", "-ar", "48000", "-movflags", "+faststart", str(out_path)]
+            "-c:a", "aac", "-b:a", "192k", "-ar", "48000", "-ac", "2", "-movflags", "+faststart", str(out_path)]
     subprocess.run(cmd, check=True)
 
 
@@ -637,6 +648,26 @@ def plan_user(browser, user, key, force=False, redo=None):
     return True
 
 
+def remove_items(user, ids):
+    """Elimina piezas de la cola (pedido desde la app): anula en Zernio por si acaso y borra sus archivos."""
+    uid = user["id"]
+    qpath = CONTENT / "users" / uid / "queue.json"
+    queue = load_json(qpath, [])
+    gone = [q for q in queue if q.get("id") in set(ids)]
+    for q in gone:
+        zernio_cancel(q)
+        folder = DOCS / "media" / uid / str(q.get("date", "")) / q["id"]
+        if folder.exists():
+            shutil.rmtree(folder)
+    queue = [q for q in queue if q.get("id") not in set(ids)]
+    save_json(qpath, queue)
+    log(f"🗑 {user.get('name')}: {len(gone)} pieza(s) eliminada(s)")
+    try:
+        api("PUT", f"/admin/status/{uid}", {"estrategia": "", "queue": summarize(queue)})
+    except Exception:
+        pass
+
+
 def reset_user(user):
     """Reinicio de cuenta: anula lo programado y borra cola, historial y archivos de esa persona."""
     uid = user["id"]
@@ -660,10 +691,18 @@ def process_requests(browser, users, key):
     errors = 0
     for u in users:
         r = u.get("requests") or {}
-        if not (r.get("reset") or r.get("replan") or r.get("redo") or r.get("create")):
+        if not (r.get("reset") or r.get("replan") or r.get("redo") or r.get("create") or r.get("remove")):
             continue
         label = f"{u.get('name')} ({u['id']})"
         done = {}
+        if r.get("remove"):
+            remove_items(u, r["remove"])
+            try:
+                api("POST", f"/admin/requests/{u['id']}/done", {"remove": r["remove"]})
+            except Exception as e:
+                log("  ⚠ No se pudo marcar la eliminación como hecha:", e)
+            if not (r.get("reset") or r.get("replan") or r.get("redo") or r.get("create")):
+                continue
         try:
             if r.get("reset"):
                 log(f"♻ {label}: reiniciar cuenta")
@@ -753,7 +792,8 @@ def main():
                 continue
             log(f"▶ {label}")
             try:
-                plan_user(browser, u, key)
+                # FORCE (lanzado a mano con "rehacer"): sustituye TODO lo que aún no se ha publicado
+                plan_user(browser, u, key, force=bool(os.environ.get("FORCE")))
             except Exception as e:
                 errors += 1
                 log(f"  ✗ Error con {label}:", e)

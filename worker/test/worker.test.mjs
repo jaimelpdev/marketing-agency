@@ -43,6 +43,7 @@ globalThis.fetch = async (url, init = {}) => {
     if (path.startsWith("/accounts?profileId=prof1")) return J({ accounts: [{ _id: "acc_tt", platform: "tiktok", username: "ana_tt", isActive: true }] });
     if (path.startsWith("/accounts/acc_tt") && init.method === "DELETE") return J({ ok: true });
     if (path === "/posts") return J({ post: { _id: "post1" } });
+    if (path.startsWith("/posts/") && init.method === "DELETE") return J({ ok: true });
     if (path === "/accounts/acc_tt/posts") return J({ status: "ok", posts: [] });
   }
   throw new Error("fetch inesperado " + url);
@@ -124,6 +125,15 @@ r = await call("POST", "/api/create", { key, body: { tipo: "rara", tema: "x", cu
 r = await call("GET", "/admin/users", { key: "admin123" }); assert.equal(r.j.users.find(x => x.id === uid).requests.create.length, 2);
 r = await call("POST", "/admin/requests/" + uid + "/done", { key: "admin123", body: { create: [cid] } }); assert.equal(r.j.requests.create.length, 1);
 await call("POST", "/api/cancel-request", { key, body: { id: r.j.requests.create[0].id } });
+r = await call("PUT", "/admin/status/" + uid, { key: "admin123", body: { estrategia: "E", queue: [{ id: "d1", tipo: "reel", status: "scheduled", publishAt: fut, zernioPostId: "zp1" }, { id: "d0", tipo: "post", status: "published", publishAt: past }] } });
+zcalls.length = 0;
+r = await call("POST", "/api/delete", { key, body: { id: "d0" } }); assert.equal(r.s, 400, "lo publicado no se borra desde aquí");
+r = await call("POST", "/api/delete", { key, body: { id: "d1" } }); assert.equal(r.s, 200); assert.deepEqual(r.j.requests.remove, ["d1"]);
+assert.ok(zcalls.some(c => c === "DELETE /posts/zp1"), "anula en Zernio al momento: " + zcalls.join(","));
+r = await call("PUT", "/admin/status/" + uid, { key: "admin123", body: { queue: [{ id: "d1", tipo: "reel", status: "scheduled", publishAt: fut }] } });
+r = await call("GET", "/api/me", { key }); assert.ok(!r.j.status.queue.some(x => x.id === "d1"), "no vuelve a aparecer");
+r = await call("GET", "/pending"); assert.equal(r.j.pending, true);
+r = await call("POST", "/admin/requests/" + uid + "/done", { key: "admin123", body: { remove: ["d1"] } });
 r = await call("POST", "/api/reset", { key }); assert.equal(r.s, 200);
 r = await call("GET", "/api/me", { key }); assert.equal(r.j.config, null); assert.equal(r.j.status, null); assert.ok(r.j.requests.reset, "la clave sigue valiendo");
 r = await call("POST", "/admin/requests/" + uid + "/done", { key: "admin123", body: { reset: "otra-fecha" } }); assert.ok(r.j.requests.reset, "no borra una petición distinta");

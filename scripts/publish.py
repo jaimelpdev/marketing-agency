@@ -95,11 +95,11 @@ def publish_item(ig, item, base):
     return ig.publish(cid)
 
 
-def publish_user(udir, base, dry):
+def publish_user(udir, base, dry, removed=frozenset()):
     uid = udir.name
     qpath = udir / "queue.json"
     queue = json.loads(qpath.read_text(encoding="utf-8")) if qpath.exists() else []
-    due = [q for q in queue if q.get("status") == "pending" and datetime.fromisoformat(q["publishAt"]) <= datetime.now(ZoneInfo("UTC"))]
+    due = [q for q in queue if q.get("status") == "pending" and q.get("id") not in removed and datetime.fromisoformat(q["publishAt"]) <= datetime.now(ZoneInfo("UTC"))]
     if not due:
         return
     ig = IG(uid)
@@ -143,8 +143,13 @@ def main():
         return
     dry = bool(os.environ.get("DRY_RUN"))
     base = pages_url()
+    removed = {}
+    try:  # piezas que alguien ha eliminado desde la app y aún no se han borrado de la cola
+        removed = {u["id"]: set((u.get("requests") or {}).get("remove") or []) for u in api("GET", "/admin/users").get("users", [])}
+    except Exception:
+        pass
     for d in dirs:
-        publish_user(d, base, dry)
+        publish_user(d, base, dry, removed.get(d.name, set()))
 
 
 if __name__ == "__main__":
