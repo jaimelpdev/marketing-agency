@@ -421,7 +421,7 @@ https://apps.apple.com/…
 
 <script>
 /* ============ STATE ============ */
-const DEF_V={bgMode:"anim",font:"impact",anim:"pop",size:"m",pos:"center",pace:"normal",length:"medium",kind:"mix",progress:true,badge:true,emoji:false,brand:true,arrow:true,agentVisuals:true,stickers:true,graficos:true,transiciones:true};
+const DEF_V={bgMode:"anim",font:"impact",anim:"pop",size:"m",pos:"center",pace:"normal",length:"medium",kind:"mix",progress:true,badge:true,emoji:false,brand:true,arrow:true,agentVisuals:true,stickers:true,graficos:true,transiciones:true,subtitulos:true};
 const DEF_CFG={name:"",web:"",app:"",ig:"",cta:"",about:"",aud:"",pillars:[],tone:"Cercano y directo",acc:"#ff3b30",bg:"#0b0d12",style:"racing",v:{...DEF_V}};
 const TONES=["Cercano y directo","Energético y motivador","Experto y serio","Divertido y desenfadado"];
 const PALETTES=[["#ff3b30","#0b0d12"],["#00e5ff","#0a0618"],["#c6ff00","#0f1115"],["#ffc83d","#111111"],["#a855f7","#0c0a1a"],["#ff4d8d","#140a10"],["#30d158","#07120b"],["#ff9f0a","#120c05"]];
@@ -440,7 +440,7 @@ const OPTS=[
   {k:"length",label:"Cantidad de texto",items:[["short","Poco"],["medium","Medio"],["long","Mucho"]]},
   {k:"kind",label:"Enfoque del contenido",items:[["mix","Variado"],["tips","Tips"],["error","Errores comunes"],["myth","Mito vs realidad"],["list","Checklist"],["question","Pregunta polémica"],["story","Antes y después"],["promo","Promo de la academia"]]}
 ];
-const TOGGLES=[["graficos","Gráficos animados (velocímetro, checklist…)"],["transiciones","Transiciones y efectos de sonido"],["stickers","Stickers animados (cochecitos, iconos…)"],["agentVisuals","La agencia elige fondo y estilo"],["progress","Barra de progreso"],["badge","Número de escena"],["emoji","Emojis"],["brand","Nombre de marca"],["arrow","Flecha final"]];
+const TOGGLES=[["subtitulos","Subtítulos dinámicos sincronizados con la voz"],["graficos","Gráficos animados (velocímetro, checklist…)"],["transiciones","Transiciones y efectos de sonido"],["stickers","Stickers animados (cochecitos, iconos…)"],["agentVisuals","La agencia elige fondo y estilo"],["progress","Barra de progreso"],["badge","Número de escena"],["emoji","Emojis"],["brand","Nombre de marca"],["arrow","Flecha final"]];
 const FONTS={impact:{h:"Anton",hw:"400",b:"Inter",bw:"800",up:true},modern:{h:"Inter",hw:"900",b:"Inter",bw:"700",up:false},elegant:{h:"Playfair Display",hw:"900",b:"Inter",bw:"600",up:false},round:{h:"Fredoka",hw:"700",b:"Fredoka",bw:"600",up:false}};
 const DEMO={tipo:"reel",tema:"Demo",formato:"tips",gancho:"El *truco* que nadie te cuenta",escenas:[{titulo:"Empieza aquí",texto:"Practica *10 minutos* al día y verás resultados en una semana",emoji:"🔥"}],cta:"Más en el link de la bio",caption:"",hashtags:""};
 /* puntos de extensión (la versión Groq añade imágenes IA y vídeos de stock) */
@@ -461,7 +461,7 @@ function normPiece(v,i){
     tema:String(v.tema||v.gancho||""),formato:String(v.formato||""),gancho:String(v.gancho||""),visual:String(v.visual||""),
     escenas:(Array.isArray(v.escenas)?v.escenas:[]).slice(0,7).map(e=>({titulo:String(e.titulo||""),texto:String(e.texto||""),emoji:String(e.emoji||""),visual:String(e.visual||""),grafico:normGraf(e.grafico)})),
     cta:String(v.cta||""),sticker:st,fondo:String(v.fondo||""),estilo:String(v.estilo||""),caption:String(v.caption||""),hashtags:Array.isArray(v.hashtags)?v.hashtags.join(" "):String(v.hashtags||""),
-    audio:String(v.audio||""),voz:String(v.voz||""),ritmo_voz:String(v.ritmo_voz||""),musica:String(v.musica||""),guion:Array.isArray(v.guion)?v.guion.map(String):[],stickers:(Array.isArray(v.stickers)?v.stickers:[]).map(x=>String(x).trim()).filter(x=>x&&x.length<=12&&!/[A-Za-z0-9]/.test(x)).slice(0,5),...(Array.isArray(v._durs)?{_durs:v._durs}:{})};
+    audio:String(v.audio||""),voz:String(v.voz||""),ritmo_voz:String(v.ritmo_voz||""),musica:String(v.musica||""),guion:Array.isArray(v.guion)?v.guion.map(String):[],anim:["pop","slide","type","fade"].includes(v.anim)?v.anim:"",stickers:(Array.isArray(v.stickers)?v.stickers:[]).map(x=>String(x).trim()).filter(x=>x&&x.length<=12&&!/[A-Za-z0-9]/.test(x)).slice(0,5),...(Array.isArray(v._durs)?{_durs:v._durs}:{})};
 }
 
 /* ============ BRANDING UI ============ */
@@ -597,7 +597,7 @@ $("#musicIn").addEventListener("change",async e=>{const f=e.target.files[0];if(!
 /* ============ PLANNING (AGENCY BRAIN) ============ */
 function availableFondos(){return Object.keys(FONDOS).filter(k=>k!=="mis"||S.media.length);}
 function buildPrompt(n){
-  const c=S.cfg;const past=S.hist.items.slice(-60).map(h=>"- "+(h.date||"")+" · "+(h.tipo||"reel")+" · "+h.tema).join("\n")||"(nada todavía)";
+  const c=S.cfg;const past=S.hist.items.slice(-60).map(h=>"- "+(h.date||"")+" · "+(h.tipo||"reel")+(h.formato?" · formato: "+h.formato:"")+" · "+h.tema).join("\n")||"(nada todavía)";
   const L=PLAN_LIMITS;const dow=new Date().toLocaleDateString("es-ES",{weekday:"long",day:"numeric",month:"long",year:"numeric"});
   const dest=c.cta||(c.app?"descargar la app":"el link de la bio");
   const O=c.v;const LEN={short:10,medium:16,long:24}[O.length]||16;
@@ -626,10 +626,18 @@ TIPOS DE PIEZA
 - "post": imagen única con una frase potente. Sirve para guardados y compartidos. Lleva 1 escena con el texto de apoyo.
 - "carrusel": de 3 a 6 diapositivas educativas. Sirve para guardados y autoridad.
 
-ESTILO DE CREADOR (como los mejores reels educativos animados)
-- Gancho en el primer segundo: curiosidad, un error común, un número o un "deja de…" ("Nadie te cuenta esto de…", "El error que te cuesta X", "3 cosas que…"). Nada de saludos ni introducciones.
-- Una idea por escena, frases cortas y concretas, con un ejemplo real del día a día del alumno. Ritmo rápido: cada escena aporta algo nuevo.
-- Cierre con recompensa o giro y un CTA claro. Que dé ganas de guardarlo o compartirlo.
+VARIEDAD (obligatorio: ninguna pieza puede parecerse a otra de la semana ni a lo ya publicado)
+- Cada pieza usa un FORMATO narrativo distinto (escríbelo en "formato") y no repitas el formato de las últimas piezas publicadas: top o lista · mito vs realidad · el error que todos cometen · antes y después · POV o mini historia ("POV: tu primera carrera online…") · tutorial paso a paso · reto o quiz ("¿Sabrías…?") · comparativa A vs B · opinión polémica · dato curioso o sorprendente · detrás de las cámaras · checklist para guardar.
+- Varía también el tipo de gancho, el número de escenas (de 2 a 5), la duración, los gráficos de cada escena, el "estilo", el "fondo", la música y el ritmo de la voz. Que se note que cada día es algo nuevo.
+
+ESTILO VIRAL (el objetivo es que la gente se quede hasta el final, lo guarde, lo comparta y siga la cuenta)
+- GANCHO (primer segundo, como mucho 7 palabras): que sea imposible no pararse. Usa una de estas fórmulas y no repitas la misma dos veces seguidas: error que cuesta algo ("El error que te hace perder 2 segundos por curva"), contraintuitivo ("Frenar más tarde te hace más lento"), secreto ("Lo que los pilotos rápidos no te cuentan"), reto ("Si haces esto, eres de los lentos"), número + promesa ("3 trucos para bajar tu tiempo hoy"), pregunta que pica ("¿Por qué siempre te pasan en la misma curva?"). Nada de saludos, presentaciones ni "hoy te voy a enseñar".
+- BUCLE ABIERTO: deja claro desde el principio que lo mejor llega al final ("el último es el que más tiempo te ahorra") y cúmplelo: guarda el consejo más potente para la última escena.
+- RITMO: escenas cortas y con una sola idea. En pantalla, pocas palabras y muy concretas (título de 2-4 palabras y texto de como mucho 12). Ejemplos reales y visuales del día a día del alumno, con emoción: frustración, sorpresa, logro.
+- RE-ENGANCHE a mitad del vídeo: una escena que empiece con "Pero ojo…", "Y aquí casi todos fallan…" o similar.
+- FINAL: recompensa clara y CTA que pida una acción fácil. En reels, invita a comentar una palabra clave ("Comenta FRENO y te paso la guía") o a guardarlo; en historias, a responder por mensaje.
+- CAPTION: primera línea = otro gancho distinto al del vídeo; luego 1-2 frases de valor y una pregunta para que comenten.
+- La voz suena a creador con energía, cercano y directo, tuteando, nunca a anuncio. Para reels de tips usa "voz_y_musica" y música "energetica" o "divertida" salvo que el tema pida otra cosa.
 
 CRITERIOS DE AGENCIA (calidad antes que cantidad; nunca satures a la audiencia)
 - Frecuencia sana para una cuenta pequeña o mediana: de 3 a 5 publicaciones de feed por semana (reels, posts y carruseles), con 2 o 3 reels como mucho. Las historias, de 1 a 3 en los días que aporten (no hace falta todos los días).
@@ -674,7 +682,7 @@ $("#genBtn").addEventListener("click",async()=>{
     const data=parseJSON(res.text);
     const raw=Array.isArray(data.piezas)?data.piezas:Array.isArray(data.videos)?data.videos:[];
     let vids=raw.filter(v=>v&&v.gancho).map(normPiece).filter(p=>p.tipo==="post"||p.escenas.length);
-    vids=enforceLimits(vids);
+    vids=enforceLimits(vids);diversify(vids);
     if(!vids.length&&n!=="auto")throw new Error("no llegó el plan");
     vids.sort((a,b)=>a.dia-b.dia||String(a.hora).localeCompare(String(b.hora)));
     S.today={date:isoDay(),estrategia:String(data.estrategia||""),videos:vids};
@@ -689,6 +697,22 @@ $("#genBtn").addEventListener("click",async()=>{
   }finally{btn.disabled=false;btn.textContent="✨ Que la agencia planifique";}
 });
 
+/* Variedad garantizada: estilos, fondos, animación del texto, música y gráficos distintos entre piezas */
+function diversify(vids){
+  if(!vids.length)return vids;const O=S.cfg.v;const seed=hashStr(isoDay());
+  const order=[S.cfg.style].concat(STYLES.map(x=>x.id).filter(x=>x!==S.cfg.style));
+  const use={};let prev=null;
+  if(O.agentVisuals){vids.forEach(p=>{let st=STYLES.some(x=>x.id===p.estilo)?p.estilo:null;
+    if(!st||st===prev||(use[st]||0)>=Math.ceil(vids.length/2))st=order.filter(x=>x!==prev).sort((a,b)=>(use[a]||0)-(use[b]||0))[0];
+    p.estilo=st;use[st]=(use[st]||0)+1;prev=st;});
+    const fs=availableFondos();let pf=null;vids.forEach((p,i)=>{if(!fs.includes(p.fondo)||(p.fondo===pf&&fs.length>1&&i%2))p.fondo=fs[(fs.indexOf(pf)+1+fs.length)%fs.length]||fs[0];pf=p.fondo;});}
+  const anims=["pop","slide","pop","type","fade","pop","slide"];vids.forEach((p,i)=>{p.anim=i===0?(O.anim||"pop"):anims[(seed+i)%anims.length];});
+  const moods=["energetica","divertida","epica","chill","emotiva","tension"];let pm=null;
+  const mc={};const fit=["energetica","divertida","epica","chill"];
+  vids.filter(p=>TYPES[p.tipo]&&TYPES[p.tipo].video).forEach(p=>{if(!moods.includes(p.musica)||p.musica===pm||(mc[p.musica]||0)>=2)p.musica=fit.concat(moods).filter(m=>m!==pm).sort((a,b)=>(mc[a]||0)-(mc[b]||0))[0];mc[p.musica]=(mc[p.musica]||0)+1;pm=p.musica;});
+  vids.forEach(p=>{let pg=null;(p.escenas||[]).forEach(e=>{if(e.grafico&&pg&&e.grafico.tipo===pg)e.grafico=null;pg=e.grafico?e.grafico.tipo:null;});});
+  return vids;
+}
 function enforceLimits(vids){
   const out=[];const perDay={};const isFeed=p=>p.tipo!=="historia";let lastFeed=null;
   vids.sort((a,b)=>a.dia-b.dia||String(a.hora).localeCompare(String(b.hora)));
@@ -771,8 +795,8 @@ function roundRect(x,y,w,h,r){r=Math.max(0,Math.min(r,w/2,h/2));ctx.beginPath();
 function drawBlock(L,cx,y,lt,delay,stagger,color,T){
   ctx.font=L.font;ctx.textBaseline="middle";ctx.textAlign="left";let k=0;
   L.lines.forEach((ln,li)=>{let x=cx-ln.width/2;const yc=y+li*L.lh+L.lh/2;
-    ln.words.forEach(wd=>{const md=S.cfg.v.anim;let p=clamp((lt-(delay+k*stagger))/(md==="fade"?0.4:0.24),0,1);if(md==="type")p=lt>=delay+k*stagger?1:0;if(STATIC)p=1;k++;
-      if(p>0){const sc=md==="pop"&&!STATIC?1.35-0.35*easeBack(p):1;const dy=md==="slide"?(1-easeOut(p))*80:0;ctx.save();ctx.globalAlpha*=md==="type"?1:easeOut(p);ctx.translate(x+wd.w/2,yc+dy);ctx.scale(sc,sc);
+    ln.words.forEach(wd=>{const md=(CUR_SC&&CUR_SC.piece&&CUR_SC.piece.anim)||S.cfg.v.anim;let p=clamp((lt-(delay+k*stagger))/(md==="fade"?0.4:0.24),0,1);if(md==="type")p=lt>=delay+k*stagger?1:0;if(STATIC)p=1;k++;
+      if(p>0){const sc=md==="pop"&&!STATIC?(wd.hl?1.8-0.8*easeBack(p):1.35-0.35*easeBack(p)):1;const dy=md==="slide"?(1-easeOut(p))*80:0;ctx.save();ctx.globalAlpha*=md==="type"?1:easeOut(p);ctx.translate(x+wd.w/2,yc+dy);ctx.scale(sc,sc);
         if(wd.hl&&T.hl==="box"){const padX=L.size*0.16,hh=L.size*1.08;ctx.fillStyle=T.hlFill;roundRect(-wd.w/2-padX,-hh/2,wd.w+padX*2,hh,L.size*0.14);ctx.fill();ctx.fillStyle=T.hlText;}
         else if(wd.hl&&T.hl==="glow"){ctx.fillStyle=T.hlText;ctx.shadowColor=T.hlFill;ctx.shadowBlur=40;ctx.fillText(wd.txt,-wd.w/2,0);ctx.shadowBlur=14;}
         else if(wd.hl&&T.hl==="under"){ctx.fillStyle=T.hlFill;ctx.globalAlpha*=0.9;roundRect(-wd.w/2-6,L.size*0.18,wd.w+12,L.size*0.28,6);ctx.fill();ctx.globalAlpha/=0.9;ctx.fillStyle=T.text;}
@@ -812,6 +836,7 @@ function buildScenes(p){
   }
   HOOKS.attachAssets(p,sc);
   if(Array.isArray(p._durs))sc.forEach((s,i)=>{const d=+p._durs[i];if(d>0)s.dur=Math.max(1.6,d);});
+  if(Array.isArray(p._caps)&&S.cfg.v.subtitulos!==false)sc.forEach((s,i)=>{if(Array.isArray(p._caps[i])&&p._caps[i].length)s.caps=p._caps[i];});
   let t=0;sc.forEach(s=>{s.start=t;t+=s.dur;});
   return{scenes:sc,total:t,type,w:SZ[0],h:SZ[1],style:effStyle(p),bm:effBM(p),piece:p};
 }
@@ -871,8 +896,9 @@ function drawFrame(SC,t,slide){
     if(s.B)drawBlock(s.B,W/2,y+s.T.h+gapB,lt,0,0,T.text,T);
     const sub=s.cta||S.cfg.ig||"";if(sub){ctx.save();ctx.font="800 38px Inter";const tw=Math.min(ctx.measureText(sub).width,W-200);ctx.fillStyle=T.pill;roundRect(W/2-tw/2-36,H-ctaH-60,tw+72,ctaH-20,45);ctx.fill();ctx.fillStyle=T.pillText;ctx.textAlign="center";ctx.textBaseline="middle";ctx.fillText(sub,W/2,H-ctaH-60+(ctaH-20)/2+2,W-200);ctx.restore();}
   }else if(s.kind==="hook"){
+    if(!STATIC&&TYPES[SC.type].video&&O.transiciones!==false){const sh=Math.max(0,1-lt/0.5)*14;ctx.translate(Math.sin(lt*95)*sh,Math.cos(lt*83)*sh);hookBurst(lt,H*PF);}
     const zoom=O.anim==="pop"&&!STATIC?1+0.08*(1-easeOut(clamp(lt/0.35,0,1))):1;const cy=H*PF;ctx.translate(W/2,cy);ctx.scale(zoom,zoom);ctx.translate(-W/2,-cy);
-    const y=clamp(cy-s.L.h/2,TOP,BOT-s.L.h);BLK=[y,y+s.L.h+60];const k=drawBlock(s.L,W/2,y,lt,0.05,0.09,T.text,T);
+    const y=clamp(cy-s.L.h/2,TOP,BOT-s.L.h);BLK=[y,y+s.L.h+60];const vid=TYPES[SC.type].video&&O.transiciones!==false;const k=drawBlock(s.L,W/2,y,lt,vid?0.17:0.05,vid?0.035:0.09,T.text,T);
     const bp=STATIC?1:easeOut(clamp((lt-0.1-k*0.09)/0.4,0,1));ctx.fillStyle=T.arrow;roundRect(W/2-170*bp,y+s.L.h+40,Math.max(1,340*bp),14,7);ctx.fill();
     if(s.swipe){ctx.save();ctx.font="800 40px Inter";const lab="DESLIZA  →";const tw=ctx.measureText(lab).width;ctx.fillStyle=T.pill;roundRect(W/2-tw/2-40,H-200,tw+80,96,48);ctx.fill();ctx.fillStyle=T.pillText;ctx.textAlign="center";ctx.textBaseline="middle";ctx.fillText(lab,W/2,H-150);ctx.restore();}
   }else if(s.kind==="tip"){
@@ -883,7 +909,7 @@ function drawFrame(SC,t,slide){
     else if(T.neon){ctx.strokeStyle=S.cfg.acc;ctx.lineWidth=8;ctx.shadowColor=S.cfg.acc;ctx.shadowBlur=30;ctx.beginPath();ctx.arc(0,0,badge/2-4,0,Math.PI*2);ctx.stroke();}
     else{ctx.fillStyle=T.badge;ctx.beginPath();ctx.arc(0,0,badge/2,0,Math.PI*2);ctx.fill();}
     ctx.fillStyle=T.badgeText;ctx.font='400 92px "Anton"';ctx.textAlign="center";ctx.textBaseline="middle";ctx.fillText(String(s.n),0,6);ctx.restore();
-    y+=badge+gap1;const k=drawBlock(s.T,W/2,y,lt,0.15,0.08,T.text,T);y+=s.T.h+gap2;drawBlock(s.B,W/2,y,lt,0.25+k*0.08,0.055,T.text,T);
+    y+=badge+gap1;const k=drawBlock(s.T,W/2,y,lt,0.15,0.08,T.text,T);y+=s.T.h+gap2;if(s.caps)drawCaptions(s.caps,W/2,y+Math.min(s.B.h,160)/2,lt,T,W-120);else drawBlock(s.B,W/2,y,lt,0.25+k*0.08,0.055,T.text,T);
     if(s.g){const gy=BLK[1]+50,gh=Math.min(620,H*0.86-gy);if(gh>=260){drawGraphic(s.g,90,gy,W-180,gh,STATIC?9:lt,T,SC);BLK=[BLK[0],gy+gh];}}
   }else{
     const stick=!!s.sticker;const subH=s.sub?150:0,stickH=stick?300:0,block=s.L.h+subH+stickH;let y=clamp(H*(stick?PF-0.08:PF)-block/2,TOP,Math.max(TOP,H-440-block));BLK=[y,y+block+(stick?120:200)];
@@ -896,6 +922,8 @@ function drawFrame(SC,t,slide){
   ctx.restore();
   drawStickers(SC,si,s,lt,a);
   if(FX)drawWipe(si,n,lt,s.dur);
+  if(FX&&s.kind==="hook"&&lt>0.2&&lt<0.42){ctx.save();ctx.globalAlpha=0.55*(1-(lt-0.2)/0.22);ctx.fillStyle="#fff";ctx.fillRect(0,0,W,H);ctx.restore();}
+  if(FX&&s.kind==="cta")drawConfetti(lt);
 }
 /* ===== Motion graphics ===== */
 const pr=(lt,t0,d)=>clamp((lt-t0)/d,0,1);
@@ -970,6 +998,42 @@ function drawGraphic(g,x,y,w,h,lt,T,SC){
 function wrapText(t,x,y,maxW,size,col,maxLines){ctx.save();ctx.font="800 "+size+"px Inter";ctx.fillStyle=col;ctx.textAlign="center";ctx.textBaseline="middle";
   const words=String(t).split(/\s+/);const lines=[];let cur="";words.forEach(w=>{const tr=cur?cur+" "+w:w;if(ctx.measureText(tr).width>maxW&&cur){lines.push(cur);cur=w;}else cur=tr;});if(cur)lines.push(cur);
   const L=lines.slice(0,maxLines||3);L.forEach((ln,i)=>ctx.fillText(ln,x,y+(i-(L.length-1)/2)*size*1.2,maxW));ctx.restore();}
+/* ===== Subtítulos dinámicos (palabra a palabra, sincronizados con la voz) ===== */
+function capChunks(caps){
+  const out=[];let cur=[];
+  caps.forEach((c,i)=>{const prev=caps[i-1];const gap=prev?c.t-(prev.t+prev.d):0;
+    if(cur.length&&(cur.length>=3||gap>0.32||/[.,;:!?…]$/.test(prev.w)))(out.push(cur),cur=[]);cur.push(c);});
+  if(cur.length)out.push(cur);return out;
+}
+function drawCaptions(caps,cx,cy,lt,T,maxW){
+  if(!caps._ch)caps._ch=capChunks(caps);const ch=caps._ch;let ci=-1;
+  for(let i=0;i<ch.length;i++)if(lt>=ch[i][0].t-0.05)ci=i;
+  if(STATIC)ci=0;if(ci<0)return;const chunk=ch[ci];
+  const words=chunk.map(c=>String(c.w).replace(/[*#_]/g,"").toUpperCase());let size=84;ctx.save();
+  const font=sz=>"900 "+sz+"px Inter";ctx.font=font(size);const sp=size*0.28;let tw=words.reduce((a,w)=>a+ctx.measureText(w).width,0)+sp*(words.length-1);
+  while(tw>maxW&&size>44){size-=4;ctx.font=font(size);tw=words.reduce((a,w)=>a+ctx.measureText(w).width,0)+size*0.28*(words.length-1);}
+  const gap=size*0.28,ent=STATIC?1:easeBack(clamp((lt-chunk[0].t+0.05)/0.16,0,1));
+  ctx.translate(cx,cy);ctx.scale(0.8+0.2*ent,0.8+0.2*ent);ctx.textBaseline="middle";ctx.textAlign="left";ctx.lineJoin="round";
+  let x=-tw/2;const acc=S.cfg.acc;
+  words.forEach((w,i)=>{const c=chunk[i],ww=ctx.measureText(w).width,on=STATIC?i===0:lt>=c.t,act=on&&(i===chunk.length-1||lt<chunk[i+1].t);
+    ctx.save();ctx.translate(x+ww/2,0);if(act&&!STATIC){const k=clamp((lt-c.t)/0.12,0,1);const sc=1.22-0.1*easeOut(k);ctx.scale(sc,sc);ctx.rotate(-0.03);}
+    if(act){ctx.fillStyle=acc;roundRect(-ww/2-size*0.18,-size*0.62,ww+size*0.36,size*1.24,size*0.2);ctx.fill();}
+    ctx.lineWidth=size*0.16;ctx.strokeStyle="rgba(0,0,0,.75)";if(!act)ctx.strokeText(w,-ww/2,size*0.04);
+    ctx.fillStyle=act?onAccent(acc):(on?"#ffffff":"rgba(255,255,255,.55)");ctx.fillText(w,-ww/2,size*0.04);ctx.restore();x+=ww+gap;});
+  ctx.restore();
+}
+function hookBurst(lt,cy){
+  const p=clamp((lt-0.15)/0.55,0,1);if(p<=0||p>=1)return;ctx.save();ctx.translate(W/2,cy);ctx.strokeStyle=S.cfg.acc;ctx.lineCap="round";ctx.globalAlpha=1-p;
+  for(let k=0;k<16;k++){const an=k/16*Math.PI*2+0.2,r0=280+p*420,r1=r0+120*(1-p)+40;ctx.lineWidth=14*(1-p)+3;ctx.beginPath();ctx.moveTo(Math.cos(an)*r0,Math.sin(an)*r0*1.25);ctx.lineTo(Math.cos(an)*r1,Math.sin(an)*r1*1.25);ctx.stroke();}
+  ctx.restore();
+}
+function drawConfetti(lt){
+  const cols=[S.cfg.acc,"#ffd60a","#ffffff","#2ecc71","#4cc9f0"];ctx.save();
+  for(let i=0;i<70;i++){const sd=(i*9301+49297)%233280/233280,sd2=(i*4271+1013)%9973/9973,t=lt-0.15-sd2*0.5;if(t<=0)continue;
+    const x=W*(0.5+(sd-0.5)*0.4)+(sd-0.5)*W*1.1*Math.min(1,t*1.6),y=H*0.42-900*t*(0.8+sd2*0.6)+1300*t*t,rot=t*(6+sd*10);if(y>H+40)continue;
+    ctx.save();ctx.translate(x,y);ctx.rotate(rot);ctx.fillStyle=cols[i%cols.length];ctx.fillRect(-12,-7,24,14);ctx.restore();}
+  ctx.restore();
+}
 /* ===== Transiciones y movimiento de fondo ===== */
 function drawWipe(si,n,lt,dur){
   const D=0.24,sk=320;let xa=null,xb=null;

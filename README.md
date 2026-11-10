@@ -124,6 +124,12 @@ Guarda tu **clave de acceso** (en Cuenta) para entrar desde otro dispositivo.
 - **Voz:** locuciones neuronales gratuitas de Microsoft (edge-tts), con el guion que escribe la agencia.
 - **Música:** si pones tus pistas en `assets/music/<ambiente>/` (energetica, chill, epica, emotiva, divertida, tension) se usan esas. Si no, la agencia busca **canciones reales con licencia libre para uso comercial** (CC0 o CC BY, sobre todo de Jamendo, a través de Openverse) según el ambiente de cada vídeo, empieza la canción ya dentro (sin la intro lenta) y nivela el volumen. Con CC BY se acredita al artista en el texto del post (o abajo del todo en las historias). Las pistas se guardan en `content/music/` y se van reutilizando.
 
+## 🚀 Contenido para enganchar
+- **Subtítulos dinámicos** palabra a palabra, sincronizados con la voz (la palabra que se dice se ilumina en el color de tu marca), porque la mayoría ve los vídeos sin sonido.
+- **Gancho con impacto:** tras la portada, el texto entra de golpe con destello, sacudida y rayos; confeti en el cierre.
+- **Guiones pensados para retener:** fórmulas de gancho probadas, bucle abierto ("el último es el mejor"), re-enganche a mitad, final con recompensa y CTA de comentar una palabra clave.
+- **Variedad obligatoria:** cada pieza usa un formato narrativo distinto (top, mito vs realidad, POV, antes y después, reto, comparativa, polémica…) y la agencia alterna estilo, fondo, animación del texto, música y gráficos para que ningún día se parezca al anterior.
+
 ## 🔎 No repetir contenido
 Antes de planificar, la agencia lee las últimas publicaciones de cada red conectada (Instagram, TikTok y YouTube, **incluido lo que subiste a mano**) con sus me gusta y comentarios, y lo junta con lo que ya creó o programó ella. Con eso evita repetir temas, ganchos o enfoques, y aprovecha lo que mejor funciona con ángulos nuevos.
 

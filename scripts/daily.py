@@ -102,25 +102,39 @@ MUSIC_EXT = (".mp3", ".m4a", ".wav", ".aac", ".ogg")
 
 
 def tts(text, voice, rate, out_path):
-    """Locución gratuita con las voces neuronales de Microsoft (edge-tts)."""
+    """Locución gratuita con las voces neuronales de Microsoft (edge-tts).
+    Devuelve los tiempos de cada palabra [(inicio_s, duración_s, palabra)] para los subtítulos dinámicos."""
     # Playwright (modo síncrono) ya tiene un bucle asyncio en este hilo: la voz se genera en otro hilo.
     import asyncio
     import threading
     import edge_tts
-    err = []
+    err, words = [], []
+
+    async def go():
+        try:
+            com = edge_tts.Communicate(text, voice, rate=rate, boundary="WordBoundary")
+        except TypeError:  # versiones antiguas: ya dan WordBoundary por defecto
+            com = edge_tts.Communicate(text, voice, rate=rate)
+        with open(out_path, "wb") as fh:
+            async for ch in com.stream():
+                if ch.get("type") == "audio":
+                    fh.write(ch["data"])
+                elif ch.get("type") == "WordBoundary":
+                    words.append((ch["offset"] / 1e7, ch["duration"] / 1e7, str(ch.get("text", ""))))
 
     def run():
         try:
-            asyncio.run(edge_tts.Communicate(text, voice, rate=rate).save(str(out_path)))
+            asyncio.run(go())
         except Exception as e:  # noqa: BLE001
             err.append(e)
     for intento in range(3):
         err.clear()
+        words.clear()
         t = threading.Thread(target=run)
         t.start()
         t.join(90)
         if not err and Path(out_path).exists() and Path(out_path).stat().st_size > 0:
-            return
+            return list(words)
     raise RuntimeError(f"edge-tts falló: {err[0] if err else 'sin respuesta'}")
 
 
@@ -204,18 +218,20 @@ def make_voice(page, i, p, workdir, voices):
     lines = [clean_speech(guion[k] if k < len(guion) else texts[k]) for k in range(len(texts))]
     voice = voices.get(p.get("voz") or "mujer", VOICES["mujer"])
     rate = RATES.get(p.get("ritmo_voz") or "normal", "+4%")
-    clips, durs = [], []
+    clips, durs, caps = [], [], []
     for k, line in enumerate(lines):
         if not line:
             clips.append(None)
             durs.append(0)
+            caps.append([])
             continue
         out = workdir / f"voz_{k:02d}.mp3"
-        tts(line, voice, rate, out)
+        wb = tts(line, voice, rate, out) or []
+        caps.append([{"t": round(a + 0.18, 3), "d": round(b, 3), "w": w} for a, b, w in wb if str(w).strip()])
         d = probe_duration(out)
         clips.append(out)
         durs.append(round(d + 0.55, 3))
-    page.evaluate("a=>{S.today.videos[a[0]]._durs=a[1];}", [i, durs])
+    page.evaluate("a=>{S.today.videos[a[0]]._durs=a[1];S.today.videos[a[0]]._caps=a[2];}", [i, durs, caps])
     starts, t = [], 0.0
     sc_durs = page.evaluate("i=>buildScenes(S.today.videos[i]).scenes.map(s=>s.dur)", i)
     for d in sc_durs:
@@ -490,7 +506,7 @@ def plan_user(browser, user, key, force=False, redo=None):
                             log(f"    voz: {vname} ({len(voice_clips)} frases)")
                         except Exception as e:
                             log("    ⚠ No se pudo generar la voz, va solo con música:", e)
-                            page.evaluate("i=>{delete S.today.videos[i]._durs;}", i)
+                            page.evaluate("i=>{delete S.today.videos[i]._durs;delete S.today.videos[i]._caps;}", i)
                             voice_clips = []
                     music, track = (None, None) if p.get("audio") == "solo_voz" else pick_music(p.get("musica"), tdp)
                     import music_lib
