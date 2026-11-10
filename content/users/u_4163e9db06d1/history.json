@@ -146,12 +146,6 @@
     },
     {
       "date": "2026-11-10",
-      "tipo": "reel",
-      "src": "red",
-      "tema": "[IG · ❤️25] En iRacing, una caída bien ajustada puede mejorar el apoyo en curva, pero el exceso castiga el neumático. Compara dos valores y mide tras ci"
-    },
-    {
-      "date": "2026-11-10",
       "tema": "Error de telemetría: frenado tardío por falta de freno motor",
       "formato": "el error que todos cometen",
       "tipo": "reel",
@@ -159,6 +153,42 @@
       "plantilla": 1551,
       "serie": "Error de la semana",
       "objetivo": "alcance"
+    },
+    {
+      "date": "2026-11-10",
+      "tema": "Checklist de ajustes críticos antes de la carrera",
+      "formato": "checklist",
+      "tipo": "carrusel",
+      "layout": "lista",
+      "plantilla": 666,
+      "serie": "checklist_setup",
+      "objetivo": "confianza"
+    },
+    {
+      "date": "2026-11-10",
+      "tema": "Optimiza tu frenado con ajustes de telemetría",
+      "formato": "lista",
+      "tipo": "post",
+      "layout": "tarjeta",
+      "plantilla": 272,
+      "serie": "",
+      "objetivo": "alcance"
+    },
+    {
+      "date": "2026-11-10",
+      "tema": "Uso avanzado del freno motor para ganar décimas",
+      "formato": "dato curioso",
+      "tipo": "reel",
+      "layout": "subtitulos",
+      "plantilla": 1995,
+      "serie": "",
+      "objetivo": "alcance"
+    },
+    {
+      "date": "2026-11-10",
+      "tipo": "reel",
+      "src": "red",
+      "tema": "[IG · ❤️27] En iRacing, una caída bien ajustada puede mejorar el apoyo en curva, pero el exceso castiga el neumático. Compara dos valores y mide tras ci"
     },
     {
       "date": "2026-11-11",
@@ -199,6 +229,16 @@
       "plantilla": 1139,
       "serie": "",
       "objetivo": ""
+    },
+    {
+      "date": "2026-11-10",
+      "tema": "Interpretar telemetría en tiempo real para evitar pérdida de tracción",
+      "formato": "mini tutorial",
+      "tipo": "historia",
+      "layout": "tarjeta",
+      "plantilla": 1809,
+      "serie": "",
+      "objetivo": "conversion"
     }
   ]
 }
