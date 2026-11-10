@@ -221,6 +221,17 @@ assert DONE and DONE[-1][1].get("redo") == [old_reel["id"]]
 r = subprocess.run(["ffprobe", "-v", "error", "-show_entries", "stream=codec_type", "-of", "csv=p=0", str(work / "docs" / new_reel[0]["media"][0])], capture_output=True, text=True)
 assert "audio" in r.stdout
 
+# — Publicación pedida desde el chat —
+USERS[0]["requests"] = {"create": [{"id": "cX1", "tipo": "reel", "tema": "Trail braking", "notas": "Tono cercano", "cuando": None}]}
+daily.main()
+q3 = json.loads(qpath.read_text())
+chat = [q for q in q3 if q.get("source") == "chat"]
+assert len(chat) == 1 and chat[0]["tipo"] == "reel" and len(q3) == len(q2) + 1, [(q["id"], q.get("source")) for q in q3]
+assert "La ha pedido el dueño" in PROMPTS[-1] and "Trail braking" in PROMPTS[-1]
+assert DONE[-1][1].get("create") == ["cX1"]
+print("CHAT: publicación creada →", chat[0]["id"], chat[0]["publishAt"])
+q2 = q3
+
 # — Reiniciar cuenta —
 USERS[0]["requests"] = {"reset": "2026-11-09T19:00:00Z"}
 USERS[0]["config"] = None

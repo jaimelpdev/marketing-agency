@@ -118,6 +118,12 @@ r = await call("GET", "/admin/users", { key: "admin123" }); assert.deepEqual(r.j
 r = await call("POST", "/admin/requests/" + uid + "/done", { key: "admin123", body: { redo: ["p1"] } }); assert.equal(r.j.requests, null);
 r = await call("POST", "/api/replan", { key }); const rp = r.j.requests.replan; assert.ok(rp);
 r = await call("POST", "/api/cancel-request", { key, body: {} }); assert.equal(r.j.requests.replan, undefined);
+r = await call("POST", "/api/create", { key, body: {} }); assert.equal(r.s, 400);
+r = await call("POST", "/api/create", { key, body: { tipo: "reel", tema: "Trail braking", cuando: new Date(Date.now() + 3 * 3600e3).toISOString() } }); assert.equal(r.s, 200); const cid = r.j.item.id; assert.ok(r.j.item.cuando);
+r = await call("POST", "/api/create", { key, body: { tipo: "rara", tema: "x", cuando: "ayer" } }); assert.equal(r.j.item.tipo, "auto"); assert.equal(r.j.item.cuando, null);
+r = await call("GET", "/admin/users", { key: "admin123" }); assert.equal(r.j.users.find(x => x.id === uid).requests.create.length, 2);
+r = await call("POST", "/admin/requests/" + uid + "/done", { key: "admin123", body: { create: [cid] } }); assert.equal(r.j.requests.create.length, 1);
+await call("POST", "/api/cancel-request", { key, body: { id: r.j.requests.create[0].id } });
 r = await call("POST", "/api/reset", { key }); assert.equal(r.s, 200);
 r = await call("GET", "/api/me", { key }); assert.equal(r.j.config, null); assert.equal(r.j.status, null); assert.ok(r.j.requests.reset, "la clave sigue valiendo");
 r = await call("POST", "/admin/requests/" + uid + "/done", { key: "admin123", body: { reset: "otra-fecha" } }); assert.ok(r.j.requests.reset, "no borra una petición distinta");

@@ -226,7 +226,7 @@ async function handle(req, env) {
     for (const id of await listUserIds(env)) {
       const u = await getUser(env, id);
       const r = u && u.requests;
-      if (r && (r.reset || r.replan || (r.redo && r.redo.length))) return json({ pending: true });
+      if (r && (r.reset || r.replan || (r.redo && r.redo.length) || (r.create && r.create.length))) return json({ pending: true });
     }
     return json({ pending: false });
   }
@@ -307,6 +307,24 @@ async function handle(req, env) {
       await putUser(env, u);
       return json({ ok: true, requests: u.requests, started: await kickAgency(env) });
     }
+    if (p === "/api/create" && method === "POST") {
+      // Pieza pedida desde el chat: la agencia la crea y la programa en cuanto pueda
+      const b = await req.json().catch(() => ({}));
+      const tipos = ["reel", "historia", "post", "carrusel", "auto"];
+      const tipo = tipos.includes(b.tipo) ? b.tipo : "auto";
+      const tema = String(b.tema || "").slice(0, 200), notas = String(b.notas || "").slice(0, 600);
+      if (!tema && !notas) return err(400, "bad_request", "Dime de qué quieres la publicación.");
+      let cuando = b.cuando ? new Date(b.cuando) : null;
+      if (!cuando || isNaN(cuando) || cuando < new Date(Date.now() + 25 * 60e3)) cuando = null; // "ahora" = en cuanto esté lista
+      if (cuando && cuando > new Date(Date.now() + 30 * 864e5)) return err(400, "bad_request", "Como mucho, con 30 días de antelación.");
+      u.requests = u.requests || {};
+      const list = (u.requests.create || []);
+      if (list.length >= 5) return err(429, "rate_limited", "Ya hay 5 publicaciones en preparación. Espera a que terminen.");
+      const item = { id: "c" + randomId(5), tipo, tema, notas, cuando: cuando ? cuando.toISOString() : null, pedido: new Date().toISOString() };
+      u.requests.create = list.concat(item);
+      await putUser(env, u);
+      return json({ ok: true, item, requests: u.requests, started: await kickAgency(env) });
+    }
     if (p === "/api/replan" && method === "POST") {
       u.requests = { ...(u.requests || {}), replan: new Date().toISOString(), redo: [] };
       await putUser(env, u);
@@ -315,7 +333,7 @@ async function handle(req, env) {
     if (p === "/api/cancel-request" && method === "POST") {
       const b = await req.json().catch(() => ({}));
       if (u.requests) {
-        if (b.id) u.requests.redo = (u.requests.redo || []).filter(x => x !== b.id);
+        if (b.id) { u.requests.redo = (u.requests.redo || []).filter(x => x !== b.id); u.requests.create = (u.requests.create || []).filter(x => x.id !== b.id); }
         else { delete u.requests.replan; u.requests.redo = []; }
         await putUser(env, u);
       }
@@ -453,6 +471,8 @@ async function handle(req, env) {
       if (b.reset && r.reset === b.reset) delete r.reset;
       if (b.replan && r.replan === b.replan) delete r.replan;
       if (Array.isArray(b.redo)) r.redo = (r.redo || []).filter(x => !b.redo.includes(x));
+      if (Array.isArray(b.create)) r.create = (r.create || []).filter(x => !b.create.includes(x.id));
+      if (Array.isArray(r.create) && !r.create.length) delete r.create;
       if (Array.isArray(r.redo) && !r.redo.length) delete r.redo;
       u.requests = Object.keys(r).length ? r : null;
       await putUser(env, u);

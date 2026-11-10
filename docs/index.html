@@ -189,6 +189,20 @@
   .qprev{display:flex;gap:8px;overflow-x:auto;padding:6px 0 10px}
   .qprev video,.qprev img{height:340px;border-radius:14px;background:#000;flex:none}
   .autohide{display:none!important}
+  #chatFab{position:fixed;right:18px;bottom:18px;z-index:40;width:64px;height:64px;border-radius:50%;border:0;background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;font-size:30px;box-shadow:0 10px 30px rgba(0,0,0,.45);cursor:pointer}
+  #chatModal .mbox{display:flex;flex-direction:column;height:min(86vh,760px);max-width:520px;padding:0}
+  .chHead{display:flex;align-items:center;justify-content:space-between;padding:14px 16px;border-bottom:1px solid var(--line)}
+  #chLog{flex:1;overflow:auto;padding:14px;display:flex;flex-direction:column;gap:10px}
+  .msg{max-width:86%;padding:10px 14px;border-radius:18px;font-size:15px;line-height:1.4;white-space:pre-wrap}
+  .msg.me{align-self:flex-end;background:var(--accent);color:#fff;border-bottom-right-radius:6px}
+  .msg.ai{align-self:flex-start;background:rgba(255,255,255,.08);border-bottom-left-radius:6px}
+  .act{align-self:flex-start;max-width:90%;border:1px solid var(--line);background:rgba(0,0,0,.3);border-radius:16px;padding:10px 12px;font-size:14px}
+  .act .bt{display:flex;gap:8px;margin-top:8px}
+  .act.done{opacity:.6}
+  #chSug{display:flex;gap:6px;overflow-x:auto;padding:0 14px 8px}
+  #chSug button{flex:none}
+  .chIn{display:flex;gap:8px;padding:10px 14px 14px;border-top:1px solid var(--line)}
+  .chIn textarea{flex:1;resize:none;height:48px;border-radius:14px;border:1px solid var(--line);background:rgba(0,0,0,.35);color:inherit;padding:12px;font:inherit}
   .qitem .w{color:var(--muted);flex:none;width:96px;font-size:12px}
   .qitem .s{margin-left:auto;font-size:11.5px;font-weight:800;white-space:nowrap}
   .sched{background:linear-gradient(135deg,rgba(48,209,88,.12),rgba(255,255,255,.02));border:1px solid var(--line);border-radius:20px;padding:14px 16px;margin-bottom:16px}
@@ -353,6 +367,17 @@ https://apps.apple.com/…
       <button class="ghost" id="lgBack">← Tengo un código de invitación</button>
     </div>
     <div class="status" id="lgStatus"></div>
+  </div>
+</div>
+
+<!-- CHAT CON LA AGENCIA -->
+<button id="chatFab" aria-label="Hablar con la agencia" hidden>💬</button>
+<div class="modal" id="chatModal">
+  <div class="mbox">
+    <div class="chHead"><strong>🤖 Tu agencia</strong><button class="x" id="chClose" aria-label="Cerrar">×</button></div>
+    <div id="chLog"></div>
+    <div id="chSug"></div>
+    <div class="chIn"><textarea id="chText" placeholder="Pídeme una publicación, una idea o un cambio…"></textarea><button class="pill" id="chSend">Enviar</button></div>
   </div>
 </div>
 
@@ -1604,8 +1629,8 @@ function renderSchedule() {
     b.appendChild(el("div", { class: "sched" }, [el("h3", { text: "🤖 Piloto automático" }), el("div", { class: "busy-note", text: msg })])); return;
   }
   const box = el("div"); queueList(box, q.filter(x => x.status === "pending" || x.status === "scheduled").slice(0, 6).concat(q.filter(x => x.status !== "pending" && x.status !== "scheduled").slice(-3)));
-  const R = reqs();
-  b.appendChild(el("div", { class: "sched" }, [el("h3", { text: "🤖 Piloto automático" + (HOST.plan.auto === false ? " (en pausa)" : "") }), R.replan ? el("div", { class: "busy-note", text: "🔄 Rehaciendo la semana… estará lista en 20-40 minutos." }) : null, me.status.estrategia ? el("p", { style: "margin:0 0 8px;font-size:14px", text: me.status.estrategia }) : null, box]));
+  const R = reqs(), nc = (R.create || []).length;
+  b.appendChild(el("div", { class: "sched" }, [el("h3", { text: "🤖 Piloto automático" + (HOST.plan.auto === false ? " (en pausa)" : "") }), nc ? el("div", { class: "busy-note", text: "📝 Creando " + (nc === 1 ? "la publicación" : nc + " publicaciones") + " que pediste en el chat…" }) : null, R.replan ? el("div", { class: "busy-note", text: "🔄 Rehaciendo la semana… estará lista en 20-40 minutos." }) : null, me.status.estrategia ? el("p", { style: "margin:0 0 8px;font-size:14px", text: me.status.estrategia }) : null, box]));
 }
 function chipRow(box, items, isOn, onClick) { box.innerHTML = ""; items.forEach(([v, t]) => { const b = el("button", { class: "chip sm" + (isOn(v) ? " on" : ""), text: t }); b.addEventListener("click", () => onClick(v)); box.appendChild(b); }); }
 function renderAcct() {
@@ -1626,6 +1651,101 @@ function renderAcct() {
   queueList($("#acQueue"), (me.status && me.status.queue) || []);
   $("#acKey").textContent = HOST.key.slice(0, 10) + "…" + HOST.key.slice(-4);
   $("#acUsage").textContent = "Uso de hoy: " + (me.usage.llm || 0) + " peticiones de IA · " + (me.usage.img || 0) + " imágenes.";
+}
+/* ============ CHAT CON LA AGENCIA ============ */
+const CHAT = { log: [] };
+try { CHAT.log = JSON.parse(localStorage.getItem("ma_chat") || "[]").slice(-30); } catch (e) { CHAT.log = []; }
+function chatSave() { try { localStorage.setItem("ma_chat", JSON.stringify(CHAT.log.slice(-30))); } catch (e) { } }
+function chatContext() {
+  const me = HOST.me || {}, P = HOST.plan, q = (me.status && me.status.queue) || [];
+  const now = new Date();
+  const fmt = d => { try { return new Date(d).toLocaleString("es-ES", { weekday: "short", day: "numeric", month: "short", hour: "2-digit", minute: "2-digit" }); } catch (e) { return d; } };
+  return [
+    "Ahora: " + now.toLocaleString("es-ES", { weekday: "long", day: "numeric", month: "long", year: "numeric", hour: "2-digit", minute: "2-digit" }) + " (zona " + (P.zona_horaria || "Europe/Madrid") + ", ISO " + now.toISOString() + ").",
+    "Marca: " + (S.cfg.name || "-") + ". Qué enseña: " + (S.cfg.about || "-") + ". Público: " + (S.cfg.aud || "-") + ". Temas: " + ((S.cfg.pillars || []).join("; ") || "-") + ".",
+    "Redes conectadas: " + (HOST.social.map(a => a.platform + (a.username ? " @" + a.username : "")).join(", ") || "ninguna") + ".",
+    "Piloto automático: " + (P.auto === false ? "en pausa" : "activado") + ". Máximo " + P.max_semana + " por semana y " + P.max_por_dia + " por día. Formatos: " + P.formatos.join(", ") + ". Sonido: " + (P.audio || "auto") + ".",
+    "Estrategia actual: " + ((me.status && me.status.estrategia) || "-"),
+    "Piezas (id · tipo · tema · cuándo · estado):\n" + (q.map(x => "- " + x.id + " · " + x.tipo + " · " + (x.tema || "") + " · " + fmt(x.publishAt) + " · " + x.status).join("\n") || "(ninguna)"),
+    "Peticiones en marcha: " + JSON.stringify(me.requests || {}),
+  ].join("\n");
+}
+function chatPrompt(userMsg) {
+  const hist = CHAT.log.slice(-10).map(m => (m.r === "me" ? "DUEÑO: " : "AGENCIA: ") + m.t).join("\n");
+  return `Eres la agencia de marketing de esta cuenta y hablas con su dueño por chat. Respondes en español, cercano, breve (2-5 frases) y muy concreto. Puedes dar ideas, explicar la estrategia o lo programado, y proponer ACCIONES que el dueño confirmará con un botón.
+
+DATOS DE LA CUENTA
+${chatContext()}
+
+ACCIONES DISPONIBLES (propón solo las que el dueño pida o claramente quiera; si falta un dato importante, pregúntalo en vez de inventarlo)
+- {"tipo":"crear","formato":"reel|historia|post|carrusel|auto","tema":"…","notas":"indicaciones concretas del dueño (enfoque, gancho, tono, CTA…)","cuando":"ISO 8601 con zona, o null para publicarla en cuanto esté lista"}
+- {"tipo":"rehacer","id":"id de una pieza programada","notas":"…"}
+- {"tipo":"rehacer_semana"}
+- {"tipo":"pausar"} · {"tipo":"reanudar"}
+- {"tipo":"ajustes","max_semana":3|5|7|10,"max_por_dia":1|2|3,"audio":"auto|voz|musica|ambos","formatos":["reel","historia","post","carrusel"]} (incluye solo lo que cambie)
+
+CONVERSACIÓN HASTA AHORA
+${hist || "(empieza ahora)"}
+DUEÑO: ${userMsg}
+
+Responde SOLO con JSON válido: {"respuesta":"texto para el dueño","acciones":[ … ]}`;
+}
+const ACT_LABEL = { crear: "📝 Crear publicación", rehacer: "🔄 Rehacer pieza", rehacer_semana: "🔄 Rehacer la semana", pausar: "⏸ Pausar piloto automático", reanudar: "▶ Reanudar piloto automático", ajustes: "⚙️ Cambiar ajustes" };
+function actDesc(a) {
+  if (a.tipo === "crear") return (a.formato && a.formato !== "auto" ? a.formato : "formato a elegir") + " · " + (a.tema || "") + (a.cuando ? " · " + fmtWhen(a.cuando) : " · en cuanto esté lista") + (a.notas ? "\n" + a.notas : "");
+  if (a.tipo === "rehacer") { const it = (((HOST.me || {}).status || {}).queue || []).find(x => x.id === a.id); return it ? (it.tipo + " · " + (it.tema || "") + " · " + fmtWhen(it.publishAt)) : a.id; }
+  if (a.tipo === "ajustes") return Object.entries(a).filter(([k]) => k !== "tipo").map(([k, v]) => k + ": " + (Array.isArray(v) ? v.join(", ") : v)).join(" · ");
+  return "";
+}
+async function runAction(a) {
+  const P = HOST.plan;
+  if (a.tipo === "crear") { const j = await api("/api/create", { method: "POST", body: { tipo: a.formato || "auto", tema: a.tema || "", notas: a.notas || "", cuando: a.cuando || null } }); HOST.me.requests = j.requests; return "📝 En marcha: la agencia la está creando" + (a.cuando ? " y la programará para " + fmtWhen(a.cuando) : " y la publicará en cuanto esté lista") + "."; }
+  if (a.tipo === "rehacer") { const j = await api("/api/redo", { method: "POST", body: { id: a.id } }); HOST.me.requests = j.requests; return "🔄 Rehaciendo la pieza."; }
+  if (a.tipo === "rehacer_semana") { const j = await api("/api/replan", { method: "POST" }); HOST.me.requests = j.requests; return "🔄 Rehaciendo la semana."; }
+  if (a.tipo === "pausar" || a.tipo === "reanudar") { P.auto = a.tipo === "reanudar"; saveCfg(); return P.auto ? "▶ Piloto automático activado." : "⏸ Piloto automático en pausa."; }
+  if (a.tipo === "ajustes") {
+    if ([3, 5, 7, 10].includes(+a.max_semana)) P.max_semana = +a.max_semana;
+    if ([1, 2, 3].includes(+a.max_por_dia)) P.max_por_dia = +a.max_por_dia;
+    if (["auto", "voz", "musica", "ambos"].includes(a.audio)) P.audio = a.audio;
+    if (Array.isArray(a.formatos)) { const f = a.formatos.filter(x => TYPES[x]); if (f.length) P.formatos = f; }
+    saveCfg(); return "⚙️ Ajustes guardados.";
+  }
+  throw new Error("Acción desconocida");
+}
+function chatRender() {
+  const box = $("#chLog"); box.innerHTML = "";
+  if (!CHAT.log.length) box.appendChild(el("div", { class: "msg ai", text: "¡Hola! Soy tu agencia 🤖 Pídeme una publicación ahora mismo, ideas, que rehaga algo o que cambie cómo publico." }));
+  CHAT.log.forEach((m, i) => {
+    if (m.r !== "act") { box.appendChild(el("div", { class: "msg " + m.r, text: m.t })); return; }
+    const a = m.a, card = el("div", { class: "act" + (m.done ? " done" : "") }, [el("b", { text: ACT_LABEL[a.tipo] || a.tipo }), el("div", { style: "margin-top:4px;white-space:pre-wrap", text: actDesc(a) })]);
+    if (!m.done) card.appendChild(el("div", { class: "bt" }, [
+      el("button", { class: "pill", text: "✅ Hacerlo", onclick: async e => { e.target.disabled = true; try { const r = await runAction(a); m.done = "ok"; CHAT.log.push({ r: "ai", t: r }); } catch (er) { CHAT.log.push({ r: "ai", t: "⚠️ " + er.message }); e.target.disabled = false; } chatSave(); chatRender(); renderSchedule(); } }),
+      el("button", { class: "pill", text: "✖", onclick: () => { m.done = "no"; chatSave(); chatRender(); } })]));
+    else card.appendChild(el("div", { class: "note", text: m.done === "ok" ? "Hecho ✓" : "Descartado" }));
+    box.appendChild(card);
+  });
+  box.scrollTop = box.scrollHeight;
+}
+async function chatSend(text) {
+  text = String(text || "").trim(); if (!text) return;
+  CHAT.log.push({ r: "me", t: text }); chatSave(); chatRender();
+  const wait = el("div", { class: "msg ai", text: "…" }); $("#chLog").appendChild(wait); $("#chLog").scrollTop = 1e9;
+  try {
+    try { HOST.me = await api("/api/me"); } catch (e) { }
+    const res = await S.sample(chatPrompt(text)); const j = parseJSON(res.text);
+    CHAT.log.push({ r: "ai", t: String(j.respuesta || "Hecho.") });
+    (Array.isArray(j.acciones) ? j.acciones : []).slice(0, 3).filter(a => a && ACT_LABEL[a.tipo]).forEach(a => CHAT.log.push({ r: "act", a }));
+  } catch (e) { CHAT.log.push({ r: "ai", t: "⚠️ No he podido responder (" + (e.message || e) + "). Prueba otra vez." }); }
+  chatSave(); chatRender();
+}
+function setupChat() {
+  $("#chatFab").hidden = false;
+  $("#chatFab").addEventListener("click", () => { $("#chatModal").classList.add("on"); chatRender(); setTimeout(() => $("#chText").focus(), 50); });
+  $("#chClose").addEventListener("click", () => $("#chatModal").classList.remove("on"));
+  $("#chatModal").addEventListener("click", e => { if (e.target.id === "chatModal") $("#chatModal").classList.remove("on"); });
+  $("#chSend").addEventListener("click", () => { const t = $("#chText").value; $("#chText").value = ""; chatSend(t); });
+  $("#chText").addEventListener("keydown", e => { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); $("#chSend").click(); } });
+  ["📝 Hazme un reel para hoy", "📅 ¿Qué hay programado?", "💡 Dame 5 ideas nuevas", "🔄 Rehaz la semana"].forEach(t => $("#chSug").appendChild(el("button", { class: "chip sm", text: t, onclick: () => chatSend(t.replace(/^\S+\s/, "")) })));
 }
 function hasBrand() { return !!(S.cfg && (S.cfg.name || S.cfg.about)); }
 async function planNow(silent) {
@@ -1672,6 +1792,7 @@ if (!window.__AGENCIA_SERVER) {
   let cfgTimer = null;
   saveCfg = async function () { ls("ma_cfg", S.cfg); if (!HOST.key || !API) return; clearTimeout(cfgTimer); cfgTimer = setTimeout(async () => { try { await api("/api/config", { method: "PUT", body: { config: confFromState() } }); } catch (e) { setStatus($("#genStatus"), "No se pudo guardar en el servidor: " + e.message, "err"); } }, 600); };
   $("#openAcct").addEventListener("click", openAcct);
+  setupChat();
   // Modo automático: el botón principal pide al servidor que cree y publique; nada de crear piezas a mano
   ["#seg", "#segNote", "#videos", "#histSec", "#mediaGroup"].forEach(sel => { const n = $(sel); if (n) n.classList.add("autohide"); });
   { const sg = $("#seg"), lb = sg && sg.previousElementSibling; if (lb && lb.classList.contains("lbl")) lb.classList.add("autohide"); }

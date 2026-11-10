@@ -448,7 +448,14 @@ def plan_user(browser, user, key, force=False, redo=None):
         page.evaluate("(allowed)=>{ delete FONDOS.stock; delete FONDOS.mis; window.__allowed = allowed; }", allowed)
         page.evaluate("a=>{S.count=a[0]; PLAN_LIMITS={maxDia:a[1],maxSemana:a[2]}; AUDIO_CAPS=true;}",
                       ["1" if redo else modo, max(1, int(plan_conf.get("max_por_dia", 2))), max(1, int(plan_conf.get("max_semana", 5)))])
-        if redo:
+        if redo and redo.get("brief") is not None:
+            tipo_b = redo["tipo"] if redo["tipo"] in allowed else None
+            hora = datetime.fromisoformat(redo["publishAt"]).astimezone(tz).strftime("%H:%M")
+            page.evaluate("""r=>{ window.__allowed=r.allowed; const orig=window.__origBP||buildPrompt; window.__origBP=orig;
+              window.buildPrompt=()=>orig("1").replace(/exactamente 1 pieza\\(s\\) para HOY \\(dia 0, [^)]*\\)\\. Elige tú el tipo\\./,
+                'UNA sola pieza '+(r.tipo?'de tipo "'+r.tipo+'" ':'(elige tú el mejor tipo) ')+'para el dia 0 a las '+r.hora+'. La ha pedido el dueño de la cuenta: tema "'+r.tema+'"'+(r.brief?'. Indicaciones: "'+r.brief+'"':'')+'. Respeta lo que pide y hazla tan llamativa como el mejor contenido de la cuenta.'); }""",
+                          {"tipo": tipo_b, "allowed": [tipo_b] if tipo_b else allowed, "hora": hora, "tema": redo.get("tema", ""), "brief": redo.get("brief", "")})
+        elif redo:
             hora = datetime.fromisoformat(redo["publishAt"]).astimezone(tz).strftime("%H:%M")
             page.evaluate("""r=>{ window.__allowed=[r.tipo]; const orig=window.__origBP||buildPrompt; window.__origBP=orig;
               window.buildPrompt=()=>orig("1").replace(/exactamente 1 pieza\\(s\\) para HOY \\(dia 0, [^)]*\\)\\. Elige tú el tipo\\./,
@@ -487,7 +494,7 @@ def plan_user(browser, user, key, force=False, redo=None):
         stamp = now.strftime("%H%M%S")
         new_items = []
         for i, p in enumerate(pieces):
-            pid = f"{today}-r{stamp}-{p['tipo']}" if redo else f"{today}-{i + 1:02d}-{p['tipo']}"
+            pid = (f"{today}-{'c' if redo.get('brief') is not None else 'r'}{stamp}-{p['tipo']}" if redo else f"{today}-{i + 1:02d}-{p['tipo']}")
             folder = out_root / pid
             if folder.exists():
                 shutil.rmtree(folder)
@@ -552,7 +559,7 @@ def plan_user(browser, user, key, force=False, redo=None):
                 if when < now + timedelta(minutes=20):
                     when = now + timedelta(minutes=30)
             new_items.append({
-                "id": pid, "date": today, "source": "redo" if redo else "auto", "tipo": p["tipo"], "tema": p.get("tema", ""),
+                "id": pid, "date": today, "source": ("chat" if redo.get("brief") is not None else "redo") if redo else "auto", "tipo": p["tipo"], "tema": p.get("tema", ""),
                 "publishAt": when.isoformat(),
                 "caption": caption[:2200], "media": media, "status": "pending", "attempts": 0,
                 **({"cover": str((folder / "cover.jpg").relative_to(DOCS))} if (folder / "cover.jpg").exists() else {}),
@@ -635,7 +642,7 @@ def process_requests(browser, users, key):
     errors = 0
     for u in users:
         r = u.get("requests") or {}
-        if not (r.get("reset") or r.get("replan") or r.get("redo")):
+        if not (r.get("reset") or r.get("replan") or r.get("redo") or r.get("create")):
             continue
         label = f"{u.get('name')} ({u['id']})"
         done = {}
@@ -643,10 +650,26 @@ def process_requests(browser, users, key):
             if r.get("reset"):
                 log(f"♻ {label}: reiniciar cuenta")
                 reset_user(u)
-                done = {"reset": r["reset"], "replan": r.get("replan"), "redo": r.get("redo") or []}
+                done = {"reset": r["reset"], "replan": r.get("replan"), "redo": r.get("redo") or [], "create": [c["id"] for c in r.get("create") or []]}
             elif not ready(u):
                 log(f"— {label}: hay peticiones pero falta marca o redes; se descartan.")
-                done = {"replan": r.get("replan"), "redo": r.get("redo") or []}
+                done = {"replan": r.get("replan"), "redo": r.get("redo") or [], "create": [c["id"] for c in r.get("create") or []]}
+            elif r.get("create") and not r.get("replan"):
+                done = {"create": []}
+                for c in r.get("create") or []:
+                    done["create"].append(c["id"])
+                    tz = ZoneInfo(((u.get("config") or {}).get("plan") or {}).get("zona_horaria", "Europe/Madrid"))
+                    when = c.get("cuando") or (datetime.now(tz) + timedelta(minutes=30)).isoformat()
+                    item = {"id": c["id"], "tipo": c.get("tipo") or "auto", "tema": c.get("tema", ""), "brief": c.get("notas", ""),
+                            "publishAt": datetime.fromisoformat(when.replace("Z", "+00:00")).astimezone(tz).isoformat()}
+                    log(f"💬 {label}: crear {item['tipo']} «{item['tema']}» desde el chat")
+                    try:
+                        plan_user(browser, u, key, redo=item)
+                    except Exception as e:
+                        errors += 1
+                        log(f"  ✗ No se pudo crear la publicación pedida:", e)
+                if r.get("redo"):
+                    done["redo"] = []  # se atienden en la siguiente vuelta
             elif r.get("replan"):
                 log(f"🔄 {label}: rehacer la semana")
                 plan_user(browser, u, key, force=True)

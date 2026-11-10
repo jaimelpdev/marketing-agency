@@ -131,6 +131,9 @@ Guarda tu **clave de acceso** (en Cuenta) para entrar desde otro dispositivo.
 - **6 diseños de pantalla** que se van alternando para que dos reels, historias o carruseles no se parezcan: clásico, lista (un top que se va desvelando con lo que falta oculto), tarjetas que entran deslizando, chat en burbujas (estilo POV), panel dividido con número gigante y mascota, y subtítulos enormes palabra a palabra. Los posts alternan entre clásico, tarjeta y dividido. La agencia nunca repite el diseño de la última pieza del mismo tipo.
 - **Variedad obligatoria:** cada pieza usa un formato narrativo distinto (top, mito vs realidad, POV, antes y después, reto, comparativa, polémica…) y la agencia alterna estilo, fondo, animación del texto, música y gráficos para que ningún día se parezca al anterior.
 
+## 💬 Chat con la agencia
+Botón 💬 en la web: pídele una publicación al momento ("hazme un reel del trail braking para las 21:00"), ideas, qué hay programado, que rehaga algo, que pause o cambie los ajustes. Cada acción sale como una tarjeta con **✅ Hacerlo** para que nada se publique sin tu confirmación. Las publicaciones pedidas se crean con el mismo motor (vídeo, voz, música, portada) y se programan en tus redes.
+
 ## 🔎 No repetir contenido
 Antes de planificar, la agencia lee las últimas publicaciones de cada red conectada (Instagram, TikTok y YouTube, **incluido lo que subiste a mano**) con sus me gusta y comentarios, y lo junta con lo que ya creó o programó ella. Con eso evita repetir temas, ganchos o enfoques, y aprovecha lo que mejor funciona con ángulos nuevos.
 
