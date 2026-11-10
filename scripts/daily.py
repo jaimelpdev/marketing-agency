@@ -28,6 +28,7 @@ from zoneinfo import ZoneInfo
 from playwright.sync_api import sync_playwright
 
 from common import api, summarize
+import brain
 
 ROOT = Path(__file__).resolve().parent.parent
 DOCS = ROOT / "docs"
@@ -448,6 +449,17 @@ def plan_user(browser, user, key, force=False, redo=None):
     if published:
         history = merge_history(history, published)
         log(f"  Revisado lo ya publicado en sus redes: {len(published)} publicaciones.")
+    # 🧠 memoria a largo plazo + estratega semanal (antes de planificar)
+    mem_path = udir / "memoria.json"
+    mem = brain.load(mem_path)
+    notas = (plan_conf.get("notas") or [])
+    if not redo and brain.needs_reflection(mem, force):
+        try:
+            mem = brain.reflect(mem, user, history, published, key, lambda *a: log(*a))
+            brain.save(mem_path, mem)
+            log(f"  🧠 Estrategia semana {mem['semana']}: fase {mem['fase']} · arco «{mem['arco_semana'].get('tema', '')}» · series: {', '.join(s['nombre'] for s in mem['series']) or '-'}")
+        except Exception as e:
+            log("  ⚠ El estratega no pudo actualizar la memoria (se usa la anterior):", e)
     allowed = plan_conf.get("formatos") or ["reel", "historia", "post", "carrusel"]
     nets = {a.get("platform") for a in (user.get("social") or [])}
     if not (user.get("ig") or {}).get("connected") and "instagram" not in nets:
@@ -492,6 +504,7 @@ def plan_user(browser, user, key, force=False, redo=None):
               window.buildPrompt=()=>orig("1").replace(/exactamente 1 pieza\\(s\\) para HOY \\(dia 0, [^)]*\\)\\. Elige tú el tipo\\./,
                 'UNA sola pieza de tipo "'+r.tipo+'" para el dia 0 a las '+r.hora+'. Sustituye a otra pieza que no gustó (tema: "'+r.tema+'"): haz algo claramente distinto y mejor, con otro gancho y otro enfoque.'); }""",
                           {"tipo": redo["tipo"], "hora": hora, "tema": redo.get("tema", "")})
+        page.evaluate("t=>{window.__memText=t;}", brain.memory_text(mem, notas))
         log("  Pidiendo el plan a la IA…")
         for intento in range(4):
             page.click("#genBtn")
@@ -645,8 +658,10 @@ def plan_user(browser, user, key, force=False, redo=None):
     save_json(hist_path, hist)
     if not redo:
         save_json(udir / "plans" / f"{today}.json", {"date": today, "estrategia": estrategia, "piezas": pieces})
+    mem = brain.after_plan(mem, pieces)
+    brain.save(mem_path, mem)
     try:
-        api("PUT", f"/admin/status/{uid}", {"estrategia": "" if redo else estrategia, "queue": summarize(queue)})
+        api("PUT", f"/admin/status/{uid}", {"estrategia": "" if redo else estrategia, "queue": summarize(queue), "memoria": brain.public(mem)})
     except Exception as e:
         log("  ⚠ No se pudo avisar a la app:", e)
 

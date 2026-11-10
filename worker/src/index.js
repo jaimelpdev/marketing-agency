@@ -523,7 +523,8 @@ async function handle(req, env) {
       const u = await getUser(env, m[1]);
       if (!u) return err(404, "not_found", "Usuario no encontrado.");
       const b = await req.json().catch(() => ({}));
-      u.status = { updated: new Date().toISOString(), estrategia: String(b.estrategia || (u.status && u.status.estrategia) || ""), queue: (Array.isArray(b.queue) ? b.queue.slice(0, 60) : []).filter(x => !new Set((u.requests && u.requests.remove) || []).has(x && x.id)) }; // las eliminadas no vuelven
+      const memoria = b.memoria && typeof b.memoria === "object" ? JSON.parse(JSON.stringify(b.memoria).slice(0, 20000) || "null") : (u.status && u.status.memoria) || null;
+      u.status = { updated: new Date().toISOString(), memoria, estrategia: String(b.estrategia || (u.status && u.status.estrategia) || ""), queue: (Array.isArray(b.queue) ? b.queue.slice(0, 60) : []).filter(x => !new Set((u.requests && u.requests.remove) || []).has(x && x.id)) }; // las eliminadas no vuelven
       await putUser(env, u);
       return json({ ok: true });
     }

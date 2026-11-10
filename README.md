@@ -134,6 +134,13 @@ Guarda tu **clave de acceso** (en Cuenta) para entrar desde otro dispositivo.
 - **Música:** 12 estilos (energética, hip hop, rock, electrónica, funk, latina, chill, épica, emotiva, divertida, tensión, ambiental), búsquedas variadas y sin repetir canción en las últimas 30 piezas.
 - **Variedad obligatoria:** cada pieza usa un formato narrativo distinto (top, mito vs realidad, POV, antes y después, reto, comparativa, polémica…) y la agencia alterna estilo, fondo, animación del texto, música y gráficos para que ningún día se parezca al anterior.
 
+## 🧠 Memoria y estrategia de marca
+La agencia piensa en dos pasos:
+1. **Director de estrategia (una vez por semana):** revisa los resultados reales de tus redes (me gusta y comentarios), lo publicado, su memoria anterior y tus notas, y decide la **fase de la marca** (descubrimiento → confianza → comunidad → conversión), el **objetivo del mes**, el **arco de la semana**, la **mezcla** de piezas por objetivo (la promoción del producto sube poco a poco), las **series** recurrentes con sus episodios, lo que funciona y lo que hay que evitar, las **promesas** pendientes y las ideas guardadas.
+2. **Planificador:** crea las piezas siguiendo esa estrategia, con al menos una pieza de comunidad por semana y la marca apareciendo de forma natural.
+
+Todo se guarda en `content/users/<id>/memoria.json` y se ve en **👤 Cuenta → 🧠 Memoria de la agencia**, donde también puedes dejar **notas** que la agencia respeta siempre (o decírselo al chat: «recuerda que…»). Los reels de una serie llevan su sello («🎬 El error de la semana · EP 3»).
+
 ## 💬 Chat con la agencia
 Botón 💬 en la web: pídele una publicación al momento ("hazme un reel del trail braking para las 21:00"), ideas, qué hay programado, que rehaga algo, que pause o cambie los ajustes. Cada acción sale como una tarjeta con **✅ Hacerlo** para que nada se publique sin tu confirmación. Las publicaciones pedidas se crean con el mismo motor (vídeo, voz, música, portada) y se programan en tus redes.
 

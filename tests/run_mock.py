@@ -54,6 +54,7 @@ def mock_routes(page):
 
 import subprocess  # noqa: E402
 calls = []
+STRAT = []
 OV = []
 PROMPTS = []
 DONE = []
@@ -119,6 +120,14 @@ class H(http.server.SimpleHTTPRequestHandler):
     def do_POST(self):
         n = int(self.headers.get("content-length", 0))
         body = json.loads(self.rfile.read(n) or b"{}")
+        if self.path == "/groq/chat/completions":
+            STRAT.append(body["messages"][0]["content"])
+            mem = {"fase": "descubrimiento", "objetivo_mes": "Crecer hasta 1.000 seguidores", "arco_semana": {"tema": "La frenada perfecta", "porque": "es lo que más dudas genera"},
+                   "mezcla": {"alcance": 55, "confianza": 30, "comunidad": 15, "conversion": 0},
+                   "series": [{"nombre": "El error de la semana", "formato": "reel", "cuando": "miércoles", "descripcion": "un error típico y cómo evitarlo", "episodios": 0}],
+                   "aprendizajes": ["Los reels de errores tienen más comentarios"], "que_evitar": ["Posts solo de app"], "promesas_pendientes": ["Enviar la guía de frenada"],
+                   "ideas": ["Reto de la semana"], "tono_comunidad": "cercano y gamer", "hitos": ["1.000 seguidores"], "resumen_para_dueño": "Esta semana vamos a por alcance."}
+            return self._json({"choices": [{"message": {"content": json.dumps(mem, ensure_ascii=False)}}]})
         if self.path.startswith("/admin/requests/") and self._auth():
             DONE.append((self.path, body))
             for u in USERS:
@@ -156,6 +165,7 @@ daily.tts = fake_tts
 TRACK = work / "track.mp3"
 subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-f", "lavfi", "-i", "sine=frequency=330:duration=90", "-ac", "2", str(TRACK)], check=True)
 os.environ["OPENVERSE_API"] = "http://127.0.0.1:8765/ov"
+os.environ["GROQ_API_BASE"] = "http://127.0.0.1:8765/groq"
 # acelerar Pollinations en la prueba
 os.environ["POLLINATIONS_TOKEN"] = "x"
 daily.main()
@@ -192,6 +202,13 @@ def loudness(path):
     import re
     return float(re.search(r"mean_volume: (-?[0-9.]+)", r.stderr).group(1))
 assert any("primer volante de simracing" in pr and "87" in pr for pr in PROMPTS), "la IA ve lo ya publicado en las redes"
+assert STRAT and "primer volante de simracing" in STRAT[0] and "87" in STRAT[0], "el estratega ve los resultados reales"
+memf = work / "content/users/u_ana/memoria.json"
+mem = json.loads(memf.read_text())
+assert mem["fase"] == "descubrimiento" and mem["semana"] == 1 and mem["series"][0]["nombre"] == "El error de la semana"
+assert any("MEMORIA Y ESTRATEGIA DE MARCA" in pr and "El error de la semana" in pr and "La frenada perfecta" in pr for pr in PROMPTS), "el planificador usa la memoria"
+assert STATUS["u_ana"].get("memoria", {}).get("fase") == "descubrimiento", "la memoria llega a la app"
+print("🧠 MEMORIA:", mem["fase"], "·", mem["arco_semana"]["tema"], "·", [x["nombre"] for x in mem["series"]])
 assert OV, "busca música libre"
 assert (work / "content/music").exists() and list((work / "content/music").rglob("index.json")), "guarda las pistas"
 reel_item = next(q for q in final if q["tipo"] == "reel")

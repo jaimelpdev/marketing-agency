@@ -412,6 +412,10 @@ https://apps.apple.com/…
       <div class="note">Guárdala: con ella entras desde otro móvil u ordenador. No la compartas.</div>
       <div class="note" id="acUsage"></div>
     </div>
+    <div class="acct-sec"><h4>🧠 Memoria de la agencia</h4><div id="acMem"></div>
+      <div class="t" style="margin-top:10px;font-weight:800;font-size:13px">Tus notas (la agencia las respeta siempre)</div><div id="acNotes"></div>
+      <div style="display:flex;gap:8px;margin-top:6px"><input id="acNoteIn" placeholder="Ej.: no menciones precios · el lunes sale la app nueva" style="flex:1"><button class="pill" id="acNoteAdd">Añadir</button></div>
+    </div>
     <div class="acct-sec"><h4>♻️ Reiniciar cuenta</h4>
       <div class="note" style="margin-top:0">Borra tu marca, el plan, el historial y anula lo programado. Se mantienen tu clave de acceso y tus redes conectadas.</div>
       <div class="chips" style="margin-top:8px"><button class="chip sm danger" id="acReset">♻️ Reiniciar cuenta</button></div>
@@ -487,7 +491,7 @@ function normPiece(v,i){
     tema:String(v.tema||v.gancho||""),formato:String(v.formato||""),gancho:String(v.gancho||""),visual:String(v.visual||""),
     escenas:(Array.isArray(v.escenas)?v.escenas:[]).slice(0,7).map(e=>({titulo:String(e.titulo||""),texto:String(e.texto||""),emoji:String(e.emoji||""),visual:String(e.visual||""),grafico:normGraf(e.grafico)})),
     cta:String(v.cta||""),sticker:st,fondo:String(v.fondo||""),estilo:String(v.estilo||""),caption:String(v.caption||""),hashtags:Array.isArray(v.hashtags)?v.hashtags.join(" "):String(v.hashtags||""),
-    audio:String(v.audio||""),voz:String(v.voz||""),ritmo_voz:String(v.ritmo_voz||""),musica:String(v.musica||""),guion:Array.isArray(v.guion)?v.guion.map(String):[],anim:["pop","slide","type","fade"].includes(v.anim)?v.anim:"",plantilla:Number.isInteger(+v.plantilla)&&+v.plantilla>=0&&+v.plantilla<TPL_TOTAL?+v.plantilla:null,layout:LAYOUTS.includes(String(v.layout||"").toLowerCase())?String(v.layout).toLowerCase():"",stickers:(Array.isArray(v.stickers)?v.stickers:[]).map(x=>String(x).trim()).filter(x=>x&&x.length<=12&&!/[A-Za-z0-9]/.test(x)).slice(0,5),...(Array.isArray(v._durs)?{_durs:v._durs}:{})};
+    audio:String(v.audio||""),voz:String(v.voz||""),ritmo_voz:String(v.ritmo_voz||""),musica:String(v.musica||""),guion:Array.isArray(v.guion)?v.guion.map(String):[],anim:["pop","slide","type","fade"].includes(v.anim)?v.anim:"",objetivo:["alcance","confianza","comunidad","conversion"].includes(v.objetivo)?v.objetivo:"",serie:String(v.serie||"").slice(0,60),episodio:Math.max(0,parseInt(v.episodio)||0),plantilla:Number.isInteger(+v.plantilla)&&+v.plantilla>=0&&+v.plantilla<TPL_TOTAL?+v.plantilla:null,layout:LAYOUTS.includes(String(v.layout||"").toLowerCase())?String(v.layout).toLowerCase():"",stickers:(Array.isArray(v.stickers)?v.stickers:[]).map(x=>String(x).trim()).filter(x=>x&&x.length<=12&&!/[A-Za-z0-9]/.test(x)).slice(0,5),...(Array.isArray(v._durs)?{_durs:v._durs}:{})};
 }
 
 /* ============ BRANDING UI ============ */
@@ -652,6 +656,8 @@ TIPOS DE PIEZA
 - "post": imagen única con una frase potente. Sirve para guardados y compartidos. Lleva 1 escena con el texto de apoyo.
 - "carrusel": de 3 a 6 diapositivas educativas. Sirve para guardados y autoridad.
 
+${window.__memText||""}
+
 VARIEDAD (obligatorio: ninguna pieza puede parecerse a otra de la semana ni a lo ya publicado)
 - Cada pieza usa un FORMATO narrativo distinto (escríbelo en "formato") y no repitas el formato de las últimas piezas publicadas: top o lista · mito vs realidad · el error que todos cometen · antes y después · POV o mini historia ("POV: tu primera carrera online…") · tutorial paso a paso · reto o quiz ("¿Sabrías…?") · comparativa A vs B · opinión polémica · dato curioso o sorprendente · detrás de las cámaras · checklist para guardar.
 - Cada pieza lleva un "layout" (diseño de pantalla) y dos piezas del mismo tipo no pueden repetir layout: "clasico" (número, título y texto), "lista" (top que se va desvelando, con lo que falta oculto), "tarjeta" (cada idea en una tarjeta que entra deslizando), "chat" (conversación en burbujas, ideal para POV, preguntas y mini historias), "dividido" (panel de color con número gigante y mascota), "subtitulos" (texto enorme palabra a palabra, ideal para opiniones y ganchos fuertes). En posts solo "clasico", "tarjeta" o "dividido".
@@ -694,7 +700,7 @@ AUDIO (solo reels e historias; los vídeos llevan locución real)
 - "guion" (solo si hay voz): lista de frases habladas, UNA por pantalla y en orden: gancho, cada escena y cierre (o el texto del sticker en historias). Tiene que sonar a creador hablando a cámara, no a texto leído: frases cortas, tuteo, exclamaciones y preguntas retóricas ("¿Sabes por qué?"), pausas con comas y puntos suspensivos, conectores de conversación ("mira", "ojo", "y aquí viene lo bueno"). Nada de "en primer lugar". Números pequeños con letra. Como mucho 22 palabras por frase, sin emojis, asteriscos ni hashtags.`:''}
 
 Responde SOLO con JSON válido:
-{"estrategia":"2 o 3 frases: qué días se publica, cuáles se descansa y por qué","piezas":[{"dia":0,"hora":"19:30","tipo":"reel","objetivo":"…","razon":"…","tema":"…","formato":"…","gancho":"…"${needVis?',"visual":"…"':''},"escenas":[{"titulo":"…","texto":"…"${needVis?',"visual":"…"':''}${O.emoji?',"emoji":"…"':''}${O.graficos!==false?',"grafico":{"tipo":"…"}':''}}],"cta":"…","layout":"…"${O.stickers!==false?',"stickers":["…","…","…"]':''},"sticker":null,"fondo":"…","estilo":"…"${AUDIO_CAPS?',"audio":"…","voz":"…","ritmo_voz":"…","musica":"…","guion":["…"]':''},"caption":"…","hashtags":["#…"]}]}`;
+{"estrategia":"2 o 3 frases: qué días se publica, cuáles se descansa y por qué","piezas":[{"dia":0,"hora":"19:30","tipo":"reel","objetivo":"…","razon":"…","tema":"…","formato":"…","gancho":"…"${needVis?',"visual":"…"':''},"escenas":[{"titulo":"…","texto":"…"${needVis?',"visual":"…"':''}${O.emoji?',"emoji":"…"':''}${O.graficos!==false?',"grafico":{"tipo":"…"}':''}}],"cta":"…","layout":"…","objetivo":"alcance|confianza|comunidad|conversion","serie":"nombre de la serie o vacío","episodio":0${O.stickers!==false?',"stickers":["…","…","…"]':''},"sticker":null,"fondo":"…","estilo":"…"${AUDIO_CAPS?',"audio":"…","voz":"…","ritmo_voz":"…","musica":"…","guion":["…"]':''},"caption":"…","hashtags":["#…"]}]}`;
 }
 $("#genBtn").addEventListener("click",async()=>{
   const st=$("#genStatus"),btn=$("#genBtn");
@@ -713,7 +719,7 @@ $("#genBtn").addEventListener("click",async()=>{
     if(!vids.length&&n!=="auto")throw new Error("no llegó el plan");
     vids.sort((a,b)=>a.dia-b.dia||String(a.hora).localeCompare(String(b.hora)));
     S.today={date:isoDay(),estrategia:String(data.estrategia||""),videos:vids};
-    vids.forEach(v=>S.hist.items.push({date:isoDay(v.dia),tema:v.tema,formato:v.formato,tipo:v.tipo,layout:v.layout,plantilla:v.plantilla}));S.hist.items=S.hist.items.slice(-200);
+    vids.forEach(v=>S.hist.items.push({date:isoDay(v.dia),tema:v.tema,formato:v.formato,tipo:v.tipo,layout:v.layout,plantilla:v.plantilla,serie:v.serie,objetivo:v.objetivo}));S.hist.items=S.hist.items.slice(-200);
     renderVideos(); saveToday(true); saveHist(); renderHist(); HOOKS.afterGenerate();
     const cnt={};vids.forEach(v=>cnt[v.tipo]=(cnt[v.tipo]||0)+1);const days=new Set(vids.map(v=>v.dia)).size;
     if(!vids.length){setStatus(st,"😌 La agencia recomienda no publicar hoy. "+(S.today.estrategia||""),"ok");return;}
@@ -971,6 +977,8 @@ function drawFrame(SC,t,slide){
   if(FX)drawWipe(si,n,lt,s.dur);
   if(FX&&s.kind==="hook"&&lt>0.2&&lt<0.42){ctx.save();ctx.globalAlpha=0.55*(1-(lt-0.2)/0.22);ctx.fillStyle="#fff";ctx.fillRect(0,0,W,H);ctx.restore();}
   if(FX&&s.kind==="cta")drawConfetti(lt);
+  if((s.kind==="hook"||s.kind==="post")&&SC.piece&&SC.piece.serie){const lab=("🎬 "+SC.piece.serie+(SC.piece.episodio?" · EP "+SC.piece.episodio:"")).toUpperCase();const pp=STATIC?1:easeBack(clamp((lt-0.3)/0.4,0,1));
+    if(pp>0){ctx.save();ctx.font="900 34px Inter";const tw=Math.min(ctx.measureText(lab).width,W-240);ctx.translate(W/2,Math.round(H*0.095));ctx.scale(pp,pp);ctx.rotate(-0.02);ctx.fillStyle="#ffd60a";roundRect(-tw/2-30,-34,tw+60,68,34);ctx.fill();ctx.fillStyle="#15151b";ctx.textAlign="center";ctx.textBaseline="middle";ctx.fillText(lab,0,2,W-240);ctx.restore();}}
 }
 /* ===== Plantillas de diseño (cada pieza puede verse distinta) ===== */
 const LAYOUTS=["clasico","lista","tarjeta","chat","dividido","subtitulos"];
@@ -1690,6 +1698,7 @@ function renderAcct() {
   chipRow($("#acDay"), [[1, "1"], [2, "2"], [3, "3"]], v => P.max_por_dia === v, v => { P.max_por_dia = v; saveCfg(); renderAcct(); });
   chipRow($("#acFmt"), Object.entries(TYPES).map(([k, T]) => [k, T.icon + " " + T.name]), v => P.formatos.includes(v), v => { if (P.formatos.includes(v)) { if (P.formatos.length > 1) P.formatos = P.formatos.filter(x => x !== v); } else P.formatos = P.formatos.concat(v); saveCfg(); renderAcct(); });
   chipRow($("#acAudio"), [["auto", "🤖 Que decida la agencia"], ["voz", "🎙 Solo voz"], ["musica", "🎵 Solo música"], ["ambos", "🎙+🎵 Voz y música"]], v => (P.audio || "auto") === v, v => { P.audio = v; saveCfg(); renderAcct(); });
+  renderMemory();
   chipRow($("#acVoz"), [["", "🤖 Que elija la agencia"], ["alvaro", "Álvaro"], ["elvira", "Elvira"], ["ximena", "Ximena"], ["jorge", "Jorge 🇲🇽"], ["dalia", "Dalia 🇲🇽"], ["andrew", "Andrew ✨"], ["ava", "Ava ✨"], ["brian", "Brian ✨"], ["emma", "Emma ✨"]], v => (P.voz_elegida || "") === v, v => { P.voz_elegida = v; saveCfg(); renderAcct(); });
   renderSocial();
   const R = reqs();
@@ -1715,11 +1724,13 @@ function chatContext() {
     "Estrategia actual: " + ((me.status && me.status.estrategia) || "-"),
     "Piezas (id · tipo · tema · cuándo · estado):\n" + (q.map(x => "- " + x.id + " · " + x.tipo + " · " + (x.tema || "") + " · " + fmt(x.publishAt) + " · " + x.status).join("\n") || "(ninguna)"),
     "Peticiones en marcha: " + JSON.stringify(me.requests || {}),
+    "Memoria de la agencia: " + JSON.stringify((me.status && me.status.memoria) || {}).slice(0, 3000),
+    "Notas del dueño (índice: texto): " + ((P.notas || []).map((n, i) => i + ": " + (n.t || n)).join(" | ") || "ninguna"),
   ].join("\n");
 }
 function chatPrompt(userMsg) {
   const hist = CHAT.log.slice(-10).map(m => (m.r === "me" ? "DUEÑO: " : "AGENCIA: ") + m.t).join("\n");
-  return `Eres la agencia de marketing de esta cuenta y hablas con su dueño por chat. Respondes en español, cercano, breve (2-5 frases) y muy concreto. Puedes dar ideas, explicar la estrategia o lo programado, y proponer ACCIONES que el dueño confirmará con un botón.
+  return `Eres la agencia de marketing de esta cuenta y hablas con su dueño por chat. Respondes en español, cercano, breve (2-5 frases) y muy concreto. Piensas como un estratega: tienes memoria (fase de la marca, series, lo que funciona, promesas) y la usas para dar consejos con criterio y explicar el porqué. Puedes dar ideas, explicar la estrategia o lo programado, y proponer ACCIONES que el dueño confirmará con un botón.
 
 DATOS DE LA CUENTA
 ${chatContext()}
@@ -1727,6 +1738,8 @@ ${chatContext()}
 ACCIONES DISPONIBLES (propón solo las que el dueño pida o claramente quiera; si falta un dato importante, pregúntalo en vez de inventarlo)
 - {"tipo":"crear","formato":"reel|historia|post|carrusel|auto","tema":"…","notas":"indicaciones concretas del dueño (enfoque, gancho, tono, CTA…)","cuando":"ISO 8601 con zona, o null para publicarla en cuanto esté lista"}
 - {"tipo":"rehacer","id":"id de una pieza programada","notas":"…"}
+- {"tipo":"recordar","nota":"algo que el dueño quiere que la agencia tenga siempre en cuenta"} (úsala cuando diga "recuerda", "a partir de ahora", "no vuelvas a…", o cuente algo importante de su marca: lanzamientos, ofertas, eventos, gustos)
+- {"tipo":"olvidar","indice":número de la nota}
 - {"tipo":"eliminar","id":"id de una pieza programada"} (no se publicará y se borra)
 - {"tipo":"rehacer_semana"}
 - {"tipo":"pausar"} · {"tipo":"reanudar"}
@@ -1738,16 +1751,20 @@ DUEÑO: ${userMsg}
 
 Responde SOLO con JSON válido: {"respuesta":"texto para el dueño","acciones":[ … ]}`;
 }
-const ACT_LABEL = { eliminar: "🗑 Eliminar pieza", crear: "📝 Crear publicación", rehacer: "🔄 Rehacer pieza", rehacer_semana: "🔄 Rehacer la semana", pausar: "⏸ Pausar piloto automático", reanudar: "▶ Reanudar piloto automático", ajustes: "⚙️ Cambiar ajustes" };
+const ACT_LABEL = { recordar: "🧠 Recordar", olvidar: "🧠 Olvidar nota", eliminar: "🗑 Eliminar pieza", crear: "📝 Crear publicación", rehacer: "🔄 Rehacer pieza", rehacer_semana: "🔄 Rehacer la semana", pausar: "⏸ Pausar piloto automático", reanudar: "▶ Reanudar piloto automático", ajustes: "⚙️ Cambiar ajustes" };
 function actDesc(a) {
   if (a.tipo === "crear") return (a.formato && a.formato !== "auto" ? a.formato : "formato a elegir") + " · " + (a.tema || "") + (a.cuando ? " · " + fmtWhen(a.cuando) : " · en cuanto esté lista") + (a.notas ? "\n" + a.notas : "");
   if (a.tipo === "rehacer" || a.tipo === "eliminar") { const it = (((HOST.me || {}).status || {}).queue || []).find(x => x.id === a.id); return it ? (it.tipo + " · " + (it.tema || "") + " · " + fmtWhen(it.publishAt)) : a.id; }
+  if (a.tipo === "recordar") return a.nota || "";
+  if (a.tipo === "olvidar") { const n = (HOST.plan.notas || [])[+a.indice]; return n ? (n.t || n) : "nota " + a.indice; }
   if (a.tipo === "ajustes") return Object.entries(a).filter(([k]) => k !== "tipo").map(([k, v]) => k + ": " + (Array.isArray(v) ? v.join(", ") : v)).join(" · ");
   return "";
 }
 async function runAction(a) {
   const P = HOST.plan;
   if (a.tipo === "crear") { const j = await api("/api/create", { method: "POST", body: { tipo: a.formato || "auto", tema: a.tema || "", notas: a.notas || "", cuando: a.cuando || null } }); HOST.me.requests = j.requests; return "📝 En marcha: la agencia la está creando" + (a.cuando ? " y la programará para " + fmtWhen(a.cuando) : " y la publicará en cuanto esté lista") + "."; }
+  if (a.tipo === "recordar") { if (!addNote(a.nota)) throw new Error("Nota vacía"); return "🧠 Apuntado. Lo tendré en cuenta en todo lo que cree."; }
+  if (a.tipo === "olvidar") { const n = HOST.plan.notas || []; const i = +a.indice; if (!(i >= 0 && i < n.length)) throw new Error("No encuentro esa nota"); n.splice(i, 1); saveCfg(); return "🧠 Olvidado."; }
   if (a.tipo === "eliminar") { const j = await api("/api/delete", { method: "POST", body: { id: a.id } }); HOST.me.requests = j.requests; if (j.status) HOST.me.status = j.status; return "🗑 Eliminada. Ya no se publicará."; }
   if (a.tipo === "rehacer") { const j = await api("/api/redo", { method: "POST", body: { id: a.id } }); HOST.me.requests = j.requests; return "🔄 Rehaciendo la pieza."; }
   if (a.tipo === "rehacer_semana") { const j = await api("/api/replan", { method: "POST" }); HOST.me.requests = j.requests; return "🔄 Rehaciendo la semana."; }
@@ -1795,6 +1812,25 @@ function setupChat() {
   $("#chSend").addEventListener("click", () => { const t = $("#chText").value; $("#chText").value = ""; chatSend(t); });
   $("#chText").addEventListener("keydown", e => { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); $("#chSend").click(); } });
   ["📝 Hazme un reel para hoy", "📅 ¿Qué hay programado?", "💡 Dame 5 ideas nuevas", "🔄 Rehaz la semana"].forEach(t => $("#chSug").appendChild(el("button", { class: "chip sm", text: t, onclick: () => chatSend(t.replace(/^\S+\s/, "")) })));
+}
+function addNote(t) { t = String(t || "").trim().slice(0, 240); if (!t) return false; const P = HOST.plan; P.notas = (P.notas || []).concat({ t, d: new Date().toISOString().slice(0, 10) }).slice(-30); saveCfg(); return true; }
+function renderMemory() {
+  const m = HOST.me && HOST.me.status && HOST.me.status.memoria, box = $("#acMem"); box.innerHTML = "";
+  if (!m) box.appendChild(el("div", { class: "note", style: "margin-top:0", text: "Se crea con el primer plan: la agencia irá recordando qué funciona, las series, las promesas y la fase de tu marca." }));
+  else {
+    const FASE = { descubrimiento: "🔭 Descubrimiento", confianza: "🤝 Confianza", comunidad: "👥 Comunidad", conversion: "💰 Conversión" };
+    const mz = m.mezcla || {};
+    const rows = [["Semana " + (m.semana || 1), FASE[m.fase] || m.fase], ["Objetivo del mes", m.objetivo_mes], ["Arco de la semana", m.arco_semana && m.arco_semana.tema],
+      ["Mezcla", "alcance " + (mz.alcance || 0) + "% · confianza " + (mz.confianza || 0) + "% · comunidad " + (mz.comunidad || 0) + "% · conversión " + (mz.conversion || 0) + "%"]];
+    rows.forEach(([k, v]) => { if (v) box.appendChild(el("div", { style: "font-size:14px;margin:3px 0" }, [el("b", { text: k + ": " }), el("span", { text: v })])); });
+    if (m.resumen_para_dueño) box.appendChild(el("div", { class: "note", text: m.resumen_para_dueño }));
+    const list = (title, arr) => { if (!arr || !arr.length) return; box.appendChild(el("div", { style: "font-weight:800;font-size:13px;margin-top:8px", text: title })); arr.slice(0, 6).forEach(x => box.appendChild(el("div", { style: "font-size:13px;opacity:.9", text: "· " + x }))); };
+    list("🎬 Series", (m.series || []).map(s => s.nombre + " (" + (s.formato || "") + ", " + (s.cuando || "") + ") · " + (s.episodios || 0) + " ep."));
+    list("📈 Lo que funciona", m.aprendizajes); list("🙅 Evitar", m.que_evitar); list("🤝 Promesas pendientes", m.promesas_pendientes); list("💡 Ideas guardadas", m.ideas);
+  }
+  const nb = $("#acNotes"); nb.innerHTML = ""; const notas = HOST.plan.notas || [];
+  if (!notas.length) nb.appendChild(el("div", { class: "note", style: "margin-top:2px", text: "Sin notas todavía. También puedes decírselo al chat: «recuerda que…»." }));
+  notas.forEach((n, i) => nb.appendChild(el("div", { class: "qitem" }, [el("span", { text: "📝 " + (n.t || n) }), el("button", { class: "rd", text: "✖", title: "Olvidar", onclick: () => { HOST.plan.notas.splice(i, 1); saveCfg(); renderMemory(); } })])));
 }
 function hasBrand() { return !!(S.cfg && (S.cfg.name || S.cfg.about)); }
 async function planNow(silent) {
@@ -1857,6 +1893,7 @@ if (!window.__AGENCIA_SERVER) {
   }));
   $("#acCopy").addEventListener("click", async () => { try { await navigator.clipboard.writeText(HOST.key); setStatus($("#acStatus"), "Clave copiada ✓", "ok"); } catch (e) { setStatus($("#acStatus"), "Tu clave: " + HOST.key); } });
   $("#acLogout").addEventListener("click", () => logout(false));
+  $("#acNoteAdd").addEventListener("click", () => { if (addNote($("#acNoteIn").value)) { $("#acNoteIn").value = ""; renderMemory(); } });
   $("#acReplan").addEventListener("click", async () => {
     const st = $("#acStatus");
     try { const j = await api("/api/replan", { method: "POST" }); HOST.me.requests = j.requests; renderAcct(); renderSchedule(); setStatus(st, "🔄 La agencia está rehaciendo la semana. Lo que estaba programado se sustituye en 20-40 minutos.", "ok"); }
