@@ -128,6 +128,7 @@ Guarda tu **clave de acceso** (en Cuenta) para entrar desde otro dispositivo.
 - **Subtítulos dinámicos** palabra a palabra, sincronizados con la voz (la palabra que se dice se ilumina en el color de tu marca), porque la mayoría ve los vídeos sin sonido.
 - **Gancho con impacto:** tras la portada, el texto entra de golpe con destello, sacudida y rayos; confeti en el cierre.
 - **Guiones pensados para retener:** fórmulas de gancho probadas, bucle abierto ("el último es el mejor"), re-enganche a mitad, final con recompensa y CTA de comentar una palabra clave.
+- **6 diseños de pantalla** que se van alternando para que dos reels, historias o carruseles no se parezcan: clásico, lista (un top que se va desvelando con lo que falta oculto), tarjetas que entran deslizando, chat en burbujas (estilo POV), panel dividido con número gigante y mascota, y subtítulos enormes palabra a palabra. Los posts alternan entre clásico, tarjeta y dividido. La agencia nunca repite el diseño de la última pieza del mismo tipo.
 - **Variedad obligatoria:** cada pieza usa un formato narrativo distinto (top, mito vs realidad, POV, antes y después, reto, comparativa, polémica…) y la agencia alterna estilo, fondo, animación del texto, música y gráficos para que ningún día se parezca al anterior.
 
 ## 🔎 No repetir contenido
