@@ -13,6 +13,8 @@ FORCE=1 (rehacer el plan), ONLY_USER=<id> (solo una persona).
 """
 import base64
 import json
+import time
+import re
 import os
 import random
 import shutil
@@ -491,9 +493,20 @@ def plan_user(browser, user, key, force=False, redo=None):
                 'UNA sola pieza de tipo "'+r.tipo+'" para el dia 0 a las '+r.hora+'. Sustituye a otra pieza que no gustó (tema: "'+r.tema+'"): haz algo claramente distinto y mejor, con otro gancho y otro enfoque.'); }""",
                           {"tipo": redo["tipo"], "hora": hora, "tema": redo.get("tema", "")})
         log("  Pidiendo el plan a la IA…")
-        page.click("#genBtn")
-        page.wait_for_function("!document.querySelector('#genBtn').disabled", timeout=300_000)
-        status = page.inner_text("#genStatus")
+        for intento in range(4):
+            page.click("#genBtn")
+            page.wait_for_function("!document.querySelector('#genBtn').disabled", timeout=300_000)
+            status = page.inner_text("#genStatus")
+            if not re.search(r"L[íi]mite|Demasiadas|rate|429|saturad", status, re.I) or page.evaluate("(S.today&&S.today.videos||[]).length"):
+                break
+            # Groq gratis tiene límite por minuto: esperar y, si sigue, pasar a un modelo con cupo propio
+            if intento >= 1:
+                alt = ["openai/gpt-oss-20b", "openai/gpt-oss-120b"][(intento - 1) % 2]
+                page.evaluate("m=>{try{localStorage.setItem('ma_groq_model',JSON.stringify(m));}catch(e){}}", alt)
+                log(f"  ⏳ Groq saturado: espero y pruebo con {alt}…")
+            else:
+                log("  ⏳ Groq saturado: espero un minuto y lo intento otra vez…")
+            time.sleep(65)
         if "recomienda no publicar" in status:
             log("  " + status)
             return False
@@ -740,6 +753,8 @@ def process_requests(browser, users, key):
                     if not item or item.get("status") not in ("pending", "scheduled"):
                         log(f"— {label}: la pieza {rid} ya no se puede rehacer.")
                         continue
+                    if done["redo"][:-1]:
+                        time.sleep(25)  # repartir las peticiones a la IA (límite por minuto de Groq)
                     log(f"🔄 {label}: rehacer {item['tipo']} «{item.get('tema', '')}»")
                     try:
                         plan_user(browser, u, key, redo=item)

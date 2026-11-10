@@ -67,22 +67,31 @@ def _index(folder):
 
 
 def _search(mood, log):
-    q = random.choice(QUERIES.get(mood) or QUERIES["energetica"]) + random.choice(["", " instrumental", " background"])
-    params = {"q": q, "category": "music", "license": "cc0,by", "page_size": 20, "page": random.randint(1, 5)}
-    r = requests.get(API + "/audio/", params=params, headers=UA, timeout=30)
-    r.raise_for_status()
-    res = [x for x in r.json().get("results", [])
-           if x.get("url") and 75_000 <= (x.get("duration") or 0) <= 360_000 and not x.get("mature") and not _bad(x)]
+    qs = list(QUERIES.get(mood) or QUERIES["energetica"])
+    random.shuffle(qs)
+    res, raw = [], []
+    for k, base in enumerate(qs[:4]):  # varias búsquedas antes de rendirse
+        q = base + (random.choice(["", " instrumental"]) if k == 0 else "")
+        params = {"q": q, "category": "music", "license": "cc0,by", "page_size": 20, "page": 1 if k else random.randint(1, 3)}
+        r = requests.get(API + "/audio/", params=params, headers=UA, timeout=30)
+        r.raise_for_status()
+        got = [x for x in r.json().get("results", []) if x.get("url") and not x.get("mature")]
+        raw += got
+        res = [x for x in got if 60_000 <= (x.get("duration") or 0) <= 420_000 and not _bad(x)]
+        log(f"    música: «{q}» → {len(res)} candidatas")
+        if res:
+            break
+    if not res:  # filtro más suave antes de quedarse sin música
+        res = [x for x in raw if 45_000 <= (x.get("duration") or 0) <= 600_000]
     # primero las que se etiquetan como instrumentales / de fondo (suenan mejor bajo la voz)
     random.shuffle(res)
     res.sort(key=lambda x: -_score(x))
-    log(f"    música: «{q}» → {len(res)} candidatas")
     return res
 
 
-BAD_WORDS = ("horror", "psyched", "vocal", "sing", "song with", "lyrics", "christmas", "xmas", "meditat", "noise", "demo",
-             "karaoke", "acapella", "a cappella", "spoken", "poem", "podcast", "sad", "funeral", "drone", "experimental", "test",
-             "remix contest", "live", "rehearsal", "lullaby", "anthem", "national", "religious", "church")
+BAD_WORDS = ("horror", "psyched", "vocals", "singing", "singer", "lyrics", "christmas", "xmas", "meditation", "noise", "demo ",
+             "karaoke", "acapella", "a cappella", "spoken word", "poem", "podcast", "funeral", "experimental",
+             "rehearsal", "lullaby", "national anthem", "religious", "church")
 GOOD_WORDS = ("instrumental", "background", "corporate", "advertising", "commercial", "youtube", "vlog", "upbeat", "motivational",
               "inspiring", "sport", "positive", "happy", "beat", "groove", "energetic")
 
@@ -93,8 +102,9 @@ def _words(x):
 
 
 def _bad(x):
+    import re
     w = _words(x)
-    return any(b in w for b in BAD_WORDS)
+    return any(re.search(r"\b" + re.escape(b), w) for b in BAD_WORDS)
 
 
 def _score(x):
