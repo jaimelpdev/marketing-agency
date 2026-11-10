@@ -341,6 +341,10 @@ def zernio_schedule(user, item, piece, tz):
     soon = datetime.now(tz) + timedelta(minutes=10)
     if when < soon:
         when = soon
+    floor = publish_floor(user, tz)
+    if floor and when < floor:  # última barrera: nunca se programa antes de lo que pidió el dueño
+        when = floor
+    item["publishAt"] = when.isoformat()
     body = {
         "profileId": user.get("zernioProfileId"),
         "content": "" if tipo == "historia" else item.get("caption", ""),
@@ -422,6 +426,22 @@ def zernio_cancel(item):
             api("POST", "/admin/zernio", {"method": "DELETE", "path": "/posts/" + item["zernioPostId"]})
         except Exception as e:
             log("  ⚠ No se pudo anular en Zernio:", e)
+
+
+def publish_floor(user, tz):
+    """Momento más temprano en que se puede publicar: ajuste de la app, archivo del repo o variable NO_ANTES."""
+    cands = []
+    plan = (user.get("config") or {}).get("plan") or {}
+    extra = load_json(CONTENT / "users" / user["id"] / "ajustes.json", {})
+    for v in (plan.get("no_publicar_antes"), extra.get("no_publicar_antes"), os.environ.get("NO_ANTES")):
+        if not v:
+            continue
+        try:
+            d = datetime.fromisoformat(str(v).replace("Z", "+00:00"))
+            cands.append(d if d.tzinfo else d.replace(tzinfo=tz))
+        except ValueError:
+            log(f"  ⚠ Fecha «no publicar antes de» no válida: {v}")
+    return max(cands).astimezone(tz) if cands else None
 
 
 def think_only(user, key, queue):
@@ -635,6 +655,10 @@ def plan_user(browser, user, key, force=False, redo=None):
                 when = datetime.fromisoformat(redo["publishAt"]).astimezone(tz)
                 if when < now + timedelta(minutes=20):
                     when = now + timedelta(minutes=30)
+            floor = publish_floor(user, tz)
+            if floor and when < floor:  # el dueño ha pedido no publicar antes de esa fecha
+                when = floor + timedelta(minutes=50 * i)
+                log(f"    ⏸ Se retrasa hasta {when.strftime('%d/%m %H:%M')} (no publicar antes de {floor.strftime('%d/%m %H:%M')})")
             new_items.append({
                 "id": pid, "date": today, "source": ("chat" if redo.get("brief") is not None else "redo") if redo else "auto", "tipo": p["tipo"], "tema": p.get("tema", ""),
                 "publishAt": when.isoformat(),

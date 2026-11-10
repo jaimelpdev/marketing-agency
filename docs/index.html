@@ -446,6 +446,7 @@ https://apps.apple.com/…
       <div class="og"><div class="t">Máximo de publicaciones por semana</div><div class="chips" id="acWeek"></div></div>
       <div class="og"><div class="t">Máximo por día</div><div class="chips" id="acDay"></div></div>
       <div class="og"><div class="t">Formatos que puede usar</div><div class="chips" id="acFmt"></div></div>
+      <div class="og"><div class="t">⏸ No publicar antes de</div><div style="display:flex;gap:8px;align-items:center"><input type="datetime-local" id="acFloor" style="flex:1"><button class="chip sm" id="acFloorClr">Quitar</button></div><div class="note" id="acFloorNote">La agencia sigue creando contenido, pero nada se publica antes de esta fecha.</div></div>
       <div class="og"><div class="t">Sonido de los vídeos</div><div class="chips" id="acAudio"></div></div>
       <div class="og"><div class="t">Voz</div><div class="chips" id="acVoz"></div><div class="note">✨ = voces multilingües, las más expresivas (pueden tener un ligero acento).</div></div>
       <div class="note">La agencia elige qué días publicar dentro de estos límites y descansa cuando conviene.</div>
@@ -1750,6 +1751,8 @@ function renderAcct() {
   chipRow($("#acDay"), [[1, "1"], [2, "2"], [3, "3"]], v => P.max_por_dia === v, v => { P.max_por_dia = v; saveCfg(); renderAcct(); });
   chipRow($("#acFmt"), Object.entries(TYPES).map(([k, T]) => [k, T.icon + " " + T.name]), v => P.formatos.includes(v), v => { if (P.formatos.includes(v)) { if (P.formatos.length > 1) P.formatos = P.formatos.filter(x => x !== v); } else P.formatos = P.formatos.concat(v); saveCfg(); renderAcct(); });
   chipRow($("#acAudio"), [["auto", "🤖 Que decida la agencia"], ["voz", "🎙 Solo voz"], ["musica", "🎵 Solo música"], ["ambos", "🎙+🎵 Voz y música"]], v => (P.audio || "auto") === v, v => { P.audio = v; saveCfg(); renderAcct(); });
+  { const f = $("#acFloor"), v = P.no_publicar_antes; if (document.activeElement !== f) { if (v) { const d = new Date(v); const pad = n => String(n).padStart(2, "0"); f.value = d.getFullYear() + "-" + pad(d.getMonth() + 1) + "-" + pad(d.getDate()) + "T" + pad(d.getHours()) + ":" + pad(d.getMinutes()); } else f.value = ""; }
+    $("#acFloorNote").textContent = v && new Date(v) > new Date() ? "⏸ Nada se publicará antes del " + fmtWhen(v) + ". La agencia sigue preparando contenido." : "La agencia sigue creando contenido, pero nada se publica antes de esta fecha."; }
   renderMemory();
   chipRow($("#acVoz"), [["", "🤖 Que elija la agencia"], ["alvaro", "Álvaro"], ["elvira", "Elvira"], ["ximena", "Ximena"], ["jorge", "Jorge 🇲🇽"], ["dalia", "Dalia 🇲🇽"], ["andrew", "Andrew ✨"], ["ava", "Ava ✨"], ["brian", "Brian ✨"], ["emma", "Emma ✨"]], v => (P.voz_elegida || "") === v, v => { P.voz_elegida = v; saveCfg(); renderAcct(); });
   renderSocial();
@@ -1795,7 +1798,7 @@ ACCIONES DISPONIBLES (propón solo las que el dueño pida o claramente quiera; s
 - {"tipo":"eliminar","id":"id de una pieza programada"} (no se publicará y se borra)
 - {"tipo":"rehacer_semana"}
 - {"tipo":"pausar"} · {"tipo":"reanudar"}
-- {"tipo":"ajustes","max_semana":3|5|7|10,"max_por_dia":1|2|3,"audio":"auto|voz|musica|ambos","formatos":["reel","historia","post","carrusel"]} (incluye solo lo que cambie)
+- {"tipo":"ajustes","max_semana":3|5|7|10,"max_por_dia":1|2|3,"audio":"auto|voz|musica|ambos","formatos":["reel","historia","post","carrusel"],"no_publicar_antes":"ISO 8601 o vacío para quitarlo"} (incluye solo lo que cambie)
 
 CONVERSACIÓN HASTA AHORA
 ${hist || "(empieza ahora)"}
@@ -1826,6 +1829,7 @@ async function runAction(a) {
     if ([1, 2, 3].includes(+a.max_por_dia)) P.max_por_dia = +a.max_por_dia;
     if (["auto", "voz", "musica", "ambos"].includes(a.audio)) P.audio = a.audio;
     if (Array.isArray(a.formatos)) { const f = a.formatos.filter(x => TYPES[x]); if (f.length) P.formatos = f; }
+    if (a.no_publicar_antes !== undefined) { const d = a.no_publicar_antes ? new Date(a.no_publicar_antes) : null; P.no_publicar_antes = d && !isNaN(d) ? d.toISOString() : ""; }
     saveCfg(); return "⚙️ Ajustes guardados.";
   }
   throw new Error("Acción desconocida");
@@ -2058,6 +2062,8 @@ if (!window.__AGENCIA_SERVER) {
   }));
   $("#acCopy").addEventListener("click", async () => { try { await navigator.clipboard.writeText(HOST.key); setStatus($("#acStatus"), "Clave copiada ✓", "ok"); } catch (e) { setStatus($("#acStatus"), "Tu clave: " + HOST.key); } });
   $("#acLogout").addEventListener("click", () => logout(false));
+  $("#acFloor").addEventListener("change", e => { const v = e.target.value; HOST.plan.no_publicar_antes = v ? new Date(v).toISOString() : ""; saveCfg(); renderAcct(); });
+  $("#acFloorClr").addEventListener("click", () => { HOST.plan.no_publicar_antes = ""; saveCfg(); renderAcct(); });
   $("#acNoteAdd").addEventListener("click", () => { if (addNote($("#acNoteIn").value)) { $("#acNoteIn").value = ""; renderMemory(); } });
   $("#acReplan").addEventListener("click", async () => {
     const st = $("#acStatus");
