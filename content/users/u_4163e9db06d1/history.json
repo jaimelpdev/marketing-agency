@@ -186,9 +186,19 @@
     },
     {
       "date": "2026-11-10",
+      "tema": "Interpretar telemetría en tiempo real para evitar pérdida de tracción",
+      "formato": "mini tutorial",
+      "tipo": "historia",
+      "layout": "tarjeta",
+      "plantilla": 1809,
+      "serie": "",
+      "objetivo": "conversion"
+    },
+    {
+      "date": "2026-11-10",
       "tipo": "reel",
       "src": "red",
-      "tema": "[IG · ❤️27] En iRacing, una caída bien ajustada puede mejorar el apoyo en curva, pero el exceso castiga el neumático. Compara dos valores y mide tras ci"
+      "tema": "[IG · ❤️32] En iRacing, una caída bien ajustada puede mejorar el apoyo en curva, pero el exceso castiga el neumático. Compara dos valores y mide tras ci"
     },
     {
       "date": "2026-11-11",
@@ -231,14 +241,14 @@
       "objetivo": ""
     },
     {
-      "date": "2026-11-10",
-      "tema": "Interpretar telemetría en tiempo real para evitar pérdida de tracción",
-      "formato": "mini tutorial",
-      "tipo": "historia",
-      "layout": "tarjeta",
-      "plantilla": 1809,
+      "date": "2026-11-11",
+      "tema": "Uso de telemetría en tiempo real para adelantamientos",
+      "formato": "dato curioso o sorprendente",
+      "tipo": "post",
+      "layout": "dividido",
+      "plantilla": 254,
       "serie": "",
-      "objetivo": "conversion"
+      "objetivo": "alcance"
     }
   ]
 }
