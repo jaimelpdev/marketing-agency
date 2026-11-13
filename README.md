@@ -132,6 +132,8 @@ Guarda tu **clave de acceso** (en Cuenta) para entrar desde otro dispositivo.
 - **2.304 plantillas visuales** combinables con los 6 diseños: 8 fondos animados (rayos, rejilla, puntos, ondas, rayas, burbujas, líneas de velocidad o liso) × 6 tratamientos de color × 4 estilos de resaltado × 4 transiciones (barrido, persiana, iris, destello) × 3 estilos de subtítulos. Cada pieza estrena una plantilla que no se ha usado antes y cambia fondo, color y transición respecto a la anterior.
 - **Voz:** 9 voces a elegir en la app (españolas, mexicanas y multilingües más expresivas), ritmo y tono según la pieza, y procesado de "micro de creador" (ecualización, compresión y brillo). Los guiones se escriben para sonar hablados.
 - **Música:** 12 estilos (energética, hip hop, rock, electrónica, funk, latina, chill, épica, emotiva, divertida, tensión, ambiental), búsquedas variadas y sin repetir canción en las últimas 30 piezas.
+- **Pantalla llena y con profundidad:** texto y gráfico se reparten por toda la zona visible (sin media pantalla vacía), los gráficos son más grandes y llevan un foco de luz detrás, y al menos la mitad de los vídeos usan una imagen generada por escena como fondo, con movimiento de cámara.
+- **Avisos de retención:** en vídeos de 3 o más consejos aparece «⏳ Quédate · el nº N es el mejor» con puntos de progreso, y el último consejo entra con el sello «🔥 El mejor».
 - **Variedad obligatoria:** cada pieza usa un formato narrativo distinto (top, mito vs realidad, POV, antes y después, reto, comparativa, polémica…) y la agencia alterna estilo, fondo, animación del texto, música y gráficos para que ningún día se parezca al anterior.
 
 ## 🧠 Memoria y estrategia de marca
