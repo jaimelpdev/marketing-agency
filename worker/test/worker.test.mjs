@@ -134,6 +134,12 @@ r = await call("PUT", "/admin/status/" + uid, { key: "admin123", body: { queue: 
 r = await call("GET", "/api/me", { key }); assert.ok(!r.j.status.queue.some(x => x.id === "d1"), "no vuelve a aparecer");
 r = await call("GET", "/pending"); assert.equal(r.j.pending, true);
 r = await call("POST", "/admin/requests/" + uid + "/done", { key: "admin123", body: { remove: ["d1"] } });
+r = await call("POST", "/api/photos", { key, body: { desc: "Camiseta roja", data: "data:text/html;base64,AAAA" } }); assert.equal(r.s, 400);
+r = await call("POST", "/api/photos", { key, body: { desc: "Camiseta roja", data: "data:image/jpeg;base64,AAAA" } }); assert.equal(r.s, 200); const fid = r.j.photos[0].id;
+r = await call("GET", "/admin/photos/" + uid, { key: "admin123" }); assert.equal(r.j.photos[0].src, "data:image/jpeg;base64,AAAA"); assert.equal(r.j.photos[0].desc, "Camiseta roja");
+r = await call("GET", "/admin/photos/" + uid, { key }); assert.equal(r.s, 401);
+r = await call("GET", "/api/me", { key }); assert.equal(r.j.photos.length, 1);
+r = await call("DELETE", "/api/photos/" + fid, { key }); assert.equal(r.j.photos.length, 0);
 r = await call("POST", "/api/reset", { key }); assert.equal(r.s, 200);
 r = await call("GET", "/api/me", { key }); assert.equal(r.j.config, null); assert.equal(r.j.status, null); assert.ok(r.j.requests.reset, "la clave sigue valiendo");
 r = await call("POST", "/admin/requests/" + uid + "/done", { key: "admin123", body: { reset: "otra-fecha" } }); assert.ok(r.j.requests.reset, "no borra una petición distinta");

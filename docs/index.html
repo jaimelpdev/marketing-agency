@@ -537,9 +537,9 @@ function normPiece(v,i){
   const st=v.sticker&&typeof v.sticker==="object"&&v.sticker.texto?{tipo:String(v.sticker.tipo||"pregunta"),texto:String(v.sticker.texto),opciones:(Array.isArray(v.sticker.opciones)?v.sticker.opciones:[]).map(o=>String(o).slice(0,22)).filter(Boolean).slice(0,3)}:null;
   return {id:v.id||("p"+Date.now().toString(36)+"_"+i),dia:Math.max(0,Math.min(6,parseInt(v.dia)||0)),hora:String(v.hora||""),tipo,objetivo:String(v.objetivo||""),razon:String(v.razon||""),
     tema:String(v.tema||v.gancho||""),formato:String(v.formato||""),gancho:String(v.gancho||""),visual:String(v.visual||""),
-    escenas:(Array.isArray(v.escenas)?v.escenas:[]).slice(0,7).map(e=>({titulo:String(e.titulo||""),texto:String(e.texto||""),emoji:String(e.emoji||""),visual:String(e.visual||""),grafico:normGraf(e.grafico)})),
+    escenas:(Array.isArray(v.escenas)?v.escenas:[]).slice(0,7).map(e=>({titulo:String(e.titulo||""),texto:String(e.texto||""),emoji:String(e.emoji||""),visual:String(e.visual||""),foto:String(e.foto||"").slice(0,24),grafico:normGraf(e.grafico)})),
     cta:String(v.cta||""),sticker:st,fondo:String(v.fondo||""),estilo:String(v.estilo||""),caption:String(v.caption||""),hashtags:Array.isArray(v.hashtags)?v.hashtags.join(" "):String(v.hashtags||""),
-    audio:String(v.audio||""),voz:String(v.voz||""),ritmo_voz:String(v.ritmo_voz||""),musica:String(v.musica||""),guion:Array.isArray(v.guion)?v.guion.map(String):[],anim:["pop","slide","type","fade"].includes(v.anim)?v.anim:"",objetivo:["alcance","confianza","comunidad","conversion"].includes(v.objetivo)?v.objetivo:"",serie:String(v.serie||"").slice(0,60),episodio:Math.max(0,parseInt(v.episodio)||0),look:v.look!=null&&Number.isInteger(+v.look)&&+v.look>=0&&+v.look<LOOK_TOTAL?+v.look:null,plantilla:Number.isInteger(+v.plantilla)&&+v.plantilla>=0&&+v.plantilla<TPL_TOTAL?+v.plantilla:null,layout:LAYOUTS.includes(String(v.layout||"").toLowerCase())?String(v.layout).toLowerCase():"",stickers:(Array.isArray(v.stickers)?v.stickers:[]).map(x=>String(x).trim()).filter(x=>x&&x.length<=12&&!/[A-Za-z0-9]/.test(x)).slice(0,5),...(Array.isArray(v._durs)?{_durs:v._durs}:{})};
+    audio:String(v.audio||""),voz:String(v.voz||""),ritmo_voz:String(v.ritmo_voz||""),musica:String(v.musica||""),guion:Array.isArray(v.guion)?v.guion.map(String):[],foto:String(v.foto||"").slice(0,24),anim:["pop","slide","type","fade"].includes(v.anim)?v.anim:"",objetivo:["alcance","confianza","comunidad","conversion"].includes(v.objetivo)?v.objetivo:"",serie:String(v.serie||"").slice(0,60),episodio:Math.max(0,parseInt(v.episodio)||0),look:v.look!=null&&Number.isInteger(+v.look)&&+v.look>=0&&+v.look<LOOK_TOTAL?+v.look:null,plantilla:Number.isInteger(+v.plantilla)&&+v.plantilla>=0&&+v.plantilla<TPL_TOTAL?+v.plantilla:null,layout:LAYOUTS.includes(String(v.layout||"").toLowerCase())?String(v.layout).toLowerCase():"",stickers:(Array.isArray(v.stickers)?v.stickers:[]).map(x=>String(x).trim()).filter(x=>x&&x.length<=12&&!/[A-Za-z0-9]/.test(x)).slice(0,5),...(Array.isArray(v._durs)?{_durs:v._durs}:{})};
 }
 
 /* ============ BRANDING UI ============ */
@@ -713,6 +713,7 @@ PROHIBIDO INVENTAR (regla más importante que cualquier otra)
 
 VARIEDAD (obligatorio: ninguna pieza puede parecerse a otra de la semana ni a lo ya publicado)
 - Cada pieza usa un FORMATO narrativo distinto (escríbelo en "formato") y no repitas el formato de las últimas piezas publicadas: top o lista · mito vs realidad · el error que todos cometen · antes y después · POV o mini historia ("POV: tu primera carrera online…") · tutorial paso a paso · reto o quiz ("¿Sabrías…?") · comparativa A vs B · opinión polémica · dato curioso o sorprendente · detrás de las cámaras · checklist para guardar.
+- El layout "cine" es el más profesional (foto real a pantalla completa con el texto grande abajo): úsalo en la mayoría de piezas.
 - Cada pieza lleva un "layout" (diseño de pantalla) y dos piezas del mismo tipo no pueden repetir layout: "clasico" (número, título y texto), "lista" (top que se va desvelando, con lo que falta oculto), "tarjeta" (cada idea en una tarjeta que entra deslizando), "chat" (conversación en burbujas, ideal para POV, preguntas y mini historias), "dividido" (panel de color con número gigante y mascota), "subtitulos" (texto enorme palabra a palabra, ideal para opiniones y ganchos fuertes). En posts solo "clasico", "tarjeta" o "dividido".
 - Varía también el tipo de gancho, el número de escenas (de 2 a 5), la duración, los gráficos de cada escena, el "estilo", el "fondo", la música y el ritmo de la voz. Que se note que cada día es algo nuevo.
 
@@ -742,7 +743,7 @@ ${O.graficos!==false?`- "grafico" (en cada escena de reels e historias): una ani
 `:""}- "cta": como mucho 8 palabras y lleva a ${dest}.${O.stickers!==false?`
 - "stickers": de 3 a 5 emojis que salen animados en el vídeo como pegatinas (cochecitos que cruzan la pantalla, iconos que rebotan…). Tienen que ilustrar el tema de forma visual y divertida, el primero es la "mascota" de la pieza. Ejemplos: conducción → ["🏎️","🏁","🛞","⚡"]; dinero → ["💰","📈","🤑"]; estudio → ["📚","🧠","✅"]. Nada de banderas de países ni símbolos raros.`:''}
 - "fondo": elige el mejor para cada pieza entre: ${fondos.map(f=>f+" ("+FONDO_DESC[f]+")").join("; ")}.
-- "estilo": racing | neon | pop | minimal. Mantén coherencia de marca, aunque puedes variar si la pieza lo pide (la marca usa "${c.style}").${needVis?'\n- "visual" (en cada pieza y en cada escena): descripción en INGLÉS, de 6 a 14 palabras, de una foto o clip de fondo realista y llamativo que ilustre ese momento. Sin texto, sin logos y sin personas famosas.':''}
+- "estilo": racing | neon | pop | minimal. Mantén coherencia de marca, aunque puedes variar si la pieza lo pide (la marca usa "${c.style}").${needVis?'\n- "visual" (OBLIGATORIO en cada pieza y en cada escena): descripción en INGLÉS, de 5 a 12 palabras, de la FOTO real que ilustra ese momento, como la elegiría un director de arte: un sujeto concreto y fotografiable (una persona haciendo algo, un producto, un objeto, un lugar), con plano y ambiente ("close-up of hands tying running shoes on track", "young woman smiling trying on white t-shirt in store", "red sports car cornering on mountain road"). Cada escena una foto distinta. Sin texto, sin logos, sin famosos.':''}${(window.__brandPhotos||[]).length?"\n- FOTOS PROPIAS DE LA MARCA (úsalas siempre que encajen, sobre todo para enseñar el producto, poniendo \"foto\":\"<id>\" en la pieza o en la escena; tienen prioridad sobre \"visual\"): "+window.__brandPhotos.map(f=>f.id+" = "+f.desc).join(" · "):""}
 - "caption": de 2 a 4 frases con pocos emojis, que termine con el CTA (en historias déjalo vacío). "hashtags": de 5 a 8 (en historias, []).
 - No inventes precios, cifras ni testimonios.${AUDIO_CAPS?`
 
@@ -753,7 +754,7 @@ AUDIO (solo reels e historias; los vídeos llevan locución real)
 - "guion" (solo si hay voz): lista de frases habladas, UNA por pantalla y en orden: gancho, cada escena y cierre (o el texto del sticker en historias). Tiene que sonar a creador hablando a cámara, no a texto leído: frases cortas, tuteo, exclamaciones y preguntas retóricas ("¿Sabes por qué?"), pausas con comas y puntos suspensivos, conectores de conversación ("mira", "ojo", "y aquí viene lo bueno"). Nada de "en primer lugar". Números pequeños con letra. Como mucho 22 palabras por frase, sin emojis, asteriscos ni hashtags.`:''}
 
 Responde SOLO con JSON válido:
-{"estrategia":"2 o 3 frases: qué días se publica, cuáles se descansa y por qué","piezas":[{"dia":0,"hora":"19:30","tipo":"reel","objetivo":"…","razon":"…","tema":"…","formato":"…","gancho":"…"${needVis?',"visual":"…"':''},"escenas":[{"titulo":"…","texto":"…"${needVis?',"visual":"…"':''}${O.emoji?',"emoji":"…"':''}${O.graficos!==false?',"grafico":{"tipo":"…"}':''}}],"cta":"…","layout":"…","objetivo":"alcance|confianza|comunidad|conversion","serie":"nombre de la serie o vacío","episodio":0${O.stickers!==false?',"stickers":["…","…","…"]':''},"sticker":null,"fondo":"…","estilo":"…"${AUDIO_CAPS?',"audio":"…","voz":"…","ritmo_voz":"…","musica":"…","guion":["…"]':''},"caption":"…","hashtags":["#…"]}]}`;
+{"estrategia":"2 o 3 frases: qué días se publica, cuáles se descansa y por qué","piezas":[{"dia":0,"hora":"19:30","tipo":"reel","objetivo":"…","razon":"…","tema":"…","formato":"…","gancho":"…"${needVis?',"visual":"…","foto":""':''},"escenas":[{"titulo":"…","texto":"…"${needVis?',"visual":"…","foto":""':''}${O.emoji?',"emoji":"…"':''}${O.graficos!==false?',"grafico":{"tipo":"…"}':''}}],"cta":"…","layout":"…","objetivo":"alcance|confianza|comunidad|conversion","serie":"nombre de la serie o vacío","episodio":0${O.stickers!==false?',"stickers":["…","…","…"]':''},"sticker":null,"fondo":"…","estilo":"…"${AUDIO_CAPS?',"audio":"…","voz":"…","ritmo_voz":"…","musica":"…","guion":["…"]':''},"caption":"…","hashtags":["#…"]}]}`;
 }
 $("#genBtn").addEventListener("click",async()=>{
   const st=$("#genStatus"),btn=$("#genBtn");
@@ -810,7 +811,9 @@ function diversify(vids){
   vids.forEach((p,i)=>{let tries=0,n=p.plantilla!=null?p.plantilla:(seed*7919+i*104729)%TPL_TOTAL;
     while(tries<60&&(usedT.has(n)||(prevT&&(decodeTpl(n).pat===prevT.pat||decodeTpl(n).tint===prevT.tint||decodeTpl(n).tr===prevT.tr)))){n=(n*48271+12345+tries*977)%TPL_TOTAL;tries++;}
     p.plantilla=n;usedT.add(n);prevT=decodeTpl(n);});
-  const anims=["pop","slide","pop","type","fade","pop","slide"];vids.forEach((p,i)=>{p.anim=i===0?(O.anim||"pop"):anims[(seed+i)%anims.length];});
+  // con fotos disponibles, la mayoría de piezas van en diseño "cine" (foto a pantalla completa)
+  if(typeof wantsPhotos==="function"&&S.cfg.v.fotos!==false)vids.forEach((p,i)=>{if(i%3!==2)p.layout="cine";});
+  const anims=["slide","fade","pop","slide","fade","pop","slide"];vids.forEach((p,i)=>{p.anim=i===0?(O.anim||"pop"):anims[(seed+i)%anims.length];});
   const moods=["energetica","divertida","epica","chill","emotiva","tension","hiphop","rock","electronica","funk","latina","ambiental"];let pm=null;
   const mc={};const fit=["energetica","hiphop","divertida","electronica","rock","funk","latina","epica","chill"];
   vids.filter(p=>TYPES[p.tipo]&&TYPES[p.tipo].video).forEach(p=>{if(!moods.includes(p.musica)||p.musica===pm||(mc[p.musica]||0)>=2)p.musica=fit.concat(moods).filter(m=>m!==pm).sort((a,b)=>(mc[a]||0)-(mc[b]||0))[0];mc[p.musica]=(mc[p.musica]||0)+1;pm=p.musica;});
@@ -894,18 +897,19 @@ function theme(hasMedia){
 }
 function parseTokens(text){const out=[];let hl=false;String(text||"").split(/\s+/).filter(Boolean).forEach(w=>{if(w.startsWith("*"))hl=true;const ends=/\*[.,!?:;)»"']*$/.test(w)&&!(w.startsWith("*")&&w.length===1);const clean=w.replace(/\*/g,"");if(clean)out.push({t:clean,hl});if(ends)hl=false;});return out;}
 function layout(toks,font,maxW,upper){ctx.font=font;const space=ctx.measureText(" ").width;const lines=[{words:[],width:0}];toks.forEach(tk=>{const txt=upper?tk.t.toUpperCase():tk.t;const w=ctx.measureText(txt).width;let L=lines[lines.length-1];if(L.words.length&&L.width+space+w>maxW){L={words:[],width:0};lines.push(L);}L.width+=(L.words.length?space:0)+w;L.words.push({txt,w,hl:tk.hl});});return{lines,space};}
-function fit(text,fam,weight,size,min,maxW,maxLines,upper,lhMul){const toks=parseTokens(text);fam=`"${fam}"`;size=Math.round(size);min=Math.round(min);let L,s=size;for(;s>=min;s-=4){L=layout(toks,`${weight} ${s}px ${fam}`,maxW,upper);if(L.lines.length<=maxLines)break;}s=Math.max(s,min);L=layout(toks,`${weight} ${s}px ${fam}`,maxW,upper);L.size=s;L.lh=s*lhMul;L.font=`${weight} ${s}px ${fam}`;L.h=L.lines.length*L.lh;L.count=toks.length;return L;}
+function fit(text,fam,weight,size,min,maxW,maxLines,upper,lhMul){const toks=parseTokens(text);fam=`"${fam}","Inter",sans-serif`;size=Math.round(size);min=Math.round(min);let L,s=size;for(;s>=min;s-=4){L=layout(toks,`${weight} ${s}px ${fam}`,maxW,upper);if(L.lines.length<=maxLines)break;}s=Math.max(s,min);L=layout(toks,`${weight} ${s}px ${fam}`,maxW,upper);L.size=s;L.lh=s*lhMul;L.font=`${weight} ${s}px ${fam}`;L.h=L.lines.length*L.lh;L.count=toks.length;return L;}
 function roundRect(x,y,w,h,r){r=Math.max(0,Math.min(r,w/2,h/2));ctx.beginPath();ctx.moveTo(x+r,y);ctx.arcTo(x+w,y,x+w,y+h,r);ctx.arcTo(x+w,y+h,x,y+h,r);ctx.arcTo(x,y+h,x,y,r);ctx.arcTo(x,y,x+w,y,r);ctx.closePath();}
 function drawBlock(L,cx,y,lt,delay,stagger,color,T){
   ctx.font=L.font;ctx.textBaseline="middle";ctx.textAlign="left";let k=0;
   const tilt=T.tilt&&L.size>=70?T.tilt:0;if(tilt){ctx.save();const my=y+L.lines.length*L.lh/2;ctx.translate(cx,my);ctx.rotate(tilt);ctx.translate(-cx,-my);}
   const hardOff=L.size*0.065;
-  L.lines.forEach((ln,li)=>{let x=cx-ln.width/2;const yc=y+li*L.lh+L.lh/2;
+  L.lines.forEach((ln,li)=>{let x=T.left?cx:cx-ln.width/2;const yc=y+li*L.lh+L.lh/2;
     ln.words.forEach(wd=>{const md=(CUR_SC&&CUR_SC.piece&&CUR_SC.piece.anim)||S.cfg.v.anim;let p=clamp((lt-(delay+k*stagger))/(md==="fade"?0.4:0.24),0,1);if(md==="type")p=lt>=delay+k*stagger?1:0;if(STATIC)p=1;k++;
       if(p>0){const sc=md==="pop"&&!STATIC?(wd.hl?1.8-0.8*easeBack(p):1.35-0.35*easeBack(p)):1;const dy=md==="slide"?(1-easeOut(p))*80:0;ctx.save();ctx.globalAlpha*=md==="type"?1:easeOut(p);ctx.translate(x+wd.w/2,yc+dy);ctx.scale(sc,sc);
         if(wd.hl&&T.hl==="box"){const padX=L.size*0.16,hh=L.size*1.08;if(T.hard){ctx.fillStyle=T.hard;roundRect(-wd.w/2-padX+hardOff,-hh/2+hardOff,wd.w+padX*2,hh,L.size*0.14);ctx.fill();}ctx.fillStyle=T.hlFill;roundRect(-wd.w/2-padX,-hh/2,wd.w+padX*2,hh,L.size*0.14);ctx.fill();ctx.fillStyle=T.hlText;}
         else if(wd.hl&&T.hl==="glow"){ctx.fillStyle=T.hlText;ctx.shadowColor=T.hlFill;ctx.shadowBlur=40;ctx.fillText(wd.txt,-wd.w/2,0);ctx.shadowBlur=14;}
         else if(wd.hl&&T.hl==="marker"){ctx.save();ctx.rotate(-0.035);ctx.fillStyle=T.hlFill||S.cfg.acc;ctx.globalAlpha*=0.92;roundRect(-wd.w/2-L.size*0.2,-L.size*0.42,wd.w+L.size*0.4,L.size*0.86,L.size*0.08);ctx.fill();ctx.restore();ctx.fillStyle=onAccent(S.cfg.acc);}
+        else if(wd.hl&&T.hl==="color"){ctx.fillStyle=T.hlFill;ctx.shadowColor="rgba(0,0,0,.55)";ctx.shadowBlur=20;}
         else if(wd.hl&&T.hl==="under"){ctx.fillStyle=T.hlFill;ctx.globalAlpha*=0.9;roundRect(-wd.w/2-6,L.size*0.18,wd.w+12,L.size*0.28,6);ctx.fill();ctx.globalAlpha/=0.9;ctx.fillStyle=T.text;}
         else{if(T.hard&&L.size>=56){ctx.fillStyle=T.hard;ctx.fillText(wd.txt,-wd.w/2+hardOff,hardOff);}
           if(T.stroke&&color==="#ffffff"){ctx.lineJoin="round";ctx.lineWidth=L.size*0.13;ctx.strokeStyle=T.stroke;ctx.strokeText(wd.txt,-wd.w/2,0);}
@@ -1007,7 +1011,7 @@ function buildScenes(p){
     const B=sub?fit(sub,F.b,F.bw,52*kk,34*kk,880,5,false,1.32):null;
     sc.push({kind:"post",T,B,cta:p.cta,dur:4});
   }else{
-    const LY=LAYOUTS.includes(p.layout)?p.layout:"clasico";const LW={tarjeta:800,chat:660,dividido:930,lista:920,subtitulos:940,clasico:930}[LY];
+    const LY=LAYOUTS.includes(p.layout)?p.layout:"clasico";const LW={cine:900,tarjeta:800,chat:660,dividido:930,lista:920,subtitulos:940,clasico:930}[LY];
     const hook=fit(p.gancho,F.h,F.hw,150*kk*(LY==="chat"?0.6:LY==="tarjeta"?0.85:1),70*kk,LY==="chat"?640:LY==="tarjeta"?780:930,5,F.up,1.12);sc.push({kind:"hook",L:hook,swipe:type==="carrusel",dur:clamp(1.6+hook.count*0.16,2.4,3.6)*pc});
     const esc=type==="historia"?p.escenas.slice(0,2):p.escenas;
     esc.forEach((s,i)=>{const T=fit(s.titulo,F.h,F.hw,112*kk*(LY==="chat"?0.6:1),56*kk,LW,2,F.up,1.12);const B=LY==="subtitulos"?fit(s.texto,F.h,F.hw,104*kk,60*kk,940,5,F.up,1.12):fit(s.texto,F.b,F.bw,64*kk*(LY==="chat"?0.85:1),36*kk,LY==="chat"?620:LW-10,isImg?7:8,false,1.32);B.maxW=LY==="chat"?600:LW-20;const g=TYPES[type].video&&S.cfg.v.graficos!==false?s.grafico:null;sc.push({kind:"tip",n:i+1,emoji:s.emoji||"",raw:String(s.titulo||"").replace(/\*/g,""),body:String(s.texto||"").replace(/\*/g,""),g,T,B,dur:(clamp(1.6+(words(s.titulo)+words(s.texto))*0.24,3,8)+(g?0.9:0))*pc*(type==="historia"?0.85:1)});});
@@ -1018,10 +1022,10 @@ function buildScenes(p){
   if(Array.isArray(p._durs))sc.forEach((s,i)=>{const d=+p._durs[i];if(d>0)s.dur=Math.max(1.6,d);});
   if(Array.isArray(p._caps)&&S.cfg.v.subtitulos!==false)sc.forEach((s,i)=>{if(Array.isArray(p._caps[i])&&p._caps[i].length)s.caps=p._caps[i];});
   let t=0;sc.forEach(s=>{s.start=t;t+=s.dur;});
-  return{scenes:sc,total:t,type,w:SZ[0],h:SZ[1],style:effStyle(p),bm:effBM(p),piece:p,tpl:p.plantilla!=null?decodeTpl(p.plantilla):null,look:p.look!=null&&S.cfg.v.looks!==false?decodeLook(p.look):null,layout:type==="post"?(["tarjeta","dividido"].includes(p.layout)?p.layout:"clasico"):(LAYOUTS.includes(p.layout)?p.layout:"clasico")};
+  return{scenes:sc,total:t,type,w:SZ[0],h:SZ[1],style:effStyle(p),bm:effBM(p),piece:p,tpl:p.plantilla!=null?decodeTpl(p.plantilla):null,look:p.look!=null&&S.cfg.v.looks!==false?decodeLook(p.look):null,layout:type==="post"?(["tarjeta","dividido","cine"].includes(p.layout)?p.layout:"clasico"):(LAYOUTS.includes(p.layout)?p.layout:"clasico")};
 }
 function drawMedia(m,zoom){const e=m.el;const iw=m.kind==="video"?e.videoWidth:e.naturalWidth,ih=m.kind==="video"?e.videoHeight:e.naturalHeight;if(!iw||!ih)return false;const s=Math.max(W/iw,H/ih)*zoom,dw=iw*s,dh=ih*s;try{ctx.drawImage(e,(W-dw)/2,(H-dh)/2,dw,dh);return true;}catch(_){return false;}}
-function darken(){ctx.fillStyle="rgba(0,0,0,.5)";ctx.fillRect(0,0,W,H);const v=ctx.createLinearGradient(0,0,0,H);v.addColorStop(0,"rgba(0,0,0,.4)");v.addColorStop(.5,"rgba(0,0,0,.05)");v.addColorStop(1,"rgba(0,0,0,.65)");ctx.fillStyle=v;ctx.fillRect(0,0,W,H);}
+function darken(){ctx.fillStyle="rgba(0,0,0,.34)";ctx.fillRect(0,0,W,H);const v=ctx.createLinearGradient(0,0,0,H);v.addColorStop(0,"rgba(0,0,0,.4)");v.addColorStop(.5,"rgba(0,0,0,.05)");v.addColorStop(1,"rgba(0,0,0,.65)");ctx.fillStyle=v;ctx.fillRect(0,0,W,H);}
 function drawBg(t,si,lt,dur){
   const acc=S.cfg.acc,bg=S.cfg.bg,st=curStyle(),BM=CUR_SC?CUR_SC.bm:S.cfg.v.bgMode;
   if(BM==="solid"){ctx.fillStyle=st==="pop"?acc:st==="minimal"?"#f4f1ea":bg;ctx.fillRect(0,0,W,H);return false;}
@@ -1063,7 +1067,7 @@ function drawFrame(SC,t,slide){
   const TPL=SC.tpl,LK=SC.look;
   if(LK){const tt=slide!=null?s.start+lt:t;
     if(!hasMedia){drawLook(LK,tt);if(TPL&&TPL.pat&&LK.look!==2&&LK.look!==6)drawPattern(TPL.pat,tt,T);}
-    else{const g=ctx.createLinearGradient(0,0,0,H);g.addColorStop(0,hexA(LK.pal[0],0.28));g.addColorStop(0.5,hexA(LK.pal[0],0.05));g.addColorStop(1,hexA(LK.pal[1],0.38));ctx.fillStyle=g;ctx.fillRect(0,0,W,H);}
+    else{const g=ctx.createLinearGradient(0,0,0,H);g.addColorStop(0,hexA(LK.pal[0],0.14));g.addColorStop(0.5,hexA(LK.pal[0],0));g.addColorStop(1,hexA(LK.pal[1],0.22));ctx.fillStyle=g;ctx.fillRect(0,0,W,H);}
     T=lookTheme(LK,hasMedia);}
   else if(TPL&&T.text==="#ffffff"){if(!hasMedia){drawPattern(TPL.pat,slide!=null?s.start+lt:t,T);drawTint(TPL.tint);}T={...T,hl:TPL.hl};}
   const O=S.cfg.v,PF={top:0.34,center:0.47,bottom:0.6}[O.pos]||0.47;
@@ -1080,6 +1084,8 @@ function drawFrame(SC,t,slide){
     drawBlock(s.T,W/2,y,lt,0,0,T.text,T);ctx.fillStyle=T.arrow;roundRect(W/2-90,y+s.T.h+14,180,10,5);ctx.fill();
     if(s.B)drawBlock(s.B,W/2,y+s.T.h+gapB,lt,0,0,T.text,T);
     const sub=s.cta||S.cfg.ig||"";if(sub){ctx.save();ctx.font="800 38px Inter";const tw=Math.min(ctx.measureText(sub).width,W-200);ctx.fillStyle=T.pill;roundRect(W/2-tw/2-36,H-ctaH-60,tw+72,ctaH-20,45);ctx.fill();ctx.fillStyle=T.pillText;ctx.textAlign="center";ctx.textBaseline="middle";ctx.fillText(sub,W/2,H-ctaH-60+(ctaH-20)/2+2,W-200);ctx.restore();}
+  }else if(SC.layout==="cine"&&(s.kind==="hook"||s.kind==="tip"||s.kind==="post"||(s.kind==="cta"&&!s.sticker))){
+    drawCine(SC,s,si,lt,T);
   }else if(s.kind==="hook"&&SC.layout!=="clasico"&&SC.layout!=="subtitulos"){
     drawHookAlt(SC,s,lt,T,O,TOP,BOT);
   }else if(s.kind==="tip"&&SC.layout!=="clasico"){
@@ -1093,7 +1099,7 @@ function drawFrame(SC,t,slide){
     const bp=STATIC?1:easeOut(clamp((lt-0.1-k*0.09)/0.4,0,1));ctx.fillStyle=T.arrow;roundRect(W/2-170*bp,y+s.L.h+40,Math.max(1,340*bp),14,7);ctx.fill();
     if(s.swipe){ctx.save();ctx.font="800 40px Inter";const lab="DESLIZA  →";const tw=ctx.measureText(lab).width;ctx.fillStyle=T.pill;roundRect(W/2-tw/2-40,H-200,tw+80,96,48);ctx.fill();ctx.fillStyle=T.pillText;ctx.textAlign="center";ctx.textBaseline="middle";ctx.fillText(lab,W/2,H-150);ctx.restore();}
   }else if(s.kind==="tip"){
-    const useEmoji=O.emoji&&s.emoji,showB=O.badge||useEmoji;const badge=showB?150:0,gap1=showB?50:0,gap2=46;const block=badge+gap1+s.T.h+gap2+s.B.h;const GL=gLimit(SC),GH=s.g?clamp(GL-TOP-40-block-50,260,780):0;let y=s.g?TOP+Math.max(30,(GL-TOP-(block+50+GH))/2):clamp(H*PF-block/2,TOP,Math.max(TOP,BOT-block));BLK=[y,y+block];
+    const useEmoji=O.emoji&&s.emoji,showB=O.badge||useEmoji;const badge=showB?150:0,gap1=showB?50:0,gap2=46;const block=badge+gap1+s.T.h+gap2+s.B.h;const GL=gLimit(SC),GH=(s.g||s.photo)?clamp(GL-TOP-40-block-50,260,780):0;let y=(s.g||s.photo)?TOP+Math.max(30,(GL-TOP-(block+50+GH))/2):clamp(H*PF-block/2,TOP,Math.max(TOP,BOT-block));BLK=[y,y+block];
     const bp=STATIC?1:easeBack(clamp(lt/0.35,0,1));ctx.save();ctx.translate(W/2,y+badge/2);ctx.scale(bp,bp);
     if(!showB){ctx.globalAlpha=0;}
     else if(useEmoji){ctx.font='130px "Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji",sans-serif';ctx.textAlign="center";ctx.textBaseline="middle";ctx.fillText(s.emoji,0,8);ctx.restore();ctx.save();ctx.globalAlpha=0;}
@@ -1101,7 +1107,7 @@ function drawFrame(SC,t,slide){
     else{ctx.fillStyle=T.badge;ctx.beginPath();ctx.arc(0,0,badge/2,0,Math.PI*2);ctx.fill();}
     ctx.fillStyle=T.badgeText;ctx.font='400 92px "Anton"';ctx.textAlign="center";ctx.textBaseline="middle";ctx.fillText(String(s.n),0,6);ctx.restore();
     y+=badge+gap1;const k=drawBlock(s.T,W/2,y,lt,0.15,0.08,T.text,T);y+=s.T.h+gap2;if(s.caps)drawCaptions(s.caps,W/2,y+Math.min(s.B.h,160)/2,lt,T,W-120);else drawBlock(s.B,W/2,y,lt,0.25+k*0.08,0.055,T.text,T);
-    if(s.g){const gy=BLK[1]+50,gh=Math.min(GH,GL-gy);if(gh>=240){drawGraphic(s.g,90,gy,W-180,gh,STATIC?9:lt,T,SC);BLK=[BLK[0],gy+gh];}}
+    if(s.g||s.photo){const gy=BLK[1]+50,gh=Math.min(GH,GL-gy);if(gh>=240){if(s.g)drawGraphic(s.g,90,gy,W-180,gh,STATIC?9:lt,T,SC);else drawPhotoCard(s.photo,90,gy,W-180,gh-56,lt,si);BLK=[BLK[0],gy+gh];}}
   }else{
     const stick=!!s.sticker;const subH=s.sub?150:0,stickH=stick?300:0,block=s.L.h+subH+stickH;let y=clamp(H*(stick?PF-0.08:PF)-block/2,TOP,Math.max(TOP,H-440-block));BLK=[y,y+block+(stick?120:200)];
     drawBlock(s.L,W/2,y,lt,0.05,0.08,T.text,T);
@@ -1114,13 +1120,34 @@ function drawFrame(SC,t,slide){
   drawStickers(SC,si,s,lt,a);
   if(FX)drawWipe(si,n,lt,s.dur);
   if(FX&&s.kind==="hook"&&lt>0.2&&lt<0.42){ctx.save();ctx.globalAlpha=0.55*(1-(lt-0.2)/0.22);ctx.fillStyle="#fff";ctx.fillRect(0,0,W,H);ctx.restore();}
-  if(FX&&s.kind==="cta")drawConfetti(lt);
-  if(FX&&s.kind==="tip")drawRetention(SC,s,lt,T);
+  if(FX&&s.kind==="cta"&&SC.layout!=="cine")drawConfetti(lt);
+  if(FX&&s.kind==="tip"&&SC.layout!=="cine")drawRetention(SC,s,lt,T);
   if((s.kind==="hook"||s.kind==="post")&&SC.piece&&SC.piece.serie){const lab=("🎬 "+SC.piece.serie+(SC.piece.episodio?" · EP "+SC.piece.episodio:"")).toUpperCase();const pp=STATIC?1:easeBack(clamp((lt-0.3)/0.4,0,1));
     if(pp>0){ctx.save();ctx.font="900 34px Inter";const tw=Math.min(ctx.measureText(lab).width,W-240);ctx.translate(W/2,Math.round(H*0.095));ctx.scale(pp,pp);ctx.rotate(-0.02);ctx.fillStyle="#ffd60a";roundRect(-tw/2-30,-34,tw+60,68,34);ctx.fill();ctx.fillStyle="#15151b";ctx.textAlign="center";ctx.textBaseline="middle";ctx.fillText(lab,0,2,W-240);ctx.restore();}}
 }
 /* ===== Plantillas de diseño (cada pieza puede verse distinta) ===== */
-const LAYOUTS=["clasico","lista","tarjeta","chat","dividido","subtitulos"];
+const LAYOUTS=["clasico","lista","tarjeta","chat","dividido","subtitulos","cine"];
+/* ===== Diseño CINE: foto real a pantalla completa, degradado y tipografía grande abajo a la izquierda ===== */
+function cineScrim(extra){const g=ctx.createLinearGradient(0,H*0.28,0,H);g.addColorStop(0,"rgba(0,0,0,0)");g.addColorStop(0.5,"rgba(0,0,0,.6)");g.addColorStop(1,"rgba(0,0,0,.9)");ctx.fillStyle=g;ctx.fillRect(0,H*0.28,W,H*0.72);if(extra){ctx.fillStyle="rgba(0,0,0,"+extra+")";ctx.fillRect(0,0,W,H);}}
+function cineT(T){const acc=farCol(S.cfg.acc,"#141414")?S.cfg.acc:"#ffffff";return{...T,text:"#ffffff",hl:"color",hlFill:acc,hlText:acc,left:true,stroke:null,hard:null,tilt:0,shadow:true,neon:false,card:"rgba(10,10,14,.72)",track:"rgba(255,255,255,.28)",acc};}
+function cineKicker(x,y,label,lt,acc){const p=STATIC?1:easeOut(clamp((lt-0.05)/0.4,0,1));ctx.save();ctx.fillStyle=acc;ctx.fillRect(x,y,150*p,10);ctx.restore();if(label){ctx.save();ctx.globalAlpha*=p;gText(label,x,y-34,34,"#ffffff",800,"left",W-2*x);ctx.restore();}}
+function drawCine(SC,s,si,lt,T){
+  const CT=cineT(T),acc=CT.acc,x=84,vid=TYPES[SC.type].video,bottom=H*(vid?0.755:0.86),TOP=Math.round(H*0.13);
+  if(s.kind==="hook"){cineScrim(0);const y=bottom-s.L.h;cineKicker(x,y-44,(SC.piece.serie?SC.piece.serie+(SC.piece.episodio?" · EP "+SC.piece.episodio:""):(S.cfg.name||"")).toUpperCase(),lt,acc);drawBlock(s.L,x,y,lt,0.17,0.04,"#ffffff",CT);BLK=[y-90,bottom];return;}
+  if(s.kind==="post"){cineScrim(0);const bh=s.B?s.B.h+30:0,b2=H-250,y=b2-s.T.h-bh;cineKicker(x,y-44,(S.cfg.name||"").toUpperCase(),lt,acc);drawBlock(s.T,x,y,lt,0,0,"#ffffff",CT);if(s.B)drawBlock(s.B,x,y+s.T.h+30,lt,0,0,"#ffffff",CT);BLK=[y-90,b2];
+    const sub=s.cta||S.cfg.ig||"";if(sub){ctx.save();ctx.font="800 36px Inter";const tw=Math.min(ctx.measureText(sub).width,W-260);ctx.fillStyle=acc;roundRect(x,H-190,tw+70,84,42);ctx.fill();ctx.fillStyle=onAccent(acc);ctx.textAlign="left";ctx.textBaseline="middle";ctx.fillText(sub,x+35,H-146,W-260);ctx.restore();}return;}
+  if(s.kind==="cta"){cineScrim(0.2);const sub=s.sub||S.cfg.ig||"",y=bottom-s.L.h-(sub?130:0);cineKicker(x,y-44,(S.cfg.name||"").toUpperCase(),lt,acc);drawBlock(s.L,x,y,lt,0.1,0.05,"#ffffff",CT);
+    if(sub){const pp=STATIC?1:easeBack(clamp((lt-0.6)/0.4,0,1));ctx.save();ctx.font="800 40px Inter";const tw=Math.min(ctx.measureText(sub).width,W-2*x-80);ctx.translate(x,bottom-50);ctx.scale(pp,pp);ctx.fillStyle=acc;roundRect(0,-46,tw+80,92,46);ctx.fill();ctx.fillStyle=onAccent(acc);ctx.textAlign="left";ctx.textBaseline="middle";ctx.fillText(sub,40,2,W-2*x-80);ctx.restore();}
+    BLK=[y-90,bottom];return;}
+  // consejo
+  cineScrim(s.g?0.38:0);const bodyH=s.caps?150:s.B.h,total=s.T.h+26+bodyH,y=bottom-total;
+  const num=String(s.n).padStart(2,"0"),np=STATIC?1:easeBack(clamp(lt/0.4,0,1));
+  ctx.save();ctx.translate(x,y-70);ctx.scale(np,np);ctx.font='900 64px "Inter"';ctx.fillStyle=acc;ctx.textAlign="left";ctx.textBaseline="middle";ctx.fillText(num,0,0);const nw=ctx.measureText(num).width;ctx.fillStyle="rgba(255,255,255,.5)";ctx.fillRect(nw+22,-3,W-2*x-nw-22,3);ctx.restore();
+  drawBlock(s.T,x,y,lt,0.15,0.06,"#ffffff",CT);
+  if(s.caps)drawCaptions(s.caps,W/2,y+s.T.h+26+70,lt,CT,W-140,76);else drawBlock(s.B,x,y+s.T.h+26,lt,0.3,0.045,"rgba(255,255,255,.92)",{...CT,hl:"color"});
+  if(s.g){const gy=TOP+70,gh=Math.min(640,y-150-gy);if(gh>=260){ctx.save();ctx.fillStyle="rgba(10,10,14,.55)";roundRect(60,gy-30,W-120,gh+60,44);ctx.fill();ctx.restore();drawGraphic(s.g,110,gy,W-220,gh,STATIC?9:lt,CT,SC);}}
+  BLK=[y-110,bottom];
+}
 function lightT(T){return{...T,text:"#15151b",hl:"box",hlFill:S.cfg.acc,hlText:onAccent(S.cfg.acc),shadow:false,neon:false,track:"rgba(0,0,0,.1)",arrow:S.cfg.acc};}
 function bubble(text,side,y,maxW,fill,col,p,size){
   size=size||46;ctx.save();ctx.font="800 "+size+"px Inter";const words=String(text).split(/\s+/);const lines=[];let cur="";
@@ -1175,7 +1202,7 @@ function drawHookAlt(SC,s,lt,T,O,TOP,BOT){
 function drawTipAlt(SC,s,si,lt,T,O,TOP,BOT){
   const L=SC.layout,acc=S.cfg.acc,app=STATIC?1:easeBack(clamp(lt/0.4,0,1));
   const body=(cx,y,Tx,col,big)=>{if(s.caps){drawCaptions(s.caps,cx,y+60,lt,Tx,s.B.maxW||W-120,big);return y+130;}drawBlock(s.B,cx,y,lt,0.3,0.05,col,Tx);return y+s.B.h;};
-  const graf=(y,Tx,maxH)=>{if(!s.g)return y;const gh=Math.min((maxH||560)+120,gLimit(SC)-y);if(gh<240)return y;drawGraphic(s.g,90,y,W-180,gh,STATIC?9:lt,Tx,SC);return y+gh;};
+  const graf=(y,Tx,maxH)=>{if(!s.g){if(!s.photo)return y;const ph=Math.min((maxH||560)+160,gLimit(SC)-y)-56;if(ph<200)return y;drawPhotoCard(s.photo,110,y,W-220,ph,lt,si);return y+ph;}const gh=Math.min((maxH||560)+120,gLimit(SC)-y);if(gh<240)return y;drawGraphic(s.g,90,y,W-180,gh,STATIC?9:lt,Tx,SC);return y+gh;};
   let top=TOP,bottom;
   if(L==="lista"){
     const tips=SC.scenes.filter(x=>x.kind==="tip"),rh=s.g?92:106,y0=TOP+30;
@@ -1186,7 +1213,7 @@ function drawTipAlt(SC,s,si,lt,T,O,TOP,BOT){
       gText(cur||done?t.raw:"???",180,yy+(rh-18)/2+2,42,cur?onAccent(acc):T.text,900,"left",W-290);ctx.restore();});
     let y=y0+tips.length*rh+40;y=body(W/2,y,T,T.text);bottom=graf(y+30,T,480);top=y0;
   }else if(L==="tarjeta"){
-    const inner=s.T.h+40+(s.caps?140:s.B.h)+(s.g?470:0),ch=Math.min(H*0.7,inner+150),cy=TOP+40+ch/2,dx=(1-app)*W*0.95,rot=(si%2?0.02:-0.02)+(1-app)*0.18;
+    const inner=s.T.h+40+(s.caps?140:s.B.h)+((s.g||s.photo)?470:0),ch=Math.min(H*0.7,inner+150),cy=TOP+40+ch/2,dx=(1-app)*W*0.95,rot=(si%2?0.02:-0.02)+(1-app)*0.18;
     ctx.save();ctx.translate(W/2+dx,cy);ctx.rotate(rot);ctx.shadowColor="rgba(0,0,0,.4)";ctx.shadowBlur=50;ctx.shadowOffsetY=20;ctx.fillStyle="#ffffff";roundRect(-(W-120)/2,-ch/2,W-120,ch,54);ctx.fill();ctx.shadowColor="transparent";
     ctx.fillStyle=acc;ctx.beginPath();ctx.arc(-(W-120)/2+80,-ch/2+80,48,0,Math.PI*2);ctx.fill();ctx.restore();
     ctx.save();ctx.translate(dx,0);gText(String(s.n),W/2-(W-120)/2+80,cy-ch/2+84,52,onAccent(acc),900);const LT=lightT(T);let y=cy-ch/2+150;
@@ -1205,8 +1232,8 @@ function drawTipAlt(SC,s,si,lt,T,O,TOP,BOT){
   }else if(L==="subtitulos"){
     ctx.save();ctx.font="900 40px Inter";const lab=("PASO "+s.n+" · "+s.raw).toUpperCase();const tw=Math.min(ctx.measureText(lab).width,W-200);const pp=STATIC?1:easeBack(clamp(lt/0.35,0,1));
     ctx.translate(W/2,TOP+70);ctx.scale(pp,pp);ctx.fillStyle=acc;roundRect(-tw/2-36,-42,tw+72,84,42);ctx.fill();ctx.restore();gText(lab,W/2,TOP+72,40,onAccent(acc),900,"center",W-200);
-    const capH=s.caps?220:s.B.h+40,GL2=gLimit(SC),gh2=s.g?clamp(GL2-TOP-200-capH-10,240,760):0;
-    let y=s.g?TOP+200+Math.max(0,(GL2-TOP-200-capH-10-gh2)*0.5):H*0.36;if(s.caps){drawCaptions(s.caps,W/2,y+90,lt,T,W-100,118);y+=220;}else{drawBlock(s.B,W/2,y,lt,0.2,0.07,T.text,T);y+=s.B.h+40;}
+    const capH=s.caps?220:s.B.h+40,GL2=gLimit(SC),gh2=(s.g||s.photo)?clamp(GL2-TOP-200-capH-10,240,760):0;
+    let y=(s.g||s.photo)?TOP+200+Math.max(0,(GL2-TOP-200-capH-10-gh2)*0.5):H*0.36;if(s.caps){drawCaptions(s.caps,W/2,y+90,lt,T,W-100,118);y+=220;}else{drawBlock(s.B,W/2,y,lt,0.2,0.07,T.text,T);y+=s.B.h+40;}
     bottom=graf(y+10,T,760);top=TOP;
   }
   BLK=[top,bottom||top+400];
@@ -1240,6 +1267,18 @@ function drawTint(k){
   if(k===5){const g=ctx.createRadialGradient(W/2,H/2,H*0.2,W/2,H/2,H*0.8);g.addColorStop(0,"rgba(0,0,0,0)");g.addColorStop(1,"rgba(0,0,0,.7)");ctx.fillStyle=g;ctx.fillRect(0,0,W,H);ctx.restore();return;}
   const C={1:[S.cfg.acc,"#000000"],2:["#ff7a00","#ff2d55"],3:["#00c6ff","#7b2ff7"],4:["#a8ff00","#00b894"]}[k];
   const g=ctx.createLinearGradient(0,0,W,H);g.addColorStop(0,hexA(C[0],0.32));g.addColorStop(1,hexA(C[1],0.26));ctx.globalCompositeOperation="source-over";ctx.fillStyle=g;ctx.fillRect(0,0,W,H);ctx.restore();
+}
+/* ===== Foto como protagonista: tarjeta con marco, sombra y movimiento de cámara ===== */
+function drawPhotoCard(m,x,y,w,h,lt,si){
+  const e=m&&m.el;const iw=e&&(e.naturalWidth||e.videoWidth),ih=e&&(e.naturalHeight||e.videoHeight);if(!iw||!ih)return false;
+  const p=STATIC?1:easeBack(clamp((lt-0.3)/0.45,0,1));if(p<=0)return true;const k=STATIC?0.5:clamp(lt/5,0,1),rot=(si%2?0.022:-0.022)+(1-p)*0.12*(si%2?1:-1),r=38;
+  ctx.save();ctx.translate(x+w/2,y+h/2+(1-p)*120);ctx.rotate(rot);ctx.scale(0.86+0.14*p,0.86+0.14*p);ctx.globalAlpha*=clamp(p,0,1);
+  ctx.shadowColor="rgba(0,0,0,.5)";ctx.shadowBlur=50;ctx.shadowOffsetY=22;ctx.fillStyle="#ffffff";roundRect(-w/2,-h/2,w,h,r);ctx.fill();ctx.shadowColor="transparent";
+  const b=12;ctx.save();roundRect(-w/2+b,-h/2+b,w-b*2,h-b*2,r-b);ctx.clip();
+  const z=1.06+0.12*k,sc=Math.max((w-b*2)/iw,(h-b*2)/ih)*z,dw=iw*sc,dh=ih*sc,dx=(si%2?1:-1)*(k-0.5)*40;
+  try{ctx.drawImage(e,-dw/2+dx,-dh/2-(k-0.5)*30,dw,dh);}catch(_){}
+  const sh=ctx.createLinearGradient(-w/2,-h/2,w/2,h/2);sh.addColorStop(0,"rgba(255,255,255,.14)");sh.addColorStop(0.4,"rgba(255,255,255,0)");ctx.fillStyle=sh;ctx.fillRect(-w/2,-h/2,w,h);
+  ctx.restore();ctx.lineWidth=5;ctx.strokeStyle=S.cfg.acc;roundRect(-w/2-8,-h/2-8,w+16,h+16,r+8);ctx.stroke();ctx.restore();return true;
 }
 /* ===== Motion graphics ===== */
 const pr=(lt,t0,d)=>clamp((lt-t0)/d,0,1);
@@ -1445,6 +1484,7 @@ function drawStickers(SC,si,s,lt,alpha){
   const wob=k=>stat?(k%2?0.12:-0.1):Math.sin(tt*2.6+k)*0.12;
   const flo=k=>stat?0:Math.sin(tt*2.2+k*1.7)*size*0.06;
   const main=st[si%n],second=st[(si+1)%n],mascot=st[0];
+  if(SC.layout==="cine")return;
   if(SC.layout&&SC.layout!=="clasico"&&SC.layout!=="subtitulos"&&s.kind!=="cta"&&!(s.kind==="hook"&&isVid&&STATIC&&SC.layout!=="chat")){if(SC.layout==="lista"&&s.kind==="hook")return;return;}
   if(s.kind==="hook"&&isVid&&STATIC){
     // PORTADA (miniatura): halo de color y mascota enorme abajo, con dos pegatinas alrededor
@@ -1466,7 +1506,9 @@ function drawStickers(SC,si,s,lt,alpha){
     if(isVid&&!stat){const veh=st.find(e=>VEHICLES.has(e));if(veh)driveBy(veh,tt,s.dur,LOW+(H-LOW)*0.05,size*0.75,a);}
     return;
   }
-  if(s.kind==="tip"&&s.g){putSticker(main,W-130,TOP+60+flo(si),150,wob(si),pop(0.3),a);return;}
+  if((s.kind==="hook"||s.kind==="post")&&s.photo&&(!SC.layout||SC.layout==="clasico"||SC.layout==="subtitulos")){
+    const top=b1+30,lim=H*(isVid?0.8:0.84),ph=lim-top;if(ph>=300){drawPhotoCard(s.photo,W*0.14,top,W*0.72,Math.min(ph,isVid?760:520),stat?9:lt,si);putSticker(mascot,W*0.86,top+10,150,0.12,pop(0.5),a);return;}}
+  if(s.kind==="tip"&&(s.g||s.photo)){putSticker(main,W-130,TOP+60+flo(si),150,wob(si),pop(0.3),a);return;}
   if(s.kind==="tip"){
     if(VEHICLES.has(main)&&isVid&&!stat){driveBy(main,tt,s.dur,cy,size,a);putSticker(second,W-size*0.55,TOP+size*0.2+flo(2),size*0.55,wob(2),pop(0.6),a*0.95);return;}
     const left=si%2===0;const x=left?W*0.36:W*0.64;
@@ -1637,12 +1679,18 @@ DEF_V.bgMode="ai"; DEF_V.imgPer="scene"; DEF_CFG.v={...DEF_V}; S.cfg.v={...DEF_V
 S.assets=new Map(); const pendingA=new Map(); let qChain=Promise.resolve(); let lastPoll=0; let assetTimer=null;
 const sleep=ms=>new Promise(r=>setTimeout(r,ms));
 function hashStr(s){let h=0;for(let i=0;i<s.length;i++)h=(h*31+s.charCodeAt(i))|0;return Math.abs(h)%1000000;}
-function sceneQ(e){return e.visual||(e.titulo+" "+e.texto);}
-function needed(p){ const mode=effBM(p); if(mode!=="ai"&&mode!=="stock") return []; const qs=[p.visual||p.gancho]; if(S.cfg.v.imgPer==="scene"&&p.tipo!=="post") (p.tipo==="historia"?p.escenas.slice(0,2):p.escenas).forEach(e=>qs.push(sceneQ(e))); return [...new Set(qs.map(q=>String(q).trim()).filter(Boolean))].map(q=>({mode,q,k:mode+"|"+q})); }
+function brandPhoto(id){return (window.__brandPhotos||[]).find(f=>f.id===id)||null;}
+function sceneQ(e){return (e.foto&&brandPhoto(e.foto))?"foto:"+e.foto:(e.visual||(e.titulo+" "+e.texto));}
+function pieceQ(p){return (p.foto&&brandPhoto(p.foto))?"foto:"+p.foto:(p.visual||p.gancho);}
+function wantsPhotos(p){const m=effBM(p);return m==="ai"||m==="stock"||(S.cfg.v.fotos!==false&&m!=="media");}
+function needed(p){ if(!wantsPhotos(p)) return []; const qs=[pieceQ(p)]; if(S.cfg.v.imgPer==="scene"&&p.tipo!=="post") (p.tipo==="historia"?p.escenas.slice(0,2):p.escenas).forEach(e=>qs.push(sceneQ(e))); return [...new Set(qs.map(q=>String(q).trim()).filter(Boolean))].map(q=>({mode:"ai",q,k:"ai|"+q})); }
 function getA(mode,q){return S.assets.get(mode+"|"+String(q).trim())||null;}
-HOOKS.attachAssets=(p,sc)=>{ const mode=effBM(p); if(mode!=="ai"&&mode!=="stock") return; const hook=getA(mode,p.visual||p.gancho); let ti=0; const esc=p.tipo==="historia"?p.escenas.slice(0,2):p.escenas;
-  sc.forEach(s=>{ if(s.kind==="tip"){ const e=esc[ti++]; s.asset=(S.cfg.v.imgPer==="scene"&&e?getA(mode,sceneQ(e)):null)||hook; } else s.asset=hook; }); };
-HOOKS.drawBgExtra=(BM,si,lt,dur)=>{ if(BM!=="ai"&&BM!=="stock") return false; const s=CUR_SC&&CUR_SC.scenes[si]; if(!s||!s.asset) return false; ctx.fillStyle="#000";ctx.fillRect(0,0,W,H); return drawKB(s.asset,STATIC?0.5:lt/dur,si); };
+HOOKS.attachAssets=(p,sc)=>{ if(!wantsPhotos(p)) return; const m=effBM(p), full=m==="ai"||m==="stock"; const hook=getA("ai",pieceQ(p)); let ti=0; const esc=p.tipo==="historia"?p.escenas.slice(0,2):p.escenas;
+  sc.forEach(s=>{ if(s.kind==="tip"){ const e=esc[ti++]; s.asset=(S.cfg.v.imgPer==="scene"&&e?getA("ai",sceneQ(e)):null)||hook; } else s.asset=hook;
+    if(p.layout==="cine"){ if(s.asset) s.full=true; }
+    else if(!full&&s.asset&&s.kind==="hook"&&TYPES[p.tipo].video) s.full=true;   // el gancho siempre abre con la foto a pantalla completa
+    else if(!full&&s.asset&&s.kind!=="cta"&&!(s.kind==="tip"&&s.g)) s.photo=s.asset; }); };
+HOOKS.drawBgExtra=(BM,si,lt,dur)=>{ const s=CUR_SC&&CUR_SC.scenes[si]; if(!s||!s.asset) return false; if(BM!=="ai"&&BM!=="stock"&&!s.full) return false; ctx.fillStyle="#000";ctx.fillRect(0,0,W,H); return drawKB(s.asset,STATIC?0.5:lt/dur,si); };
 HOOKS.onPlay=SC=>{ SC.scenes.forEach(s=>{ if(s.asset&&s.asset.kind==="video"){ try{s.asset.el.currentTime=0;s.asset.el.play().catch(()=>{});}catch(_){} } }); };
 HOOKS.beforeOpen=async p=>{ if(needed(p).some(it=>!S.assets.has(it.k))){ await ensureAssets(p,(d,n)=>setStatus($("#mStatus"),"🎨 Preparando imágenes "+d+"/"+n+"… (la primera vez tarda un poco)")); setStatus($("#mStatus"),""); } };
 HOOKS.afterGenerate=()=>prefetchAll();
@@ -1661,8 +1709,18 @@ async function prefetchAll(){
   setStatus(st,"🎨 Creando imágenes y clips: 0/"+items.length+"… puedes ir revisando el plan");
   await Promise.all(items.map(it=>fetchAsset(it).then(()=>{ d++; setStatus(st, d<items.length?"🎨 Creando imágenes y clips: "+d+"/"+items.length+"…":"🔥 Todo listo con sus imágenes. Toca cada pieza para crearla.", d<items.length?"":"ok"); })));
 }
+async function imgFrom(src){ const im=new Image(); im.src=src; await im.decode(); return {kind:"image",el:im}; }
+async function loadPexelsPhoto(q){
+  const key=ls("ma_pexels_key"); if(!key) throw new Error("sin clave de Pexels");
+  const r=await fetch("https://api.pexels.com/v1/search?orientation=portrait&per_page=12&query="+encodeURIComponent(q.split(/\s+/).slice(0,7).join(" ")),{headers:{Authorization:key}});
+  if(!r.ok) throw new Error("Pexels "+r.status); const j=await r.json(); const ph=j.photos||[]; if(!ph.length) throw new Error("sin resultados");
+  window.__usedPh=window.__usedPh||new Set(); const fresh=ph.filter(x=>!window.__usedPh.has(x.id)); const pick=(fresh.length?fresh:ph)[hashStr(q)%Math.min(5,(fresh.length?fresh:ph).length)]; window.__usedPh.add(pick.id);
+  const ir=await fetch(pick.src.portrait||pick.src.large2x||pick.src.large); if(!ir.ok) throw new Error("descarga "+ir.status);
+  return await imgFrom(URL.createObjectURL(await ir.blob()));
+}
 async function loadAsset(it){
-  if(it.mode==="stock"){ const a=await loadPexels(it.q).catch(()=>null); if(a) return a; }
+  if(it.q.startsWith("foto:")){ const f=brandPhoto(it.q.slice(5)); if(f&&f.src) return await imgFrom(f.src); }
+  const a=await loadPexelsPhoto(it.q).catch(()=>null); if(a) return a;
   return await loadPollinations(it.q);
 }
 async function loadPollinations(q){
@@ -2075,6 +2133,18 @@ function renderCal() {
   up.forEach(it => { const dl = dayLabel(it.publishAt); if (dl !== lastDay) { box.appendChild(el("div", { class: "day", text: dl })); lastDay = dl; } box.appendChild(card(it, false)); });
   if (past.length) { const d = el("details", { class: "pcard", style: "margin-top:16px" }, [el("summary", { style: "font-weight:800;cursor:pointer", text: "✅ Ya publicado (" + past.length + ")" })]); past.slice(0, 30).forEach(it => d.appendChild(card(it, true))); box.appendChild(d); }
 }
+const PH_CACHE = {};
+function renderPhotos() {
+  const g = $("#phGrid"); if (!g) return; g.innerHTML = ""; const list = (HOST.me && HOST.me.photos) || [];
+  list.forEach(f => {
+    const im = el("img", { alt: f.desc, style: "width:100%;aspect-ratio:3/4;object-fit:cover;border-radius:12px;background:#000" });
+    if (PH_CACHE[f.id]) im.src = PH_CACHE[f.id]; else api("/api/photos/" + f.id).then(j => { PH_CACHE[f.id] = j.src; im.src = j.src; }).catch(() => { });
+    const inp = el("input", { value: f.desc, style: "width:100%;font-size:12px;padding:6px 8px;margin-top:4px", title: "Qué se ve en la foto" });
+    inp.addEventListener("change", async () => { try { const j = await api("/api/photos/" + f.id, { method: "PUT", body: { desc: inp.value } }); HOST.me.photos = j.photos; } catch (e) { } });
+    g.appendChild(el("div", {}, [im, inp, el("button", { class: "rd danger", style: "width:100%;margin-top:4px", text: "🗑 Quitar", onclick: async () => { try { const j = await api("/api/photos/" + f.id, { method: "DELETE" }); HOST.me.photos = j.photos; renderPhotos(); } catch (e) { } } })]));
+  });
+  if (!list.length) g.appendChild(el("div", { class: "note", style: "grid-column:1/-1;margin:0", text: "Aún no hay fotos. Sin fotos tuyas, la agencia usa fotos de banco de imágenes o generadas." }));
+}
 function setupTabs() {
   document.body.classList.add("tabs");
   const app = $("#app"), hdr = app.querySelector("header"), hero = $("#genBtn").closest("section");
@@ -2090,6 +2160,28 @@ function setupTabs() {
   const mbox = $("#acctModal .mbox"), secs = Array.from(mbox.querySelectorAll(":scope > .acct-sec"));
   const memSec = secs.find(x => x.querySelector("#acMem")), progSec = secs.find(x => x.querySelector("#acQueue"));
   pMar.appendChild(el("div", { class: "pcard" }, [el("h3", { text: "✏️ Tu marca" }), el("div", { class: "note", style: "margin:0 0 10px", text: "Nombre, qué enseñas, a quién, enlaces y colores." }), el("div", { class: "quick" }, [el("button", { class: "main", text: "Editar datos de la marca", onclick: () => $("#openBrand").click() })])]));
+  pMar.appendChild(el("div", { class: "pcard" }, [el("h3", { text: "📸 Fotos de tu marca" }),
+    el("div", { class: "note", style: "margin:0 0 10px", text: "Sube fotos de tus productos, tu equipo o tu local (hasta 24). La agencia las usará en los vídeos y posts cuando encajen. Escribe qué se ve en cada una para que sepa cuándo usarla." }),
+    el("div", { id: "phGrid", style: "display:grid;grid-template-columns:repeat(3,1fr);gap:8px" }),
+    el("input", { type: "file", id: "phFile", accept: "image/*", multiple: "", style: "display:none" }),
+    el("div", { class: "quick", style: "margin-top:10px" }, [el("button", { class: "main", id: "phAdd", text: "＋ Subir fotos", onclick: () => $("#phFile").click() })]),
+    el("div", { class: "note", id: "phStatus" })]));
+  $("#phFile").addEventListener("change", async e => {
+    const files = Array.from(e.target.files || []).slice(0, 8), st = $("#phStatus"); e.target.value = "";
+    for (const f of files) {
+      try {
+        st.textContent = "Subiendo " + f.name + "…";
+        const bmp = await createImageBitmap(f), k = Math.min(1, 1280 / Math.max(bmp.width, bmp.height)), c = document.createElement("canvas");
+        c.width = Math.round(bmp.width * k); c.height = Math.round(bmp.height * k); c.getContext("2d").drawImage(bmp, 0, 0, c.width, c.height);
+        let q = 0.85, data = c.toDataURL("image/jpeg", q); while (data.length > 900000 && q > 0.4) { q -= 0.1; data = c.toDataURL("image/jpeg", q); }
+        const desc = (f.name || "").replace(/\.[^.]+$/, "").replace(/[_-]+/g, " ").slice(0, 80) || "foto de la marca";
+        const j = await api("/api/photos", { method: "POST", body: { desc, data } }); HOST.me.photos = j.photos;
+        PH_CACHE[j.photos[j.photos.length - 1].id] = data; renderPhotos();
+      } catch (er) { st.textContent = "⚠️ " + (er.message || er); return; }
+    }
+    st.textContent = "✅ Fotos guardadas. Edita la descripción de cada una para que la agencia sepa qué es.";
+  });
+  renderPhotos();
   if (memSec) { memSec.classList.add("pcard"); pMar.appendChild(memSec); }
   const sty = el("div", { class: "pcard" }, [el("h3", { text: "🎨 Estilo de los vídeos" })]); const lbl = $("#styles").previousElementSibling;
   if (lbl && lbl.classList.contains("lbl")) lbl.classList.add("autohide"); sty.appendChild($("#styles")); sty.appendChild($("#optsWrap")); pMar.appendChild(sty);

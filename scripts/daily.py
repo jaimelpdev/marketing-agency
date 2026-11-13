@@ -78,6 +78,8 @@ def cors_proxy(route, request):
 def install_routes(page):
     page.route("https://api.groq.com/**", cors_proxy)
     page.route("https://image.pollinations.ai/**", cors_proxy)
+    page.route("https://api.pexels.com/**", cors_proxy)
+    page.route("https://images.pexels.com/**", cors_proxy)
 
 
 # ---------- utilidades ----------
@@ -517,9 +519,18 @@ def plan_user(browser, user, key, force=False, redo=None):
         "ma_groq_model": json.dumps(conf.get("modelo", "openai/gpt-oss-120b")),
         "ma_hist": json.dumps(history),
         "ma_poll_token": json.dumps(os.environ.get("POLLINATIONS_TOKEN", "")),
+        "ma_pexels_key": json.dumps(os.environ.get("PEXELS_API_KEY", "")),
     }
+    brand_photos = []
+    try:  # fotos propias de la marca (productos, equipo, local): tienen prioridad sobre las de stock
+        brand_photos = api("GET", f"/admin/photos/{uid}").get("photos", [])
+    except Exception as e:
+        log("  ⚠ No se pudieron cargar las fotos de la marca:", e)
+    if brand_photos:
+        log(f"  📸 {len(brand_photos)} fotos propias de la marca disponibles")
     init_js = "window.__AGENCIA_SERVER=true;try{localStorage.clear();" + "".join(
         f"localStorage.setItem({json.dumps(k)},{json.dumps(v)});" for k, v in init.items()) + "}catch(e){}"
+    init_js += ";window.__brandPhotos=" + json.dumps(brand_photos) + ";"
 
     page = browser.new_page(viewport={"width": 480, "height": 900})
     try:

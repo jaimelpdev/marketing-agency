@@ -77,6 +77,7 @@ function publicUser(u) {
     ig: u.ig ? { connected: true, username: u.ig.username, expires: u.ig.expires } : { connected: false },
     status: u.status || null,
     requests: u.requests || null,
+    photos: u.photos || [],
     resetAt: u.config ? null : (u.resetAt || null),
     usage: u.usage && u.usage.day === today() ? u.usage : { day: today(), llm: 0, img: 0 },
   };
@@ -325,6 +326,41 @@ async function handle(req, env) {
       await putUser(env, u);
       return json({ ok: true, item, requests: u.requests, started: await kickAgency(env) });
     }
+    // ===== fotos propias de la marca (productos, equipo, local…) =====
+    if (p === "/api/photos" && method === "POST") {
+      const b = await req.json().catch(() => ({}));
+      const m = /^data:image\/(jpeg|png|webp);base64,([A-Za-z0-9+/=]+)$/.exec(String(b.data || ""));
+      if (!m) return err(400, "bad_request", "Imagen no válida.");
+      if (m[2].length > 950000) return err(413, "too_large", "La foto pesa demasiado.");
+      u.photos = u.photos || [];
+      if (u.photos.length >= 24) return err(400, "bad_request", "Máximo 24 fotos. Borra alguna para subir más.");
+      const ph = { id: "f" + randomId(4), desc: String(b.desc || "foto de la marca").slice(0, 120), type: "image/" + m[1] };
+      await env.KV.put("photo:" + u.id + ":" + ph.id, m[2]);
+      u.photos.push(ph);
+      await putUser(env, u);
+      return json({ ok: true, photos: u.photos });
+    }
+    const phm = p.match(/^\/api\/photos\/(f[\w]+)$/);
+    if (phm && method === "DELETE") {
+      u.photos = (u.photos || []).filter(x => x.id !== phm[1]);
+      await env.KV.delete("photo:" + u.id + ":" + phm[1]);
+      await putUser(env, u);
+      return json({ ok: true, photos: u.photos });
+    }
+    if (phm && method === "PUT") {
+      const b = await req.json().catch(() => ({}));
+      const f = (u.photos || []).find(x => x.id === phm[1]);
+      if (!f) return err(404, "not_found", "No encuentro esa foto.");
+      f.desc = String(b.desc || f.desc).slice(0, 120);
+      await putUser(env, u);
+      return json({ ok: true, photos: u.photos });
+    }
+    if (phm && method === "GET") {
+      const f = (u.photos || []).find(x => x.id === phm[1]);
+      const d = f && await env.KV.get("photo:" + u.id + ":" + f.id);
+      if (!d) return err(404, "not_found", "No encuentro esa foto.");
+      return json({ id: f.id, desc: f.desc, src: "data:" + f.type + ";base64," + d });
+    }
     if (p === "/api/delete" && method === "POST") {
       // Eliminar una pieza programada: se anula ya en las redes y la agencia borra sus archivos
       const b = await req.json().catch(() => ({}));
@@ -498,6 +534,14 @@ async function handle(req, env) {
       u.requests = Object.keys(r).length ? r : null;
       await putUser(env, u);
       return json({ ok: true, requests: u.requests });
+    }
+    const aph = p.match(/^\/admin\/photos\/([\w-]+)$/);
+    if (aph && method === "GET") {
+      const u = await getUser(env, aph[1]);
+      if (!u) return err(404, "not_found", "Usuario no encontrado.");
+      const out = [];
+      for (const f of u.photos || []) { const d = await env.KV.get("photo:" + u.id + ":" + f.id); if (d) out.push({ id: f.id, desc: f.desc, src: "data:" + f.type + ";base64," + d }); }
+      return json({ photos: out });
     }
     if (p === "/admin/invite" && method === "POST") {
       const code = "inv-" + randomId(4);

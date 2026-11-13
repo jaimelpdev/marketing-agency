@@ -124,6 +124,12 @@ Guarda tu **clave de acceso** (en Cuenta) para entrar desde otro dispositivo.
 - **Voz:** locuciones neuronales gratuitas de Microsoft (edge-tts), con el guion que escribe la agencia.
 - **Música:** si pones tus pistas en `assets/music/<ambiente>/` (energetica, chill, epica, emotiva, divertida, tension) se usan esas. Si no, la agencia busca **canciones reales con licencia libre para uso comercial** (CC0 o CC BY, sobre todo de Jamendo, a través de Openverse) según el ambiente de cada vídeo, empieza la canción ya dentro (sin la intro lenta) y nivela el volumen. Con CC BY se acredita al artista en el texto del post; el vídeo no lleva marca de agua. Las historias, que no tienen texto, solo usan canciones CC0 (sin obligación de acreditar). Las pistas se guardan en `content/music/` y se van reutilizando.
 
+## 📷 Fotos reales y diseño «cine»
+- **Diseño cine (el principal):** foto real a pantalla completa con movimiento de cámara, degradado y tipografía grande abajo a la izquierda, sin pegatinas ni adornos. Lo usan dos de cada tres piezas; el resto alterna los demás diseños, donde la foto aparece como tarjeta enmarcada.
+- **De dónde salen las fotos**, por orden: 1) **tus fotos** (pestaña *Marca → 📸 Fotos de tu marca*: productos, equipo, local; hasta 24, con una descripción para que la agencia sepa cuándo usar cada una); 2) **fotos reales de banco de imágenes** (Pexels, gratis y sin atribución) si existe el secreto `PEXELS_API_KEY`; 3) imágenes generadas con IA.
+- **Activar Pexels:** crea una clave gratis en pexels.com/api y añádela en GitHub → *Settings → Environments → github-pages → Add secret* con el nombre `PEXELS_API_KEY`.
+- Sirve para cualquier negocio: la agencia pide para cada escena una foto concreta (una persona haciendo algo, un producto, un lugar) según la marca.
+
 ## 🚀 Contenido para enganchar
 - **Subtítulos dinámicos** palabra a palabra, sincronizados con la voz (la palabra que se dice se ilumina en el color de tu marca), porque la mayoría ve los vídeos sin sonido.
 - **Gancho con impacto:** tras la portada, el texto entra de golpe con destello, sacudida y rayos; confeti en el cierre.
