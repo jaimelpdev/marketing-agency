@@ -984,7 +984,6 @@ function drawFrame(SC,t,slide){
   const O=S.cfg.v,PF={top:0.34,center:0.47,bottom:0.6}[O.pos]||0.47;
   const TOP=Math.round(H*0.115),BOT=H-360,n=scenes.length;
   if(O.progress&&SC.type==="reel"){const gap=10,x0=60,segW=(W-120-gap*(n-1))/n;for(let i=0;i<n;i++){const x=x0+i*(segW+gap);ctx.fillStyle=T.track;roundRect(x,70,segW,10,5);ctx.fill();const f=i<si?1:i>si?0:clamp(lt/s.dur,0,1);if(f>0){ctx.fillStyle=T.fill;roundRect(x,70,Math.max(10,segW*f),10,5);ctx.fill();}}}
-  if(SC.type==="carrusel"&&n>1){ctx.save();ctx.font="800 34px Inter";const lab=(si+1)+"/"+n;const tw=ctx.measureText(lab).width;ctx.fillStyle=T.track;roundRect(W-tw-110,56,tw+50,56,28);ctx.fill();ctx.fillStyle=T.text;ctx.textBaseline="middle";ctx.textAlign="center";ctx.fillText(lab,W-85-tw/2,85);ctx.restore();}
   if(S.cfg.name&&O.brand){ctx.save();ctx.font="800 34px Inter";ctx.textAlign=isImg?"left":"center";ctx.textBaseline="middle";ctx.fillStyle=T.brand;ctx.fillText(S.cfg.name.toUpperCase(),isImg?60:W/2,isImg?85:140);ctx.restore();}
   const FX=!isImg&&O.transiciones!==false&&!STATIC;
   if(FX)drawParticles(slide!=null?s.start+lt:t,T);

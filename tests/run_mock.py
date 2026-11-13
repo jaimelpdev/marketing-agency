@@ -91,7 +91,7 @@ class H(http.server.SimpleHTTPRequestHandler):
     def do_GET(self):
         if self.path.startswith("/ov/audio/"):
             OV.append(self.path)
-            return self._json({"results": [{"id": f"trk{len(OV)}", "title": "Sunny Ride", "creator": "Band X", "license": "by", "license_version": "4.0",
+            return self._json({"results": [{"id": f"trk{len(OV)}", "title": "Sunny Ride", "creator": "Band X", "license": "cc0" if "license=cc0&" in self.path + "&" else "by", "license_version": "4.0",
                                             "url": "http://127.0.0.1:8765/ov/track.mp3", "duration": 95000, "filetype": "mp3", "source": "jamendo",
                                             "foreign_landing_url": "https://jamendo.com/x"}]})
         if self.path == "/ov/track.mp3":

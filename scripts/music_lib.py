@@ -66,13 +66,13 @@ def _index(folder):
     return [t for t in items if (folder / t["file"]).exists()]
 
 
-def _search(mood, log):
+def _search(mood, log, free_only=False):
     qs = list(QUERIES.get(mood) or QUERIES["energetica"])
     random.shuffle(qs)
     res, raw = [], []
     for k, base in enumerate(qs[:4]):  # varias búsquedas antes de rendirse
         q = base + (random.choice(["", " instrumental"]) if k == 0 else "")
-        params = {"q": q, "category": "music", "license": "cc0,by", "page_size": 20, "page": 1 if k else random.randint(1, 3)}
+        params = {"q": q, "category": "music", "license": "cc0" if free_only else "cc0,by", "page_size": 20, "page": 1 if k else random.randint(1, 3)}
         r = requests.get(API + "/audio/", params=params, headers=UA, timeout=30)
         r.raise_for_status()
         got = [x for x in r.json().get("results", []) if x.get("url") and not x.get("mature")]
@@ -143,8 +143,9 @@ def credit(track):
     return f"🎵 «{track['title']}» de {track['creator']} (CC {track['license'].upper()}{v})"
 
 
-def get_track(mood, cache_root, log=print):
-    """Devuelve (ruta, info) de una pista para el ambiente, o (None, None) si no hay ninguna disponible."""
+def get_track(mood, cache_root, log=print, free_only=False):
+    """Devuelve (ruta, info) de una pista para el ambiente, o (None, None) si no hay ninguna disponible.
+    free_only: solo pistas que no exigen atribución (CC0), para piezas sin texto donde acreditar."""
     import unicodedata
     m = unicodedata.normalize("NFKD", str(mood or "")).encode("ascii", "ignore").decode().lower().strip()
     m = {"energica": "energetica", "energico": "energetica", "emocional": "emotiva", "emotivo": "emotiva", "epico": "epica",
@@ -154,16 +155,17 @@ def get_track(mood, cache_root, log=print):
     mood = m if m in QUERIES else "energetica"
     folder = Path(cache_root) / mood
     folder.mkdir(parents=True, exist_ok=True)
+    ok = (lambda t: t.get("license") in ("cc0", "pdm", "own")) if free_only else (lambda t: True)
     have = _index(folder)
     recent = set(_usage(cache_root)[-NO_REPEAT:])
-    fresh = [t for t in have if t["file"] not in recent]
+    fresh = [t for t in have if t["file"] not in recent and ok(t)]
     if fresh and (len(have) >= POOL and random.random() < REUSE_CHANCE):
         t = random.choice(fresh)
         _mark_used(cache_root, t)
         return folder / t["file"], t
     try:
         known = {Path(t["file"]).stem for t in have}
-        for item in _search(mood, log)[:6]:
+        for item in _search(mood, log, free_only)[:6]:
             if item["id"] in known:
                 continue
             try:
@@ -178,12 +180,13 @@ def get_track(mood, cache_root, log=print):
             return folder / t["file"], t
     except Exception as e:
         log(f"    ⚠ No se pudo buscar música nueva: {e}")
-    if have:
-        t = random.choice([x for x in have if x["file"] not in recent] or have)
+    usable = [x for x in have if ok(x)]
+    if usable:
+        t = random.choice([x for x in usable if x["file"] not in recent] or usable)
         _mark_used(cache_root, t)
         return folder / t["file"], t
     for other in Path(cache_root).glob("*/index.json"):  # cualquier pista guardada antes que el silencio
-        alt = _index(other.parent)
+        alt = [x for x in _index(other.parent) if ok(x)]
         if alt:
             t = random.choice(alt)
             return other.parent / t["file"], t

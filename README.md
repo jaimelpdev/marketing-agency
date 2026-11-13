@@ -122,7 +122,7 @@ Guarda tu **clave de acceso** (en Cuenta) para entrar desde otro dispositivo.
 ## 🔊 Sonido
 - En **👤 Cuenta → Sonido de los vídeos** cada persona elige: 🤖 que decida la agencia, 🎙 solo voz, 🎵 solo música o 🎙+🎵 voz y música.
 - **Voz:** locuciones neuronales gratuitas de Microsoft (edge-tts), con el guion que escribe la agencia.
-- **Música:** si pones tus pistas en `assets/music/<ambiente>/` (energetica, chill, epica, emotiva, divertida, tension) se usan esas. Si no, la agencia busca **canciones reales con licencia libre para uso comercial** (CC0 o CC BY, sobre todo de Jamendo, a través de Openverse) según el ambiente de cada vídeo, empieza la canción ya dentro (sin la intro lenta) y nivela el volumen. Con CC BY se acredita al artista en el texto del post (o abajo del todo en las historias). Las pistas se guardan en `content/music/` y se van reutilizando.
+- **Música:** si pones tus pistas en `assets/music/<ambiente>/` (energetica, chill, epica, emotiva, divertida, tension) se usan esas. Si no, la agencia busca **canciones reales con licencia libre para uso comercial** (CC0 o CC BY, sobre todo de Jamendo, a través de Openverse) según el ambiente de cada vídeo, empieza la canción ya dentro (sin la intro lenta) y nivela el volumen. Con CC BY se acredita al artista en el texto del post; el vídeo no lleva marca de agua. Las historias, que no tienen texto, solo usan canciones CC0 (sin obligación de acreditar). Las pistas se guardan en `content/music/` y se van reutilizando.
 
 ## 🚀 Contenido para enganchar
 - **Subtítulos dinámicos** palabra a palabra, sincronizados con la voz (la palabra que se dice se ilumina en el color de tu marca), porque la mayoría ve los vídeos sin sonido.

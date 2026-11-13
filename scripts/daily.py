@@ -161,7 +161,7 @@ def probe_duration(path):
     return float(r.stdout.strip())
 
 
-def pick_music(mood, workdir=None):
+def pick_music(mood, workdir=None, free_only=False):
     """Música para la pieza: primero tus pistas de assets/music/<ambiente>; si no, música libre real (Openverse)."""
     pools = []
     if mood:
@@ -172,7 +172,7 @@ def pick_music(mood, workdir=None):
         if pool:
             return random.choice(pool), {"license": "own", "title": pool[0].stem}
     import music_lib
-    return music_lib.get_track(mood, CONTENT / "music", lambda *a: log(*a))
+    return music_lib.get_track(mood, CONTENT / "music", lambda *a: log(*a), free_only)
 
 
 def ff_text(t):
@@ -612,7 +612,7 @@ def plan_user(browser, user, key, force=False, redo=None):
                             log("    ⚠ No se pudo generar la voz, va solo con música:", e)
                             page.evaluate("i=>{delete S.today.videos[i]._durs;delete S.today.videos[i]._caps;}", i)
                             voice_clips = []
-                    music, track = (None, None) if p.get("audio") == "solo_voz" else pick_music(p.get("musica"), tdp)
+                    music, track = (None, None) if p.get("audio") == "solo_voz" else pick_music(p.get("musica"), tdp, free_only=p["tipo"] == "historia")  # las historias no llevan texto donde acreditar
                     import music_lib
                     credit = music_lib.credit(track)
                     log(f"    música: {(track or {}).get('title', 'ninguna')} · ambiente {p.get('musica') or '-'} · audio {p.get('audio') or '-'}")
@@ -637,7 +637,7 @@ def plan_user(browser, user, key, force=False, redo=None):
                         sfx_path = sfx.track(events, total, tdp / "sfx.wav")
                     except Exception as e:
                         log("    ⚠ Sin efectos de sonido:", e)
-                    encode_video(tdp, total, folder / "video.mp4", voice_clips, music, credit if p["tipo"] == "historia" else "", sfx_path)
+                    encode_video(tdp, total, folder / "video.mp4", voice_clips, music, "", sfx_path)  # sin marca de agua de la canción
                 media.append(str((folder / "video.mp4").relative_to(DOCS)))
             else:
                 for k in range(int(info["slides"])):
