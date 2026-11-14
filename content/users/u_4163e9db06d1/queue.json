@@ -92,10 +92,10 @@
     "media": [
       "media/u_4163e9db06d1/2026-11-14/2026-11-14-02-reel/video.mp4"
     ],
-    "status": "failed",
+    "status": "scheduled",
     "attempts": 0,
     "cover": "media/u_4163e9db06d1/2026-11-14/2026-11-14-02-reel/cover.jpg",
-    "error": "Subida a Zernio falló (502)"
+    "zernioPostId": "6af8634a57546f84959b9c3c"
   },
   {
     "id": "2026-11-14-03-carrusel",
