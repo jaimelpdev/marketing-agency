@@ -67,87 +67,87 @@
     "zernioPostId": "6af3bcaeab419287a3961457"
   },
   {
-    "id": "2026-11-14-01-post",
+    "id": "2026-11-14-01-reel",
     "date": "2026-11-14",
     "source": "auto",
-    "tipo": "post",
-    "tema": "Zona de frenado crítica en curvas lentas",
-    "publishAt": "2026-11-14T13:07:35.289460+01:00",
-    "caption": "🚦 La zona de frenado que más te cuesta puede robarte décimas. Descubre cómo identificarla y ajustarla. ¿Cuál es tu mayor desafío?\n\n#SimRacing #Telemetría #Ajustes #Lapriq #RacingTips",
+    "tipo": "reel",
+    "tema": "Error de la semana",
+    "publishAt": "2026-11-14T19:30:00+01:00",
+    "caption": "¿Te cuesta perder segundos en la curva? Aprende a frenarlo a tiempo. 💡 Comenta FRENO y guarda este reel. 🚦 Visita nuestro link en bio.\n\n#SimRacing #Telemetría #LAPRIQ #Frenado #RacingTips\n\n🎵 «Spencer Newton - Bounce (Original Mix)(Electro House)» de Spencer Newton (CC BY 3.0)",
     "media": [
-      "media/u_4163e9db06d1/2026-11-14/2026-11-14-01-post/01.jpg"
+      "media/u_4163e9db06d1/2026-11-14/2026-11-14-01-reel/video.mp4"
     ],
     "status": "scheduled",
     "attempts": 0,
-    "zernioPostId": "6af84caf0c89f23a06cba2e8"
+    "cover": "media/u_4163e9db06d1/2026-11-14/2026-11-14-01-reel/cover.jpg",
+    "zernioPostId": "6af8578ef22bfdce4b64e61b"
   },
   {
     "id": "2026-11-14-02-reel",
     "date": "2026-11-14",
     "source": "auto",
     "tipo": "reel",
-    "tema": "Freno tardío por falta de freno motor",
-    "publishAt": "2026-11-16T19:30:00+01:00",
-    "caption": "🚀 ¿Te ha pasado? El freno motor es tu aliado oculto. Actívalo y siente la diferencia. ¿Qué otras dudas tienes?\n\n#SimRacing #Telemetría #ErrorDeLaSemana #Lapriq #RacingTips\n\n🎵 «Spencer Newton - Bounce (Original Mix)(Electro House)» de Spencer Newton (CC BY 3.0)",
+    "tema": "Setup del seguidor",
+    "publishAt": "2026-11-15T19:30:00+01:00",
+    "caption": "¿Quieres que tu coche sea más rápido? Ajusta estos 3 puntos y gana 0.3s. 🚀 Mándame tu setup. #LAPRIQ #SimRacing #Setup\n\n#LAPRIQ #SimRacing #Setup #Telemetry #Racing\n\n🎵 «electronique beat hip hop» de dj beck (CC BY 3.0)",
     "media": [
       "media/u_4163e9db06d1/2026-11-14/2026-11-14-02-reel/video.mp4"
     ],
     "status": "scheduled",
     "attempts": 0,
     "cover": "media/u_4163e9db06d1/2026-11-14/2026-11-14-02-reel/cover.jpg",
-    "zernioPostId": "6af84cb10c89f23a06cba308"
+    "zernioPostId": "6af85791f22bfdce4b64e633"
   },
   {
-    "id": "2026-11-14-03-carrusel",
-    "date": "2026-11-14",
-    "source": "auto",
-    "tipo": "carrusel",
-    "tema": "Guía de ajustes críticos antes de la carrera",
-    "publishAt": "2026-11-18T13:30:00+01:00",
-    "caption": "🔧 La diferencia está en los detalles. Usa esta checklist para no dejar nada al azar. ¿Qué ajuste te sorprendió?\n\n#SimRacing #Checklist #AjustesCriticos #Lapriq #RacingTips",
-    "media": [
-      "media/u_4163e9db06d1/2026-11-14/2026-11-14-03-carrusel/01.jpg",
-      "media/u_4163e9db06d1/2026-11-14/2026-11-14-03-carrusel/02.jpg",
-      "media/u_4163e9db06d1/2026-11-14/2026-11-14-03-carrusel/03.jpg",
-      "media/u_4163e9db06d1/2026-11-14/2026-11-14-03-carrusel/04.jpg",
-      "media/u_4163e9db06d1/2026-11-14/2026-11-14-03-carrusel/05.jpg",
-      "media/u_4163e9db06d1/2026-11-14/2026-11-14-03-carrusel/06.jpg",
-      "media/u_4163e9db06d1/2026-11-14/2026-11-14-03-carrusel/07.jpg"
-    ],
-    "status": "scheduled",
-    "attempts": 0,
-    "zernioPostId": "6af84cbbb5f14a6a1590aac6"
-  },
-  {
-    "id": "2026-11-14-04-reel",
-    "date": "2026-11-14",
-    "source": "auto",
-    "tipo": "reel",
-    "tema": "Llamada a envío de setup",
-    "publishAt": "2026-11-19T19:30:00+01:00",
-    "caption": "📊 ¿Quieres saber qué le falta a tu coche? Envíame tu setup y lo desglosamos juntos. ¡Vamos a mejorar!\n\n#SimRacing #SetupSeguidor #Lapriq #Coaching #Telemetría\n\n🎵 «Lucky Acoustic» de Jesse Keller (CC BY 3.0)",
-    "media": [
-      "media/u_4163e9db06d1/2026-11-14/2026-11-14-04-reel/video.mp4"
-    ],
-    "status": "scheduled",
-    "attempts": 0,
-    "cover": "media/u_4163e9db06d1/2026-11-14/2026-11-14-04-reel/cover.jpg",
-    "zernioPostId": "6af84cc1aedf197772a1363c"
-  },
-  {
-    "id": "2026-11-14-05-historia",
+    "id": "2026-11-14-03-historia",
     "date": "2026-11-14",
     "source": "auto",
     "tipo": "historia",
-    "tema": "Mini tutorial: interpretar telemetría en tiempo real",
-    "publishAt": "2026-11-20T09:00:00+01:00",
+    "tema": "Mini encuesta",
+    "publishAt": "2026-11-17T09:00:00+01:00",
     "caption": "",
     "media": [
-      "media/u_4163e9db06d1/2026-11-14/2026-11-14-05-historia/video.mp4"
+      "media/u_4163e9db06d1/2026-11-14/2026-11-14-03-historia/video.mp4"
     ],
     "status": "scheduled",
     "attempts": 0,
-    "cover": "media/u_4163e9db06d1/2026-11-14/2026-11-14-05-historia/cover.jpg",
-    "zernioPostId": "6af84cc30c89f23a06cba3e8"
+    "cover": "media/u_4163e9db06d1/2026-11-14/2026-11-14-03-historia/cover.jpg",
+    "zernioPostId": "6af85794fe1ca6f9cac248b4"
+  },
+  {
+    "id": "2026-11-14-04-carrusel",
+    "date": "2026-11-14",
+    "source": "auto",
+    "tipo": "carrusel",
+    "tema": "Mito o realidad",
+    "publishAt": "2026-11-18T19:30:00+01:00",
+    "caption": "Desmontamos los mitos del downforce. 📉⚡ ¿Cuál te sorprendió más? #LAPRIQ #SimRacing #Downforce\n\n#LAPRIQ #SimRacing #Downforce #Mitos #Racing",
+    "media": [
+      "media/u_4163e9db06d1/2026-11-14/2026-11-14-04-carrusel/01.jpg",
+      "media/u_4163e9db06d1/2026-11-14/2026-11-14-04-carrusel/02.jpg",
+      "media/u_4163e9db06d1/2026-11-14/2026-11-14-04-carrusel/03.jpg",
+      "media/u_4163e9db06d1/2026-11-14/2026-11-14-04-carrusel/04.jpg",
+      "media/u_4163e9db06d1/2026-11-14/2026-11-14-04-carrusel/05.jpg",
+      "media/u_4163e9db06d1/2026-11-14/2026-11-14-04-carrusel/06.jpg"
+    ],
+    "status": "scheduled",
+    "attempts": 0,
+    "zernioPostId": "6af8579dfe1ca6f9cac24907"
+  },
+  {
+    "id": "2026-11-14-05-reel",
+    "date": "2026-11-14",
+    "source": "auto",
+    "tipo": "reel",
+    "tema": "Error de la semana",
+    "publishAt": "2026-11-20T19:30:00+01:00",
+    "caption": "¿Te cuesta perder segundos en la curva? Aprende a frenarlo a tiempo. 💡 Guarda este reel y visita nuestro enlace en bio. 🚦\n\n#SimRacing #Telemetría #LAPRIQ #Frenado #RacingTips\n\n🎵 «Spencer Newton - Right Now (Original Mix)(Electro House)» de Spencer Newton (CC BY 3.0)",
+    "media": [
+      "media/u_4163e9db06d1/2026-11-14/2026-11-14-05-reel/video.mp4"
+    ],
+    "status": "scheduled",
+    "attempts": 0,
+    "cover": "media/u_4163e9db06d1/2026-11-14/2026-11-14-05-reel/cover.jpg",
+    "zernioPostId": "6af857a4468e0fd807ee8e33"
   }
 ]

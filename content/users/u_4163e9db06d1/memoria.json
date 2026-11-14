@@ -1,8 +1,8 @@
 {
  "version": 1,
  "creada": "2026-11-10T21:43:01",
- "actualizada": "2026-11-14T11:45:24",
- "semana": 3,
+ "actualizada": "2026-11-14T12:13:07",
+ "semana": 4,
  "fase": "descubrimiento",
  "objetivo_mes": "Aumentar el alcance y posicionar a LAPRIQ como referencia de tips técnicos y coaching en sim‑racing",
  "arco_semana": {
@@ -21,28 +21,29 @@
    "formato": "reel",
    "cuando": "lunes",
    "descripcion": "Se muestra un error típico de telemetría y cómo corregirlo",
-   "episodios": 3
+   "episodios": 5
   },
   {
    "nombre": "Setup del seguidor",
    "formato": "reel",
    "cuando": "jueves",
    "descripcion": "Analizamos el setup enviado por un seguidor y lo mejoramos en tiempo real",
-   "episodios": 3
+   "episodios": 4
   },
   {
    "nombre": "Mito o realidad",
    "formato": "carrusel",
    "cuando": "miércoles",
    "descripcion": "Desmentimos creencias comunes del sim‑racing con datos y ejemplos",
-   "episodios": 2
+   "episodios": 3
   }
  ],
  "aprendizajes": [
   "Los reels con datos concretos (Nm, mm, tiempos) generan >80% más engagement",
   "Los contenidos de ajuste de coche y estrategia de boxes reciben más likes y guardados",
   "Los posts con llamada a comentar aumentan los comentarios en 3×",
-  "Los reels promocionales de la app sin valor técnico obtienen <5% de engagement y deben evitarse"
+  "Los reels promocionales de la app sin valor técnico obtienen <5% de engagement y deben evitarse",
+  "Los reels de \"Error de la semana\" generan mayor número de comentarios que otros formatos"
  ],
  "que_evitar": [
   "Promociones genéricas de hardware sin vínculo técnico",
@@ -64,12 +65,14 @@
  "hitos": [
   "Lanzar versión beta de la app con 500 usuarios testeando",
   "Alcanzar 10 000 seguidores en IG",
-  "Publicar el primer caso de estudio con resultados medibles"
+  "Publicar el primer caso de estudio con resultados medibles",
+  "Iniciar reto mensual de telemetría"
  ],
  "metricas": {
   "publicaciones_medidas": 25,
   "media_por_formato": {
-   "reel": 48.0,
+   "post": 0.0,
+   "reel": 48.4,
    "carrusel": 4.0
   },
   "mejores": [
@@ -117,14 +120,6 @@
   "peores": [
    {
     "tipo": "reel",
-    "date": "2026-11-13",
-    "eng": 4,
-    "likes": 4,
-    "com": 0,
-    "tema": "Descarga la app para dejar de adivinar donde pierdes tiempo en cada vuelta/pasada!!"
-   },
-   {
-    "tipo": "reel",
     "date": "2026-11-12",
     "eng": 4,
     "likes": 4,
@@ -138,8 +133,16 @@
     "likes": 4,
     "com": 0,
     "tema": "¿Te cuesta ganar esos décimos? 🕒 Aquí tienes 4 ajustes críticos que pueden salvarte tiempo. Ponlos a prueba y "
+   },
+   {
+    "tipo": "post",
+    "date": "2026-11-14",
+    "eng": 0,
+    "likes": 0,
+    "com": 0,
+    "tema": "🚦 La zona de frenado que más te cuesta puede robarte décimas. Descubre cómo identificarla y ajustarla. ¿Cuál e"
    }
   ]
  },
- "resumen_para_dueño": "Esta semana reforzamos el descubrimiento con contenido técnico de alto valor, manteniendo nuestras series pilares y cumpliendo las promesas pendientes. La mezcla sigue priorizando alcance y confianza, mientras preparamos el reto de telemetría para impulsar la comunidad."
+ "resumen_para_dueño": "Esta semana reforzamos el arco de \"Optimiza tu setup para cada circuito\" con reels técnicos de alto valor, mantenemos nuestras series pilares y cumplimos las promesas pendientes, preparando el próximo reto de telemetría para fortalecer la comunidad."
 }

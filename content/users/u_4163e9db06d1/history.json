@@ -1,12 +1,6 @@
 {
   "items": [
     {
-      "date": "2026-09-24",
-      "tipo": "reel",
-      "src": "red",
-      "tema": "[IG · ❤️38] ¿Realmente los volantes con feedback en frenadas marcan la diferencia? Descubre la verdad y optimiza tu control"
-    },
-    {
       "date": "2026-09-27",
       "tipo": "reel",
       "src": "red",
@@ -252,6 +246,23 @@
       "objetivo": "alcance"
     },
     {
+      "date": "2026-11-14",
+      "tema": "Zona de frenado crítica en curvas lentas",
+      "formato": "lista",
+      "tipo": "post",
+      "layout": "cine",
+      "plantilla": 1694,
+      "look": 252,
+      "serie": "",
+      "objetivo": "comunidad"
+    },
+    {
+      "date": "2026-11-14",
+      "tipo": "post",
+      "src": "red",
+      "tema": "[IG · ❤️0] 🚦 La zona de frenado que más te cuesta puede robarte décimas. Descubre cómo identificarla y ajustarla. ¿Cuál es tu mayor desafío?"
+    },
+    {
       "date": "2026-11-15",
       "tema": "Promoción Black Friday: 15 días de garantía + 20% descuento",
       "formato": "mini anuncio",
@@ -284,39 +295,6 @@
       "objetivo": "alcance"
     },
     {
-      "date": "2026-11-18",
-      "tema": "Más downforce siempre es mejor",
-      "formato": "mito vs realidad",
-      "tipo": "carrusel",
-      "layout": "cine",
-      "plantilla": 1814,
-      "look": 5,
-      "serie": "Mito o realidad",
-      "objetivo": ""
-    },
-    {
-      "date": "2026-11-19",
-      "tema": "Envía tu setup y lo analizamos en tiempo real",
-      "formato": "llamada a participación",
-      "tipo": "reel",
-      "layout": "cine",
-      "plantilla": 559,
-      "look": 115,
-      "serie": "Setup del seguidor",
-      "objetivo": "comunidad"
-    },
-    {
-      "date": "2026-11-14",
-      "tema": "Zona de frenado crítica en curvas lentas",
-      "formato": "lista",
-      "tipo": "post",
-      "layout": "cine",
-      "plantilla": 1694,
-      "look": 252,
-      "serie": "",
-      "objetivo": "comunidad"
-    },
-    {
       "date": "2026-11-16",
       "tema": "Freno tardío por falta de freno motor",
       "formato": "error que cuesta tiempo",
@@ -329,6 +307,17 @@
     },
     {
       "date": "2026-11-18",
+      "tema": "Más downforce siempre es mejor",
+      "formato": "mito vs realidad",
+      "tipo": "carrusel",
+      "layout": "cine",
+      "plantilla": 1814,
+      "look": 5,
+      "serie": "Mito o realidad",
+      "objetivo": ""
+    },
+    {
+      "date": "2026-11-18",
       "tema": "Guía de ajustes críticos antes de la carrera",
       "formato": "checklist",
       "tipo": "carrusel",
@@ -337,6 +326,17 @@
       "look": 216,
       "serie": "",
       "objetivo": ""
+    },
+    {
+      "date": "2026-11-19",
+      "tema": "Envía tu setup y lo analizamos en tiempo real",
+      "formato": "llamada a participación",
+      "tipo": "reel",
+      "layout": "cine",
+      "plantilla": 559,
+      "look": 115,
+      "serie": "Setup del seguidor",
+      "objetivo": "comunidad"
     },
     {
       "date": "2026-11-19",
@@ -358,6 +358,61 @@
       "plantilla": 2170,
       "look": 180,
       "serie": "",
+      "objetivo": ""
+    },
+    {
+      "date": "2026-11-14",
+      "tema": "Error de la semana",
+      "formato": "reel",
+      "tipo": "reel",
+      "layout": "faceless",
+      "plantilla": 1612,
+      "look": 9,
+      "serie": "Error de la semana",
+      "objetivo": ""
+    },
+    {
+      "date": "2026-11-15",
+      "tema": "Setup del seguidor",
+      "formato": "reel",
+      "tipo": "reel",
+      "layout": "cine",
+      "plantilla": 358,
+      "look": 119,
+      "serie": "Setup del seguidor",
+      "objetivo": ""
+    },
+    {
+      "date": "2026-11-17",
+      "tema": "Mini encuesta",
+      "formato": "historia",
+      "tipo": "historia",
+      "layout": "faceless",
+      "plantilla": 1155,
+      "look": 229,
+      "serie": "",
+      "objetivo": ""
+    },
+    {
+      "date": "2026-11-18",
+      "tema": "Mito o realidad",
+      "formato": "carrusel",
+      "tipo": "carrusel",
+      "layout": "cine",
+      "plantilla": 1880,
+      "look": 83,
+      "serie": "Mito o realidad",
+      "objetivo": ""
+    },
+    {
+      "date": "2026-11-20",
+      "tema": "Error de la semana",
+      "formato": "reel",
+      "tipo": "reel",
+      "layout": "faceless",
+      "plantilla": 427,
+      "look": 193,
+      "serie": "Error de la semana",
       "objetivo": ""
     }
   ]
