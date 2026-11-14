@@ -71,8 +71,8 @@
     "date": "2026-11-14",
     "source": "auto",
     "tipo": "historia",
-    "tema": "Zona de boxes y gestión de pit‑stop",
-    "publishAt": "2026-11-14T17:28:03.873460+01:00",
+    "tema": "pregunta sobre telemetría",
+    "publishAt": "2026-11-15T09:00:00+01:00",
     "caption": "",
     "media": [
       "media/u_4163e9db06d1/2026-11-14/2026-11-14-01-historia/video.mp4"
@@ -80,74 +80,6 @@
     "status": "scheduled",
     "attempts": 0,
     "cover": "media/u_4163e9db06d1/2026-11-14/2026-11-14-01-historia/cover.jpg",
-    "zernioPostId": "6af889bc449439ddfceaba73"
-  },
-  {
-    "id": "2026-11-14-02-reel",
-    "date": "2026-11-14",
-    "source": "auto",
-    "tipo": "reel",
-    "tema": "Sobre‑frenado en curvas lentas",
-    "publishAt": "2026-11-16T19:30:00+01:00",
-    "caption": "¿Te suena familiar? Aprende a corregirlo y gana décimas. 👉 Comenta FRENO y recibe la guía completa. #simracing #telemetria #tips #racing #LAPRIQ\n\n#simracing #telemetria #tips #racing #LAPRIQ\n\n🎵 «Hip Hop Turn» de Kobito (CC BY 3.0)",
-    "media": [
-      "media/u_4163e9db06d1/2026-11-14/2026-11-14-02-reel/video.mp4"
-    ],
-    "status": "scheduled",
-    "attempts": 0,
-    "cover": "media/u_4163e9db06d1/2026-11-14/2026-11-14-02-reel/cover.jpg",
-    "zernioPostId": "6af889bfb0eb32043dfd48a2"
-  },
-  {
-    "id": "2026-11-14-03-carrusel",
-    "date": "2026-11-14",
-    "source": "auto",
-    "tipo": "carrusel",
-    "tema": "Neumáticos blandos siempre son más rápidos",
-    "publishAt": "2026-11-18T13:30:00+01:00",
-    "caption": "Desmontamos el mito del neumático blando. Usa los datos y gana tiempo. Guarda este carrusel y aplica el consejo. #simracing #neumaticos #telemetria #LAPRIQ\n\n#simracing #neumaticos #telemetria #LAPRIQ",
-    "media": [
-      "media/u_4163e9db06d1/2026-11-14/2026-11-14-03-carrusel/01.jpg",
-      "media/u_4163e9db06d1/2026-11-14/2026-11-14-03-carrusel/02.jpg",
-      "media/u_4163e9db06d1/2026-11-14/2026-11-14-03-carrusel/03.jpg",
-      "media/u_4163e9db06d1/2026-11-14/2026-11-14-03-carrusel/04.jpg",
-      "media/u_4163e9db06d1/2026-11-14/2026-11-14-03-carrusel/05.jpg",
-      "media/u_4163e9db06d1/2026-11-14/2026-11-14-03-carrusel/06.jpg"
-    ],
-    "status": "scheduled",
-    "attempts": 0,
-    "zernioPostId": "6af889c7449439ddfceabb12"
-  },
-  {
-    "id": "2026-11-14-04-reel",
-    "date": "2026-11-14",
-    "source": "auto",
-    "tipo": "reel",
-    "tema": "Llamada a envío de setups",
-    "publishAt": "2026-11-19T19:45:00+01:00",
-    "caption": "¿Tienes un setup que te está frenando? Envíalo por DM y lo optimizamos en el próximo Reel. #simracing #setup #telemetria #LAPRIQ\n\n#simracing #setup #telemetria #LAPRIQ\n\n🎵 «Super Power Pop Rock» de Kara Square (CC BY 3.0)",
-    "media": [
-      "media/u_4163e9db06d1/2026-11-14/2026-11-14-04-reel/video.mp4"
-    ],
-    "status": "scheduled",
-    "attempts": 0,
-    "cover": "media/u_4163e9db06d1/2026-11-14/2026-11-14-04-reel/cover.jpg",
-    "zernioPostId": "6af889cd449439ddfceabb4a"
-  },
-  {
-    "id": "2026-11-14-05-historia",
-    "date": "2026-11-14",
-    "source": "auto",
-    "tipo": "historia",
-    "tema": "Guía de ajustes críticos",
-    "publishAt": "2026-11-20T09:30:00+01:00",
-    "caption": "",
-    "media": [
-      "media/u_4163e9db06d1/2026-11-14/2026-11-14-05-historia/video.mp4"
-    ],
-    "status": "scheduled",
-    "attempts": 0,
-    "cover": "media/u_4163e9db06d1/2026-11-14/2026-11-14-05-historia/cover.jpg",
-    "zernioPostId": "6af889d1449439ddfceabb6a"
+    "zernioPostId": "6af890e46b2a87dbdf664da8"
   }
 ]

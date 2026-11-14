@@ -1,8 +1,8 @@
 {
  "version": 1,
  "creada": "2026-11-10T21:43:01",
- "actualizada": "2026-11-14T15:11:11",
- "semana": 7,
+ "actualizada": "2026-11-14T16:36:02",
+ "semana": 8,
  "fase": "confianza",
  "objetivo_mes": "Aumentar el alcance y posicionar a LAPRIQ como referencia de tips técnicos y coaching en sim‑racing",
  "arco_semana": {
@@ -154,5 +154,5 @@
    }
   ]
  },
- "resumen_para_dueño": "Esta semana reforzamos la fase de confianza con contenido técnico de telemetría y gestión de boxes, cumplimos las promesas pendientes y lanzamos la estructura del reto mensual para impulsar la comunidad y acercarnos a los hitos de beta y 10k seguidores."
+ "resumen_para_dueño": "Esta semana reforzamos la fase de confianza con contenidos técnicos de telemetría y gestión de boxes, cumplimos las dos promesas pendientes y lanzamos la estructura del reto mensual para fomentar la participación y acercarnos a los hitos de beta y 10k seguidores."
 }

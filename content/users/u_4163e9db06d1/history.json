@@ -291,6 +291,17 @@
     },
     {
       "date": "2026-11-14",
+      "tema": "Zona de boxes y gestión de pit‑stop",
+      "formato": "mini encuesta",
+      "tipo": "historia",
+      "layout": "faceless",
+      "plantilla": 1024,
+      "look": 186,
+      "serie": "",
+      "objetivo": "comunidad"
+    },
+    {
+      "date": "2026-11-14",
       "tipo": "post",
       "src": "red",
       "tema": "[IG · ❤️1] 🚦 La zona de frenado que más te cuesta puede robarte décimas. Descubre cómo identificarla y ajustarla. ¿Cuál es tu mayor desafío?"
@@ -372,6 +383,17 @@
       "objetivo": "alcance"
     },
     {
+      "date": "2026-11-16",
+      "tema": "Sobre‑frenado en curvas lentas",
+      "formato": "Error de la semana",
+      "tipo": "reel",
+      "layout": "faceless",
+      "plantilla": 2103,
+      "look": 119,
+      "serie": "",
+      "objetivo": "alcance"
+    },
+    {
       "date": "2026-11-17",
       "tema": "Mini encuesta",
       "formato": "historia",
@@ -449,6 +471,17 @@
       "objetivo": ""
     },
     {
+      "date": "2026-11-18",
+      "tema": "Neumáticos blandos siempre son más rápidos",
+      "formato": "Mito o realidad",
+      "tipo": "carrusel",
+      "layout": "dividido",
+      "plantilla": 62,
+      "look": 229,
+      "serie": "",
+      "objetivo": ""
+    },
+    {
       "date": "2026-11-19",
       "tema": "Envía tu setup y lo analizamos en tiempo real",
       "formato": "llamada a participación",
@@ -493,6 +526,17 @@
       "objetivo": "confianza"
     },
     {
+      "date": "2026-11-19",
+      "tema": "Llamada a envío de setups",
+      "formato": "Setup del seguidor",
+      "tipo": "reel",
+      "layout": "faceless",
+      "plantilla": 1957,
+      "look": 83,
+      "serie": "",
+      "objetivo": "comunidad"
+    },
+    {
       "date": "2026-11-20",
       "tema": "Mini tutorial: interpretar telemetría en tiempo real",
       "formato": "mini tutorial",
@@ -515,50 +559,6 @@
       "objetivo": ""
     },
     {
-      "date": "2026-11-14",
-      "tema": "Zona de boxes y gestión de pit‑stop",
-      "formato": "mini encuesta",
-      "tipo": "historia",
-      "layout": "faceless",
-      "plantilla": 1024,
-      "look": 186,
-      "serie": "",
-      "objetivo": "comunidad"
-    },
-    {
-      "date": "2026-11-16",
-      "tema": "Sobre‑frenado en curvas lentas",
-      "formato": "Error de la semana",
-      "tipo": "reel",
-      "layout": "faceless",
-      "plantilla": 2103,
-      "look": 119,
-      "serie": "",
-      "objetivo": "alcance"
-    },
-    {
-      "date": "2026-11-18",
-      "tema": "Neumáticos blandos siempre son más rápidos",
-      "formato": "Mito o realidad",
-      "tipo": "carrusel",
-      "layout": "dividido",
-      "plantilla": 62,
-      "look": 229,
-      "serie": "",
-      "objetivo": ""
-    },
-    {
-      "date": "2026-11-19",
-      "tema": "Llamada a envío de setups",
-      "formato": "Setup del seguidor",
-      "tipo": "reel",
-      "layout": "faceless",
-      "plantilla": 1957,
-      "look": 83,
-      "serie": "",
-      "objetivo": "comunidad"
-    },
-    {
       "date": "2026-11-20",
       "tema": "Guía de ajustes críticos",
       "formato": "mini tutorial",
@@ -568,6 +568,17 @@
       "look": 193,
       "serie": "",
       "objetivo": ""
+    },
+    {
+      "date": "2026-11-15",
+      "tema": "pregunta sobre telemetría",
+      "formato": "historia",
+      "tipo": "historia",
+      "layout": "faceless",
+      "plantilla": 590,
+      "look": 186,
+      "serie": "",
+      "objetivo": "comunidad"
     }
   ]
 }
