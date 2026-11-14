@@ -200,6 +200,14 @@ async function refreshIgTokens(env, force = false) {
 }
 
 // ---------- rutas ----------
+// Anula ya en las redes (Zernio) una pieza programada. Devuelve false solo si Zernio falla de verdad.
+async function cancelPost(env, item) {
+  if (!item || !item.zernioPostId || !env.ZERNIO_API_KEY) return true;
+  try { await zernio(env, "DELETE", "/posts/" + encodeURIComponent(item.zernioPostId)); }
+  catch (e) { if (!/404|not found/i.test(String(e.message))) return false; }
+  item.status = "cancelled"; delete item.zernioPostId; return true;
+}
+
 // Pone a trabajar a la agencia en GitHub Actions al momento (si hay GITHUB_TOKEN); si no, lo hará la revisión periódica.
 async function kickAgency(env) {
   if (!env.GITHUB_TOKEN) return false;
@@ -304,9 +312,11 @@ async function handle(req, env) {
       u.requests = u.requests || {};
       const redo = (u.requests.redo || []).filter(x => x !== id);
       if (redo.length >= 10) return err(429, "rate_limited", "Ya hay muchas piezas rehaciéndose. Espera a que terminen.");
+      if (!(await cancelPost(env, item))) return err(502, "upstream", "No se pudo anular la versión anterior en las redes. Prueba otra vez.");
+      if (item.status === "cancelled") item.status = "pending";
       u.requests.redo = redo.concat(id);
       await putUser(env, u);
-      return json({ ok: true, requests: u.requests, started: await kickAgency(env) });
+      return json({ ok: true, requests: u.requests, status: u.status, started: await kickAgency(env) });
     }
     if (p === "/api/create" && method === "POST") {
       // Pieza pedida desde el chat: la agencia la crea y la programa en cuanto pueda
@@ -369,10 +379,7 @@ async function handle(req, env) {
       const item = q.find(x => x.id === id);
       if (!item) return err(404, "not_found", "No encuentro esa pieza.");
       if (!["pending", "scheduled", "failed"].includes(item.status)) return err(400, "bad_request", "Esa pieza ya está publicada; bórrala desde la propia red social.");
-      if (item.zernioPostId && env.ZERNIO_API_KEY) {
-        try { await zernio(env, "DELETE", "/posts/" + encodeURIComponent(item.zernioPostId)); }
-        catch (e) { if (!/404|not found/i.test(String(e.message))) return err(502, "upstream", "Zernio no ha podido anular la publicación. Prueba otra vez."); }
-      }
+      if (!(await cancelPost(env, item))) return err(502, "upstream", "Zernio no ha podido anular la publicación. Prueba otra vez.");
       u.status.queue = q.filter(x => x.id !== id);
       u.requests = u.requests || {};
       u.requests.remove = (u.requests.remove || []).filter(x => x !== id).concat(id).slice(-50);
@@ -381,6 +388,11 @@ async function handle(req, env) {
       return json({ ok: true, requests: u.requests, status: u.status, started: await kickAgency(env) });
     }
     if (p === "/api/replan" && method === "POST") {
+      // lo que estaba programado se anula YA en las redes: no se publica nada viejo mientras se rehace
+      const now = Date.now(), up = ((u.status && u.status.queue) || []).filter(x => ["pending", "scheduled"].includes(x.status) && new Date(x.publishAt).getTime() > now);
+      let fails = 0;
+      for (const it of up) { if (!(await cancelPost(env, it))) fails++; else if (it.status === "cancelled") it.status = "pending"; }
+      if (fails) return err(502, "upstream", "No se pudieron anular " + fails + " publicaciones en las redes. Prueba otra vez.");
       u.requests = { ...(u.requests || {}), replan: new Date().toISOString(), redo: [] };
       await putUser(env, u);
       return json({ ok: true, requests: u.requests, started: await kickAgency(env) });

@@ -140,6 +140,14 @@ r = await call("GET", "/admin/photos/" + uid, { key: "admin123" }); assert.equal
 r = await call("GET", "/admin/photos/" + uid, { key }); assert.equal(r.s, 401);
 r = await call("GET", "/api/me", { key }); assert.equal(r.j.photos.length, 1);
 r = await call("DELETE", "/api/photos/" + fid, { key }); assert.equal(r.j.photos.length, 0);
+r = await call("PUT", "/admin/status/" + uid, { key: "admin123", body: { queue: [{ id: "w1", tipo: "reel", status: "scheduled", publishAt: fut, zernioPostId: "zw1" }, { id: "w2", tipo: "post", status: "scheduled", publishAt: fut, zernioPostId: "zw2" }, { id: "w0", tipo: "post", status: "published", publishAt: past, zernioPostId: "zw0" }] } });
+zcalls.length = 0;
+r = await call("POST", "/api/redo", { key, body: { id: "w1" } }); assert.equal(r.s, 200);
+assert.ok(zcalls.includes("DELETE /posts/zw1"), "rehacer anula ya la versión anterior: " + zcalls.join(","));
+r = await call("POST", "/api/replan", { key }); assert.equal(r.s, 200);
+assert.ok(zcalls.includes("DELETE /posts/zw2") && !zcalls.includes("DELETE /posts/zw0"), "rehacer semana anula lo pendiente y no toca lo publicado: " + zcalls.join(","));
+r = await call("GET", "/api/me", { key }); assert.ok(!r.j.status.queue.some(x => x.zernioPostId === "zw2"));
+await call("POST", "/api/cancel-request", { key, body: {} });
 r = await call("POST", "/api/reset", { key }); assert.equal(r.s, 200);
 r = await call("GET", "/api/me", { key }); assert.equal(r.j.config, null); assert.equal(r.j.status, null); assert.ok(r.j.requests.reset, "la clave sigue valiendo");
 r = await call("POST", "/admin/requests/" + uid + "/done", { key: "admin123", body: { reset: "otra-fecha" } }); assert.ok(r.j.requests.reset, "no borra una petición distinta");

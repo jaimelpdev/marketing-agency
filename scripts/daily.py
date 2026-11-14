@@ -27,7 +27,7 @@ from zoneinfo import ZoneInfo
 
 from playwright.sync_api import sync_playwright
 
-from common import api, summarize
+from common import api, summarize, zernio_reconcile
 import brain
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -427,7 +427,8 @@ def zernio_cancel(item):
         try:
             api("POST", "/admin/zernio", {"method": "DELETE", "path": "/posts/" + item["zernioPostId"]})
         except Exception as e:
-            log("  ⚠ No se pudo anular en Zernio:", e)
+            if "404" not in str(e) and "not found" not in str(e).lower():  # ya anulada desde la app
+                log("  ⚠ No se pudo anular en Zernio:", e)
 
 
 def publish_floor(user, tz):
@@ -862,6 +863,9 @@ def main():
         if has_requests:
             errors += process_requests(browser, users, key)
             users = api("GET", "/admin/users").get("users", [])
+        for u in users:  # red de seguridad: nada borrado o sustituido sigue programado en las redes
+            if u.get("social"):
+                zernio_reconcile(u, load_json(CONTENT / "users" / u["id"] / "queue.json", []), lambda *a: log(*a))
         for u in users:
             if only and u["id"] != only:
                 continue

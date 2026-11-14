@@ -143,11 +143,18 @@ def main():
         return
     dry = bool(os.environ.get("DRY_RUN"))
     base = pages_url()
-    removed = {}
+    removed, users = {}, []
     try:  # piezas que alguien ha eliminado desde la app y aún no se han borrado de la cola
-        removed = {u["id"]: set((u.get("requests") or {}).get("remove") or []) for u in api("GET", "/admin/users").get("users", [])}
+        users = api("GET", "/admin/users").get("users", [])
+        removed = {u["id"]: set((u.get("requests") or {}).get("remove") or []) for u in users}
     except Exception:
         pass
+    from common import zernio_reconcile
+    for u in users:  # anular en las redes lo que ya no está en el plan
+        if u.get("social"):
+            q = json.loads((users_dir / u["id"] / "queue.json").read_text()) if (users_dir / u["id"] / "queue.json").exists() else []
+            q = [x for x in q if x.get("id") not in removed.get(u["id"], set())]
+            zernio_reconcile(u, q, log)
     for d in dirs:
         publish_user(d, base, dry, removed.get(d.name, set()))
 

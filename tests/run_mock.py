@@ -55,6 +55,9 @@ def mock_routes(page):
 import subprocess  # noqa: E402
 calls = []
 STRAT = []
+ZPOSTS = [{"_id": "huerfano1", "status": "scheduled", "createdAt": "2026-01-01T00:00:00Z", "scheduledFor": "2030-01-01T10:00:00Z"},
+          {"_id": "reciente1", "status": "scheduled", "createdAt": "2099-01-01T00:00:00Z"},
+          {"_id": "otroperfil", "status": "scheduled", "createdAt": "2026-01-01T00:00:00Z", "profileId": "prof_otro"}]
 OV = []
 PROMPTS = []
 DONE = []
@@ -136,6 +139,8 @@ class H(http.server.SimpleHTTPRequestHandler):
             return self._json({"ok": True})
         if self.path == "/admin/zernio" and self._auth():
             zcalls.append(body)
+            if body.get("method") == "GET" and body["path"].startswith("/posts?profileId="):
+                return self._json({"posts": ZPOSTS})
             if body.get("method") == "GET" and body["path"].endswith("/posts"):
                 return self._json({"status": "ok", "posts": [{"id": "x1", "platform": "instagram", "message": "Cómo elegir tu primer volante de simracing #simracing", "mediaType": "VIDEO", "createdTime": "2026-11-01T18:00:00Z", "likeCount": 87, "commentCount": 9}]})
             if body["path"] == "/media/presign":
@@ -209,6 +214,9 @@ assert mem["fase"] == "descubrimiento" and mem["semana"] == 1 and mem["series"][
 assert any("MEMORIA Y ESTRATEGIA DE MARCA" in pr and "El error de la semana" in pr and "La frenada perfecta" in pr for pr in PROMPTS), "el planificador usa la memoria"
 assert STATUS["u_ana"].get("memoria", {}).get("fase") == "descubrimiento", "la memoria llega a la app"
 print("🧠 MEMORIA:", mem["fase"], "·", mem["arco_semana"]["tema"], "·", [x["nombre"] for x in mem["series"]])
+dels = [c["path"] for c in zcalls if c.get("method") == "DELETE"]
+assert "/posts/huerfano1" in dels and "/posts/reciente1" not in dels and "/posts/otroperfil" not in dels, dels
+print("🧹 Red de seguridad: anula lo que ya no está en el plan ✓")
 assert OV, "busca música libre"
 assert (work / "content/music").exists() and list((work / "content/music").rglob("index.json")), "guarda las pistas"
 reel_item = next(q for q in final if q["tipo"] == "reel")
@@ -255,7 +263,7 @@ USERS[0]["config"] = None
 zcalls.clear()
 daily.main()
 assert not (work / "content/users/u_ana").exists() and not (work / "docs/media/u_ana").exists(), "reinicio borra todo"
-assert sum(1 for c in zcalls if c["method"] == "DELETE") == len(q2), "anula todo lo programado"
+assert sum(1 for c in zcalls if c["method"] == "DELETE" and c["path"] != "/posts/huerfano1") == len(q2), "anula todo lo programado"
 assert DONE[-1][1].get("reset")
 print("REINICIO: cola y archivos borrados, publicaciones anuladas ✓")
 srv.shutdown()
