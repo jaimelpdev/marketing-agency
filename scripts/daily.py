@@ -15,6 +15,7 @@ import base64
 import json
 import time
 import re
+import requests
 import os
 import random
 import shutil
@@ -577,6 +578,7 @@ def plan_user(browser, user, key, force=False, redo=None):
     init_js += f";window.__faceless={'true' if faceless else 'false'};"
 
     page = browser.new_page(viewport={"width": 480, "height": 900})
+    page.expose_function("__genImage", lambda prompt, seed=0: gen_image(prompt, seed, log))
     try:
         page.on("pageerror", lambda e: log("  Error en la página:", e))
         install_routes(page)
@@ -640,6 +642,10 @@ def plan_user(browser, user, key, force=False, redo=None):
         # 🎨 director de arte: cada frase de los vídeos faceless con una imagen concreta del mundo del negocio
         vids = page.evaluate("JSON.parse(JSON.stringify(S.today.videos))")
         for vi, vp in enumerate(vids):
+            if vp.get("layout") == "faceless" and TYPES_VIDEO(vp):
+                if brain.write_script(vp, user, key, lambda *a: log(*a)):
+                    page.evaluate("a=>{const p=S.today.videos[a[0]];p.beats=a[1];p.guion=a[1].map(b=>b.t);p.cierre_bio=a[2]||p.cierre_bio;}", [vi, vp["beats"], vp.get("cierre_bio", "")])
+                    log(f"    ✍️ Guion de «{vp.get('tema', '')}»: {len(vp['beats'])} frases, {sum(len(b['t'].split()) for b in vp['beats'])} palabras")
             if vp.get("layout") == "faceless" and len(vp.get("beats") or []) >= 2:
                 if brain.art_direct(vp, user, key, lambda *a: log(*a)):
                     page.evaluate("a=>{const p=S.today.videos[a[0]];p.beats=a[1];p.estilo_visual=a[2];}", [vi, vp["beats"], vp.get("estilo_visual", "")])
@@ -662,7 +668,7 @@ def plan_user(browser, user, key, force=False, redo=None):
             page.wait_for_function("typeof pendingA==='undefined' || pendingA.size===0", timeout=2_700_000, polling=2000)
         if total_img:
             got = total_img - page.evaluate(miss)
-            log(f"  🖼 Imágenes: {got}/{total_img} generadas" + ("" if got == total_img else " (el generador gratuito limita la velocidad; con POLLINATIONS_TOKEN no pasa)"))
+            log(f"  🖼 Imágenes: {got}/{total_img} generadas ({IMG_ENGINE['n']} con FLUX de calidad)" + ("" if got == total_img else " (el generador gratuito limita la velocidad)"))
         page.evaluate(RENDER_JS)
         pieces = page.evaluate("JSON.parse(JSON.stringify(S.today.videos))")
         out_root = DOCS / "media" / uid / today
@@ -910,6 +916,46 @@ def process_requests(browser, users, key):
         except Exception as e:
             log("  ⚠ No se pudo marcar la petición como hecha:", e)
     return errors
+
+
+IMG_ENGINE = {"ok": None, "n": 0}
+
+
+def gen_image(prompt, seed, log=print):
+    """Imagen de calidad (FLUX en Cloudflare Workers AI, gratis) a través del servidor de la agencia.
+    Devuelve una data URL, o "" si el servidor no la ofrece (entonces se usa el generador de reserva)."""
+    if IMG_ENGINE["ok"] is False:
+        return ""
+    base = os.environ.get("AGENCIA_API", "").strip().rstrip("/")
+    token = os.environ.get("AGENCIA_ADMIN_TOKEN", "").strip()
+    if not base or not token:
+        IMG_ENGINE["ok"] = False
+        return ""
+    for t in range(3):
+        try:
+            r = requests.post(base + "/admin/image", json={"prompt": str(prompt)[:1800], "seed": int(seed or 0) % 2147483647},
+                              timeout=120, headers={"authorization": "Bearer " + token})
+        except Exception:
+            time.sleep(5)
+            continue
+        if r.status_code == 200 and r.headers.get("content-type", "").startswith("image/"):
+            IMG_ENGINE["ok"] = True
+            IMG_ENGINE["n"] += 1
+            return "data:" + r.headers["content-type"].split(";")[0] + ";base64," + base64.b64encode(r.content).decode()
+        if r.status_code in (404, 501) or (r.status_code == 429 and IMG_ENGINE["ok"] is None):
+            IMG_ENGINE["ok"] = False
+            log("  ⚠ El servidor aún no genera imágenes de calidad (hay que desplegarlo: cd worker; npx wrangler deploy). Uso el generador gratuito de reserva, que se ve peor.")
+            return ""
+        if r.status_code == 429:  # cupo diario gratuito agotado
+            IMG_ENGINE["ok"] = False
+            log("  ⚠ Cupo diario de imágenes de calidad agotado; el resto con el generador de reserva.")
+            return ""
+        time.sleep(6 + 6 * t)
+    return ""
+
+
+def TYPES_VIDEO(p):
+    return p.get("tipo") in ("reel", "historia")
 
 
 def main():

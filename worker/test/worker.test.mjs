@@ -79,6 +79,17 @@ const cb = await worker.fetch(new Request(B + "/auth/instagram/callback?code=abc
 assert.equal(cb.status, 302); assert.ok(cb.headers.get("location").endsWith("#ig-ok"));
 r = await call("GET", "/api/me", { key }); assert.equal(r.j.ig.username, "academia_demo"); assert.ok(!JSON.stringify(r.j).includes("LONG"), "token IG no se expone");
 r = await call("GET", "/admin/users", { key }); assert.equal(r.s, 401, "una clave de usuario no es admin");
+{ // imágenes de calidad (Workers AI)
+  const h = { authorization: "Bearer admin123", "content-type": "application/json" };
+  let rr = await worker.fetch(new Request("https://w/admin/image", { method: "POST", headers: h, body: JSON.stringify({ prompt: "a" }) }), env, {});
+  assert.equal(rr.status, 501, "sin enlace AI avisa");
+  env.AI = { run: async (m, i) => { assert.ok(/flux/.test(m) && i.prompt === "un simulador"); return { image: btoa("\xff\xd8jpg") }; } };
+  rr = await worker.fetch(new Request("https://w/admin/image", { method: "POST", headers: h, body: JSON.stringify({ prompt: "un simulador", seed: 7 }) }), env, {});
+  assert.equal(rr.status, 200); assert.equal(rr.headers.get("content-type"), "image/jpeg");
+  rr = await worker.fetch(new Request("https://w/admin/image", { method: "POST", headers: { ...h, authorization: "Bearer x" }, body: "{}" }), env, {});
+  assert.equal(rr.status, 401);
+  delete env.AI;
+}
 r = await call("GET", "/admin/users", { key: "admin123" }); assert.equal(r.j.users[0].config.marca.name, "Academia Ana"); assert.ok(!JSON.stringify(r.j).includes("LONG"));
 const uid = r.j.users[0].id;
 r = await call("POST", "/admin/ig", { key: "admin123", body: { userId: uid, action: "container", params: { image_url: "https://x/1.jpg" } } }); assert.equal(r.j.id, "CONT1");

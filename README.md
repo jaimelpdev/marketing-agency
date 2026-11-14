@@ -201,3 +201,9 @@ cd worker && node test/worker.test.mjs   # servidor: cuentas, límites, Instagra
 cd .. && pip install -r requirements.txt && python -m playwright install chromium
 python tests/run_mock.py                 # recorrido completo simulado: plan → vídeo con voz → publicación
 ```
+
+
+## Guionista e imágenes de calidad (FLUX)
+
+- **Guionista**: cada reel e historia faceless pasa por una llamada dedicada (`brain.write_script`) que reescribe la narración como una explicación útil de una sola idea (8-11 frases, 75-115 palabras; historias 4-6 frases), sin cifras inventadas ni venta. Después el director de arte pone una imagen a cada frase.
+- **Imágenes**: el servidor (Cloudflare Worker) genera las imágenes con FLUX mediante Workers AI (`POST /admin/image`, gratis hasta 10.000 neuronas al día, de sobra para una semana de contenido). Hay que desplegar el worker una vez (`cd worker; npx wrangler deploy`) para activar el enlace `[ai]`. Si no está disponible, se usa el generador anónimo de reserva (peor calidad). Una clave `sk_…` de enter.pollinations.ai en `POLLINATIONS_TOKEN` también da FLUX.

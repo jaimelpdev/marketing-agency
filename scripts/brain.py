@@ -223,6 +223,57 @@ def public(mem):
     return {k: mem.get(k) for k in keep}
 
 
+def write_script(piece, user, key, log=print):
+    """Guionista: reescribe la narración de un vídeo faceless como una explicación útil y concreta,
+    frase a frase, con la duración que toca. Una llamada dedicada por vídeo da mucho mejor guion
+    que pedir toda la semana de golpe."""
+    story = piece.get("tipo") == "historia"
+    nmin, nmax, wmin, wmax = (4, 6, 38, 65) if story else (8, 11, 75, 115)
+    marca = ((user.get("config") or {}).get("marca") or {})
+    negocio = json.dumps({k: marca.get(k) for k in ("name", "about", "aud", "pillars", "tone") if marca.get(k)}, ensure_ascii=False)[:1500]
+    borrador = " ".join(str(b.get("t", "")) for b in (piece.get("beats") or [])) or " ".join(piece.get("guion") or [])
+    base = f"""Eres guionista de vídeos cortos faceless (voz en off sobre imágenes) que consiguen muchas visitas porque ENSEÑAN algo de verdad. Escribe la narración de este vídeo en el idioma del borrador.
+
+NEGOCIO: {negocio}
+TEMA: {piece.get('tema', '')}
+GANCHO PROPUESTO: {piece.get('gancho', '')}
+BORRADOR (mejóralo, no lo copies): {borrador[:900]}
+
+CÓMO TIENE QUE SER
+1. UNA sola idea por vídeo, explicada de principio a fin: gancho → por qué pasa → qué hacer exactamente (pasos concretos que el espectador puede aplicar hoy) → qué nota cuando lo hace bien → cierre.
+2. Entre {nmin} y {nmax} frases y entre {wmin} y {wmax} palabras en total. Cada frase de 6 a 14 palabras, una idea y UNA imagen posible por frase (algo que se pueda ver: una acción, un objeto, un lugar).
+3. Primera frase: gancho que atrapa en un segundo (error común, pregunta directa o "nadie te cuenta esto"). Sin saludar ni presentarte.
+4. Habla de tú, como un amigo que sabe del tema. Lenguaje llano; si usas un término técnico, lo explicas en la misma frase. Nada de frases vacías ("es muy importante", "marca la diferencia") ni relleno.
+5. Nada de vender: ni precios, ni ofertas, ni "apúntate". La última frase invita con naturalidad a seguir la cuenta para más consejos.
+6. NO inventes cifras, porcentajes, tiempos, estudios, testimonios ni nombres. Si no estás seguro de un número, explica la idea sin número ("un poco antes", "con menos fuerza").
+7. Sin emojis, hashtags, comillas ni @usuarios. Números pequeños con letra.
+8. "cierre_bio": frase alternativa de cierre que menciona con naturalidad el enlace del perfil.
+
+Responde SOLO con JSON: {{"frases":["…", …],"cierre_bio":"…"}}"""
+    extra = ""
+    for _ in range(2):
+        try:
+            j = groq_json(base + extra, key, log)
+        except Exception as e:
+            log(f"    ⚠ Guionista: {e}")
+            return False
+        fr = [re.sub(r"\s+", " ", str(x)).strip() for x in (j.get("frases") or []) if str(x).strip()]
+        words = sum(len(x.split()) for x in fr)
+        if nmin - 1 <= len(fr) <= nmax + 2 and words >= wmin - 8:
+            old = piece.get("beats") or []
+            bio = str(j.get("cierre_bio") or piece.get("cierre_bio") or "").strip()
+            if bio and old and piece.get("cierre_bio") and old[-1].get("t") == piece.get("cierre_bio"):
+                fr[-1] = bio  # a este vídeo le tocaba cerrar con el enlace del perfil
+            piece["beats"] = [{"t": x[:220], "img": ""} for x in fr[:14]]
+            piece["guion"] = [b["t"] for b in piece["beats"]]
+            if bio:
+                piece["cierre_bio"] = bio[:200]
+            return True
+        extra = f"\n\nTu respuesta anterior tenía {len(fr)} frases y {words} palabras: NO cumple. Escribe entre {nmin} y {nmax} frases y al menos {wmin} palabras."
+    log("    ⚠ Guionista: el guion salió demasiado corto; se mantiene el original")
+    return False
+
+
 def beats_of(piece):
     """Momentos de una pieza que no es faceless (gancho, escenas, cierre), para dirigir sus imágenes."""
     out = [{"t": piece.get("gancho", ""), "img": piece.get("visual", "")}]
@@ -250,7 +301,7 @@ FRASES (en orden):
 
 REGLAS
 1. "mundo": en INGLÉS, el escenario concreto y reconocible de este negocio que aparece en TODAS las imágenes, diciendo SIEMPRE en qué SALA o LUGAR está y con qué NO debe confundirse (por ejemplo, para simracing: "aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a big monitor showing a racing game, not a real car interior"; para una tienda de deporte: "sports store with football boots and jerseys on display"; para un hotel: "bright seaside boutique hotel in Mallorca"). Si la imagen pudiera parecer otra cosa genérica (un coche real, una tienda cualquiera), el "mundo" debe dejar claro la diferencia.
-2. Cada "img": en INGLÉS sencillo, máximo 22 palabras, empezando por el SUJETO principal, que se vea grande, nítido y de frente. Una sola idea por imagen. Debe mostrar literalmente la acción u objeto de la frase dentro del "mundo".
+2. Cada "img": en INGLÉS sencillo, máximo 28 palabras, describiendo qué se ve, desde dónde (plano) y qué está haciendo quién, empezando por el SUJETO principal, que se vea grande, nítido y de frente. Una sola idea por imagen. Debe mostrar literalmente la acción u objeto de la frase dentro del "mundo".
 2b. PROHIBIDO lo genérico: nada de "a car", "a sports car on a road", "a person smiling", "a city", paisajes ni planos de recurso que valdrían para cualquier vídeo. Cada imagen tiene que contener algo que SOLO tiene sentido con esa frase y con este negocio: la persona del vídeo haciendo esa acción concreta con el equipo o el producto del negocio, el objeto exacto del que se habla en primer plano, o la pantalla/el lugar exacto. Si una imagen podría ilustrar otra frase del vídeo, cámbiala.
 3. Si la frase es abstracta o técnica (datos, ajustes, una sensación, un consejo), tradúcela a algo fotografiable: un objeto o una pantalla con gráficos de colores sin texto legible, una mano haciendo la acción, una cara con la emoción, un antes/después visible. Nunca dejes conceptos sin cuerpo como "pressure" o "balance" sin un objeto que los muestre.
 4. Sin texto, letras, números ni logos en la imagen. Sin famosos. Las personas son anónimas y consistentes (misma persona en todo el vídeo).

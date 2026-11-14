@@ -1801,16 +1801,24 @@ async function loadPexelsPhoto(q){
   return await imgFrom(URL.createObjectURL(await ir.blob()));
 }
 async function loadAsset(it){
-  if(it.q.startsWith("ia:")) return await loadPollinations(it.q.slice(3));  // faceless: todo generado con IA
+  if(it.q.startsWith("ia:")) return (await loadFlux(it.q.slice(3)))||await loadPollinations(it.q.slice(3));  // faceless: todo generado con IA
   if(it.q.startsWith("foto:")){ const f=brandPhoto(it.q.slice(5)); if(f&&f.src) return await imgFrom(f.src); }
   const a=await loadPexelsPhoto(it.q).catch(()=>null); if(a) return a;
-  return await loadPollinations(it.q);
+  return (await loadFlux(it.q))||await loadPollinations(it.q);
+}
+// FLUX (Cloudflare Workers AI) a través del servidor de la agencia: mucha más calidad que el generador anónimo
+async function loadFlux(q){
+  if(typeof window.__genImage!=="function") return null;
+  try{ const d=await window.__genImage(q+", vertical portrait composition, main subject large and centered, photorealistic, sharp, no text, no letters, no watermark",hashStr(q)); if(!d) return null;
+    const im=new Image(); im.src=d; await im.decode(); return {kind:"image",el:im}; }catch(e){ return null; }
 }
 async function loadPollinations(q){
   const token=ls("ma_poll_token"); const gap=token?2500:18000;
   const wait=lastPoll+gap-Date.now(); if(wait>0) await sleep(wait);
   const prompt=q+", vertical photo, realistic, no text, no watermark";
-  const url="https://image.pollinations.ai/prompt/"+encodeURIComponent(prompt)+"?width=1080&height=1920&nologo=true&model=flux&seed="+hashStr(q)+(token?"&token="+encodeURIComponent(token):"");
+  const url=/^(sk|pk)_/.test(token)  // clave nueva de enter.pollinations.ai: API con FLUX de verdad
+    ?"https://gen.pollinations.ai/image/"+encodeURIComponent(prompt)+"?width=1080&height=1920&nologo=true&model=flux&seed="+hashStr(q)+"&key="+encodeURIComponent(token)
+    :"https://image.pollinations.ai/prompt/"+encodeURIComponent(prompt)+"?width=1080&height=1920&nologo=true&model=flux&seed="+hashStr(q)+(token?"&token="+encodeURIComponent(token):"");
   const MAXT=window.__AGENCIA_SERVER?6:3;
   for(let tries=0;tries<MAXT;tries++){
     lastPoll=Date.now();

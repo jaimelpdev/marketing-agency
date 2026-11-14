@@ -12,6 +12,10 @@ crons = ["23 4 * * *"]
 binding = "KV"
 id = "PEGA_AQUI_EL_ID_DEL_KV"
 
+# Generador de imágenes de calidad (FLUX, gratis hasta 10.000 neuronas al día ≈ 100 imágenes)
+[ai]
+binding = "AI"
+
 [vars]
 # Dirección de tu app en GitHub Pages (a donde vuelve el usuario tras conectar Instagram)
 APP_URL = "https://jaimelpdev.github.io/marketing-agency/"

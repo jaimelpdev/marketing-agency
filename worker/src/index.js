@@ -518,6 +518,24 @@ async function handle(req, env) {
   if (p.startsWith("/admin/")) {
     if (!env.ADMIN_TOKEN || !timingSafeEqual(bearer(req), env.ADMIN_TOKEN)) return err(401, "unauthorized", "Admin no autorizado.");
 
+    // Imagen de calidad con FLUX (Workers AI, gratis hasta el cupo diario). La usa la agencia al crear el contenido.
+    if (p === "/admin/image" && method === "POST") {
+      if (!env.AI) return err(501, "no_ai", "Falta el enlace [ai] en wrangler.toml.");
+      const b = await req.json().catch(() => ({}));
+      const prompt = String(b.prompt || "").slice(0, 2000);
+      if (!prompt) return err(400, "bad_request", "Falta el prompt.");
+      try {
+        const out = await env.AI.run("@cf/black-forest-labs/flux-1-schnell", { prompt, steps: 8, seed: Number(b.seed) || 1 });
+        const b64 = out && out.image;
+        if (!b64) return err(502, "no_image", "El generador no devolvió imagen.");
+        const bin = Uint8Array.from(atob(b64), c => c.charCodeAt(0));
+        return new Response(bin, { headers: { "content-type": bin[0] === 0x89 ? "image/png" : "image/jpeg", "cache-control": "no-store" } });
+      } catch (e) {
+        const m = String(e && e.message || e);
+        return err(/neuron|limit|quota|429|4006/i.test(m) ? 429 : 502, "ai_error", m.slice(0, 200));
+      }
+    }
+
     if (p === "/admin/users" && method === "GET") {
       const out = [];
       for (const id of await listUserIds(env)) {
