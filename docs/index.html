@@ -1745,7 +1745,7 @@ function brandPhoto(id){return (window.__brandPhotos||[]).find(f=>f.id===id)||nu
 function sceneQ(e){return (e.foto&&brandPhoto(e.foto))?"foto:"+e.foto:(e.visual||(e.titulo+" "+e.texto));}
 function pieceQ(p){return (p.foto&&brandPhoto(p.foto))?"foto:"+p.foto:(p.visual||p.gancho);}
 function wantsPhotos(p){const m=effBM(p);return m==="ai"||m==="stock"||(S.cfg.v.fotos!==false&&m!=="media");}
-function flStyle(p){const st=String(p.estilo_visual||"cinematic film still, natural light").replace(/,?\s*(shallow depth of field|bokeh|blurr?y?|motion blur|dark|moody)/gi,"");return ", "+st+", sharp focus, subject clearly visible and centered, well lit, high detail";}
+function flStyle(p){const st=String(p.estilo_visual||"cinematic film still, natural light").replace(/,?\s*(shallow depth of field|bokeh|blurr?y?|motion blur|dark|moody)/gi,"");return ", "+st+", sharp focus, well lit, high detail";}
 function flPrompts(p){ const st=flStyle(p);
   if(p.beats&&p.beats.length>=3){ const b=p.beats.map(x=>(x.img||x.t)+st); return {beats:b,hook:[b[0]],tips:b.slice(1,-1).map(x=>[x]),cta:[b[b.length-1]]}; }
   const esc=p.tipo==="historia"?p.escenas.slice(0,2):p.escenas;
@@ -1805,8 +1805,8 @@ async function loadAsset(it){
 async function loadPollinations(q){
   const token=ls("ma_poll_token"); const gap=token?2500:18000;
   const wait=lastPoll+gap-Date.now(); if(wait>0) await sleep(wait);
-  const prompt=q+", vertical photo, cinematic lighting, vibrant, high detail, no text, no watermark";
-  const url="https://image.pollinations.ai/prompt/"+encodeURIComponent(prompt)+"?width=1080&height=1920&nologo=true&seed="+hashStr(q)+(token?"&token="+encodeURIComponent(token):"");
+  const prompt=q+", vertical photo, realistic, no text, no watermark";
+  const url="https://image.pollinations.ai/prompt/"+encodeURIComponent(prompt)+"?width=1080&height=1920&nologo=true&model=flux&seed="+hashStr(q)+(token?"&token="+encodeURIComponent(token):"");
   const MAXT=window.__AGENCIA_SERVER?6:3;
   for(let tries=0;tries<MAXT;tries++){
     lastPoll=Date.now();

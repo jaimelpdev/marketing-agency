@@ -221,3 +221,45 @@ def public(mem):
     keep = ("semana", "fase", "objetivo_mes", "arco_semana", "mezcla", "series", "aprendizajes", "que_evitar",
             "promesas_pendientes", "ideas", "tono_comunidad", "hitos", "resumen_para_dueño", "actualizada")
     return {k: mem.get(k) for k in keep}
+
+
+def art_direct(piece, user, key, log=print):
+    """Director de arte: convierte cada frase hablada de un vídeo faceless en una imagen concreta,
+    fotografiable y anclada al mundo del negocio, para que lo que se ve sea lo que se dice."""
+    beats = piece.get("beats") or []
+    if len(beats) < 3:
+        return False
+    marca = ((user.get("config") or {}).get("marca") or {})
+    negocio = json.dumps({k: marca.get(k) for k in ("name", "about", "aud", "pillars") if marca.get(k)}, ensure_ascii=False)[:1200]
+    frases = "\n".join(f"{i + 1}. {b.get('t', '')}" for i, b in enumerate(beats))
+    prompt = f"""Eres director de arte de vídeos cortos faceless (todo con imágenes generadas por IA). Para cada frase hablada eliges UNA imagen que la ilustre de forma que cualquiera entienda la relación al instante.
+
+NEGOCIO: {negocio}
+TEMA DEL VÍDEO: {piece.get('tema', '')}
+
+FRASES (en orden):
+{frases}
+
+REGLAS
+1. "mundo": en INGLÉS, el escenario concreto y reconocible de este negocio que aparece en TODAS las imágenes (por ejemplo, para simracing: "home sim racing cockpit with racing seat, steering wheel, pedals and a large monitor showing a racing game"; para una tienda de deporte: "sports store with football boots and jerseys on display"; para un hotel: "bright seaside boutique hotel in Mallorca").
+2. Cada "img": en INGLÉS sencillo, máximo 22 palabras, empezando por el SUJETO principal, que se vea grande, nítido y de frente. Una sola idea por imagen. Debe mostrar literalmente la acción u objeto de la frase dentro del "mundo".
+3. Si la frase es abstracta o técnica (datos, ajustes, una sensación, un consejo), tradúcela a algo fotografiable: un objeto o una pantalla con gráficos de colores sin texto legible, una mano haciendo la acción, una cara con la emoción, un antes/después visible. Nunca dejes conceptos sin cuerpo como "pressure" o "balance" sin un objeto que los muestre.
+4. Sin texto, letras, números ni logos en la imagen. Sin famosos. Las personas son anónimas y consistentes (misma persona en todo el vídeo).
+5. "estilo": en INGLÉS, la misma fotografía para todo el vídeo: luz brillante y nítida, colores vivos, nada de desenfoques ni oscuridad.
+
+Responde SOLO con JSON: {{"mundo":"…","estilo":"…","imgs":["…", …]}} con exactamente {len(beats)} elementos en "imgs"."""
+    try:
+        j = groq_json(prompt, key, log)
+    except Exception as e:
+        log(f"    ⚠ Director de arte: {e}")
+        return False
+    imgs = [str(x).strip() for x in (j.get("imgs") or []) if str(x).strip()]
+    if len(imgs) < len(beats):
+        log(f"    ⚠ Director de arte: devolvió {len(imgs)} de {len(beats)} imágenes; se mantienen las originales")
+        return False
+    mundo = str(j.get("mundo") or "").strip()[:240]
+    for b, im in zip(beats, imgs):
+        b["img"] = (im + (", setting: " + mundo if mundo else ""))[:420]
+    if j.get("estilo"):
+        piece["estilo_visual"] = str(j["estilo"])[:200]
+    return True
