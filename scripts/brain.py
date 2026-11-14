@@ -223,10 +223,18 @@ def public(mem):
     return {k: mem.get(k) for k in keep}
 
 
-def art_direct(piece, user, key, log=print):
+def beats_of(piece):
+    """Momentos de una pieza que no es faceless (gancho, escenas, cierre), para dirigir sus imágenes."""
+    out = [{"t": piece.get("gancho", ""), "img": piece.get("visual", "")}]
+    for e in piece.get("escenas") or []:
+        out.append({"t": f"{e.get('titulo', '')}. {e.get('texto', '')}".strip(". "), "img": e.get("visual", "")})
+    return [b for b in out if b["t"]]
+
+
+def art_direct(piece, user, key, log=print, beats=None):
     """Director de arte: convierte cada frase hablada de un vídeo faceless en una imagen concreta,
     fotografiable y anclada al mundo del negocio, para que lo que se ve sea lo que se dice."""
-    beats = piece.get("beats") or []
+    beats = beats if beats is not None else (piece.get("beats") or [])
     if len(beats) < 2:
         return False
     marca = ((user.get("config") or {}).get("marca") or {})
@@ -243,6 +251,7 @@ FRASES (en orden):
 REGLAS
 1. "mundo": en INGLÉS, el escenario concreto y reconocible de este negocio que aparece en TODAS las imágenes (por ejemplo, para simracing: "home sim racing cockpit with racing seat, steering wheel, pedals and a large monitor showing a racing game"; para una tienda de deporte: "sports store with football boots and jerseys on display"; para un hotel: "bright seaside boutique hotel in Mallorca").
 2. Cada "img": en INGLÉS sencillo, máximo 22 palabras, empezando por el SUJETO principal, que se vea grande, nítido y de frente. Una sola idea por imagen. Debe mostrar literalmente la acción u objeto de la frase dentro del "mundo".
+2b. PROHIBIDO lo genérico: nada de "a car", "a sports car on a road", "a person smiling", "a city", paisajes ni planos de recurso que valdrían para cualquier vídeo. Cada imagen tiene que contener algo que SOLO tiene sentido con esa frase y con este negocio: la persona del vídeo haciendo esa acción concreta con el equipo o el producto del negocio, el objeto exacto del que se habla en primer plano, o la pantalla/el lugar exacto. Si una imagen podría ilustrar otra frase del vídeo, cámbiala.
 3. Si la frase es abstracta o técnica (datos, ajustes, una sensación, un consejo), tradúcela a algo fotografiable: un objeto o una pantalla con gráficos de colores sin texto legible, una mano haciendo la acción, una cara con la emoción, un antes/después visible. Nunca dejes conceptos sin cuerpo como "pressure" o "balance" sin un objeto que los muestre.
 4. Sin texto, letras, números ni logos en la imagen. Sin famosos. Las personas son anónimas y consistentes (misma persona en todo el vídeo).
 5. "estilo": en INGLÉS, la misma fotografía para todo el vídeo: luz brillante y nítida, colores vivos, nada de desenfoques ni oscuridad.
@@ -259,7 +268,7 @@ Responde SOLO con JSON: {{"mundo":"…","estilo":"…","imgs":["…", …]}} con
         return False
     mundo = str(j.get("mundo") or "").strip()[:240]
     for b, im in zip(beats, imgs):
-        b["img"] = (im + (", setting: " + mundo if mundo else ""))[:420]
+        b["img"] = ((mundo + ". " if mundo else "") + im)[:420]  # el mundo del negocio primero: es lo que más pesa en la imagen
     if j.get("estilo"):
         piece["estilo_visual"] = str(j["estilo"])[:200]
     return True

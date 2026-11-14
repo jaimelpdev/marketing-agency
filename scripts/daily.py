@@ -644,6 +644,11 @@ def plan_user(browser, user, key, force=False, redo=None):
                 if brain.art_direct(vp, user, key, lambda *a: log(*a)):
                     page.evaluate("a=>{const p=S.today.videos[a[0]];p.beats=a[1];p.estilo_visual=a[2];}", [vi, vp["beats"], vp.get("estilo_visual", "")])
                     log(f"    🎨 Imágenes dirigidas para «{vp.get('tema', '')}»: {vp['beats'][-1]['img'][:90]}…")
+            elif vp.get("tipo") in ("post", "carrusel"):  # también las imágenes de carruseles y posts
+                bs = brain.beats_of(vp)
+                if len(bs) >= 2 and brain.art_direct(vp, user, key, lambda *a: log(*a), beats=bs):
+                    page.evaluate("""a=>{const p=S.today.videos[a[0]];const b=a[1];p.visual=b[0].img;(p.escenas||[]).forEach((e,i)=>{if(b[i+1])e.visual=b[i+1].img;});}""", [vi, bs])
+                    log(f"    🎨 Imágenes dirigidas para «{vp.get('tema', '')}»: {bs[0]['img'][:90]}…")
         log(f"  {n} piezas. Generando imágenes…")
         page.evaluate("prefetchAll()")
         page.wait_for_function("typeof pendingA==='undefined' || pendingA.size===0", timeout=2_700_000, polling=2000)

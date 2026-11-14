@@ -128,7 +128,7 @@ Guarda tu **clave de acceso** (en Cuenta) para entrar desde otro dispositivo.
 El estilo que más visitas da en vídeo corto sin cara: **imágenes generadas con IA a pantalla completa** (9:16) que cambian cada 2-3 segundos con movimiento suave de cámara, **voz narrando** de principio a fin con música baja de fondo, y **subtítulos grandes en el centro** palabra a palabra, con la palabra que se dice resaltada y contorno fuerte. Sin títulos, pegatinas, gráficos ni marcos.
 - **Guion:** narración continua de 25-45 s en segunda persona, con tono de quien quiere enseñar. Gancho en el primer segundo y medio, 90% de valor real del nicho y cierre invitando a seguir la cuenta. Solo 1 de cada 4 vídeos menciona el enlace del perfil, y de forma natural. Se mantiene la regla anti-inventos.
 - **Imagen = lo que se dice:** la narración se trocea en frases y cada una lleva su propia imagen, que muestra literalmente lo que dice esa frase, con un estilo visual común (plano, luz, paleta) y las mismas personas, objetos y lugar en todo el vídeo. Sirve para cualquier negocio: una academia, una tienda o un hotel.
-- Se usa en 3 de cada 4 reels e historias; carruseles y posts siguen igual. Se cambia en **Ajustes → Estilo de vídeo: Faceless (recomendado) / Clásico**.
+- Se usa en todos los reels e historias; carruseles y posts siguen con su diseño, pero sus imágenes también pasan por el director de arte. Se cambia en **Ajustes → Estilo de vídeo: Faceless (recomendado) / Clásico**.
 - Con `POLLINATIONS_TOKEN` las imágenes se generan mucho más rápido (sin él, unos 15 s por imagen).
 
 ## 📷 Fotos reales y diseño «cine»

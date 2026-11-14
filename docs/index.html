@@ -447,7 +447,7 @@ https://apps.apple.com/…
       <div class="og"><div class="t">Máximo por día</div><div class="chips" id="acDay"></div></div>
       <div class="og"><div class="t">Formatos que puede usar</div><div class="chips" id="acFmt"></div></div>
       <div class="og"><div class="t">⏸ No publicar antes de</div><div style="display:flex;gap:8px;align-items:center"><input type="datetime-local" id="acFloor" style="flex:1"><button class="chip sm" id="acFloorClr">Quitar</button></div><div class="note" id="acFloorNote">La agencia sigue creando contenido, pero nada se publica antes de esta fecha.</div></div>
-      <div class="og"><div class="t">Estilo de vídeo</div><div class="chips" id="acEstilo"></div><div class="note">Faceless: imágenes de IA a pantalla completa que cambian cada 2-3 segundos, voz narrando y subtítulos grandes. Se usa en 3 de cada 4 reels e historias.</div></div>
+      <div class="og"><div class="t">Estilo de vídeo</div><div class="chips" id="acEstilo"></div><div class="note">Faceless: imágenes de IA a pantalla completa que cambian cada 2-3 segundos, voz narrando y subtítulos grandes. Se usa en todos los reels e historias.</div></div>
       <div class="og"><div class="t">Sonido de los vídeos</div><div class="chips" id="acAudio"></div></div>
       <div class="og"><div class="t">Voz</div><div class="chips" id="acVoz"></div><div class="note">✨ = voces multilingües, las más expresivas (pueden tener un ligero acento).</div></div>
       <div class="note">La agencia elige qué días publicar dentro de estos límites y descansa cuando conviene.</div>
@@ -826,7 +826,7 @@ function diversify(vids){
   if(typeof wantsPhotos==="function"&&S.cfg.v.fotos!==false)vids.forEach((p,i)=>{if(i%3!==2)p.layout="cine";});
   // MODO FACELESS: estilo principal de reels e historias (3 de cada 4), salvo que el dueño elija "clásico"
   if(window.__faceless!==false){const hv=(S.hist&&S.hist.items||[]).filter(h=>h.tipo==="reel"||h.tipo==="historia").length;let k=0;
-    vids.forEach(p=>{if(!(TYPES[p.tipo]&&TYPES[p.tipo].video))return;if((hv+k)%4!==3)p.layout="faceless";else if(p.layout==="faceless")p.layout="clasico";k++;});
+    vids.forEach(p=>{if(!(TYPES[p.tipo]&&TYPES[p.tipo].video))return;p.layout="faceless";k++;});
     const fl=vids.filter(p=>p.layout==="faceless"),hf=(S.hist&&S.hist.items||[]).filter(h=>h.layout==="faceless").length;
     fl.forEach((p,i)=>{const bio=(hf+i)%4===0&&p.cierre_bio;
       if(p.beats&&p.beats.length>=2){if(bio)p.beats[p.beats.length-1]={...p.beats[p.beats.length-1],t:p.cierre_bio};p.guion=p.beats.map(b=>b.t);return;}
