@@ -1749,7 +1749,7 @@ function brandPhoto(id){return (window.__brandPhotos||[]).find(f=>f.id===id)||nu
 function sceneQ(e){return (e.foto&&brandPhoto(e.foto))?"foto:"+e.foto:(e.visual||(e.titulo+" "+e.texto));}
 function pieceQ(p){return (p.foto&&brandPhoto(p.foto))?"foto:"+p.foto:(p.visual||p.gancho);}
 function wantsPhotos(p){const m=effBM(p);return m==="ai"||m==="stock"||(S.cfg.v.fotos!==false&&m!=="media");}
-function flStyle(p){const st=String(p.estilo_visual||"cinematic film still, natural light").replace(/,?\s*(shallow depth of field|bokeh|blurr?y?|motion blur|dark|moody)/gi,"");return ", "+st+", sharp focus, well lit, high detail";}
+function flStyle(p){const st=String(p.estilo_visual||"cinematic film still, natural light").replace(/,?\s*(shallow depth of field|bokeh|blurr?y?|motion blur|dark|moody)/gi,"");return ", "+st+", bright daylight, sharp focus, well lit, high detail";}
 function flPrompts(p){ const st=flStyle(p);
   if(p.beats&&p.beats.length>=2){ const b=p.beats.map(x=>(x.img||x.t)+st); return {beats:b,hook:[b[0]],tips:b.slice(1,-1).map(x=>[x]),cta:[b[b.length-1]]}; }
   const esc=p.tipo==="historia"?p.escenas.slice(0,2):p.escenas;
