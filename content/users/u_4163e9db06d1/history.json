@@ -216,7 +216,7 @@
       "date": "2026-11-12",
       "tipo": "reel",
       "src": "red",
-      "tema": "[IG · ❤️74] En iRacing, un prototipo más rápido no te obliga a abandonar tu trazada. Practica esta regla durante cinco vueltas y conserva el control en "
+      "tema": "[IG · ❤️75] En iRacing, un prototipo más rápido no te obliga a abandonar tu trazada. Practica esta regla durante cinco vueltas y conserva el control en "
     },
     {
       "date": "2026-11-13",
@@ -304,7 +304,7 @@
       "date": "2026-11-14",
       "tipo": "post",
       "src": "red",
-      "tema": "[IG · ❤️1] 🚦 La zona de frenado que más te cuesta puede robarte décimas. Descubre cómo identificarla y ajustarla. ¿Cuál es tu mayor desafío?"
+      "tema": "[IG · ❤️2] 🚦 La zona de frenado que más te cuesta puede robarte décimas. Descubre cómo identificarla y ajustarla. ¿Cuál es tu mayor desafío?"
     },
     {
       "date": "2026-11-15",
@@ -337,6 +337,17 @@
       "look": 119,
       "serie": "Setup del seguidor",
       "objetivo": ""
+    },
+    {
+      "date": "2026-11-15",
+      "tema": "pregunta sobre telemetría",
+      "formato": "historia",
+      "tipo": "historia",
+      "layout": "faceless",
+      "plantilla": 590,
+      "look": 186,
+      "serie": "",
+      "objetivo": "comunidad"
     },
     {
       "date": "2026-11-16",
@@ -570,14 +581,58 @@
       "objetivo": ""
     },
     {
-      "date": "2026-11-15",
-      "tema": "pregunta sobre telemetría",
-      "formato": "historia",
-      "tipo": "historia",
+      "date": "2026-11-14",
+      "tema": "Dato curioso: Telemetría de suspensión",
+      "formato": "reel",
+      "tipo": "reel",
       "layout": "faceless",
-      "plantilla": 590,
+      "plantilla": 2225,
       "look": 186,
       "serie": "",
+      "objetivo": "alcance"
+    },
+    {
+      "date": "2026-11-16",
+      "tema": "Error de la semana: Desbalance de presión de neumáticos",
+      "formato": "reel",
+      "tipo": "reel",
+      "layout": "faceless",
+      "plantilla": 775,
+      "look": 119,
+      "serie": "Error de la semana",
+      "objetivo": "confianza"
+    },
+    {
+      "date": "2026-11-17",
+      "tema": "3 ajustes críticos de suspensión para mejorar tu lap",
+      "formato": "post",
+      "tipo": "post",
+      "layout": "tarjeta",
+      "plantilla": 1793,
+      "look": 229,
+      "serie": "",
+      "objetivo": ""
+    },
+    {
+      "date": "2026-11-18",
+      "tema": "Mito: Suspensión más dura siempre mejora la velocidad",
+      "formato": "carrusel",
+      "tipo": "carrusel",
+      "layout": "cine",
+      "plantilla": 1718,
+      "look": 83,
+      "serie": "",
+      "objetivo": ""
+    },
+    {
+      "date": "2026-11-19",
+      "tema": "Setup del seguidor: análisis de suspensión",
+      "formato": "reel",
+      "tipo": "reel",
+      "layout": "faceless",
+      "plantilla": 2257,
+      "look": 193,
+      "serie": "Setup del seguidor",
       "objetivo": "comunidad"
     }
   ]

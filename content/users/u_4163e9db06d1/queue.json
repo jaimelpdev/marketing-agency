@@ -67,19 +67,86 @@
     "zernioPostId": "6af3bcaeab419287a3961457"
   },
   {
-    "id": "2026-11-14-01-historia",
+    "id": "2026-11-14-01-reel",
     "date": "2026-11-14",
     "source": "auto",
-    "tipo": "historia",
-    "tema": "pregunta sobre telemetría",
-    "publishAt": "2026-11-15T09:00:00+01:00",
-    "caption": "",
+    "tipo": "reel",
+    "tema": "Dato curioso: Telemetría de suspensión",
+    "publishAt": "2026-11-14T21:59:37.883130+01:00",
+    "caption": "¿Sabes que la suspensión registra 200kHz? 🚀 Un ajuste de 1mm puede ganar 0.2s por vuelta. Guarda y comparte si te sorprendió. 👉 Link en bio\n\n#telemetría #suspensión #simracing #lapriq #datos\n\n🎵 «Spencer Newton - Bounce (Original Mix)(Electro House)» de Spencer Newton (CC BY 3.0)",
     "media": [
-      "media/u_4163e9db06d1/2026-11-14/2026-11-14-01-historia/video.mp4"
+      "media/u_4163e9db06d1/2026-11-14/2026-11-14-01-reel/video.mp4"
     ],
     "status": "scheduled",
     "attempts": 0,
-    "cover": "media/u_4163e9db06d1/2026-11-14/2026-11-14-01-historia/cover.jpg",
-    "zernioPostId": "6af890e46b2a87dbdf664da8"
+    "cover": "media/u_4163e9db06d1/2026-11-14/2026-11-14-01-reel/cover.jpg",
+    "zernioPostId": "6af8c9621f34eda6cbe61183"
+  },
+  {
+    "id": "2026-11-14-02-reel",
+    "date": "2026-11-14",
+    "source": "auto",
+    "tipo": "reel",
+    "tema": "Error de la semana: Desbalance de presión de neumáticos",
+    "publishAt": "2026-11-16T20:00:00+01:00",
+    "caption": "El desbalance de presión de neumáticos puede costarte 0.5s por vuelta. Recalibra a 1 bar y gana tiempo. Comenta 'PRESIÓN' si te pasó. 👉 Link en bio\n\n#errores #presión #simracing #lapriq\n\n🎵 «8.» de Ivan Tregub (BER) (CC BY 3.0)",
+    "media": [
+      "media/u_4163e9db06d1/2026-11-14/2026-11-14-02-reel/video.mp4"
+    ],
+    "status": "scheduled",
+    "attempts": 0,
+    "cover": "media/u_4163e9db06d1/2026-11-14/2026-11-14-02-reel/cover.jpg",
+    "zernioPostId": "6af8c96676757d70136b6414"
+  },
+  {
+    "id": "2026-11-14-03-post",
+    "date": "2026-11-14",
+    "source": "auto",
+    "tipo": "post",
+    "tema": "3 ajustes críticos de suspensión para mejorar tu lap",
+    "publishAt": "2026-11-17T13:30:00+01:00",
+    "caption": "3 ajustes críticos de suspensión para mejorar tu lap: 1) Camber +0.5° 2) Damping rate 1.2x 3) Anti‑roll bar 20% más rígido. Comenta tu ajuste favorito. 👉 Link en bio\n\n#suspensión #ajustes #simracing #lapriq",
+    "media": [
+      "media/u_4163e9db06d1/2026-11-14/2026-11-14-03-post/01.jpg"
+    ],
+    "status": "scheduled",
+    "attempts": 0,
+    "zernioPostId": "6af8c9691f34eda6cbe61191"
+  },
+  {
+    "id": "2026-11-14-04-carrusel",
+    "date": "2026-11-14",
+    "source": "auto",
+    "tipo": "carrusel",
+    "tema": "Mito: Suspensión más dura siempre mejora la velocidad",
+    "publishAt": "2026-11-18T14:00:00+01:00",
+    "caption": "Mito o realidad: ¿Más rigidez siempre mejora la velocidad? Desliza y descubre la verdad. 👉 Link en bio\n\n#mitos #suspensión #simracing #lapriq",
+    "media": [
+      "media/u_4163e9db06d1/2026-11-14/2026-11-14-04-carrusel/01.jpg",
+      "media/u_4163e9db06d1/2026-11-14/2026-11-14-04-carrusel/02.jpg",
+      "media/u_4163e9db06d1/2026-11-14/2026-11-14-04-carrusel/03.jpg",
+      "media/u_4163e9db06d1/2026-11-14/2026-11-14-04-carrusel/04.jpg",
+      "media/u_4163e9db06d1/2026-11-14/2026-11-14-04-carrusel/05.jpg",
+      "media/u_4163e9db06d1/2026-11-14/2026-11-14-04-carrusel/06.jpg"
+    ],
+    "status": "scheduled",
+    "attempts": 0,
+    "zernioPostId": "6af8c97125c13ed5b4917f60"
+  },
+  {
+    "id": "2026-11-14-05-reel",
+    "date": "2026-11-14",
+    "source": "auto",
+    "tipo": "reel",
+    "tema": "Setup del seguidor: análisis de suspensión",
+    "publishAt": "2026-11-19T20:30:00+01:00",
+    "caption": "¿Tienes un setup de suspensión? Mándame tu configuración por DM y lo analizamos en tiempo real. 👉 Link en bio\n\n#setup #suspensión #simracing #lapriq\n\n🎵 «Super Power Pop Rock» de Kara Square (CC BY 3.0)",
+    "media": [
+      "media/u_4163e9db06d1/2026-11-14/2026-11-14-05-reel/video.mp4"
+    ],
+    "status": "scheduled",
+    "attempts": 0,
+    "cover": "media/u_4163e9db06d1/2026-11-14/2026-11-14-05-reel/cover.jpg",
+    "zernioPostId": "6af8c97925c13ed5b4917f93"
   }
 ]

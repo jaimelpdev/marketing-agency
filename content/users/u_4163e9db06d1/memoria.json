@@ -1,8 +1,8 @@
 {
  "version": 1,
  "creada": "2026-11-10T21:43:01",
- "actualizada": "2026-11-14T16:36:02",
- "semana": 8,
+ "actualizada": "2026-11-14T19:25:22",
+ "semana": 9,
  "fase": "confianza",
  "objetivo_mes": "Aumentar el alcance y posicionar a LAPRIQ como referencia de tips técnicos y coaching en sim‑racing",
  "arco_semana": {
@@ -21,14 +21,14 @@
    "formato": "reel",
    "cuando": "lunes",
    "descripcion": "Se muestra un error típico de telemetría y cómo corregirlo",
-   "episodios": 13
+   "episodios": 14
   },
   {
    "nombre": "Setup del seguidor",
    "formato": "reel",
    "cuando": "jueves",
    "descripcion": "Analizamos el setup enviado por un seguidor y lo mejoramos en tiempo real",
-   "episodios": 13
+   "episodios": 14
   },
   {
    "nombre": "Mito o realidad",
@@ -81,8 +81,8 @@
  "metricas": {
   "publicaciones_medidas": 25,
   "media_por_formato": {
-   "post": 1.0,
-   "reel": 48.4,
+   "post": 2.0,
+   "reel": 48.5,
    "carrusel": 4.0
   },
   "mejores": [
@@ -121,8 +121,8 @@
    {
     "tipo": "reel",
     "date": "2026-11-12",
-    "eng": 74,
-    "likes": 74,
+    "eng": 75,
+    "likes": 75,
     "com": 0,
     "tema": "En iRacing, un prototipo más rápido no te obliga a abandonar tu trazada. Practica esta regla durante cinco vue"
    }
@@ -147,12 +147,12 @@
    {
     "tipo": "post",
     "date": "2026-11-14",
-    "eng": 1,
-    "likes": 1,
+    "eng": 2,
+    "likes": 2,
     "com": 0,
     "tema": "🚦 La zona de frenado que más te cuesta puede robarte décimas. Descubre cómo identificarla y ajustarla. ¿Cuál e"
    }
   ]
  },
- "resumen_para_dueño": "Esta semana reforzamos la fase de confianza con contenidos técnicos de telemetría y gestión de boxes, cumplimos las dos promesas pendientes y lanzamos la estructura del reto mensual para fomentar la participación y acercarnos a los hitos de beta y 10k seguidores."
+ "resumen_para_dueño": "Esta semana reforzamos la fase de confianza con contenido técnico de telemetría y gestión de boxes, cumplimos las dos promesas pendientes y lanzamos la estructura del reto mensual para impulsar la participación y acercarnos a los hitos de beta y 10k seguidores."
 }

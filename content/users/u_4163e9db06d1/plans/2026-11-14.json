@@ -1,88 +1,635 @@
 {
   "date": "2026-11-14",
-  "estrategia": "Publicamos 3 piezas feed (2 reels, 1 carrusel) y 2 historias a lo largo de la semana, descansando los sábados y lunes. Los reels generan alcance y comunidad, el carrusel refuerza confianza, y las historias fomentan interacción y tráfico.",
+  "estrategia": "Publicaremos 5 piezas de feed durante la semana: un reel de dato curioso el sábado, el Error de la semana el lunes, un post de lista el martes, un carrusel mito o realidad el miércoles y el Setup del seguidor el jueves. Descansaremos el domingo y el viernes de feed para dar espacio a la comunidad. El calendario aprovecha la campaña de telemetría en tiempo real, introduce nuevos temas (suspensión y presión de neumáticos) y mantiene la mezcla de alcance, confianza y comunidad.",
   "piezas": [
     {
-      "id": "pmwgmpdnf_0",
-      "dia": 1,
-      "hora": "09:00",
-      "tipo": "historia",
-      "objetivo": "comunidad",
-      "razon": "generar interacción",
-      "tema": "pregunta sobre telemetría",
-      "formato": "historia",
-      "gancho": "¿Qué parte de la telemetría te resulta más confusa?",
-      "visual": "close-up of a telemetry screen with a question mark overlay",
+      "id": "pmwgssga7_0",
+      "dia": 0,
+      "hora": "19:30",
+      "tipo": "reel",
+      "objetivo": "alcance",
+      "razon": "Atraer nuevos seguidores con dato inesperado",
+      "tema": "Dato curioso: Telemetría de suspensión",
+      "formato": "reel",
+      "gancho": "¿Sabes que la suspensión registra 200kHz?",
+      "visual": "close-up of telemetry screen",
       "escenas": [
         {
-          "titulo": "Pregunta",
-          "texto": "Mándame tu duda",
+          "titulo": "Suspensión",
+          "texto": "La suspensión registra 200kHz de datos",
           "emoji": "",
-          "visual": "close-up of telemetry screen",
+          "visual": "high‑speed telemetry readout",
           "visuales": [
-            "📈",
-            "⚡"
+            "close‑up of telemetry screen",
+            "close‑up of car suspension"
+          ],
+          "foto": "",
+          "grafico": {
+            "tipo": "comparacion",
+            "mal": "1mm",
+            "bien": "0.2s"
+          }
+        },
+        {
+          "titulo": "Datos",
+          "texto": "El cambio de camber se mide en milímetros",
+          "emoji": "",
+          "visual": "graph of camber vs time",
+          "visuales": [
+            "graph of camber changes",
+            "close‑up of telemetry screen"
           ],
           "foto": "",
           "grafico": {
             "tipo": "checklist",
             "items": [
-              "Duda",
-              "Respuesta"
+              "camber",
+              "roll",
+              "pitch"
             ]
+          }
+        },
+        {
+          "titulo": "Impacto",
+          "texto": "Un ajuste de 1mm puede ganar 0.2s por vuelta",
+          "emoji": "",
+          "visual": "car racing on track",
+          "visuales": [
+            "car on track",
+            "time-lapse of lap"
+          ],
+          "foto": "",
+          "grafico": {
+            "tipo": "progreso",
+            "valor": 20,
+            "etiqueta": "savings"
+          }
+        },
+        {
+          "titulo": "Resultado",
+          "texto": "Mejoras en tiempo y manejo",
+          "emoji": "",
+          "visual": "driver celebrating at finish line",
+          "visuales": [
+            "driver celebrating",
+            "race finish line"
+          ],
+          "foto": "",
+          "grafico": {
+            "tipo": "objetivo",
+            "etiqueta": "speed boost"
           }
         }
       ],
-      "cta": "",
+      "cta": "Guarda este dato y comparte si te sorprendió",
       "sticker": null,
       "fondo": "ia",
       "estilo": "racing",
-      "caption": "",
-      "hashtags": "",
+      "caption": "¿Sabes que la suspensión registra 200kHz? 🚀 Un ajuste de 1mm puede ganar 0.2s por vuelta. Guarda y comparte si te sorprendió. 👉 Link en bio",
+      "hashtags": "#telemetría #suspensión #simracing #lapriq #datos",
       "audio": "voz_y_musica",
-      "voz": "",
-      "ritmo_voz": "",
+      "voz": "mujer",
+      "ritmo_voz": "energico",
       "musica": "energetica",
       "guion": [
-        "¿Te pierdes al leer la curva de frenado en la telemetría?",
-        "Porque muestra la presión de freno sin señalar la zona exacta.",
-        "Abre la telemetría de freno y marca cuando el coche empieza a girar.",
-        "Verás el punto de frenado alineado con la entrada de la curva, sin sobre‑frenar.",
-        "Si te sirve, sigue la cuenta para más trucos de telemetría."
+        "¿Sabías que la suspensión de tu simulador registra hasta doscientos mil hertz?",
+        "Ese dato revela cuánta información captura cada movimiento del coche.",
+        "La telemetría mide la posición de la suspensión en milisegundos.",
+        "Un cambio de camber de un milímetro altera la carga de los neumáticos.",
+        "Ajusta el camber en pasos de medio milímetro y observa la diferencia.",
+        "Revisa la gráfica de suspensión mientras giras para detectar desviaciones.",
+        "Si la curva se vuelve más suave, estás equilibrando mejor el coche.",
+        "Aplica este ajuste antes de cada sesión y notarás vueltas más consistentes.",
+        "Sígueme para descubrir más trucos de telemetría y rendimiento."
       ],
       "beats": [
         {
-          "t": "¿Te pierdes al leer la curva de frenado en la telemetría?",
-          "img": "Aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a large monitor showing a racing simulation, not a real car interior. The racer sits in the rig, squinting at a monitor displaying a blue braking curve graph, hand hovering over steering wheel, confused expression."
+          "t": "¿Sabías que la suspensión de tu simulador registra hasta doscientos mil hertz?",
+          "img": "aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a large monitor displaying a racing simulation, not a real car interior. The monitor screen displays a colorful high‑frequency waveform graph representing suspension telemetry at 200 kHz, viewed straight on the rig"
         },
         {
-          "t": "Porque muestra la presión de freno sin señalar la zona exacta.",
-          "img": "Aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a large monitor showing a racing simulation, not a real car interior. The racer points at a flat brake pressure bar on the monitor, the screen lacking any highlighted zone, while seated in the rig."
+          "t": "Ese dato revela cuánta información captura cada movimiento del coche.",
+          "img": "aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a large monitor displaying a racing simulation, not a real car interior. The steering wheel turns while a dense cloud of tiny data points streams from the monitor, visualizing information per movement"
         },
         {
-          "t": "Abre la telemetría de freno y marca cuando el coche empieza a girar.",
-          "img": "Aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a large monitor showing a racing simulation, not a real car interior. The racer uses a mouse to open the brake telemetry window and draws a red marker on the graph at the moment the car begins to turn."
+          "t": "La telemetría mide la posición de la suspensión en milisegundos.",
+          "img": "aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a large monitor displaying a racing simulation, not a real car interior. The front suspension damper on the rig glows as a millisecond timer overlay flashes on the monitor, indicating precise position measurement"
         },
         {
-          "t": "Verás el punto de frenado alineado con la entrada de la curva, sin sobre‑frenar.",
-          "img": "Aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a large monitor showing a racing simulation, not a real car interior. The monitor shows a red braking point aligned with the curve entry on the track map, while the racer watches intently from the rig."
+          "t": "Un cambio de camber de un milímetro altera la carga de los neumáticos.",
+          "img": "aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a large monitor displaying a racing simulation, not a real car interior. The racing wheel hub tilts slightly, and a side‑view graphic on the monitor shows a one‑millimeter camber change affecting tire load"
         },
         {
-          "t": "Si te sirve, sigue la cuenta para más trucos de telemetría.",
-          "img": "Aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a large monitor showing a racing simulation, not a real car interior. The racer gives a thumbs‑up, leaning forward at the rig, with the monitor displaying icons of telemetry tricks, inviting viewers to follow."
+          "t": "Ajusta el camber en pasos de medio milímetro y observa la diferencia.",
+          "img": "aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a large monitor displaying a racing simulation, not a real car interior. The hand moves a virtual camber slider on the monitor in 0.5 mm increments, while side‑by‑side graphs reveal the performance difference"
+        },
+        {
+          "t": "Revisa la gráfica de suspensión mientras giras para detectar desviaciones.",
+          "img": "aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a large monitor displaying a racing simulation, not a real car interior. The driver turns the wheel sharply, and the monitor displays a live suspension graph highlighting deviation spikes in real time"
+        },
+        {
+          "t": "Si la curva se vuelve más suave, estás equilibrando mejor el coche.",
+          "img": "aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a large monitor displaying a racing simulation, not a real car interior. The monitor shows a smooth curved lap line, and the driver’s relaxed posture indicates better car balance"
+        },
+        {
+          "t": "Aplica este ajuste antes de cada sesión y notarás vueltas más consistentes.",
+          "img": "aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a large monitor displaying a racing simulation, not a real car interior. The driver sets the camber knob on the control panel, then starts a new session on the monitor, promising consistent laps"
+        },
+        {
+          "t": "Sígueme para descubrir más trucos de telemetría y rendimiento.",
+          "img": "aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a large monitor displaying a racing simulation, not a real car interior. The driver points to a glowing ‘follow’ icon on the monitor, inviting viewers to learn more telemetry tricks"
         }
       ],
-      "estilo_visual": "Bright, crisp lighting with vivid colors, sharp focus, no blur, consistent photographic style throughout",
-      "visual_cierre": "",
-      "cierre_bio": "Descubre más en el enlace de mi perfil.",
+      "estilo_visual": "bright, sharp lighting with vivid colors, clear focus, no blur, consistent photographic style throughout",
+      "visual_cierre": "car racing on track",
+      "cierre_bio": "Visita el enlace en mi perfil para más guías de telemetría.",
       "foto": "",
       "anim": "pop",
       "serie": "",
       "episodio": 0,
       "look": 186,
-      "plantilla": 590,
+      "plantilla": 2225,
       "layout": "faceless",
+      "stickers": [
+        "🏎️",
+        "⚡",
+        "📈"
+      ]
+    },
+    {
+      "id": "pmwgssga8_1",
+      "dia": 2,
+      "hora": "20:00",
+      "tipo": "reel",
+      "objetivo": "confianza",
+      "razon": "Mostrar autoridad al detectar errores comunes",
+      "tema": "Error de la semana: Desbalance de presión de neumáticos",
+      "formato": "reel",
+      "gancho": "El error que hace perder 0.5s en curvas largas",
+      "visual": "car in tight corner",
+      "escenas": [
+        {
+          "titulo": "Error",
+          "texto": "Presión desigual entre neumáticos",
+          "emoji": "",
+          "visual": "telemetry screen with uneven pressure",
+          "visuales": [
+            "telemetry screen",
+            "car in corner"
+          ],
+          "foto": "",
+          "grafico": {
+            "tipo": "comparacion",
+            "mal": "desbalance",
+            "bien": "balanceado"
+          }
+        },
+        {
+          "titulo": "Síntoma",
+          "texto": "Vuelta lenta y vibraciones",
+          "emoji": "",
+          "visual": "car trembling on track",
+          "visuales": [
+            "car trembling",
+            "track"
+          ],
+          "foto": "",
+          "grafico": {
+            "tipo": "checklist",
+            "items": [
+              "vibración",
+              "lentitud"
+            ]
+          }
+        },
+        {
+          "titulo": "Causa",
+          "texto": "Calibración incorrecta de la cámara",
+          "emoji": "",
+          "visual": "mechanic adjusting gauge",
+          "visuales": [
+            "mechanic adjusting gauge",
+            "circuit track"
+          ],
+          "foto": "",
+          "grafico": {
+            "tipo": "objetivo",
+            "etiqueta": "cambio de calibración"
+          }
+        },
+        {
+          "titulo": "Solución",
+          "texto": "Recalibra a 1 bar en cada neumático",
+          "emoji": "",
+          "visual": "car on track, smooth lap",
+          "visuales": [
+            "car on track",
+            "smooth lap"
+          ],
+          "foto": "",
+          "grafico": {
+            "tipo": "progreso",
+            "valor": 50,
+            "etiqueta": "balance"
+          }
+        }
+      ],
+      "cta": "Comenta 'PRESIÓN' si te pasó y te lo explico",
+      "sticker": null,
+      "fondo": "color",
+      "estilo": "neon",
+      "caption": "El desbalance de presión de neumáticos puede costarte 0.5s por vuelta. Recalibra a 1 bar y gana tiempo. Comenta 'PRESIÓN' si te pasó. 👉 Link en bio",
+      "hashtags": "#errores #presión #simracing #lapriq",
+      "audio": "voz_y_musica",
+      "voz": "mujer",
+      "ritmo_voz": "normal",
+      "musica": "tension",
+      "guion": [
+        "¿Sabes que la presión desigual de neumáticos te pierde medio segundo?",
+        "Cuando un neumático está más inflado, la curva se vuelve más lenta.",
+        "Esto provoca vibraciones en el volante y pérdida de tiempo.",
+        "Primero revisa la presión con la herramienta de telemetría.",
+        "Ajusta ambos neumáticos a exactamente 1 bar, igual en los cuatro.",
+        "Luego activa la cámara de presión para confirmar la calibración.",
+        "Si la presión se mantiene equilibrada, notarás una curva más rápida.",
+        "Una vez calibrado, realiza una vuelta de prueba para medir la mejora.",
+        "Comparte tus resultados y sigue aprendiendo más trucos de simulación."
+      ],
+      "beats": [
+        {
+          "t": "¿Sabes que la presión desigual de neumáticos te pierde medio segundo?",
+          "img": "aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a big monitor showing a racing game, not a real car interior. The racer sits at the rig, staring at the monitor where two tire pressure bars are mismatched and a red timer flash shows 0.5 s loss"
+        },
+        {
+          "t": "Cuando un neumático está más inflado, la curva se vuelve más lenta.",
+          "img": "aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a big monitor showing a racing game, not a real car interior. The racer watches the screen as the car drifts through a corner, the left tire gauge shows higher pressure and the lap line lags behind"
+        },
+        {
+          "t": "Esto provoca vibraciones en el volante y pérdida de tiempo.",
+          "img": "aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a big monitor showing a racing game, not a real car interior. The racer grips the steering wheel, which shows subtle motion blur lines indicating vibration, while the monitor displays a delayed lap time"
+        },
+        {
+          "t": "Primero revisa la presión con la herramienta de telemetría.",
+          "img": "aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a big monitor showing a racing game, not a real car interior. The racer clicks the telemetry interface on the monitor, a digital pressure readout appears for each tire"
+        },
+        {
+          "t": "Ajusta ambos neumáticos a exactamente 1 bar, igual en los cuatro.",
+          "img": "aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a big monitor showing a racing game, not a real car interior. The racer slides four pressure sliders on the screen, aligning each to the 1 bar mark"
+        },
+        {
+          "t": "Luego activa la cámara de presión para confirmar la calibración.",
+          "img": "aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a big monitor showing a racing game, not a real car interior. The racer activates the pressure camera, and the monitor shows a 3D tire model with uniform pressure rings"
+        },
+        {
+          "t": "Si la presión se mantiene equilibrada, notarás una curva más rápida.",
+          "img": "aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a big monitor showing a racing game, not a real car interior. The racer watches the screen as the car slices a corner faster, all four pressure bars now equal"
+        },
+        {
+          "t": "Una vez calibrado, realiza una vuelta de prueba para medir la mejora.",
+          "img": "aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a big monitor showing a racing game, not a real car interior. The racer initiates a test lap, the monitor displays a live lap timer comparing current and previous times"
+        },
+        {
+          "t": "Comparte tus resultados y sigue aprendiendo más trucos de simulación.",
+          "img": "aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a big monitor showing a racing game, not a real car interior. The racer uploads the lap data on the community dashboard, a celebratory graphic appears beside the results"
+        }
+      ],
+      "estilo_visual": "bright, sharp lighting, vivid colors, high clarity, no blur, studio-like photography",
+      "visual_cierre": "car on track",
+      "cierre_bio": "Para más consejos como este, visita mi perfil.",
+      "foto": "",
+      "anim": "pop",
+      "serie": "Error de la semana",
+      "episodio": 4,
+      "look": 119,
+      "plantilla": 775,
+      "layout": "faceless",
+      "stickers": [
+        "🏎️",
+        "⚙️",
+        "📊"
+      ]
+    },
+    {
+      "id": "pmwgssga8_2",
+      "dia": 3,
+      "hora": "13:30",
+      "tipo": "post",
+      "objetivo": "",
+      "razon": "Ofrecer lista práctica de ajustes de suspensión",
+      "tema": "3 ajustes críticos de suspensión para mejorar tu lap",
+      "formato": "post",
+      "gancho": "3 ajustes que te ganan 0.3s por vuelta",
+      "visual": "aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a big monitor showing a racing game, not a real car interior. driver's hand pointing to a digital stopwatch on laptop screen, indicating 0.3s improvement, with sim rig in background.",
+      "escenas": [
+        {
+          "titulo": "Ajuste 1",
+          "texto": "Camber +0.5° para mejor contacto",
+          "emoji": "",
+          "visual": "aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a big monitor showing a racing game, not a real car interior. close-up of a car wheel rim on the sim rig, with a digital overlay arrow pointing up 0.5°, showing camber adjustment.",
+          "visuales": [
+            "wheel camber angle",
+            "car in cockpit"
+          ],
+          "foto": "",
+          "grafico": {
+            "tipo": "checklist",
+            "items": [
+              "camber",
+              "contacto"
+            ]
+          }
+        },
+        {
+          "titulo": "Ajuste 2",
+          "texto": "Damping rate 1.2x para absorción",
+          "emoji": "",
+          "visual": "aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a big monitor showing a racing game, not a real car interior. hand turning a large dial labeled Damping on a steering wheel control panel, with a green arrow indicating 1.2x increase, sim rig in background.",
+          "visuales": [
+            "shock absorber graphic",
+            "car on track"
+          ],
+          "foto": "",
+          "grafico": null
+        },
+        {
+          "titulo": "Ajuste 3",
+          "texto": "Anti‑roll bar 20% más rígido",
+          "emoji": "",
+          "visual": "aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a big monitor showing a racing game, not a real car interior. side view of a suspension anti‑roll bar on the sim rig, with a digital overlay arrow showing +20% stiffness.",
+          "visuales": [
+            "anti‑roll bar illustration",
+            "car side view"
+          ],
+          "foto": "",
+          "grafico": {
+            "tipo": "checklist",
+            "items": [
+              "anti‑roll",
+              "rigidez"
+            ]
+          }
+        }
+      ],
+      "cta": "Comenta tu ajuste favorito",
+      "sticker": null,
+      "fondo": "color",
+      "estilo": "racing",
+      "caption": "3 ajustes críticos de suspensión para mejorar tu lap: 1) Camber +0.5° 2) Damping rate 1.2x 3) Anti‑roll bar 20% más rígido. Comenta tu ajuste favorito. 👉 Link en bio",
+      "hashtags": "#suspensión #ajustes #simracing #lapriq",
+      "audio": "solo_musica",
+      "voz": "",
+      "ritmo_voz": "",
+      "musica": "chill",
+      "guion": [],
+      "beats": [],
+      "estilo_visual": "racing",
+      "visual_cierre": "driver in cockpit",
+      "cierre_bio": "para más tips, el enlace está en mi bio",
+      "foto": "",
+      "anim": "slide",
+      "serie": "",
+      "episodio": 0,
+      "look": 229,
+      "plantilla": 1793,
+      "layout": "tarjeta",
       "stickers": []
+    },
+    {
+      "id": "pmwgssga8_3",
+      "dia": 4,
+      "hora": "14:00",
+      "tipo": "carrusel",
+      "objetivo": "",
+      "razon": "Desmentir mito sobre suspensión dura",
+      "tema": "Mito: Suspensión más dura siempre mejora la velocidad",
+      "formato": "carrusel",
+      "gancho": "Mito o realidad: Suspensión dura vs suave",
+      "visual": "Aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a big monitor showing a racing game, not a real car interior. Instructor holds stiff spring on left, soft coil on right, beside aluminium sim rig, gaming room, monitor shows race track, not real car interior.",
+      "escenas": [
+        {
+          "titulo": "Mito",
+          "texto": "Más rigidez = más velocidad",
+          "emoji": "",
+          "visual": "Aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a big monitor showing a racing game, not a real car interior. Instructor points to high speed gauge on monitor, holding rigid suspension spring, standing before aluminium sim rig, gaming room, monitor shows race, not real car.",
+          "visuales": [
+            "car with stiff suspension",
+            "track"
+          ],
+          "foto": "",
+          "grafico": {
+            "tipo": "checklist",
+            "items": [
+              "rigidez",
+              "velocidad"
+            ]
+          }
+        },
+        {
+          "titulo": "Realidad 1",
+          "texto": "En curvas, menos rigidez reduce vibraciones",
+          "emoji": "",
+          "visual": "Aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a big monitor showing a racing game, not a real car interior. Instructor adjusts soft suspension setting, monitor displays curved track, vibration indicator low, standing beside aluminium sim rig, gaming room, not real car interior.",
+          "visuales": [
+            "car in tight corner",
+            "telemetry screen"
+          ],
+          "foto": "",
+          "grafico": null
+        },
+        {
+          "titulo": "Realidad 2",
+          "texto": "En rectas, rigidez máxima no compensa",
+          "emoji": "",
+          "visual": "Aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a big monitor showing a racing game, not a real car interior. Instructor holds rigid suspension, monitor shows straight track, speed gauge unchanged, standing beside aluminium sim rig, gaming room, not real car.",
+          "visuales": [
+            "car on straight",
+            "speedometer"
+          ],
+          "foto": "",
+          "grafico": {
+            "tipo": "checklist",
+            "items": [
+              "speed",
+              "rigidez"
+            ]
+          }
+        },
+        {
+          "titulo": "Conclusión",
+          "texto": "Equilibrio de suspensión es clave",
+          "emoji": "",
+          "visual": "Aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a big monitor showing a racing game, not a real car interior. Instructor balances stiff and soft springs side by side, monitor shows balanced speed gauge, standing beside aluminium sim rig, gaming room, not real car.",
+          "visuales": [
+            "car on track",
+            "smooth lap"
+          ],
+          "foto": "",
+          "grafico": {
+            "tipo": "objetivo",
+            "etiqueta": "balance"
+          }
+        }
+      ],
+      "cta": "Desliza para ver la prueba real",
+      "sticker": null,
+      "fondo": "animado",
+      "estilo": "pop",
+      "caption": "Mito o realidad: ¿Más rigidez siempre mejora la velocidad? Desliza y descubre la verdad. 👉 Link en bio",
+      "hashtags": "#mitos #suspensión #simracing #lapriq",
+      "audio": "solo_musica",
+      "voz": "",
+      "ritmo_voz": "",
+      "musica": "chill",
+      "guion": [],
+      "beats": [],
+      "estilo_visual": "racing",
+      "visual_cierre": "car on track",
+      "cierre_bio": "para más datos, el enlace está en mi bio",
+      "foto": "",
+      "anim": "slide",
+      "serie": "",
+      "episodio": 0,
+      "look": 83,
+      "plantilla": 1718,
+      "layout": "cine",
+      "stickers": []
+    },
+    {
+      "id": "pmwgssga8_4",
+      "dia": 5,
+      "hora": "20:30",
+      "tipo": "reel",
+      "objetivo": "comunidad",
+      "razon": "Invitar a enviar setups de suspensión",
+      "tema": "Setup del seguidor: análisis de suspensión",
+      "formato": "reel",
+      "gancho": "Mándame tu setup y lo mejoramos en vivo",
+      "visual": "screen recording of telemetry",
+      "escenas": [
+        {
+          "titulo": "Llamado",
+          "texto": "Envía tu setup de suspensión por DM",
+          "emoji": "",
+          "visual": "hand typing DM",
+          "visuales": [
+            "hand typing DM",
+            "telemetry screen"
+          ],
+          "foto": "",
+          "grafico": {
+            "tipo": "checklist",
+            "items": [
+              "setup",
+              "DM"
+            ]
+          }
+        },
+        {
+          "titulo": "Análisis",
+          "texto": "Revisaremos camber, damping y anti‑roll",
+          "emoji": "",
+          "visual": "coach analyzing data",
+          "visuales": [
+            "coach analyzing data",
+            "telemetry screen"
+          ],
+          "foto": "",
+          "grafico": {
+            "tipo": "objetivo",
+            "etiqueta": "análisis"
+          }
+        },
+        {
+          "titulo": "Resultado",
+          "texto": "Mejoras en tiempo y manejo",
+          "emoji": "",
+          "visual": "car racing on track",
+          "visuales": [
+            "car racing on track",
+            "smooth lap"
+          ],
+          "foto": "",
+          "grafico": {
+            "tipo": "progreso",
+            "valor": 30,
+            "etiqueta": "savings"
+          }
+        }
+      ],
+      "cta": "Comenta tu setup en DM y lo analizamos",
+      "sticker": null,
+      "fondo": "ia",
+      "estilo": "racing",
+      "caption": "¿Tienes un setup de suspensión? Mándame tu configuración por DM y lo analizamos en tiempo real. 👉 Link en bio",
+      "hashtags": "#setup #suspensión #simracing #lapriq",
+      "audio": "voz_y_musica",
+      "voz": "hombre",
+      "ritmo_voz": "energico",
+      "musica": "energetica",
+      "guion": [
+        "¿Te cuesta controlar la curva cuando el seguidor está mal?",
+        "El camber mal ajustado hace que el coche pierda tracción en la esquina.",
+        "Mide el camber con nivel de rueda y compáralo con la línea ideal.",
+        "Ajusta el camber unos grados antes de la curva para mantener la carga.",
+        "El amortiguador debe tener la presión adecuada; si es demasiado firme, pierde contacto.",
+        "Reduce la presión ligeramente y observa la respuesta en el telemetría.",
+        "El anti‑roll equilibra la fuerza lateral; demasiado alto hace que el coche se vuelque.",
+        "Aplica ajustes de anti‑roll poco a poco y revisa la estabilidad en la pista.",
+        "Envíame tu setup y el enlace está en mi bio."
+      ],
+      "beats": [
+        {
+          "t": "¿Te cuesta controlar la curva cuando el seguidor está mal?",
+          "img": ""
+        },
+        {
+          "t": "El camber mal ajustado hace que el coche pierda tracción en la esquina.",
+          "img": ""
+        },
+        {
+          "t": "Mide el camber con nivel de rueda y compáralo con la línea ideal.",
+          "img": ""
+        },
+        {
+          "t": "Ajusta el camber unos grados antes de la curva para mantener la carga.",
+          "img": ""
+        },
+        {
+          "t": "El amortiguador debe tener la presión adecuada; si es demasiado firme, pierde contacto.",
+          "img": ""
+        },
+        {
+          "t": "Reduce la presión ligeramente y observa la respuesta en el telemetría.",
+          "img": ""
+        },
+        {
+          "t": "El anti‑roll equilibra la fuerza lateral; demasiado alto hace que el coche se vuelque.",
+          "img": ""
+        },
+        {
+          "t": "Aplica ajustes de anti‑roll poco a poco y revisa la estabilidad en la pista.",
+          "img": ""
+        },
+        {
+          "t": "Envíame tu setup y el enlace está en mi bio.",
+          "img": ""
+        }
+      ],
+      "estilo_visual": "racing",
+      "visual_cierre": "screen recording",
+      "cierre_bio": "Envíame tu setup y el enlace está en mi bio.",
+      "foto": "",
+      "anim": "fade",
+      "serie": "Setup del seguidor",
+      "episodio": 0,
+      "look": 193,
+      "plantilla": 2257,
+      "layout": "faceless",
+      "stickers": [
+        "🏎️",
+        "📈",
+        "🛠️"
+      ]
     }
   ]
 }
