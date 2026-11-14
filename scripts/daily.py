@@ -848,6 +848,9 @@ def process_requests(browser, users, key):
 def main():
     users = api("GET", "/admin/users").get("users", [])
     has_requests = any((u.get("requests") or {}) for u in users)
+    for u in users:
+        if u.get("requests"):
+            log(f"📥 Peticiones de {u.get('name')}: {json.dumps(u['requests'], ensure_ascii=False)[:300]}")
     if not has_requests and not any(ready(u) for u in users):
         log(f"{len(users)} personas en la agencia; ninguna tiene aún marca y redes conectadas. Nada que planificar.")
         return

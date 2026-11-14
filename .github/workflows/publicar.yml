@@ -36,7 +36,9 @@ jobs:
         env:
           AGENCIA_API: ${{ vars.AGENCIA_API || 'https://agencia-marketing.lopezsimrace29.workers.dev' }}
         run: |
-          p=$(curl -fsS --max-time 20 "$AGENCIA_API/pending" | python3 -c "import sys,json;print('true' if json.load(sys.stdin).get('pending') else 'false')" || echo false)
+          r=$(curl -sS --max-time 20 -w ' HTTP%{http_code}' "$AGENCIA_API/pending" || echo "error de conexión")
+          echo "Respuesta del servidor: $r"
+          case "$r" in *'"pending":true'*) p=true;; *) p=false;; esac
           echo "pending=$p" >> "$GITHUB_OUTPUT"
 
   peticiones:
