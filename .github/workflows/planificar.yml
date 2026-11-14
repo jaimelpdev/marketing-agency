@@ -32,6 +32,8 @@ jobs:
       url: ${{ steps.deploy.outputs.page_url }}
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: main  # siempre lo último (no la versión del momento en que se pidió la ejecución)
 
       - uses: actions/setup-python@v5
         with:
@@ -60,7 +62,7 @@ jobs:
           git config user.email "agencia-bot@users.noreply.github.com"
           git add -A content docs
           git diff --cached --quiet || git commit -m "🧠 Plan y contenido $(date -u +%F)"
-          for i in 1 2 3 4 5; do git pull --rebase -X theirs && git push && break; sleep 8; done
+          for i in 1 2 3 4 5; do git pull --rebase && git push && break; sleep 8; done
 
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
