@@ -1046,7 +1046,7 @@ REPLANNED = set()
 IMG_ENGINE = {"ok": None, "n": 0}
 
 
-POLL = {"ok": None, "n": 0, "err": ""}
+POLL = {"ok": None, "n": 0, "err": "", "fails": 0}
 
 
 def gen_pollinations(prompt, seed, log=print):
@@ -1059,7 +1059,7 @@ def gen_pollinations(prompt, seed, log=print):
            f"?model=flux&width=1080&height=1920&seed={int(seed or 0) % 2147483647}&nologo=true&private=true&enhance=false")
     for t in range(3):
         try:
-            r = requests.get(url, timeout=150, headers={"Authorization": "Bearer " + key})
+            r = requests.get(url, timeout=75, headers={"Authorization": "Bearer " + key})
         except Exception as e:  # noqa: BLE001
             POLL["err"] = str(e)[:120]
             time.sleep(5)
@@ -1068,6 +1068,7 @@ def gen_pollinations(prompt, seed, log=print):
         if r.status_code == 200 and ct.startswith("image/"):
             POLL["ok"] = True
             POLL["n"] += 1
+            POLL["fails"] = 0
             return "data:" + ct.split(";")[0] + ";base64," + base64.b64encode(r.content).decode()
         POLL["err"] = f"HTTP {r.status_code}: {r.text[:160]}"
         if r.status_code in (401, 402, 403):  # clave mala o sin saldo: no insistir
@@ -1076,6 +1077,10 @@ def gen_pollinations(prompt, seed, log=print):
             POLL["ok"] = False
             return ""
         time.sleep(4 + 6 * t)
+    POLL["fails"] += 1
+    if POLL["fails"] >= 3 and POLL["ok"] is not True:  # no funciona: no perder horas reintentando
+        POLL["ok"] = False
+        log(f"  ⚠ Pollinations con clave no responde bien ({POLL['err']}). Sigo con el generador de reserva.")
     return ""
 
 
