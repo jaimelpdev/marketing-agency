@@ -533,7 +533,10 @@ function setStatus(el,msg,cls){el.textContent=msg||"";el.className="status"+(cls
 function el(tag,attrs={},kids=[]){const e=document.createElement(tag);Object.entries(attrs).forEach(([k,v])=>{if(k==="text")e.textContent=v;else if(k.startsWith("on"))e.addEventListener(k.slice(2),v);else e.setAttribute(k,v);});kids.forEach(k=>k&&e.appendChild(k));return e;}
 function parseJSON(t){t=String(t||"").replace(/```json|```/g,"");const a=t.indexOf("{"),b=t.lastIndexOf("}");if(a<0||b<a)throw new Error("respuesta sin JSON");return JSON.parse(t.slice(a,b+1));}
 function normCfg(c){c={...DEF_CFG,...c};if(typeof c.pillars==="string")c.pillars=c.pillars.split(/[,\n]/).map(x=>x.trim()).filter(Boolean);if(!Array.isArray(c.pillars))c.pillars=[];if(!/^#[0-9a-f]{6}$/i.test(c.acc))c.acc=DEF_CFG.acc;if(!/^#[0-9a-f]{6}$/i.test(c.bg))c.bg=DEF_CFG.bg;if(!STYLES.some(s=>s.id===c.style))c.style="racing";c.v={...DEF_V,...(c.v||{})};return c;}
-function normPiece(v,i){
+function noFakeHandles(t){const own=String(S.cfg.ig||"").toLowerCase().replace(/^.*@/,"");return String(t==null?"":t).replace(/(^|[\s(«"'])@([A-Za-z0-9_.]{2,30})/g,(m,pre,h)=>own&&h.toLowerCase()===own?m:pre+"un seguidor");}
+function scrubHandles(v){if(!v||typeof v!=="object")return v;["gancho","tema","cta","caption","cierre_bio"].forEach(k=>{if(typeof v[k]==="string")v[k]=noFakeHandles(v[k]);});
+  if(Array.isArray(v.guion))v.guion=v.guion.map(noFakeHandles);(v.escenas||[]).forEach(e=>{if(e){e.titulo=noFakeHandles(e.titulo);e.texto=noFakeHandles(e.texto);}});(v.beats||[]).forEach(b=>{if(b)b.t=noFakeHandles(b.t);});return v;}
+function normPiece(v,i){v=scrubHandles(v);
   const tipo=TYPES[v.tipo]?v.tipo:"reel";
   const st=v.sticker&&typeof v.sticker==="object"&&v.sticker.texto?{tipo:String(v.sticker.tipo||"pregunta"),texto:String(v.sticker.texto),opciones:(Array.isArray(v.sticker.opciones)?v.sticker.opciones:[]).map(o=>String(o).slice(0,22)).filter(Boolean).slice(0,3)}:null;
   return {id:v.id||("p"+Date.now().toString(36)+"_"+i),dia:Math.max(0,Math.min(6,parseInt(v.dia)||0)),hora:String(v.hora||""),tipo,objetivo:String(v.objetivo||""),razon:String(v.razon||""),
@@ -709,6 +712,7 @@ ${window.__memText||""}
 
 PROHIBIDO INVENTAR (regla más importante que cualquier otra)
 - Nunca inventes seguidores, nombres o @usuarios, testimonios, casos, cifras de resultados, ofertas, descuentos, precios, garantías, sorteos, fechas de lanzamiento ni eventos. Solo puedes usar los que aparezcan en los datos de la marca o en las NOTAS DEL DUEÑO.
+- Nunca escribas @usuarios ni nombres de seguidores (el código los borra igualmente).
 - Si una serie necesita material de la comunidad (por ejemplo "Setup del seguidor") y no lo hay, la pieza es la LLAMADA a participar ("Mándame tu setup por DM y lo analizo en el próximo episodio"), nunca un caso inventado.
 - Para conversión sin ofertas en los datos: muestra el producto y su valor real, sin promociones inventadas.
 
@@ -825,7 +829,7 @@ function diversify(vids){
     vids.forEach(p=>{if(!(TYPES[p.tipo]&&TYPES[p.tipo].video))return;if((hv+k)%4!==3)p.layout="faceless";else if(p.layout==="faceless")p.layout="clasico";k++;});
     const fl=vids.filter(p=>p.layout==="faceless"),hf=(S.hist&&S.hist.items||[]).filter(h=>h.layout==="faceless").length;
     fl.forEach((p,i)=>{const bio=(hf+i)%4===0&&p.cierre_bio;
-      if(p.beats&&p.beats.length>=3){if(bio)p.beats[p.beats.length-1]={...p.beats[p.beats.length-1],t:p.cierre_bio};p.guion=p.beats.map(b=>b.t);return;}
+      if(p.beats&&p.beats.length>=2){if(bio)p.beats[p.beats.length-1]={...p.beats[p.beats.length-1],t:p.cierre_bio};p.guion=p.beats.map(b=>b.t);return;}
       const g=(p.guion||[]).filter(x=>String(x).trim());if(bio&&g.length){p.guion=g.slice(0,-1).concat(p.cierre_bio);}});}
   const anims=["slide","fade","pop","slide","fade","pop","slide"];vids.forEach((p,i)=>{p.anim=i===0?(O.anim||"pop"):anims[(seed+i)%anims.length];});
   const moods=["energetica","divertida","epica","chill","emotiva","tension","hiphop","rock","electronica","funk","latina","ambiental"];let pm=null;
@@ -1024,7 +1028,7 @@ function buildScenes(p){
     const T=fit(p.gancho,F.h,F.hw,130*kk,70*kk,920,5,F.up,1.1);const sub=(p.escenas[0]&&p.escenas[0].texto)||"";
     const B=sub?fit(sub,F.b,F.bw,52*kk,34*kk,880,5,false,1.32):null;
     sc.push({kind:"post",T,B,cta:p.cta,dur:4});
-  }else if(p.layout==="faceless"&&p.beats&&p.beats.length>=3){
+  }else if(p.layout==="faceless"&&p.beats&&p.beats.length>=2){
     const n=p.beats.length,hook=fit(p.gancho||p.beats[0].t,F.h,F.hw,150*kk,70*kk,930,5,F.up,1.12);
     p.beats.forEach((b,i)=>{const w=words(b.t);sc.push({kind:i===0?"hook":i===n-1?"cta":"tip",n:i,L:i===0?hook:null,beat:b,raw:"",body:"",dur:clamp(0.8+w*0.36,1.8,5.5)*pc});});
   }else{
@@ -1747,14 +1751,14 @@ function pieceQ(p){return (p.foto&&brandPhoto(p.foto))?"foto:"+p.foto:(p.visual|
 function wantsPhotos(p){const m=effBM(p);return m==="ai"||m==="stock"||(S.cfg.v.fotos!==false&&m!=="media");}
 function flStyle(p){const st=String(p.estilo_visual||"cinematic film still, natural light").replace(/,?\s*(shallow depth of field|bokeh|blurr?y?|motion blur|dark|moody)/gi,"");return ", "+st+", sharp focus, well lit, high detail";}
 function flPrompts(p){ const st=flStyle(p);
-  if(p.beats&&p.beats.length>=3){ const b=p.beats.map(x=>(x.img||x.t)+st); return {beats:b,hook:[b[0]],tips:b.slice(1,-1).map(x=>[x]),cta:[b[b.length-1]]}; }
+  if(p.beats&&p.beats.length>=2){ const b=p.beats.map(x=>(x.img||x.t)+st); return {beats:b,hook:[b[0]],tips:b.slice(1,-1).map(x=>[x]),cta:[b[b.length-1]]}; }
   const esc=p.tipo==="historia"?p.escenas.slice(0,2):p.escenas;
   const hook=[(p.visual||p.gancho)+st], tips=esc.map(e=>{const v=(e.visuales&&e.visuales.length?e.visuales:[e.visual||e.texto||e.titulo]).slice(0,2);return v.map(x=>x+st);}), cta=[(p.visual_cierre||p.visual||p.gancho)+st];
   return {hook,tips,cta}; }
 function needed(p){ if(p&&p.layout==="faceless"&&TYPES[p.tipo]&&TYPES[p.tipo].video){ const f=flPrompts(p); return [...new Set([].concat(f.hook,...f.tips,f.cta).map(q=>String(q).trim()).filter(Boolean))].map(q=>({mode:"ai",q:"ia:"+q,k:"ai|ia:"+q})); }
   if(!wantsPhotos(p)) return []; const qs=[pieceQ(p)]; if(S.cfg.v.imgPer==="scene"&&p.tipo!=="post") (p.tipo==="historia"?p.escenas.slice(0,2):p.escenas).forEach(e=>qs.push(sceneQ(e))); return [...new Set(qs.map(q=>String(q).trim()).filter(Boolean))].map(q=>({mode:"ai",q,k:"ai|"+q})); }
 function getA(mode,q){return S.assets.get(mode+"|"+String(q).trim())||null;}
-HOOKS.attachAssets=(p,sc)=>{ if(p&&p.layout==="faceless"&&TYPES[p.tipo]&&TYPES[p.tipo].video&&p.beats&&p.beats.length>=3&&sc.length===p.beats.length){
+HOOKS.attachAssets=(p,sc)=>{ if(p&&p.layout==="faceless"&&TYPES[p.tipo]&&TYPES[p.tipo].video&&p.beats&&p.beats.length>=2&&sc.length===p.beats.length){
     // una imagen por frase: lo que se ve es lo que se está diciendo. Si alguna falla, se usa la de la frase anterior (lo más parecido)
     const f=flPrompts(p), g=q=>getA("ai","ia:"+q); let last=null;
     sc.forEach((s,i)=>{ const a=g(f.beats[i])||last||f.beats.map(g).find(Boolean)||null; s.imgs=a?[a]:[]; if(g(f.beats[i])) last=g(f.beats[i]); }); return; }

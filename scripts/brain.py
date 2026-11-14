@@ -227,7 +227,7 @@ def art_direct(piece, user, key, log=print):
     """Director de arte: convierte cada frase hablada de un vídeo faceless en una imagen concreta,
     fotografiable y anclada al mundo del negocio, para que lo que se ve sea lo que se dice."""
     beats = piece.get("beats") or []
-    if len(beats) < 3:
+    if len(beats) < 2:
         return False
     marca = ((user.get("config") or {}).get("marca") or {})
     negocio = json.dumps({k: marca.get(k) for k in ("name", "about", "aud", "pillars") if marca.get(k)}, ensure_ascii=False)[:1200]

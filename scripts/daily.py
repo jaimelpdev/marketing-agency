@@ -640,10 +640,10 @@ def plan_user(browser, user, key, force=False, redo=None):
         # 🎨 director de arte: cada frase de los vídeos faceless con una imagen concreta del mundo del negocio
         vids = page.evaluate("JSON.parse(JSON.stringify(S.today.videos))")
         for vi, vp in enumerate(vids):
-            if vp.get("layout") == "faceless" and len(vp.get("beats") or []) >= 3:
+            if vp.get("layout") == "faceless" and len(vp.get("beats") or []) >= 2:
                 if brain.art_direct(vp, user, key, lambda *a: log(*a)):
                     page.evaluate("a=>{const p=S.today.videos[a[0]];p.beats=a[1];p.estilo_visual=a[2];}", [vi, vp["beats"], vp.get("estilo_visual", "")])
-                    log(f"    🎨 Imágenes dirigidas para «{vp.get('tema', '')}»: {vp['beats'][1]['img'][:90]}…")
+                    log(f"    🎨 Imágenes dirigidas para «{vp.get('tema', '')}»: {vp['beats'][-1]['img'][:90]}…")
         log(f"  {n} piezas. Generando imágenes…")
         page.evaluate("prefetchAll()")
         page.wait_for_function("typeof pendingA==='undefined' || pendingA.size===0", timeout=2_700_000, polling=2000)
