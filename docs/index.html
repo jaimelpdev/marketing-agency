@@ -1813,10 +1813,10 @@ async function loadFlux(q){
     const im=new Image(); im.src=d; await im.decode(); return {kind:"image",el:im}; }catch(e){ return null; }
 }
 async function loadPollinations(q){
-  const token=ls("ma_poll_token"); const gap=token?2500:18000;
+  const token=/^sk_/.test(ls("ma_poll_token"))?"":ls("ma_poll_token"); const gap=token?2500:18000;
   const wait=lastPoll+gap-Date.now(); if(wait>0) await sleep(wait);
   const prompt=q+", vertical photo, realistic, no text, no watermark";
-  const url=/^sk_/.test(token)  // clave nueva de enter.pollinations.ai: API con FLUX de verdad
+  const url=false  // la clave sk_ se usa desde el servidor (Python); aquí solo la vía antigua  // clave nueva de enter.pollinations.ai: API con FLUX de verdad
     ?"https://gen.pollinations.ai/image/"+encodeURIComponent(prompt)+"?width=1080&height=1920&nologo=true&model=flux&seed="+hashStr(q)+"&key="+encodeURIComponent(token)
     :"https://image.pollinations.ai/prompt/"+encodeURIComponent(prompt)+"?width=1080&height=1920&nologo=true&model=flux&seed="+hashStr(q)+(token?"&token="+encodeURIComponent(token):"");
   const MAXT=window.__AGENCIA_SERVER?6:3;

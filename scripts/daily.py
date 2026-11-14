@@ -670,7 +670,7 @@ def plan_user(browser, user, key, force=False, redo=None):
             page.wait_for_function("typeof pendingA==='undefined' || pendingA.size===0", timeout=2_700_000, polling=2000)
         if total_img:
             got = total_img - page.evaluate(miss)
-            log(f"  🖼 Imágenes: {got}/{total_img} generadas ({IMG_ENGINE['n']} con FLUX de calidad)" + ("" if got == total_img else " (el generador gratuito limita la velocidad)"))
+            log(f"  🖼 Imágenes: {got}/{total_img} generadas ({IMG_ENGINE['n'] + POLL['n']} con FLUX de calidad)" + (f" · último error de Pollinations: {POLL['err']}" if POLL['err'] else "") + ("" if got == total_img else " (el generador gratuito limita la velocidad)"))
         page.evaluate(RENDER_JS)
         pieces = page.evaluate("JSON.parse(JSON.stringify(S.today.videos))")
         out_root = DOCS / "media" / uid / today
@@ -925,7 +925,45 @@ REPLANNED = set()
 IMG_ENGINE = {"ok": None, "n": 0}
 
 
+POLL = {"ok": None, "n": 0, "err": ""}
+
+
+def gen_pollinations(prompt, seed, log=print):
+    """FLUX vertical con la clave secreta (sk_) de enter.pollinations.ai, desde Python (sin límites del navegador)."""
+    key = os.environ.get("POLLINATIONS_TOKEN", "").strip()
+    if not key.startswith("sk_") or POLL["ok"] is False:
+        return ""
+    from urllib.parse import quote
+    url = (f"https://gen.pollinations.ai/image/{quote(str(prompt)[:1500], safe='')}"
+           f"?model=flux&width=1080&height=1920&seed={int(seed or 0) % 2147483647}&nologo=true&private=true&enhance=false")
+    for t in range(3):
+        try:
+            r = requests.get(url, timeout=150, headers={"Authorization": "Bearer " + key})
+        except Exception as e:  # noqa: BLE001
+            POLL["err"] = str(e)[:120]
+            time.sleep(5)
+            continue
+        ct = r.headers.get("content-type", "")
+        if r.status_code == 200 and ct.startswith("image/"):
+            POLL["ok"] = True
+            POLL["n"] += 1
+            return "data:" + ct.split(";")[0] + ";base64," + base64.b64encode(r.content).decode()
+        POLL["err"] = f"HTTP {r.status_code}: {r.text[:160]}"
+        if r.status_code in (401, 402, 403):  # clave mala o sin saldo: no insistir
+            if POLL["ok"] is not False:
+                log(f"  ⚠ Pollinations rechaza la clave ({POLL['err']}). Uso el generador de reserva.")
+            POLL["ok"] = False
+            return ""
+        time.sleep(4 + 6 * t)
+    return ""
+
+
 def gen_image(prompt, seed, log=print):
+    d = gen_image_worker(prompt, seed, log)
+    return d or gen_pollinations(prompt, seed, log)
+
+
+def gen_image_worker(prompt, seed, log=print):
     """Imagen de calidad (FLUX en Cloudflare Workers AI, gratis) a través del servidor de la agencia.
     Devuelve una data URL, o "" si el servidor no la ofrece (entonces se usa el generador de reserva)."""
     if IMG_ENGINE["ok"] is False:
