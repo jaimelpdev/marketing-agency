@@ -655,6 +655,8 @@ def plan_user(browser, user, key, force=False, redo=None):
                 if len(bs) >= 2 and brain.art_direct(vp, user, key, lambda *a: log(*a), beats=bs):
                     page.evaluate("""a=>{const p=S.today.videos[a[0]];const b=a[1];p.visual=b[0].img;(p.escenas||[]).forEach((e,i)=>{if(b[i+1])e.visual=b[i+1].img;});}""", [vi, bs])
                     log(f"    🎨 Imágenes dirigidas para «{vp.get('tema', '')}»: {bs[0]['img'][:90]}…")
+        _pt = os.environ.get("POLLINATIONS_TOKEN", "").strip()
+        log("  Motor de imágenes de reserva: " + ("Pollinations con clave nueva (FLUX)" if _pt[:3] in ("sk_", "pk_") else "Pollinations con token antiguo" if _pt else "Pollinations ANÓNIMO (mala calidad: falta POLLINATIONS_TOKEN)"))
         log(f"  {n} piezas. Generando imágenes…")
         page.evaluate("prefetchAll()")
         page.wait_for_function("typeof pendingA==='undefined' || pendingA.size===0", timeout=2_700_000, polling=2000)
