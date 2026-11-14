@@ -185,6 +185,22 @@ def get_track(mood, cache_root, log=print, free_only=False):
         t = random.choice([x for x in usable if x["file"] not in recent] or usable)
         _mark_used(cache_root, t)
         return folder / t["file"], t
+    if free_only:  # sin canción libre de crédito para este estilo: probar otros estilos antes que dejarla muda
+        for alt in ("chill", "energetica", "divertida", "ambiental", "emotiva"):
+            if alt == mood:
+                continue
+            try:
+                for item in _search(alt, log, True)[:4]:
+                    try:
+                        t = _download(item, folder)
+                    except Exception:
+                        continue
+                    have.append(t)
+                    (folder / "index.json").write_text(json.dumps(have[-POOL * 2:], ensure_ascii=False, indent=1))
+                    _mark_used(cache_root, t)
+                    return folder / t["file"], t
+            except Exception:
+                continue
     for other in Path(cache_root).glob("*/index.json"):  # cualquier pista guardada antes que el silencio
         alt = [x for x in _index(other.parent) if ok(x)]
         if alt:
