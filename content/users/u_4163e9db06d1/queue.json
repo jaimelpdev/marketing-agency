@@ -79,74 +79,30 @@
     ],
     "status": "scheduled",
     "attempts": 0,
-    "cover": "media/u_4163e9db06d1/2026-11-14/2026-11-14-01-reel/cover.jpg",
-    "zernioPostId": "6af8c9621f34eda6cbe61183"
-  },
-  {
-    "id": "2026-11-14-02-reel",
-    "date": "2026-11-14",
-    "source": "auto",
-    "tipo": "reel",
-    "tema": "Error de la semana: Desbalance de presión de neumáticos",
-    "publishAt": "2026-11-16T20:00:00+01:00",
-    "caption": "El desbalance de presión de neumáticos puede costarte 0.5s por vuelta. Recalibra a 1 bar y gana tiempo. Comenta 'PRESIÓN' si te pasó. 👉 Link en bio\n\n#errores #presión #simracing #lapriq\n\n🎵 «8.» de Ivan Tregub (BER) (CC BY 3.0)",
-    "media": [
-      "media/u_4163e9db06d1/2026-11-14/2026-11-14-02-reel/video.mp4"
-    ],
-    "status": "scheduled",
-    "attempts": 0,
-    "cover": "media/u_4163e9db06d1/2026-11-14/2026-11-14-02-reel/cover.jpg",
-    "zernioPostId": "6af8c96676757d70136b6414"
-  },
-  {
-    "id": "2026-11-14-03-post",
-    "date": "2026-11-14",
-    "source": "auto",
-    "tipo": "post",
-    "tema": "3 ajustes críticos de suspensión para mejorar tu lap",
-    "publishAt": "2026-11-17T13:30:00+01:00",
-    "caption": "3 ajustes críticos de suspensión para mejorar tu lap: 1) Camber +0.5° 2) Damping rate 1.2x 3) Anti‑roll bar 20% más rígido. Comenta tu ajuste favorito. 👉 Link en bio\n\n#suspensión #ajustes #simracing #lapriq",
-    "media": [
-      "media/u_4163e9db06d1/2026-11-14/2026-11-14-03-post/01.jpg"
-    ],
-    "status": "scheduled",
-    "attempts": 0,
-    "zernioPostId": "6af8c9691f34eda6cbe61191"
-  },
-  {
-    "id": "2026-11-14-04-carrusel",
-    "date": "2026-11-14",
-    "source": "auto",
-    "tipo": "carrusel",
-    "tema": "Mito: Suspensión más dura siempre mejora la velocidad",
-    "publishAt": "2026-11-18T14:00:00+01:00",
-    "caption": "Mito o realidad: ¿Más rigidez siempre mejora la velocidad? Desliza y descubre la verdad. 👉 Link en bio\n\n#mitos #suspensión #simracing #lapriq",
-    "media": [
-      "media/u_4163e9db06d1/2026-11-14/2026-11-14-04-carrusel/01.jpg",
-      "media/u_4163e9db06d1/2026-11-14/2026-11-14-04-carrusel/02.jpg",
-      "media/u_4163e9db06d1/2026-11-14/2026-11-14-04-carrusel/03.jpg",
-      "media/u_4163e9db06d1/2026-11-14/2026-11-14-04-carrusel/04.jpg",
-      "media/u_4163e9db06d1/2026-11-14/2026-11-14-04-carrusel/05.jpg",
-      "media/u_4163e9db06d1/2026-11-14/2026-11-14-04-carrusel/06.jpg"
-    ],
-    "status": "scheduled",
-    "attempts": 0,
-    "zernioPostId": "6af8c97125c13ed5b4917f60"
-  },
-  {
-    "id": "2026-11-14-05-reel",
-    "date": "2026-11-14",
-    "source": "auto",
-    "tipo": "reel",
-    "tema": "Setup del seguidor: análisis de suspensión",
-    "publishAt": "2026-11-19T20:30:00+01:00",
-    "caption": "¿Tienes un setup de suspensión? Mándame tu configuración por DM y lo analizamos en tiempo real. 👉 Link en bio\n\n#setup #suspensión #simracing #lapriq\n\n🎵 «Super Power Pop Rock» de Kara Square (CC BY 3.0)",
-    "media": [
-      "media/u_4163e9db06d1/2026-11-14/2026-11-14-05-reel/video.mp4"
-    ],
-    "status": "scheduled",
-    "attempts": 0,
-    "cover": "media/u_4163e9db06d1/2026-11-14/2026-11-14-05-reel/cover.jpg",
-    "zernioPostId": "6af8c97925c13ed5b4917f93"
+    "cover": "media/u_4163e9db06d1/2026-11-14/2026-11-14-01-historia/cover.jpg",
+    "zernioPostId": "6af890e46b2a87dbdf664da8",
+    "veo": {
+      "clips": [
+        {
+          "t": "¿Te pierdes al leer la curva de frenado en la telemetría? Porque muestra la presión de freno sin señalar la zona exacta.",
+          "prompt": "Aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a large monitor showing a racing simulation, not a real car interior. The racer sits in the rig, squinting at a monitor displaying a blue braking curve graph, hand hovering over steering wheel, confused expression. Then: The racer points at a flat brake pressure bar on the monitor, the screen lacking any highlighted zone, while seated in the rig. smooth natural camera movement, vertical 9:16 video, photorealistic, bright natural light, sharp focus, no text, no captions, no logos, no brand names, no watermark",
+          "dur": 8
+        },
+        {
+          "t": "Abre la telemetría de freno y marca cuando el coche empieza a girar.",
+          "prompt": "Aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a large monitor showing a racing simulation, not a real car interior. The racer uses a mouse to open the brake telemetry window and draws a red marker on the graph at the moment the car begins to turn. smooth natural camera movement, vertical 9:16 video, photorealistic, bright natural light, sharp focus, no text, no captions, no logos, no brand names, no watermark",
+          "dur": 6
+        },
+        {
+          "t": "Verás el punto de frenado alineado con la entrada de la curva, sin sobre‑frenar. Si te sirve, sigue la cuenta para más trucos de telemetría.",
+          "prompt": "Aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a large monitor showing a racing simulation, not a real car interior. The monitor shows a red braking point aligned with the curve entry on the track map, while the racer watches intently from the rig. Then: The racer gives a thumbs‑up, leaning forward at the rig, with the monitor displaying icons of telemetry tricks, inviting viewers to follow. smooth natural camera movement, vertical 9:16 video, photorealistic, bright natural light, sharp focus, no text, no captions, no logos, no brand names, no watermark",
+          "dur": 8
+        }
+      ],
+      "voz": "es-ES-ElviraNeural",
+      "ritmo": "+8%",
+      "musica": "energetica",
+      "hashtags": ""
+    }
   }
 ]
