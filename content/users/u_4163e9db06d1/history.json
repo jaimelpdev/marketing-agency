@@ -1,12 +1,6 @@
 {
   "items": [
     {
-      "date": "2026-09-27",
-      "tipo": "reel",
-      "src": "red",
-      "tema": "[IG · ❤️12] ¿Vale la pena apostar por encoders ópticos en tu volante de SimRacing? Descubre si precisión y durabilidad realmente van de la mano."
-    },
-    {
       "date": "2026-09-29",
       "tipo": "reel",
       "src": "red",
@@ -269,6 +263,23 @@
     },
     {
       "date": "2026-11-14",
+      "tema": "Comparativa de estrategias de pit‑stop: anticipado vs reactivo",
+      "formato": "comparativa",
+      "tipo": "post",
+      "layout": "cine",
+      "plantilla": 335,
+      "look": 186,
+      "serie": "",
+      "objetivo": "alcance"
+    },
+    {
+      "date": "2026-11-14",
+      "tipo": "post",
+      "src": "red",
+      "tema": "[IG · ❤️0] Pit‑stop bien planificado puede ahorrarte décimas en cada vuelta. 🚦 Compara los dos enfoques y elige el que mejor se adapta a tu estilo. ¿Cu"
+    },
+    {
+      "date": "2026-11-14",
       "tipo": "post",
       "src": "red",
       "tema": "[IG · ❤️0] 🚦 La zona de frenado que más te cuesta puede robarte décimas. Descubre cómo identificarla y ajustarla. ¿Cuál es tu mayor desafío?"
@@ -328,6 +339,17 @@
       "objetivo": "alcance"
     },
     {
+      "date": "2026-11-16",
+      "tema": "Error de la semana: Sobre‑frenar en curvas lentas",
+      "formato": "error que cuesta tiempo",
+      "tipo": "reel",
+      "layout": "faceless",
+      "plantilla": 837,
+      "look": 119,
+      "serie": "Error de la semana",
+      "objetivo": ""
+    },
+    {
       "date": "2026-11-17",
       "tema": "Mini encuesta",
       "formato": "historia",
@@ -372,6 +394,17 @@
       "objetivo": ""
     },
     {
+      "date": "2026-11-18",
+      "tema": "Mito o realidad: Más downforce siempre es mejor",
+      "formato": "mito vs realidad",
+      "tipo": "carrusel",
+      "layout": "tarjeta",
+      "plantilla": 960,
+      "look": 229,
+      "serie": "Mito o realidad",
+      "objetivo": ""
+    },
+    {
       "date": "2026-11-19",
       "tema": "Envía tu setup y lo analizamos en tiempo real",
       "formato": "llamada a participación",
@@ -392,6 +425,17 @@
       "look": 70,
       "serie": "Setup del seguidor",
       "objetivo": "comunidad"
+    },
+    {
+      "date": "2026-11-19",
+      "tema": "Setup del seguidor: mejora de tiempo en Monza",
+      "formato": "setup del seguidor",
+      "tipo": "reel",
+      "layout": "cine",
+      "plantilla": 404,
+      "look": 83,
+      "serie": "Setup del seguidor",
+      "objetivo": "confianza"
     },
     {
       "date": "2026-11-20",
@@ -417,45 +461,56 @@
     },
     {
       "date": "2026-11-14",
-      "tema": "Comparativa de estrategias de pit‑stop: anticipado vs reactivo",
-      "formato": "comparativa",
+      "tema": "estrategia de pit‑stop sin perder tiempo",
+      "formato": "lista",
       "tipo": "post",
       "layout": "cine",
-      "plantilla": 335,
+      "plantilla": 461,
       "look": 186,
       "serie": "",
-      "objetivo": "alcance"
+      "objetivo": "confianza"
     },
     {
       "date": "2026-11-16",
-      "tema": "Error de la semana: Sobre‑frenar en curvas lentas",
-      "formato": "error que cuesta tiempo",
+      "tema": "Freno tardío por falta de freno motor",
+      "formato": "error de la semana",
       "tipo": "reel",
-      "layout": "faceless",
-      "plantilla": 837,
+      "layout": "cine",
+      "plantilla": 166,
       "look": 119,
       "serie": "Error de la semana",
-      "objetivo": ""
+      "objetivo": "alcance"
+    },
+    {
+      "date": "2026-11-17",
+      "tema": "zona de frenado crítica",
+      "formato": "mini tutorial",
+      "tipo": "historia",
+      "layout": "faceless",
+      "plantilla": 381,
+      "look": 229,
+      "serie": "",
+      "objetivo": "comunidad"
     },
     {
       "date": "2026-11-18",
-      "tema": "Mito o realidad: Más downforce siempre es mejor",
+      "tema": "downforce y ajustes críticos antes de carrera",
       "formato": "mito vs realidad",
       "tipo": "carrusel",
-      "layout": "tarjeta",
-      "plantilla": 960,
-      "look": 229,
+      "layout": "cine",
+      "plantilla": 1591,
+      "look": 83,
       "serie": "Mito o realidad",
       "objetivo": ""
     },
     {
       "date": "2026-11-19",
-      "tema": "Setup del seguidor: mejora de tiempo en Monza",
+      "tema": "setup enviado por @juan para Spa",
       "formato": "setup del seguidor",
       "tipo": "reel",
-      "layout": "cine",
-      "plantilla": 404,
-      "look": 83,
+      "layout": "faceless",
+      "plantilla": 732,
+      "look": 193,
       "serie": "Setup del seguidor",
       "objetivo": "confianza"
     }

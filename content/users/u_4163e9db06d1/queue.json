@@ -71,67 +71,81 @@
     "date": "2026-11-14",
     "source": "auto",
     "tipo": "post",
-    "tema": "Comparativa de estrategias de pit‑stop: anticipado vs reactivo",
-    "publishAt": "2026-11-14T14:38:15.529137+01:00",
-    "caption": "Pit‑stop bien planificado puede ahorrarte décimas en cada vuelta. 🚦 Compara los dos enfoques y elige el que mejor se adapta a tu estilo. ¿Cuál usarías en tu próxima carrera? 👉 Enlace en bio\n\n#SimRacing #PitStop #Telemetría #Coaching #LAPRIQ #RacingTips #eSports",
+    "tema": "estrategia de pit‑stop sin perder tiempo",
+    "publishAt": "2026-11-14T15:28:17.269848+01:00",
+    "caption": "¿Quieres pit‑stops sin perder tiempo? 👇 Aplica estos 3 trucos y mejora tus vueltas. ¿Cuál usarás primero? #simracing #pitstop #LAPRIQ\n\n#simracing #pitstop #telemetria #LAPRIQ #coaching",
     "media": [
       "media/u_4163e9db06d1/2026-11-14/2026-11-14-01-post/01.jpg"
     ],
     "status": "scheduled",
     "attempts": 0,
-    "zernioPostId": "6af861efcf7ed47f34af2cef"
+    "zernioPostId": "6af86da9ea4d9cc51e04b52f"
   },
   {
     "id": "2026-11-14-02-reel",
     "date": "2026-11-14",
     "source": "auto",
     "tipo": "reel",
-    "tema": "Error de la semana: Sobre‑frenar en curvas lentas",
+    "tema": "Freno tardío por falta de freno motor",
     "publishAt": "2026-11-16T19:45:00+01:00",
-    "caption": "Sobre‑frenar en curvas lentas es un error que muchos cometen y que cuesta décimas valiosas. 🚦 Descubre cómo detectarlo en la telemetría y corregirlo en 3 pasos. ¿Te ha pasado? 👉 Comenta FRENO y recibe la guía completa en mi bio.\n\n#SimRacing #ErrorDeLaSemana #Telemetría #PitStop #LAPRIQ\n\n🎵 «Spencer Newton - Lucky Number 8 (Original Mix)(Electro House)» de Spencer Newton (CC BY 3.0)",
+    "caption": "¿Te ha pasado? 🚦 El freno motor es tu aliado oculto. Cuéntanos tu experiencia y mejora tus vueltas. #simracing #telemetria #LAPRIQ\n\n#simracing #telemetria #pitstop #LAPRIQ #coaching\n\n🎵 «Psychedelic Sunshine Pop Phantasm - Lenny n Marshmello Popsickles» de Lenny Wiles Lionstar GALAXY BANDSTAND (CC BY 3.0)",
     "media": [
       "media/u_4163e9db06d1/2026-11-14/2026-11-14-02-reel/video.mp4"
     ],
     "status": "scheduled",
     "attempts": 0,
     "cover": "media/u_4163e9db06d1/2026-11-14/2026-11-14-02-reel/cover.jpg",
-    "zernioPostId": "6af8634a57546f84959b9c3c"
+    "zernioPostId": "6af86dacea4d9cc51e04b53d"
   },
   {
-    "id": "2026-11-14-03-carrusel",
+    "id": "2026-11-14-03-historia",
+    "date": "2026-11-14",
+    "source": "auto",
+    "tipo": "historia",
+    "tema": "zona de frenado crítica",
+    "publishAt": "2026-11-17T09:00:00+01:00",
+    "caption": "",
+    "media": [
+      "media/u_4163e9db06d1/2026-11-14/2026-11-14-03-historia/video.mp4"
+    ],
+    "status": "scheduled",
+    "attempts": 0,
+    "cover": "media/u_4163e9db06d1/2026-11-14/2026-11-14-03-historia/cover.jpg",
+    "zernioPostId": "6af86dafea4d9cc51e04b564"
+  },
+  {
+    "id": "2026-11-14-04-carrusel",
     "date": "2026-11-14",
     "source": "auto",
     "tipo": "carrusel",
-    "tema": "Mito o realidad: Más downforce siempre es mejor",
+    "tema": "downforce y ajustes críticos antes de carrera",
     "publishAt": "2026-11-18T13:00:00+01:00",
-    "caption": "Más downforce no siempre significa más velocidad. Descubre cuándo reducir el ángulo del alerón para ganar tiempo en rectas largas. 🚗💨 Guarda este carrusel y ajusta tu setup con datos reales. #Downforce #MitoVsRealidad #LAPRIQ\n\n#Downforce #MitoVsRealidad #SimRacing #LAPRIQ #Coaching",
+    "caption": "Desmontamos el mito del downforce y te damos la guía definitiva de ajustes. 👉 Desliza y guarda. #simracing #ajustes #LAPRIQ\n\n#simracing #downforce #ajustes #LAPRIQ #coaching",
     "media": [
-      "media/u_4163e9db06d1/2026-11-14/2026-11-14-03-carrusel/01.jpg",
-      "media/u_4163e9db06d1/2026-11-14/2026-11-14-03-carrusel/02.jpg",
-      "media/u_4163e9db06d1/2026-11-14/2026-11-14-03-carrusel/03.jpg",
-      "media/u_4163e9db06d1/2026-11-14/2026-11-14-03-carrusel/04.jpg",
-      "media/u_4163e9db06d1/2026-11-14/2026-11-14-03-carrusel/05.jpg",
-      "media/u_4163e9db06d1/2026-11-14/2026-11-14-03-carrusel/06.jpg",
-      "media/u_4163e9db06d1/2026-11-14/2026-11-14-03-carrusel/07.jpg"
+      "media/u_4163e9db06d1/2026-11-14/2026-11-14-04-carrusel/01.jpg",
+      "media/u_4163e9db06d1/2026-11-14/2026-11-14-04-carrusel/02.jpg",
+      "media/u_4163e9db06d1/2026-11-14/2026-11-14-04-carrusel/03.jpg",
+      "media/u_4163e9db06d1/2026-11-14/2026-11-14-04-carrusel/04.jpg",
+      "media/u_4163e9db06d1/2026-11-14/2026-11-14-04-carrusel/05.jpg"
     ],
     "status": "scheduled",
     "attempts": 0,
-    "zernioPostId": "6af861f7cf7ed47f34af2d1e"
+    "zernioPostId": "6af86db5ea4d9cc51e04b5a5"
   },
   {
-    "id": "2026-11-14-04-reel",
+    "id": "2026-11-14-05-reel",
     "date": "2026-11-14",
     "source": "auto",
     "tipo": "reel",
-    "tema": "Setup del seguidor: mejora de tiempo en Monza",
+    "tema": "setup enviado por @juan para Spa",
     "publishAt": "2026-11-19T19:30:00+01:00",
-    "caption": "Un ajuste de freno motor y balance de peso le ahorró 0.48 s a nuestro seguidor en Monza. 🚀 ¿Te animas a probarlo? Manda tu setup por DM y lo analizamos juntos. 👉 Link en bio\n\n#Setup #Monza #SimRacing #LAPRIQ #Coaching\n\n🎵 «Hip-Hop 1» de Deff Syndicate (CC BY 3.0)",
+    "caption": "Así transformamos el setup de @juan y ganamos décimas. 🚀 Envíame el tuyo y lo pulimos juntos. #simracing #coaching #LAPRIQ\n\n#simracing #coaching #setup #LAPRIQ #racing\n\n🎵 «Spencer Newton - Right Now (Original Mix)(Electro House)» de Spencer Newton (CC BY 3.0)",
     "media": [
-      "media/u_4163e9db06d1/2026-11-14/2026-11-14-04-reel/video.mp4"
+      "media/u_4163e9db06d1/2026-11-14/2026-11-14-05-reel/video.mp4"
     ],
     "status": "scheduled",
     "attempts": 0,
-    "cover": "media/u_4163e9db06d1/2026-11-14/2026-11-14-04-reel/cover.jpg",
-    "zernioPostId": "6af861fd58a2bd853a85f85e"
+    "cover": "media/u_4163e9db06d1/2026-11-14/2026-11-14-05-reel/cover.jpg",
+    "zernioPostId": "6af86dbbea4d9cc51e04b5ec"
   }
 ]
