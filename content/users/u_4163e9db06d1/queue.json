@@ -67,45 +67,6 @@
     "zernioPostId": "6af3bcaeab419287a3961457"
   },
   {
-    "id": "2026-11-14-01-reel",
-    "date": "2026-11-14",
-    "source": "auto",
-    "tipo": "reel",
-    "tema": "Dato curioso: Telemetría de suspensión",
-    "publishAt": "2026-11-14T21:59:37.883130+01:00",
-    "caption": "¿Sabes que la suspensión registra 200kHz? 🚀 Un ajuste de 1mm puede ganar 0.2s por vuelta. Guarda y comparte si te sorprendió. 👉 Link en bio\n\n#telemetría #suspensión #simracing #lapriq #datos\n\n🎵 «Spencer Newton - Bounce (Original Mix)(Electro House)» de Spencer Newton (CC BY 3.0)",
-    "media": [
-      "media/u_4163e9db06d1/2026-11-14/2026-11-14-01-reel/video.mp4"
-    ],
-    "status": "scheduled",
-    "attempts": 0,
-    "cover": "media/u_4163e9db06d1/2026-11-14/2026-11-14-01-historia/cover.jpg",
-    "zernioPostId": "6af890e46b2a87dbdf664da8",
-    "veo": {
-      "clips": [
-        {
-          "t": "¿Te pierdes al leer la curva de frenado en la telemetría? Porque muestra la presión de freno sin señalar la zona exacta.",
-          "prompt": "Aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a large monitor showing a racing simulation, not a real car interior. The racer sits in the rig, squinting at a monitor displaying a blue braking curve graph, hand hovering over steering wheel, confused expression. Then: The racer points at a flat brake pressure bar on the monitor, the screen lacking any highlighted zone, while seated in the rig. smooth natural camera movement, vertical 9:16 video, photorealistic, bright natural light, sharp focus, no text, no captions, no logos, no brand names, no watermark",
-          "dur": 8
-        },
-        {
-          "t": "Abre la telemetría de freno y marca cuando el coche empieza a girar.",
-          "prompt": "Aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a large monitor showing a racing simulation, not a real car interior. The racer uses a mouse to open the brake telemetry window and draws a red marker on the graph at the moment the car begins to turn. smooth natural camera movement, vertical 9:16 video, photorealistic, bright natural light, sharp focus, no text, no captions, no logos, no brand names, no watermark",
-          "dur": 6
-        },
-        {
-          "t": "Verás el punto de frenado alineado con la entrada de la curva, sin sobre‑frenar. Si te sirve, sigue la cuenta para más trucos de telemetría.",
-          "prompt": "Aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a large monitor showing a racing simulation, not a real car interior. The monitor shows a red braking point aligned with the curve entry on the track map, while the racer watches intently from the rig. Then: The racer gives a thumbs‑up, leaning forward at the rig, with the monitor displaying icons of telemetry tricks, inviting viewers to follow. smooth natural camera movement, vertical 9:16 video, photorealistic, bright natural light, sharp focus, no text, no captions, no logos, no brand names, no watermark",
-          "dur": 8
-        }
-      ],
-      "voz": "es-ES-ElviraNeural",
-      "ritmo": "+8%",
-      "musica": "energetica",
-      "hashtags": ""
-    }
-  },
-  {
     "id": "2026-11-14-02-reel",
     "date": "2026-11-14",
     "source": "auto",
