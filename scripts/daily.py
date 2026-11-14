@@ -600,6 +600,16 @@ def plan_user(browser, user, key, force=False, redo=None):
         page.evaluate("prefetchAll()")
         page.wait_for_function("typeof pendingA==='undefined' || pendingA.size===0", timeout=2_700_000, polling=2000)
         page.wait_for_timeout(1000)
+        miss = "S.today.videos.reduce((a,p)=>a+needed(p).filter(it=>!S.assets.has(it.k)).length,0)"
+        total_img = page.evaluate("S.today.videos.reduce((a,p)=>a+needed(p).length,0)")
+        if total_img and page.evaluate(miss):  # segunda vuelta para las imágenes que fallaron
+            log(f"  ⏳ Faltan {page.evaluate(miss)}/{total_img} imágenes; espero y lo vuelvo a intentar…")
+            time.sleep(60)
+            page.evaluate("prefetchAll()")
+            page.wait_for_function("typeof pendingA==='undefined' || pendingA.size===0", timeout=2_700_000, polling=2000)
+        if total_img:
+            got = total_img - page.evaluate(miss)
+            log(f"  🖼 Imágenes: {got}/{total_img} generadas" + ("" if got == total_img else " (el generador gratuito limita la velocidad; con POLLINATIONS_TOKEN no pasa)"))
         page.evaluate(RENDER_JS)
         pieces = page.evaluate("JSON.parse(JSON.stringify(S.today.videos))")
         out_root = DOCS / "media" / uid / today

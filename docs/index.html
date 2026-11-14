@@ -741,7 +741,7 @@ CRITERIOS DE AGENCIA (calidad antes que cantidad; nunca satures a la audiencia)
 - Cada escena tiene un "titulo" de como mucho 4 palabras y un "texto" de como mucho ${LEN} palabras, concretos y útiles. Marca 1 o 2 palabras clave con *asteriscos*.${O.emoji?' Añade "emoji" (uno solo) a cada escena.':''}
 ${O.graficos!==false?`- "grafico" (en cada escena de reels e historias): una animación que explica visualmente la escena, como hacen los creadores de vídeos educativos animados. Elige el que mejor encaje y varía entre escenas:
   {"tipo":"comparacion","mal":"lo que se hace mal (≤4 palabras)","bien":"lo correcto (≤4 palabras)"} · {"tipo":"checklist","items":["paso","paso","paso"]} (2-4 pasos de ≤3 palabras) · {"tipo":"velocimetro","valor":0-100,"etiqueta":"qué mide"} (intensidad, presión, nivel) · {"tipo":"progreso","valor":0-100,"etiqueta":"…"} · {"tipo":"ruta","desde":"punto de partida","hasta":"meta"} (camino o proceso) · {"tipo":"objetivo","etiqueta":"la clave"} (dar en el blanco) · {"tipo":"contador","valor":número,"unidad":"…"} (SOLO si el número sale en el propio consejo, p. ej. "3 pasos" o "2 segundos").
-`:""}${window.__faceless!==false?`- ESTILO FACELESS para TODOS los reels e historias (el estilo que más visitas da): el vídeo es una NARRACIÓN CONTINUA de 25 a 45 segundos (entre 70 y 110 palabras en total en "guion") sobre imágenes generadas a pantalla completa que cambian cada 2-3 segundos, con subtítulos. Por eso en reels e historias:
+`:""}${window.__faceless!==false?`- ESTILO FACELESS para TODOS los reels e historias (el estilo que más visitas da): el vídeo es una NARRACIÓN CONTINUA de 25 a 45 segundos (OBLIGATORIO: entre 7 y 10 frases y entre 75 y 110 palabras en total en "guion"; en historias, entre 4 y 6 frases y 40-60 palabras) sobre imágenes generadas a pantalla completa que cambian cada 2-3 segundos, con subtítulos. Por eso en reels e historias:
   · "guion" es obligatorio y se lee como UNA historia o explicación seguida, en segunda persona, de alguien que quiere enseñar y ayudar de verdad, nunca de anuncio. La primera frase es el gancho y tiene que atrapar en el primer segundo y medio (pregunta, error común, dato sorprendente o "nadie te cuenta esto…"). El 90% del vídeo enseña algo útil y concreto del nicho de la marca; la venta nunca es explícita. La última frase invita con naturalidad a seguir la cuenta para más consejos.
   · "cierre_bio": una frase alternativa de cierre que menciona el enlace del perfil con naturalidad ("si quieres aprender más, tienes el enlace en mi perfil"); la agencia solo la usa en uno de cada cuatro vídeos.
   · "estilo_visual" (en INGLÉS): estilo fotográfico común a todo el vídeo para que las imágenes sean coherentes: tipo de plano, luz, paleta y ambiente ("cinematic 35mm film look, warm golden hour light, teal and orange palette, shallow depth of field"). Adaptado al nicho y la marca.
@@ -760,7 +760,7 @@ AUDIO (solo reels e historias; los vídeos llevan locución real)
 - "guion" (solo si hay voz): lista de frases habladas, UNA por pantalla y en orden: gancho, cada escena y cierre (o el texto del sticker en historias). Tiene que sonar a creador hablando a cámara, no a texto leído: frases cortas, tuteo, exclamaciones y preguntas retóricas ("¿Sabes por qué?"), pausas con comas y puntos suspensivos, conectores de conversación ("mira", "ojo", "y aquí viene lo bueno"). Nada de "en primer lugar". Números pequeños con letra. Como mucho 22 palabras por frase, sin emojis, asteriscos ni hashtags.`:''}
 
 Responde SOLO con JSON válido:
-{"estrategia":"2 o 3 frases: qué días se publica, cuáles se descansa y por qué","piezas":[{"dia":0,"hora":"19:30","tipo":"reel","objetivo":"…","razon":"…","tema":"…","formato":"…","gancho":"…"${needVis?',"visual":"…","foto":""':''},"escenas":[{"titulo":"…","texto":"…"${needVis?',"visual":"…","foto":""':''}${O.emoji?',"emoji":"…"':''}${O.graficos!==false?',"grafico":{"tipo":"…"}':''}}],"cta":"…","layout":"…"${window.__faceless!==false?',"estilo_visual":"…","visual_cierre":"…","cierre_bio":"…"':''},"objetivo":"alcance|confianza|comunidad|conversion","serie":"nombre de la serie o vacío","episodio":0${O.stickers!==false?',"stickers":["…","…","…"]':''},"sticker":null,"fondo":"…","estilo":"…"${AUDIO_CAPS?',"audio":"…","voz":"…","ritmo_voz":"…","musica":"…","guion":["…"]':''},"caption":"…","hashtags":["#…"]}]}`;
+{"estrategia":"2 o 3 frases: qué días se publica, cuáles se descansa y por qué","piezas":[{"dia":0,"hora":"19:30","tipo":"reel","objetivo":"…","razon":"…","tema":"…","formato":"…","gancho":"…"${needVis?',"visual":"…","foto":""':''},"escenas":[{"titulo":"…","texto":"…"${needVis?',"visual":"…","foto":""':''}${window.__faceless!==false?',"visuales":["…","…"]':''}${O.emoji?',"emoji":"…"':''}${O.graficos!==false?',"grafico":{"tipo":"…"}':''}}],"cta":"…","layout":"…"${window.__faceless!==false?',"estilo_visual":"…","visual_cierre":"…","cierre_bio":"…"':''},"objetivo":"alcance|confianza|comunidad|conversion","serie":"nombre de la serie o vacío","episodio":0${O.stickers!==false?',"stickers":["…","…","…"]':''},"sticker":null,"fondo":"…","estilo":"…"${AUDIO_CAPS?',"audio":"…","voz":"…","ritmo_voz":"…","musica":"…","guion":["…"]':''},"caption":"…","hashtags":["#…"]}]}`;
 }
 $("#genBtn").addEventListener("click",async()=>{
   const st=$("#genStatus"),btn=$("#genBtn");
@@ -1747,7 +1747,10 @@ function needed(p){ if(p&&p.layout==="faceless"&&TYPES[p.tipo]&&TYPES[p.tipo].vi
   if(!wantsPhotos(p)) return []; const qs=[pieceQ(p)]; if(S.cfg.v.imgPer==="scene"&&p.tipo!=="post") (p.tipo==="historia"?p.escenas.slice(0,2):p.escenas).forEach(e=>qs.push(sceneQ(e))); return [...new Set(qs.map(q=>String(q).trim()).filter(Boolean))].map(q=>({mode:"ai",q,k:"ai|"+q})); }
 function getA(mode,q){return S.assets.get(mode+"|"+String(q).trim())||null;}
 HOOKS.attachAssets=(p,sc)=>{ if(p&&p.layout==="faceless"&&TYPES[p.tipo]&&TYPES[p.tipo].video){ const f=flPrompts(p); let ti=0; const g=q=>getA("ai","ia:"+q);
-    sc.forEach(s=>{ const list=s.kind==="hook"?f.hook:s.kind==="tip"?(f.tips[ti++]||f.hook):f.cta; s.imgs=list.map(g).filter(Boolean); if(!s.imgs.length){ const any=[].concat(f.hook,...f.tips,f.cta).map(g).filter(Boolean); s.imgs=any.slice(0,1);} }); return; }
+    const pool=[...new Set([].concat(f.hook,...f.tips,f.cta))].map(g).filter(Boolean);
+    sc.forEach((s,si)=>{ const list=s.kind==="hook"?f.hook:s.kind==="tip"?(f.tips[ti++]||f.hook):f.cta; s.imgs=list.map(g).filter(Boolean);
+      if(s.imgs.length<2&&pool.length>1){ const extra=[pool[(si*2+1)%pool.length],pool[(si*2+2)%pool.length]].filter(x=>!s.imgs.includes(x)); s.imgs=s.imgs.concat(extra).slice(0,2); }
+      if(!s.imgs.length&&pool.length) s.imgs=[pool[si%pool.length]]; }); return; }
   if(!wantsPhotos(p)) return; const m=effBM(p), full=m==="ai"||m==="stock"; const hook=getA("ai",pieceQ(p)); let ti=0; const esc=p.tipo==="historia"?p.escenas.slice(0,2):p.escenas;
   sc.forEach(s=>{ if(s.kind==="tip"){ const e=esc[ti++]; s.asset=(S.cfg.v.imgPer==="scene"&&e?getA("ai",sceneQ(e)):null)||hook; } else s.asset=hook;
     if(p.layout==="cine"){ if(s.asset) s.full=true; }
@@ -1788,20 +1791,21 @@ async function loadAsset(it){
   return await loadPollinations(it.q);
 }
 async function loadPollinations(q){
-  const token=ls("ma_poll_token"); const gap=token?2500:15500;
+  const token=ls("ma_poll_token"); const gap=token?2500:18000;
   const wait=lastPoll+gap-Date.now(); if(wait>0) await sleep(wait);
   const prompt=q+", vertical photo, cinematic lighting, vibrant, high detail, no text, no watermark";
   const url="https://image.pollinations.ai/prompt/"+encodeURIComponent(prompt)+"?width=1080&height=1920&nologo=true&seed="+hashStr(q)+(token?"&token="+encodeURIComponent(token):"");
-  for(let tries=0;tries<3;tries++){
+  const MAXT=window.__AGENCIA_SERVER?6:3;
+  for(let tries=0;tries<MAXT;tries++){
     lastPoll=Date.now();
     try{
       const r=await fetch(url);
-      if(r.status===429){ await sleep(16000); continue; }
+      if(r.status===429||r.status===402||r.status>=500){ window.__imgRetries=(window.__imgRetries||0)+1; await sleep(window.__AGENCIA_SERVER?25000+tries*10000:16000); if(tries===MAXT-1) throw new Error("HTTP "+r.status); continue; }
       if(!r.ok) throw new Error("HTTP "+r.status);
       const blob=await r.blob(); if(!/^image\//.test(blob.type)) throw new Error("no es imagen");
       const im=new Image(); im.src=URL.createObjectURL(blob); await im.decode();
       return {kind:"image",el:im};
-    }catch(e){ if(tries===2) throw e; await sleep(4000); }
+    }catch(e){ if(tries>=MAXT-1) throw e; await sleep(4000); }
   }
   throw new Error("sin imagen");
 }
