@@ -71,81 +71,83 @@
     "date": "2026-11-14",
     "source": "auto",
     "tipo": "post",
-    "tema": "Top 3 ajustes de telemetría para acelerar tu primera vuelta",
-    "publishAt": "2026-11-14T19:30:00+01:00",
-    "caption": "¿Quieres ganar décimas en tu primera vuelta? Aplica estos 3 ajustes y siente la diferencia. ¿Cuál probarás primero? 🚀\n\n#SimRacing #TelemetryTips #Lapriq #RacingSetup #FastLap",
+    "tema": "Zona de frenado crítica en curvas lentas",
+    "publishAt": "2026-11-14T13:07:35.289460+01:00",
+    "caption": "🚦 La zona de frenado que más te cuesta puede robarte décimas. Descubre cómo identificarla y ajustarla. ¿Cuál es tu mayor desafío?\n\n#SimRacing #Telemetría #Ajustes #Lapriq #RacingTips",
     "media": [
       "media/u_4163e9db06d1/2026-11-14/2026-11-14-01-post/01.jpg"
     ],
     "status": "scheduled",
     "attempts": 0,
-    "zernioPostId": "6af82032fee79e2865eca44f"
+    "zernioPostId": "6af84caf0c89f23a06cba2e8"
   },
   {
-    "id": "2026-11-14-02-historia",
-    "date": "2026-11-14",
-    "source": "auto",
-    "tipo": "historia",
-    "tema": "Mini tutorial: interpretar telemetría en tiempo real",
-    "publishAt": "2026-11-15T09:00:00+01:00",
-    "caption": "",
-    "media": [
-      "media/u_4163e9db06d1/2026-11-14/2026-11-14-02-historia/video.mp4"
-    ],
-    "status": "scheduled",
-    "attempts": 0,
-    "cover": "media/u_4163e9db06d1/2026-11-14/2026-11-14-02-historia/cover.jpg",
-    "zernioPostId": "6af8203454c62ce6d95b934f"
-  },
-  {
-    "id": "2026-11-14-03-reel",
+    "id": "2026-11-14-02-reel",
     "date": "2026-11-14",
     "source": "auto",
     "tipo": "reel",
     "tema": "Freno tardío por falta de freno motor",
-    "publishAt": "2026-11-16T20:00:00+01:00",
-    "caption": "¿Te ha pasado este error en tu última sesión? Activa el freno motor y gana décimas. ¿Listo para probarlo? 🏎️\n\n#SimRacingTips #TelemetryError #Lapriq #RacingSetup #DrivingSkill\n\n🎵 «Spencer Newton - Right Now (Original Mix)(Electro House)» de Spencer Newton (CC BY 3.0)",
+    "publishAt": "2026-11-16T19:30:00+01:00",
+    "caption": "🚀 ¿Te ha pasado? El freno motor es tu aliado oculto. Actívalo y siente la diferencia. ¿Qué otras dudas tienes?\n\n#SimRacing #Telemetría #ErrorDeLaSemana #Lapriq #RacingTips\n\n🎵 «Spencer Newton - Bounce (Original Mix)(Electro House)» de Spencer Newton (CC BY 3.0)",
     "media": [
-      "media/u_4163e9db06d1/2026-11-14/2026-11-14-03-reel/video.mp4"
+      "media/u_4163e9db06d1/2026-11-14/2026-11-14-02-reel/video.mp4"
     ],
     "status": "scheduled",
     "attempts": 0,
-    "cover": "media/u_4163e9db06d1/2026-11-14/2026-11-14-03-reel/cover.jpg",
-    "zernioPostId": "6af8203654c62ce6d95b935c"
+    "cover": "media/u_4163e9db06d1/2026-11-14/2026-11-14-02-reel/cover.jpg",
+    "zernioPostId": "6af84cb10c89f23a06cba308"
   },
   {
-    "id": "2026-11-14-04-carrusel",
+    "id": "2026-11-14-03-carrusel",
     "date": "2026-11-14",
     "source": "auto",
     "tipo": "carrusel",
-    "tema": "Más downforce siempre es mejor",
+    "tema": "Guía de ajustes críticos antes de la carrera",
     "publishAt": "2026-11-18T13:30:00+01:00",
-    "caption": "¿Pensabas que más downforce siempre ayuda? Descubre la verdad y ajusta tu coche como un ingeniero. ¿Qué ajuste cambiarías hoy? 🛠️\n\n#Downforce #RacingAerodynamics #Lapriq #SimRacingScience #TechTips",
+    "caption": "🔧 La diferencia está en los detalles. Usa esta checklist para no dejar nada al azar. ¿Qué ajuste te sorprendió?\n\n#SimRacing #Checklist #AjustesCriticos #Lapriq #RacingTips",
     "media": [
-      "media/u_4163e9db06d1/2026-11-14/2026-11-14-04-carrusel/01.jpg",
-      "media/u_4163e9db06d1/2026-11-14/2026-11-14-04-carrusel/02.jpg",
-      "media/u_4163e9db06d1/2026-11-14/2026-11-14-04-carrusel/03.jpg",
-      "media/u_4163e9db06d1/2026-11-14/2026-11-14-04-carrusel/04.jpg",
-      "media/u_4163e9db06d1/2026-11-14/2026-11-14-04-carrusel/05.jpg"
+      "media/u_4163e9db06d1/2026-11-14/2026-11-14-03-carrusel/01.jpg",
+      "media/u_4163e9db06d1/2026-11-14/2026-11-14-03-carrusel/02.jpg",
+      "media/u_4163e9db06d1/2026-11-14/2026-11-14-03-carrusel/03.jpg",
+      "media/u_4163e9db06d1/2026-11-14/2026-11-14-03-carrusel/04.jpg",
+      "media/u_4163e9db06d1/2026-11-14/2026-11-14-03-carrusel/05.jpg",
+      "media/u_4163e9db06d1/2026-11-14/2026-11-14-03-carrusel/06.jpg",
+      "media/u_4163e9db06d1/2026-11-14/2026-11-14-03-carrusel/07.jpg"
     ],
     "status": "scheduled",
     "attempts": 0,
-    "zernioPostId": "6af8203c54c62ce6d95b93a2"
+    "zernioPostId": "6af84cbbb5f14a6a1590aac6"
   },
   {
-    "id": "2026-11-14-05-reel",
+    "id": "2026-11-14-04-reel",
     "date": "2026-11-14",
     "source": "auto",
     "tipo": "reel",
-    "tema": "Envía tu setup y lo analizamos en tiempo real",
-    "publishAt": "2026-11-19T19:45:00+01:00",
-    "caption": "¡Queremos ver tu configuración! Envía tu setup y descubre cómo pulir cada detalle. ¿Listo para el reto? 🚀\n\n#SetupReview #LapriqCommunity #SimRacingCoaching #Telemetry #RacingTips\n\n🎵 «Trip Around The World - FREE MUSIC» de ANtarcticbreeze (CC BY 3.0)",
+    "tema": "Llamada a envío de setup",
+    "publishAt": "2026-11-19T19:30:00+01:00",
+    "caption": "📊 ¿Quieres saber qué le falta a tu coche? Envíame tu setup y lo desglosamos juntos. ¡Vamos a mejorar!\n\n#SimRacing #SetupSeguidor #Lapriq #Coaching #Telemetría\n\n🎵 «Lucky Acoustic» de Jesse Keller (CC BY 3.0)",
     "media": [
-      "media/u_4163e9db06d1/2026-11-14/2026-11-14-05-reel/video.mp4"
+      "media/u_4163e9db06d1/2026-11-14/2026-11-14-04-reel/video.mp4"
     ],
     "status": "scheduled",
     "attempts": 0,
-    "cover": "media/u_4163e9db06d1/2026-11-14/2026-11-14-05-reel/cover.jpg",
-    "zernioPostId": "6af8204154c62ce6d95b93f8"
+    "cover": "media/u_4163e9db06d1/2026-11-14/2026-11-14-04-reel/cover.jpg",
+    "zernioPostId": "6af84cc1aedf197772a1363c"
+  },
+  {
+    "id": "2026-11-14-05-historia",
+    "date": "2026-11-14",
+    "source": "auto",
+    "tipo": "historia",
+    "tema": "Mini tutorial: interpretar telemetría en tiempo real",
+    "publishAt": "2026-11-20T09:00:00+01:00",
+    "caption": "",
+    "media": [
+      "media/u_4163e9db06d1/2026-11-14/2026-11-14-05-historia/video.mp4"
+    ],
+    "status": "scheduled",
+    "attempts": 0,
+    "cover": "media/u_4163e9db06d1/2026-11-14/2026-11-14-05-historia/cover.jpg",
+    "zernioPostId": "6af84cc30c89f23a06cba3e8"
   }
 ]

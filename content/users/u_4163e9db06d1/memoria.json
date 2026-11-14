@@ -1,8 +1,8 @@
 {
  "version": 1,
  "creada": "2026-11-10T21:43:01",
- "actualizada": "2026-11-14T08:37:29",
- "semana": 2,
+ "actualizada": "2026-11-14T11:45:24",
+ "semana": 3,
  "fase": "descubrimiento",
  "objetivo_mes": "Aumentar el alcance y posicionar a LAPRIQ como referencia de tips técnicos y coaching en sim‑racing",
  "arco_semana": {
@@ -21,14 +21,14 @@
    "formato": "reel",
    "cuando": "lunes",
    "descripcion": "Se muestra un error típico de telemetría y cómo corregirlo",
-   "episodios": 2
+   "episodios": 3
   },
   {
    "nombre": "Setup del seguidor",
    "formato": "reel",
    "cuando": "jueves",
    "descripcion": "Analizamos el setup enviado por un seguidor y lo mejoramos en tiempo real",
-   "episodios": 2
+   "episodios": 3
   },
   {
    "nombre": "Mito o realidad",
@@ -141,5 +141,5 @@
    }
   ]
  },
- "resumen_para_dueño": "Esta semana reforzamos el descubrimiento con contenido técnico de alto valor y mantenemos nuestras tres series pilares, enfocándonos en ajustes de setup y gestión de boxes. La mezcla sigue priorizando alcance y confianza, mientras cumplimos las promesas pendientes y preparamos ideas para fortalecer la comunidad en próximas semanas."
+ "resumen_para_dueño": "Esta semana reforzamos el descubrimiento con contenido técnico de alto valor, manteniendo nuestras series pilares y cumpliendo las promesas pendientes. La mezcla sigue priorizando alcance y confianza, mientras preparamos el reto de telemetría para impulsar la comunidad."
 }

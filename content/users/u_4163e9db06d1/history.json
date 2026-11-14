@@ -241,16 +241,6 @@
       "tema": "[IG · ❤️4] Descarga la app para dejar de adivinar donde pierdes tiempo en cada vuelta/pasada!!"
     },
     {
-      "date": "2026-11-15",
-      "tema": "Promoción Black Friday: 15 días de garantía + 20% descuento",
-      "formato": "mini anuncio",
-      "tipo": "historia",
-      "layout": "clasico",
-      "plantilla": 1139,
-      "serie": "",
-      "objetivo": ""
-    },
-    {
       "date": "2026-11-14",
       "tema": "Top 3 ajustes de telemetría para acelerar tu primera vuelta",
       "formato": "lista",
@@ -260,6 +250,16 @@
       "look": 187,
       "serie": "",
       "objetivo": "alcance"
+    },
+    {
+      "date": "2026-11-15",
+      "tema": "Promoción Black Friday: 15 días de garantía + 20% descuento",
+      "formato": "mini anuncio",
+      "tipo": "historia",
+      "layout": "clasico",
+      "plantilla": 1139,
+      "serie": "",
+      "objetivo": ""
     },
     {
       "date": "2026-11-15",
@@ -304,6 +304,61 @@
       "look": 115,
       "serie": "Setup del seguidor",
       "objetivo": "comunidad"
+    },
+    {
+      "date": "2026-11-14",
+      "tema": "Zona de frenado crítica en curvas lentas",
+      "formato": "lista",
+      "tipo": "post",
+      "layout": "cine",
+      "plantilla": 1694,
+      "look": 252,
+      "serie": "",
+      "objetivo": "comunidad"
+    },
+    {
+      "date": "2026-11-16",
+      "tema": "Freno tardío por falta de freno motor",
+      "formato": "error que cuesta tiempo",
+      "tipo": "reel",
+      "layout": "faceless",
+      "plantilla": 661,
+      "look": 106,
+      "serie": "Error de la semana",
+      "objetivo": "alcance"
+    },
+    {
+      "date": "2026-11-18",
+      "tema": "Guía de ajustes críticos antes de la carrera",
+      "formato": "checklist",
+      "tipo": "carrusel",
+      "layout": "dividido",
+      "plantilla": 1932,
+      "look": 216,
+      "serie": "",
+      "objetivo": ""
+    },
+    {
+      "date": "2026-11-19",
+      "tema": "Llamada a envío de setup",
+      "formato": "llamada a participación",
+      "tipo": "reel",
+      "layout": "faceless",
+      "plantilla": 899,
+      "look": 70,
+      "serie": "Setup del seguidor",
+      "objetivo": "comunidad"
+    },
+    {
+      "date": "2026-11-20",
+      "tema": "Mini tutorial: interpretar telemetría en tiempo real",
+      "formato": "mini tutorial",
+      "tipo": "historia",
+      "layout": "faceless",
+      "plantilla": 2170,
+      "look": 180,
+      "serie": "",
+      "objetivo": ""
     }
   ]
 }
