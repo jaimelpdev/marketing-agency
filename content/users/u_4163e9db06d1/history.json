@@ -1,6 +1,12 @@
 {
   "items": [
     {
+      "date": "2026-09-27",
+      "tipo": "reel",
+      "src": "red",
+      "tema": "[IG · ❤️12] ¿Vale la pena apostar por encoders ópticos en tu volante de SimRacing? Descubre si precisión y durabilidad realmente van de la mano."
+    },
+    {
       "date": "2026-09-29",
       "tipo": "reel",
       "src": "red",
@@ -100,7 +106,7 @@
       "date": "2026-11-05",
       "tipo": "reel",
       "src": "red",
-      "tema": "[IG · ❤️60] Si el rival ya apunta al interior, defender tarde en Monza suele acabar en contacto. Aprende cuándo cubrir y cómo frenar con margen."
+      "tema": "[IG · ❤️61] Si el rival ya apunta al interior, defender tarde en Monza suele acabar en contacto. Aprende cuándo cubrir y cómo frenar con margen."
     },
     {
       "date": "2026-11-08",
@@ -274,15 +280,20 @@
     },
     {
       "date": "2026-11-14",
+      "tema": "estrategia de pit‑stop sin perder tiempo",
+      "formato": "lista",
       "tipo": "post",
-      "src": "red",
-      "tema": "[IG · ❤️0] Pit‑stop bien planificado puede ahorrarte décimas en cada vuelta. 🚦 Compara los dos enfoques y elige el que mejor se adapta a tu estilo. ¿Cu"
+      "layout": "cine",
+      "plantilla": 461,
+      "look": 186,
+      "serie": "",
+      "objetivo": "confianza"
     },
     {
       "date": "2026-11-14",
       "tipo": "post",
       "src": "red",
-      "tema": "[IG · ❤️0] 🚦 La zona de frenado que más te cuesta puede robarte décimas. Descubre cómo identificarla y ajustarla. ¿Cuál es tu mayor desafío?"
+      "tema": "[IG · ❤️1] 🚦 La zona de frenado que más te cuesta puede robarte décimas. Descubre cómo identificarla y ajustarla. ¿Cuál es tu mayor desafío?"
     },
     {
       "date": "2026-11-15",
@@ -350,6 +361,17 @@
       "objetivo": ""
     },
     {
+      "date": "2026-11-16",
+      "tema": "Freno tardío por falta de freno motor",
+      "formato": "error de la semana",
+      "tipo": "reel",
+      "layout": "cine",
+      "plantilla": 166,
+      "look": 119,
+      "serie": "Error de la semana",
+      "objetivo": "alcance"
+    },
+    {
       "date": "2026-11-17",
       "tema": "Mini encuesta",
       "formato": "historia",
@@ -359,6 +381,17 @@
       "look": 229,
       "serie": "",
       "objetivo": ""
+    },
+    {
+      "date": "2026-11-17",
+      "tema": "zona de frenado crítica",
+      "formato": "mini tutorial",
+      "tipo": "historia",
+      "layout": "faceless",
+      "plantilla": 381,
+      "look": 229,
+      "serie": "",
+      "objetivo": "comunidad"
     },
     {
       "date": "2026-11-18",
@@ -405,6 +438,17 @@
       "objetivo": ""
     },
     {
+      "date": "2026-11-18",
+      "tema": "downforce y ajustes críticos antes de carrera",
+      "formato": "mito vs realidad",
+      "tipo": "carrusel",
+      "layout": "cine",
+      "plantilla": 1591,
+      "look": 83,
+      "serie": "Mito o realidad",
+      "objetivo": ""
+    },
+    {
       "date": "2026-11-19",
       "tema": "Envía tu setup y lo analizamos en tiempo real",
       "formato": "llamada a participación",
@@ -438,6 +482,17 @@
       "objetivo": "confianza"
     },
     {
+      "date": "2026-11-19",
+      "tema": "setup enviado por @juan para Spa",
+      "formato": "setup del seguidor",
+      "tipo": "reel",
+      "layout": "faceless",
+      "plantilla": 732,
+      "look": 193,
+      "serie": "Setup del seguidor",
+      "objetivo": "confianza"
+    },
+    {
       "date": "2026-11-20",
       "tema": "Mini tutorial: interpretar telemetría en tiempo real",
       "formato": "mini tutorial",
@@ -461,58 +516,58 @@
     },
     {
       "date": "2026-11-14",
-      "tema": "estrategia de pit‑stop sin perder tiempo",
-      "formato": "lista",
-      "tipo": "post",
-      "layout": "cine",
-      "plantilla": 461,
-      "look": 186,
-      "serie": "",
-      "objetivo": "confianza"
-    },
-    {
-      "date": "2026-11-16",
-      "tema": "Freno tardío por falta de freno motor",
-      "formato": "error de la semana",
-      "tipo": "reel",
-      "layout": "cine",
-      "plantilla": 166,
-      "look": 119,
-      "serie": "Error de la semana",
-      "objetivo": "alcance"
-    },
-    {
-      "date": "2026-11-17",
-      "tema": "zona de frenado crítica",
-      "formato": "mini tutorial",
+      "tema": "Zona de boxes y gestión de pit‑stop",
+      "formato": "mini encuesta",
       "tipo": "historia",
       "layout": "faceless",
-      "plantilla": 381,
-      "look": 229,
+      "plantilla": 1024,
+      "look": 186,
       "serie": "",
       "objetivo": "comunidad"
     },
     {
+      "date": "2026-11-16",
+      "tema": "Sobre‑frenado en curvas lentas",
+      "formato": "Error de la semana",
+      "tipo": "reel",
+      "layout": "faceless",
+      "plantilla": 2103,
+      "look": 119,
+      "serie": "",
+      "objetivo": "alcance"
+    },
+    {
       "date": "2026-11-18",
-      "tema": "downforce y ajustes críticos antes de carrera",
-      "formato": "mito vs realidad",
+      "tema": "Neumáticos blandos siempre son más rápidos",
+      "formato": "Mito o realidad",
       "tipo": "carrusel",
-      "layout": "cine",
-      "plantilla": 1591,
-      "look": 83,
-      "serie": "Mito o realidad",
+      "layout": "dividido",
+      "plantilla": 62,
+      "look": 229,
+      "serie": "",
       "objetivo": ""
     },
     {
       "date": "2026-11-19",
-      "tema": "setup enviado por @juan para Spa",
-      "formato": "setup del seguidor",
+      "tema": "Llamada a envío de setups",
+      "formato": "Setup del seguidor",
       "tipo": "reel",
       "layout": "faceless",
-      "plantilla": 732,
+      "plantilla": 1957,
+      "look": 83,
+      "serie": "",
+      "objetivo": "comunidad"
+    },
+    {
+      "date": "2026-11-20",
+      "tema": "Guía de ajustes críticos",
+      "formato": "mini tutorial",
+      "tipo": "historia",
+      "layout": "faceless",
+      "plantilla": 816,
       "look": 193,
-      "serie": "Setup del seguidor",
-      "objetivo": "confianza"
+      "serie": "",
+      "objetivo": ""
     }
   ]
 }

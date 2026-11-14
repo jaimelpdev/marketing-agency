@@ -1,19 +1,19 @@
 {
  "version": 1,
  "creada": "2026-11-10T21:43:01",
- "actualizada": "2026-11-14T13:43:19",
- "semana": 6,
+ "actualizada": "2026-11-14T15:11:11",
+ "semana": 7,
  "fase": "confianza",
  "objetivo_mes": "Aumentar el alcance y posicionar a LAPRIQ como referencia de tips técnicos y coaching en sim‑racing",
  "arco_semana": {
-  "tema": "Gestión de boxes y estrategia de carrera",
-  "porque": "Conecta los reels de tácticas de pit‑stop y planificación de carrera con contenido educativo que muestra el valor del coaching en tiempo real"
+  "tema": "Interpretación de telemetría en tiempo real para optimizar frenado y gestión de boxes",
+  "porque": "Conecta los reels de ajustes de frenado con la serie “Error de la semana” y refuerza la autoridad técnica mientras invitamos a la comunidad a compartir sus datos"
  },
  "mezcla": {
-  "alcance": 45,
-  "confianza": 35,
-  "comunidad": 15,
-  "conversion": 5
+  "alcance": 40,
+  "confianza": 30,
+  "comunidad": 20,
+  "conversion": 10
  },
  "series": [
   {
@@ -36,6 +36,13 @@
    "cuando": "miércoles",
    "descripcion": "Desmentimos creencias comunes del sim‑racing con datos y ejemplos",
    "episodios": 9
+  },
+  {
+   "nombre": "Reto mensual de telemetría",
+   "formato": "reel",
+   "cuando": "último viernes del mes",
+   "descripcion": "Desafío de telemetría con leaderboard; invitamos a subir sus laps y premiamos al mejor delta",
+   "episodios": 0
   }
  ],
  "aprendizajes": [
@@ -43,7 +50,7 @@
   "Los contenidos de ajuste de coche y estrategia de boxes reciben más likes y guardados",
   "Los posts con llamada a comentar aumentan los comentarios en 3×",
   "Los reels de \"Error de la semana\" generan mayor número de comentarios que otros formatos",
-  "Los reels promocionales de la app sin aporte técnico obtienen <5% de engagement y deben evitarse"
+  "Los reels promocionales sin aporte técnico obtienen <5% de engagement y deben evitarse"
  ],
  "que_evitar": [
   "Promociones genéricas de hardware sin vínculo técnico",
@@ -74,8 +81,8 @@
  "metricas": {
   "publicaciones_medidas": 25,
   "media_por_formato": {
-   "post": 0.0,
-   "reel": 50.0,
+   "post": 1.0,
+   "reel": 48.4,
    "carrusel": 4.0
   },
   "mejores": [
@@ -122,6 +129,14 @@
   ],
   "peores": [
    {
+    "tipo": "reel",
+    "date": "2026-11-12",
+    "eng": 4,
+    "likes": 4,
+    "com": 0,
+    "tema": "¿Sabes cómo el freno motor puede recortar décimas? Te explico el truco que usan los pilotos top. ¿Lo aplicaría"
+   },
+   {
     "tipo": "carrusel",
     "date": "2026-11-11",
     "eng": 4,
@@ -132,20 +147,12 @@
    {
     "tipo": "post",
     "date": "2026-11-14",
-    "eng": 0,
-    "likes": 0,
-    "com": 0,
-    "tema": "Pit‑stop bien planificado puede ahorrarte décimas en cada vuelta. 🚦 Compara los dos enfoques y elige el que me"
-   },
-   {
-    "tipo": "post",
-    "date": "2026-11-14",
-    "eng": 0,
-    "likes": 0,
+    "eng": 1,
+    "likes": 1,
     "com": 0,
     "tema": "🚦 La zona de frenado que más te cuesta puede robarte décimas. Descubre cómo identificarla y ajustarla. ¿Cuál e"
    }
   ]
  },
- "resumen_para_dueño": "Esta semana reforzamos la fase de confianza con reels técnicos sobre gestión de boxes y estrategias de carrera, cumpliendo las promesas pendientes y manteniendo nuestras series de alto engagement. Paralelamente preparamos el reto mensual de telemetría para consolidar la comunidad y avanzar hacia los hitos de beta y seguidores."
+ "resumen_para_dueño": "Esta semana reforzamos la fase de confianza con contenido técnico de telemetría y gestión de boxes, cumplimos las promesas pendientes y lanzamos la estructura del reto mensual para impulsar la comunidad y acercarnos a los hitos de beta y 10k seguidores."
 }

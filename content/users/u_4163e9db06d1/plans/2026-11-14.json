@@ -1,239 +1,456 @@
 {
   "date": "2026-11-14",
-  "estrategia": "Publicaremos 5 piezas en 5 días: sábado (post de autoridad), lunes (reel “Error de la semana”), martes (historia con pregunta), miércoles (carrusel “Mito o realidad” con la guía de ajustes críticos) y jueves (reel “Setup del seguidor”). Descansaremos el domingo y el viernes para no saturar.",
+  "estrategia": "Publicaremos contenido de alto valor los días clave de la semana para mantener el ritmo y la expectativa. Descansaremos el domingo y martes para evitar saturación y maximizar el impacto de cada pieza.",
   "piezas": [
     {
-      "id": "pmwggjb6w_0",
+      "id": "pmwgjoa4z_0",
       "dia": 0,
-      "hora": "13:30",
-      "tipo": "post",
-      "objetivo": "confianza",
-      "razon": "Iniciamos la semana con un consejo práctico de boxes que muestra nuestro expertise.",
-      "tema": "estrategia de pit‑stop sin perder tiempo",
-      "formato": "lista",
-      "gancho": "3 trucos para pit‑stop perfecto",
-      "visual": "close-up of a racing wheel and telemetry screen on a desk",
+      "hora": "09:00",
+      "tipo": "historia",
+      "objetivo": "comunidad",
+      "razon": "Involucrar a la audiencia con una pregunta abierta sobre su mayor reto en pit‑stop.",
+      "tema": "Zona de boxes y gestión de pit‑stop",
+      "formato": "mini encuesta",
+      "gancho": "¿Qué te cuesta más en los pits?",
+      "visual": "close-up of racing pit crew adjusting a wheel",
       "escenas": [
         {
-          "titulo": "Truco 1",
-          "texto": "Ajusta la presión del freno a *30%* para evitar bloqueos.",
+          "titulo": "Pregunta",
+          "texto": "¿Qué parte del pit‑stop te resulta más difícil?",
           "emoji": "",
-          "visual": "close-up of brake pressure gauge on telemetry software",
-          "visuales": [
-            "close-up of brake pressure gauge",
-            "hand adjusting settings on screen"
-          ],
+          "visual": "close-up of hands pressing a pit‑stop button on a sim rig",
+          "visuales": [],
           "foto": "",
-          "grafico": {
-            "tipo": "checklist",
-            "items": [
-              "presión 30%",
-              "cambio rápido",
-              "entrada suave"
-            ]
-          }
+          "grafico": null
         }
       ],
-      "cta": "Guarda este post y aplícalo en tu próxima carrera",
-      "sticker": null,
+      "cta": "Responde y mejora tu estrategia",
+      "sticker": {
+        "tipo": "pregunta",
+        "texto": "¿Qué te cuesta más en los pits?",
+        "opciones": [],
+        "auto": true
+      },
       "fondo": "ia",
       "estilo": "racing",
-      "caption": "¿Quieres pit‑stops sin perder tiempo? 👇 Aplica estos 3 trucos y mejora tus vueltas. ¿Cuál usarás primero? #simracing #pitstop #LAPRIQ",
-      "hashtags": "#simracing #pitstop #telemetria #LAPRIQ #coaching",
+      "caption": "",
+      "hashtags": "",
       "audio": "voz_y_musica",
-      "voz": "hombre",
-      "ritmo_voz": "energico",
+      "voz": "",
+      "ritmo_voz": "",
       "musica": "energetica",
       "guion": [
-        "Truco 1: ajusta presión del freno a 30%",
-        "Así evitas bloqueos y ganas décimas",
-        "Aplica y siente la diferencia en boxes"
+        "¿Qué te cuesta más en los pits?",
+        "Mira este ejemplo de una parada rápida",
+        "Ahora cuéntanos tu reto"
       ],
       "beats": [
         {
-          "t": "Truco 1: ajusta presión del freno a 30%",
-          "img": "close-up of brake pressure gauge on telemetry software"
+          "t": "¿Qué te cuesta más en los pits?",
+          "img": "home sim racing cockpit with racing seat, steering wheel, pedals and a large monitor showing a racing game. Monitor displaying pit‑stop telemetry with red warning icons over tire‑change times in a home sim racing cockpit"
         },
         {
-          "t": "Así evitas bloqueos y ganas décimas",
-          "img": "hand pressing brake pedal in simulator"
+          "t": "Mira este ejemplo de una parada rápida",
+          "img": "home sim racing cockpit with racing seat, steering wheel, pedals and a large monitor showing a racing game. Monitor showing side‑by‑side lap times dropping after a perfect pit stop, bright cockpit lighting"
         },
         {
-          "t": "Aplica y siente la diferencia en boxes",
-          "img": "racing car entering pit lane smoothly"
+          "t": "Ahora cuéntanos tu reto",
+          "img": "home sim racing cockpit with racing seat, steering wheel, pedals and a large monitor showing a racing game. Driver’s hand holding a racing headset microphone while challenge leaderboard appears on the monitor"
         }
       ],
-      "estilo_visual": "cinematic 35mm photo, bright natural light, vivid colors",
-      "visual_cierre": "close-up of a finished lap time on screen",
-      "cierre_bio": "",
+      "estilo_visual": "bright, sharp lighting, vivid colors, high‑resolution, no blur",
+      "visual_cierre": "close-up of a stopwatch on a racing dashboard",
+      "cierre_bio": "Si quieres más tips, visita el enlace en mi perfil",
       "foto": "",
       "anim": "pop",
       "serie": "",
       "episodio": 0,
       "look": 186,
-      "plantilla": 461,
-      "layout": "cine",
+      "plantilla": 1024,
+      "layout": "faceless",
       "stickers": [
-        "🏎️",
-        "⚙️",
-        "🛞"
+        "🏎️,🛞,📋"
       ]
     },
     {
-      "id": "pmwggjb6w_1",
+      "id": "pmwgjoa4z_1",
       "dia": 2,
-      "hora": "19:45",
+      "hora": "19:30",
       "tipo": "reel",
       "objetivo": "alcance",
-      "razon": "Lunes de “Error de la semana” para generar interacción y comentarios.",
-      "tema": "Freno tardío por falta de freno motor",
-      "formato": "error de la semana",
-      "gancho": "El error que te hace perder 2 s por curva",
-      "visual": "wide shot of a racing simulator cockpit with telemetry overlay",
+      "razon": "Mostrar un error típico que genera pérdidas de tiempo y posicionarnos como expertos.",
+      "tema": "Sobre‑frenado en curvas lentas",
+      "formato": "Error de la semana",
+      "gancho": "El error que te cuesta 2 s por curva",
+      "visual": "wide shot of a racing car drifting on a tight corner",
       "escenas": [
         {
-          "titulo": "Error",
-          "texto": "Frenas tarde porque no usas el freno motor.",
+          "titulo": "Gancho",
+          "texto": "El error que te cuesta 2 s por curva",
           "emoji": "",
-          "visual": "close-up of driver’s foot missing engine brake lever",
-          "visuales": [
-            "driver foot missing lever",
-            "telemetry showing late brake point"
-          ],
-          "foto": "",
-          "grafico": {
-            "tipo": "comparacion",
-            "mal": "freno tardío",
-            "bien": "freno motor"
-          }
-        },
-        {
-          "titulo": "Consejo",
-          "texto": "Activa el freno motor al 40 % al entrar en curva.",
-          "emoji": "",
-          "visual": "telemetry screen highlighting engine brake activation",
-          "visuales": [
-            "telemetry graph with engine brake line",
-            "hand adjusting brake settings"
-          ],
+          "visual": "close-up of a car braking late on a tight corner",
+          "visuales": [],
           "foto": "",
           "grafico": {
             "tipo": "contador",
-            "valor": 40,
-            "unidad": "%"
+            "valor": 2,
+            "unidad": "segundos"
           }
         },
         {
-          "titulo": "Resultado",
-          "texto": "Ganas hasta 2 s por vuelta y más control.",
+          "titulo": "Causa",
+          "texto": "Frenas demasiado fuerte y sueltas el acelerador demasiado pronto",
           "emoji": "",
-          "visual": "lap time comparison before and after",
-          "visuales": [
-            "split screen lap times",
-            "driver smiling"
-          ],
+          "visual": "overhead view of brake pressure gauge spikes",
+          "visuales": [],
           "foto": "",
           "grafico": {
-            "tipo": "progreso",
-            "valor": 20,
-            "etiqueta": "ganancia %"
+            "tipo": "comparacion",
+            "mal": "freno fuerte",
+            "bien": "freno progresivo"
+          }
+        },
+        {
+          "titulo": "Solución",
+          "texto": "Reduce la presión en un 30 % y mantén el acelerador hasta 80 % del punto de frenado",
+          "emoji": "",
+          "visual": "hand adjusting telemetría on screen",
+          "visuales": [],
+          "foto": "",
+          "grafico": {
+            "tipo": "checklist",
+            "items": [
+              "reducir presión",
+              "mantener acelerador",
+              "revisar telemetría"
+            ]
+          }
+        },
+        {
+          "titulo": "CTA",
+          "texto": "Comenta FRENO y recibe la guía completa",
+          "emoji": "",
+          "visual": "close-up of a smartphone showing the link in bio",
+          "visuales": [],
+          "foto": "",
+          "grafico": {
+            "tipo": "objetivo",
+            "etiqueta": "guía"
           }
         }
       ],
-      "cta": "Comenta FRENO y te envío la guía completa",
+      "cta": "Comenta FRENO y obtén la guía",
       "sticker": null,
       "fondo": "ia",
       "estilo": "neon",
-      "caption": "¿Te ha pasado? 🚦 El freno motor es tu aliado oculto. Cuéntanos tu experiencia y mejora tus vueltas. #simracing #telemetria #LAPRIQ",
-      "hashtags": "#simracing #telemetria #pitstop #LAPRIQ #coaching",
+      "caption": "¿Te suena familiar? Aprende a corregirlo y gana décimas. 👉 Comenta FRENO y recibe la guía completa. #simracing #telemetria #tips #racing #LAPRIQ",
+      "hashtags": "#simracing #telemetria #tips #racing #LAPRIQ",
       "audio": "voz_y_musica",
       "voz": "hombre",
-      "ritmo_voz": "energico",
-      "musica": "energetica",
+      "ritmo_voz": "energetico",
+      "musica": "hiphop",
       "guion": [
-        "El error que te hace perder 2 s por curva",
-        "Muchos frenan solo con el pedal principal",
-        "Pero ojo, el freno motor es clave",
-        "Actívalo al 40 % al entrar en curva",
-        "Así recuperas tiempo y estabilidad",
-        "Prueba y siente la diferencia",
-        "Comenta FRENO y te paso la guía"
+        "El error que te cuesta 2 s por curva",
+        "Frenas demasiado fuerte y sueltas el acelerador",
+        "Reduce la presión en un 30 % y mantén el acelerador",
+        "Este ajuste ahorra tiempo en cada vuelta",
+        "Comenta FRENO y recibe la guía completa"
       ],
       "beats": [
         {
-          "t": "El error que te hace perder 2 s por curva",
-          "img": "close-up of driver’s foot missing engine brake lever"
+          "t": "El error que te cuesta 2 s por curva",
+          "img": "home sim racing cockpit with racing seat, steering wheel, pedals and a large monitor showing a racing game. racing wheel and pedals with foot on brake, hand on accelerator, monitor displaying lap time slower by two seconds"
         },
         {
-          "t": "Muchos frenan solo con el pedal principal",
-          "img": "telemetry showing late brake point"
+          "t": "Frenas demasiado fuerte y sueltas el acelerador",
+          "img": "home sim racing cockpit with racing seat, steering wheel, pedals and a large monitor showing a racing game. foot slamming brake pedal hard while left hand lifts off accelerator, cockpit view focused on pedals and wheel"
         },
         {
-          "t": "Pero ojo, el freno motor es clave",
-          "img": "hand reaching for engine brake lever"
+          "t": "Reduce la presión en un 30 % y mantén el acelerador",
+          "img": "home sim racing cockpit with racing seat, steering wheel, pedals and a large monitor showing a racing game. hand turning brake pressure dial down on steering wheel while foot keeps accelerator pedal fully pressed"
         },
         {
-          "t": "Actívalo al 40 % al entrar en curva",
-          "img": "telemetry screen highlighting engine brake activation"
+          "t": "Este ajuste ahorra tiempo en cada vuelta",
+          "img": "home sim racing cockpit with racing seat, steering wheel, pedals and a large monitor showing a racing game. monitor split-screen showing slower lap on left and faster lap on right after brake adjustment"
         },
         {
-          "t": "Así recuperas tiempo y estabilidad",
-          "img": "lap time comparison before and after"
-        },
-        {
-          "t": "Prueba y siente la diferencia",
-          "img": "driver smiling after fast lap"
-        },
-        {
-          "t": "Comenta FRENO y te paso la guía",
-          "img": "close-up of the lap time improvement on screen"
+          "t": "Comenta FRENO y recibe la guía completa",
+          "img": "home sim racing cockpit with racing seat, steering wheel, pedals and a large monitor showing a racing game. hand typing FRENO on keyboard while monitor pops up detailed braking guide overlay"
         }
       ],
-      "estilo_visual": "cinematic 35mm photo, bright natural light, vivid colors",
-      "visual_cierre": "close-up of the lap time improvement on screen",
-      "cierre_bio": "si quieres aprender más, tienes el enlace en mi perfil",
+      "estilo_visual": "bright, sharp, vivid colors, high clarity, no blur",
+      "visual_cierre": "close-up of a racing wheel with telemetry overlay",
+      "cierre_bio": "Si quieres aprender más, tienes el enlace en mi perfil",
       "foto": "",
       "anim": "pop",
-      "serie": "Error de la semana",
-      "episodio": 1,
+      "serie": "",
+      "episodio": 0,
       "look": 119,
-      "plantilla": 166,
-      "layout": "cine",
+      "plantilla": 2103,
+      "layout": "faceless",
       "stickers": [
-        "🏎️",
-        "⚡",
-        "🛞"
+        "🏎️,⚡,🛞"
       ]
     },
     {
-      "id": "pmwggjb6w_2",
-      "dia": 3,
-      "hora": "09:00",
-      "tipo": "historia",
-      "objetivo": "comunidad",
-      "razon": "Responder a la pregunta sobre la zona de frenado más difícil y generar DM.",
-      "tema": "zona de frenado crítica",
-      "formato": "mini tutorial",
-      "gancho": "¿Cuál es tu zona de frenado más difícil?",
-      "visual": "close-up of a racing wheel with brake pedal highlighted",
+      "id": "pmwgjoa4z_2",
+      "dia": 4,
+      "hora": "13:30",
+      "tipo": "carrusel",
+      "objetivo": "",
+      "razon": "Desmentir un mito frecuente y reforzar nuestra credibilidad técnica.",
+      "tema": "Neumáticos blandos siempre son más rápidos",
+      "formato": "Mito o realidad",
+      "gancho": "¿Los neumáticos blandos siempre ganan?",
+      "visual": "home sim racing cockpit with racing seat, steering wheel, pedals and a large monitor showing a racing game. Racer's hand pointing at soft tire icon on monitor in home sim cockpit",
       "escenas": [
         {
-          "titulo": "Pregunta",
-          "texto": "¿En qué curva pierdes más tiempo al frenar?",
+          "titulo": "Mito",
+          "texto": "Los compuestos blandos siempre son los más rápidos",
           "emoji": "",
-          "visual": "telemetry graph with red zone on braking area",
-          "visuales": [
-            "telemetry graph with red zone",
-            "driver looking at screen"
-          ],
+          "visual": "home sim racing cockpit with racing seat, steering wheel, pedals and a large monitor showing a racing game. Racer holding soft tire model and shaking head in the sim racing cockpit",
+          "visuales": [],
           "foto": "",
-          "grafico": null
+          "grafico": {
+            "tipo": "objetivo",
+            "etiqueta": "Mito"
+          }
+        },
+        {
+          "titulo": "Realidad",
+          "texto": "Depende del circuito, temperatura y desgaste",
+          "emoji": "",
+          "visual": "home sim racing cockpit with racing seat, steering wheel, pedals and a large monitor showing a racing game. Monitor displaying track map with temperature heat overlay and tire wear bars",
+          "visuales": [],
+          "foto": "",
+          "grafico": {
+            "tipo": "checklist",
+            "items": [
+              "circuito",
+              "temperatura",
+              "desgaste"
+            ]
+          }
+        },
+        {
+          "titulo": "Dato",
+          "texto": "En pistas largas, un compuesto medio puede ser 0.3 s más rápido por vuelta",
+          "emoji": "",
+          "visual": "home sim racing cockpit with racing seat, steering wheel, pedals and a large monitor showing a racing game. Screen showing side‑by‑side lap time graphs with medium tire line slightly faster",
+          "visuales": [],
+          "foto": "",
+          "grafico": {
+            "tipo": "velocimetro",
+            "valor": 0.3,
+            "etiqueta": "segundos"
+          }
+        },
+        {
+          "titulo": "Conclusión",
+          "texto": "Elige el compuesto según análisis de telemetría",
+          "emoji": "",
+          "visual": "home sim racing cockpit with racing seat, steering wheel, pedals and a large monitor showing a racing game. Telemetry overlay with colored tire performance curves as racer adjusts tire selection",
+          "visuales": [],
+          "foto": "",
+          "grafico": {
+            "tipo": "objetivo",
+            "etiqueta": "Conclusión"
+          }
         }
       ],
-      "cta": "Mándame DM con tu curva y te ayudo",
+      "cta": "Guarda este carrusel y ajusta tus neumáticos",
+      "sticker": null,
+      "fondo": "animado",
+      "estilo": "racing",
+      "caption": "Desmontamos el mito del neumático blando. Usa los datos y gana tiempo. Guarda este carrusel y aplica el consejo. #simracing #neumaticos #telemetria #LAPRIQ",
+      "hashtags": "#simracing #neumaticos #telemetria #LAPRIQ",
+      "audio": "voz_y_musica",
+      "voz": "hombre",
+      "ritmo_voz": "normal",
+      "musica": "energetica",
+      "guion": [
+        "¿Los neumáticos blandos siempre son los más rápidos?",
+        "Mito: los compuestos blandos siempre ganan",
+        "Realidad: depende del circuito, temperatura y desgaste",
+        "En pistas largas, un compuesto medio puede ser 0.3 segundos más rápido por vuelta",
+        "Elige el compuesto según análisis de telemetría"
+      ],
+      "beats": [
+        {
+          "t": "¿Los neumáticos blandos siempre son los más rápidos?",
+          "img": "medium shot of a racing tire on a track"
+        },
+        {
+          "t": "Mito: los compuestos blandos siempre ganan",
+          "img": "close-up of soft tire sidewall"
+        },
+        {
+          "t": "Realidad: depende del circuito, temperatura y desgaste",
+          "img": "overhead view of tire temperature map"
+        },
+        {
+          "t": "En pistas largas, un compuesto medio puede ser 0.3 s más rápido por vuelta",
+          "img": "graph comparing lap times"
+        },
+        {
+          "t": "Elige el compuesto según análisis de telemetría",
+          "img": "racing driver reviewing data on screen"
+        }
+      ],
+      "estilo_visual": "cinematic 35mm photo, bright natural light, vivid colors",
+      "visual_cierre": "close-up of a tire with temperature zones highlighted",
+      "cierre_bio": "Si quieres más datos, visita el enlace en mi perfil",
+      "foto": "",
+      "anim": "slide",
+      "serie": "",
+      "episodio": 0,
+      "look": 229,
+      "plantilla": 62,
+      "layout": "dividido",
+      "stickers": [
+        "🛞,📊,⚡"
+      ]
+    },
+    {
+      "id": "pmwgjoa4z_3",
+      "dia": 5,
+      "hora": "19:45",
+      "tipo": "reel",
+      "objetivo": "comunidad",
+      "razon": "Invitar a la audiencia a participar enviando su setup para el próximo análisis.",
+      "tema": "Llamada a envío de setups",
+      "formato": "Setup del seguidor",
+      "gancho": "¿Quieres que analicemos tu setup en tiempo real?",
+      "visual": "close-up of a racing cockpit with telemetry screens",
+      "escenas": [
+        {
+          "titulo": "Invitación",
+          "texto": "Mándame tu setup y lo mejoramos en vivo",
+          "emoji": "",
+          "visual": "hand holding a phone showing a sim setup screenshot",
+          "visuales": [],
+          "foto": "",
+          "grafico": {
+            "tipo": "objetivo",
+            "etiqueta": "Envío"
+          }
+        },
+        {
+          "titulo": "Proceso",
+          "texto": "Revisamos telemetría, ajustamos balance y compartimos resultados",
+          "emoji": "",
+          "visual": "split screen of telemetry data and car on track",
+          "visuales": [],
+          "foto": "",
+          "grafico": {
+            "tipo": "checklist",
+            "items": [
+              "revisar telemetría",
+              "ajustar balance",
+              "compartir resultados"
+            ]
+          }
+        },
+        {
+          "titulo": "Beneficio",
+          "texto": "Aprende de los ajustes y mejora tus tiempos en la próxima sesión",
+          "emoji": "",
+          "visual": "car crossing finish line with improved lap time",
+          "visuales": [],
+          "foto": "",
+          "grafico": {
+            "tipo": "contador",
+            "valor": 1,
+            "unidad": "sesión"
+          }
+        }
+      ],
+      "cta": "Envía tu setup por DM y aparecerás en el próximo episodio",
+      "sticker": null,
+      "fondo": "ia",
+      "estilo": "pop",
+      "caption": "¿Tienes un setup que te está frenando? Envíalo por DM y lo optimizamos en el próximo Reel. #simracing #setup #telemetria #LAPRIQ",
+      "hashtags": "#simracing #setup #telemetria #LAPRIQ",
+      "audio": "voz_y_musica",
+      "voz": "hombre",
+      "ritmo_voz": "energetico",
+      "musica": "energetica",
+      "guion": [
+        "¿Quieres que analicemos tu setup en tiempo real?",
+        "Mándame tu setup y lo mejoramos en vivo",
+        "Revisamos telemetría, ajustamos balance y compartimos resultados",
+        "Aprende de los ajustes y mejora tus tiempos",
+        "Envía tu setup por DM y aparecerás en el próximo episodio"
+      ],
+      "beats": [
+        {
+          "t": "¿Quieres que analicemos tu setup en tiempo real?",
+          "img": "home sim racing cockpit with racing seat, steering wheel, pedals and a large monitor showing a racing game. Engineer examines real‑time telemetry graph on monitor beside racing seat"
+        },
+        {
+          "t": "Mándame tu setup y lo mejoramos en vivo",
+          "img": "home sim racing cockpit with racing seat, steering wheel, pedals and a large monitor showing a racing game. Racer hands USB drive to engineer next to the sim cockpit"
+        },
+        {
+          "t": "Revisamos telemetría, ajustamos balance y compartimos resultados",
+          "img": "home sim racing cockpit with racing seat, steering wheel, pedals and a large monitor showing a racing game. Engineer adjusts car balance sliders on on‑screen setup panel while racer watches"
+        },
+        {
+          "t": "Aprende de los ajustes y mejora tus tiempos",
+          "img": "home sim racing cockpit with racing seat, steering wheel, pedals and a large monitor showing a racing game. Racer studies side‑by‑side lap time graphs on monitor, smiling"
+        },
+        {
+          "t": "Envía tu setup por DM y aparecerás en el próximo episodio",
+          "img": "home sim racing cockpit with racing seat, steering wheel, pedals and a large monitor showing a racing game. Racer types direct message on laptop, headset on, cockpit background"
+        }
+      ],
+      "estilo_visual": "bright, crisp lighting with vivid colors, sharp focus and no blur",
+      "visual_cierre": "close-up of a racing wheel with a message 'Setup enviado'",
+      "cierre_bio": "Si quieres aprender más, tienes el enlace en mi perfil",
+      "foto": "",
+      "anim": "slide",
+      "serie": "",
+      "episodio": 0,
+      "look": 83,
+      "plantilla": 1957,
+      "layout": "faceless",
+      "stickers": [
+        "🏎️,📩,🛞"
+      ]
+    },
+    {
+      "id": "pmwgjoa4z_4",
+      "dia": 6,
+      "hora": "09:30",
+      "tipo": "historia",
+      "objetivo": "",
+      "razon": "Dirigir a la audiencia a la guía de ajustes críticos prometida y al enlace en bio.",
+      "tema": "Guía de ajustes críticos",
+      "formato": "mini tutorial",
+      "gancho": "Descubre la guía de ajustes críticos ahora",
+      "visual": "close-up of a tablet showing a checklist",
+      "escenas": [
+        {
+          "titulo": "Intro",
+          "texto": "Hoy te entrego la guía de ajustes críticos que prometimos",
+          "emoji": "",
+          "visual": "hand scrolling a PDF on a tablet",
+          "visuales": [],
+          "foto": "",
+          "grafico": {
+            "tipo": "checklist",
+            "items": [
+              "frenado",
+              "suspensión",
+              "balance"
+            ]
+          }
+        }
+      ],
+      "cta": "Desliza arriba o visita el enlace en mi bio",
       "sticker": {
-        "tipo": "pregunta",
-        "texto": "¿Cuál es tu zona de frenado más difícil?",
+        "tipo": "enlace",
+        "texto": "Guía ajustes críticos",
         "opciones": [],
         "auto": true
       },
@@ -246,276 +463,31 @@
       "ritmo_voz": "",
       "musica": "chill",
       "guion": [
-        "¿Cuál es tu zona de frenado más difícil?",
-        "Responde en DM y te daré el ajuste perfecto"
+        "Descubre la guía de ajustes críticos ahora",
+        "Si quieres más contenido, visita el enlace en mi perfil"
       ],
       "beats": [
         {
-          "t": "¿Cuál es tu zona de frenado más difícil?",
-          "img": "close-up of a racing wheel with brake pedal highlighted"
+          "t": "Descubre la guía de ajustes críticos ahora",
+          "img": "home sim racing cockpit with racing seat, steering wheel, pedals and a large monitor showing a racing game. Monitor showing telemetry graphs with highlighted brake bias and tire pressure sliders, bright cockpit background"
         },
         {
-          "t": "Responde en DM y te daré el ajuste perfecto",
-          "img": "hand typing a DM on phone"
+          "t": "Si quieres más contenido, visita el enlace en mi perfil",
+          "img": "home sim racing cockpit with racing seat, steering wheel, pedals and a large monitor showing a racing game. Hand tapping a profile icon on a cockpit tablet screen, bright background"
         }
       ],
-      "estilo_visual": "cinematic 35mm photo, bright natural light, vivid colors",
-      "visual_cierre": "hand typing a DM on phone",
-      "cierre_bio": "",
-      "foto": "",
-      "anim": "slide",
-      "serie": "",
-      "episodio": 0,
-      "look": 229,
-      "plantilla": 381,
-      "layout": "faceless",
-      "stickers": [
-        "🏎️",
-        "❓",
-        "📩"
-      ]
-    },
-    {
-      "id": "pmwggjb6w_3",
-      "dia": 4,
-      "hora": "13:00",
-      "tipo": "carrusel",
-      "objetivo": "",
-      "razon": "Miércoles de “Mito o realidad” y entrega de la guía de ajustes críticos prometida.",
-      "tema": "downforce y ajustes críticos antes de carrera",
-      "formato": "mito vs realidad",
-      "gancho": "Mito: más downforce siempre es mejor",
-      "visual": "wide shot of a race car on a high‑downforce setup",
-      "escenas": [
-        {
-          "titulo": "Mito",
-          "texto": "Más downforce = más velocidad en todas las curvas.",
-          "emoji": "",
-          "visual": "car with extreme rear wing on track",
-          "visuales": [
-            "car with extreme rear wing",
-            "track with tight corner"
-          ],
-          "foto": "",
-          "grafico": {
-            "tipo": "comparacion",
-            "mal": "más siempre mejor",
-            "bien": "optimo según pista"
-          }
-        },
-        {
-          "titulo": "Realidad",
-          "texto": "El exceso de downforce reduce velocidad en rectas y aumenta consumo.",
-          "emoji": "",
-          "visual": "telemetry showing speed loss on straights",
-          "visuales": [
-            "telemetry graph speed loss",
-            "driver adjusting wing angle"
-          ],
-          "foto": "",
-          "grafico": {
-            "tipo": "checklist",
-            "items": [
-              "evalúa pista",
-              "ajusta ángulo",
-              "prueba 2% menos"
-            ]
-          }
-        },
-        {
-          "titulo": "Guía",
-          "texto": "Checklist de ajustes críticos antes de la carrera.",
-          "emoji": "",
-          "visual": "hand holding checklist on tablet",
-          "visuales": [
-            "tablet with checklist",
-            "driver reviewing settings"
-          ],
-          "foto": "",
-          "grafico": null
-        }
-      ],
-      "cta": "Desliza y guarda la guía completa",
-      "sticker": null,
-      "fondo": "ia",
-      "estilo": "pop",
-      "caption": "Desmontamos el mito del downforce y te damos la guía definitiva de ajustes. 👉 Desliza y guarda. #simracing #ajustes #LAPRIQ",
-      "hashtags": "#simracing #downforce #ajustes #LAPRIQ #coaching",
-      "audio": "voz_y_musica",
-      "voz": "hombre",
-      "ritmo_voz": "normal",
-      "musica": "energetica",
-      "guion": [
-        "Mito: más downforce siempre es mejor",
-        "Pero la realidad es distinta",
-        "Ajusta el ángulo según la pista",
-        "Revisa la checklist de ajustes críticos",
-        "Guarda y mejora tu tiempo en boxes"
-      ],
-      "beats": [
-        {
-          "t": "Mito: más downforce siempre es mejor",
-          "img": "car with extreme rear wing on track"
-        },
-        {
-          "t": "Pero la realidad es distinta",
-          "img": "telemetry showing speed loss on straights"
-        },
-        {
-          "t": "Ajusta el ángulo según la pista",
-          "img": "driver adjusting wing angle"
-        },
-        {
-          "t": "Revisa la checklist de ajustes críticos",
-          "img": "hand holding checklist on tablet"
-        },
-        {
-          "t": "Guarda y mejora tu tiempo en boxes",
-          "img": "close-up of the saved checklist on phone"
-        }
-      ],
-      "estilo_visual": "cinematic 35mm photo, bright natural light, vivid colors",
-      "visual_cierre": "close-up of the saved checklist on phone",
-      "cierre_bio": "",
-      "foto": "",
-      "anim": "slide",
-      "serie": "Mito o realidad",
-      "episodio": 5,
-      "look": 83,
-      "plantilla": 1591,
-      "layout": "cine",
-      "stickers": [
-        "📋",
-        "⚙️",
-        "🏁"
-      ]
-    },
-    {
-      "id": "pmwggjb6w_4",
-      "dia": 5,
-      "hora": "19:30",
-      "tipo": "reel",
-      "objetivo": "confianza",
-      "razon": "Jueves de “Setup del seguidor” para mostrar el valor del coaching en tiempo real.",
-      "tema": "setup enviado por @juan para Spa",
-      "formato": "setup del seguidor",
-      "gancho": "El setup que ganó 0.3 s en Spa",
-      "visual": "overhead view of a racing simulator with telemetry data",
-      "escenas": [
-        {
-          "titulo": "Entrada",
-          "texto": "Juan nos envió su setup base para Spa.",
-          "emoji": "",
-          "visual": "screen showing Juan’s telemetry file",
-          "visuales": [
-            "telemetry file on screen",
-            "hand pointing at data"
-          ],
-          "foto": "",
-          "grafico": {
-            "tipo": "ruta",
-            "desde": "setup base",
-            "hasta": "optimizado"
-          }
-        },
-        {
-          "titulo": "Mejora 1",
-          "texto": "Reducimos la presión del freno motor al 35 %.",
-          "emoji": "",
-          "visual": "graph comparing brake motor pressure before/after",
-          "visuales": [
-            "graph bar comparison",
-            "driver adjusting brake settings"
-          ],
-          "foto": "",
-          "grafico": {
-            "tipo": "contador",
-            "valor": 35,
-            "unidad": "%"
-          }
-        },
-        {
-          "titulo": "Mejora 2",
-          "texto": "Ajustamos la relación de marcha 4ª a 6,5 :1.",
-          "emoji": "",
-          "visual": "gear ratio chart highlighting 4th gear",
-          "visuales": [
-            "gear ratio chart",
-            "hand moving selector"
-          ],
-          "foto": "",
-          "grafico": null
-        },
-        {
-          "titulo": "Resultado",
-          "texto": "Juan ganó 0.3 s en su vuelta de referencia.",
-          "emoji": "",
-          "visual": "lap time delta showing -0.3s",
-          "visuales": [
-            "lap time delta on screen",
-            "Juan smiling in cockpit"
-          ],
-          "foto": "",
-          "grafico": {
-            "tipo": "progreso",
-            "valor": 30,
-            "etiqueta": "ms ganados"
-          }
-        }
-      ],
-      "cta": "Mándame tu setup y lo analizamos",
-      "sticker": null,
-      "fondo": "ia",
-      "estilo": "racing",
-      "caption": "Así transformamos el setup de @juan y ganamos décimas. 🚀 Envíame el tuyo y lo pulimos juntos. #simracing #coaching #LAPRIQ",
-      "hashtags": "#simracing #coaching #setup #LAPRIQ #racing",
-      "audio": "voz_y_musica",
-      "voz": "hombre",
-      "ritmo_voz": "energico",
-      "musica": "energetica",
-      "guion": [
-        "El setup que ganó 0.3 s en Spa",
-        "Primero, bajamos la presión del freno motor al 35 %",
-        "Luego, ajustamos la relación de marcha 4ª a 6,5 :1",
-        "El resultado: -0.3 s en la vuelta de referencia",
-        "si quieres aprender más, tienes el enlace en mi perfil"
-      ],
-      "beats": [
-        {
-          "t": "El setup que ganó 0.3 s en Spa",
-          "img": "Racing wheel with a glowing green indicator and a sleek monitor displaying a faster lap graph in a home sim racing cockpit, setting: home sim racing cockpit with racing seat, steering wheel, pedals and a large monitor showing a racing game"
-        },
-        {
-          "t": "Primero, bajamos la presión del freno motor al 35 %",
-          "img": "Foot brake pedal with a pressure gauge knob turned down to low setting in a home sim racing cockpit, setting: home sim racing cockpit with racing seat, steering wheel, pedals and a large monitor showing a racing game"
-        },
-        {
-          "t": "Luego, ajustamos la relación de marcha 4ª a 6,5 :1",
-          "img": "Gear shifter with a digital display showing gear ratio 6.5 to 1 in a home sim racing cockpit, setting: home sim racing cockpit with racing seat, steering wheel, pedals and a large monitor showing a racing game"
-        },
-        {
-          "t": "El resultado: -0.3 s en la vuelta de referencia",
-          "img": "Monitor screen showing a blue bar dropping 0.3 seconds compared to reference lap in a home sim racing cockpit, setting: home sim racing cockpit with racing seat, steering wheel, pedals and a large monitor showing a racing game"
-        },
-        {
-          "t": "si quieres aprender más, tienes el enlace en mi perfil",
-          "img": "Hand pointing toward a profile avatar on a bright computer screen in a home sim racing cockpit, setting: home sim racing cockpit with racing seat, steering wheel, pedals and a large monitor showing a racing game"
-        }
-      ],
-      "estilo_visual": "bright, sharp lighting with vivid colors, high clarity, no motion blur",
-      "visual_cierre": "close-up of the lap time improvement on screen",
-      "cierre_bio": "si quieres aprender más, tienes el enlace en mi perfil",
+      "estilo_visual": "bright, crisp lighting with vivid colors and sharp focus",
+      "visual_cierre": "close-up of the link button highlighted",
+      "cierre_bio": "Si quieres más contenido, visita el enlace en mi perfil",
       "foto": "",
       "anim": "fade",
-      "serie": "Setup del seguidor",
-      "episodio": 2,
+      "serie": "",
+      "episodio": 0,
       "look": 193,
-      "plantilla": 732,
+      "plantilla": 816,
       "layout": "faceless",
       "stickers": [
-        "🏎️",
-        "🔧",
-        "⏱️"
+        "📚,🔗,⚙️"
       ]
     }
   ]
