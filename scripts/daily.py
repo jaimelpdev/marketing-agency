@@ -891,6 +891,7 @@ def process_requests(browser, users, key):
             elif r.get("replan"):
                 log(f"🔄 {label}: rehacer la semana")
                 plan_user(browser, u, key, force=True)
+                REPLANNED.add(u["id"])
                 done = {"replan": r["replan"], "redo": r.get("redo") or []}
             else:
                 queue = load_json(CONTENT / "users" / u["id"] / "queue.json", [])
@@ -920,6 +921,7 @@ def process_requests(browser, users, key):
     return errors
 
 
+REPLANNED = set()
 IMG_ENGINE = {"ok": None, "n": 0}
 
 
@@ -1003,7 +1005,8 @@ def main():
             log(f"▶ {label}")
             try:
                 # FORCE (lanzado a mano con "rehacer"): sustituye TODO lo que aún no se ha publicado
-                plan_user(browser, u, key, force=bool(os.environ.get("FORCE")))
+                # si en esta misma ejecución ya se rehízo su semana, no se rehace otra vez
+                plan_user(browser, u, key, force=bool(os.environ.get("FORCE")) and u["id"] not in REPLANNED)
             except Exception as e:
                 errors += 1
                 log(f"  ✗ Error con {label}:", e)
