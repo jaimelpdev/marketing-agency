@@ -312,10 +312,19 @@ def zernio_upload(path):
     up, pub = pre.get("uploadUrl"), pre.get("publicUrl")
     if not up or not pub:
         raise RuntimeError("Zernio no devolvió la URL de subida")
-    r = requests.put(up, data=Path(path).read_bytes(), headers={"Content-Type": ct}, timeout=600)
-    if r.status_code >= 300:
-        raise RuntimeError(f"Subida a Zernio falló ({r.status_code})")
-    return pub
+    data = Path(path).read_bytes()
+    for intento in range(4):  # el almacenamiento de Zernio a veces responde 5xx: reintentar
+        try:
+            r = requests.put(up, data=data, headers={"Content-Type": ct}, timeout=600)
+            if r.status_code < 300:
+                return pub
+            err = f"Subida a Zernio falló ({r.status_code})"
+            if r.status_code < 500:
+                break
+        except requests.RequestException as e:
+            err = f"Subida a Zernio falló ({e})"
+        time.sleep(15 * (intento + 1))
+    raise RuntimeError(err)
 
 
 def zernio_schedule(user, item, piece, tz):
@@ -445,6 +454,38 @@ def publish_floor(user, tz):
         except ValueError:
             log(f"  ⚠ Fecha «no publicar antes de» no válida: {v}")
     return max(cands).astimezone(tz) if cands else None
+
+
+def retry_failed(user):
+    """Vuelve a programar en las redes las piezas que fallaron al subir (si aún no ha pasado su hora)."""
+    uid = user["id"]
+    qpath = CONTENT / "users" / uid / "queue.json"
+    queue = load_json(qpath, [])
+    plan_conf = ((user.get("config") or {}).get("plan") or {})
+    tz = ZoneInfo(plan_conf.get("zona_horaria", "Europe/Madrid"))
+    now = datetime.now(tz)
+    todo = [q for q in queue if q.get("status") == "failed" and datetime.fromisoformat(q["publishAt"]) > now + timedelta(minutes=12)]
+    if not todo or not user.get("social"):
+        return
+    pieces = {}
+    for pf in sorted((CONTENT / "users" / uid / "plans").glob("*.json"))[-8:]:
+        for p in load_json(pf, {}).get("piezas", []):
+            pieces[(pf.stem, p.get("tema"))] = p
+    for it in todo:
+        piece = pieces.get((it.get("date"), it.get("tema"))) or {"tema": it.get("tema"), "gancho": it.get("tema")}
+        try:
+            pid_z = zernio_schedule(user, it, piece, tz)
+            if pid_z:
+                it["status"], it["zernioPostId"] = "scheduled", pid_z
+                it.pop("error", None)
+                log(f"  🔁 Reprogramada en redes: {it['tipo']} «{it.get('tema', '')}»")
+        except Exception as e:
+            log(f"  ⚠ Sigue sin poder programarse «{it.get('tema', '')}»: {e}")
+    save_json(qpath, queue)
+    try:
+        api("PUT", f"/admin/status/{uid}", {"estrategia": "", "queue": summarize(queue)})
+    except Exception:
+        pass
 
 
 def think_only(user, key, queue):
@@ -882,6 +923,7 @@ def main():
             users = api("GET", "/admin/users").get("users", [])
         for u in users:  # red de seguridad: nada borrado o sustituido sigue programado en las redes
             if u.get("social"):
+                retry_failed(u)
                 zernio_reconcile(u, load_json(CONTENT / "users" / u["id"] / "queue.json", []), lambda *a: log(*a))
         for u in users:
             if only and u["id"] != only:
