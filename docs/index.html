@@ -540,7 +540,7 @@ function normPiece(v,i){
     tema:String(v.tema||v.gancho||""),formato:String(v.formato||""),gancho:String(v.gancho||""),visual:String(v.visual||""),
     escenas:(Array.isArray(v.escenas)?v.escenas:[]).slice(0,7).map(e=>({titulo:String(e.titulo||""),texto:String(e.texto||""),emoji:String(e.emoji||""),visual:String(e.visual||""),visuales:(Array.isArray(e.visuales)?e.visuales:[]).map(x=>String(x).slice(0,240)).filter(Boolean).slice(0,3),foto:String(e.foto||"").slice(0,24),grafico:normGraf(e.grafico)})),
     cta:String(v.cta||""),sticker:st,fondo:String(v.fondo||""),estilo:String(v.estilo||""),caption:String(v.caption||""),hashtags:Array.isArray(v.hashtags)?v.hashtags.join(" "):String(v.hashtags||""),
-    audio:String(v.audio||""),voz:String(v.voz||""),ritmo_voz:String(v.ritmo_voz||""),musica:String(v.musica||""),guion:Array.isArray(v.guion)?v.guion.map(String):[],estilo_visual:String(v.estilo_visual||"").slice(0,240),visual_cierre:String(v.visual_cierre||"").slice(0,240),cierre_bio:String(v.cierre_bio||"").slice(0,240),foto:String(v.foto||"").slice(0,24),anim:["pop","slide","type","fade"].includes(v.anim)?v.anim:"",objetivo:["alcance","confianza","comunidad","conversion"].includes(v.objetivo)?v.objetivo:"",serie:String(v.serie||"").slice(0,60),episodio:Math.max(0,parseInt(v.episodio)||0),look:v.look!=null&&Number.isInteger(+v.look)&&+v.look>=0&&+v.look<LOOK_TOTAL?+v.look:null,plantilla:Number.isInteger(+v.plantilla)&&+v.plantilla>=0&&+v.plantilla<TPL_TOTAL?+v.plantilla:null,layout:LAYOUTS.includes(String(v.layout||"").toLowerCase())?String(v.layout).toLowerCase():"",stickers:(Array.isArray(v.stickers)?v.stickers:[]).map(x=>String(x).trim()).filter(x=>x&&x.length<=12&&!/[A-Za-z0-9]/.test(x)).slice(0,5),...(Array.isArray(v._durs)?{_durs:v._durs}:{})};
+    audio:String(v.audio||""),voz:String(v.voz||""),ritmo_voz:String(v.ritmo_voz||""),musica:String(v.musica||""),guion:Array.isArray(v.guion)?v.guion.map(String):[],beats:(Array.isArray(v.beats)?v.beats:[]).map(b=>b&&typeof b==="object"?{t:String(b.t||b.texto||b.frase||"").replace(/\s+/g," ").trim().slice(0,220),img:String(b.img||b.imagen||b.visual||"").slice(0,260)}:null).filter(b=>b&&b.t).slice(0,14),estilo_visual:String(v.estilo_visual||"").slice(0,240),visual_cierre:String(v.visual_cierre||"").slice(0,240),cierre_bio:String(v.cierre_bio||"").slice(0,240),foto:String(v.foto||"").slice(0,24),anim:["pop","slide","type","fade"].includes(v.anim)?v.anim:"",objetivo:["alcance","confianza","comunidad","conversion"].includes(v.objetivo)?v.objetivo:"",serie:String(v.serie||"").slice(0,60),episodio:Math.max(0,parseInt(v.episodio)||0),look:v.look!=null&&Number.isInteger(+v.look)&&+v.look>=0&&+v.look<LOOK_TOTAL?+v.look:null,plantilla:Number.isInteger(+v.plantilla)&&+v.plantilla>=0&&+v.plantilla<TPL_TOTAL?+v.plantilla:null,layout:LAYOUTS.includes(String(v.layout||"").toLowerCase())?String(v.layout).toLowerCase():"",stickers:(Array.isArray(v.stickers)?v.stickers:[]).map(x=>String(x).trim()).filter(x=>x&&x.length<=12&&!/[A-Za-z0-9]/.test(x)).slice(0,5),...(Array.isArray(v._durs)?{_durs:v._durs}:{})};
 }
 
 /* ============ BRANDING UI ============ */
@@ -745,7 +745,8 @@ ${O.graficos!==false?`- "grafico" (en cada escena de reels e historias): una ani
   · "guion" es obligatorio y se lee como UNA historia o explicación seguida, en segunda persona, de alguien que quiere enseñar y ayudar de verdad, nunca de anuncio. La primera frase es el gancho y tiene que atrapar en el primer segundo y medio (pregunta, error común, dato sorprendente o "nadie te cuenta esto…"). El 90% del vídeo enseña algo útil y concreto del nicho de la marca; la venta nunca es explícita. La última frase invita con naturalidad a seguir la cuenta para más consejos.
   · "cierre_bio": una frase alternativa de cierre que menciona el enlace del perfil con naturalidad ("si quieres aprender más, tienes el enlace en mi perfil"); la agencia solo la usa en uno de cada cuatro vídeos.
   · "estilo_visual" (en INGLÉS): estilo fotográfico común a todo el vídeo para que las imágenes sean coherentes: tipo de plano, luz, paleta y ambiente ("cinematic 35mm film look, warm golden hour light, teal and orange palette, shallow depth of field"). Adaptado al nicho y la marca.
-  · "visual" (en INGLÉS, la imagen del gancho), "visual_cierre" (en INGLÉS, la del cierre) y en cada escena "visuales": 2 descripciones en INGLÉS de imágenes cinematográficas distintas que ilustran lo que se está contando en ese momento (sujeto concreto, acción, lugar; sin texto, sin logos, sin caras de famosos ni del dueño). Que se sigan como una película: mismas personas u objetos, mismo lugar o época.
+  · "beats" (OBLIGATORIO en reels e historias): la narración troceada en momentos, en orden, entre 8 y 12 en reels y entre 4 y 6 en historias. Cada uno es {"t":"una frase hablada corta, de 5 a 14 palabras","img":"descripción en INGLÉS de la imagen que se ve MIENTRAS se dice esa frase"}. La imagen tiene que mostrar LITERALMENTE lo que dice la frase: si habla de frenar tarde en una curva, se ve un coche frenando tarde en una curva; si habla de una camiseta que transpira, se ve esa camiseta empapada en sudor; si habla del desayuno del hotel, se ve ese desayuno. Nada genérico ni decorativo. Sujeto concreto, acción y lugar; mismas personas, objetos y lugar en todo el vídeo para que parezca una sola historia; sin texto, sin logos, sin caras de famosos ni del dueño. La primera frase es el gancho y la última el cierre. Juntas suman entre 75 y 110 palabras en reels (40-60 en historias).
+  · "visual" y "visual_cierre" (en INGLÉS): imagen del gancho y del cierre, por si faltan beats.
 `:""}- "cta": como mucho 8 palabras y lleva a ${dest}.${O.stickers!==false?`
 - "stickers": de 3 a 5 emojis que salen animados en el vídeo como pegatinas (cochecitos que cruzan la pantalla, iconos que rebotan…). Tienen que ilustrar el tema de forma visual y divertida, el primero es la "mascota" de la pieza. Ejemplos: conducción → ["🏎️","🏁","🛞","⚡"]; dinero → ["💰","📈","🤑"]; estudio → ["📚","🧠","✅"]. Nada de banderas de países ni símbolos raros.`:''}
 - "fondo": elige el mejor para cada pieza entre: ${fondos.map(f=>f+" ("+FONDO_DESC[f]+")").join("; ")}.
@@ -760,7 +761,7 @@ AUDIO (solo reels e historias; los vídeos llevan locución real)
 - "guion" (solo si hay voz): lista de frases habladas, UNA por pantalla y en orden: gancho, cada escena y cierre (o el texto del sticker en historias). Tiene que sonar a creador hablando a cámara, no a texto leído: frases cortas, tuteo, exclamaciones y preguntas retóricas ("¿Sabes por qué?"), pausas con comas y puntos suspensivos, conectores de conversación ("mira", "ojo", "y aquí viene lo bueno"). Nada de "en primer lugar". Números pequeños con letra. Como mucho 22 palabras por frase, sin emojis, asteriscos ni hashtags.`:''}
 
 Responde SOLO con JSON válido:
-{"estrategia":"2 o 3 frases: qué días se publica, cuáles se descansa y por qué","piezas":[{"dia":0,"hora":"19:30","tipo":"reel","objetivo":"…","razon":"…","tema":"…","formato":"…","gancho":"…"${needVis?',"visual":"…","foto":""':''},"escenas":[{"titulo":"…","texto":"…"${needVis?',"visual":"…","foto":""':''}${window.__faceless!==false?',"visuales":["…","…"]':''}${O.emoji?',"emoji":"…"':''}${O.graficos!==false?',"grafico":{"tipo":"…"}':''}}],"cta":"…","layout":"…"${window.__faceless!==false?',"estilo_visual":"…","visual_cierre":"…","cierre_bio":"…"':''},"objetivo":"alcance|confianza|comunidad|conversion","serie":"nombre de la serie o vacío","episodio":0${O.stickers!==false?',"stickers":["…","…","…"]':''},"sticker":null,"fondo":"…","estilo":"…"${AUDIO_CAPS?',"audio":"…","voz":"…","ritmo_voz":"…","musica":"…","guion":["…"]':''},"caption":"…","hashtags":["#…"]}]}`;
+{"estrategia":"2 o 3 frases: qué días se publica, cuáles se descansa y por qué","piezas":[{"dia":0,"hora":"19:30","tipo":"reel","objetivo":"…","razon":"…","tema":"…","formato":"…","gancho":"…"${needVis?',"visual":"…","foto":""':''},"escenas":[{"titulo":"…","texto":"…"${needVis?',"visual":"…","foto":""':''}${window.__faceless!==false?',"visuales":["…","…"]':''}${O.emoji?',"emoji":"…"':''}${O.graficos!==false?',"grafico":{"tipo":"…"}':''}}],"cta":"…","layout":"…"${window.__faceless!==false?',"estilo_visual":"…","visual_cierre":"…","cierre_bio":"…","beats":[{"t":"…","img":"…"}]':''},"objetivo":"alcance|confianza|comunidad|conversion","serie":"nombre de la serie o vacío","episodio":0${O.stickers!==false?',"stickers":["…","…","…"]':''},"sticker":null,"fondo":"…","estilo":"…"${AUDIO_CAPS?',"audio":"…","voz":"…","ritmo_voz":"…","musica":"…","guion":["…"]':''},"caption":"…","hashtags":["#…"]}]}`;
 }
 $("#genBtn").addEventListener("click",async()=>{
   const st=$("#genStatus"),btn=$("#genBtn");
@@ -823,7 +824,9 @@ function diversify(vids){
   if(window.__faceless!==false){const hv=(S.hist&&S.hist.items||[]).filter(h=>h.tipo==="reel"||h.tipo==="historia").length;let k=0;
     vids.forEach(p=>{if(!(TYPES[p.tipo]&&TYPES[p.tipo].video))return;if((hv+k)%4!==3)p.layout="faceless";else if(p.layout==="faceless")p.layout="clasico";k++;});
     const fl=vids.filter(p=>p.layout==="faceless"),hf=(S.hist&&S.hist.items||[]).filter(h=>h.layout==="faceless").length;
-    fl.forEach((p,i)=>{const g=(p.guion||[]).filter(x=>String(x).trim());const bio=(hf+i)%4===0&&p.cierre_bio;if(bio&&g.length){p.guion=g.slice(0,-1).concat(p.cierre_bio);}});}
+    fl.forEach((p,i)=>{const bio=(hf+i)%4===0&&p.cierre_bio;
+      if(p.beats&&p.beats.length>=3){if(bio)p.beats[p.beats.length-1]={...p.beats[p.beats.length-1],t:p.cierre_bio};p.guion=p.beats.map(b=>b.t);return;}
+      const g=(p.guion||[]).filter(x=>String(x).trim());if(bio&&g.length){p.guion=g.slice(0,-1).concat(p.cierre_bio);}});}
   const anims=["slide","fade","pop","slide","fade","pop","slide"];vids.forEach((p,i)=>{p.anim=i===0?(O.anim||"pop"):anims[(seed+i)%anims.length];});
   const moods=["energetica","divertida","epica","chill","emotiva","tension","hiphop","rock","electronica","funk","latina","ambiental"];let pm=null;
   const mc={};const fit=["energetica","hiphop","divertida","electronica","rock","funk","latina","epica","chill"];
@@ -1021,6 +1024,9 @@ function buildScenes(p){
     const T=fit(p.gancho,F.h,F.hw,130*kk,70*kk,920,5,F.up,1.1);const sub=(p.escenas[0]&&p.escenas[0].texto)||"";
     const B=sub?fit(sub,F.b,F.bw,52*kk,34*kk,880,5,false,1.32):null;
     sc.push({kind:"post",T,B,cta:p.cta,dur:4});
+  }else if(p.layout==="faceless"&&p.beats&&p.beats.length>=3){
+    const n=p.beats.length,hook=fit(p.gancho||p.beats[0].t,F.h,F.hw,150*kk,70*kk,930,5,F.up,1.12);
+    p.beats.forEach((b,i)=>{const w=words(b.t);sc.push({kind:i===0?"hook":i===n-1?"cta":"tip",n:i,L:i===0?hook:null,beat:b,raw:"",body:"",dur:clamp(0.8+w*0.36,1.8,5.5)*pc});});
   }else{
     const LY=LAYOUTS.includes(p.layout)?p.layout:"clasico";const LW={cine:900,tarjeta:800,chat:660,dividido:930,lista:920,subtitulos:940,clasico:930}[LY];
     const hook=fit(p.gancho,F.h,F.hw,150*kk*(LY==="chat"?0.6:LY==="tarjeta"?0.85:1),70*kk,LY==="chat"?640:LY==="tarjeta"?780:930,5,F.up,1.12);sc.push({kind:"hook",L:hook,swipe:type==="carrusel",dur:clamp(1.6+hook.count*0.16,2.4,3.6)*pc});
@@ -1307,7 +1313,7 @@ function drawFacelessImg(im,k,dir,alpha){
 function drawFaceless(SC,s,si,lt){
   const imgs=(s.imgs||[]).filter(x=>x&&x.el);let drew=false;
   if(imgs.length){
-    const n=Math.max(1,Math.min(imgs.length*2,Math.round(s.dur/2.6))),seg=s.dur/n,idx=STATIC?0:Math.min(n-1,Math.floor(Math.max(0,lt)/seg)),loc=STATIC?0.35:(lt-idx*seg)/seg;
+    const n=imgs.length===1?1:Math.max(1,Math.min(imgs.length*2,Math.round(s.dur/2.6))),seg=s.dur/n,idx=STATIC?0:Math.min(n-1,Math.floor(Math.max(0,lt)/seg)),loc=STATIC?0.35:(lt-idx*seg)/seg;
     drew=drawFacelessImg(imgs[idx%imgs.length],loc,si*3+idx,1);
     const X=0.28;if(!STATIC&&idx>0&&loc*seg<X){const pk=(lt-(idx-1)*seg)/seg;drawFacelessImg(imgs[(idx-1)%imgs.length],pk,si*3+idx-1,1-loc*seg/X);}
     if(!STATIC&&si>0&&idx===0&&lt<X){const ps=SC.scenes[si-1],pim=(ps.imgs||[]).filter(x=>x&&x.el);if(pim.length){const pn=Math.max(1,Math.min(pim.length*2,Math.round(ps.dur/2.6)));drawFacelessImg(pim[(pn-1)%pim.length],1,(si-1)*3+pn-1,1-lt/X);}}
@@ -1740,13 +1746,19 @@ function sceneQ(e){return (e.foto&&brandPhoto(e.foto))?"foto:"+e.foto:(e.visual|
 function pieceQ(p){return (p.foto&&brandPhoto(p.foto))?"foto:"+p.foto:(p.visual||p.gancho);}
 function wantsPhotos(p){const m=effBM(p);return m==="ai"||m==="stock"||(S.cfg.v.fotos!==false&&m!=="media");}
 function flStyle(p){return p.estilo_visual?", "+p.estilo_visual:", cinematic film still, dramatic natural light, shallow depth of field";}
-function flPrompts(p){ const st=flStyle(p), esc=p.tipo==="historia"?p.escenas.slice(0,2):p.escenas;
+function flPrompts(p){ const st=flStyle(p);
+  if(p.beats&&p.beats.length>=3){ const b=p.beats.map(x=>(x.img||x.t)+st); return {beats:b,hook:[b[0]],tips:b.slice(1,-1).map(x=>[x]),cta:[b[b.length-1]]}; }
+  const esc=p.tipo==="historia"?p.escenas.slice(0,2):p.escenas;
   const hook=[(p.visual||p.gancho)+st], tips=esc.map(e=>{const v=(e.visuales&&e.visuales.length?e.visuales:[e.visual||e.texto||e.titulo]).slice(0,2);return v.map(x=>x+st);}), cta=[(p.visual_cierre||p.visual||p.gancho)+st];
   return {hook,tips,cta}; }
 function needed(p){ if(p&&p.layout==="faceless"&&TYPES[p.tipo]&&TYPES[p.tipo].video){ const f=flPrompts(p); return [...new Set([].concat(f.hook,...f.tips,f.cta).map(q=>String(q).trim()).filter(Boolean))].map(q=>({mode:"ai",q:"ia:"+q,k:"ai|ia:"+q})); }
   if(!wantsPhotos(p)) return []; const qs=[pieceQ(p)]; if(S.cfg.v.imgPer==="scene"&&p.tipo!=="post") (p.tipo==="historia"?p.escenas.slice(0,2):p.escenas).forEach(e=>qs.push(sceneQ(e))); return [...new Set(qs.map(q=>String(q).trim()).filter(Boolean))].map(q=>({mode:"ai",q,k:"ai|"+q})); }
 function getA(mode,q){return S.assets.get(mode+"|"+String(q).trim())||null;}
-HOOKS.attachAssets=(p,sc)=>{ if(p&&p.layout==="faceless"&&TYPES[p.tipo]&&TYPES[p.tipo].video){ const f=flPrompts(p); let ti=0; const g=q=>getA("ai","ia:"+q);
+HOOKS.attachAssets=(p,sc)=>{ if(p&&p.layout==="faceless"&&TYPES[p.tipo]&&TYPES[p.tipo].video&&p.beats&&p.beats.length>=3&&sc.length===p.beats.length){
+    // una imagen por frase: lo que se ve es lo que se está diciendo. Si alguna falla, se usa la de la frase anterior (lo más parecido)
+    const f=flPrompts(p), g=q=>getA("ai","ia:"+q); let last=null;
+    sc.forEach((s,i)=>{ const a=g(f.beats[i])||last||f.beats.map(g).find(Boolean)||null; s.imgs=a?[a]:[]; if(g(f.beats[i])) last=g(f.beats[i]); }); return; }
+  if(p&&p.layout==="faceless"&&TYPES[p.tipo]&&TYPES[p.tipo].video){ const f=flPrompts(p); let ti=0; const g=q=>getA("ai","ia:"+q);
     const pool=[...new Set([].concat(f.hook,...f.tips,f.cta))].map(g).filter(Boolean);
     sc.forEach((s,si)=>{ const list=s.kind==="hook"?f.hook:s.kind==="tip"?(f.tips[ti++]||f.hook):f.cta; s.imgs=list.map(g).filter(Boolean);
       if(s.imgs.length<2&&pool.length>1){ const extra=[pool[(si*2+1)%pool.length],pool[(si*2+2)%pool.length]].filter(x=>!s.imgs.includes(x)); s.imgs=s.imgs.concat(extra).slice(0,2); }
