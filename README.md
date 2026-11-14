@@ -207,3 +207,14 @@ python tests/run_mock.py                 # recorrido completo simulado: plan →
 
 - **Guionista**: cada reel e historia faceless pasa por una llamada dedicada (`brain.write_script`) que reescribe la narración como una explicación útil de una sola idea (8-11 frases, 75-115 palabras; historias 4-6 frases), sin cifras inventadas ni venta. Después el director de arte pone una imagen a cada frase.
 - **Imágenes**: el servidor (Cloudflare Worker) genera las imágenes con FLUX mediante Workers AI (`POST /admin/image`, gratis hasta 10.000 neuronas al día, de sobra para una semana de contenido). Hay que desplegar el worker una vez (`cd worker; npx wrangler deploy`) para activar el enlace `[ai]`. Si no está disponible, se usa el generador anónimo de reserva (peor calidad). Una clave `sk_…` de enter.pollinations.ai en `POLLINATIONS_TOKEN` también da FLUX.
+
+
+## Modo Veo (vídeo de verdad, gratis)
+
+Para cada reel e historia faceless la agencia prepara de 3 a 5 clips (descripción en inglés lista para copiar y duración de 4, 6 u 8 s), agrupando las frases del guion para no pasar de los 50 créditos diarios gratis de Google Flow (Veo 3.1 Lite = 10 créditos por clip).
+
+1. En la app, en lo programado, pulsa **🎬** en la pieza: verás cada clip con su frase y su descripción.
+2. Genéralos en [Google Flow](https://labs.google/flow) con **Veo 3.1 – Lite**, vertical 9:16, y súbelos ahí mismo.
+3. Con todos subidos, la agencia (`scripts/veo.py`) los monta con la voz, subtítulos palabra a palabra y música, sustituye la versión con imágenes y la reprograma a la misma hora.
+
+Los clips se guardan 30 días en el KV del servidor (`POST /api/clips/<pieza>/<n>`, máx. 24 MB). Si no subes clips, la pieza sale con imágenes como siempre. Requiere desplegar el servidor (`cd worker; npx wrangler deploy`).

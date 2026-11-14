@@ -522,6 +522,7 @@ def plan_user(browser, user, key, force=False, redo=None):
     queue = load_json(queue_path, [])
     modo = str(plan_conf.get("modo", "smart"))
     if not (force or redo or os.environ.get("FORCE")):
+        backfill_veo(user, queue, udir, tz)
         if any(q.get("date") == today and q.get("source") == "auto" for q in queue):
             log("  Ya se planificó hoy.")
             think_only(user, key, queue)
@@ -691,6 +692,7 @@ def plan_user(browser, user, key, force=False, redo=None):
                 with tempfile.TemporaryDirectory() as td:
                     tdp = Path(td)
                     voice_clips = []
+                    vname = None
                     if p.get("audio") in ("voz_y_musica", "solo_voz"):
                         try:
                             voice_clips, vname = make_voice(page, i, p, tdp, voices)
@@ -746,11 +748,24 @@ def plan_user(browser, user, key, force=False, redo=None):
             if floor and when < floor:  # el dueño ha pedido no publicar antes de esa fecha
                 when = floor + timedelta(minutes=50 * i)
                 log(f"    ⏸ Se retrasa hasta {when.strftime('%d/%m %H:%M')} (no publicar antes de {floor.strftime('%d/%m %H:%M')})")
+            veo_plan = None
+            if info["video"] and p.get("layout") == "faceless":
+                try:
+                    import veo
+                    cl = veo.plan_clips(p)
+                    if cl:
+                        veo_plan = {"clips": cl, "voz": vname if info["video"] and p.get("audio") in ("voz_y_musica", "solo_voz") and vname else VOICES.get(p.get("voz") if p.get("voz") in ("mujer", "hombre") else "mujer"),
+                                    "ritmo": RATES.get(p.get("ritmo_voz") or "normal", "+8%"), "musica": p.get("musica") or "",
+                                    "hashtags": p.get("hashtags", "")}
+                        log(f"    🎬 {len(cl)} clips de Veo preparados (duraciones {', '.join(str(c['dur']) for c in cl)} s)")
+                except Exception as e:
+                    log("    ⚠ No se pudieron preparar los clips de Veo:", e)
             new_items.append({
                 "id": pid, "date": today, "source": ("chat" if redo.get("brief") is not None else "redo") if redo else "auto", "tipo": p["tipo"], "tema": p.get("tema", ""),
                 "publishAt": when.isoformat(),
                 "caption": caption[:2200], "media": media, "status": "pending", "attempts": 0,
                 **({"cover": str((folder / "cover.jpg").relative_to(DOCS))} if (folder / "cover.jpg").exists() else {}),
+                **({"veo": veo_plan} if veo_plan else {}),
             })
         hist = page.evaluate("S.hist")
         estrategia = page.evaluate("S.today.estrategia")
@@ -847,15 +862,121 @@ def ready(u):
     return bool((marca.get("name") or marca.get("about")) and ((u.get("ig") or {}).get("connected") or u.get("social")))
 
 
+def backfill_veo(user, queue, udir, tz):
+    """Piezas ya programadas antes del modo Veo: se les preparan los clips a partir de su plan."""
+    import glob
+    import veo
+    now = datetime.now(tz)
+    pieces = []
+    for f in sorted(glob.glob(str(udir / "plans" / "*.json")))[-4:]:
+        pieces += (load_json(Path(f), {}) or {}).get("piezas") or []
+    n = 0
+    for q in queue:
+        if q.get("veo") or q.get("tipo") not in ("reel", "historia") or q.get("status") not in ("pending", "scheduled"):
+            continue
+        if datetime.fromisoformat(q["publishAt"]) < now + timedelta(hours=1):
+            continue
+        p = next((x for x in reversed(pieces) if x.get("tipo") == q["tipo"] and x.get("tema") == q.get("tema") and x.get("beats")), None)
+        cl = veo.plan_clips(p) if p else None
+        if not cl:
+            continue
+        q["veo"] = {"clips": cl, "voz": VOICES.get(p.get("voz") if p.get("voz") in ("mujer", "hombre") else "mujer"),
+                    "ritmo": RATES.get(p.get("ritmo_voz") or "normal", "+8%"), "musica": p.get("musica") or "", "hashtags": p.get("hashtags", "")}
+        n += 1
+    if n:
+        save_json(udir / "queue.json", queue)
+        log(f"  🎬 Clips de Veo preparados para {n} pieza(s) ya programadas")
+        try:
+            api("PUT", f"/admin/status/{user['id']}", {"queue": summarize(queue)})
+        except Exception as e:
+            log("  ⚠ No se pudo avisar a la app:", e)
+
+
+def fetch_clip(uid, iid, k, path):
+    base = os.environ.get("AGENCIA_API", "").strip().rstrip("/")
+    token = os.environ.get("AGENCIA_ADMIN_TOKEN", "").strip()
+    r = requests.get(f"{base}/admin/clips/{uid}/{iid}/{k}", timeout=120, headers={"authorization": "Bearer " + token})
+    if r.status_code != 200 or len(r.content) < 1000:
+        raise RuntimeError(f"clip {k + 1}: HTTP {r.status_code}")
+    Path(path).write_bytes(r.content)
+
+
+def assemble_veo(user, iid):
+    """Monta una pieza con los clips de Veo que la persona ha subido y sustituye la versión programada."""
+    import veo
+    uid = user["id"]
+    udir = CONTENT / "users" / uid
+    queue_path = udir / "queue.json"
+    queue = load_json(queue_path, [])
+    tz = ZoneInfo(((user.get("config") or {}).get("plan") or {}).get("zona_horaria", "Europe/Madrid"))
+    item = next((q for q in queue if q.get("id") == iid), None)
+    if not item or not item.get("veo") or item.get("status") not in ("pending", "scheduled", "failed"):
+        log(f"  — {iid}: ya no se puede montar con Veo.")
+        return False
+    if datetime.fromisoformat(item["publishAt"]) < datetime.now(tz) + timedelta(minutes=12):
+        log(f"  — {iid}: ya se ha publicado o está a punto; se deja como estaba.")
+        return False
+    v = item["veo"]
+    log(f"🎬 Montando «{item.get('tema', '')}» con {len(v['clips'])} clips de Veo")
+    with tempfile.TemporaryDirectory() as td:
+        segs = []
+        for k, c in enumerate(v["clips"]):
+            path = Path(td) / f"c{k}.mp4"
+            fetch_clip(uid, iid, k, path)
+            segs.append({"clip": path, "t": c["t"]})
+        folder = DOCS / "media" / uid / item.get("date", datetime.now(tz).strftime("%Y-%m-%d")) / f"{iid}-veo"
+        if folder.exists():
+            shutil.rmtree(folder)
+        total, meta = veo.compose(segs, v.get("voz") or VOICES["hombre"], v.get("ritmo") or "+8%", v.get("musica") or "energetica",
+                                  folder / "video.mp4", log, music_free_only=item["tipo"] == "historia")
+    log(f"    ✓ {total:.1f}s · música: {(meta or {}).get('title', 'ninguna')}")
+    zernio_cancel(item)
+    item["media"] = [str((folder / "video.mp4").relative_to(DOCS))]
+    if (folder / "cover.jpg").exists():
+        item["cover"] = str((folder / "cover.jpg").relative_to(DOCS))
+    item["status"] = "pending"
+    item.pop("zernioPostId", None)
+    item.pop("error", None)
+    v["done"] = datetime.now(tz).isoformat()
+    if user.get("social"):
+        try:
+            pid_z = zernio_schedule(user, item, {"tema": item.get("tema"), "hashtags": v.get("hashtags", "")}, tz)
+            if pid_z:
+                item["status"], item["zernioPostId"] = "scheduled", pid_z
+                log(f"    📅 Reprogramado con la versión Veo: {item['publishAt']}")
+        except Exception as e:
+            log("    ✗ No se pudo programar en Zernio:", e)
+            item["status"], item["error"] = "failed", str(e)[:300]
+    save_json(queue_path, queue)
+    try:
+        api("PUT", f"/admin/status/{uid}", {"queue": summarize(queue)})
+    except Exception as e:
+        log("  ⚠ No se pudo avisar a la app:", e)
+    return True
+
+
 def process_requests(browser, users, key):
     """Peticiones hechas desde la app: reiniciar cuenta, rehacer la semana o rehacer piezas sueltas."""
     errors = 0
     for u in users:
         r = u.get("requests") or {}
-        if not (r.get("reset") or r.get("replan") or r.get("redo") or r.get("create") or r.get("remove")):
+        if not (r.get("reset") or r.get("replan") or r.get("redo") or r.get("create") or r.get("remove") or r.get("veo")):
             continue
         label = f"{u.get('name')} ({u['id']})"
         done = {}
+        if r.get("veo") and not r.get("reset"):
+            for iid in r["veo"]:
+                try:
+                    assemble_veo(u, iid)
+                except Exception as e:
+                    errors += 1
+                    log(f"  ✗ No se pudo montar {iid} con Veo:", e)
+            try:
+                api("POST", f"/admin/requests/{u['id']}/done", {"veo": r["veo"]})
+            except Exception as e:
+                log("  ⚠ No se pudo marcar el montaje como hecho:", e)
+            if not (r.get("replan") or r.get("redo") or r.get("create") or r.get("remove")):
+                continue
         if r.get("remove"):
             remove_items(u, r["remove"])
             try:

@@ -128,6 +128,20 @@ delete env.GITHUB_TOKEN; await call("POST", "/api/cancel-request", { key, body: 
 r = await call("GET", "/pending"); assert.equal(r.j.pending, true);
 r = await call("GET", "/admin/users", { key: "admin123" }); assert.deepEqual(r.j.users.find(x => x.id === uid).requests.redo, ["p1"]);
 r = await call("POST", "/admin/requests/" + uid + "/done", { key: "admin123", body: { redo: ["p1"] } }); assert.equal(r.j.requests, null);
+{ // modo Veo: subir clips, montar cuando están todos, descargar como admin
+  await call("PUT", "/admin/status/" + uid, { key: "admin123", body: { estrategia: "E", queue: [{ id: "v1", tipo: "reel", status: "scheduled", publishAt: fut, veo: { clips: [{ t: "a", prompt: "p", dur: 4 }, { t: "b", prompt: "q", dur: 6 }] } }] } });
+  const up = (k, bytes) => worker.fetch(new Request(B + "/api/clips/v1/" + k, { method: "POST", headers: { authorization: "Bearer " + key, "content-type": "video/mp4", Origin: "https://x.github.io" }, body: new Uint8Array(bytes) }), env).then(async x => ({ s: x.status, j: await x.json() }));
+  let u1 = await up(0, 50); assert.equal(u1.s, 400, "clip vacío");
+  u1 = await up(5, 20000); assert.equal(u1.s, 404, "clip que no existe");
+  u1 = await up(0, 20000); assert.equal(u1.s, 200); assert.deepEqual(u1.j.veo.v1, [0]); assert.ok(!(u1.j.requests && u1.j.requests.veo));
+  r = await call("GET", "/pending"); assert.equal(r.j.pending, false);
+  u1 = await up(1, 30000); assert.deepEqual(u1.j.veo.v1, [0, 1]); assert.deepEqual(u1.j.requests.veo, ["v1"]);
+  r = await call("GET", "/pending"); assert.equal(r.j.pending, true);
+  const dl = await worker.fetch(new Request(B + "/admin/clips/" + uid + "/v1/1", { headers: { authorization: "Bearer admin123" } }), env);
+  assert.equal(dl.status, 200); assert.equal((await dl.arrayBuffer()).byteLength, 30000);
+  r = await call("GET", "/api/me", { key }); assert.deepEqual(r.j.user ? r.j.user.veo.v1 : r.j.veo.v1, [0, 1]);
+  r = await call("POST", "/admin/requests/" + uid + "/done", { key: "admin123", body: { veo: ["v1"] } }); assert.equal(r.j.requests, null);
+}
 r = await call("POST", "/api/replan", { key }); const rp = r.j.requests.replan; assert.ok(rp);
 r = await call("POST", "/api/cancel-request", { key, body: {} }); assert.equal(r.j.requests.replan, undefined);
 r = await call("POST", "/api/create", { key, body: {} }); assert.equal(r.s, 400);

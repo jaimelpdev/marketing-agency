@@ -78,6 +78,7 @@ function publicUser(u) {
     status: u.status || null,
     requests: u.requests || null,
     photos: u.photos || [],
+    veo: u.veo || {},
     resetAt: u.config ? null : (u.resetAt || null),
     usage: u.usage && u.usage.day === today() ? u.usage : { day: today(), llm: 0, img: 0 },
   };
@@ -235,7 +236,7 @@ async function handle(req, env) {
     for (const id of await listUserIds(env)) {
       const u = await getUser(env, id);
       const r = u && u.requests;
-      if (r && (r.reset || r.replan || (r.redo && r.redo.length) || (r.create && r.create.length) || (r.remove && r.remove.length))) return json({ pending: true });
+      if (r && (r.reset || r.replan || (r.redo && r.redo.length) || (r.create && r.create.length) || (r.remove && r.remove.length) || (r.veo && r.veo.length))) return json({ pending: true });
     }
     return json({ pending: false });
   }
@@ -336,6 +337,41 @@ async function handle(req, env) {
       await putUser(env, u);
       return json({ ok: true, item, requests: u.requests, started: await kickAgency(env) });
     }
+    // ===== clips de vídeo generados con Veo (Google Flow) para montar una pieza =====
+    const clm = p.match(/^\/api\/clips\/([\w-]+)\/(\d)$/);
+    if (clm) {
+      const iid = clm[1], k = Number(clm[2]);
+      const item = ((u.status && u.status.queue) || []).find(q => q.id === iid);
+      if (!item || !item.veo || !Array.isArray(item.veo.clips) || k >= item.veo.clips.length) return err(404, "not_found", "Esa pieza no tiene ese clip.");
+      u.veo = u.veo || {};
+      const have = new Set(u.veo[iid] || []);
+      if (method === "POST") {
+        if (new Date(item.publishAt) < new Date(Date.now() + 15 * 60e3)) return err(400, "bad_request", "Esta pieza ya se publica en nada; no da tiempo a montarla.");
+        const buf = await req.arrayBuffer();
+        if (buf.byteLength < 10000) return err(400, "bad_request", "El vídeo está vacío o no es válido.");
+        if (buf.byteLength > 24 * 1024 * 1024) return err(413, "too_large", "El clip pesa más de 24 MB. Descárgalo en 720p.");
+        await env.KV.put(`clip:${u.id}:${iid}:${k}`, buf, { expirationTtl: 30 * 86400 });
+        have.add(k);
+        u.veo[iid] = [...have].sort();
+        let started = false;
+        if (u.veo[iid].length >= item.veo.clips.length) {  // ya están todos: a montar
+          u.requests = u.requests || {};
+          u.requests.veo = (u.requests.veo || []).filter(x => x !== iid).concat(iid);
+          started = true;
+        }
+        await putUser(env, u);
+        if (started) started = await kickAgency(env);
+        return json({ ok: true, veo: u.veo, requests: u.requests || null, started });
+      }
+      if (method === "DELETE") {
+        await env.KV.delete(`clip:${u.id}:${iid}:${k}`);
+        have.delete(k);
+        u.veo[iid] = [...have].sort();
+        await putUser(env, u);
+        return json({ ok: true, veo: u.veo });
+      }
+    }
+
     // ===== fotos propias de la marca (productos, equipo, local…) =====
     if (p === "/api/photos" && method === "POST") {
       const b = await req.json().catch(() => ({}));
@@ -558,12 +594,19 @@ async function handle(req, env) {
       if (Array.isArray(b.redo)) r.redo = (r.redo || []).filter(x => !b.redo.includes(x));
       if (Array.isArray(b.remove)) r.remove = (r.remove || []).filter(x => !b.remove.includes(x));
       if (Array.isArray(r.remove) && !r.remove.length) delete r.remove;
+      if (Array.isArray(b.veo)) { r.veo = (r.veo || []).filter(x => !b.veo.includes(x)); if (!r.veo.length) delete r.veo; }
       if (Array.isArray(b.create)) r.create = (r.create || []).filter(x => !b.create.includes(x.id));
       if (Array.isArray(r.create) && !r.create.length) delete r.create;
       if (Array.isArray(r.redo) && !r.redo.length) delete r.redo;
       u.requests = Object.keys(r).length ? r : null;
       await putUser(env, u);
       return json({ ok: true, requests: u.requests });
+    }
+    const acl = p.match(/^\/admin\/clips\/([\w-]+)\/([\w-]+)\/(\d)$/);
+    if (acl && method === "GET") {
+      const buf = await env.KV.get(`clip:${acl[1]}:${acl[2]}:${acl[3]}`, "arrayBuffer");
+      if (!buf) return err(404, "not_found", "No encuentro ese clip.");
+      return new Response(buf, { headers: { "content-type": "video/mp4", "cache-control": "no-store" } });
     }
     const aph = p.match(/^\/admin\/photos\/([\w-]+)$/);
     if (aph && method === "GET") {

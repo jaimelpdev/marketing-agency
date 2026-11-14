@@ -46,6 +46,10 @@ def summarize(queue):
         item = {k: q.get(k) for k in ("id", "tipo", "tema", "publishAt", "status", "error", "zernioPostId") if q.get(k) is not None}
         if q.get("media"):
             item["media"] = [m for m in q["media"] if isinstance(m, str) and m.startswith("media/")][:6]
+        if isinstance(q.get("veo"), dict) and upcoming(q):
+            v = q["veo"]
+            item["veo"] = {"clips": [{"t": c.get("t", "")[:300], "prompt": c.get("prompt", "")[:1400], "dur": c.get("dur", 8)} for c in v.get("clips", [])[:6]],
+                           **({"done": v["done"]} if v.get("done") else {})}
         if isinstance(q.get("cover"), str) and q["cover"].startswith("media/"):
             item["cover"] = q["cover"]
         out.append(item)

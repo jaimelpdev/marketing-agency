@@ -186,6 +186,7 @@
   .busy-note{font-size:13px;margin:6px 0;color:var(--accent2)}
   .qitem.clk{cursor:pointer}
   .qthumb{width:42px;height:64px;object-fit:cover;border-radius:8px;flex:none;background:#000}
+.qveo{background:var(--card2,rgba(255,255,255,.04));border-radius:12px;padding:10px;margin:4px 0 10px}.qveo a{color:var(--accent2,#7cf)}.veo-c{border-top:1px solid rgba(255,255,255,.08);padding:8px 0}.veo-h{display:flex;justify-content:space-between;gap:8px}.veo-t{font-size:12px;opacity:.85;margin:4px 0}.veo-p{width:100%;box-sizing:border-box;font-size:11px;background:rgba(0,0,0,.25);color:inherit;border:1px solid rgba(255,255,255,.12);border-radius:8px;padding:6px;resize:vertical}.veo-b{display:flex;gap:6px;margin-top:6px;flex-wrap:wrap}.rd.veo{background:var(--accent,#ff5a1f);color:#fff}
   .qprev{display:flex;gap:8px;overflow-x:auto;padding:6px 0 10px}
   .qprev video,.qprev img{height:340px;border-radius:14px;background:#000;flex:none}
   .autohide{display:none!important}
@@ -1941,6 +1942,49 @@ async function askRedo(it) {
   try { const j = await api("/api/redo", { method: "POST", body: { id: it.id } }); HOST.me.requests = j.requests; renderAcct(); renderSchedule(); const m = "🔄 La agencia está rehaciendo «" + (it.tema || it.tipo) + "». Estará lista en 20-40 minutos y se publicará a la misma hora."; setStatus(st, m, "ok"); setStatus($("#genStatus"), m, "ok"); }
   catch (e) { setStatus(st, e.message, "err"); setStatus($("#genStatus"), e.message, "err"); }
 }
+/* ============ MODO VEO: clips gratis de Google Flow que la agencia monta sola ============ */
+function toggleVeo(row, it) {
+  const nx = row.nextSibling; if (nx && nx.classList && nx.classList.contains("qveo")) { nx.remove(); return; }
+  if (nx && nx.classList && nx.classList.contains("qprev")) nx.remove();
+  row.after(veoPanel(it));
+}
+function veoPanel(it) {
+  const have = new Set((HOST.me.veo || {})[it.id] || []), clips = it.veo.clips, R = reqs();
+  const box = el("div", { class: "qveo" });
+  const montando = (R.veo || []).includes(it.id);
+  const note = el("div", { class: "note" }); box.appendChild(note); note.innerHTML = (it.veo.done
+    ? "✅ Esta pieza ya está montada con tus clips de Veo y programada. Si subes otro clip, se vuelve a montar."
+    : montando ? "🎬 Tienes todos los clips: la agencia los está montando con la voz, los subtítulos y la música. Sustituye a la versión programada en cuanto termine."
+    : "Genera cada clip gratis en <a href='https://labs.google/flow' target='_blank' rel='noopener'>Google Flow</a> con <b>Veo 3.1 – Lite</b>, formato <b>vertical 9:16</b> y la duración indicada. Descárgalo y súbelo aquí. Con todos subidos, la agencia lo monta sola y sustituye la versión con imágenes.");
+  clips.forEach((c, k) => {
+    const st = el("span", { class: "s", text: have.has(k) ? "✅ subido" : "" });
+    const ta = el("textarea", { class: "veo-p", readonly: "", rows: "3" }); ta.value = c.prompt;
+    const inp = el("input", { type: "file", accept: "video/mp4,video/*", style: "display:none" });
+    inp.addEventListener("change", async () => {
+      const f = inp.files && inp.files[0]; if (!f) return;
+      if (f.size > 24 * 1024 * 1024) { st.textContent = "⚠ pesa más de 24 MB: descárgalo en 720p"; return; }
+      st.textContent = "⏫ subiendo…";
+      try {
+        const r = await fetch(API + "/api/clips/" + it.id + "/" + k, { method: "POST", headers: { "content-type": f.type || "video/mp4", authorization: "Bearer " + HOST.key }, body: f });
+        const j = await r.json().catch(() => ({}));
+        if (!r.ok) throw new Error((j.error && j.error.message) || ("Error " + r.status));
+        HOST.me.veo = j.veo; if (j.requests !== undefined) HOST.me.requests = j.requests;
+        if ((j.requests && j.requests.veo || []).includes(it.id)) setStatus($("#genStatus"), "🎬 ¡Todos los clips subidos! La agencia monta «" + (it.tema || it.tipo) + "» y sustituye la versión programada" + (j.started ? " en unos minutos." : " en su próxima vuelta (como mucho unas horas)."), "ok");
+        renderSchedule(); if ($("#acctModal").classList.contains("on")) renderAcct();
+      } catch (e) { st.textContent = "⚠ " + e.message; inp.value = ""; }
+    });
+    box.appendChild(el("div", { class: "veo-c" }, [
+      el("div", { class: "veo-h" }, [el("b", { text: "Clip " + (k + 1) + " · " + c.dur + " s" }), st]),
+      el("div", { class: "veo-t", text: "🗣 «" + c.t + "»" }),
+      ta,
+      el("div", { class: "veo-b" }, [
+        el("button", { class: "rd", text: "📋 Copiar descripción", onclick: async e => { try { await navigator.clipboard.writeText(c.prompt); e.target.textContent = "✓ Copiada"; } catch (er) { ta.select(); } } }),
+        el("button", { class: "rd", text: have.has(k) ? "🔁 Cambiar vídeo" : "⏫ Subir vídeo", onclick: () => inp.click() }), inp
+      ])
+    ]));
+  });
+  return box;
+}
 function queueList(box, q) {
   box.innerHTML = "";
   if (!q || !q.length) { box.appendChild(el("div", { class: "note", text: isConnected() ? "Aún no hay nada programado. La agencia planifica cada mañana." : "Conecta tus redes y la agencia empezará a planificar y publicar." })); return; }
@@ -1951,6 +1995,10 @@ function queueList(box, q) {
     const st = busy ? ["🔄 rehaciendo…", "var(--accent2)"] : (QSTATE[it.status] || [it.status, "var(--muted)"]);
     const thumb = it.cover || (it.media && it.media[0] && !/\.mp4$/i.test(it.media[0]) ? it.media[0] : "");
     const row = el("div", { class: "qitem" }, [thumb ? el("img", { class: "qthumb", src: thumb, alt: "", loading: "lazy" }) : null, el("span", { class: "w", text: fmtWhen(it.publishAt) }), el("span", { text: (TYPES[it.tipo] ? TYPES[it.tipo].icon + " " : "") + (it.tema || "") }), el("span", { class: "s", style: "color:" + st[1], text: st[0] })]);
+    if (upcoming && !busy && it.id && it.veo && it.veo.clips && it.veo.clips.length) {
+      const nHave = ((HOST.me.veo || {})[it.id] || []).length, nAll = it.veo.clips.length;
+      row.appendChild(el("button", { class: "rd" + (it.veo.done ? "" : " veo"), title: "Versión con vídeo de Veo (gratis con Google Flow)", text: it.veo.done ? "🎬✓" : (reqs().veo || []).includes(it.id) ? "🎬…" : "🎬 " + nHave + "/" + nAll, onclick: e => { e.stopPropagation(); toggleVeo(row, it); } }));
+    }
     if (upcoming && !busy && it.id) row.appendChild(el("button", { class: "rd", title: "Rehacer esta pieza", text: "🔄", onclick: e => { e.stopPropagation(); askRedo(it); } }));
     if ((upcoming || it.status === "failed") && it.id) { let armed = 0; row.appendChild(el("button", { class: "rd danger", title: "Eliminar esta pieza", text: "🗑", onclick: async e => {
       e.stopPropagation(); const b = e.currentTarget;
