@@ -744,7 +744,7 @@ ${O.graficos!==false?`- "grafico" (en cada escena de reels e historias): una ani
 `:""}${window.__faceless!==false?`- ESTILO FACELESS para TODOS los reels e historias (el estilo que más visitas da): el vídeo es una NARRACIÓN CONTINUA de 25 a 45 segundos (OBLIGATORIO: entre 7 y 10 frases y entre 75 y 110 palabras en total en "guion"; en historias, entre 4 y 6 frases y 40-60 palabras) sobre imágenes generadas a pantalla completa que cambian cada 2-3 segundos, con subtítulos. Por eso en reels e historias:
   · "guion" es obligatorio y se lee como UNA historia o explicación seguida, en segunda persona, de alguien que quiere enseñar y ayudar de verdad, nunca de anuncio. La primera frase es el gancho y tiene que atrapar en el primer segundo y medio (pregunta, error común, dato sorprendente o "nadie te cuenta esto…"). El 90% del vídeo enseña algo útil y concreto del nicho de la marca; la venta nunca es explícita. La última frase invita con naturalidad a seguir la cuenta para más consejos.
   · "cierre_bio": una frase alternativa de cierre que menciona el enlace del perfil con naturalidad ("si quieres aprender más, tienes el enlace en mi perfil"); la agencia solo la usa en uno de cada cuatro vídeos.
-  · "estilo_visual" (en INGLÉS): estilo fotográfico común a todo el vídeo para que las imágenes sean coherentes: tipo de plano, luz, paleta y ambiente ("cinematic 35mm film look, warm golden hour light, teal and orange palette, shallow depth of field"). Adaptado al nicho y la marca.
+  · "estilo_visual" (en INGLÉS): estilo fotográfico común a todo el vídeo para que las imágenes sean coherentes: tipo de plano, luz y paleta ("cinematic 35mm photo, bright natural light, vivid colors"). Adaptado al nicho y la marca. Nada de desenfoques, bokeh ni ambientes oscuros: lo que describe cada frase tiene que verse nítido y reconocible al instante.
   · "beats" (OBLIGATORIO en reels e historias): la narración troceada en momentos, en orden, entre 8 y 12 en reels y entre 4 y 6 en historias. Cada uno es {"t":"una frase hablada corta, de 5 a 14 palabras","img":"descripción en INGLÉS de la imagen que se ve MIENTRAS se dice esa frase"}. La imagen tiene que mostrar LITERALMENTE lo que dice la frase: si habla de frenar tarde en una curva, se ve un coche frenando tarde en una curva; si habla de una camiseta que transpira, se ve esa camiseta empapada en sudor; si habla del desayuno del hotel, se ve ese desayuno. Nada genérico ni decorativo. Sujeto concreto, acción y lugar; mismas personas, objetos y lugar en todo el vídeo para que parezca una sola historia; sin texto, sin logos, sin caras de famosos ni del dueño. La primera frase es el gancho y la última el cierre. Juntas suman entre 75 y 110 palabras en reels (40-60 en historias).
   · "visual" y "visual_cierre" (en INGLÉS): imagen del gancho y del cierre, por si faltan beats.
 `:""}- "cta": como mucho 8 palabras y lleva a ${dest}.${O.stickers!==false?`
@@ -1320,7 +1320,7 @@ function drawFaceless(SC,s,si,lt){
   }
   if(!drew){if(SC.look)drawLook(SC.look,STATIC?0:lt);else{const g=ctx.createLinearGradient(0,0,W,H);g.addColorStop(0,mix(S.cfg.acc,"#000000",0.55));g.addColorStop(1,"#08080c");ctx.fillStyle=g;ctx.fillRect(0,0,W,H);}}
   // viñeta suave para que el texto se lea sin tapar la imagen
-  const v=ctx.createRadialGradient(W/2,H*0.55,H*0.22,W/2,H*0.55,H*0.75);v.addColorStop(0,"rgba(0,0,0,.08)");v.addColorStop(1,"rgba(0,0,0,.5)");ctx.fillStyle=v;ctx.fillRect(0,0,W,H);
+  const v=ctx.createRadialGradient(W/2,H*0.55,H*0.3,W/2,H*0.55,H*0.8);v.addColorStop(0,"rgba(0,0,0,0)");v.addColorStop(1,"rgba(0,0,0,.32)");ctx.fillStyle=v;ctx.fillRect(0,0,W,H);
   if(STATIC&&s.kind==="hook"){ // portada: el gancho entero
     const Y=flYellow(),T={text:"#ffffff",hl:"color",hlFill:Y,hlText:Y,stroke:"#000000",hard:null,shadow:false,neon:false};
     const y=H*0.5-s.L.h/2;drawBlock(s.L,W/2,y,9,0,0,"#ffffff",T);return;}
@@ -1745,7 +1745,7 @@ function brandPhoto(id){return (window.__brandPhotos||[]).find(f=>f.id===id)||nu
 function sceneQ(e){return (e.foto&&brandPhoto(e.foto))?"foto:"+e.foto:(e.visual||(e.titulo+" "+e.texto));}
 function pieceQ(p){return (p.foto&&brandPhoto(p.foto))?"foto:"+p.foto:(p.visual||p.gancho);}
 function wantsPhotos(p){const m=effBM(p);return m==="ai"||m==="stock"||(S.cfg.v.fotos!==false&&m!=="media");}
-function flStyle(p){return p.estilo_visual?", "+p.estilo_visual:", cinematic film still, dramatic natural light, shallow depth of field";}
+function flStyle(p){const st=String(p.estilo_visual||"cinematic film still, natural light").replace(/,?\s*(shallow depth of field|bokeh|blurr?y?|motion blur|dark|moody)/gi,"");return ", "+st+", sharp focus, subject clearly visible and centered, well lit, high detail";}
 function flPrompts(p){ const st=flStyle(p);
   if(p.beats&&p.beats.length>=3){ const b=p.beats.map(x=>(x.img||x.t)+st); return {beats:b,hook:[b[0]],tips:b.slice(1,-1).map(x=>[x]),cta:[b[b.length-1]]}; }
   const esc=p.tipo==="historia"?p.escenas.slice(0,2):p.escenas;
