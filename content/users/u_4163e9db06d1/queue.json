@@ -1,175 +1,241 @@
 [
- {
-  "id": "2026-11-10-01-reel",
-  "date": "2026-11-10",
-  "source": "auto",
-  "tipo": "reel",
-  "tema": "Error de telemetría: frenado tardío por falta de freno motor",
-  "publishAt": "2026-11-10T22:57:55.297646+01:00",
-  "caption": "¿Te ha pasado perder tiempo por no usar el freno motor? 🚗💨 Cuéntanos y guarda este tip.\n\n#simracing #telemetria #tips #LAPRIQ #racingcoach\n\n🎵 «AleXZavesa - Lo squalo (EDM)» de AlexZavesa (CC BY 3.0)",
-  "media": [
-   "media/u_4163e9db06d1/2026-11-10/2026-11-10-01-reel/video.mp4"
-  ],
-  "status": "scheduled",
-  "attempts": 0,
-  "cover": "media/u_4163e9db06d1/2026-11-10/2026-11-10-01-reel/cover.jpg",
-  "zernioPostId": "6af390f6fed4d40f10c88510"
- },
- {
-  "id": "2026-11-10-r233124-carrusel",
-  "date": "2026-11-10",
-  "source": "redo",
-  "tipo": "carrusel",
-  "tema": "Checklist de ajustes críticos antes de la carrera",
-  "publishAt": "2026-11-11T13:30:00+01:00",
-  "caption": "¿Te cuesta ganar esos décimos? 🕒 Aquí tienes 4 ajustes críticos que pueden salvarte tiempo. Ponlos a prueba y cuéntanos tu mejora. 👉 Descubre más en el link en bio\n\n#SimRacing #Telemetria #LAPRIQ #RacingTips #Coaching",
-  "media": [
-   "media/u_4163e9db06d1/2026-11-10/2026-11-10-r233124-carrusel/01.jpg",
-   "media/u_4163e9db06d1/2026-11-10/2026-11-10-r233124-carrusel/02.jpg",
-   "media/u_4163e9db06d1/2026-11-10/2026-11-10-r233124-carrusel/03.jpg",
-   "media/u_4163e9db06d1/2026-11-10/2026-11-10-r233124-carrusel/04.jpg",
-   "media/u_4163e9db06d1/2026-11-10/2026-11-10-r233124-carrusel/05.jpg",
-   "media/u_4163e9db06d1/2026-11-10/2026-11-10-r233124-carrusel/06.jpg"
-  ],
-  "status": "scheduled",
-  "attempts": 0,
-  "zernioPostId": "6af39b4ca92bb73d012296d5"
- },
- {
-  "id": "2026-11-10-r233246-reel",
-  "date": "2026-11-10",
-  "source": "redo",
-  "tipo": "reel",
-  "tema": "Uso avanzado del freno motor para ganar décimas",
-  "publishAt": "2026-11-12T19:45:00+01:00",
-  "caption": "¿Sabes cómo el freno motor puede recortar décimas? Te explico el truco que usan los pilotos top. ¿Lo aplicarías en tu próxima sesión? 👉 Descubre más en el link en bio\n\n#SimRacing #Telemetria #FrenoMotor #LAPRIQ #Coaching #RacingTips\n\n🎵 «Super Power Pop Rock» de Kara Square (CC BY 3.0)",
-  "media": [
-   "media/u_4163e9db06d1/2026-11-10/2026-11-10-r233246-reel/video.mp4"
-  ],
-  "status": "scheduled",
-  "attempts": 0,
-  "cover": "media/u_4163e9db06d1/2026-11-10/2026-11-10-r233246-reel/cover.jpg",
-  "zernioPostId": "6af39c25971ece870c775e33"
- },
- {
-  "id": "2026-11-11-r015354-post",
-  "date": "2026-11-11",
-  "source": "redo",
-  "tipo": "post",
-  "tema": "Uso de telemetría en tiempo real para adelantamientos",
-  "publishAt": "2026-11-13T13:00:00+01:00",
-  "caption": "¿Sabías que la telemetría en vivo puede ser tu mejor aliado para adelantar? 🔎 Detecta los momentos perfectos y supera a tus rivales sin arriesgarte. Cuéntanos, ¿qué curva te cuesta más abrir paso? 👉 Descubre más en el link de bio\n\n#SimRacing #Telemetria #Adelantar #LAPRIQ #Coaching #RacingTips",
-  "media": [
-   "media/u_4163e9db06d1/2026-11-11/2026-11-11-r015354-post/01.jpg"
-  ],
-  "status": "scheduled",
-  "attempts": 0,
-  "zernioPostId": "6af3bcaeab419287a3961457"
- },
- {
-  "id": "2026-11-14-01-reel",
-  "date": "2026-11-14",
-  "source": "auto",
-  "tipo": "reel",
-  "tema": "Dato curioso: Telemetría de suspensión",
-  "publishAt": "2026-11-14T21:59:37.883130+01:00",
-  "caption": "¿Sabes que la suspensión registra 200kHz? 🚀 Un ajuste de 1mm puede ganar 0.2s por vuelta. Guarda y comparte si te sorprendió. 👉 Link en bio\n\n#telemetría #suspensión #simracing #lapriq #datos\n\n🎵 «Spencer Newton - Bounce (Original Mix)(Electro House)» de Spencer Newton (CC BY 3.0)",
-  "media": [
-   "media/u_4163e9db06d1/2026-11-14/2026-11-14-01-reel/video.mp4"
-  ],
-  "status": "scheduled",
-  "attempts": 0,
-  "cover": "media/u_4163e9db06d1/2026-11-14/2026-11-14-01-historia/cover.jpg",
-  "zernioPostId": "6af890e46b2a87dbdf664da8",
-  "veo": {
-   "clips": [
-    {
-     "t": "¿Te pierdes al leer la curva de frenado en la telemetría? Porque muestra la presión de freno sin señalar la zona exacta.",
-     "prompt": "Aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a large monitor showing a racing simulation, not a real car interior. The racer sits in the rig, squinting at a monitor displaying a blue braking curve graph, hand hovering over steering wheel, confused expression. Then: The racer points at a flat brake pressure bar on the monitor, the screen lacking any highlighted zone, while seated in the rig. smooth natural camera movement, vertical 9:16 video, photorealistic, bright natural light, sharp focus, no text, no captions, no logos, no brand names, no watermark",
-     "dur": 8
-    },
-    {
-     "t": "Abre la telemetría de freno y marca cuando el coche empieza a girar.",
-     "prompt": "Aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a large monitor showing a racing simulation, not a real car interior. The racer uses a mouse to open the brake telemetry window and draws a red marker on the graph at the moment the car begins to turn. smooth natural camera movement, vertical 9:16 video, photorealistic, bright natural light, sharp focus, no text, no captions, no logos, no brand names, no watermark",
-     "dur": 6
-    },
-    {
-     "t": "Verás el punto de frenado alineado con la entrada de la curva, sin sobre‑frenar. Si te sirve, sigue la cuenta para más trucos de telemetría.",
-     "prompt": "Aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a large monitor showing a racing simulation, not a real car interior. The monitor shows a red braking point aligned with the curve entry on the track map, while the racer watches intently from the rig. Then: The racer gives a thumbs‑up, leaning forward at the rig, with the monitor displaying icons of telemetry tricks, inviting viewers to follow. smooth natural camera movement, vertical 9:16 video, photorealistic, bright natural light, sharp focus, no text, no captions, no logos, no brand names, no watermark",
-     "dur": 8
+  {
+    "id": "2026-11-10-01-reel",
+    "date": "2026-11-10",
+    "source": "auto",
+    "tipo": "reel",
+    "tema": "Error de telemetría: frenado tardío por falta de freno motor",
+    "publishAt": "2026-11-10T22:57:55.297646+01:00",
+    "caption": "¿Te ha pasado perder tiempo por no usar el freno motor? 🚗💨 Cuéntanos y guarda este tip.\n\n#simracing #telemetria #tips #LAPRIQ #racingcoach\n\n🎵 «AleXZavesa - Lo squalo (EDM)» de AlexZavesa (CC BY 3.0)",
+    "media": [
+      "media/u_4163e9db06d1/2026-11-10/2026-11-10-01-reel/video.mp4"
+    ],
+    "status": "scheduled",
+    "attempts": 0,
+    "cover": "media/u_4163e9db06d1/2026-11-10/2026-11-10-01-reel/cover.jpg",
+    "zernioPostId": "6af390f6fed4d40f10c88510"
+  },
+  {
+    "id": "2026-11-10-r233124-carrusel",
+    "date": "2026-11-10",
+    "source": "redo",
+    "tipo": "carrusel",
+    "tema": "Checklist de ajustes críticos antes de la carrera",
+    "publishAt": "2026-11-11T13:30:00+01:00",
+    "caption": "¿Te cuesta ganar esos décimos? 🕒 Aquí tienes 4 ajustes críticos que pueden salvarte tiempo. Ponlos a prueba y cuéntanos tu mejora. 👉 Descubre más en el link en bio\n\n#SimRacing #Telemetria #LAPRIQ #RacingTips #Coaching",
+    "media": [
+      "media/u_4163e9db06d1/2026-11-10/2026-11-10-r233124-carrusel/01.jpg",
+      "media/u_4163e9db06d1/2026-11-10/2026-11-10-r233124-carrusel/02.jpg",
+      "media/u_4163e9db06d1/2026-11-10/2026-11-10-r233124-carrusel/03.jpg",
+      "media/u_4163e9db06d1/2026-11-10/2026-11-10-r233124-carrusel/04.jpg",
+      "media/u_4163e9db06d1/2026-11-10/2026-11-10-r233124-carrusel/05.jpg",
+      "media/u_4163e9db06d1/2026-11-10/2026-11-10-r233124-carrusel/06.jpg"
+    ],
+    "status": "scheduled",
+    "attempts": 0,
+    "zernioPostId": "6af39b4ca92bb73d012296d5"
+  },
+  {
+    "id": "2026-11-10-r233246-reel",
+    "date": "2026-11-10",
+    "source": "redo",
+    "tipo": "reel",
+    "tema": "Uso avanzado del freno motor para ganar décimas",
+    "publishAt": "2026-11-12T19:45:00+01:00",
+    "caption": "¿Sabes cómo el freno motor puede recortar décimas? Te explico el truco que usan los pilotos top. ¿Lo aplicarías en tu próxima sesión? 👉 Descubre más en el link en bio\n\n#SimRacing #Telemetria #FrenoMotor #LAPRIQ #Coaching #RacingTips\n\n🎵 «Super Power Pop Rock» de Kara Square (CC BY 3.0)",
+    "media": [
+      "media/u_4163e9db06d1/2026-11-10/2026-11-10-r233246-reel/video.mp4"
+    ],
+    "status": "scheduled",
+    "attempts": 0,
+    "cover": "media/u_4163e9db06d1/2026-11-10/2026-11-10-r233246-reel/cover.jpg",
+    "zernioPostId": "6af39c25971ece870c775e33"
+  },
+  {
+    "id": "2026-11-11-r015354-post",
+    "date": "2026-11-11",
+    "source": "redo",
+    "tipo": "post",
+    "tema": "Uso de telemetría en tiempo real para adelantamientos",
+    "publishAt": "2026-11-13T13:00:00+01:00",
+    "caption": "¿Sabías que la telemetría en vivo puede ser tu mejor aliado para adelantar? 🔎 Detecta los momentos perfectos y supera a tus rivales sin arriesgarte. Cuéntanos, ¿qué curva te cuesta más abrir paso? 👉 Descubre más en el link de bio\n\n#SimRacing #Telemetria #Adelantar #LAPRIQ #Coaching #RacingTips",
+    "media": [
+      "media/u_4163e9db06d1/2026-11-11/2026-11-11-r015354-post/01.jpg"
+    ],
+    "status": "scheduled",
+    "attempts": 0,
+    "zernioPostId": "6af3bcaeab419287a3961457"
+  },
+  {
+    "id": "2026-11-14-01-reel",
+    "date": "2026-11-14",
+    "source": "auto",
+    "tipo": "reel",
+    "tema": "Dato curioso: Telemetría de suspensión",
+    "publishAt": "2026-11-14T21:59:37.883130+01:00",
+    "caption": "¿Sabes que la suspensión registra 200kHz? 🚀 Un ajuste de 1mm puede ganar 0.2s por vuelta. Guarda y comparte si te sorprendió. 👉 Link en bio\n\n#telemetría #suspensión #simracing #lapriq #datos\n\n🎵 «Spencer Newton - Bounce (Original Mix)(Electro House)» de Spencer Newton (CC BY 3.0)",
+    "media": [
+      "media/u_4163e9db06d1/2026-11-14/2026-11-14-01-reel/video.mp4"
+    ],
+    "status": "scheduled",
+    "attempts": 0,
+    "cover": "media/u_4163e9db06d1/2026-11-14/2026-11-14-01-historia/cover.jpg",
+    "zernioPostId": "6af890e46b2a87dbdf664da8",
+    "veo": {
+      "clips": [
+        {
+          "t": "¿Te pierdes al leer la curva de frenado en la telemetría? Porque muestra la presión de freno sin señalar la zona exacta.",
+          "prompt": "Aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a large monitor showing a racing simulation, not a real car interior. The racer sits in the rig, squinting at a monitor displaying a blue braking curve graph, hand hovering over steering wheel, confused expression. Then: The racer points at a flat brake pressure bar on the monitor, the screen lacking any highlighted zone, while seated in the rig. smooth natural camera movement, vertical 9:16 video, photorealistic, bright natural light, sharp focus, no text, no captions, no logos, no brand names, no watermark",
+          "dur": 8
+        },
+        {
+          "t": "Abre la telemetría de freno y marca cuando el coche empieza a girar.",
+          "prompt": "Aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a large monitor showing a racing simulation, not a real car interior. The racer uses a mouse to open the brake telemetry window and draws a red marker on the graph at the moment the car begins to turn. smooth natural camera movement, vertical 9:16 video, photorealistic, bright natural light, sharp focus, no text, no captions, no logos, no brand names, no watermark",
+          "dur": 6
+        },
+        {
+          "t": "Verás el punto de frenado alineado con la entrada de la curva, sin sobre‑frenar. Si te sirve, sigue la cuenta para más trucos de telemetría.",
+          "prompt": "Aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a large monitor showing a racing simulation, not a real car interior. The monitor shows a red braking point aligned with the curve entry on the track map, while the racer watches intently from the rig. Then: The racer gives a thumbs‑up, leaning forward at the rig, with the monitor displaying icons of telemetry tricks, inviting viewers to follow. smooth natural camera movement, vertical 9:16 video, photorealistic, bright natural light, sharp focus, no text, no captions, no logos, no brand names, no watermark",
+          "dur": 8
+        }
+      ],
+      "voz": "es-ES-ElviraNeural",
+      "ritmo": "+8%",
+      "musica": "energetica",
+      "hashtags": ""
     }
-   ],
-   "voz": "es-ES-ElviraNeural",
-   "ritmo": "+8%",
-   "musica": "energetica",
-   "hashtags": ""
+  },
+  {
+    "id": "2026-11-14-02-reel",
+    "date": "2026-11-14",
+    "source": "auto",
+    "tipo": "reel",
+    "tema": "Error de la semana: Desbalance de presión de neumáticos",
+    "publishAt": "2026-11-16T20:00:00+01:00",
+    "caption": "El desbalance de presión de neumáticos puede costarte 0.5s por vuelta. Recalibra a 1 bar y gana tiempo. Comenta 'PRESIÓN' si te pasó. 👉 Link en bio\n\n#errores #presión #simracing #lapriq\n\n🎵 «8.» de Ivan Tregub (BER) (CC BY 3.0)",
+    "media": [
+      "media/u_4163e9db06d1/2026-11-14/2026-11-14-02-reel/video.mp4"
+    ],
+    "status": "scheduled",
+    "attempts": 0,
+    "cover": "media/u_4163e9db06d1/2026-11-14/2026-11-14-02-reel/cover.jpg",
+    "zernioPostId": "6af8c96676757d70136b6414",
+    "veo": {
+      "clips": [
+        {
+          "t": "¿Sabes que la presión desigual de neumáticos te pierde medio segundo? Cuando un neumático está más inflado, la curva se vuelve más lenta.",
+          "prompt": "aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a big monitor showing a racing game, not a real car interior. The racer sits at the rig, staring at the monitor where two tire pressure bars are mismatched and a red timer flash shows 0.5 s loss. Then: The racer watches the screen as the car drifts through a corner, the left tire gauge shows higher pressure and the lap line lags behind. smooth natural camera movement, vertical 9:16 video, photorealistic, bright natural light, sharp focus, no text, no captions, no logos, no brand names, no watermark",
+          "dur": 8
+        },
+        {
+          "t": "Esto provoca vibraciones en el volante y pérdida de tiempo. Primero revisa la presión con la herramienta de telemetría.",
+          "prompt": "aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a big monitor showing a racing game, not a real car interior. The racer grips the steering wheel, which shows subtle motion blur lines indicating vibration, while the monitor displays a delayed lap time. Then: The racer clicks the telemetry interface on the monitor, a digital pressure readout appears for each tire. smooth natural camera movement, vertical 9:16 video, photorealistic, bright natural light, sharp focus, no text, no captions, no logos, no brand names, no watermark",
+          "dur": 8
+        },
+        {
+          "t": "Ajusta ambos neumáticos a exactamente 1 bar, igual en los cuatro.",
+          "prompt": "aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a big monitor showing a racing game, not a real car interior. The racer slides four pressure sliders on the screen, aligning each to the 1 bar mark. smooth natural camera movement, vertical 9:16 video, photorealistic, bright natural light, sharp focus, no text, no captions, no logos, no brand names, no watermark",
+          "dur": 6
+        },
+        {
+          "t": "Luego activa la cámara de presión para confirmar la calibración. Si la presión se mantiene equilibrada, notarás una curva más rápida.",
+          "prompt": "aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a big monitor showing a racing game, not a real car interior. The racer activates the pressure camera, and the monitor shows a 3D tire model with uniform pressure rings. Then: The racer watches the screen as the car slices a corner faster, all four pressure bars now equal. smooth natural camera movement, vertical 9:16 video, photorealistic, bright natural light, sharp focus, no text, no captions, no logos, no brand names, no watermark",
+          "dur": 8
+        },
+        {
+          "t": "Una vez calibrado, realiza una vuelta de prueba para medir la mejora. Comparte tus resultados y sigue aprendiendo más trucos de simulación.",
+          "prompt": "aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a big monitor showing a racing game, not a real car interior. The racer initiates a test lap, the monitor displays a live lap timer comparing current and previous times. Then: The racer uploads the lap data on the community dashboard, a celebratory graphic appears beside the results. smooth natural camera movement, vertical 9:16 video, photorealistic, bright natural light, sharp focus, no text, no captions, no logos, no brand names, no watermark",
+          "dur": 8
+        }
+      ],
+      "voz": "es-ES-ElviraNeural",
+      "ritmo": "+8%",
+      "musica": "tension",
+      "hashtags": "#errores #presión #simracing #lapriq"
+    }
+  },
+  {
+    "id": "2026-11-14-03-post",
+    "date": "2026-11-14",
+    "source": "auto",
+    "tipo": "post",
+    "tema": "3 ajustes críticos de suspensión para mejorar tu lap",
+    "publishAt": "2026-11-17T13:30:00+01:00",
+    "caption": "3 ajustes críticos de suspensión para mejorar tu lap: 1) Camber +0.5° 2) Damping rate 1.2x 3) Anti‑roll bar 20% más rígido. Comenta tu ajuste favorito. 👉 Link en bio\n\n#suspensión #ajustes #simracing #lapriq",
+    "media": [
+      "media/u_4163e9db06d1/2026-11-14/2026-11-14-03-post/01.jpg"
+    ],
+    "status": "scheduled",
+    "attempts": 0,
+    "zernioPostId": "6af8c9691f34eda6cbe61191"
+  },
+  {
+    "id": "2026-11-14-04-carrusel",
+    "date": "2026-11-14",
+    "source": "auto",
+    "tipo": "carrusel",
+    "tema": "Mito: Suspensión más dura siempre mejora la velocidad",
+    "publishAt": "2026-11-18T14:00:00+01:00",
+    "caption": "Mito o realidad: ¿Más rigidez siempre mejora la velocidad? Desliza y descubre la verdad. 👉 Link en bio\n\n#mitos #suspensión #simracing #lapriq",
+    "media": [
+      "media/u_4163e9db06d1/2026-11-14/2026-11-14-04-carrusel/01.jpg",
+      "media/u_4163e9db06d1/2026-11-14/2026-11-14-04-carrusel/02.jpg",
+      "media/u_4163e9db06d1/2026-11-14/2026-11-14-04-carrusel/03.jpg",
+      "media/u_4163e9db06d1/2026-11-14/2026-11-14-04-carrusel/04.jpg",
+      "media/u_4163e9db06d1/2026-11-14/2026-11-14-04-carrusel/05.jpg",
+      "media/u_4163e9db06d1/2026-11-14/2026-11-14-04-carrusel/06.jpg"
+    ],
+    "status": "scheduled",
+    "attempts": 0,
+    "zernioPostId": "6af8c97125c13ed5b4917f60"
+  },
+  {
+    "id": "2026-11-14-05-reel",
+    "date": "2026-11-14",
+    "source": "auto",
+    "tipo": "reel",
+    "tema": "Setup del seguidor: análisis de suspensión",
+    "publishAt": "2026-11-19T20:30:00+01:00",
+    "caption": "¿Tienes un setup de suspensión? Mándame tu configuración por DM y lo analizamos en tiempo real. 👉 Link en bio\n\n#setup #suspensión #simracing #lapriq\n\n🎵 «Super Power Pop Rock» de Kara Square (CC BY 3.0)",
+    "media": [
+      "media/u_4163e9db06d1/2026-11-14/2026-11-14-05-reel/video.mp4"
+    ],
+    "status": "scheduled",
+    "attempts": 0,
+    "cover": "media/u_4163e9db06d1/2026-11-14/2026-11-14-05-reel/cover.jpg",
+    "zernioPostId": "6af8c97925c13ed5b4917f93",
+    "veo": {
+      "clips": [
+        {
+          "t": "¿Te cuesta controlar la curva cuando el seguidor está mal? El camber mal ajustado hace que el coche pierda tracción en la esquina.",
+          "prompt": "¿Te cuesta controlar la curva cuando el seguidor está mal?. smooth natural camera movement, vertical 9:16 video, photorealistic, bright natural light, sharp focus, no text, no captions, no logos, no brand names, no watermark",
+          "dur": 8
+        },
+        {
+          "t": "Mide el camber con nivel de rueda y compáralo con la línea ideal. Ajusta el camber unos grados antes de la curva para mantener la carga.",
+          "prompt": "Mide el camber con nivel de rueda y compáralo con la línea ideal. smooth natural camera movement, vertical 9:16 video, photorealistic, bright natural light, sharp focus, no text, no captions, no logos, no brand names, no watermark",
+          "dur": 8
+        },
+        {
+          "t": "El amortiguador debe tener la presión adecuada; si es demasiado firme, pierde contacto.",
+          "prompt": "El amortiguador debe tener la presión adecuada; si es demasiado firme, pierde contacto. smooth natural camera movement, vertical 9:16 video, photorealistic, bright natural light, sharp focus, no text, no captions, no logos, no brand names, no watermark",
+          "dur": 6
+        },
+        {
+          "t": "Reduce la presión ligeramente y observa la respuesta en el telemetría. El anti‑roll equilibra la fuerza lateral; demasiado alto hace que el coche se vuelque.",
+          "prompt": "Reduce la presión ligeramente y observa la respuesta en el telemetría. smooth natural camera movement, vertical 9:16 video, photorealistic, bright natural light, sharp focus, no text, no captions, no logos, no brand names, no watermark",
+          "dur": 8
+        },
+        {
+          "t": "Aplica ajustes de anti‑roll poco a poco y revisa la estabilidad en la pista. Envíame tu setup y el enlace está en mi bio.",
+          "prompt": "Aplica ajustes de anti‑roll poco a poco y revisa la estabilidad en la pista. smooth natural camera movement, vertical 9:16 video, photorealistic, bright natural light, sharp focus, no text, no captions, no logos, no brand names, no watermark",
+          "dur": 8
+        }
+      ],
+      "voz": "es-ES-AlvaroNeural",
+      "ritmo": "+16%",
+      "musica": "energetica",
+      "hashtags": "#setup #suspensión #simracing #lapriq"
+    }
   }
- },
- {
-  "id": "2026-11-14-02-reel",
-  "date": "2026-11-14",
-  "source": "auto",
-  "tipo": "reel",
-  "tema": "Error de la semana: Desbalance de presión de neumáticos",
-  "publishAt": "2026-11-16T20:00:00+01:00",
-  "caption": "El desbalance de presión de neumáticos puede costarte 0.5s por vuelta. Recalibra a 1 bar y gana tiempo. Comenta 'PRESIÓN' si te pasó. 👉 Link en bio\n\n#errores #presión #simracing #lapriq\n\n🎵 «8.» de Ivan Tregub (BER) (CC BY 3.0)",
-  "media": [
-   "media/u_4163e9db06d1/2026-11-14/2026-11-14-02-reel/video.mp4"
-  ],
-  "status": "scheduled",
-  "attempts": 0,
-  "cover": "media/u_4163e9db06d1/2026-11-14/2026-11-14-02-reel/cover.jpg",
-  "zernioPostId": "6af8c96676757d70136b6414"
- },
- {
-  "id": "2026-11-14-03-post",
-  "date": "2026-11-14",
-  "source": "auto",
-  "tipo": "post",
-  "tema": "3 ajustes críticos de suspensión para mejorar tu lap",
-  "publishAt": "2026-11-17T13:30:00+01:00",
-  "caption": "3 ajustes críticos de suspensión para mejorar tu lap: 1) Camber +0.5° 2) Damping rate 1.2x 3) Anti‑roll bar 20% más rígido. Comenta tu ajuste favorito. 👉 Link en bio\n\n#suspensión #ajustes #simracing #lapriq",
-  "media": [
-   "media/u_4163e9db06d1/2026-11-14/2026-11-14-03-post/01.jpg"
-  ],
-  "status": "scheduled",
-  "attempts": 0,
-  "zernioPostId": "6af8c9691f34eda6cbe61191"
- },
- {
-  "id": "2026-11-14-04-carrusel",
-  "date": "2026-11-14",
-  "source": "auto",
-  "tipo": "carrusel",
-  "tema": "Mito: Suspensión más dura siempre mejora la velocidad",
-  "publishAt": "2026-11-18T14:00:00+01:00",
-  "caption": "Mito o realidad: ¿Más rigidez siempre mejora la velocidad? Desliza y descubre la verdad. 👉 Link en bio\n\n#mitos #suspensión #simracing #lapriq",
-  "media": [
-   "media/u_4163e9db06d1/2026-11-14/2026-11-14-04-carrusel/01.jpg",
-   "media/u_4163e9db06d1/2026-11-14/2026-11-14-04-carrusel/02.jpg",
-   "media/u_4163e9db06d1/2026-11-14/2026-11-14-04-carrusel/03.jpg",
-   "media/u_4163e9db06d1/2026-11-14/2026-11-14-04-carrusel/04.jpg",
-   "media/u_4163e9db06d1/2026-11-14/2026-11-14-04-carrusel/05.jpg",
-   "media/u_4163e9db06d1/2026-11-14/2026-11-14-04-carrusel/06.jpg"
-  ],
-  "status": "scheduled",
-  "attempts": 0,
-  "zernioPostId": "6af8c97125c13ed5b4917f60"
- },
- {
-  "id": "2026-11-14-05-reel",
-  "date": "2026-11-14",
-  "source": "auto",
-  "tipo": "reel",
-  "tema": "Setup del seguidor: análisis de suspensión",
-  "publishAt": "2026-11-19T20:30:00+01:00",
-  "caption": "¿Tienes un setup de suspensión? Mándame tu configuración por DM y lo analizamos en tiempo real. 👉 Link en bio\n\n#setup #suspensión #simracing #lapriq\n\n🎵 «Super Power Pop Rock» de Kara Square (CC BY 3.0)",
-  "media": [
-   "media/u_4163e9db06d1/2026-11-14/2026-11-14-05-reel/video.mp4"
-  ],
-  "status": "scheduled",
-  "attempts": 0,
-  "cover": "media/u_4163e9db06d1/2026-11-14/2026-11-14-05-reel/cover.jpg",
-  "zernioPostId": "6af8c97925c13ed5b4917f93"
- }
 ]
