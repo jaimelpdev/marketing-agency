@@ -1,0 +1,374 @@
+{
+  "date": "2026-11-14",
+  "estrategia": "Publicaremos 5 piezas en 5 días distintos: sábado post, domingo historia, lunes reel (Error de la semana), miércoles carrusel (Mito o realidad) y jueves reel (Setup del seguidor). Martes y viernes descansamos para no saturar y maximizar el impacto de cada contenido.",
+  "piezas": [
+    {
+      "id": "pmwg5lxy8_0",
+      "dia": 0,
+      "hora": "19:30",
+      "tipo": "post",
+      "objetivo": "alcance",
+      "razon": "Abrir la semana con un contenido guardable que muestre valor técnico y atraiga a nuevos seguidores.",
+      "tema": "Top 3 ajustes de telemetría para acelerar tu primera vuelta",
+      "formato": "lista",
+      "gancho": "3 ajustes que bajan 0.2s ya",
+      "visual": "close‑up of a racing wheel with telemetry overlay on screen",
+      "escenas": [
+        {
+          "titulo": "Ajuste 1",
+          "texto": "Reduce *delay* del freno motor 5 % y gana estabilidad.",
+          "emoji": "",
+          "visual": "hand adjusting brake pedal on a sim rig",
+          "foto": "",
+          "grafico": {
+            "tipo": "checklist",
+            "items": [
+              "reducir delay",
+              "optimizar presión",
+              "verificar respuesta"
+            ]
+          }
+        }
+      ],
+      "cta": "Descubre más en el link en bio",
+      "sticker": null,
+      "fondo": "color",
+      "estilo": "racing",
+      "caption": "¿Quieres ganar décimas en tu primera vuelta? Aplica estos 3 ajustes y siente la diferencia. ¿Cuál probarás primero? 🚀",
+      "hashtags": "#SimRacing #TelemetryTips #Lapriq #RacingSetup #FastLap",
+      "audio": "voz_y_musica",
+      "voz": "hombre",
+      "ritmo_voz": "energico",
+      "musica": "energetica",
+      "guion": [
+        "3 ajustes que bajan 0.2s ya",
+        "Reduce delay del freno motor 5 %",
+        "Optimiza presión del embrague",
+        "Guarda y mejora tu tiempo"
+      ],
+      "foto": "",
+      "anim": "pop",
+      "serie": "",
+      "episodio": 0,
+      "look": 187,
+      "plantilla": 971,
+      "layout": "cine",
+      "stickers": [
+        "🏎️",
+        "⚡",
+        "📊"
+      ]
+    },
+    {
+      "id": "pmwg5lxy8_1",
+      "dia": 1,
+      "hora": "09:00",
+      "tipo": "historia",
+      "objetivo": "comunidad",
+      "razon": "Fomentar la interacción y recoger dudas reales sobre telemetría.",
+      "tema": "Mini tutorial: interpretar telemetría en tiempo real",
+      "formato": "mini tutorial",
+      "gancho": "¿Qué dato de telemetría te cuesta más?",
+      "visual": "close‑up of a laptop screen showing live telemetry graphs",
+      "escenas": [
+        {
+          "titulo": "Dato clave",
+          "texto": "Observa la curva de freno motor y ajusta en tiempo real.",
+          "emoji": "",
+          "visual": "hands on wheel while telemetry overlay glows",
+          "foto": "",
+          "grafico": {
+            "tipo": "velocimetro",
+            "valor": 75,
+            "etiqueta": "uso freno motor"
+          }
+        }
+      ],
+      "cta": "",
+      "sticker": {
+        "tipo": "pregunta",
+        "texto": "¿Qué dato de telemetría te cuesta más?",
+        "opciones": [],
+        "auto": true
+      },
+      "fondo": "ia",
+      "estilo": "minimal",
+      "caption": "",
+      "hashtags": "",
+      "audio": "solo_musica",
+      "voz": "",
+      "ritmo_voz": "",
+      "musica": "chill",
+      "guion": [],
+      "foto": "",
+      "anim": "pop",
+      "serie": "",
+      "episodio": 0,
+      "look": 41,
+      "plantilla": 2020,
+      "layout": "cine",
+      "stickers": [
+        "📚",
+        "🛞",
+        "❓"
+      ]
+    },
+    {
+      "id": "pmwg5lxy8_2",
+      "dia": 2,
+      "hora": "20:00",
+      "tipo": "reel",
+      "objetivo": "alcance",
+      "razon": "Lunes de serie “Error de la semana” para captar tráfico nuevo con dato concreto.",
+      "tema": "Freno tardío por falta de freno motor",
+      "formato": "error que cuesta tiempo",
+      "gancho": "El error que te cuesta 0.3s por curva",
+      "visual": "dynamic shot of a car losing grip on a corner in a sim",
+      "escenas": [
+        {
+          "titulo": "Error común",
+          "texto": "Freno motor apagado en frenada fuerte.",
+          "emoji": "",
+          "visual": "driver’s hands releasing brake pedal too late",
+          "foto": "",
+          "grafico": {
+            "tipo": "comparacion",
+            "mal": "sin freno motor",
+            "bien": "con freno motor"
+          }
+        },
+        {
+          "titulo": "Consecuencia",
+          "texto": "Pierdes hasta 0.3 s por curva y la estabilidad sufre.",
+          "emoji": "",
+          "visual": "telemetry graph showing spike in braking distance",
+          "foto": "",
+          "grafico": {
+            "tipo": "velocimetro",
+            "valor": 30,
+            "etiqueta": "pérdida tiempo"
+          }
+        },
+        {
+          "titulo": "Solución rápida",
+          "texto": "Activa el freno motor al 70 % de presión antes de la zona de frenado.",
+          "emoji": "",
+          "visual": "hand adjusting brake motor slider on UI",
+          "foto": "",
+          "grafico": {
+            "tipo": "checklist",
+            "items": [
+              "activar freno",
+              "ajustar 70 %",
+              "verificar respuesta"
+            ]
+          }
+        },
+        {
+          "titulo": "Resultado",
+          "texto": "Recuperas los décimos y mejoras la estabilidad.",
+          "emoji": "",
+          "visual": "car cornering smoothly with telemetry overlay green",
+          "foto": "",
+          "grafico": {
+            "tipo": "progreso",
+            "valor": 80,
+            "etiqueta": "mejora"
+          }
+        }
+      ],
+      "cta": "Comenta ERROR y recibe la guía completa",
+      "sticker": null,
+      "fondo": "ia",
+      "estilo": "racing",
+      "caption": "¿Te ha pasado este error en tu última sesión? Activa el freno motor y gana décimas. ¿Listo para probarlo? 🏎️",
+      "hashtags": "#SimRacingTips #TelemetryError #Lapriq #RacingSetup #DrivingSkill",
+      "audio": "voz_y_musica",
+      "voz": "hombre",
+      "ritmo_voz": "energico",
+      "musica": "energetica",
+      "guion": [
+        "El error que te cuesta 0.3s por curva",
+        "Freno motor apagado en frenada fuerte",
+        "Pierdes hasta 0.3 s y estabilidad sufre",
+        "Activa el freno motor al 70 % antes del punto de frenado",
+        "Recuperas décimos y mejoras la estabilidad",
+        "Comenta ERROR y recibe la guía completa"
+      ],
+      "foto": "",
+      "anim": "slide",
+      "serie": "Error de la semana",
+      "episodio": 1,
+      "look": 151,
+      "plantilla": 765,
+      "layout": "cine",
+      "stickers": [
+        "🏁",
+        "⚙️",
+        "✅"
+      ]
+    },
+    {
+      "id": "pmwg5lxy8_3",
+      "dia": 4,
+      "hora": "13:30",
+      "tipo": "carrusel",
+      "objetivo": "",
+      "razon": "Miércoles de “Mito o realidad” para posicionar a LAPRIQ como referencia técnica.",
+      "tema": "Más downforce siempre es mejor",
+      "formato": "mito vs realidad",
+      "gancho": "Mito: más downforce = más velocidad",
+      "visual": "high‑angle view of a race car with aerodynamic elements highlighted",
+      "escenas": [
+        {
+          "titulo": "Mito",
+          "texto": "Crees que más downforce siempre acelera el coche.",
+          "emoji": "",
+          "visual": "car with massive rear wing on straight line",
+          "foto": "",
+          "grafico": {
+            "tipo": "comparacion",
+            "mal": "más downforce",
+            "bien": "más arrastre"
+          }
+        },
+        {
+          "titulo": "Realidad",
+          "texto": "Exceso de downforce aumenta arrastre y reduce velocidad en rectas.",
+          "emoji": "",
+          "visual": "telemetry showing lower top speed with high downforce",
+          "foto": "",
+          "grafico": {
+            "tipo": "checklist",
+            "items": [
+              "medir arrastre",
+              "optimizar ángulo",
+              "balancear"
+            ]
+          }
+        },
+        {
+          "titulo": "Conclusión",
+          "texto": "Ajusta downforce según circuito: menos en largas rectas, más en curvas técnicas.",
+          "emoji": "",
+          "visual": "driver tweaking aerodynamic settings on UI",
+          "foto": "",
+          "grafico": {
+            "tipo": "objetivo",
+            "etiqueta": "balance ideal"
+          }
+        }
+      ],
+      "cta": "Guarda este carrusel para tu próximo setup",
+      "sticker": null,
+      "fondo": "animado",
+      "estilo": "neon",
+      "caption": "¿Pensabas que más downforce siempre ayuda? Descubre la verdad y ajusta tu coche como un ingeniero. ¿Qué ajuste cambiarías hoy? 🛠️",
+      "hashtags": "#Downforce #RacingAerodynamics #Lapriq #SimRacingScience #TechTips",
+      "audio": "voz_y_musica",
+      "voz": "hombre",
+      "ritmo_voz": "normal",
+      "musica": "epica",
+      "guion": [
+        "Mito: más downforce = más velocidad",
+        "En realidad, el exceso aumenta arrastre",
+        "Ajusta downforce según circuito: menos en rectas largas, más en curvas técnicas",
+        "Guarda este carrusel para tu próximo setup"
+      ],
+      "foto": "",
+      "anim": "slide",
+      "serie": "Mito o realidad",
+      "episodio": 1,
+      "look": 5,
+      "plantilla": 1814,
+      "layout": "cine",
+      "stickers": [
+        "📈",
+        "🏎️",
+        "🔧"
+      ]
+    },
+    {
+      "id": "pmwg5lxy8_4",
+      "dia": 5,
+      "hora": "19:45",
+      "tipo": "reel",
+      "objetivo": "comunidad",
+      "razon": "Jueves de “Setup del seguidor” para invitar a la comunidad a participar y generar engagement.",
+      "tema": "Envía tu setup y lo analizamos en tiempo real",
+      "formato": "llamada a participación",
+      "gancho": "¿Tu setup gana tiempo? Lo revisamos",
+      "visual": "close‑up of a racing cockpit with a laptop displaying telemetry data",
+      "escenas": [
+        {
+          "titulo": "Invitación",
+          "texto": "Mándame tu setup por DM y lo optimizo en vivo.",
+          "emoji": "",
+          "visual": "hand holding phone with DM screen open",
+          "foto": "",
+          "grafico": {
+            "tipo": "checklist",
+            "items": [
+              "enviar setup",
+              "recibir feedback",
+              "ver mejora"
+            ]
+          }
+        },
+        {
+          "titulo": "Qué analizamos",
+          "texto": "Ajustes de freno motor, distribución de downforce y mapa de potencia.",
+          "emoji": "",
+          "visual": "telemetry dashboard highlighting key parameters",
+          "foto": "",
+          "grafico": {
+            "tipo": "comparacion",
+            "mal": "ajustes genéricos",
+            "bien": "ajustes personalizados"
+          }
+        },
+        {
+          "titulo": "Beneficio",
+          "texto": "Mejora tu tiempo en pista y recibe tips de ingeniero de pista.",
+          "emoji": "",
+          "visual": "driver smiling after lap time improves on screen",
+          "foto": "",
+          "grafico": {
+            "tipo": "progreso",
+            "valor": 70,
+            "etiqueta": "mejora tiempo"
+          }
+        }
+      ],
+      "cta": "Envíame DM con tu setup ahora",
+      "sticker": null,
+      "fondo": "ia",
+      "estilo": "racing",
+      "caption": "¡Queremos ver tu configuración! Envía tu setup y descubre cómo pulir cada detalle. ¿Listo para el reto? 🚀",
+      "hashtags": "#SetupReview #LapriqCommunity #SimRacingCoaching #Telemetry #RacingTips",
+      "audio": "voz_y_musica",
+      "voz": "hombre",
+      "ritmo_voz": "normal",
+      "musica": "divertida",
+      "guion": [
+        "¿Tu setup gana tiempo? Lo revisamos",
+        "Mándame tu setup por DM y lo optimizo en vivo",
+        "Analizamos freno motor, downforce y mapa de potencia",
+        "Mejora tu tiempo y recibe tips de ingeniero de pista",
+        "Envíame DM con tu setup ahora"
+      ],
+      "foto": "",
+      "anim": "fade",
+      "serie": "Setup del seguidor",
+      "episodio": 1,
+      "look": 115,
+      "plantilla": 559,
+      "layout": "cine",
+      "stickers": [
+        "📩",
+        "🛞",
+        "⚡"
+      ]
+    }
+  ]
+}

@@ -1,30 +1,6 @@
 {
   "items": [
     {
-      "date": "2026-09-20",
-      "tipo": "reel",
-      "src": "red",
-      "tema": "[IG · ❤️47] ¿Vale la pena invertir en un volante de alta tasa de refresco? Descubre cómo puede transformar tu pilotaje y afina cada detalle en pista."
-    },
-    {
-      "date": "2026-09-21",
-      "tipo": "reel",
-      "src": "red",
-      "tema": "[IG · ❤️29 💬1] ¿Sabías que un mal cableado puede arruinar tu precisión en pista? Descubre cómo optimizar tus periféricos y ganar esas décimas."
-    },
-    {
-      "date": "2026-09-22",
-      "tipo": "reel",
-      "src": "red",
-      "tema": "[IG · ❤️12] ¿Notas inconsistencia en tus giros? El sensor magnético en el volante es el cambio que tu sim necesita. Precisión y control reales en cada c"
-    },
-    {
-      "date": "2026-09-23",
-      "tipo": "reel",
-      "src": "red",
-      "tema": "[IG · ❤️17] ¿Sabías que una mala configuración del centro del volante arruina tu precisión? Ajusta bien y domina cada curva."
-    },
-    {
       "date": "2026-09-24",
       "tipo": "reel",
       "src": "red",
@@ -142,7 +118,7 @@
       "date": "2026-11-08",
       "tipo": "reel",
       "src": "red",
-      "tema": "[IG · ❤️6] En iRacing, una referencia fija evita que frenes tarde o demasiado pronto. Prueba este método en tu próxima sesión y guarda el dato."
+      "tema": "[IG · ❤️8] En iRacing, una referencia fija evita que frenes tarde o demasiado pronto. Prueba este método en tu próxima sesión y guarda el dato."
     },
     {
       "date": "2026-11-10",
@@ -198,7 +174,7 @@
       "date": "2026-11-10",
       "tipo": "reel",
       "src": "red",
-      "tema": "[IG · ❤️32] En iRacing, una caída bien ajustada puede mejorar el apoyo en curva, pero el exceso castiga el neumático. Compara dos valores y mide tras ci"
+      "tema": "[IG · ❤️54] En iRacing, una caída bien ajustada puede mejorar el apoyo en curva, pero el exceso castiga el neumático. Compara dos valores y mide tras ci"
     },
     {
       "date": "2026-11-11",
@@ -211,6 +187,22 @@
       "objetivo": "confianza"
     },
     {
+      "date": "2026-11-11",
+      "tema": "Uso de telemetría en tiempo real para adelantamientos",
+      "formato": "dato curioso o sorprendente",
+      "tipo": "post",
+      "layout": "dividido",
+      "plantilla": 254,
+      "serie": "",
+      "objetivo": "alcance"
+    },
+    {
+      "date": "2026-11-11",
+      "tipo": "carrusel",
+      "src": "red",
+      "tema": "[IG · ❤️4] ¿Te cuesta ganar esos décimos? 🕒 Aquí tienes 4 ajustes críticos que pueden salvarte tiempo. Ponlos a prueba y cuéntanos tu mejora. 👉 Descubr"
+    },
+    {
       "date": "2026-11-12",
       "tema": "Setup del seguidor: optimizamos el setup de @juan para Spa",
       "formato": "antes y después",
@@ -219,6 +211,18 @@
       "plantilla": 904,
       "serie": "Setup del seguidor",
       "objetivo": "comunidad"
+    },
+    {
+      "date": "2026-11-12",
+      "tipo": "reel",
+      "src": "red",
+      "tema": "[IG · ❤️4] ¿Sabes cómo el freno motor puede recortar décimas? Te explico el truco que usan los pilotos top. ¿Lo aplicarías en tu próxima sesión? 👉 Desc"
+    },
+    {
+      "date": "2026-11-12",
+      "tipo": "reel",
+      "src": "red",
+      "tema": "[IG · ❤️74] En iRacing, un prototipo más rápido no te obliga a abandonar tu trazada. Practica esta regla durante cinco vueltas y conserva el control en "
     },
     {
       "date": "2026-11-13",
@@ -231,6 +235,12 @@
       "objetivo": "comunidad"
     },
     {
+      "date": "2026-11-13",
+      "tipo": "reel",
+      "src": "red",
+      "tema": "[IG · ❤️4] Descarga la app para dejar de adivinar donde pierdes tiempo en cada vuelta/pasada!!"
+    },
+    {
       "date": "2026-11-15",
       "tema": "Promoción Black Friday: 15 días de garantía + 20% descuento",
       "formato": "mini anuncio",
@@ -241,14 +251,59 @@
       "objetivo": ""
     },
     {
-      "date": "2026-11-11",
-      "tema": "Uso de telemetría en tiempo real para adelantamientos",
-      "formato": "dato curioso o sorprendente",
+      "date": "2026-11-14",
+      "tema": "Top 3 ajustes de telemetría para acelerar tu primera vuelta",
+      "formato": "lista",
       "tipo": "post",
-      "layout": "dividido",
-      "plantilla": 254,
+      "layout": "cine",
+      "plantilla": 971,
+      "look": 187,
       "serie": "",
       "objetivo": "alcance"
+    },
+    {
+      "date": "2026-11-15",
+      "tema": "Mini tutorial: interpretar telemetría en tiempo real",
+      "formato": "mini tutorial",
+      "tipo": "historia",
+      "layout": "cine",
+      "plantilla": 2020,
+      "look": 41,
+      "serie": "",
+      "objetivo": "comunidad"
+    },
+    {
+      "date": "2026-11-16",
+      "tema": "Freno tardío por falta de freno motor",
+      "formato": "error que cuesta tiempo",
+      "tipo": "reel",
+      "layout": "cine",
+      "plantilla": 765,
+      "look": 151,
+      "serie": "Error de la semana",
+      "objetivo": "alcance"
+    },
+    {
+      "date": "2026-11-18",
+      "tema": "Más downforce siempre es mejor",
+      "formato": "mito vs realidad",
+      "tipo": "carrusel",
+      "layout": "cine",
+      "plantilla": 1814,
+      "look": 5,
+      "serie": "Mito o realidad",
+      "objetivo": ""
+    },
+    {
+      "date": "2026-11-19",
+      "tema": "Envía tu setup y lo analizamos en tiempo real",
+      "formato": "llamada a participación",
+      "tipo": "reel",
+      "layout": "cine",
+      "plantilla": 559,
+      "look": 115,
+      "serie": "Setup del seguidor",
+      "objetivo": "comunidad"
     }
   ]
 }
