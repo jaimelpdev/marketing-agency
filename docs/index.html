@@ -447,6 +447,7 @@ https://apps.apple.com/…
       <div class="og"><div class="t">Máximo por día</div><div class="chips" id="acDay"></div></div>
       <div class="og"><div class="t">Formatos que puede usar</div><div class="chips" id="acFmt"></div></div>
       <div class="og"><div class="t">⏸ No publicar antes de</div><div style="display:flex;gap:8px;align-items:center"><input type="datetime-local" id="acFloor" style="flex:1"><button class="chip sm" id="acFloorClr">Quitar</button></div><div class="note" id="acFloorNote">La agencia sigue creando contenido, pero nada se publica antes de esta fecha.</div></div>
+      <div class="og"><div class="t">Estilo de vídeo</div><div class="chips" id="acEstilo"></div><div class="note">Faceless: imágenes de IA a pantalla completa que cambian cada 2-3 segundos, voz narrando y subtítulos grandes. Se usa en 3 de cada 4 reels e historias.</div></div>
       <div class="og"><div class="t">Sonido de los vídeos</div><div class="chips" id="acAudio"></div></div>
       <div class="og"><div class="t">Voz</div><div class="chips" id="acVoz"></div><div class="note">✨ = voces multilingües, las más expresivas (pueden tener un ligero acento).</div></div>
       <div class="note">La agencia elige qué días publicar dentro de estos límites y descansa cuando conviene.</div>
@@ -537,9 +538,9 @@ function normPiece(v,i){
   const st=v.sticker&&typeof v.sticker==="object"&&v.sticker.texto?{tipo:String(v.sticker.tipo||"pregunta"),texto:String(v.sticker.texto),opciones:(Array.isArray(v.sticker.opciones)?v.sticker.opciones:[]).map(o=>String(o).slice(0,22)).filter(Boolean).slice(0,3)}:null;
   return {id:v.id||("p"+Date.now().toString(36)+"_"+i),dia:Math.max(0,Math.min(6,parseInt(v.dia)||0)),hora:String(v.hora||""),tipo,objetivo:String(v.objetivo||""),razon:String(v.razon||""),
     tema:String(v.tema||v.gancho||""),formato:String(v.formato||""),gancho:String(v.gancho||""),visual:String(v.visual||""),
-    escenas:(Array.isArray(v.escenas)?v.escenas:[]).slice(0,7).map(e=>({titulo:String(e.titulo||""),texto:String(e.texto||""),emoji:String(e.emoji||""),visual:String(e.visual||""),foto:String(e.foto||"").slice(0,24),grafico:normGraf(e.grafico)})),
+    escenas:(Array.isArray(v.escenas)?v.escenas:[]).slice(0,7).map(e=>({titulo:String(e.titulo||""),texto:String(e.texto||""),emoji:String(e.emoji||""),visual:String(e.visual||""),visuales:(Array.isArray(e.visuales)?e.visuales:[]).map(x=>String(x).slice(0,240)).filter(Boolean).slice(0,3),foto:String(e.foto||"").slice(0,24),grafico:normGraf(e.grafico)})),
     cta:String(v.cta||""),sticker:st,fondo:String(v.fondo||""),estilo:String(v.estilo||""),caption:String(v.caption||""),hashtags:Array.isArray(v.hashtags)?v.hashtags.join(" "):String(v.hashtags||""),
-    audio:String(v.audio||""),voz:String(v.voz||""),ritmo_voz:String(v.ritmo_voz||""),musica:String(v.musica||""),guion:Array.isArray(v.guion)?v.guion.map(String):[],foto:String(v.foto||"").slice(0,24),anim:["pop","slide","type","fade"].includes(v.anim)?v.anim:"",objetivo:["alcance","confianza","comunidad","conversion"].includes(v.objetivo)?v.objetivo:"",serie:String(v.serie||"").slice(0,60),episodio:Math.max(0,parseInt(v.episodio)||0),look:v.look!=null&&Number.isInteger(+v.look)&&+v.look>=0&&+v.look<LOOK_TOTAL?+v.look:null,plantilla:Number.isInteger(+v.plantilla)&&+v.plantilla>=0&&+v.plantilla<TPL_TOTAL?+v.plantilla:null,layout:LAYOUTS.includes(String(v.layout||"").toLowerCase())?String(v.layout).toLowerCase():"",stickers:(Array.isArray(v.stickers)?v.stickers:[]).map(x=>String(x).trim()).filter(x=>x&&x.length<=12&&!/[A-Za-z0-9]/.test(x)).slice(0,5),...(Array.isArray(v._durs)?{_durs:v._durs}:{})};
+    audio:String(v.audio||""),voz:String(v.voz||""),ritmo_voz:String(v.ritmo_voz||""),musica:String(v.musica||""),guion:Array.isArray(v.guion)?v.guion.map(String):[],estilo_visual:String(v.estilo_visual||"").slice(0,240),visual_cierre:String(v.visual_cierre||"").slice(0,240),cierre_bio:String(v.cierre_bio||"").slice(0,240),foto:String(v.foto||"").slice(0,24),anim:["pop","slide","type","fade"].includes(v.anim)?v.anim:"",objetivo:["alcance","confianza","comunidad","conversion"].includes(v.objetivo)?v.objetivo:"",serie:String(v.serie||"").slice(0,60),episodio:Math.max(0,parseInt(v.episodio)||0),look:v.look!=null&&Number.isInteger(+v.look)&&+v.look>=0&&+v.look<LOOK_TOTAL?+v.look:null,plantilla:Number.isInteger(+v.plantilla)&&+v.plantilla>=0&&+v.plantilla<TPL_TOTAL?+v.plantilla:null,layout:LAYOUTS.includes(String(v.layout||"").toLowerCase())?String(v.layout).toLowerCase():"",stickers:(Array.isArray(v.stickers)?v.stickers:[]).map(x=>String(x).trim()).filter(x=>x&&x.length<=12&&!/[A-Za-z0-9]/.test(x)).slice(0,5),...(Array.isArray(v._durs)?{_durs:v._durs}:{})};
 }
 
 /* ============ BRANDING UI ============ */
@@ -740,6 +741,11 @@ CRITERIOS DE AGENCIA (calidad antes que cantidad; nunca satures a la audiencia)
 - Cada escena tiene un "titulo" de como mucho 4 palabras y un "texto" de como mucho ${LEN} palabras, concretos y útiles. Marca 1 o 2 palabras clave con *asteriscos*.${O.emoji?' Añade "emoji" (uno solo) a cada escena.':''}
 ${O.graficos!==false?`- "grafico" (en cada escena de reels e historias): una animación que explica visualmente la escena, como hacen los creadores de vídeos educativos animados. Elige el que mejor encaje y varía entre escenas:
   {"tipo":"comparacion","mal":"lo que se hace mal (≤4 palabras)","bien":"lo correcto (≤4 palabras)"} · {"tipo":"checklist","items":["paso","paso","paso"]} (2-4 pasos de ≤3 palabras) · {"tipo":"velocimetro","valor":0-100,"etiqueta":"qué mide"} (intensidad, presión, nivel) · {"tipo":"progreso","valor":0-100,"etiqueta":"…"} · {"tipo":"ruta","desde":"punto de partida","hasta":"meta"} (camino o proceso) · {"tipo":"objetivo","etiqueta":"la clave"} (dar en el blanco) · {"tipo":"contador","valor":número,"unidad":"…"} (SOLO si el número sale en el propio consejo, p. ej. "3 pasos" o "2 segundos").
+`:""}${window.__faceless!==false?`- ESTILO FACELESS para TODOS los reels e historias (el estilo que más visitas da): el vídeo es una NARRACIÓN CONTINUA de 25 a 45 segundos (entre 70 y 110 palabras en total en "guion") sobre imágenes generadas a pantalla completa que cambian cada 2-3 segundos, con subtítulos. Por eso en reels e historias:
+  · "guion" es obligatorio y se lee como UNA historia o explicación seguida, en segunda persona, de alguien que quiere enseñar y ayudar de verdad, nunca de anuncio. La primera frase es el gancho y tiene que atrapar en el primer segundo y medio (pregunta, error común, dato sorprendente o "nadie te cuenta esto…"). El 90% del vídeo enseña algo útil y concreto del nicho de la marca; la venta nunca es explícita. La última frase invita con naturalidad a seguir la cuenta para más consejos.
+  · "cierre_bio": una frase alternativa de cierre que menciona el enlace del perfil con naturalidad ("si quieres aprender más, tienes el enlace en mi perfil"); la agencia solo la usa en uno de cada cuatro vídeos.
+  · "estilo_visual" (en INGLÉS): estilo fotográfico común a todo el vídeo para que las imágenes sean coherentes: tipo de plano, luz, paleta y ambiente ("cinematic 35mm film look, warm golden hour light, teal and orange palette, shallow depth of field"). Adaptado al nicho y la marca.
+  · "visual" (en INGLÉS, la imagen del gancho), "visual_cierre" (en INGLÉS, la del cierre) y en cada escena "visuales": 2 descripciones en INGLÉS de imágenes cinematográficas distintas que ilustran lo que se está contando en ese momento (sujeto concreto, acción, lugar; sin texto, sin logos, sin caras de famosos ni del dueño). Que se sigan como una película: mismas personas u objetos, mismo lugar o época.
 `:""}- "cta": como mucho 8 palabras y lleva a ${dest}.${O.stickers!==false?`
 - "stickers": de 3 a 5 emojis que salen animados en el vídeo como pegatinas (cochecitos que cruzan la pantalla, iconos que rebotan…). Tienen que ilustrar el tema de forma visual y divertida, el primero es la "mascota" de la pieza. Ejemplos: conducción → ["🏎️","🏁","🛞","⚡"]; dinero → ["💰","📈","🤑"]; estudio → ["📚","🧠","✅"]. Nada de banderas de países ni símbolos raros.`:''}
 - "fondo": elige el mejor para cada pieza entre: ${fondos.map(f=>f+" ("+FONDO_DESC[f]+")").join("; ")}.
@@ -754,7 +760,7 @@ AUDIO (solo reels e historias; los vídeos llevan locución real)
 - "guion" (solo si hay voz): lista de frases habladas, UNA por pantalla y en orden: gancho, cada escena y cierre (o el texto del sticker en historias). Tiene que sonar a creador hablando a cámara, no a texto leído: frases cortas, tuteo, exclamaciones y preguntas retóricas ("¿Sabes por qué?"), pausas con comas y puntos suspensivos, conectores de conversación ("mira", "ojo", "y aquí viene lo bueno"). Nada de "en primer lugar". Números pequeños con letra. Como mucho 22 palabras por frase, sin emojis, asteriscos ni hashtags.`:''}
 
 Responde SOLO con JSON válido:
-{"estrategia":"2 o 3 frases: qué días se publica, cuáles se descansa y por qué","piezas":[{"dia":0,"hora":"19:30","tipo":"reel","objetivo":"…","razon":"…","tema":"…","formato":"…","gancho":"…"${needVis?',"visual":"…","foto":""':''},"escenas":[{"titulo":"…","texto":"…"${needVis?',"visual":"…","foto":""':''}${O.emoji?',"emoji":"…"':''}${O.graficos!==false?',"grafico":{"tipo":"…"}':''}}],"cta":"…","layout":"…","objetivo":"alcance|confianza|comunidad|conversion","serie":"nombre de la serie o vacío","episodio":0${O.stickers!==false?',"stickers":["…","…","…"]':''},"sticker":null,"fondo":"…","estilo":"…"${AUDIO_CAPS?',"audio":"…","voz":"…","ritmo_voz":"…","musica":"…","guion":["…"]':''},"caption":"…","hashtags":["#…"]}]}`;
+{"estrategia":"2 o 3 frases: qué días se publica, cuáles se descansa y por qué","piezas":[{"dia":0,"hora":"19:30","tipo":"reel","objetivo":"…","razon":"…","tema":"…","formato":"…","gancho":"…"${needVis?',"visual":"…","foto":""':''},"escenas":[{"titulo":"…","texto":"…"${needVis?',"visual":"…","foto":""':''}${O.emoji?',"emoji":"…"':''}${O.graficos!==false?',"grafico":{"tipo":"…"}':''}}],"cta":"…","layout":"…"${window.__faceless!==false?',"estilo_visual":"…","visual_cierre":"…","cierre_bio":"…"':''},"objetivo":"alcance|confianza|comunidad|conversion","serie":"nombre de la serie o vacío","episodio":0${O.stickers!==false?',"stickers":["…","…","…"]':''},"sticker":null,"fondo":"…","estilo":"…"${AUDIO_CAPS?',"audio":"…","voz":"…","ritmo_voz":"…","musica":"…","guion":["…"]':''},"caption":"…","hashtags":["#…"]}]}`;
 }
 $("#genBtn").addEventListener("click",async()=>{
   const st=$("#genStatus"),btn=$("#genBtn");
@@ -813,6 +819,11 @@ function diversify(vids){
     p.plantilla=n;usedT.add(n);prevT=decodeTpl(n);});
   // con fotos disponibles, la mayoría de piezas van en diseño "cine" (foto a pantalla completa)
   if(typeof wantsPhotos==="function"&&S.cfg.v.fotos!==false)vids.forEach((p,i)=>{if(i%3!==2)p.layout="cine";});
+  // MODO FACELESS: estilo principal de reels e historias (3 de cada 4), salvo que el dueño elija "clásico"
+  if(window.__faceless!==false){const hv=(S.hist&&S.hist.items||[]).filter(h=>h.tipo==="reel"||h.tipo==="historia").length;let k=0;
+    vids.forEach(p=>{if(!(TYPES[p.tipo]&&TYPES[p.tipo].video))return;if((hv+k)%4!==3)p.layout="faceless";else if(p.layout==="faceless")p.layout="clasico";k++;});
+    const fl=vids.filter(p=>p.layout==="faceless"),hf=(S.hist&&S.hist.items||[]).filter(h=>h.layout==="faceless").length;
+    fl.forEach((p,i)=>{const g=(p.guion||[]).filter(x=>String(x).trim());const bio=(hf+i)%4===0&&p.cierre_bio;if(bio&&g.length){p.guion=g.slice(0,-1).concat(p.cierre_bio);}});}
   const anims=["slide","fade","pop","slide","fade","pop","slide"];vids.forEach((p,i)=>{p.anim=i===0?(O.anim||"pop"):anims[(seed+i)%anims.length];});
   const moods=["energetica","divertida","epica","chill","emotiva","tension","hiphop","rock","electronica","funk","latina","ambiental"];let pm=null;
   const mc={};const fit=["energetica","hiphop","divertida","electronica","rock","funk","latina","epica","chill"];
@@ -1021,6 +1032,11 @@ function buildScenes(p){
   HOOKS.attachAssets(p,sc);
   if(Array.isArray(p._durs))sc.forEach((s,i)=>{const d=+p._durs[i];if(d>0)s.dur=Math.max(1.6,d);});
   if(Array.isArray(p._caps)&&S.cfg.v.subtitulos!==false)sc.forEach((s,i)=>{if(Array.isArray(p._caps[i])&&p._caps[i].length)s.caps=p._caps[i];});
+  if(p.layout==="faceless"&&TYPES[type].video){ // texto hablado de cada pantalla, para subtítulos aunque falle la voz
+    const g=(p.guion||[]).filter(x=>String(x).trim());let ti=0;const esc=type==="historia"?p.escenas.slice(0,2):p.escenas;
+    sc.forEach((s,i)=>{let line=g[i];if(!line)line=s.kind==="hook"?p.gancho:s.kind==="tip"?((esc[ti]||{}).texto||""):(p.sticker?p.sticker.texto:p.cta);if(s.kind==="tip")ti++;
+      s.say=String(line||"").replace(/\*/g,"");
+      if(!s.caps){const ws=s.say.split(/\s+/).filter(Boolean),d=Math.max(1.6,s.dur)-0.4,st=d/Math.max(1,ws.length);s.caps=ws.map((w,k)=>({t:+(0.2+k*st).toFixed(3),d:st*0.9,w}));}});}
   let t=0;sc.forEach(s=>{s.start=t;t+=s.dur;});
   return{scenes:sc,total:t,type,w:SZ[0],h:SZ[1],style:effStyle(p),bm:effBM(p),piece:p,tpl:p.plantilla!=null?decodeTpl(p.plantilla):null,look:p.look!=null&&S.cfg.v.looks!==false?decodeLook(p.look):null,layout:type==="post"?(["tarjeta","dividido","cine"].includes(p.layout)?p.layout:"clasico"):(LAYOUTS.includes(p.layout)?p.layout:"clasico")};
 }
@@ -1063,6 +1079,7 @@ function drawFrame(SC,t,slide){
   const{scenes}=SC;const isImg=SC.type==="post"||SC.type==="carrusel";
   let si=slide!=null?slide:scenes.findIndex(s=>t<s.start+s.dur);if(si<0)si=scenes.length-1;
   const s=scenes[si];let lt=t-s.start;if(slide!=null)lt=s.dur-0.3;
+  if(SC.layout==="faceless"&&TYPES[SC.type].video){drawFaceless(SC,s,si,lt);return;}
   const hasMedia=drawBg(slide!=null?s.start+lt:t,si,lt,s.dur);let T=theme(hasMedia);
   const TPL=SC.tpl,LK=SC.look;
   if(LK){const tt=slide!=null?s.start+lt:t;
@@ -1126,7 +1143,7 @@ function drawFrame(SC,t,slide){
     if(pp>0){ctx.save();ctx.font="900 34px Inter";const tw=Math.min(ctx.measureText(lab).width,W-240);ctx.translate(W/2,Math.round(H*0.095));ctx.scale(pp,pp);ctx.rotate(-0.02);ctx.fillStyle="#ffd60a";roundRect(-tw/2-30,-34,tw+60,68,34);ctx.fill();ctx.fillStyle="#15151b";ctx.textAlign="center";ctx.textBaseline="middle";ctx.fillText(lab,0,2,W-240);ctx.restore();}}
 }
 /* ===== Plantillas de diseño (cada pieza puede verse distinta) ===== */
-const LAYOUTS=["clasico","lista","tarjeta","chat","dividido","subtitulos","cine"];
+const LAYOUTS=["clasico","lista","tarjeta","chat","dividido","subtitulos","cine","faceless"];
 /* ===== Diseño CINE: foto real a pantalla completa, degradado y tipografía grande abajo a la izquierda ===== */
 function cineScrim(extra){const g=ctx.createLinearGradient(0,H*0.28,0,H);g.addColorStop(0,"rgba(0,0,0,0)");g.addColorStop(0.5,"rgba(0,0,0,.6)");g.addColorStop(1,"rgba(0,0,0,.9)");ctx.fillStyle=g;ctx.fillRect(0,H*0.28,W,H*0.72);if(extra){ctx.fillStyle="rgba(0,0,0,"+extra+")";ctx.fillRect(0,0,W,H);}}
 function cineT(T){const acc=farCol(S.cfg.acc,"#141414")?S.cfg.acc:"#ffffff";return{...T,text:"#ffffff",hl:"color",hlFill:acc,hlText:acc,left:true,stroke:null,hard:null,tilt:0,shadow:true,neon:false,card:"rgba(10,10,14,.72)",track:"rgba(255,255,255,.28)",acc};}
@@ -1280,6 +1297,44 @@ function drawPhotoCard(m,x,y,w,h,lt,si){
   const sh=ctx.createLinearGradient(-w/2,-h/2,w/2,h/2);sh.addColorStop(0,"rgba(255,255,255,.14)");sh.addColorStop(0.4,"rgba(255,255,255,0)");ctx.fillStyle=sh;ctx.fillRect(-w/2,-h/2,w,h);
   ctx.restore();ctx.lineWidth=5;ctx.strokeStyle=S.cfg.acc;roundRect(-w/2-8,-h/2-8,w+16,h+16,r+8);ctx.stroke();ctx.restore();return true;
 }
+/* ===== MODO FACELESS: imagen de IA a pantalla completa que cambia cada 2-3 s + subtítulos grandes ===== */
+function flYellow(){return farCol(S.cfg.acc,"#000000")&&farCol(S.cfg.acc,"#ffffff")?S.cfg.acc:"#FFD60A";}
+function drawFacelessImg(im,k,dir,alpha){
+  const e=im&&im.el,iw=e&&(e.naturalWidth||e.videoWidth),ih=e&&(e.naturalHeight||e.videoHeight);if(!iw||!ih)return false;
+  const z=1.08+0.14*k,sc=Math.max(W/iw,H/ih)*z,dw=iw*sc,dh=ih*sc,px=[[-1,0],[1,0],[0,-1],[0,1],[-0.7,-0.7],[0.7,0.7]][dir%6];
+  ctx.save();ctx.globalAlpha=alpha;try{ctx.drawImage(e,(W-dw)/2+px[0]*(k-0.5)*W*0.07,(H-dh)/2+px[1]*(k-0.5)*H*0.05,dw,dh);}catch(_){}ctx.restore();return true;
+}
+function drawFaceless(SC,s,si,lt){
+  const imgs=(s.imgs||[]).filter(x=>x&&x.el);let drew=false;
+  if(imgs.length){
+    const n=Math.max(1,Math.min(imgs.length*2,Math.round(s.dur/2.6))),seg=s.dur/n,idx=STATIC?0:Math.min(n-1,Math.floor(Math.max(0,lt)/seg)),loc=STATIC?0.35:(lt-idx*seg)/seg;
+    drew=drawFacelessImg(imgs[idx%imgs.length],loc,si*3+idx,1);
+    const X=0.28;if(!STATIC&&idx>0&&loc*seg<X){const pk=(lt-(idx-1)*seg)/seg;drawFacelessImg(imgs[(idx-1)%imgs.length],pk,si*3+idx-1,1-loc*seg/X);}
+    if(!STATIC&&si>0&&idx===0&&lt<X){const ps=SC.scenes[si-1],pim=(ps.imgs||[]).filter(x=>x&&x.el);if(pim.length){const pn=Math.max(1,Math.min(pim.length*2,Math.round(ps.dur/2.6)));drawFacelessImg(pim[(pn-1)%pim.length],1,(si-1)*3+pn-1,1-lt/X);}}
+  }
+  if(!drew){if(SC.look)drawLook(SC.look,STATIC?0:lt);else{const g=ctx.createLinearGradient(0,0,W,H);g.addColorStop(0,mix(S.cfg.acc,"#000000",0.55));g.addColorStop(1,"#08080c");ctx.fillStyle=g;ctx.fillRect(0,0,W,H);}}
+  // viñeta suave para que el texto se lea sin tapar la imagen
+  const v=ctx.createRadialGradient(W/2,H*0.55,H*0.22,W/2,H*0.55,H*0.75);v.addColorStop(0,"rgba(0,0,0,.08)");v.addColorStop(1,"rgba(0,0,0,.5)");ctx.fillStyle=v;ctx.fillRect(0,0,W,H);
+  if(STATIC&&s.kind==="hook"){ // portada: el gancho entero
+    const Y=flYellow(),T={text:"#ffffff",hl:"color",hlFill:Y,hlText:Y,stroke:"#000000",hard:null,shadow:false,neon:false};
+    const y=H*0.5-s.L.h/2;drawBlock(s.L,W/2,y,9,0,0,"#ffffff",T);return;}
+  if(s.caps&&s.caps.length)drawFacelessCaps(s.caps,lt);
+}
+function drawFacelessCaps(caps,lt){
+  if(!caps._fch){const out=[];let cur=[];caps.forEach((c,i)=>{const pv=caps[i-1],gap=pv?c.t-(pv.t+pv.d):0;if(cur.length&&(cur.length>=3||gap>0.35||/[.,;:!?…]$/.test(pv.w)))(out.push(cur),cur=[]);cur.push(c);});if(cur.length)out.push(cur);caps._fch=out;}
+  const ch=caps._fch;let ci=-1;for(let i=0;i<ch.length;i++)if(lt>=ch[i][0].t-0.06)ci=i;if(ci<0)return;
+  const chunk=ch[ci],last=chunk[chunk.length-1];if(ci===ch.length-1&&lt>last.t+last.d+1.2)return;
+  const words=chunk.map(c=>String(c.w).replace(/[*#_"«»]/g,"").toUpperCase());let size=122;
+  ctx.save();const font=z=>"900 "+z+"px Inter";ctx.font=font(size);const gp=()=>size*0.42,tw=()=>words.reduce((a,w)=>a+ctx.measureText(w).width,0)+gp()*(words.length-1);
+  while(tw()>W-110&&size>56){size-=4;ctx.font=font(size);}
+  const ent=easeBack(clamp((lt-chunk[0].t+0.06)/0.14,0,1)),Y=flYellow();let x=-tw()/2;
+  ctx.translate(W/2,H*0.6);ctx.scale(0.86+0.14*ent,0.86+0.14*ent);ctx.textBaseline="middle";ctx.textAlign="left";ctx.lineJoin="round";
+  words.forEach((w,i)=>{const c=chunk[i],ww=ctx.measureText(w).width,act=lt>=c.t&&(i===chunk.length-1||lt<chunk[i+1].t);
+    ctx.save();ctx.translate(x+ww/2,0);if(act){const k=clamp((lt-c.t)/0.1,0,1);const z=1.08-0.03*k;ctx.scale(z,z);}
+    ctx.lineWidth=size*0.22;ctx.strokeStyle="#000000";ctx.strokeText(w,-ww/2,0);ctx.shadowColor="rgba(0,0,0,.6)";ctx.shadowBlur=18;
+    ctx.fillStyle=act?Y:"#ffffff";ctx.fillText(w,-ww/2,0);ctx.restore();x+=ww+gp();});
+  ctx.restore();
+}
 /* ===== Motion graphics ===== */
 const pr=(lt,t0,d)=>clamp((lt-t0)/d,0,1);
 function cardFill(T){if(T.card)return T.card;return T.text==="#ffffff"?"rgba(255,255,255,.09)":"rgba(0,0,0,.07)";}
@@ -1427,6 +1482,7 @@ function drawParticles(t,T){ctx.save();for(let i=0;i<22;i++){const sd=(i*9301+49
   ctx.globalAlpha=0.12+0.18*sd2;ctx.fillStyle=i%3?"#ffffff":S.cfg.acc;ctx.beginPath();ctx.arc(x,y,r,0,Math.PI*2);ctx.fill();}ctx.restore();}
 /* Momentos de sonido (whoosh, pop, ding, golpe) sincronizados con la animación */
 function sceneEvents(SC){
+  if(SC.layout==="faceless"){const e=[];SC.scenes.forEach((s,i)=>{if(i>0&&s.start-0.15<SC.total-0.05)e.push({t:+(s.start-0.15).toFixed(3),k:"whoosh"});});return e;}
   const ev=[],O=S.cfg.v,fx=O.transiciones!==false,add=(t,k)=>{if(t>=0&&t<SC.total-0.05)ev.push({t:+t.toFixed(3),k});};
   SC.scenes.forEach((s,si)=>{const t0=s.start;
     if(fx&&si>0)add(t0-0.2,"whoosh");
@@ -1683,9 +1739,16 @@ function brandPhoto(id){return (window.__brandPhotos||[]).find(f=>f.id===id)||nu
 function sceneQ(e){return (e.foto&&brandPhoto(e.foto))?"foto:"+e.foto:(e.visual||(e.titulo+" "+e.texto));}
 function pieceQ(p){return (p.foto&&brandPhoto(p.foto))?"foto:"+p.foto:(p.visual||p.gancho);}
 function wantsPhotos(p){const m=effBM(p);return m==="ai"||m==="stock"||(S.cfg.v.fotos!==false&&m!=="media");}
-function needed(p){ if(!wantsPhotos(p)) return []; const qs=[pieceQ(p)]; if(S.cfg.v.imgPer==="scene"&&p.tipo!=="post") (p.tipo==="historia"?p.escenas.slice(0,2):p.escenas).forEach(e=>qs.push(sceneQ(e))); return [...new Set(qs.map(q=>String(q).trim()).filter(Boolean))].map(q=>({mode:"ai",q,k:"ai|"+q})); }
+function flStyle(p){return p.estilo_visual?", "+p.estilo_visual:", cinematic film still, dramatic natural light, shallow depth of field";}
+function flPrompts(p){ const st=flStyle(p), esc=p.tipo==="historia"?p.escenas.slice(0,2):p.escenas;
+  const hook=[(p.visual||p.gancho)+st], tips=esc.map(e=>{const v=(e.visuales&&e.visuales.length?e.visuales:[e.visual||e.texto||e.titulo]).slice(0,2);return v.map(x=>x+st);}), cta=[(p.visual_cierre||p.visual||p.gancho)+st];
+  return {hook,tips,cta}; }
+function needed(p){ if(p&&p.layout==="faceless"&&TYPES[p.tipo]&&TYPES[p.tipo].video){ const f=flPrompts(p); return [...new Set([].concat(f.hook,...f.tips,f.cta).map(q=>String(q).trim()).filter(Boolean))].map(q=>({mode:"ai",q:"ia:"+q,k:"ai|ia:"+q})); }
+  if(!wantsPhotos(p)) return []; const qs=[pieceQ(p)]; if(S.cfg.v.imgPer==="scene"&&p.tipo!=="post") (p.tipo==="historia"?p.escenas.slice(0,2):p.escenas).forEach(e=>qs.push(sceneQ(e))); return [...new Set(qs.map(q=>String(q).trim()).filter(Boolean))].map(q=>({mode:"ai",q,k:"ai|"+q})); }
 function getA(mode,q){return S.assets.get(mode+"|"+String(q).trim())||null;}
-HOOKS.attachAssets=(p,sc)=>{ if(!wantsPhotos(p)) return; const m=effBM(p), full=m==="ai"||m==="stock"; const hook=getA("ai",pieceQ(p)); let ti=0; const esc=p.tipo==="historia"?p.escenas.slice(0,2):p.escenas;
+HOOKS.attachAssets=(p,sc)=>{ if(p&&p.layout==="faceless"&&TYPES[p.tipo]&&TYPES[p.tipo].video){ const f=flPrompts(p); let ti=0; const g=q=>getA("ai","ia:"+q);
+    sc.forEach(s=>{ const list=s.kind==="hook"?f.hook:s.kind==="tip"?(f.tips[ti++]||f.hook):f.cta; s.imgs=list.map(g).filter(Boolean); if(!s.imgs.length){ const any=[].concat(f.hook,...f.tips,f.cta).map(g).filter(Boolean); s.imgs=any.slice(0,1);} }); return; }
+  if(!wantsPhotos(p)) return; const m=effBM(p), full=m==="ai"||m==="stock"; const hook=getA("ai",pieceQ(p)); let ti=0; const esc=p.tipo==="historia"?p.escenas.slice(0,2):p.escenas;
   sc.forEach(s=>{ if(s.kind==="tip"){ const e=esc[ti++]; s.asset=(S.cfg.v.imgPer==="scene"&&e?getA("ai",sceneQ(e)):null)||hook; } else s.asset=hook;
     if(p.layout==="cine"){ if(s.asset) s.full=true; }
     else if(!full&&s.asset&&s.kind==="hook"&&TYPES[p.tipo].video) s.full=true;   // el gancho siempre abre con la foto a pantalla completa
@@ -1719,6 +1782,7 @@ async function loadPexelsPhoto(q){
   return await imgFrom(URL.createObjectURL(await ir.blob()));
 }
 async function loadAsset(it){
+  if(it.q.startsWith("ia:")) return await loadPollinations(it.q.slice(3));  // faceless: todo generado con IA
   if(it.q.startsWith("foto:")){ const f=brandPhoto(it.q.slice(5)); if(f&&f.src) return await imgFrom(f.src); }
   const a=await loadPexelsPhoto(it.q).catch(()=>null); if(a) return a;
   return await loadPollinations(it.q);
@@ -1912,6 +1976,7 @@ function renderAcct() {
   chipRow($("#acWeek"), [[3, "3"], [5, "5"], [7, "7"], [10, "10"]], v => P.max_semana === v, v => { P.max_semana = v; saveCfg(); renderAcct(); });
   chipRow($("#acDay"), [[1, "1"], [2, "2"], [3, "3"]], v => P.max_por_dia === v, v => { P.max_por_dia = v; saveCfg(); renderAcct(); });
   chipRow($("#acFmt"), Object.entries(TYPES).map(([k, T]) => [k, T.icon + " " + T.name]), v => P.formatos.includes(v), v => { if (P.formatos.includes(v)) { if (P.formatos.length > 1) P.formatos = P.formatos.filter(x => x !== v); } else P.formatos = P.formatos.concat(v); saveCfg(); renderAcct(); });
+  chipRow($("#acEstilo"), [["faceless", "🎬 Faceless (recomendado)"], ["clasico", "🎨 Clásico"]], v => (P.estilo_video || "faceless") === v, v => { P.estilo_video = v; saveCfg(); renderAcct(); });
   chipRow($("#acAudio"), [["auto", "🤖 Que decida la agencia"], ["voz", "🎙 Solo voz"], ["musica", "🎵 Solo música"], ["ambos", "🎙+🎵 Voz y música"]], v => (P.audio || "auto") === v, v => { P.audio = v; saveCfg(); renderAcct(); });
   { const f = $("#acFloor"), v = P.no_publicar_antes; if (document.activeElement !== f) { if (v) { const d = new Date(v); const pad = n => String(n).padStart(2, "0"); f.value = d.getFullYear() + "-" + pad(d.getMonth() + 1) + "-" + pad(d.getDate()) + "T" + pad(d.getHours()) + ":" + pad(d.getMinutes()); } else f.value = ""; }
     $("#acFloorNote").textContent = v && new Date(v) > new Date() ? "⏸ Nada se publicará antes del " + fmtWhen(v) + ". La agencia sigue preparando contenido." : "La agencia sigue creando contenido, pero nada se publica antes de esta fecha."; }
@@ -1960,7 +2025,7 @@ ACCIONES DISPONIBLES (propón solo las que el dueño pida o claramente quiera; s
 - {"tipo":"eliminar","id":"id de una pieza programada"} (no se publicará y se borra)
 - {"tipo":"rehacer_semana"}
 - {"tipo":"pausar"} · {"tipo":"reanudar"}
-- {"tipo":"ajustes","max_semana":3|5|7|10,"max_por_dia":1|2|3,"audio":"auto|voz|musica|ambos","formatos":["reel","historia","post","carrusel"],"no_publicar_antes":"ISO 8601 o vacío para quitarlo"} (incluye solo lo que cambie)
+- {"tipo":"ajustes","max_semana":3|5|7|10,"max_por_dia":1|2|3,"audio":"auto|voz|musica|ambos","formatos":["reel","historia","post","carrusel"],"no_publicar_antes":"ISO 8601 o vacío para quitarlo","estilo_video":"faceless|clasico"} (incluye solo lo que cambie)
 
 CONVERSACIÓN HASTA AHORA
 ${hist || "(empieza ahora)"}
@@ -1991,6 +2056,7 @@ async function runAction(a) {
     if ([1, 2, 3].includes(+a.max_por_dia)) P.max_por_dia = +a.max_por_dia;
     if (["auto", "voz", "musica", "ambos"].includes(a.audio)) P.audio = a.audio;
     if (Array.isArray(a.formatos)) { const f = a.formatos.filter(x => TYPES[x]); if (f.length) P.formatos = f; }
+    if (["faceless", "clasico"].includes(a.estilo_video)) P.estilo_video = a.estilo_video;
     if (a.no_publicar_antes !== undefined) { const d = a.no_publicar_antes ? new Date(a.no_publicar_antes) : null; P.no_publicar_antes = d && !isNaN(d) ? d.toISOString() : ""; }
     saveCfg(); return "⚙️ Ajustes guardados.";
   }

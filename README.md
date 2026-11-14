@@ -124,6 +124,13 @@ Guarda tu **clave de acceso** (en Cuenta) para entrar desde otro dispositivo.
 - **Voz:** locuciones neuronales gratuitas de Microsoft (edge-tts), con el guion que escribe la agencia.
 - **Música:** si pones tus pistas en `assets/music/<ambiente>/` (energetica, chill, epica, emotiva, divertida, tension) se usan esas. Si no, la agencia busca **canciones reales con licencia libre para uso comercial** (CC0 o CC BY, sobre todo de Jamendo, a través de Openverse) según el ambiente de cada vídeo, empieza la canción ya dentro (sin la intro lenta) y nivela el volumen. Con CC BY se acredita al artista en el texto del post; el vídeo no lleva marca de agua. Las historias, que no tienen texto, solo usan canciones CC0 (sin obligación de acreditar). Las pistas se guardan en `content/music/` y se van reutilizando.
 
+## 🎬 Modo Faceless (estilo principal de reels e historias)
+El estilo que más visitas da en vídeo corto sin cara: **imágenes generadas con IA a pantalla completa** (9:16) que cambian cada 2-3 segundos con movimiento suave de cámara, **voz narrando** de principio a fin con música baja de fondo, y **subtítulos grandes en el centro** palabra a palabra, con la palabra que se dice resaltada y contorno fuerte. Sin títulos, pegatinas, gráficos ni marcos.
+- **Guion:** narración continua de 25-45 s en segunda persona, con tono de quien quiere enseñar. Gancho en el primer segundo y medio, 90% de valor real del nicho y cierre invitando a seguir la cuenta. Solo 1 de cada 4 vídeos menciona el enlace del perfil, y de forma natural. Se mantiene la regla anti-inventos.
+- **Imágenes coherentes:** la IA define un estilo visual común (plano, luz, paleta) para todo el vídeo y describe dos imágenes por escena a partir del guion y del nicho de la marca. Sirve para cualquier negocio: una academia, una tienda o un hotel.
+- Se usa en 3 de cada 4 reels e historias; carruseles y posts siguen igual. Se cambia en **Ajustes → Estilo de vídeo: Faceless (recomendado) / Clásico**.
+- Con `POLLINATIONS_TOKEN` las imágenes se generan mucho más rápido (sin él, unos 15 s por imagen).
+
 ## 📷 Fotos reales y diseño «cine»
 - **Diseño cine (el principal):** foto real a pantalla completa con movimiento de cámara, degradado y tipografía grande abajo a la izquierda, sin pegatinas ni adornos. Lo usan dos de cada tres piezas; el resto alterna los demás diseños, donde la foto aparece como tarjeta enmarcada.
 - **De dónde salen las fotos**, por orden: 1) **tus fotos** (pestaña *Marca → 📸 Fotos de tu marca*: productos, equipo, local; hasta 24, con una descripción para que la agencia sepa cuándo usar cada una); 2) **fotos reales de banco de imágenes** (Pexels, gratis y sin atribución) si existe el secreto `PEXELS_API_KEY`; 3) imágenes generadas con IA.

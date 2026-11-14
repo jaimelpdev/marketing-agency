@@ -194,7 +194,7 @@ def encode_video(frames_dir, total, out_path, voice_clips=(), music=None, credit
         cmd += ["-f", "lavfi", "-i", "anullsrc=r=48000:cl=stereo"]
     m_idx = len(voice_clips) + 1
     has_voice = bool(voice_clips)
-    music_vol = 0.42 if has_voice else 1.3  # con voz, la música baja sola cuando se habla (sidechain)
+    music_vol = 0.3 if has_voice else 1.3  # con voz, la música baja sola cuando se habla (sidechain)
     fade_start = max(0.0, total - 1.2)
     parts, labels = [], []
     for k, (_, start_s) in enumerate(voice_clips):
@@ -532,6 +532,8 @@ def plan_user(browser, user, key, force=False, redo=None):
     init_js = "window.__AGENCIA_SERVER=true;try{localStorage.clear();" + "".join(
         f"localStorage.setItem({json.dumps(k)},{json.dumps(v)});" for k, v in init.items()) + "}catch(e){}"
     init_js += ";window.__brandPhotos=" + json.dumps(brand_photos) + ";"
+    faceless = str(((user.get("config") or {}).get("plan") or {}).get("estilo_video", "faceless")) != "clasico"
+    init_js += f";window.__faceless={'true' if faceless else 'false'};"
 
     page = browser.new_page(viewport={"width": 480, "height": 900})
     try:
@@ -591,10 +593,12 @@ def plan_user(browser, user, key, force=False, redo=None):
         audio_pref = AUDIO_MODES.get(str(plan_conf.get("audio", "auto")))
         if audio_pref:
             page.evaluate("a=>S.today.videos.forEach(p=>{p.audio=a;})", audio_pref)
+        # faceless: la voz siempre está presente (con música baja de fondo)
+        page.evaluate("()=>S.today.videos.forEach(p=>{if(p.layout==='faceless'&&p.audio!=='solo_voz')p.audio='voz_y_musica';})")
         log("  Estrategia:", page.evaluate("S.today.estrategia"))
         log(f"  {n} piezas. Generando imágenes…")
         page.evaluate("prefetchAll()")
-        page.wait_for_function("typeof pendingA==='undefined' || pendingA.size===0", timeout=1_200_000, polling=2000)
+        page.wait_for_function("typeof pendingA==='undefined' || pendingA.size===0", timeout=2_700_000, polling=2000)
         page.wait_for_timeout(1000)
         page.evaluate(RENDER_JS)
         pieces = page.evaluate("JSON.parse(JSON.stringify(S.today.videos))")
