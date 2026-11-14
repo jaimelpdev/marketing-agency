@@ -258,6 +258,17 @@
     },
     {
       "date": "2026-11-14",
+      "tema": "Error de la semana",
+      "formato": "reel",
+      "tipo": "reel",
+      "layout": "faceless",
+      "plantilla": 1612,
+      "look": 9,
+      "serie": "Error de la semana",
+      "objetivo": ""
+    },
+    {
+      "date": "2026-11-14",
       "tipo": "post",
       "src": "red",
       "tema": "[IG · ❤️0] 🚦 La zona de frenado que más te cuesta puede robarte décimas. Descubre cómo identificarla y ajustarla. ¿Cuál es tu mayor desafío?"
@@ -284,6 +295,17 @@
       "objetivo": "comunidad"
     },
     {
+      "date": "2026-11-15",
+      "tema": "Setup del seguidor",
+      "formato": "reel",
+      "tipo": "reel",
+      "layout": "cine",
+      "plantilla": 358,
+      "look": 119,
+      "serie": "Setup del seguidor",
+      "objetivo": ""
+    },
+    {
       "date": "2026-11-16",
       "tema": "Freno tardío por falta de freno motor",
       "formato": "error que cuesta tiempo",
@@ -306,6 +328,17 @@
       "objetivo": "alcance"
     },
     {
+      "date": "2026-11-17",
+      "tema": "Mini encuesta",
+      "formato": "historia",
+      "tipo": "historia",
+      "layout": "faceless",
+      "plantilla": 1155,
+      "look": 229,
+      "serie": "",
+      "objetivo": ""
+    },
+    {
       "date": "2026-11-18",
       "tema": "Más downforce siempre es mejor",
       "formato": "mito vs realidad",
@@ -325,6 +358,17 @@
       "plantilla": 1932,
       "look": 216,
       "serie": "",
+      "objetivo": ""
+    },
+    {
+      "date": "2026-11-18",
+      "tema": "Mito o realidad",
+      "formato": "carrusel",
+      "tipo": "carrusel",
+      "layout": "cine",
+      "plantilla": 1880,
+      "look": 83,
+      "serie": "Mito o realidad",
       "objetivo": ""
     },
     {
@@ -361,50 +405,6 @@
       "objetivo": ""
     },
     {
-      "date": "2026-11-14",
-      "tema": "Error de la semana",
-      "formato": "reel",
-      "tipo": "reel",
-      "layout": "faceless",
-      "plantilla": 1612,
-      "look": 9,
-      "serie": "Error de la semana",
-      "objetivo": ""
-    },
-    {
-      "date": "2026-11-15",
-      "tema": "Setup del seguidor",
-      "formato": "reel",
-      "tipo": "reel",
-      "layout": "cine",
-      "plantilla": 358,
-      "look": 119,
-      "serie": "Setup del seguidor",
-      "objetivo": ""
-    },
-    {
-      "date": "2026-11-17",
-      "tema": "Mini encuesta",
-      "formato": "historia",
-      "tipo": "historia",
-      "layout": "faceless",
-      "plantilla": 1155,
-      "look": 229,
-      "serie": "",
-      "objetivo": ""
-    },
-    {
-      "date": "2026-11-18",
-      "tema": "Mito o realidad",
-      "formato": "carrusel",
-      "tipo": "carrusel",
-      "layout": "cine",
-      "plantilla": 1880,
-      "look": 83,
-      "serie": "Mito o realidad",
-      "objetivo": ""
-    },
-    {
       "date": "2026-11-20",
       "tema": "Error de la semana",
       "formato": "reel",
@@ -414,6 +414,50 @@
       "look": 193,
       "serie": "Error de la semana",
       "objetivo": ""
+    },
+    {
+      "date": "2026-11-14",
+      "tema": "Comparativa de estrategias de pit‑stop: anticipado vs reactivo",
+      "formato": "comparativa",
+      "tipo": "post",
+      "layout": "cine",
+      "plantilla": 335,
+      "look": 186,
+      "serie": "",
+      "objetivo": "alcance"
+    },
+    {
+      "date": "2026-11-16",
+      "tema": "Error de la semana: Sobre‑frenar en curvas lentas",
+      "formato": "error que cuesta tiempo",
+      "tipo": "reel",
+      "layout": "faceless",
+      "plantilla": 837,
+      "look": 119,
+      "serie": "Error de la semana",
+      "objetivo": ""
+    },
+    {
+      "date": "2026-11-18",
+      "tema": "Mito o realidad: Más downforce siempre es mejor",
+      "formato": "mito vs realidad",
+      "tipo": "carrusel",
+      "layout": "tarjeta",
+      "plantilla": 960,
+      "look": 229,
+      "serie": "Mito o realidad",
+      "objetivo": ""
+    },
+    {
+      "date": "2026-11-19",
+      "tema": "Setup del seguidor: mejora de tiempo en Monza",
+      "formato": "setup del seguidor",
+      "tipo": "reel",
+      "layout": "cine",
+      "plantilla": 404,
+      "look": 83,
+      "serie": "Setup del seguidor",
+      "objetivo": "confianza"
     }
   ]
 }

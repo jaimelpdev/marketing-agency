@@ -67,87 +67,71 @@
     "zernioPostId": "6af3bcaeab419287a3961457"
   },
   {
-    "id": "2026-11-14-01-reel",
+    "id": "2026-11-14-01-post",
     "date": "2026-11-14",
     "source": "auto",
-    "tipo": "reel",
-    "tema": "Error de la semana",
-    "publishAt": "2026-11-14T19:30:00+01:00",
-    "caption": "¿Te cuesta perder segundos en la curva? Aprende a frenarlo a tiempo. 💡 Comenta FRENO y guarda este reel. 🚦 Visita nuestro link en bio.\n\n#SimRacing #Telemetría #LAPRIQ #Frenado #RacingTips\n\n🎵 «Spencer Newton - Bounce (Original Mix)(Electro House)» de Spencer Newton (CC BY 3.0)",
+    "tipo": "post",
+    "tema": "Comparativa de estrategias de pit‑stop: anticipado vs reactivo",
+    "publishAt": "2026-11-14T14:38:15.529137+01:00",
+    "caption": "Pit‑stop bien planificado puede ahorrarte décimas en cada vuelta. 🚦 Compara los dos enfoques y elige el que mejor se adapta a tu estilo. ¿Cuál usarías en tu próxima carrera? 👉 Enlace en bio\n\n#SimRacing #PitStop #Telemetría #Coaching #LAPRIQ #RacingTips #eSports",
     "media": [
-      "media/u_4163e9db06d1/2026-11-14/2026-11-14-01-reel/video.mp4"
+      "media/u_4163e9db06d1/2026-11-14/2026-11-14-01-post/01.jpg"
     ],
     "status": "scheduled",
     "attempts": 0,
-    "cover": "media/u_4163e9db06d1/2026-11-14/2026-11-14-01-reel/cover.jpg",
-    "zernioPostId": "6af8578ef22bfdce4b64e61b"
+    "zernioPostId": "6af861efcf7ed47f34af2cef"
   },
   {
     "id": "2026-11-14-02-reel",
     "date": "2026-11-14",
     "source": "auto",
     "tipo": "reel",
-    "tema": "Setup del seguidor",
-    "publishAt": "2026-11-15T19:30:00+01:00",
-    "caption": "¿Quieres que tu coche sea más rápido? Ajusta estos 3 puntos y gana 0.3s. 🚀 Mándame tu setup. #LAPRIQ #SimRacing #Setup\n\n#LAPRIQ #SimRacing #Setup #Telemetry #Racing\n\n🎵 «electronique beat hip hop» de dj beck (CC BY 3.0)",
+    "tema": "Error de la semana: Sobre‑frenar en curvas lentas",
+    "publishAt": "2026-11-16T19:45:00+01:00",
+    "caption": "Sobre‑frenar en curvas lentas es un error que muchos cometen y que cuesta décimas valiosas. 🚦 Descubre cómo detectarlo en la telemetría y corregirlo en 3 pasos. ¿Te ha pasado? 👉 Comenta FRENO y recibe la guía completa en mi bio.\n\n#SimRacing #ErrorDeLaSemana #Telemetría #PitStop #LAPRIQ\n\n🎵 «Spencer Newton - Lucky Number 8 (Original Mix)(Electro House)» de Spencer Newton (CC BY 3.0)",
     "media": [
       "media/u_4163e9db06d1/2026-11-14/2026-11-14-02-reel/video.mp4"
     ],
-    "status": "scheduled",
+    "status": "failed",
     "attempts": 0,
     "cover": "media/u_4163e9db06d1/2026-11-14/2026-11-14-02-reel/cover.jpg",
-    "zernioPostId": "6af85791f22bfdce4b64e633"
+    "error": "Subida a Zernio falló (502)"
   },
   {
-    "id": "2026-11-14-03-historia",
-    "date": "2026-11-14",
-    "source": "auto",
-    "tipo": "historia",
-    "tema": "Mini encuesta",
-    "publishAt": "2026-11-17T09:00:00+01:00",
-    "caption": "",
-    "media": [
-      "media/u_4163e9db06d1/2026-11-14/2026-11-14-03-historia/video.mp4"
-    ],
-    "status": "scheduled",
-    "attempts": 0,
-    "cover": "media/u_4163e9db06d1/2026-11-14/2026-11-14-03-historia/cover.jpg",
-    "zernioPostId": "6af85794fe1ca6f9cac248b4"
-  },
-  {
-    "id": "2026-11-14-04-carrusel",
+    "id": "2026-11-14-03-carrusel",
     "date": "2026-11-14",
     "source": "auto",
     "tipo": "carrusel",
-    "tema": "Mito o realidad",
-    "publishAt": "2026-11-18T19:30:00+01:00",
-    "caption": "Desmontamos los mitos del downforce. 📉⚡ ¿Cuál te sorprendió más? #LAPRIQ #SimRacing #Downforce\n\n#LAPRIQ #SimRacing #Downforce #Mitos #Racing",
+    "tema": "Mito o realidad: Más downforce siempre es mejor",
+    "publishAt": "2026-11-18T13:00:00+01:00",
+    "caption": "Más downforce no siempre significa más velocidad. Descubre cuándo reducir el ángulo del alerón para ganar tiempo en rectas largas. 🚗💨 Guarda este carrusel y ajusta tu setup con datos reales. #Downforce #MitoVsRealidad #LAPRIQ\n\n#Downforce #MitoVsRealidad #SimRacing #LAPRIQ #Coaching",
     "media": [
-      "media/u_4163e9db06d1/2026-11-14/2026-11-14-04-carrusel/01.jpg",
-      "media/u_4163e9db06d1/2026-11-14/2026-11-14-04-carrusel/02.jpg",
-      "media/u_4163e9db06d1/2026-11-14/2026-11-14-04-carrusel/03.jpg",
-      "media/u_4163e9db06d1/2026-11-14/2026-11-14-04-carrusel/04.jpg",
-      "media/u_4163e9db06d1/2026-11-14/2026-11-14-04-carrusel/05.jpg",
-      "media/u_4163e9db06d1/2026-11-14/2026-11-14-04-carrusel/06.jpg"
+      "media/u_4163e9db06d1/2026-11-14/2026-11-14-03-carrusel/01.jpg",
+      "media/u_4163e9db06d1/2026-11-14/2026-11-14-03-carrusel/02.jpg",
+      "media/u_4163e9db06d1/2026-11-14/2026-11-14-03-carrusel/03.jpg",
+      "media/u_4163e9db06d1/2026-11-14/2026-11-14-03-carrusel/04.jpg",
+      "media/u_4163e9db06d1/2026-11-14/2026-11-14-03-carrusel/05.jpg",
+      "media/u_4163e9db06d1/2026-11-14/2026-11-14-03-carrusel/06.jpg",
+      "media/u_4163e9db06d1/2026-11-14/2026-11-14-03-carrusel/07.jpg"
     ],
     "status": "scheduled",
     "attempts": 0,
-    "zernioPostId": "6af8579dfe1ca6f9cac24907"
+    "zernioPostId": "6af861f7cf7ed47f34af2d1e"
   },
   {
-    "id": "2026-11-14-05-reel",
+    "id": "2026-11-14-04-reel",
     "date": "2026-11-14",
     "source": "auto",
     "tipo": "reel",
-    "tema": "Error de la semana",
-    "publishAt": "2026-11-20T19:30:00+01:00",
-    "caption": "¿Te cuesta perder segundos en la curva? Aprende a frenarlo a tiempo. 💡 Guarda este reel y visita nuestro enlace en bio. 🚦\n\n#SimRacing #Telemetría #LAPRIQ #Frenado #RacingTips\n\n🎵 «Spencer Newton - Right Now (Original Mix)(Electro House)» de Spencer Newton (CC BY 3.0)",
+    "tema": "Setup del seguidor: mejora de tiempo en Monza",
+    "publishAt": "2026-11-19T19:30:00+01:00",
+    "caption": "Un ajuste de freno motor y balance de peso le ahorró 0.48 s a nuestro seguidor en Monza. 🚀 ¿Te animas a probarlo? Manda tu setup por DM y lo analizamos juntos. 👉 Link en bio\n\n#Setup #Monza #SimRacing #LAPRIQ #Coaching\n\n🎵 «Hip-Hop 1» de Deff Syndicate (CC BY 3.0)",
     "media": [
-      "media/u_4163e9db06d1/2026-11-14/2026-11-14-05-reel/video.mp4"
+      "media/u_4163e9db06d1/2026-11-14/2026-11-14-04-reel/video.mp4"
     ],
     "status": "scheduled",
     "attempts": 0,
-    "cover": "media/u_4163e9db06d1/2026-11-14/2026-11-14-05-reel/cover.jpg",
-    "zernioPostId": "6af857a4468e0fd807ee8e33"
+    "cover": "media/u_4163e9db06d1/2026-11-14/2026-11-14-04-reel/cover.jpg",
+    "zernioPostId": "6af861fd58a2bd853a85f85e"
   }
 ]

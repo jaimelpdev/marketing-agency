@@ -1,479 +1,422 @@
 {
   "date": "2026-11-14",
-  "estrategia": "Publicaremos 4 piezas en feed (3 reels y 1 carrusel) y 1 historia para interacción. Se descansarán los días 5 y 7 para no saturar. La semana sigue el arco de optimizar tu setup, con series recurrentes y un reto de comunidad.",
+  "estrategia": "Publicaremos el sábado un post comparativo, el domingo una historia interactiva, el lunes lanzaremos el Reel \"Error de la semana\", el miércoles el carrusel \"Mito o realidad\" y el jueves el Reel \"Setup del seguidor\". Descansaremos martes y viernes para evitar saturación y mantener expectativa.",
   "piezas": [
     {
-      "id": "pmwgd9sev_0",
+      "id": "pmwgewx0n_0",
       "dia": 0,
-      "hora": "19:30",
+      "hora": "13:30",
+      "tipo": "post",
+      "objetivo": "alcance",
+      "razon": "Aprovechar el inicio del fin de semana con contenido rápido y fácil de guardar.",
+      "tema": "Comparativa de estrategias de pit‑stop: anticipado vs reactivo",
+      "formato": "comparativa",
+      "gancho": "¿Pit‑stop anticipado o reactivo?",
+      "visual": "close-up of pit lane with crew ready, bright daylight",
+      "escenas": [],
+      "cta": "Descubre más en el enlace de mi perfil",
+      "sticker": null,
+      "fondo": "color",
+      "estilo": "racing",
+      "caption": "Pit‑stop bien planificado puede ahorrarte décimas en cada vuelta. 🚦 Compara los dos enfoques y elige el que mejor se adapta a tu estilo. ¿Cuál usarías en tu próxima carrera? 👉 Enlace en bio",
+      "hashtags": "#SimRacing #PitStop #Telemetría #Coaching #LAPRIQ #RacingTips #eSports",
+      "audio": "",
+      "voz": "",
+      "ritmo_voz": "",
+      "musica": "",
+      "guion": [],
+      "beats": [],
+      "estilo_visual": "cinematic 35mm film look, warm golden hour light, teal and orange palette, shallow depth of field",
+      "visual_cierre": "",
+      "cierre_bio": "",
+      "foto": "close-up of pit lane wit",
+      "anim": "pop",
+      "serie": "",
+      "episodio": 0,
+      "look": 186,
+      "plantilla": 335,
+      "layout": "cine",
+      "stickers": []
+    },
+    {
+      "id": "pmwgewx0n_2",
+      "dia": 2,
+      "hora": "19:45",
       "tipo": "reel",
       "objetivo": "",
-      "razon": "Genera comentarios y comparte valor",
-      "tema": "Error de la semana",
-      "formato": "reel",
-      "gancho": "El error que te hace perder 2 segundos",
-      "visual": "close-up of racing wheel with telemetry overlay",
+      "razon": "Mostrar error frecuente y generar debate, siguiendo la serie semanal.",
+      "tema": "Error de la semana: Sobre‑frenar en curvas lentas",
+      "formato": "error que cuesta tiempo",
+      "gancho": "El error que te quita 0.3 s por curva",
+      "visual": "first-person view of car entering a slow corner, tires squealing",
       "escenas": [
         {
-          "titulo": "Frenado tardío",
-          "texto": "El coche frena demasiado tarde",
+          "titulo": "Freno tardío",
+          "texto": "Aceleras demasiado y frenas 0.3 s tarde",
           "emoji": "",
-          "visual": "close-up of brake pedal",
-          "visuales": [
-            "driver's hand on pedal",
-            "speedometer"
-          ],
-          "foto": "",
+          "visual": "close-up of car entering a slow corner, brake lights delayed",
+          "visuales": [],
+          "foto": "close-up of car entering",
           "grafico": {
             "tipo": "comparacion",
             "mal": "freno tarde",
-            "bien": "freno oportuno"
+            "bien": "freno a tiempo"
           }
         },
         {
-          "titulo": "Identificar señales",
-          "texto": "Observa la telemetría en tiempo real",
+          "titulo": "Pérdida de tracción",
+          "texto": "El neumático patina y pierdes velocidad",
           "emoji": "",
-          "visual": "screen showing telemetry",
-          "visuales": [
-            "monitor with graph",
-            "car in lap"
-          ],
-          "foto": "",
+          "visual": "tires sliding on wet asphalt",
+          "visuales": [],
+          "foto": "tires sliding on wet asp",
           "grafico": {
             "tipo": "checklist",
             "items": [
-              "identifica",
-              "ajusta",
-              "mide"
+              "Revisa presión",
+              "Ajusta balance",
+              "Reduce velocidad"
             ]
           }
         },
         {
-          "titulo": "Ajuste correcto",
-          "texto": "Reduce la latencia en 0.2s",
+          "titulo": "Telemetry spike",
+          "texto": "El gráfico muestra un pico de freno motor",
           "emoji": "",
-          "visual": "adjusting throttle",
-          "visuales": [
-            "hand on throttle",
-            "car speed"
-          ],
-          "foto": "",
+          "visual": "telemetry screen highlighting brake pressure spike",
+          "visuales": [],
+          "foto": "telemetry screen highlig",
           "grafico": {
-            "tipo": "velocimetro",
-            "valor": 80,
-            "etiqueta": "cambio de freno"
+            "tipo": "contador",
+            "valor": 3,
+            "unidad": "segundos perdidos"
+          }
+        },
+        {
+          "titulo": "Solución",
+          "texto": "Aplica frenado motor 30% antes y gana tiempo",
+          "emoji": "",
+          "visual": "driver's hands adjusting brake bias in UI",
+          "visuales": [],
+          "foto": "driver's hands adjusting",
+          "grafico": {
+            "tipo": "objetivo",
+            "etiqueta": "freno óptimo"
           }
         }
       ],
-      "cta": "Comenta FRENO y guarda este reel",
+      "cta": "Comenta FRENO y recibe la guía completa",
       "sticker": null,
       "fondo": "ia",
-      "estilo": "racing",
-      "caption": "¿Te cuesta perder segundos en la curva? Aprende a frenarlo a tiempo. 💡 Comenta FRENO y guarda este reel. 🚦 Visita nuestro link en bio.",
-      "hashtags": "#SimRacing #Telemetría #LAPRIQ #Frenado #RacingTips",
+      "estilo": "neon",
+      "caption": "Sobre‑frenar en curvas lentas es un error que muchos cometen y que cuesta décimas valiosas. 🚦 Descubre cómo detectarlo en la telemetría y corregirlo en 3 pasos. ¿Te ha pasado? 👉 Comenta FRENO y recibe la guía completa en mi bio.",
+      "hashtags": "#SimRacing #ErrorDeLaSemana #Telemetría #PitStop #LAPRIQ",
       "audio": "voz_y_musica",
       "voz": "hombre",
       "ritmo_voz": "energico",
       "musica": "energetica",
       "guion": [
-        "El error que te hace perder 2 segundos.",
-        "Cuando frenas demasiado tarde, pierdes tracción.",
-        "La telemetría muestra el instante exacto.",
-        "Observa la curva y la presión del freno.",
-        "Ajusta el tiempo de activación en 0.2s.",
-        "Esto te devuelve 0.1s por vuelta.",
-        "Ponlo en tu configuración y mejora.",
-        "¿Quieres más tips? Síguenos."
+        "El error que te quita 0.3 s por curva",
+        "Frenas tarde y el coche pierde tracción",
+        "Mira el pico de presión en la telemetría",
+        "Pero ojo… el balance de frenos está mal",
+        "Ajusta el freno motor 30% antes de la curva",
+        "Verás cómo la velocidad se estabiliza",
+        "Prueba en la próxima sesión y siente la diferencia",
+        "Comenta FRENO para recibir la guía completa"
       ],
-      "estilo_visual": "racing",
-      "visual_cierre": "car accelerating",
-      "cierre_bio": "Si quieres más tips, tienes el enlace en mi perfil",
-      "foto": "",
+      "beats": [
+        {
+          "t": "El error que te quita 0.3 s por curva",
+          "img": "first-person view of car entering a slow corner, tires squealing"
+        },
+        {
+          "t": "Frenas tarde y el coche pierde tracción",
+          "img": "close-up of car entering a slow corner, brake lights delayed"
+        },
+        {
+          "t": "Mira el pico de presión en la telemetría",
+          "img": "telemetry screen highlighting brake pressure spike"
+        },
+        {
+          "t": "Pero ojo… el balance de frenos está mal",
+          "img": "tires sliding on wet asphalt"
+        },
+        {
+          "t": "Ajusta el freno motor 30% antes de la curva",
+          "img": "driver's hands adjusting brake bias in UI"
+        },
+        {
+          "t": "Verás cómo la velocidad se estabiliza",
+          "img": "close-up of telemetry data highlighting brake pressure spike"
+        },
+        {
+          "t": "Prueba en la próxima sesión y siente la diferencia",
+          "img": "first-person view of car exiting the corner smoothly"
+        },
+        {
+          "t": "Comenta FRENO para recibir la guía completa",
+          "img": "close-up of driver smiling after improved lap"
+        }
+      ],
+      "estilo_visual": "cinematic 35mm film look, warm golden hour light, teal and orange palette, shallow depth of field",
+      "visual_cierre": "close-up of telemetry data highlighting brake pressure spike",
+      "cierre_bio": "Si quieres más trucos, tienes el enlace en mi perfil",
+      "foto": "first-person view of car",
       "anim": "pop",
       "serie": "Error de la semana",
-      "episodio": 1,
-      "look": 9,
-      "plantilla": 1612,
+      "episodio": 8,
+      "look": 119,
+      "plantilla": 837,
       "layout": "faceless",
       "stickers": [
         "🏎️",
-        "⚡",
-        "🛞"
+        "🛞",
+        "⚡"
       ]
     },
     {
-      "id": "pmwgd9sev_1",
-      "dia": 1,
-      "hora": "19:30",
-      "tipo": "reel",
+      "id": "pmwgewx0n_3",
+      "dia": 4,
+      "hora": "13:00",
+      "tipo": "carrusel",
       "objetivo": "",
-      "razon": "Invita a la comunidad a enviar setups",
-      "tema": "Setup del seguidor",
-      "formato": "reel",
-      "gancho": "El ajuste que convierte tu coche en máquina",
-      "visual": "hands adjusting car suspension on racing track",
+      "razon": "Desmentir un mito clave sobre downforce y reforzar la expertise de LAPRIQ.",
+      "tema": "Mito o realidad: Más downforce siempre es mejor",
+      "formato": "mito vs realidad",
+      "gancho": "¿Más downforce = más velocidad?",
+      "visual": "side view of race car with exaggerated rear wing, bright track",
       "escenas": [
         {
-          "titulo": "Análisis inicial",
-          "texto": "Revisamos tu telemetry en vivo",
+          "titulo": "Mito",
+          "texto": "Más downforce siempre aumenta la velocidad en todas las curvas.",
           "emoji": "",
-          "visual": "screen with telemetry data",
-          "visuales": [
-            "monitor with data",
-            "driver looking"
-          ],
-          "foto": "",
+          "visual": "close-up of car rear wing with exaggerated angle on straight line",
+          "visuales": [],
+          "foto": "close-up of car rear win",
+          "grafico": {
+            "tipo": "comparacion",
+            "mal": "más downforce",
+            "bien": "exceso drag"
+          }
+        },
+        {
+          "titulo": "Realidad",
+          "texto": "En rectas largas, el exceso de downforce genera drag y reduce velocidad máxima.",
+          "emoji": "",
+          "visual": "car accelerating on long straight with visible airflow turbulence",
+          "visuales": [],
+          "foto": "car accelerating on long",
           "grafico": {
             "tipo": "checklist",
             "items": [
-              "analiza",
-              "ajusta",
-              "revisa"
+              "Evalúa longitudes",
+              "Ajusta ángulo",
+              "Mide drag"
             ]
           }
         },
         {
-          "titulo": "Puntos críticos",
-          "texto": "Identificamos los 3 ajustes que más marcan",
+          "titulo": "Dato",
+          "texto": "Un 5% más de downforce puede costar 0.2 s en la recta principal.",
           "emoji": "",
-          "visual": "car on track",
-          "visuales": [
-            "car speeding",
-            "track"
-          ],
-          "foto": "",
+          "visual": "telemetry chart comparing lap times with different wing settings",
+          "visuales": [],
+          "foto": "telemetry chart comparin",
           "grafico": {
-            "tipo": "ruta",
-            "desde": "entrada",
-            "hasta": "salida"
+            "tipo": "contador",
+            "valor": 0,
+            "unidad": "s"
           }
         },
         {
-          "titulo": "Resultado final",
-          "texto": "Ganas 0.3s por vuelta",
+          "titulo": "Aplicación",
+          "texto": "Reduce el ángulo en circuitos con largas rectas y gana velocidad.",
           "emoji": "",
-          "visual": "speedometer rising",
-          "visuales": [
-            "speedometer",
-            "car passing"
-          ],
-          "foto": "",
+          "visual": "driver adjusting rear wing angle in UI on a circuit map",
+          "visuales": [],
+          "foto": "driver adjusting rear wi",
           "grafico": {
-            "tipo": "progreso",
-            "valor": 30,
-            "etiqueta": "pérdida de tiempo"
+            "tipo": "objetivo",
+            "etiqueta": "ángulo óptimo"
+          }
+        },
+        {
+          "titulo": "Conclusión",
+          "texto": "Equilibra downforce y drag según cada pista para maximizar tu ritmo.",
+          "emoji": "",
+          "visual": "side view of car with balanced wing on a mixed circuit",
+          "visuales": [],
+          "foto": "side view of car with ba",
+          "grafico": {
+            "tipo": "checklist",
+            "items": [
+              "Analiza pista",
+              "Ajusta wing",
+              "Prueba tiempo"
+            ]
           }
         }
       ],
-      "cta": "Mándame tu setup por DM y te lo reviso",
+      "cta": "Guarda este carrusel y mejora tu setup",
       "sticker": null,
-      "fondo": "color",
-      "estilo": "neon",
-      "caption": "¿Quieres que tu coche sea más rápido? Ajusta estos 3 puntos y gana 0.3s. 🚀 Mándame tu setup. #LAPRIQ #SimRacing #Setup",
-      "hashtags": "#LAPRIQ #SimRacing #Setup #Telemetry #Racing",
+      "fondo": "animado",
+      "estilo": "racing",
+      "caption": "Más downforce no siempre significa más velocidad. Descubre cuándo reducir el ángulo del alerón para ganar tiempo en rectas largas. 🚗💨 Guarda este carrusel y ajusta tu setup con datos reales. #Downforce #MitoVsRealidad #LAPRIQ",
+      "hashtags": "#Downforce #MitoVsRealidad #SimRacing #LAPRIQ #Coaching",
+      "audio": "voz_y_musica",
+      "voz": "hombre",
+      "ritmo_voz": "normal",
+      "musica": "chill",
+      "guion": [],
+      "beats": [],
+      "estilo_visual": "cinematic 35mm film look, warm golden hour light, teal and orange palette, shallow depth of field",
+      "visual_cierre": "",
+      "cierre_bio": "",
+      "foto": "side view of race car wi",
+      "anim": "slide",
+      "serie": "Mito o realidad",
+      "episodio": 5,
+      "look": 229,
+      "plantilla": 960,
+      "layout": "tarjeta",
+      "stickers": []
+    },
+    {
+      "id": "pmwgewx0n_4",
+      "dia": 5,
+      "hora": "19:30",
+      "tipo": "reel",
+      "objetivo": "confianza",
+      "razon": "Analizar el setup de un seguidor y demostrar la mejora con coaching en tiempo real.",
+      "tema": "Setup del seguidor: mejora de tiempo en Monza",
+      "formato": "setup del seguidor",
+      "gancho": "¿Quieres bajar 0.5 s en Monza?",
+      "visual": "aerial view of Monza circuit with car approaching main straight",
+      "escenas": [
+        {
+          "titulo": "Setup original",
+          "texto": "El seguidor tenía exceso de presión de freno en la curva 1.",
+          "emoji": "",
+          "visual": "telemetry screen highlighting brake pressure spike in turn 1",
+          "visuales": [],
+          "foto": "telemetry screen highlig",
+          "grafico": {
+            "tipo": "comparacion",
+            "mal": "presión alta",
+            "bien": "presión óptima"
+          }
+        },
+        {
+          "titulo": "Ajuste clave",
+          "texto": "Reducimos el bias del freno motor 20% y ajustamos la distribución de peso.",
+          "emoji": "",
+          "visual": "driver adjusting brake bias slider in UI",
+          "visuales": [],
+          "foto": "driver adjusting brake b",
+          "grafico": {
+            "tipo": "checklist",
+            "items": [
+              "Bias -20%",
+              "Balance +5%",
+              "Revisa presión"
+            ]
+          }
+        },
+        {
+          "titulo": "Resultado",
+          "texto": "Ganó 0.48 s en la vuelta y mejora la estabilidad en la chicane.",
+          "emoji": "",
+          "visual": "telemetry comparison chart showing time drop",
+          "visuales": [],
+          "foto": "telemetry comparison cha",
+          "grafico": {
+            "tipo": "contador",
+            "valor": 0,
+            "unidad": "s"
+          }
+        },
+        {
+          "titulo": "Conclusión",
+          "texto": "Pequeños cambios en el freno motor pueden marcar la diferencia.",
+          "emoji": "",
+          "visual": "car exiting chicane with smooth line",
+          "visuales": [],
+          "foto": "car exiting chicane with",
+          "grafico": {
+            "tipo": "objetivo",
+            "etiqueta": "freno motor óptimo"
+          }
+        }
+      ],
+      "cta": "Manda tu setup y te ayudo a mejorar",
+      "sticker": null,
+      "fondo": "ia",
+      "estilo": "pop",
+      "caption": "Un ajuste de freno motor y balance de peso le ahorró 0.48 s a nuestro seguidor en Monza. 🚀 ¿Te animas a probarlo? Manda tu setup por DM y lo analizamos juntos. 👉 Link en bio",
+      "hashtags": "#Setup #Monza #SimRacing #LAPRIQ #Coaching",
       "audio": "voz_y_musica",
       "voz": "hombre",
       "ritmo_voz": "energico",
       "musica": "hiphop",
       "guion": [
-        "El ajuste que convierte tu coche en máquina.",
-        "Primero, revisamos tu telemetry en vivo.",
-        "Luego, identificamos los 3 ajustes que más marcan.",
-        "Con esos cambios, ganas 0.3s por vuelta.",
-        "Mándame tu setup por DM y te lo reviso."
+        "¿Quieres bajar 0.5 s en Monza? Te muestro cómo.",
+        "El setup original tiene exceso de presión de freno en la curva 1.",
+        "Pero ojo… el balance de peso está desajustado.",
+        "Reducimos el bias del freno motor 20% y ajustamos la distribución.",
+        "El tiempo cae 0.48 s, casi medio segundo ganado.",
+        "Pequeños cambios en el freno motor pueden marcar la diferencia.",
+        "Prueba este ajuste en tu próxima sesión.",
+        "Manda tu setup y te ayudo a mejorar."
       ],
-      "estilo_visual": "racing",
-      "visual_cierre": "car racing",
-      "cierre_bio": "El enlace está en mi perfil",
-      "foto": "",
-      "anim": "pop",
+      "beats": [
+        {
+          "t": "¿Quieres bajar 0.5 s en Monza?",
+          "img": "aerial view of Monza circuit with car approaching main straight"
+        },
+        {
+          "t": "Mira el setup original, el freno motor está demasiado alto",
+          "img": "telemetry screen highlighting brake pressure spike in turn 1"
+        },
+        {
+          "t": "Pero ojo… el balance de peso también está desajustado",
+          "img": "driver adjusting brake bias slider in UI"
+        },
+        {
+          "t": "Reduce el bias del freno motor 20% y ajusta la distribución",
+          "img": "driver adjusting brake bias slider in UI"
+        },
+        {
+          "t": "Verás la diferencia al salir de la chicane",
+          "img": "car exiting chicane with smooth line"
+        },
+        {
+          "t": "El tiempo cae 0.48 s, casi medio segundo ganado",
+          "img": "telemetry comparison chart showing time drop"
+        },
+        {
+          "t": "Prueba este ajuste en tu próxima sesión",
+          "img": "car exiting chicane with smooth line"
+        },
+        {
+          "t": "Manda tu setup y te ayudo a mejorar",
+          "img": "close-up of driver smiling after improvement"
+        }
+      ],
+      "estilo_visual": "cinematic 35mm film look, warm golden hour light, teal and orange palette, shallow depth of field",
+      "visual_cierre": "close-up of telemetry showing lap time reduction after adjustments",
+      "cierre_bio": "Más trucos en el link de mi perfil",
+      "foto": "aerial view of Monza cir",
+      "anim": "slide",
       "serie": "Setup del seguidor",
-      "episodio": 1,
-      "look": 119,
-      "plantilla": 358,
-      "layout": "cine",
-      "stickers": [
-        "🏎️",
-        "⚙️",
-        "🛠️"
-      ]
-    },
-    {
-      "id": "pmwgd9sev_2",
-      "dia": 3,
-      "hora": "09:00",
-      "tipo": "historia",
-      "objetivo": "",
-      "razon": "Fomenta la respuesta directa de la comunidad",
-      "tema": "Mini encuesta",
-      "formato": "historia",
-      "gancho": "¿Cuál es tu zona de frenado más difícil?",
-      "visual": "person looking at steering wheel",
-      "escenas": [
-        {
-          "titulo": "Pregunta",
-          "texto": "¿Cuál es tu zona de frenado más difícil?",
-          "emoji": "",
-          "visual": "close-up of steering wheel",
-          "visuales": [
-            "wheel",
-            "hand"
-          ],
-          "foto": "",
-          "grafico": {
-            "tipo": "checklist",
-            "items": [
-              "zona 1",
-              "zona 2",
-              "zona 3"
-            ]
-          }
-        }
-      ],
-      "cta": "",
-      "sticker": {
-        "tipo": "pregunta",
-        "texto": "¿Cuál es tu zona de frenado más difícil?",
-        "opciones": [],
-        "auto": true
-      },
-      "fondo": "ia",
-      "estilo": "racing",
-      "caption": "",
-      "hashtags": "",
-      "audio": "voz_y_musica",
-      "voz": "hombre",
-      "ritmo_voz": "normal",
-      "musica": "tension",
-      "guion": [
-        "¿Cuál es tu zona de frenado más difícil?",
-        "Envíanos tu comentario y te respondemos."
-      ],
-      "estilo_visual": "racing",
-      "visual_cierre": "",
-      "cierre_bio": "",
-      "foto": "",
-      "anim": "slide",
-      "serie": "",
-      "episodio": 0,
-      "look": 229,
-      "plantilla": 1155,
-      "layout": "faceless",
-      "stickers": [
-        "🏎️",
-        "❓",
-        "🛞"
-      ]
-    },
-    {
-      "id": "pmwgd9sev_3",
-      "dia": 4,
-      "hora": "19:30",
-      "tipo": "carrusel",
-      "objetivo": "",
-      "razon": "Desmonta mitos comunes con datos claros",
-      "tema": "Mito o realidad",
-      "formato": "carrusel",
-      "gancho": "¿Mitos sobre downforce? Te lo desmontamos",
-      "visual": "racing car on track at sunset",
-      "escenas": [
-        {
-          "titulo": "Mito 1",
-          "texto": "Más downforce siempre significa más velocidad",
-          "emoji": "",
-          "visual": "car on track",
-          "visuales": [
-            "car racing",
-            "track"
-          ],
-          "foto": "",
-          "grafico": {
-            "tipo": "comparacion",
-            "mal": "más downforce",
-            "bien": "mayor carga"
-          }
-        },
-        {
-          "titulo": "Realidad 1",
-          "texto": "Excesivo downforce reduce la velocidad en curvas",
-          "emoji": "",
-          "visual": "speedometer",
-          "visuales": [
-            "speedometer",
-            "curve"
-          ],
-          "foto": "",
-          "grafico": {
-            "tipo": "progreso",
-            "valor": 0,
-            "etiqueta": "pérdida"
-          }
-        },
-        {
-          "titulo": "Mito 2",
-          "texto": "Menos downforce siempre es mejor",
-          "emoji": "",
-          "visual": "car on track",
-          "visuales": [
-            "car racing",
-            "track"
-          ],
-          "foto": "",
-          "grafico": {
-            "tipo": "comparacion",
-            "mal": "menos downforce",
-            "bien": "equilibrio"
-          }
-        },
-        {
-          "titulo": "Realidad 2",
-          "texto": "El balance correcto mejora la pista",
-          "emoji": "",
-          "visual": "track view",
-          "visuales": [
-            "track view",
-            "car"
-          ],
-          "foto": "",
-          "grafico": {
-            "tipo": "ruta",
-            "desde": "entrada",
-            "hasta": "salida"
-          }
-        }
-      ],
-      "cta": "Descarga la app y optimiza tu downforce",
-      "sticker": null,
-      "fondo": "animado",
-      "estilo": "pop",
-      "caption": "Desmontamos los mitos del downforce. 📉⚡ ¿Cuál te sorprendió más? #LAPRIQ #SimRacing #Downforce",
-      "hashtags": "#LAPRIQ #SimRacing #Downforce #Mitos #Racing",
-      "audio": "voz_y_musica",
-      "voz": "hombre",
-      "ritmo_voz": "energico",
-      "musica": "energetica",
-      "guion": [
-        "¿Mitos sobre downforce? Te lo desmontamos.",
-        "Primero, más downforce no siempre es mejor.",
-        "Excesivo downforce reduce la velocidad en curvas.",
-        "Por otro lado, menos downforce puede ser un riesgo.",
-        "El equilibrio correcto es clave para ganar tiempo."
-      ],
-      "estilo_visual": "racing",
-      "visual_cierre": "car racing",
-      "cierre_bio": "Enlace en bio",
-      "foto": "",
-      "anim": "slide",
-      "serie": "Mito o realidad",
-      "episodio": 1,
+      "episodio": 8,
       "look": 83,
-      "plantilla": 1880,
+      "plantilla": 404,
       "layout": "cine",
       "stickers": [
         "🏎️",
         "📊",
-        "⚠️"
-      ]
-    },
-    {
-      "id": "pmwgd9sev_4",
-      "dia": 6,
-      "hora": "19:30",
-      "tipo": "reel",
-      "objetivo": "",
-      "razon": "Cierra la campaña con un llamado a la acción",
-      "tema": "Error de la semana",
-      "formato": "reel",
-      "gancho": "El error que te hace perder 2 segundos",
-      "visual": "close-up of racing wheel with telemetry overlay",
-      "escenas": [
-        {
-          "titulo": "Frenado tardío",
-          "texto": "El coche frena demasiado tarde",
-          "emoji": "",
-          "visual": "close-up of brake pedal",
-          "visuales": [
-            "driver's hand on pedal",
-            "speedometer"
-          ],
-          "foto": "",
-          "grafico": {
-            "tipo": "comparacion",
-            "mal": "freno tarde",
-            "bien": "freno oportuno"
-          }
-        },
-        {
-          "titulo": "Detecta la señal",
-          "texto": "La telemetría te lo muestra en tiempo real",
-          "emoji": "",
-          "visual": "screen with telemetry",
-          "visuales": [
-            "monitor with graph",
-            "car in lap"
-          ],
-          "foto": "",
-          "grafico": {
-            "tipo": "checklist",
-            "items": [
-              "identifica",
-              "ajusta",
-              "mide"
-            ]
-          }
-        },
-        {
-          "titulo": "Actúa rápido",
-          "texto": "Reduce la activación en 0.2s y gana 0.1s",
-          "emoji": "",
-          "visual": "adjusting throttle",
-          "visuales": [
-            "hand on throttle",
-            "car speed"
-          ],
-          "foto": "",
-          "grafico": {
-            "tipo": "velocimetro",
-            "valor": 90,
-            "etiqueta": "cambio de freno"
-          }
-        }
-      ],
-      "cta": "Mira el enlace en bio para aprender más",
-      "sticker": null,
-      "fondo": "animado",
-      "estilo": "racing",
-      "caption": "¿Te cuesta perder segundos en la curva? Aprende a frenarlo a tiempo. 💡 Guarda este reel y visita nuestro enlace en bio. 🚦",
-      "hashtags": "#SimRacing #Telemetría #LAPRIQ #Frenado #RacingTips",
-      "audio": "voz_y_musica",
-      "voz": "hombre",
-      "ritmo_voz": "energico",
-      "musica": "energetica",
-      "guion": [
-        "El error que te hace perder 2 segundos.",
-        "Cuando frenas demasiado tarde, pierdes tracción.",
-        "La telemetría muestra el instante exacto.",
-        "Observa la curva y la presión del freno.",
-        "Ajusta el tiempo de activación en 0.2s.",
-        "Esto te devuelve 0.1s por vuelta.",
-        "Ponlo en tu configuración y mejora.",
-        "Mira el enlace en bio para aprender más."
-      ],
-      "estilo_visual": "racing",
-      "visual_cierre": "car accelerating",
-      "cierre_bio": "Enlace en bio",
-      "foto": "",
-      "anim": "fade",
-      "serie": "Error de la semana",
-      "episodio": 2,
-      "look": 193,
-      "plantilla": 427,
-      "layout": "faceless",
-      "stickers": [
-        "🏎️",
-        "⚡",
-        "🛞"
+        "✅"
       ]
     }
   ]

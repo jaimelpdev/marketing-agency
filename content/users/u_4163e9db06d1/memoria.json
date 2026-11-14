@@ -1,17 +1,17 @@
 {
  "version": 1,
  "creada": "2026-11-10T21:43:01",
- "actualizada": "2026-11-14T12:13:07",
- "semana": 4,
- "fase": "descubrimiento",
+ "actualizada": "2026-11-14T12:57:51",
+ "semana": 5,
+ "fase": "confianza",
  "objetivo_mes": "Aumentar el alcance y posicionar a LAPRIQ como referencia de tips técnicos y coaching en sim‑racing",
  "arco_semana": {
-  "tema": "Optimiza tu setup para cada circuito",
-  "porque": "Conecta los reels de ajustes de coche y gestión de box con contenido educativo que invite a probar la metodología de LAPRIQ"
+  "tema": "Gestión de boxes y estrategia de carrera",
+  "porque": "Conecta los reels de tácticas de pit‑stop y planificación de carrera con contenido educativo que muestra el valor del coaching en tiempo real"
  },
  "mezcla": {
-  "alcance": 55,
-  "confianza": 25,
+  "alcance": 50,
+  "confianza": 30,
   "comunidad": 15,
   "conversion": 5
  },
@@ -21,35 +21,36 @@
    "formato": "reel",
    "cuando": "lunes",
    "descripcion": "Se muestra un error típico de telemetría y cómo corregirlo",
-   "episodios": 5
+   "episodios": 9
   },
   {
    "nombre": "Setup del seguidor",
    "formato": "reel",
    "cuando": "jueves",
    "descripcion": "Analizamos el setup enviado por un seguidor y lo mejoramos en tiempo real",
-   "episodios": 4
+   "episodios": 9
   },
   {
    "nombre": "Mito o realidad",
    "formato": "carrusel",
    "cuando": "miércoles",
    "descripcion": "Desmentimos creencias comunes del sim‑racing con datos y ejemplos",
-   "episodios": 3
+   "episodios": 6
   }
  ],
  "aprendizajes": [
   "Los reels con datos concretos (Nm, mm, tiempos) generan >80% más engagement",
   "Los contenidos de ajuste de coche y estrategia de boxes reciben más likes y guardados",
   "Los posts con llamada a comentar aumentan los comentarios en 3×",
-  "Los reels promocionales de la app sin valor técnico obtienen <5% de engagement y deben evitarse",
-  "Los reels de \"Error de la semana\" generan mayor número de comentarios que otros formatos"
+  "Los reels de \"Error de la semana\" generan mayor número de comentarios que otros formatos",
+  "Los reels promocionales de la app sin aporte técnico obtienen <5% de engagement y deben evitarse"
  ],
  "que_evitar": [
   "Promociones genéricas de hardware sin vínculo técnico",
   "Temas demasiado genéricos o fuera de la telemetría",
   "Capturas largas sin gancho visual",
-  "Reels de venta directa de la app sin aporte técnico"
+  "Reels de venta directa de la app sin aporte técnico",
+  "Publicar contenido sin datos medibles o sin llamada a la acción"
  ],
  "promesas_pendientes": [
   "Responder a la pregunta de la comunidad sobre la zona de frenado más difícil",
@@ -59,7 +60,9 @@
   "Crear un reto mensual de telemetría con leaderboard",
   "Entrevista en IG Live a un piloto pro usando la app",
   "Publicar caso de éxito de un alumno que pasó de Rookie a PadDock",
-  "Mini tutorial en historias sobre interpretación de telemetría en tiempo real"
+  "Mini tutorial en historias sobre interpretación de telemetría en tiempo real",
+  "Lanzar encuesta de preferencias de simulador para orientar futuros contenidos",
+  "Video behind the scenes del proceso de coaching en tiempo real"
  ],
  "tono_comunidad": "Autoridad experta pero cercana; lenguaje técnico simplificado, invita a la interacción y celebra los logros de la comunidad",
  "hitos": [
@@ -144,5 +147,5 @@
    }
   ]
  },
- "resumen_para_dueño": "Esta semana reforzamos el arco de \"Optimiza tu setup para cada circuito\" con reels técnicos de alto valor, mantenemos nuestras series pilares y cumplimos las promesas pendientes, preparando el próximo reto de telemetría para fortalecer la comunidad."
+ "resumen_para_dueño": "Esta semana pasamos a la fase de confianza, reforzando la autoridad técnica con reels de gestión de boxes y estrategias de carrera. Cumplimos las promesas pendientes y mantenemos nuestras series pilares para generar interacción, mientras preparamos el reto mensual de telemetría que consolidará la comunidad."
 }
