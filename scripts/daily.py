@@ -655,6 +655,12 @@ def plan_user(browser, user, key, force=False, redo=None):
                     page.evaluate("a=>{const p=S.today.videos[a[0]];p.beats=a[1];p.estilo_visual=a[2];}", [vi, vp["beats"], vp.get("estilo_visual", "")])
                     log(f"    🎨 Imágenes dirigidas para «{vp.get('tema', '')}»: {vp['beats'][-1]['img'][:90]}…")
             elif vp.get("tipo") in ("post", "carrusel"):  # también las imágenes de carruseles y posts
+                if brain.write_slides(vp, user, key, lambda *a: log(*a)):
+                    page.evaluate("""a=>{const p=S.today.videos[a[0]];const es=a[1];
+                      p.escenas=es.map((e,i)=>({...(p.escenas[i]||{emoji:"",visual:"",visuales:[],foto:"",grafico:null}),titulo:e.titulo,texto:e.texto}));
+                      if(a[2])p.tema=a[2];if(a[3])p.gancho=a[3];if(a[4])p.caption=a[4];}""",
+                                  [vi, [{"titulo": e["titulo"], "texto": e["texto"]} for e in vp["escenas"]], vp.get("tema", ""), vp.get("gancho", ""), vp.get("caption", "")])
+                    log(f"    ✍️ Texto de «{vp.get('tema', '')}»: {len(vp['escenas'])} diapositiva(s)")
                 bs = brain.beats_of(vp)
                 if len(bs) >= 2 and brain.art_direct(vp, user, key, lambda *a: log(*a), beats=bs):
                     page.evaluate("""a=>{const p=S.today.videos[a[0]];const b=a[1];p.visual=b[0].img;(p.escenas||[]).forEach((e,i)=>{if(b[i+1])e.visual=b[i+1].img;});}""", [vi, bs])

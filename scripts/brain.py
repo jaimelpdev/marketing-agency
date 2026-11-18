@@ -346,7 +346,7 @@ CÓMO TIENE QUE SER
 5. Nada de vender: ni precios, ni ofertas, ni "apúntate". La última frase invita con naturalidad a seguir la cuenta para más consejos.
 6. NO inventes cifras, porcentajes, tiempos, estudios, testimonios ni nombres. Si no estás seguro de un número, explica la idea sin número ("un poco antes", "con menos fuerza").
 6b. NO inventes funciones, apps, herramientas, IA ni servicios del negocio: del negocio solo puedes decir lo que pone en NEGOCIO. Si el tema o el borrador hablan de algo que NEGOCIO no menciona, reconviértelo en un consejo práctico del oficio sobre ese mismo asunto (qué hacer tú, paso a paso) sin atribuírselo al negocio.
-6c. Español de España: tuteo, NUNCA voseo (prohibido "aplicás", "tenés", "podés", "sabés", "querés", "mirá"…), vocabulario peninsular.
+6c. Español de España: tuteo, NUNCA voseo (prohibido "aplicás", "tenés", "podés", "sabés", "querés", "mirá"…), vocabulario peninsular (coche, no carro; neumático, no llanta; conducir, no manejar).
 7. Sin emojis, hashtags, comillas ni @usuarios. Números pequeños con letra.
 8. "cierre_bio": frase alternativa de cierre que menciona con naturalidad el enlace del perfil.
 9. "caption": texto de la publicación, 2-3 frases cortas que resumen el consejo y terminan con una pregunta a la audiencia. Mismas reglas: sin cifras inventadas, sin vender, sin hashtags.
@@ -395,6 +395,58 @@ Responde SOLO con JSON: {{"entrada":"la entrada del conocimiento que explicas (o
     log("    ⚠ Guionista: no cumplió las reglas; se mantiene el original")
     for b in piece.get("beats") or []:
         b["t"] = de_voseo(b.get("t", ""))
+    return False
+
+
+def write_slides(piece, user, key, log=print):
+    """Redactor de carruseles y posts: diapositivas que enseñan una idea concreta, sacada del conocimiento verificado."""
+    carr = piece.get("tipo") == "carrusel"
+    nmin, nmax = (5, 7) if carr else (1, 3)
+    marca = ((user.get("config") or {}).get("marca") or {})
+    negocio = json.dumps({k: marca.get(k) for k in ("name", "about", "aud", "pillars", "tone") if marca.get(k)}, ensure_ascii=False)[:1500]
+    saber = knowledge_for(user)
+    old = [f"{e.get('titulo', '')}: {e.get('texto', '')}" for e in piece.get("escenas") or []]
+    prompt = f"""Eres redactor de {'carruseles' if carr else 'posts de imagen'} de Instagram que la gente guarda porque ENSEÑAN algo útil.
+NEGOCIO: {negocio}
+TEMA: {piece.get('tema', '')}
+GANCHO PROPUESTO: {piece.get('gancho', '')}
+BORRADOR: {' | '.join(old)[:900]}
+""" + (f"""
+CONOCIMIENTO VERIFICADO DEL SECTOR (elige UNA entrada que encaje con el tema, o la más cercana cambiando el tema; todo lo técnico sale de ahí):
+{saber}
+""" if saber else "") + f"""
+REGLAS
+- Entre {nmin} y {nmax} {'diapositivas' if carr else 'bloques'}: cada una con "titulo" (2-6 palabras) y "texto" (8-20 palabras) que se pueda leer de un vistazo.
+- {'La primera diapositiva engancha (error común o pregunta); las siguientes explican el porqué y el cómo paso a paso; la última resume y anima a guardar o comentar.' if carr else 'Una idea clara y aplicable.'}
+- Español de España, tuteo, sin voseo y sin palabras de Latinoamérica (di coche, no carro).
+- Nada de cifras, tiempos, porcentajes, ofertas, testimonios ni funciones del negocio que no estén en NEGOCIO o en el CONOCIMIENTO.
+- Sin emojis ni hashtags.
+- "caption": 2-3 frases que resumen el consejo y acaban con una pregunta.
+
+Responde SOLO con JSON: {{"tema":"…","gancho":"…","escenas":[{{"titulo":"…","texto":"…"}}],"caption":"…"}}"""
+    for _ in range(2):
+        try:
+            j = groq_json(prompt, key, log)
+        except Exception as e:  # noqa: BLE001
+            log(f"    ⚠ Redactor: {e}")
+            return False
+        es = [{"titulo": de_voseo(str(x.get("titulo", "")).strip())[:60], "texto": de_voseo(str(x.get("texto", "")).strip())[:200]}
+              for x in (j.get("escenas") or []) if isinstance(x, dict) and str(x.get("titulo", "")).strip()]
+        txt = " ".join(e["titulo"] + " " + e["texto"] for e in es) + " " + str(j.get("gancho", ""))
+        bad = [n for n in re.findall(r"\d+(?:[.,]\d+)?", txt) if n not in (saber or "")]
+        if nmin <= len(es) <= nmax + 1 and not bad:
+            prev = piece.get("escenas") or []
+            piece["escenas"] = [{**(prev[k] if k < len(prev) else {}), **e} for k, e in enumerate(es[:nmax])]
+            for k in ("tema", "gancho"):
+                v = de_voseo(str(j.get(k) or "").strip())
+                if 3 < len(v) < 120:
+                    piece[k] = v
+            cap = de_voseo(str(j.get("caption") or "").strip())
+            if len(cap) > 40:
+                piece["caption"] = cap[:600]
+            return True
+        prompt += f"\n\nTu respuesta anterior no cumplía (" + (f"cifras inventadas: {', '.join(bad[:4])}" if bad else f"{len(es)} diapositivas") + "). Corrígelo."
+    log("    ⚠ Redactor: no cumplió las reglas; se mantiene el borrador")
     return False
 
 
