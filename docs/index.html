@@ -343,6 +343,7 @@ https://apps.apple.com/…
       <div class="dna">
         <h3>Qué vendes y a quién</h3>
         <label class="f" for="b_about">Resumen</label><textarea id="b_about" rows="4"></textarea>
+        <label class="f" for="b_conocimiento">Lo que sabes y enseñas (opcional)</label><textarea id="b_conocimiento" rows="5" placeholder="Consejos reales, datos de tus productos o servicios, lo que hace tu app… La agencia solo dirá cosas que estén aquí o en su banco de conocimiento verificado."></textarea>
         <label class="f" for="b_aud">Público</label><input type="text" id="b_aud">
       </div>
       <div class="dna">
@@ -607,7 +608,7 @@ Responde SOLO con JSON válido:
     setStatus(st,e&&e.code==="not_granted"?"Revisa tu clave de Groq.":e&&e.code==="rate_limited"?"Límite gratuito de Groq alcanzado. Espera un minuto o cambia de modelo.":"No he podido analizarlo ("+(e.message||e.code||"error")+"). Prueba otra vez o rellénalo a mano.","err");
   }
 });
-const BF=["name","ig","web","app","cta","about","aud","acc","bg"];
+const BF=["name","ig","web","app","cta","about","conocimiento","aud","acc","bg"];
 function fillBrand(){
   BF.forEach(k=>{const i=$("#b_"+k);if(i)i.value=S.cfg[k]||"";});
   const tc=$("#toneChips");tc.innerHTML="";
@@ -1949,7 +1950,7 @@ async function api(path, opts = {}) {
 }
 function confFromState() {
   const c = S.cfg;
-  return { marca: { name: c.name, web: c.web, app: c.app, ig: c.ig, cta: c.cta, about: c.about, aud: c.aud, pillars: c.pillars, tone: c.tone, acc: c.acc, bg: c.bg, style: c.style }, visual: c.v, plan: HOST.plan, modelo: "openai/gpt-oss-120b" };
+  return { marca: { name: c.name, web: c.web, app: c.app, ig: c.ig, cta: c.cta, about: c.about, conocimiento: c.conocimiento || "", aud: c.aud, pillars: c.pillars, tone: c.tone, acc: c.acc, bg: c.bg, style: c.style }, visual: c.v, plan: HOST.plan, modelo: "openai/gpt-oss-120b" };
 }
 function showLogin(msg) { $("#loginOv").classList.add("on"); setStatus($("#lgStatus"), msg || "", msg ? "err" : ""); }
 function logout(expired) { HOST.key = ""; HOST.me = null; ls("ma_key", ""); try { localStorage.removeItem("ma_key"); localStorage.removeItem("ma_cfg"); localStorage.removeItem("ma_today"); localStorage.removeItem("ma_hist"); } catch (e) { } $("#acctModal").classList.remove("on"); showLogin(expired ? "Tu sesión ha caducado. Vuelve a entrar." : ""); }

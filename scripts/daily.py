@@ -604,7 +604,10 @@ def plan_user(browser, user, key, force=False, redo=None):
               window.buildPrompt=()=>orig("1").replace(/exactamente 1 pieza\\(s\\) para HOY \\(dia 0, [^)]*\\)\\. Elige tú el tipo\\./,
                 'UNA sola pieza de tipo "'+r.tipo+'" para el dia 0 a las '+r.hora+'. Sustituye a otra pieza que no gustó (tema: "'+r.tema+'"): haz algo claramente distinto y mejor, con otro gancho y otro enfoque.'); }""",
                           {"tipo": redo["tipo"], "hora": hora, "tema": redo.get("tema", "")})
-        page.evaluate("t=>{window.__memText=t;}", brain.memory_text(mem, notas))
+        temas_saber = brain.knowledge_topics(user)
+        page.evaluate("t=>{window.__memText=t;}", brain.memory_text(mem, notas) + (
+            "\nTEMAS CON BASE VERIFICADA (los consejos de la semana deben salir de estos temas o de algo muy cercano; "
+            "así no se inventa nada): " + "; ".join(temas_saber) if temas_saber else ""))
         log("  Pidiendo el plan a la IA…")
         for intento in range(4):
             page.click("#genBtn")

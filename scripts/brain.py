@@ -8,6 +8,7 @@
   (series, episodios, promesas) para la siguiente vez.
 """
 import json
+from pathlib import Path
 import os
 import re
 import time
@@ -243,7 +244,37 @@ def de_voseo(text):
     return VOSEO.sub(fix, str(text))
 
 
-def review_script(piece, negocio, key, log=print):
+KNOW_DIR = Path(__file__).resolve().parent.parent / "knowledge"
+
+
+def knowledge_for(user):
+    """Banco de conocimiento verificado del sector del negocio (knowledge/*.md, por palabras clave) + lo que el dueño haya escrito."""
+    marca = ((user.get("config") or {}).get("marca") or {})
+    hay = " ".join(str(marca.get(k, "")) for k in ("name", "about", "aud", "pillars", "tone")).lower()
+    parts = []
+    for f in sorted(KNOW_DIR.glob("*.md")):
+        txt = f.read_text(encoding="utf-8")
+        m = re.search(r"claves:\s*\[(.*?)\]", txt)
+        claves = [c.strip().lower() for c in (m.group(1).split(",") if m else []) if c.strip()]
+        if any(c and c in hay for c in claves):
+            parts.append(re.sub(r"^---.*?---\s*", "", txt, flags=re.S).strip())
+    own = str(marca.get("conocimiento") or "").strip()
+    if own:
+        parts.insert(0, "# Del dueño del negocio\n" + own[:4000])
+    return "\n\n".join(parts)[:9000]
+
+
+def knowledge_topics(user):
+    """Lista corta de temas del banco de conocimiento, para que el plan elija temas con base real."""
+    k = knowledge_for(user)
+    out = []
+    for t in re.findall(r"^- ([^:\n]{4,70}):", k, re.M):
+        if t[:3].upper() == t[:3]:
+            out.append(t.strip().capitalize())
+    return out
+
+
+def review_script(piece, negocio, key, log=print, saber=""):
     """Revisor experto: corrige o quita lo que sea falso, dudoso o inventado antes de grabar la voz."""
     fr = [b["t"] for b in piece.get("beats") or []]
     if len(fr) < 2:
@@ -254,7 +285,10 @@ TEMA: {piece.get('tema', '')}
 GUION (una frase por línea):
 """ + "\n".join(f"{k + 1}. {x}" for k, x in enumerate(fr)) + f"""
 TEXTO DE LA PUBLICACIÓN: {piece.get('caption', '')}
-
+""" + (f"""
+CONOCIMIENTO VERIFICADO DEL SECTOR (la referencia para decidir qué es correcto):
+{saber}
+""" if saber else "") + """
 Comprueba cada frase como lo haría un profesional del sector:
 - ¿Es técnicamente correcta y un buen consejo? Si es falsa, dudosa o puede llevar a error, reescríbela con un consejo correcto sobre lo mismo.
 - ¿Contiene cifras, tiempos, porcentajes, estudios, nombres, funciones del negocio u ofertas que no estén en NEGOCIO? Quítalos (explica la idea sin número).
@@ -291,13 +325,17 @@ def write_script(piece, user, key, log=print):
     marca = ((user.get("config") or {}).get("marca") or {})
     negocio = json.dumps({k: marca.get(k) for k in ("name", "about", "aud", "pillars", "tone") if marca.get(k)}, ensure_ascii=False)[:1500]
     borrador = " ".join(str(b.get("t", "")) for b in (piece.get("beats") or [])) or " ".join(piece.get("guion") or [])
+    saber = knowledge_for(user)
     base = f"""Eres guionista de vídeos cortos faceless (voz en off sobre imágenes) que consiguen muchas visitas porque ENSEÑAN algo de verdad. Escribe la narración de este vídeo en el idioma del borrador.
 
 NEGOCIO: {negocio}
 TEMA: {piece.get('tema', '')}
 GANCHO PROPUESTO: {piece.get('gancho', '')}
 BORRADOR (mejóralo, no lo copies): {borrador[:900]}
-
+""" + (f"""
+CONOCIMIENTO VERIFICADO DEL SECTOR (tu base técnica: el consejo tiene que salir de aquí, ser concreto y no contradecirlo nunca):
+{saber}
+""" if saber else "") + f"""
 CÓMO TIENE QUE SER
 1. UNA sola idea por vídeo, explicada de principio a fin: gancho → por qué pasa → qué hacer exactamente (pasos concretos que el espectador puede aplicar hoy) → qué nota cuando lo hace bien → cierre.
 2. Entre {nmin} y {nmax} frases y entre {wmin} y {wmax} palabras en total. Cada frase de 6 a 14 palabras, una idea y UNA imagen posible por frase (algo que se pueda ver: una acción, un objeto, un lugar).
@@ -337,7 +375,7 @@ Responde SOLO con JSON: {{"frases":["…", …],"cierre_bio":"…","caption":"�
             cap = de_voseo(str(j.get("caption") or "").strip())
             if len(cap) > 40:
                 piece["caption"] = cap[:600]
-            review_script(piece, negocio, key, log)
+            review_script(piece, negocio, key, log, saber)
             return True
         extra = f"\n\nTu respuesta anterior tenía {len(fr)} frases y {words} palabras: NO cumple. Escribe entre {nmin} y {nmax} frases y al menos {wmin} palabras."
     log("    ⚠ Guionista: no cumplió las reglas; se mantiene el original")
