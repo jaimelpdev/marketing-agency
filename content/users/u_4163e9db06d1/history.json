@@ -175,6 +175,50 @@
       "look": 207,
       "serie": "Detrás de la app",
       "objetivo": "confianza"
+    },
+    {
+      "date": "2026-11-18",
+      "tema": "Setup del seguidor – llamado a participar",
+      "formato": "call to action",
+      "tipo": "carrusel",
+      "layout": "cine",
+      "plantilla": 1417,
+      "look": 133,
+      "serie": "Setup del seguidor",
+      "objetivo": "comunidad"
+    },
+    {
+      "date": "2026-11-19",
+      "tema": "Control de derrape en curva rápida",
+      "formato": "tutorial paso a paso",
+      "tipo": "reel",
+      "layout": "faceless",
+      "plantilla": 1122,
+      "look": 243,
+      "serie": "Tip rápido del día",
+      "objetivo": "alcance"
+    },
+    {
+      "date": "2026-11-20",
+      "tema": "Neumáticos fríos no influyen en los tiempos",
+      "formato": "mito vs realidad",
+      "tipo": "historia",
+      "layout": "faceless",
+      "plantilla": 1532,
+      "look": 97,
+      "serie": "Mito o realidad",
+      "objetivo": ""
+    },
+    {
+      "date": "2026-11-24",
+      "tema": "Análisis de sector en tiempo real en la app",
+      "formato": "detrás de las cámaras",
+      "tipo": "reel",
+      "layout": "faceless",
+      "plantilla": 1717,
+      "look": 207,
+      "serie": "Detrás de la app",
+      "objetivo": "confianza"
     }
   ]
 }

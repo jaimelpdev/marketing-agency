@@ -1,8 +1,8 @@
 {
  "version": 1,
  "creada": "2026-11-18T17:28:47",
- "actualizada": "2026-11-18T19:15:10",
- "semana": 4,
+ "actualizada": "2026-11-18T19:30:28",
+ "semana": 5,
  "fase": "comunidad",
  "objetivo_mes": "Generar reconocimiento de marca y captar a entusiastas del simracing",
  "arco_semana": {
@@ -21,14 +21,14 @@
    "formato": "reel",
    "cuando": "lunes y jueves",
    "descripcion": "Consejo breve y práctico para mejorar en pista o configurar el coche",
-   "episodios": 7
+   "episodios": 8
   },
   {
    "nombre": "Setup del seguidor",
    "formato": "carrusel",
    "cuando": "miércoles",
    "descripcion": "Revisamos el setup enviado por un seguidor y damos ajustes profesionales",
-   "episodios": 2
+   "episodios": 3
   },
   {
    "nombre": "Mito o realidad",
@@ -42,7 +42,7 @@
    "formato": "reel",
    "cuando": "martes",
    "descripcion": "Mostramos funcionalidades de la app y cómo sacarle el máximo provecho a los alumnos",
-   "episodios": 3
+   "episodios": 4
   }
  ],
  "aprendizajes": [
@@ -70,10 +70,10 @@
  "hitos": [
   "Alcanzar 3 000 seguidores en Instagram",
   "Publicar un reel con >15 000 visualizaciones",
-  "Obtener 200 comentarios en la serie \"Setup del seguidor\"",
+  "Obtener 200 comentarios en la serie \\\"Setup del seguidor\\\"",
   "Lograr al menos 40 participaciones en el desafío semanal",
   "Realizar el primer Live Q&A con 100 espectadores"
  ],
  "metricas": {},
- "resumen_para_dueño": "Esta semana reforzamos la fase de comunidad con un desafío semanal que invita a los seguidores a compartir sus mejores vueltas. Mantendremos la mezcla orientada a alcance y comunidad, y cumpliremos con las series que ya funcionan mientras introducimos el nuevo reto para impulsar la interacción."
+ "resumen_para_dueño": "Esta semana seguimos en fase de comunidad, impulsando el desafío semanal de mejora de vuelta para generar contenido generado por usuarios y reforzar la identidad de la academia. Mantendremos la mezcla actual, reforzaremos las series que ya funcionan y buscaremos aumentar la interacción y los comentarios."
 }
