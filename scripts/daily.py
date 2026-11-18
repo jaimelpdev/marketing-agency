@@ -648,7 +648,7 @@ def plan_user(browser, user, key, force=False, redo=None):
         for vi, vp in enumerate(vids):
             if vp.get("layout") == "faceless" and TYPES_VIDEO(vp):
                 if brain.write_script(vp, user, key, lambda *a: log(*a)):
-                    page.evaluate("a=>{const p=S.today.videos[a[0]];p.beats=a[1];p.guion=a[1].map(b=>b.t);p.cierre_bio=a[2]||p.cierre_bio;if(a[3])p.caption=a[3];}", [vi, vp["beats"], vp.get("cierre_bio", ""), vp.get("caption", "")])
+                    page.evaluate("a=>{const p=S.today.videos[a[0]];p.beats=a[1];p.guion=a[1].map(b=>b.t);p.cierre_bio=a[2]||p.cierre_bio;if(a[3])p.caption=a[3];if(a[4])p.tema=a[4];if(a[5])p.gancho=a[5];}", [vi, vp["beats"], vp.get("cierre_bio", ""), vp.get("caption", ""), vp.get("tema", ""), vp.get("gancho", "")])
                     log(f"    ✍️ Guion de «{vp.get('tema', '')}»: {len(vp['beats'])} frases, {sum(len(b['t'].split()) for b in vp['beats'])} palabras")
             if vp.get("layout") == "faceless" and len(vp.get("beats") or []) >= 2:
                 if brain.art_direct(vp, user, key, lambda *a: log(*a)):

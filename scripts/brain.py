@@ -290,6 +290,7 @@ CONOCIMIENTO VERIFICADO DEL SECTOR (la referencia para decidir qué es correcto)
 {saber}
 """ if saber else "") + """
 Comprueba cada frase como lo haría un profesional del sector:
+- Si hay CONOCIMIENTO VERIFICADO: toda afirmación técnica tiene que estar respaldada por él. Lo que no lo esté (o lo contradiga), cámbialo por lo que dice el conocimiento sobre ese mismo asunto.
 - ¿Es técnicamente correcta y un buen consejo? Si es falsa, dudosa o puede llevar a error, reescríbela con un consejo correcto sobre lo mismo.
 - ¿Contiene cifras, tiempos, porcentajes, estudios, nombres, funciones del negocio u ofertas que no estén en NEGOCIO? Quítalos (explica la idea sin número).
 - ¿Hay relleno vacío o una frase que no aporta? Mejórala con algo concreto y útil.
@@ -337,6 +338,7 @@ CONOCIMIENTO VERIFICADO DEL SECTOR (tu base técnica: el consejo tiene que salir
 {saber}
 """ if saber else "") + f"""
 CÓMO TIENE QUE SER
+0. Si hay CONOCIMIENTO VERIFICADO: elige UNA entrada concreta que corresponda al TEMA. Si el tema no está cubierto o contradice el conocimiento, elige la entrada más cercana y cambia el tema y el gancho para que encajen. Todo lo técnico del vídeo sale de esa entrada (puedes explicarla con tus palabras y con ejemplos, nunca añadir afirmaciones técnicas nuevas).
 1. UNA sola idea por vídeo, explicada de principio a fin: gancho → por qué pasa → qué hacer exactamente (pasos concretos que el espectador puede aplicar hoy) → qué nota cuando lo hace bien → cierre.
 2. Entre {nmin} y {nmax} frases y entre {wmin} y {wmax} palabras en total. Cada frase de 6 a 14 palabras, una idea y UNA imagen posible por frase (algo que se pueda ver: una acción, un objeto, un lugar).
 3. Primera frase: gancho que atrapa en un segundo (error común, pregunta directa o "nadie te cuenta esto"). Sin saludar ni presentarte.
@@ -349,9 +351,9 @@ CÓMO TIENE QUE SER
 8. "cierre_bio": frase alternativa de cierre que menciona con naturalidad el enlace del perfil.
 9. "caption": texto de la publicación, 2-3 frases cortas que resumen el consejo y terminan con una pregunta a la audiencia. Mismas reglas: sin cifras inventadas, sin vender, sin hashtags.
 
-Responde SOLO con JSON: {{"frases":["…", …],"cierre_bio":"…","caption":"…"}}"""
+Responde SOLO con JSON: {{"entrada":"la entrada del conocimiento que explicas (o vacío)","tema":"tema final, corto","gancho":"gancho final (sin cifras)","frases":["…", …],"cierre_bio":"…","caption":"…"}}"""
     extra = ""
-    for _ in range(2):
+    for _ in range(3):
         try:
             j = groq_json(base + extra, key, log)
         except Exception as e:
@@ -359,6 +361,12 @@ Responde SOLO con JSON: {{"frases":["…", …],"cierre_bio":"…","caption":"�
             return False
         fr = [re.sub(r"\s+", " ", str(x)).strip() for x in (j.get("frases") or []) if str(x).strip()]
         words = sum(len(x.split()) for x in fr)
+        nums = [x for x in fr + [str(j.get("gancho") or "")] if re.search(r"\d", x) and not re.search(r"\d", saber or "x")]
+        if saber:
+            nums = [x for x in fr + [str(j.get("gancho") or "")] if any(n not in saber for n in re.findall(r"\d+(?:[.,]\d+)?", x))]
+        if nums:
+            extra = f"\n\nTu respuesta anterior tenía cifras que no están en el conocimiento ({nums[0][:80]}). Quita todas las cifras."
+            continue
         vos = [w for x in fr for w in VOSEO.findall(x)]
         if vos:
             extra = f"\n\nTu respuesta anterior usaba voseo ({', '.join(sorted(set(vos))[:6])}). Reescríbela en español de España, con tuteo."
@@ -375,6 +383,12 @@ Responde SOLO con JSON: {{"frases":["…", …],"cierre_bio":"…","caption":"�
             cap = de_voseo(str(j.get("caption") or "").strip())
             if len(cap) > 40:
                 piece["caption"] = cap[:600]
+            for k in ("tema", "gancho"):
+                v = de_voseo(str(j.get(k) or "").strip())
+                if 3 < len(v) < 120:
+                    piece[k] = v
+            if j.get("entrada"):
+                log(f"    📚 Basado en: {str(j['entrada'])[:90]}")
             review_script(piece, negocio, key, log, saber)
             return True
         extra = f"\n\nTu respuesta anterior tenía {len(fr)} frases y {words} palabras: NO cumple. Escribe entre {nmin} y {nmax} frases y al menos {wmin} palabras."
