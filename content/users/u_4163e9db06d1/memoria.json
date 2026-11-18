@@ -1,0 +1,61 @@
+{
+ "version": 1,
+ "creada": "2026-11-18T17:28:47",
+ "actualizada": "2026-11-18T17:28:47",
+ "semana": 1,
+ "fase": "descubrimiento",
+ "objetivo_mes": "Generar reconocimiento de marca y captar a entusiastas del simracing",
+ "arco_semana": {
+  "tema": "Introducción al universo del simracing y la academia",
+  "porque": "Para que la audiencia conozca quiénes somos, qué ofrecemos y se genere curiosidad por aprender"
+ },
+ "mezcla": {
+  "alcance": 70,
+  "confianza": 15,
+  "comunidad": 15,
+  "conversion": 0
+ },
+ "series": [
+  {
+   "nombre": "Tip rápido del día",
+   "formato": "reel",
+   "cuando": "lunes y jueves",
+   "descripcion": "Consejo breve y práctico para mejorar en pista o configurar el coche",
+   "episodios": 2
+  },
+  {
+   "nombre": "Setup del seguidor",
+   "formato": "carrusel",
+   "cuando": "miércoles",
+   "descripcion": "Revisamos el setup enviado por un seguidor y damos ajustes profesionales",
+   "episodios": 0
+  },
+  {
+   "nombre": "Mito o realidad",
+   "formato": "historia",
+   "cuando": "viernes",
+   "descripcion": "Desmentimos ideas comunes del simracing con datos y ejemplos",
+   "episodios": 0
+  }
+ ],
+ "aprendizajes": [],
+ "que_evitar": [
+  "Ventas directas en los primeros contenidos",
+  "Demasiado jargon técnico sin explicación",
+  "Publicar fuera de los horarios pico (18‑22h)"
+ ],
+ "promesas_pendientes": [],
+ "ideas": [
+  "Reel de presentación del fundador y la visión de la academia",
+  "Video corto mostrando la interfaz de la app y sus funciones principales",
+  "Desafío semanal: mejora tu vuelta en X pista y comparte el tiempo"
+ ],
+ "tono_comunidad": "Energético, motivador y cercano; habla como un compañero de pista que celebra cada progreso",
+ "hitos": [
+  "Alcanzar 1 000 seguidores en Instagram",
+  "Publicar el primer reel con >5 000 visualizaciones",
+  "Obtener 50 comentarios en la serie \"Setup del seguidor\""
+ ],
+ "metricas": {},
+ "resumen_para_dueño": "Esta semana nos enfocamos en dar a conocer la academia mediante reels y carruseles de tips y setups, creando hábitos de consumo y empezando a construir comunidad sin vender directamente."
+}

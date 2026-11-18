@@ -1,0 +1,98 @@
+[
+  {
+    "id": "2026-11-18-01-reel",
+    "date": "2026-11-18",
+    "source": "auto",
+    "tipo": "reel",
+    "tema": "Frenado tardío",
+    "publishAt": "2026-11-19T19:30:00+01:00",
+    "caption": "¿Te ha pasado? Guarda este consejo y cuéntanos tu mejora. 🚗💨 #simracing #racingtips #driving\n\n#simracing #racingtips #driving #motorsport #learnracing\n\n🎵 «AleXZavesa - Lo squalo (EDM)» de AlexZavesa (CC BY 3.0)",
+    "media": [
+      "media/u_4163e9db06d1/2026-11-18/2026-11-18-01-reel/video.mp4"
+    ],
+    "status": "prueba",
+    "attempts": 0,
+    "cover": "media/u_4163e9db06d1/2026-11-18/2026-11-18-01-reel/cover.jpg",
+    "veo": {
+      "clips": [
+        {
+          "t": "Ese frenado tardío te roba dos valiosos segundos por curva. Aceleras demasiado antes del vértice y pierdes tracción al entrar.",
+          "prompt": "aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a big monitor showing a racing game, not a real car interior. The driver, seen from the front, slams the brake pedal late while the monitor flashes a red timer bar, indicating two seconds lost, in the sim rig. Then: The driver, front view, pushes the accelerator hard before the corner apex, while the wheel rim spins and the monitor shows a slipping tire icon. smooth natural camera movement, vertical 9:16 video, photorealistic, bright natural light, sharp focus, no text, no captions, no logos, no brand names, no watermark",
+          "dur": 8
+        },
+        {
+          "t": "Busca el punto donde la pista empieza a curvarse ligeramente. Frena fuerte justo antes de ese punto, con dos segundos de anticipación.",
+          "prompt": "aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a big monitor showing a racing game, not a real car interior. The driver, facing forward, points with his finger at the subtle curve start on the track map displayed on the large monitor. Then: The driver, frontally centered, presses the brake hard just before the highlighted spot, while the monitor shows a two‑second anticipation bar. smooth natural camera movement, vertical 9:16 video, photorealistic, bright natural light, sharp focus, no text, no captions, no logos, no brand names, no watermark",
+          "dur": 8
+        },
+        {
+          "t": "Suelta el freno suavemente al llegar al vértice para mantener velocidad.",
+          "prompt": "aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a big monitor showing a racing game, not a real car interior. The driver, viewed from the seat, eases off the brake pedal at the apex, and the monitor displays a steady speed line. smooth natural camera movement, vertical 9:16 video, photorealistic, bright natural light, sharp focus, no text, no captions, no logos, no brand names, no watermark",
+          "dur": 6
+        },
+        {
+          "t": "Al salir, mantén el acelerador abierto y sentirás la diferencia. Practica una vuelta enfocándote solo en ese instante de frenado.",
+          "prompt": "aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a big monitor showing a racing game, not a real car interior. The driver, front view, holds the accelerator fully on corner exit, while the monitor shows a rising speed gauge. Then: The driver, centered, practices one lap concentrating on the brake zone, with a glowing overlay on the brake pedal and track segment. smooth natural camera movement, vertical 9:16 video, photorealistic, bright natural light, sharp focus, no text, no captions, no logos, no brand names, no watermark",
+          "dur": 8
+        },
+        {
+          "t": "Notarás cómo cada curva se vuelve más rápida y fluida. Encuentra el enlace en mi perfil para seguir aprendiendo.",
+          "prompt": "aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a big monitor showing a racing game, not a real car interior. The driver, frontally, smiles as the monitor displays multiple laps with faster, smoother curves highlighted in green. Then: The driver, facing the camera, points toward a floating profile icon on the monitor, indicating where to click for more lessons. smooth natural camera movement, vertical 9:16 video, photorealistic, bright natural light, sharp focus, no text, no captions, no logos, no brand names, no watermark",
+          "dur": 8
+        }
+      ],
+      "voz": "es-ES-AlvaroNeural",
+      "ritmo": "+8%",
+      "musica": "energetica",
+      "hashtags": "#simracing #racingtips #driving #motorsport #learnracing"
+    }
+  },
+  {
+    "id": "2026-11-18-02-reel",
+    "date": "2026-11-18",
+    "source": "auto",
+    "tipo": "reel",
+    "tema": "Presión de neumáticos",
+    "publishAt": "2026-11-22T19:00:00+01:00",
+    "caption": "Ajusta la presión y siente la mejora. 🚀 ¿Cuál es tu psi ideal? #simracing #tires #setup\n\n#simracing #tires #setup #racingtips #learnracing\n\n🎵 «Epic Hip-Hop» de Soundrider/Dope (CC BY 3.0)",
+    "media": [
+      "media/u_4163e9db06d1/2026-11-18/2026-11-18-02-reel/video.mp4"
+    ],
+    "status": "prueba",
+    "attempts": 0,
+    "cover": "media/u_4163e9db06d1/2026-11-18/2026-11-18-02-reel/cover.jpg",
+    "veo": {
+      "clips": [
+        {
+          "t": "Nadie te dice que la presión de los neumáticos es clave. Con presión baja pierdes agarre y las curvas te devuelven tiempo.",
+          "prompt": "Aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a large monitor showing a racing game, not a real car interior. The driver holds a tablet displaying a tire pressure gauge, front view, bright rig background, focusing on the gauge. Then: The driver watches a monitor showing a red grip loss graph on corner sections, front view, rig lighting highlights his concerned expression. smooth natural camera movement, vertical 9:16 video, photorealistic, bright natural light, sharp focus, no text, no captions, no logos, no brand names, no watermark",
+          "dur": 8
+        },
+        {
+          "t": "Mide la presión en frío, justo antes de calentar los neumáticos. Ajusta entre veintidós y veintiséis psi según el trazado.",
+          "prompt": "Aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a large monitor showing a racing game, not a real car interior. The driver uses a handheld digital pressure meter on a virtual tire displayed on the screen, front angle, rig lights bright. Then: The driver slides a touchscreen slider to set 24 psi, with a track map overlay, front view, bright rig background. smooth natural camera movement, vertical 9:16 video, photorealistic, bright natural light, sharp focus, no text, no captions, no logos, no brand names, no watermark",
+          "dur": 8
+        },
+        {
+          "t": "Más presión brinda estabilidad en rectas, menos ayuda en curvas lentas.",
+          "prompt": "Aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a large monitor showing a racing game, not a real car interior. The driver observes a split-screen: left shows a straight with a high‑pressure tire glowing, right a slow corner with a softer tire, front view. smooth natural camera movement, vertical 9:16 video, photorealistic, bright natural light, sharp focus, no text, no captions, no logos, no brand names, no watermark",
+          "dur": 6
+        },
+        {
+          "t": "Siente el borde de la pista y nota la respuesta más firme. Tus tiempos bajarán unos décimos, suficiente para subir posiciones.",
+          "prompt": "Aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a large monitor showing a racing game, not a real car interior. The driver grips the steering wheel tightly, feeling firm feedback as the monitor displays the track edge, front close‑up, bright lighting. Then: The driver looks at a lap time leaderboard on the screen showing a 0.2‑second improvement, front view, rig lights accentuating excitement. smooth natural camera movement, vertical 9:16 video, photorealistic, bright natural light, sharp focus, no text, no captions, no logos, no brand names, no watermark",
+          "dur": 8
+        },
+        {
+          "t": "Prueba este ajuste hoy y compara la diferencia en la vuelta. Sígueme para descubrir más trucos que te harán más rápido.",
+          "prompt": "Aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a large monitor showing a racing game, not a real car interior. The driver compares side‑by‑side before/after lap telemetry graphs on the monitor, front angle, bright rig emphasizing the contrast. Then: The driver points at a follow button on the app interface displayed on the tablet, front view, bright room, confident smile. smooth natural camera movement, vertical 9:16 video, photorealistic, bright natural light, sharp focus, no text, no captions, no logos, no brand names, no watermark",
+          "dur": 8
+        }
+      ],
+      "voz": "es-ES-AlvaroNeural",
+      "ritmo": "+8%",
+      "musica": "hiphop",
+      "hashtags": "#simracing #tires #setup #racingtips #learnracing"
+    }
+  }
+]

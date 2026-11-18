@@ -1,0 +1,48 @@
+{
+  "items": [
+    {
+      "date": "2026-11-18",
+      "tema": "Setup del seguidor",
+      "formato": "checklist",
+      "tipo": "carrusel",
+      "layout": "cine",
+      "plantilla": 391,
+      "look": 55,
+      "serie": "Setup del seguidor",
+      "objetivo": "confianza"
+    },
+    {
+      "date": "2026-11-19",
+      "tema": "Frenado tardío",
+      "formato": "tutorial paso a paso",
+      "tipo": "reel",
+      "layout": "faceless",
+      "plantilla": 1689,
+      "look": 165,
+      "serie": "Tip rápido del día",
+      "objetivo": "alcance"
+    },
+    {
+      "date": "2026-11-22",
+      "tema": "Presión de neumáticos",
+      "formato": "tutorial paso a paso",
+      "tipo": "reel",
+      "layout": "faceless",
+      "plantilla": 656,
+      "look": 19,
+      "serie": "Tip rápido del día",
+      "objetivo": "alcance"
+    },
+    {
+      "date": "2026-11-23",
+      "tema": "Presentación de la academia",
+      "formato": "opinion polémica",
+      "tipo": "post",
+      "layout": "cine",
+      "plantilla": 1927,
+      "look": 129,
+      "serie": "",
+      "objetivo": "confianza"
+    }
+  ]
+}

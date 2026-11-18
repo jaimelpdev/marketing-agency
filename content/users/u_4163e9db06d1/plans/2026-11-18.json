@@ -1,0 +1,288 @@
+{
+  "date": "2026-11-18",
+  "estrategia": "Publicamos 5 piezas en 7 días: carrusel miércoles, reels jueves y domingo, historia viernes y post lunes. Descansamos sábado y martes para no saturar y mantener ritmo.",
+  "piezas": [
+    {
+      "id": "pmwmebail_1",
+      "dia": 1,
+      "hora": "19:30",
+      "tipo": "reel",
+      "objetivo": "alcance",
+      "razon": "Dar un tip rápido que atraiga nuevos seguidores",
+      "tema": "Frenado tardío",
+      "formato": "tutorial paso a paso",
+      "gancho": "El error que te cuesta 2 segundos",
+      "visual": "dynamic shot of a racing car approaching a corner",
+      "escenas": [
+        {
+          "titulo": "Freno tarde",
+          "texto": "Muchos frenan demasiado tarde y pierden tiempo",
+          "emoji": "",
+          "visual": "car braking late into a tight corner",
+          "visuales": [],
+          "foto": "",
+          "grafico": {
+            "tipo": "comparacion",
+            "mal": "freno tarde",
+            "bien": "freno temprano"
+          }
+        },
+        {
+          "titulo": "Punto ideal",
+          "texto": "Identifica el punto de frenado justo antes del vértice",
+          "emoji": "",
+          "visual": "ghost car showing ideal braking line",
+          "visuales": [],
+          "foto": "",
+          "grafico": {
+            "tipo": "ruta",
+            "desde": "punto de frenado",
+            "hasta": "vértice"
+          }
+        },
+        {
+          "titulo": "Reduce 2s",
+          "texto": "Ajusta 2 segundos de anticipación y gana velocidad",
+          "emoji": "",
+          "visual": "timer showing 2s reduction",
+          "visuales": [],
+          "foto": "",
+          "grafico": {
+            "tipo": "contador",
+            "valor": 2,
+            "unidad": "s"
+          }
+        },
+        {
+          "titulo": "Practica ahora",
+          "texto": "Haz una vuelta enfocándote en ese punto",
+          "emoji": "",
+          "visual": "driver hands on wheel focusing",
+          "visuales": [],
+          "foto": "",
+          "grafico": {
+            "tipo": "checklist",
+            "items": [
+              "mirar ahead",
+              "frenar suave",
+              "mantener ritmo"
+            ]
+          }
+        }
+      ],
+      "cta": "Guarda este tip y mejora tu vuelta",
+      "sticker": null,
+      "fondo": "ia",
+      "estilo": "neon",
+      "caption": "¿Te ha pasado? Guarda este consejo y cuéntanos tu mejora. 🚗💨 #simracing #racingtips #driving",
+      "hashtags": "#simracing #racingtips #driving #motorsport #learnracing",
+      "audio": "voz_y_musica",
+      "voz": "hombre",
+      "ritmo_voz": "energetico",
+      "musica": "energetica",
+      "guion": [
+        "Ese frenado tardío te roba dos valiosos segundos por curva.",
+        "Aceleras demasiado antes del vértice y pierdes tracción al entrar.",
+        "Busca el punto donde la pista empieza a curvarse ligeramente.",
+        "Frena fuerte justo antes de ese punto, con dos segundos de anticipación.",
+        "Suelta el freno suavemente al llegar al vértice para mantener velocidad.",
+        "Al salir, mantén el acelerador abierto y sentirás la diferencia.",
+        "Practica una vuelta enfocándote solo en ese instante de frenado.",
+        "Notarás cómo cada curva se vuelve más rápida y fluida.",
+        "Encuentra el enlace en mi perfil para seguir aprendiendo."
+      ],
+      "beats": [
+        {
+          "t": "Ese frenado tardío te roba dos valiosos segundos por curva.",
+          "img": "aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a big monitor showing a racing game, not a real car interior. The driver, seen from the front, slams the brake pedal late while the monitor flashes a red timer bar, indicating two seconds lost, in the sim rig"
+        },
+        {
+          "t": "Aceleras demasiado antes del vértice y pierdes tracción al entrar.",
+          "img": "aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a big monitor showing a racing game, not a real car interior. The driver, front view, pushes the accelerator hard before the corner apex, while the wheel rim spins and the monitor shows a slipping tire icon"
+        },
+        {
+          "t": "Busca el punto donde la pista empieza a curvarse ligeramente.",
+          "img": "aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a big monitor showing a racing game, not a real car interior. The driver, facing forward, points with his finger at the subtle curve start on the track map displayed on the large monitor"
+        },
+        {
+          "t": "Frena fuerte justo antes de ese punto, con dos segundos de anticipación.",
+          "img": "aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a big monitor showing a racing game, not a real car interior. The driver, frontally centered, presses the brake hard just before the highlighted spot, while the monitor shows a two‑second anticipation bar"
+        },
+        {
+          "t": "Suelta el freno suavemente al llegar al vértice para mantener velocidad.",
+          "img": "aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a big monitor showing a racing game, not a real car interior. The driver, viewed from the seat, eases off the brake pedal at the apex, and the monitor displays a steady speed line"
+        },
+        {
+          "t": "Al salir, mantén el acelerador abierto y sentirás la diferencia.",
+          "img": "aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a big monitor showing a racing game, not a real car interior. The driver, front view, holds the accelerator fully on corner exit, while the monitor shows a rising speed gauge"
+        },
+        {
+          "t": "Practica una vuelta enfocándote solo en ese instante de frenado.",
+          "img": "aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a big monitor showing a racing game, not a real car interior. The driver, centered, practices one lap concentrating on the brake zone, with a glowing overlay on the brake pedal and track segment"
+        },
+        {
+          "t": "Notarás cómo cada curva se vuelve más rápida y fluida.",
+          "img": "aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a big monitor showing a racing game, not a real car interior. The driver, frontally, smiles as the monitor displays multiple laps with faster, smoother curves highlighted in green"
+        },
+        {
+          "t": "Encuentra el enlace en mi perfil para seguir aprendiendo.",
+          "img": "aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a big monitor showing a racing game, not a real car interior. The driver, facing the camera, points toward a floating profile icon on the monitor, indicating where to click for more lessons"
+        }
+      ],
+      "estilo_visual": "bright, sharp lighting, vivid colors, clear focus, no blur",
+      "visual_cierre": "close-up of wheel with hand applying brake",
+      "cierre_bio": "Encuentra el enlace en mi perfil para seguir aprendiendo.",
+      "foto": "",
+      "anim": "pop",
+      "serie": "Tip rápido del día",
+      "episodio": 1,
+      "look": 165,
+      "plantilla": 1689,
+      "layout": "faceless",
+      "stickers": [
+        "🏎️",
+        "🏁",
+        "⚡"
+      ]
+    },
+    {
+      "id": "pmwmebail_3",
+      "dia": 4,
+      "hora": "19:00",
+      "tipo": "reel",
+      "objetivo": "alcance",
+      "razon": "Mantener ritmo de tips y captar nuevos seguidores",
+      "tema": "Presión de neumáticos",
+      "formato": "tutorial paso a paso",
+      "gancho": "Lo que los pilotos rápidos no te cuentan",
+      "visual": "close-up of tire sidewall with pressure gauge overlay",
+      "escenas": [
+        {
+          "titulo": "Presión baja",
+          "texto": "Con presión insuficiente pierdes agarre en curvas",
+          "emoji": "",
+          "visual": "tire flexing under load",
+          "visuales": [],
+          "foto": "",
+          "grafico": {
+            "tipo": "comparacion",
+            "mal": "presión baja",
+            "bien": "presión óptima"
+          }
+        },
+        {
+          "titulo": "Valor ideal",
+          "texto": "Ajusta entre 22 y 26 psi según pista",
+          "emoji": "",
+          "visual": "gauge showing 24 psi on tire",
+          "visuales": [],
+          "foto": "",
+          "grafico": {
+            "tipo": "contador",
+            "valor": 24,
+            "unidad": "psi"
+          }
+        },
+        {
+          "titulo": "Beneficio",
+          "texto": "Mejora tiempo en vuelta hasta 0.3s",
+          "emoji": "",
+          "visual": "lap timer showing improvement",
+          "visuales": [],
+          "foto": "",
+          "grafico": null
+        },
+        {
+          "titulo": "Prueba ahora",
+          "texto": "Modifica la presión y siente la diferencia",
+          "emoji": "",
+          "visual": "driver feeling car stability",
+          "visuales": [],
+          "foto": "",
+          "grafico": {
+            "tipo": "checklist",
+            "items": [
+              "abrir app",
+              "ajustar psi",
+              "grabar vuelta"
+            ]
+          }
+        }
+      ],
+      "cta": "Prueba el ajuste y cuéntanos tu mejora",
+      "sticker": null,
+      "fondo": "ia",
+      "estilo": "racing",
+      "caption": "Ajusta la presión y siente la mejora. 🚀 ¿Cuál es tu psi ideal? #simracing #tires #setup",
+      "hashtags": "#simracing #tires #setup #racingtips #learnracing",
+      "audio": "voz_y_musica",
+      "voz": "hombre",
+      "ritmo_voz": "energetico",
+      "musica": "hiphop",
+      "guion": [
+        "Nadie te dice que la presión de los neumáticos es clave.",
+        "Con presión baja pierdes agarre y las curvas te devuelven tiempo.",
+        "Mide la presión en frío, justo antes de calentar los neumáticos.",
+        "Ajusta entre veintidós y veintiséis psi según el trazado.",
+        "Más presión brinda estabilidad en rectas, menos ayuda en curvas lentas.",
+        "Siente el borde de la pista y nota la respuesta más firme.",
+        "Tus tiempos bajarán unos décimos, suficiente para subir posiciones.",
+        "Prueba este ajuste hoy y compara la diferencia en la vuelta.",
+        "Sígueme para descubrir más trucos que te harán más rápido."
+      ],
+      "beats": [
+        {
+          "t": "Nadie te dice que la presión de los neumáticos es clave.",
+          "img": "Aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a large monitor showing a racing game, not a real car interior. The driver holds a tablet displaying a tire pressure gauge, front view, bright rig background, focusing on the gauge"
+        },
+        {
+          "t": "Con presión baja pierdes agarre y las curvas te devuelven tiempo.",
+          "img": "Aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a large monitor showing a racing game, not a real car interior. The driver watches a monitor showing a red grip loss graph on corner sections, front view, rig lighting highlights his concerned expression"
+        },
+        {
+          "t": "Mide la presión en frío, justo antes de calentar los neumáticos.",
+          "img": "Aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a large monitor showing a racing game, not a real car interior. The driver uses a handheld digital pressure meter on a virtual tire displayed on the screen, front angle, rig lights bright"
+        },
+        {
+          "t": "Ajusta entre veintidós y veintiséis psi según el trazado.",
+          "img": "Aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a large monitor showing a racing game, not a real car interior. The driver slides a touchscreen slider to set 24 psi, with a track map overlay, front view, bright rig background"
+        },
+        {
+          "t": "Más presión brinda estabilidad en rectas, menos ayuda en curvas lentas.",
+          "img": "Aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a large monitor showing a racing game, not a real car interior. The driver observes a split-screen: left shows a straight with a high‑pressure tire glowing, right a slow corner with a softer tire, front view"
+        },
+        {
+          "t": "Siente el borde de la pista y nota la respuesta más firme.",
+          "img": "Aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a large monitor showing a racing game, not a real car interior. The driver grips the steering wheel tightly, feeling firm feedback as the monitor displays the track edge, front close‑up, bright lighting"
+        },
+        {
+          "t": "Tus tiempos bajarán unos décimos, suficiente para subir posiciones.",
+          "img": "Aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a large monitor showing a racing game, not a real car interior. The driver looks at a lap time leaderboard on the screen showing a 0.2‑second improvement, front view, rig lights accentuating excitement"
+        },
+        {
+          "t": "Prueba este ajuste hoy y compara la diferencia en la vuelta.",
+          "img": "Aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a large monitor showing a racing game, not a real car interior. The driver compares side‑by‑side before/after lap telemetry graphs on the monitor, front angle, bright rig emphasizing the contrast"
+        },
+        {
+          "t": "Sígueme para descubrir más trucos que te harán más rápido.",
+          "img": "Aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a large monitor showing a racing game, not a real car interior. The driver points at a follow button on the app interface displayed on the tablet, front view, bright room, confident smile"
+        }
+      ],
+      "estilo_visual": "Bright, sharp photography with vivid colors, high contrast, no blur, consistent lighting across all shots",
+      "visual_cierre": "close-up of hands tightening tire valve",
+      "cierre_bio": "Encuentra el enlace en mi perfil para más ajustes de rendimiento",
+      "foto": "",
+      "anim": "slide",
+      "serie": "Tip rápido del día",
+      "episodio": 2,
+      "look": 19,
+      "plantilla": 656,
+      "layout": "faceless",
+      "stickers": [
+        "🏎️",
+        "⚙️",
+        "🔧"
+      ]
+    }
+  ]
+}
