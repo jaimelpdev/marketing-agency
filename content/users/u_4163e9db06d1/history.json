@@ -329,6 +329,61 @@
       "look": 61,
       "serie": "Mito o realidad",
       "objetivo": ""
+    },
+    {
+      "date": "2026-11-20",
+      "tema": "Force feedback alto no siempre mejora tiempos",
+      "formato": "pregunta",
+      "tipo": "historia",
+      "layout": "faceless",
+      "plantilla": 2101,
+      "look": 22,
+      "serie": "",
+      "objetivo": ""
+    },
+    {
+      "date": "2026-11-21",
+      "tema": "Transferencia de peso al cambiar de marcha",
+      "formato": "tip rápido del día",
+      "tipo": "reel",
+      "layout": "faceless",
+      "plantilla": 59,
+      "look": 243,
+      "serie": "Tip rápido del día",
+      "objetivo": "alcance"
+    },
+    {
+      "date": "2026-11-22",
+      "tema": "Setup del seguidor – llamado a participación",
+      "formato": "carrusel",
+      "tipo": "carrusel",
+      "layout": "lista",
+      "plantilla": 1364,
+      "look": 97,
+      "serie": "Setup del seguidor",
+      "objetivo": "comunidad"
+    },
+    {
+      "date": "2026-11-23",
+      "tema": "Dato curioso sobre la última vuelta",
+      "formato": "dato curioso o sorprendente",
+      "tipo": "post",
+      "layout": "cine",
+      "plantilla": 1594,
+      "look": 207,
+      "serie": "",
+      "objetivo": "confianza"
+    },
+    {
+      "date": "2026-11-24",
+      "tema": "FOV amplio siempre ayuda",
+      "formato": "pregunta",
+      "tipo": "historia",
+      "layout": "faceless",
+      "plantilla": 237,
+      "look": 61,
+      "serie": "",
+      "objetivo": ""
     }
   ]
 }
