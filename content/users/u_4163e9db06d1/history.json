@@ -43,6 +43,50 @@
       "look": 129,
       "serie": "",
       "objetivo": "confianza"
+    },
+    {
+      "date": "2026-11-20",
+      "tema": "Mito o realidad: ¿El ABS siempre mejora tus tiempos?",
+      "formato": "mito vs realidad",
+      "tipo": "historia",
+      "layout": "faceless",
+      "plantilla": 418,
+      "look": 107,
+      "serie": "Mito o realidad",
+      "objetivo": ""
+    },
+    {
+      "date": "2026-11-21",
+      "tema": "Antes y después: mejora de 1,8 s en el circuito de Brands Hatch",
+      "formato": "antes y después",
+      "tipo": "carrusel",
+      "layout": "cine",
+      "plantilla": 1440,
+      "look": 217,
+      "serie": "",
+      "objetivo": ""
+    },
+    {
+      "date": "2026-11-23",
+      "tema": "Dato curioso: el 70 % de los tiempos perdidos ocurre en la primera curva",
+      "formato": "dato curioso o sorprendente",
+      "tipo": "post",
+      "layout": "clasico",
+      "plantilla": 185,
+      "look": 71,
+      "serie": "",
+      "objetivo": "confianza"
+    },
+    {
+      "date": "2026-11-24",
+      "tema": "Detrás de la app: cómo la IA ajusta tu setup al vuelo",
+      "formato": "detrás de las cámaras",
+      "tipo": "reel",
+      "layout": "faceless",
+      "plantilla": 1234,
+      "look": 181,
+      "serie": "Detrás de la app",
+      "objetivo": "confianza"
     }
   ]
 }

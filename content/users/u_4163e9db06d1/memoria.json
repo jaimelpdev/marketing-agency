@@ -1,19 +1,19 @@
 {
  "version": 1,
  "creada": "2026-11-18T17:28:47",
- "actualizada": "2026-11-18T17:28:47",
- "semana": 1,
- "fase": "descubrimiento",
+ "actualizada": "2026-11-18T18:38:26",
+ "semana": 2,
+ "fase": "confianza",
  "objetivo_mes": "Generar reconocimiento de marca y captar a entusiastas del simracing",
  "arco_semana": {
-  "tema": "Introducción al universo del simracing y la academia",
-  "porque": "Para que la audiencia conozca quiénes somos, qué ofrecemos y se genere curiosidad por aprender"
+  "tema": "Profundizando en la práctica y la app",
+  "porque": "Mostrar cómo la academia ayuda a mejorar tiempos y a usar la app, creando confianza y valor antes de cualquier venta"
  },
  "mezcla": {
-  "alcance": 70,
-  "confianza": 15,
+  "alcance": 50,
+  "confianza": 30,
   "comunidad": 15,
-  "conversion": 0
+  "conversion": 5
  },
  "series": [
   {
@@ -28,7 +28,7 @@
    "formato": "carrusel",
    "cuando": "miércoles",
    "descripcion": "Revisamos el setup enviado por un seguidor y damos ajustes profesionales",
-   "episodios": 0
+   "episodios": 1
   },
   {
    "nombre": "Mito o realidad",
@@ -36,9 +36,20 @@
    "cuando": "viernes",
    "descripcion": "Desmentimos ideas comunes del simracing con datos y ejemplos",
    "episodios": 0
+  },
+  {
+   "nombre": "Detrás de la app",
+   "formato": "reel",
+   "cuando": "martes",
+   "descripcion": "Mostramos funcionalidades de la app y cómo sacarle el máximo provecho a los alumnos",
+   "episodios": 1
   }
  ],
- "aprendizajes": [],
+ "aprendizajes": [
+  "Los reels de tips generan alto alcance en horario pico (18‑22h)",
+  "El carrusel de checklist del \"Setup del seguidor\" obtuvo buena interacción y comentarios",
+  "La publicación de opinión polémica generó conversación, pero debemos cuidarnos de polémicas que no aporten valor"
+ ],
  "que_evitar": [
   "Ventas directas en los primeros contenidos",
   "Demasiado jargon técnico sin explicación",
@@ -52,10 +63,10 @@
  ],
  "tono_comunidad": "Energético, motivador y cercano; habla como un compañero de pista que celebra cada progreso",
  "hitos": [
-  "Alcanzar 1 000 seguidores en Instagram",
-  "Publicar el primer reel con >5 000 visualizaciones",
-  "Obtener 50 comentarios en la serie \"Setup del seguidor\""
+  "Alcanzar 2 000 seguidores en Instagram",
+  "Publicar un reel con >10 000 visualizaciones",
+  "Obtener 100 comentarios en la serie \"Setup del seguidor\""
  ],
  "metricas": {},
- "resumen_para_dueño": "Esta semana nos enfocamos en dar a conocer la academia mediante reels y carruseles de tips y setups, creando hábitos de consumo y empezando a construir comunidad sin vender directamente."
+ "resumen_para_dueño": "Esta semana pasamos a la fase de confianza, profundizando en la app y mostrando resultados reales. Mantendremos la mezcla de alcance y contenido de valor, y reforzaremos la serie \"Setup del seguidor\" para impulsar la interacción."
 }
