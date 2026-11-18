@@ -87,6 +87,50 @@
       "look": 181,
       "serie": "Detrás de la app",
       "objetivo": "confianza"
+    },
+    {
+      "date": "2026-11-19",
+      "tema": "Línea de salida",
+      "formato": "reel",
+      "tipo": "reel",
+      "layout": "faceless",
+      "plantilla": 648,
+      "look": 22,
+      "serie": "Tip rápido del día",
+      "objetivo": "alcance"
+    },
+    {
+      "date": "2026-11-21",
+      "tema": "Setup del seguidor",
+      "formato": "carrusel",
+      "tipo": "carrusel",
+      "layout": "cine",
+      "plantilla": 1002,
+      "look": 243,
+      "serie": "Setup del seguidor",
+      "objetivo": "comunidad"
+    },
+    {
+      "date": "2026-11-22",
+      "tema": "Motivación antes de la carrera",
+      "formato": "post",
+      "tipo": "post",
+      "layout": "tarjeta",
+      "plantilla": 827,
+      "look": 97,
+      "serie": "",
+      "objetivo": ""
+    },
+    {
+      "date": "2026-11-23",
+      "tema": "Sensibilidad del volante",
+      "formato": "reel",
+      "tipo": "reel",
+      "layout": "faceless",
+      "plantilla": 1048,
+      "look": 207,
+      "serie": "Tip rápido del día",
+      "objetivo": "alcance"
     }
   ]
 }

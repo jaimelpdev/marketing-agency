@@ -4,9 +4,9 @@
     "date": "2026-11-18",
     "source": "auto",
     "tipo": "reel",
-    "tema": "Detrás de la app: cómo la IA ajusta tu setup al vuelo",
-    "publishAt": "2026-11-24T19:45:00+01:00",
-    "caption": "Descubre cómo la IA de nuestra app ajusta tu setup al vuelo y gana segundos. ¿Listo para probarlo? #simracing #app #IA #setup #racing\n\n#simracing #app #IA #setup #racing\n\n🎵 «Super Power Pop Rock» de Kara Square (CC BY 3.0)",
+    "tema": "Línea de salida",
+    "publishAt": "2026-11-19T19:30:00+01:00",
+    "caption": "El secreto de la línea de salida: un punto exacto y 5 km/h extra pueden ahorrarte 0,2 s en la primera curva. ¿Ya lo has probado? #simracing #tips #racetime\n\n#simracing #tips #racetime #racing #motivation\n\n🎵 «Spencer Newton - Bounce (Original Mix)(Electro House)» de Spencer Newton (CC BY 3.0)",
     "media": [
       "media/u_4163e9db06d1/2026-11-18/2026-11-18-01-reel/video.mp4"
     ],
@@ -16,35 +16,78 @@
     "veo": {
       "clips": [
         {
-          "t": "Nadie te cuenta cómo la app corrige tu coche al instante. Abres la app, eliges tu modelo y la pista actual.",
-          "prompt": "Aluminium sim racing rig with bucket seat, steering wheel, pedals, and a large monitor displaying a racing game, inside a bright home gaming room, not a real car interior. The driver holds a tablet displaying animated telemetry graphs pulsing as the setup changes, seated at the sim racing rig. Then: The driver taps the tablet screen, selecting a car silhouette and a track map icon, the rig’s monitor glows behind. smooth natural camera movement, vertical 9:16 video, photorealistic, bright natural light, sharp focus, no text, no captions, no logos, no brand names, no watermark",
+          "t": "Nadie te dice que la posición exacta en la salida cambia todo Arrancas con menos arrastre y ganas velocidad desde el primer kilómetro",
+          "prompt": "modern home sim racing studio with aluminium rig, bucket seat, steering wheel and pedals inside a bright gaming room, large 4K monitor showing a racing game, not a real car interior. Driver’s hand places a tiny digital marker on the start line displayed on the monitor, rig and seat visible behind, highlighting exact launch position. Then: Driver’s foot fully depresses the accelerator pedal while the monitor shows the virtual car surging forward with clean airflow lines, indicating low drag. smooth natural camera movement, vertical 9:16 video, photorealistic, bright natural light, sharp focus, no text, no captions, no logos, no brand names, no watermark",
           "dur": 8
         },
         {
-          "t": "La IA captura tus telemetrías, como velocidad y ángulo de giro. En milisegundos analiza la aerodinámica y la presión de neumáticos.",
-          "prompt": "Aluminium sim racing rig with bucket seat, steering wheel, pedals, and a large monitor displaying a racing game, inside a bright home gaming room, not a real car interior. The tablet shows a colorful speed line graph and a rotating steering‑angle dial, while the driver’s hand rests on the wheel. Then: The driver watches a 3D car model on the tablet, with blue airflow arrows and red tire‑pressure bars flashing quickly. smooth natural camera movement, vertical 9:16 video, photorealistic, bright natural light, sharp focus, no text, no captions, no logos, no brand names, no watermark",
+          "t": "Una línea ligeramente adelantada te permite acelerar unos metros antes Antes de la carrera, marca la zona de referencia en tu pantalla",
+          "prompt": "modern home sim racing studio with aluminium rig, bucket seat, steering wheel and pedals inside a bright gaming room, large 4K monitor showing a racing game, not a real car interior. Driver’s hand drags the racing line forward on the screen, creating a slightly advanced trajectory highlighted in bright orange, ready for earlier acceleration. Then: Driver’s cursor clicks to set a bright green reference zone on the racing track displayed on the monitor, rig background visible. smooth natural camera movement, vertical 9:16 video, photorealistic, bright natural light, sharp focus, no text, no captions, no logos, no brand names, no watermark",
           "dur": 8
         },
         {
-          "t": "Te sugiere bajar la carga del alerón y subir la presión ligera.",
-          "prompt": "Aluminium sim racing rig with bucket seat, steering wheel, pedals, and a large monitor displaying a racing game, inside a bright home gaming room, not a real car interior. The driver nods as the tablet slides the rear wing slider down and the tire pressure slider up, both highlighted in green. smooth natural camera movement, vertical 9:16 video, photorealistic, bright natural light, sharp focus, no text, no captions, no logos, no brand names, no watermark",
-          "dur": 6
-        },
-        {
-          "t": "Aplicás los ajustes, sientes más agarre y menos resistencia. En la siguiente vuelta el tiempo mejora, notas la diferencia al instante.",
-          "prompt": "Aluminium sim racing rig with bucket seat, steering wheel, pedals, and a large monitor displaying a racing game, inside a bright home gaming room, not a real car interior. The driver firmly grips the steering wheel, eyes focused, while the tablet shows increased grip bars and reduced drag meters. Then: The driver raises a fist as the on‑screen lap timer drops by seconds, the monitor displaying a green improvement arrow. smooth natural camera movement, vertical 9:16 video, photorealistic, bright natural light, sharp focus, no text, no captions, no logos, no brand names, no watermark",
+          "t": "Practica lanzarte justo cuando el semáforo pasa a verde, sin frenar Ajusta la sensibilidad del acelerador para que responda al instante",
+          "prompt": "modern home sim racing studio with aluminium rig, bucket seat, steering wheel and pedals inside a bright gaming room, large 4K monitor showing a racing game, not a real car interior. Driver’s foot lifts from the brake and presses the accelerator as the on‑screen traffic light turns green, indicating a perfect launch. Then: Driver’s hand turns the small throttle‑sensitivity knob on the rig, fingers close to the dial, implying instant response adjustment. smooth natural camera movement, vertical 9:16 video, photorealistic, bright natural light, sharp focus, no text, no captions, no logos, no brand names, no watermark",
           "dur": 8
         },
         {
-          "t": "Repite el proceso cada pista y la IA aprende tu estilo. Sígueme para descubrir más trucos que la app guarda en silencio.",
-          "prompt": "Aluminium sim racing rig with bucket seat, steering wheel, pedals, and a large monitor displaying a racing game, inside a bright home gaming room, not a real car interior. The driver selects a new track on the tablet while a glowing AI brain icon expands, indicating learning progress across circuits. Then: The driver points toward the camera, smiling, with the tablet closed beside the rig, a faint app glow hinting at hidden tricks. smooth natural camera movement, vertical 9:16 video, photorealistic, bright natural light, sharp focus, no text, no captions, no logos, no brand names, no watermark",
+          "t": "Verás tus tiempos bajar y la primera curva más estable Descubre más lecciones en el enlace de mi perfil",
+          "prompt": "modern home sim racing studio with aluminium rig, bucket seat, steering wheel and pedals inside a bright gaming room, large 4K monitor showing a racing game, not a real car interior. Monitor displays a descending lap‑time graph and the virtual car smoothly hugging the first corner, illustrating faster, more stable handling. Then: Driver’s hand taps a glowing profile icon on the monitor, indicating where to find additional lessons, with rig and room bright. smooth natural camera movement, vertical 9:16 video, photorealistic, bright natural light, sharp focus, no text, no captions, no logos, no brand names, no watermark",
           "dur": 8
         }
       ],
       "voz": "es-ES-AlvaroNeural",
-      "ritmo": "+8%",
+      "ritmo": "+16%",
       "musica": "energetica",
-      "hashtags": "#simracing #app #IA #setup #racing"
+      "hashtags": "#simracing #tips #racetime #racing #motivation"
+    }
+  },
+  {
+    "id": "2026-11-18-02-reel",
+    "date": "2026-11-18",
+    "source": "auto",
+    "tipo": "reel",
+    "tema": "Sensibilidad del volante",
+    "publishAt": "2026-11-23T19:30:00+01:00",
+    "caption": "¿Sientes que tu volante reacciona demasiado rápido? Ajusta la sensibilidad y ahorra tiempo en cada curva. #simracing #tips #sensibilidad\n\n#simracing #tips #sensibilidad #racing\n\n🎵 «electronique beat hip hop» de dj beck (CC BY 3.0)",
+    "media": [
+      "media/u_4163e9db06d1/2026-11-18/2026-11-18-02-reel/video.mp4"
+    ],
+    "status": "prueba",
+    "attempts": 0,
+    "cover": "media/u_4163e9db06d1/2026-11-18/2026-11-18-02-reel/cover.jpg",
+    "veo": {
+      "clips": [
+        {
+          "t": "¿Tu coche se desvía al girar en cada curva? Eso ocurre cuando la sensibilidad del volante está demasiado alta.",
+          "prompt": "Aluminium sim racing rig with bucket seat, steering wheel, pedals and a large monitor displaying a racing game, inside a bright home gaming room, not a real car interior. Driver gripping steering wheel tightly, eyes on monitor where the virtual car slides outward on a tight corner. Then: Hand turning a bright on‑screen sensitivity slider to the far right, indicator glowing intensely. smooth natural camera movement, vertical 9:16 video, photorealistic, bright natural light, sharp focus, no text, no captions, no logos, no brand names, no watermark",
+          "dur": 8
+        },
+        {
+          "t": "Con una sensibilidad alta, el juego reacciona antes de que muevas el volante. Baja la sensibilidad en la configuración del simulador para ganar control.",
+          "prompt": "Aluminium sim racing rig with bucket seat, steering wheel, pedals and a large monitor displaying a racing game, inside a bright home gaming room, not a real car interior. Driver’s hand still, while the on‑screen steering wheel spins ahead, showing early reaction. Then: Hand sliding the sensitivity slider downwards to a lower level, calm blue glow indicating control. smooth natural camera movement, vertical 9:16 video, photorealistic, bright natural light, sharp focus, no text, no captions, no logos, no brand names, no watermark",
+          "dur": 8
+        },
+        {
+          "t": "Reduce también la zona muerta, ese espacio donde el volante no responde.",
+          "prompt": "Aluminium sim racing rig with bucket seat, steering wheel, pedals and a large monitor displaying a racing game, inside a bright home gaming room, not a real car interior. Hand adjusting a circular deadzone ring on the screen, shrinking its size around the virtual steering wheel. smooth natural camera movement, vertical 9:16 video, photorealistic, bright natural light, sharp focus, no text, no captions, no logos, no brand names, no watermark",
+          "dur": 6
+        },
+        {
+          "t": "Ajusta el ángulo máximo a la mitad de tu rango habitual. Practica una curva cerrada y siente la respuesta más suave y predecible.",
+          "prompt": "Aluminium sim racing rig with bucket seat, steering wheel, pedals and a large monitor displaying a racing game, inside a bright home gaming room, not a real car interior. Driver moving the max‑angle knob to the midpoint, gauge needle pointing at half of the usual range. Then: Driver smoothly steering through a tight virtual corner, monitor showing a clean racing line and stable car. smooth natural camera movement, vertical 9:16 video, photorealistic, bright natural light, sharp focus, no text, no captions, no logos, no brand names, no watermark",
+          "dur": 8
+        },
+        {
+          "t": "Cuando el coche siga la línea sin tirones, habrás conseguido la configuración ideal. Sígueme para más trucos de simracing y mejora tu tiempo",
+          "prompt": "Aluminium sim racing rig with bucket seat, steering wheel, pedals and a large monitor displaying a racing game, inside a bright home gaming room, not a real car interior. Driver smiling as the on‑screen car follows the racing line flawlessly, no jitter visible. Then: Driver looking directly at camera, raising a finger in a follow gesture, racing rig background. smooth natural camera movement, vertical 9:16 video, photorealistic, bright natural light, sharp focus, no text, no captions, no logos, no brand names, no watermark",
+          "dur": 8
+        }
+      ],
+      "voz": "es-ES-AlvaroNeural",
+      "ritmo": "+16%",
+      "musica": "hiphop",
+      "hashtags": "#simracing #tips #sensibilidad #racing"
     }
   }
 ]

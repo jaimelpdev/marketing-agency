@@ -1,19 +1,19 @@
 {
  "version": 1,
  "creada": "2026-11-18T17:28:47",
- "actualizada": "2026-11-18T18:38:26",
- "semana": 2,
- "fase": "confianza",
+ "actualizada": "2026-11-18T18:58:39",
+ "semana": 3,
+ "fase": "comunidad",
  "objetivo_mes": "Generar reconocimiento de marca y captar a entusiastas del simracing",
  "arco_semana": {
-  "tema": "Profundizando en la práctica y la app",
-  "porque": "Mostrar cómo la academia ayuda a mejorar tiempos y a usar la app, creando confianza y valor antes de cualquier venta"
+  "tema": "Participación activa y retos comunitarios",
+  "porque": "Fomentar interacción y sentido de pertenencia, invitando a la audiencia a compartir sus setups y tiempos, consolidando la confianza en la academia"
  },
  "mezcla": {
-  "alcance": 50,
-  "confianza": 30,
-  "comunidad": 15,
-  "conversion": 5
+  "alcance": 40,
+  "confianza": 25,
+  "comunidad": 25,
+  "conversion": 10
  },
  "series": [
   {
@@ -21,7 +21,7 @@
    "formato": "reel",
    "cuando": "lunes y jueves",
    "descripcion": "Consejo breve y práctico para mejorar en pista o configurar el coche",
-   "episodios": 2
+   "episodios": 4
   },
   {
    "nombre": "Setup del seguidor",
@@ -35,7 +35,7 @@
    "formato": "historia",
    "cuando": "viernes",
    "descripcion": "Desmentimos ideas comunes del simracing con datos y ejemplos",
-   "episodios": 0
+   "episodios": 1
   },
   {
    "nombre": "Detrás de la app",
@@ -53,20 +53,23 @@
  "que_evitar": [
   "Ventas directas en los primeros contenidos",
   "Demasiado jargon técnico sin explicación",
-  "Publicar fuera de los horarios pico (18‑22h)"
+  "Publicar fuera de los horarios pico (18‑22h)",
+  "Polémicas sin valor añadido"
  ],
  "promesas_pendientes": [],
  "ideas": [
   "Reel de presentación del fundador y la visión de la academia",
   "Video corto mostrando la interfaz de la app y sus funciones principales",
-  "Desafío semanal: mejora tu vuelta en X pista y comparte el tiempo"
+  "Desafío semanal: mejora tu vuelta en X pista y comparte el tiempo",
+  "Live Q&A sobre setups y estrategias"
  ],
  "tono_comunidad": "Energético, motivador y cercano; habla como un compañero de pista que celebra cada progreso",
  "hitos": [
-  "Alcanzar 2 000 seguidores en Instagram",
-  "Publicar un reel con >10 000 visualizaciones",
-  "Obtener 100 comentarios en la serie \"Setup del seguidor\""
+  "Alcanzar 2 500 seguidores en Instagram",
+  "Publicar un reel con >12 000 visualizaciones",
+  "Obtener 150 comentarios en la serie \"Setup del seguidor\"",
+  "Lanzar el primer desafío semanal con al menos 30 participaciones"
  ],
  "metricas": {},
- "resumen_para_dueño": "Esta semana pasamos a la fase de confianza, profundizando en la app y mostrando resultados reales. Mantendremos la mezcla de alcance y contenido de valor, y reforzaremos la serie \"Setup del seguidor\" para impulsar la interacción."
+ "resumen_para_dueño": "Esta semana pasamos a la fase de comunidad, impulsando la interacción mediante el reto semanal y reforzando nuestras series establecidas. Mantendremos la mezcla orientada a comunidad y confianza, y buscaremos generar conversaciones y participación activa en los comentarios."
 }
