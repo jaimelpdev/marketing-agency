@@ -550,7 +550,7 @@ def plan_user(browser, user, key, force=False, redo=None):
             log("  ⚠ El estratega no pudo actualizar la memoria (se usa la anterior):", e)
     allowed = plan_conf.get("formatos") or ["reel", "historia", "post", "carrusel"]
     nets = {a.get("platform") for a in (user.get("social") or [])}
-    if not (user.get("ig") or {}).get("connected") and "instagram" not in nets:
+    if not (user.get("ig") or {}).get("connected") and "instagram" not in nets and (nets or not os.environ.get("PRUEBA")):
         allowed = [f for f in allowed if f == "reel"] or ["reel"]  # solo TikTok/YouTube: solo vídeo
     voices = {**VOICES, **conf.get("voces", {}), "_elegida": plan_conf.get("voz_elegida") or ""}
     cfg = dict(conf.get("marca", {}))
