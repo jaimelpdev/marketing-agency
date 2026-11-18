@@ -859,7 +859,7 @@ def reset_user(user):
 def ready(u):
     conf = u.get("config") or {}
     marca = conf.get("marca") or {}
-    return bool((marca.get("name") or marca.get("about")) and ((u.get("ig") or {}).get("connected") or u.get("social")))
+    return bool((marca.get("name") or marca.get("about")) and ((u.get("ig") or {}).get("connected") or u.get("social") or os.environ.get("PRUEBA")))
 
 
 def backfill_veo(user, queue, udir, tz):
