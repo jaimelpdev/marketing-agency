@@ -784,7 +784,7 @@ $("#genBtn").addEventListener("click",async()=>{
     const data=parseJSON(res.text);
     const raw=Array.isArray(data.piezas)?data.piezas:Array.isArray(data.videos)?data.videos:[];
     // una pieza vale si tiene contenido: escenas, o frases para el vídeo faceless (beats/guion)
-    let vids=raw.filter(v=>v&&v.gancho).map(normPiece).filter(p=>p.tipo==="post"||p.escenas.length||(TYPES[p.tipo]&&TYPES[p.tipo].video&&p.beats.length>=2));
+    let vids=raw.filter(v=>v&&v.gancho).map(normPiece).map(salvage).filter(p=>p.tipo==="post"||p.escenas.length||(TYPES[p.tipo]&&TYPES[p.tipo].video&&p.beats.length>=2));
     window.__planRaw=raw.length;
     vids=enforceLimits(vids);diversify(vids);
     if(!vids.length&&n!=="auto")throw new Error("no llegó el plan");
@@ -843,6 +843,18 @@ function diversify(vids){
   vids.filter(p=>TYPES[p.tipo]&&TYPES[p.tipo].video).forEach(p=>{if(!moods.includes(p.musica)||p.musica===pm||(mc[p.musica]||0)>=2)p.musica=fit.concat(moods).filter(m=>m!==pm).sort((a,b)=>(mc[a]||0)-(mc[b]||0))[0];mc[p.musica]=(mc[p.musica]||0)+1;pm=p.musica;});
   vids.forEach(p=>{let pg=null;(p.escenas||[]).forEach(e=>{if(e.grafico&&pg&&e.grafico.tipo===pg)e.grafico=null;pg=e.grafico?e.grafico.tipo:null;});});
   return vids;
+}
+/* La IA a veces manda una pieza a medias (sin escenas o sin frases): se completa con lo que sí trae en vez de tirarla */
+function salvage(p){
+  const lines=(p.beats.length?p.beats.map(b=>b.t):p.guion).filter(Boolean);
+  if(TYPES[p.tipo]&&TYPES[p.tipo].video&&p.beats.length<2){
+    const src=lines.length>=2?lines:p.escenas.map(e=>[e.titulo,e.texto].filter(Boolean).join(": ")).filter(Boolean);
+    if(src.length>=2)p.beats=src.slice(0,14).map((t,i)=>({t:String(t).slice(0,220),img:String((p.escenas[i]&&p.escenas[i].visual)||p.visual||"").slice(0,260)}));
+  }
+  if(!p.escenas.length&&p.tipo!=="post"&&lines.length>=2){
+    p.escenas=lines.slice(0,7).map(t=>{const w=String(t).split(" ");return {titulo:w.slice(0,5).join(" "),texto:w.length>5?w.slice(5).join(" "):"",emoji:"",visual:p.visual||"",visuales:[],foto:"",grafico:null};});
+  }
+  return p;
 }
 function enforceLimits(vids){
   const out=[];const perDay={};const isFeed=p=>p.tipo!=="historia";let lastFeed=null;

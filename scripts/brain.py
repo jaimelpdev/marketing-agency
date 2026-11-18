@@ -243,6 +243,45 @@ def de_voseo(text):
     return VOSEO.sub(fix, str(text))
 
 
+def review_script(piece, negocio, key, log=print):
+    """Revisor experto: corrige o quita lo que sea falso, dudoso o inventado antes de grabar la voz."""
+    fr = [b["t"] for b in piece.get("beats") or []]
+    if len(fr) < 2:
+        return
+    prompt = f"""Eres un experto exigente en el tema de este negocio y revisas el guion de un vídeo corto antes de publicarlo.
+NEGOCIO: {negocio}
+TEMA: {piece.get('tema', '')}
+GUION (una frase por línea):
+""" + "\n".join(f"{k + 1}. {x}" for k, x in enumerate(fr)) + f"""
+TEXTO DE LA PUBLICACIÓN: {piece.get('caption', '')}
+
+Comprueba cada frase como lo haría un profesional del sector:
+- ¿Es técnicamente correcta y un buen consejo? Si es falsa, dudosa o puede llevar a error, reescríbela con un consejo correcto sobre lo mismo.
+- ¿Contiene cifras, tiempos, porcentajes, estudios, nombres, funciones del negocio u ofertas que no estén en NEGOCIO? Quítalos (explica la idea sin número).
+- ¿Hay relleno vacío o una frase que no aporta? Mejórala con algo concreto y útil.
+- Mantén el mismo número de frases, el orden, el tono, el tuteo en español de España y una longitud parecida por frase (6-14 palabras).
+- Revisa también el texto de la publicación con las mismas reglas.
+
+Responde SOLO con JSON: {{"frases":["…"],"caption":"…","cambios":["qué corregiste y por qué, muy breve"]}}"""
+    try:
+        j = groq_json(prompt, key, log)
+    except Exception as e:  # noqa: BLE001
+        log(f"    ⚠ Revisor: {e}")
+        return
+    new = [de_voseo(re.sub(r"\s+", " ", str(x)).strip()) for x in (j.get("frases") or []) if str(x).strip()]
+    if len(new) != len(fr) or sum(len(x.split()) for x in new) < 0.7 * sum(len(x.split()) for x in fr):
+        log("    ⚠ Revisor: respuesta no válida; se mantiene el guion")
+        return
+    for b, x in zip(piece["beats"], new):
+        b["t"] = x[:220]
+    piece["guion"] = [b["t"] for b in piece["beats"]]
+    cap = de_voseo(str(j.get("caption") or "").strip())
+    if len(cap) > 40:
+        piece["caption"] = cap[:600]
+    cambios = [str(c) for c in (j.get("cambios") or []) if str(c).strip()]
+    log(f"    🔎 Revisor: {len(cambios)} corrección(es)" + (f" — {'; '.join(cambios)[:220]}" if cambios else ""))
+
+
 def write_script(piece, user, key, log=print):
     """Guionista: reescribe la narración de un vídeo faceless como una explicación útil y concreta,
     frase a frase, con la duración que toca. Una llamada dedicada por vídeo da mucho mejor guion
@@ -270,8 +309,9 @@ CÓMO TIENE QUE SER
 6c. Español de España: tuteo, NUNCA voseo (prohibido "aplicás", "tenés", "podés", "sabés", "querés", "mirá"…), vocabulario peninsular.
 7. Sin emojis, hashtags, comillas ni @usuarios. Números pequeños con letra.
 8. "cierre_bio": frase alternativa de cierre que menciona con naturalidad el enlace del perfil.
+9. "caption": texto de la publicación, 2-3 frases cortas que resumen el consejo y terminan con una pregunta a la audiencia. Mismas reglas: sin cifras inventadas, sin vender, sin hashtags.
 
-Responde SOLO con JSON: {{"frases":["…", …],"cierre_bio":"…"}}"""
+Responde SOLO con JSON: {{"frases":["…", …],"cierre_bio":"…","caption":"…"}}"""
     extra = ""
     for _ in range(2):
         try:
@@ -294,6 +334,10 @@ Responde SOLO con JSON: {{"frases":["…", …],"cierre_bio":"…"}}"""
             piece["guion"] = [b["t"] for b in piece["beats"]]
             if bio:
                 piece["cierre_bio"] = bio[:200]
+            cap = de_voseo(str(j.get("caption") or "").strip())
+            if len(cap) > 40:
+                piece["caption"] = cap[:600]
+            review_script(piece, negocio, key, log)
             return True
         extra = f"\n\nTu respuesta anterior tenía {len(fr)} frases y {words} palabras: NO cumple. Escribe entre {nmin} y {nmax} frases y al menos {wmin} palabras."
     log("    ⚠ Guionista: no cumplió las reglas; se mantiene el original")
