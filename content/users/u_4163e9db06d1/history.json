@@ -219,6 +219,61 @@
       "look": 207,
       "serie": "Detrás de la app",
       "objetivo": "confianza"
+    },
+    {
+      "date": "2026-11-18",
+      "tema": "Aceleración lenta dentro, rápida fuera",
+      "formato": "post",
+      "tipo": "post",
+      "layout": "cine",
+      "plantilla": 1284,
+      "look": 133,
+      "serie": "",
+      "objetivo": "confianza"
+    },
+    {
+      "date": "2026-11-19",
+      "tema": "Trail braking en fases",
+      "formato": "Tip rápido del día",
+      "tipo": "reel",
+      "layout": "faceless",
+      "plantilla": 2177,
+      "look": 243,
+      "serie": "Tip rápido del día",
+      "objetivo": "alcance"
+    },
+    {
+      "date": "2026-11-20",
+      "tema": "Uso del freno de mano en curvas",
+      "formato": "Mito o realidad",
+      "tipo": "historia",
+      "layout": "faceless",
+      "plantilla": 1138,
+      "look": 97,
+      "serie": "",
+      "objetivo": ""
+    },
+    {
+      "date": "2026-11-23",
+      "tema": "Transferencia de peso al cambiar de marcha",
+      "formato": "Tip rápido del día",
+      "tipo": "reel",
+      "layout": "faceless",
+      "plantilla": 532,
+      "look": 207,
+      "serie": "Tip rápido del día",
+      "objetivo": "alcance"
+    },
+    {
+      "date": "2026-11-24",
+      "tema": "Telemetría en la app para afinar la línea",
+      "formato": "Detrás de la app",
+      "tipo": "reel",
+      "layout": "faceless",
+      "plantilla": 2283,
+      "look": 61,
+      "serie": "Detrás de la app",
+      "objetivo": "confianza"
     }
   ]
 }

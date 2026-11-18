@@ -1,8 +1,8 @@
 {
  "version": 1,
  "creada": "2026-11-18T17:28:47",
- "actualizada": "2026-11-18T19:30:28",
- "semana": 5,
+ "actualizada": "2026-11-18T21:18:37",
+ "semana": 6,
  "fase": "comunidad",
  "objetivo_mes": "Generar reconocimiento de marca y captar a entusiastas del simracing",
  "arco_semana": {
@@ -21,7 +21,7 @@
    "formato": "reel",
    "cuando": "lunes y jueves",
    "descripcion": "Consejo breve y práctico para mejorar en pista o configurar el coche",
-   "episodios": 8
+   "episodios": 10
   },
   {
    "nombre": "Setup del seguidor",
@@ -42,7 +42,7 @@
    "formato": "reel",
    "cuando": "martes",
    "descripcion": "Mostramos funcionalidades de la app y cómo sacarle el máximo provecho a los alumnos",
-   "episodios": 4
+   "episodios": 5
   }
  ],
  "aprendizajes": [
@@ -75,5 +75,5 @@
   "Realizar el primer Live Q&A con 100 espectadores"
  ],
  "metricas": {},
- "resumen_para_dueño": "Esta semana seguimos en fase de comunidad, impulsando el desafío semanal de mejora de vuelta para generar contenido generado por usuarios y reforzar la identidad de la academia. Mantendremos la mezcla actual, reforzaremos las series que ya funcionan y buscaremos aumentar la interacción y los comentarios."
+ "resumen_para_dueño": "Esta semana reforzamos la fase de comunidad impulsando el desafío semanal y potenciando las series que ya generan interacción. Publicaremos todo en el horario pico (18‑22h), evitaremos cualquier venta directa y buscaremos que los seguidores compartan sus setups y tiempos para crear contenido generado por la comunidad."
 }
