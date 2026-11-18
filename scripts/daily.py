@@ -658,7 +658,8 @@ def plan_user(browser, user, key, force=False, redo=None):
                     log(f"    🎨 Imágenes dirigidas para «{vp.get('tema', '')}»: {bs[0]['img'][:90]}…")
         _pt = os.environ.get("POLLINATIONS_TOKEN", "").strip()
         log("  Motor de imágenes de reserva: " + ("Pollinations con clave nueva (FLUX)" if _pt[:3] == "sk_" else "Pollinations con token antiguo" if _pt else "Pollinations ANÓNIMO (mala calidad: falta POLLINATIONS_TOKEN)"))
-        log(f"  {n} piezas. Generando imágenes…")
+        raw_n = page.evaluate("()=>window.__planRaw||0")
+        log(f"  {n} piezas" + (f" (la IA propuso {raw_n}; {raw_n - n} descartadas por venir incompletas)" if raw_n and raw_n > n else "") + ". Generando imágenes…")
         page.evaluate("prefetchAll()")
         page.wait_for_function("typeof pendingA==='undefined' || pendingA.size===0", timeout=2_700_000, polling=2000)
         page.wait_for_timeout(1000)
@@ -734,7 +735,7 @@ def plan_user(browser, user, key, force=False, redo=None):
                     path = folder / f"{k + 1:02d}.jpg"
                     path.write_bytes(base64.b64decode(url.split(",", 1)[1]))
                     media.append(str(path.relative_to(DOCS)))
-            caption = (p.get("caption", "") + "\n\n" + p.get("hashtags", "")).strip() if p["tipo"] != "historia" else ""
+            caption = brain.de_voseo((p.get("caption", "") + "\n\n" + p.get("hashtags", "")).strip()) if p["tipo"] != "historia" else ""
             if caption and info["video"] and credit:
                 caption += "\n\n" + credit
             when = publish_time(today, p.get("dia", 0), p.get("hora"), tz, i)

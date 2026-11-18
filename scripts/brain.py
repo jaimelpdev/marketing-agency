@@ -130,7 +130,7 @@ CÓMO PIENSAS
 3. Crea 2-4 SERIES recurrentes que den identidad y hábito (por ejemplo "El error de la semana", "Setup del seguidor", "Mito o realidad"), con su formato y día. Mantén las que funcionan y numera los episodios.
 4. Aprende de los resultados: qué formatos, temas, ganchos y horas funcionan mejor, y qué evitar. Sé concreto ("los reels de errores tienen 3× más comentarios que los posts de app").
 5. Lleva una lista de promesas pendientes (si se dijo "comenta X y te paso la guía", o "el próximo vídeo…", hay que cumplirlo) y de ideas para próximas semanas.
-6. No inventes nada: ni seguidores, ni testimonios, ni ofertas, descuentos, precios o lanzamientos que no estén en la marca o en las notas del dueño. Las series que dependan de la comunidad empiezan pidiendo participación.
+6. No inventes nada: ni seguidores, ni testimonios, ni ofertas, descuentos, precios o lanzamientos, ni funciones, apps, IA o servicios del negocio que no estén en la marca o en las notas del dueño. Las series que dependan de la comunidad empiezan pidiendo participación.
 7. Define el arco de la semana: un tema o historia que conecte las piezas de la semana para que la gente quiera ver la siguiente.
 
 Responde SOLO con JSON válido:
@@ -223,6 +223,26 @@ def public(mem):
     return {k: mem.get(k) for k in keep}
 
 
+# voseo rioplatense: formas acentuadas de 2.ª persona que en España no se usan
+VOSEO = re.compile(r"\b(?:aplicás|tenés|podés|sabés|querés|hacés|ponés|mirá|fijate|andá|vení|decí|probá|usá|elegí|subí|bajá|sentís|notás|buscás|empezás|frenás|girás|acelerás|ajustás|cambiás|tomá|dejá|pensá|imaginá|sos)\b", re.I)
+
+
+_VOS_IRR = {"tenés": "tienes", "podés": "puedes", "querés": "quieres", "sentís": "sientes", "elegí": "elige", "vení": "ven",
+            "decí": "di", "sos": "eres", "fijate": "fíjate", "andá": "ve", "subí": "sube", "empezás": "empiezas"}
+
+
+def de_voseo(text):
+    """Pasa a tuteo las formas de voseo que se cuelen (aplicás → aplicas)."""
+    def fix(m):
+        w = m.group(0)
+        low = w.lower()
+        r = _VOS_IRR.get(low) or (low[:-2] + {"á": "a", "é": "e", "í": "i"}[low[-2]] + "s" if low.endswith(("ás", "és", "ís")) else
+                                 {"mirá": "mira", "probá": "prueba", "usá": "usa", "bajá": "baja", "tomá": "toma", "dejá": "deja",
+                                  "pensá": "piensa", "imaginá": "imagina"}.get(low, low))
+        return r.capitalize() if w[0].isupper() else r
+    return VOSEO.sub(fix, str(text))
+
+
 def write_script(piece, user, key, log=print):
     """Guionista: reescribe la narración de un vídeo faceless como una explicación útil y concreta,
     frase a frase, con la duración que toca. Una llamada dedicada por vídeo da mucho mejor guion
@@ -246,6 +266,8 @@ CÓMO TIENE QUE SER
 4. Habla de tú, como un amigo que sabe del tema. Lenguaje llano; si usas un término técnico, lo explicas en la misma frase. Nada de frases vacías ("es muy importante", "marca la diferencia") ni relleno.
 5. Nada de vender: ni precios, ni ofertas, ni "apúntate". La última frase invita con naturalidad a seguir la cuenta para más consejos.
 6. NO inventes cifras, porcentajes, tiempos, estudios, testimonios ni nombres. Si no estás seguro de un número, explica la idea sin número ("un poco antes", "con menos fuerza").
+6b. NO inventes funciones, apps, herramientas, IA ni servicios del negocio: del negocio solo puedes decir lo que pone en NEGOCIO. Si el tema o el borrador hablan de algo que NEGOCIO no menciona, reconviértelo en un consejo práctico del oficio sobre ese mismo asunto (qué hacer tú, paso a paso) sin atribuírselo al negocio.
+6c. Español de España: tuteo, NUNCA voseo (prohibido "aplicás", "tenés", "podés", "sabés", "querés", "mirá"…), vocabulario peninsular.
 7. Sin emojis, hashtags, comillas ni @usuarios. Números pequeños con letra.
 8. "cierre_bio": frase alternativa de cierre que menciona con naturalidad el enlace del perfil.
 
@@ -259,18 +281,24 @@ Responde SOLO con JSON: {{"frases":["…", …],"cierre_bio":"…"}}"""
             return False
         fr = [re.sub(r"\s+", " ", str(x)).strip() for x in (j.get("frases") or []) if str(x).strip()]
         words = sum(len(x.split()) for x in fr)
+        vos = [w for x in fr for w in VOSEO.findall(x)]
+        if vos:
+            extra = f"\n\nTu respuesta anterior usaba voseo ({', '.join(sorted(set(vos))[:6])}). Reescríbela en español de España, con tuteo."
+            continue
         if nmin - 1 <= len(fr) <= nmax + 2 and words >= wmin - 8:
             old = piece.get("beats") or []
             bio = str(j.get("cierre_bio") or piece.get("cierre_bio") or "").strip()
             if bio and old and piece.get("cierre_bio") and old[-1].get("t") == piece.get("cierre_bio"):
                 fr[-1] = bio  # a este vídeo le tocaba cerrar con el enlace del perfil
-            piece["beats"] = [{"t": x[:220], "img": ""} for x in fr[:14]]
+            piece["beats"] = [{"t": de_voseo(x)[:220], "img": ""} for x in fr[:14]]
             piece["guion"] = [b["t"] for b in piece["beats"]]
             if bio:
                 piece["cierre_bio"] = bio[:200]
             return True
         extra = f"\n\nTu respuesta anterior tenía {len(fr)} frases y {words} palabras: NO cumple. Escribe entre {nmin} y {nmax} frases y al menos {wmin} palabras."
-    log("    ⚠ Guionista: el guion salió demasiado corto; se mantiene el original")
+    log("    ⚠ Guionista: no cumplió las reglas; se mantiene el original")
+    for b in piece.get("beats") or []:
+        b["t"] = de_voseo(b.get("t", ""))
     return False
 
 
