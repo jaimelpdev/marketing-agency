@@ -52,6 +52,7 @@ jobs:
       - name: Planificar y renderizar
         env:
           GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           POLLINATIONS_TOKEN: ${{ secrets.POLLINATIONS_TOKEN }}
           PEXELS_API_KEY: ${{ secrets.PEXELS_API_KEY }}
           AGENCIA_API: ${{ vars.AGENCIA_API || 'https://agencia-marketing.lopezsimrace29.workers.dev' }}

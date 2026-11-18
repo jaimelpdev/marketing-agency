@@ -16,6 +16,8 @@ descripcion: Banco de conocimiento verificado de técnica y configuración en si
 - SUBVIRAJE (el morro no gira): suele venir de entrar demasiado rápido, soltar el freno demasiado pronto o girar demasiado volante. Pedir más volante no lo arregla: hay que bajar velocidad o dejar algo de freno al girar.
 - SOBREVIRAJE (la trasera se va): suele venir de acelerar demasiado pronto o brusco, o de levantar el pie de golpe en curva. Se corrige contravolanteando con suavidad y dosificando el acelerador.
 - TRANSFERENCIA DE PESOS: frenar carga el eje delantero (más agarre delante), acelerar carga el trasero. Por eso girar con algo de freno ayuda a que el coche gire.
+- LEVANTAR EL PIE DEL ACELERADOR: soltar el gas también pasa peso al eje delantero (igual que frenar). Hacerlo de golpe a mitad de curva puede descargar la trasera y hacer que se vaya. Por eso, en curva, mejor dosificar el acelerador que soltarlo de repente.
+- SUBIR DE MARCHA: hazlo con el coche lo más recto posible y sin brusquedad; un cambio brusco con el coche cargado en curva altera su equilibrio.
 - REDUCIR MARCHAS: reduce mientras frenas, una a una, sin pasarte de vueltas; reducir demasiado rápido puede desestabilizar la trasera.
 - CONSTANCIA ANTES QUE VUELTA RÁPIDA: en carrera gana quien repite tiempos sin errores. Un buen ejercicio: 10 vueltas seguidas sin salirse antes de buscar la vuelta rápida.
 - PIANOS: hay pianos que se pueden pisar y otros que desestabilizan el coche; pruébalos en práctica antes de usarlos en carrera.

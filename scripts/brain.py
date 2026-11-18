@@ -100,6 +100,40 @@ def groq_json(prompt, key, log=print, tries=4):
     raise RuntimeError(f"El estratega no ha podido pensar ({last})")
 
 
+GEMINI = "https://generativelanguage.googleapis.com/v1beta/openai"
+GEMINI_MODELS = ["gemini-2.5-flash", "gemini-2.5-flash-lite"]
+WRITER = {"gemini_ok": None}
+
+
+def writer_json(prompt, key, log=print):
+    """Redacción (guiones, revisión, diapositivas): Gemini gratis si hay GEMINI_API_KEY (escribe y sabe bastante
+    más que los modelos de Groq); si no está o falla, Groq."""
+    gk = os.environ.get("GEMINI_API_KEY", "").strip()
+    if gk and WRITER["gemini_ok"] is not False:
+        for i, model in enumerate(GEMINI_MODELS * 2):
+            try:
+                r = requests.post(GEMINI + "/chat/completions", timeout=120,
+                                  headers={"authorization": "Bearer " + gk, "content-type": "application/json"},
+                                  json={"model": model, "temperature": 0.6, "response_format": {"type": "json_object"},
+                                        "messages": [{"role": "user", "content": prompt}]})
+                if r.status_code in (401, 403):
+                    WRITER["gemini_ok"] = False
+                    log(f"    ⚠ Gemini rechaza la clave ({r.status_code}); uso Groq")
+                    break
+                if r.status_code == 429:
+                    time.sleep(20 + 10 * i)
+                    continue
+                r.raise_for_status()
+                txt = r.json()["choices"][0]["message"]["content"]
+                a, b = txt.find("{"), txt.rfind("}")
+                WRITER["gemini_ok"] = True
+                return json.loads(txt[a:b + 1])
+            except Exception as e:  # noqa: BLE001
+                log(f"    ⚠ Gemini ({model}): {str(e)[:120]}")
+                time.sleep(5)
+    return groq_json(prompt, key, log)
+
+
 def reflect(mem, user, history, published, key, log=print):
     """El director de estrategia actualiza la memoria con resultados reales y la visión a largo plazo."""
     conf = user.get("config") or {}
@@ -131,6 +165,7 @@ CÓMO PIENSAS
 3. Crea 2-4 SERIES recurrentes que den identidad y hábito (por ejemplo "El error de la semana", "Setup del seguidor", "Mito o realidad"), con su formato y día. Mantén las que funcionan y numera los episodios.
 4. Aprende de los resultados: qué formatos, temas, ganchos y horas funcionan mejor, y qué evitar. Sé concreto ("los reels de errores tienen 3× más comentarios que los posts de app").
 5. Lleva una lista de promesas pendientes (si se dijo "comenta X y te paso la guía", o "el próximo vídeo…", hay que cumplirlo) y de ideas para próximas semanas.
+6b. No propongas series que dependan de que los seguidores envíen cosas (setups, vídeos, preguntas) salvo que las notas del dueño digan que ya las envían.
 6. No inventes nada: ni seguidores, ni testimonios, ni ofertas, descuentos, precios o lanzamientos, ni funciones, apps, IA o servicios del negocio que no estén en la marca o en las notas del dueño. Las series que dependan de la comunidad empiezan pidiendo participación.
 7. Define el arco de la semana: un tema o historia que conecte las piezas de la semana para que la gente quiera ver la siguiente.
 
@@ -299,7 +334,7 @@ Comprueba cada frase como lo haría un profesional del sector:
 
 Responde SOLO con JSON: {{"frases":["…"],"caption":"…","cambios":["qué corregiste y por qué, muy breve"]}}"""
     try:
-        j = groq_json(prompt, key, log)
+        j = writer_json(prompt, key, log)
     except Exception as e:  # noqa: BLE001
         log(f"    ⚠ Revisor: {e}")
         return
@@ -355,7 +390,7 @@ Responde SOLO con JSON: {{"entrada":"la entrada del conocimiento que explicas (o
     extra = ""
     for _ in range(3):
         try:
-            j = groq_json(base + extra, key, log)
+            j = writer_json(base + extra, key, log)
         except Exception as e:
             log(f"    ⚠ Guionista: {e}")
             return False
@@ -426,7 +461,7 @@ REGLAS
 Responde SOLO con JSON: {{"tema":"…","gancho":"…","escenas":[{{"titulo":"…","texto":"…"}}],"caption":"…"}}"""
     for _ in range(2):
         try:
-            j = groq_json(prompt, key, log)
+            j = writer_json(prompt, key, log)
         except Exception as e:  # noqa: BLE001
             log(f"    ⚠ Redactor: {e}")
             return False
