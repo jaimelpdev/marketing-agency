@@ -763,7 +763,7 @@ def plan_user(browser, user, key, force=False, redo=None):
             new_items.append({
                 "id": pid, "date": today, "source": ("chat" if redo.get("brief") is not None else "redo") if redo else "auto", "tipo": p["tipo"], "tema": p.get("tema", ""),
                 "publishAt": when.isoformat(),
-                "caption": caption[:2200], "media": media, "status": "pending", "attempts": 0,
+                "caption": caption[:2200], "media": media, "status": "pending" if (user.get("social") or (user.get("ig") or {}).get("connected")) else "prueba", "attempts": 0,
                 **({"cover": str((folder / "cover.jpg").relative_to(DOCS))} if (folder / "cover.jpg").exists() else {}),
                 **({"veo": veo_plan} if veo_plan else {}),
             })
@@ -1161,8 +1161,10 @@ def main():
                 log(f"— {label}: sin marca configurada, se salta.")
                 continue
             if not (u.get("ig") or {}).get("connected") and not u.get("social"):
-                log(f"— {label}: sin redes conectadas, se salta.")
-                continue
+                if not os.environ.get("PRUEBA"):
+                    log(f"— {label}: sin redes conectadas, se salta.")
+                    continue
+                log(f"🧪 {label}: sin redes conectadas — modo prueba: se crea el contenido pero NO se publica nada.")
             if (conf.get("plan") or {}).get("auto") is False:
                 log(f"— {label}: piloto automático en pausa.")
                 continue

@@ -13,6 +13,10 @@ on:
         description: "Solo esta persona (id u_…); vacío = todas"
         type: string
         default: ""
+      prueba:
+        description: "Crear contenido de prueba aunque no haya redes conectadas (no se publica nada)"
+        type: boolean
+        default: false
 
 permissions:
   contents: write
@@ -54,6 +58,7 @@ jobs:
           AGENCIA_ADMIN_TOKEN: ${{ secrets.AGENCIA_ADMIN_TOKEN }}
           ONLY_USER: ${{ github.event.inputs.only_user }}
           FORCE: ${{ github.event.inputs.force == 'true' && '1' || '' }}
+          PRUEBA: ${{ github.event.inputs.prueba == 'true' && '1' || '' }}
         run: python scripts/daily.py
 
       - name: Guardar en el repositorio
