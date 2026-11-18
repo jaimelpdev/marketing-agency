@@ -274,6 +274,61 @@
       "look": 61,
       "serie": "Detrás de la app",
       "objetivo": "confianza"
+    },
+    {
+      "date": "2026-11-19",
+      "tema": "Aceleración lenta dentro, rápida fuera",
+      "formato": "tip rápido del día",
+      "tipo": "reel",
+      "layout": "faceless",
+      "plantilla": 1162,
+      "look": 22,
+      "serie": "Tip rápido del día",
+      "objetivo": "alcance"
+    },
+    {
+      "date": "2026-11-20",
+      "tema": "Setup del seguidor",
+      "formato": "Setup del seguidor",
+      "tipo": "carrusel",
+      "layout": "cine",
+      "plantilla": 1347,
+      "look": 243,
+      "serie": "Setup del seguidor",
+      "objetivo": "comunidad"
+    },
+    {
+      "date": "2026-11-21",
+      "tema": "Detrás de la app",
+      "formato": "Detrás de la app",
+      "tipo": "reel",
+      "layout": "faceless",
+      "plantilla": 1981,
+      "look": 97,
+      "serie": "Detrás de la app",
+      "objetivo": "confianza"
+    },
+    {
+      "date": "2026-11-22",
+      "tema": "Trail braking en fases",
+      "formato": "tip rápido del día",
+      "tipo": "reel",
+      "layout": "faceless",
+      "plantilla": 342,
+      "look": 207,
+      "serie": "Tip rápido del día",
+      "objetivo": "alcance"
+    },
+    {
+      "date": "2026-11-24",
+      "tema": "Mito: Los pedales de freno de 2 piezas son mejores",
+      "formato": "Mito o realidad",
+      "tipo": "historia",
+      "layout": "faceless",
+      "plantilla": 2156,
+      "look": 61,
+      "serie": "Mito o realidad",
+      "objetivo": ""
     }
   ]
 }

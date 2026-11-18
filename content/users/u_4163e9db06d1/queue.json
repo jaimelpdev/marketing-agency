@@ -1,102 +1,117 @@
 [
   {
-    "id": "2026-11-18-01-post",
-    "date": "2026-11-18",
-    "source": "auto",
-    "tipo": "post",
-    "tema": "Aceleración lenta dentro, rápida fuera",
-    "publishAt": "2026-11-18T22:33:35.005569+01:00",
-    "caption": "¿Sabías que frenar menos al entrar te permite acelerar más? Prueba la técnica y cuéntanos tu mejora. 🚗💨\n\n#simracing #aceleración #pilotos #tips #carreras",
-    "media": [
-      "media/u_4163e9db06d1/2026-11-18/2026-11-18-01-post/01.jpg"
-    ],
-    "status": "prueba",
-    "attempts": 0
-  },
-  {
-    "id": "2026-11-18-02-reel",
+    "id": "2026-11-18-01-reel",
     "date": "2026-11-18",
     "source": "auto",
     "tipo": "reel",
-    "tema": "Trail braking en fases",
-    "publishAt": "2026-11-19T19:45:00+01:00",
-    "caption": "Frena fuerte en recta y suelta suavemente al girar. ¿Ya usas la liberación progresiva en cada curva?\n\n#simracing #tips #trailbraking #carreras #pilotos\n\n🎵 «Spencer Newton - Right Now (Original Mix)(Electro House)» de Spencer Newton (CC BY 3.0)",
+    "tema": "Lento dentro, rápido fuera",
+    "publishAt": "2026-11-19T19:30:00+01:00",
+    "caption": "Frena fuerte al inicio y suéltalo suave mientras giras. Acelera progresivamente al salir del vértice. ¿Ya lo aplicas en tus vueltas?\n\n#simracing #técnicas #piloto #velocidad #consejos\n\n🎵 «Spencer Newton - Lucky Number 8 (Original Mix)(Electro House)» de Spencer Newton (CC BY 3.0)",
     "media": [
-      "media/u_4163e9db06d1/2026-11-18/2026-11-18-02-reel/video.mp4"
+      "media/u_4163e9db06d1/2026-11-18/2026-11-18-01-reel/video.mp4"
     ],
     "status": "prueba",
     "attempts": 0,
-    "cover": "media/u_4163e9db06d1/2026-11-18/2026-11-18-02-reel/cover.jpg",
+    "cover": "media/u_4163e9db06d1/2026-11-18/2026-11-18-01-reel/cover.jpg",
     "veo": {
       "clips": [
         {
-          "t": "¿Sabías que frenar demasiado tarde, justo antes del vértice, te ralentiza? En la recta pisa el freno fuerte y mantén la presión máxima.",
-          "prompt": "Aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a large monitor showing a racing game, not a real car interior. Driver’s foot pressing the brake pedal late, just before the apex, while the monitor shows the racing line approaching the corner, in the sim rig. Then: Driver’s foot fully depressed on the brake pedal, hand gripping the wheel, straight track displayed on the monitor, bright home gaming room. smooth natural camera movement, vertical 9:16 video, photorealistic, bright natural light, sharp focus, no text, no captions, no logos, no brand names, no watermark",
+          "t": "Ese error que te cuesta tiempo: frenar demasiado pronto. Al entrar en curva, mantén la velocidad un poco más alta.",
+          "prompt": "aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a big monitor showing a racing game, not a real car interior. The driver sits in the bucket seat, foot pressed hard on the brake pedal before the corner, eyes focused on the monitor, not a real car. Then: The driver leans into the turn, keeping the accelerator slightly pressed, wheel turned, monitor shows the corner, bright home gaming room. smooth natural camera movement, vertical 9:16 video, photorealistic, bright natural light, sharp focus, no text, no captions, no logos, no brand names, no watermark",
           "dur": 8
         },
         {
-          "t": "Al entrar en curva suelta el freno poco a poco mientras giras el volante. Esta liberación mantiene carga frontal suficiente, mejorando la adherencia del frente.",
-          "prompt": "Aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a large monitor showing a racing game, not a real car interior. Driver’s foot easing off the brake while turning the steering wheel left, monitor shows corner entry, aluminium sim rig background. Then: Monitor displays a 3D car model with glowing front tires, driver’s foot gently releasing the brake, illustrating front load. smooth natural camera movement, vertical 9:16 video, photorealistic, bright natural light, sharp focus, no text, no captions, no logos, no brand names, no watermark",
+          "t": "Busca un punto de referencia fijo para iniciar la frenada. Aplica el freno al máximo al inicio y suéltalo suavemente.",
+          "prompt": "aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a big monitor showing a racing game, not a real car interior. The driver glances at a fixed virtual cone on the screen, then moves his foot toward the brake pedal, rig clearly visible. Then: The driver pushes the brake pedal to the floor, then eases off smoothly, hands gripping the steering wheel, monitor displaying the braking zone. smooth natural camera movement, vertical 9:16 video, photorealistic, bright natural light, sharp focus, no text, no captions, no logos, no brand names, no watermark",
           "dur": 8
         },
         {
-          "t": "Si sueltas el freno de golpe, el coche pierde estabilidad y subvirará.",
-          "prompt": "Aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a large monitor showing a racing game, not a real car interior. Driver’s foot suddenly lifted off the brake, monitor shows the car sliding outward with rear oversteer, tire smoke. smooth natural camera movement, vertical 9:16 video, photorealistic, bright natural light, sharp focus, no text, no captions, no logos, no brand names, no watermark",
+          "t": "Mientras giras, mantén un leve toque de freno para girar.",
+          "prompt": "aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a big monitor showing a racing game, not a real car interior. The driver keeps a light touch on the brake while turning the wheel, foot hovering, rig interior illuminated. smooth natural camera movement, vertical 9:16 video, photorealistic, bright natural light, sharp focus, no text, no captions, no logos, no brand names, no watermark",
           "dur": 6
         },
         {
-          "t": "Mantén la suelta suave hasta medio giro y siente la tracción limpia. Practica en una sola curva eligiendo un punto de referencia para frenar.",
-          "prompt": "Aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a large monitor showing a racing game, not a real car interior. Driver’s foot gently releasing brake halfway through the turn, wheel turned 45°, monitor shows smooth racing line. Then: Driver’s hand pointing at a virtual reference marker on the monitor, foot near brake, focusing on a single corner. smooth natural camera movement, vertical 9:16 video, photorealistic, bright natural light, sharp focus, no text, no captions, no logos, no brand names, no watermark",
+          "t": "Al llegar al vértice, suelta el freno y abre el volante. Acelera progresivamente, aumentando el pedal a medida que el coche endereza.",
+          "prompt": "aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a big monitor showing a racing game, not a real car interior. The driver releases the brake pedal and opens the steering wheel fully at the apex, eyes on the monitor. Then: The driver gradually presses the accelerator as the car straightens, foot moving upward, monitor showing a straightening line. smooth natural camera movement, vertical 9:16 video, photorealistic, bright natural light, sharp focus, no text, no captions, no logos, no brand names, no watermark",
           "dur": 8
         },
         {
-          "t": "Repite varias vueltas sin errores y luego compara telemetría para afinar la frenada. Para más técnicas como esta visita el enlace en mi bio.",
-          "prompt": "Aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a large monitor showing a racing game, not a real car interior. Driver seated, looking at monitor displaying colorful telemetry graphs, hand on wheel, feet off pedals, bright room. Then: Driver’s hand reaching toward a glowing link icon on the monitor, sim rig background, inviting viewers to click. smooth natural camera movement, vertical 9:16 video, photorealistic, bright natural light, sharp focus, no text, no captions, no logos, no brand names, no watermark",
+          "t": "Sentirás la salida más rápida y ganarás tiempo en la recta. Encuentra la guía completa en el enlace de mi perfil.",
+          "prompt": "aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a big monitor showing a racing game, not a real car interior. The driver smiles, foot fully on the accelerator, speed gauge needle high, bright monitor and rig in background. Then: The driver points at the tablet screen displaying the app interface, hand visible, rig and monitor behind, no text shown. smooth natural camera movement, vertical 9:16 video, photorealistic, bright natural light, sharp focus, no text, no captions, no logos, no brand names, no watermark",
           "dur": 8
         }
       ],
       "voz": "es-ES-AlvaroNeural",
       "ritmo": "+16%",
       "musica": "energetica",
-      "hashtags": "#simracing #tips #trailbraking #carreras #pilotos"
+      "hashtags": "#simracing #técnicas #piloto #velocidad #consejos"
     }
   },
   {
-    "id": "2026-11-18-03-historia",
+    "id": "2026-11-18-02-carrusel",
     "date": "2026-11-18",
     "source": "auto",
-    "tipo": "historia",
-    "tema": "Uso del freno de mano en curvas",
-    "publishAt": "2026-11-20T09:00:00+01:00",
-    "caption": "",
+    "tipo": "carrusel",
+    "tema": "Setup del seguidor",
+    "publishAt": "2026-11-20T13:30:00+01:00",
+    "caption": "¿Has revisado tu presión de neumáticos? Ajusta y gana 0,3 s en cada vuelta. Comparte tu setup y te lo ajusto. Enlace en bio\n\n#simracing #setup #tiempo #pistas #consejos",
     "media": [
-      "media/u_4163e9db06d1/2026-11-18/2026-11-18-03-historia/video.mp4"
+      "media/u_4163e9db06d1/2026-11-18/2026-11-18-02-carrusel/01.jpg",
+      "media/u_4163e9db06d1/2026-11-18/2026-11-18-02-carrusel/02.jpg",
+      "media/u_4163e9db06d1/2026-11-18/2026-11-18-02-carrusel/03.jpg",
+      "media/u_4163e9db06d1/2026-11-18/2026-11-18-02-carrusel/04.jpg",
+      "media/u_4163e9db06d1/2026-11-18/2026-11-18-02-carrusel/05.jpg",
+      "media/u_4163e9db06d1/2026-11-18/2026-11-18-02-carrusel/06.jpg"
+    ],
+    "status": "prueba",
+    "attempts": 0
+  },
+  {
+    "id": "2026-11-18-03-reel",
+    "date": "2026-11-18",
+    "source": "auto",
+    "tipo": "reel",
+    "tema": "Detrás de la app",
+    "publishAt": "2026-11-21T19:30:00+01:00",
+    "caption": "Usa la telemetría en tiempo real para afinar tu frenado y aceleración. Cada ajuste se refleja en la gráfica y te ayuda a ser más constante. ¿Qué cambio aplicarás en tu próxima sesión?\n\n#simracing #app #IA #tecnología #tiempo\n\n🎵 «Arthas's theme (Hip-hop remix)» de Applewise (CC BY 2.0)",
+    "media": [
+      "media/u_4163e9db06d1/2026-11-18/2026-11-18-03-reel/video.mp4"
     ],
     "status": "prueba",
     "attempts": 0,
-    "cover": "media/u_4163e9db06d1/2026-11-18/2026-11-18-03-historia/cover.jpg",
+    "cover": "media/u_4163e9db06d1/2026-11-18/2026-11-18-03-reel/cover.jpg",
     "veo": {
       "clips": [
         {
-          "t": "¿Crees que el freno de mano solo sirve para derrapes? En curvas muy cerradas puede ayudar a girar el coche.",
-          "prompt": "aluminium sim racing rig with bucket seat, steering wheel, handbrake lever and pedals inside a bright home gaming room, large monitor displaying a racing game, not a real car interior. Driver reaches for the handbrake lever on the sim rig, front view, bright gaming room, monitor showing a racing track, not a real car. Then: Driver pulls the handbrake while turning the steering wheel sharply, front view, tight corner visible on the monitor, bright home gaming room. smooth natural camera movement, vertical 9:16 video, photorealistic, bright natural light, sharp focus, no text, no captions, no logos, no brand names, no watermark",
+          "t": "Nadie te dice cómo la telemetría en vivo te ayuda a afinar tu técnica al instante Observa la barra de telemetría mientras giras para ver la presión de freno",
+          "prompt": "aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a big monitor showing a racing game, not a real car interior. The driver sits in the rig, facing the monitor, watching a colorful live telemetry graph while gripping the steering wheel, bright room. Then: Driver turns the wheel sharply, monitor shows a red brake pressure bar rising, view from over the shoulder in the gaming room. smooth natural camera movement, vertical 9:16 video, photorealistic, bright natural light, sharp focus, no text, no captions, no logos, no brand names, no watermark",
           "dur": 8
         },
         {
-          "t": "Frena en recta, mantén presión y toca el freno al girar.",
-          "prompt": "aluminium sim racing rig with bucket seat, steering wheel, handbrake lever and pedals inside a bright home gaming room, large monitor displaying a racing game, not a real car interior. Driver depresses the foot brake pedal, keeps pressure, and taps the handbrake as the monitor shows a straight track, front view. smooth natural camera movement, vertical 9:16 video, photorealistic, bright natural light, sharp focus, no text, no captions, no logos, no brand names, no watermark",
+          "t": "Si el pico de presión llega tarde, comienza a frenar un poco antes Desliza el freno suavemente al entrar en curva para evitar subvira",
+          "prompt": "aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a big monitor showing a racing game, not a real car interior. Driver presses the brake pedal earlier, monitor displays a delayed pressure peak line, focus on foot and screen. Then: Driver eases the brake pedal while cornering, monitor shows smooth brake curve, side view of hands on wheel and foot. smooth natural camera movement, vertical 9:16 video, photorealistic, bright natural light, sharp focus, no text, no captions, no logos, no brand names, no watermark",
+          "dur": 8
+        },
+        {
+          "t": "Mira el momento en que el acelerador sube y mantén el volante firme",
+          "prompt": "aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a big monitor showing a racing game, not a real car interior. Driver’s hand holds wheel steady as a green throttle bar spikes on the monitor, close‑up from driver’s perspective. smooth natural camera movement, vertical 9:16 video, photorealistic, bright natural light, sharp focus, no text, no captions, no logos, no brand names, no watermark",
           "dur": 6
         },
         {
-          "t": "Suelta el freno suavemente mientras abres el volante y acelera progresivamente. Practica en una curva sencilla, siente la transferencia y repite.",
-          "prompt": "aluminium sim racing rig with bucket seat, steering wheel, handbrake lever and pedals inside a bright home gaming room, large monitor displaying a racing game, not a real car interior. Driver eases off the handbrake, opens the steering wheel, and presses the accelerator gradually, front view, monitor displaying a corner. Then: Driver repeats the maneuver on a simple curve, feeling weight shift, front view, monitor shows a gentle corner, bright gaming room. smooth natural camera movement, vertical 9:16 video, photorealistic, bright natural light, sharp focus, no text, no captions, no logos, no brand names, no watermark",
+          "t": "Acelera progresivamente mientras abres el volante, así evitas sobreviraje Cada ajuste que hagas, registra la vuelta de referencia para comparar",
+          "prompt": "aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a big monitor showing a racing game, not a real car interior. Driver gradually pushes the throttle and turns the wheel outward, screen shows increasing throttle and wheel angle, bright room. Then: Driver taps the ‘save lap’ button on the app interface, monitor displays a saved reference lap entry, focus on hand and screen. smooth natural camera movement, vertical 9:16 video, photorealistic, bright natural light, sharp focus, no text, no captions, no logos, no brand names, no watermark",
+          "dur": 8
+        },
+        {
+          "t": "Verás la diferencia en la gráfica: menos tiempo de frenado y salida más fluida Sígueme para más trucos y mejora tu tiempo en cada vuelta",
+          "prompt": "aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a big monitor showing a racing game, not a real car interior. Monitor displays side‑by‑side graphs, left longer brake phase, right shorter brake and smoother exit, driver watches attentively. Then: Driver gives a thumbs‑up toward the camera, monitor glows with a subtle notification icon, bright room, consistent rig. smooth natural camera movement, vertical 9:16 video, photorealistic, bright natural light, sharp focus, no text, no captions, no logos, no brand names, no watermark",
           "dur": 8
         }
       ],
-      "voz": "es-ES-ElviraNeural",
-      "ritmo": "+8%",
-      "musica": "divertida",
-      "hashtags": ""
+      "voz": "es-ES-AlvaroNeural",
+      "ritmo": "+16%",
+      "musica": "hiphop",
+      "hashtags": "#simracing #app #IA #tecnología #tiempo"
     }
   },
   {
@@ -104,9 +119,9 @@
     "date": "2026-11-18",
     "source": "auto",
     "tipo": "reel",
-    "tema": "Transferencia de peso al cambiar de marcha",
-    "publishAt": "2026-11-23T19:30:00+01:00",
-    "caption": "Reducir rpm antes de cambiar evita subviraje y gana tiempo. Mantén la tracción delantera y acelera suavemente. ¿Ya lo aplicas en tus vueltas?\n\n#simracing #tips #cambioDeMarcha #pilotos #carreras\n\n🎵 «Spencer Newton - Right Now (Original Mix)(Electro House)» de Spencer Newton (CC BY 3.0)",
+    "tema": "Trail braking en tres fases",
+    "publishAt": "2026-11-22T19:30:00+01:00",
+    "caption": "Domina el trail braking en tres fases y siente la diferencia en cada curva. Suelta el freno gradualmente y ganarás estabilidad. ¿Ya lo pruebas en tu pista favorita?\n\n#simracing #trailbraking #piloto #tiempo #consejos\n\n🎵 «AleXZavesa - Raven (EDM Trance Progressive)» de AlexZavesa (CC BY 3.0)",
     "media": [
       "media/u_4163e9db06d1/2026-11-18/2026-11-18-04-reel/video.mp4"
     ],
@@ -116,83 +131,73 @@
     "veo": {
       "clips": [
         {
-          "t": "Ese salto de peso al subir de marcha te roba tiempo Al cambiar, el coche traslada masa al eje delantero, provocando subviraje",
-          "prompt": "Aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a big monitor showing a racing game, not a real car interior. Driver lifts gear shifter while his torso tilts upward, monitor shows a red flash on lap timer. Then: Driver grips steering wheel tightly as front tires slip, monitor displays front wheels sliding outward, indicating understeer. smooth natural camera movement, vertical 9:16 video, photorealistic, bright natural light, sharp focus, no text, no captions, no logos, no brand names, no watermark",
+          "t": "Nadie te dice que frenar en tres fases cambia tu ritmo Primero, aprieta el freno firmemente mientras el coche sigue recto",
+          "prompt": "aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a large monitor displaying a racing game, not a real car interior. Driver’s right foot halfway down the black brake pedal on the sim rig, viewed from the side, with two faint ghosted pedal positions showing earlier and later presses. Then: Driver seated upright, pressing the brake pedal fully with both feet, straight‑ahead view of the racing monitor displaying a straight track, captured from the cockpit front. smooth natural camera movement, vertical 9:16 video, photorealistic, bright natural light, sharp focus, no text, no captions, no logos, no brand names, no watermark",
           "dur": 8
         },
         {
-          "t": "Si mantienes revoluciones altas, la carga delantera pierde agarre Reduce las rpm unas revoluciones antes de cambiar de marcha",
-          "prompt": "Aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a big monitor showing a racing game, not a real car interior. Driver presses accelerator pedal fully, rev meter spikes, monitor shows front tires smoking, loss of grip. Then: Driver eases off accelerator, rev meter drops a few hundred RPM, hand prepares to pull shifter down. smooth natural camera movement, vertical 9:16 video, photorealistic, bright natural light, sharp focus, no text, no captions, no logos, no brand names, no watermark",
+          "t": "Mantén esa presión hasta el punto de referencia para girar Al iniciar la curva, suelta el freno suavemente mientras giras el volante",
+          "prompt": "aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a large monitor displaying a racing game, not a real car interior. Driver keeps foot steady on the brake while eyes focus on a highlighted corner marker on the monitor, seen from the driver’s eye level in the cockpit. Then: Driver’s left hand turns the steering wheel left as the right foot lifts slightly off the brake, captured from a front‑center cockpit angle. smooth natural camera movement, vertical 9:16 video, photorealistic, bright natural light, sharp focus, no text, no captions, no logos, no brand names, no watermark",
           "dur": 8
         },
         {
-          "t": "Acelera suavemente mientras sueltas el embrague, sin perder freno",
-          "prompt": "Aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a big monitor showing a racing game, not a real car interior. Driver lifts foot from clutch, presses accelerator smoothly, brake pedal remains pressed, monitor shows steady speed. smooth natural camera movement, vertical 9:16 video, photorealistic, bright natural light, sharp focus, no text, no captions, no logos, no brand names, no watermark",
-          "dur": 4
+          "t": "Cuanto más giras, menos freno mantienes, lo que ayuda al morro a seguir",
+          "prompt": "aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a large monitor displaying a racing game, not a real car interior. Driver’s wheel turned sharply right with only a light tap on the brake pedal, seen from a side view highlighting the minimal foot pressure. smooth natural camera movement, vertical 9:16 video, photorealistic, bright natural light, sharp focus, no text, no captions, no logos, no brand names, no watermark",
+          "dur": 6
         },
         {
-          "t": "Así mantienes la carga delantera estable y evitas el subviraje Mejorarás tu vuelta sin notar el cambio y ganarás tiempo",
-          "prompt": "Aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a big monitor showing a racing game, not a real car interior. Driver sits upright, hands steady on wheel, monitor displays front tires with solid grip, no understeer. Then: Driver smiles as monitor shows lap time dropping, smooth racing line, no gear shift animation. smooth natural camera movement, vertical 9:16 video, photorealistic, bright natural light, sharp focus, no text, no captions, no logos, no brand names, no watermark",
+          "t": "Si sueltas el freno de golpe, el coche subvirará y perderá velocidad Practica la transición en una pista sencilla, repitiendo la suelta hasta que sea fluida",
+          "prompt": "aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a large monitor displaying a racing game, not a real car interior. Driver’s foot fully off the brake as the monitor shows the car’s rear sliding outward, captured from a cockpit perspective with the wheel angled. Then: Driver practices on a simple oval track displayed on the screen, repeatedly easing off the brake, viewed from the front of the sim rig. smooth natural camera movement, vertical 9:16 video, photorealistic, bright natural light, sharp focus, no text, no captions, no logos, no brand names, no watermark",
           "dur": 8
         },
         {
-          "t": "Prueba este truco en la próxima curva y siente la diferencia Sígueme para más consejos y mejora tu tiempo cada sesión",
-          "prompt": "Aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a big monitor showing a racing game, not a real car interior. Driver leans into virtual corner, hands guiding wheel, monitor shows car hugging apex tightly. Then: Driver gives thumbs up toward camera, monitor displays fast lap replay, inviting viewers. smooth natural camera movement, vertical 9:16 video, photorealistic, bright natural light, sharp focus, no text, no captions, no logos, no brand names, no watermark",
+          "t": "Cuando lo logres, notarás que el coche entra más estable y acelera antes Sígueme para más trucos que convierten tu tiempo en pista",
+          "prompt": "aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a large monitor displaying a racing game, not a real car interior. Driver smiles as the monitor shows the car entering the corner smoothly and accelerating early, captured from a close‑up cockpit front view. Then: Driver extends a hand toward a glowing app icon on the monitor, inviting viewers, seen from a frontal cockpit angle. smooth natural camera movement, vertical 9:16 video, photorealistic, bright natural light, sharp focus, no text, no captions, no logos, no brand names, no watermark",
           "dur": 8
         }
       ],
       "voz": "es-ES-AlvaroNeural",
       "ritmo": "+16%",
       "musica": "energetica",
-      "hashtags": "#simracing #tips #cambioDeMarcha #pilotos #carreras"
+      "hashtags": "#simracing #trailbraking #piloto #tiempo #consejos"
     }
   },
   {
-    "id": "2026-11-18-05-reel",
+    "id": "2026-11-18-05-historia",
     "date": "2026-11-18",
     "source": "auto",
-    "tipo": "reel",
-    "tema": "Telemetría en la app para afinar la línea",
-    "publishAt": "2026-11-24T19:30:00+01:00",
-    "caption": "La telemetría indica dónde frenas de más y cómo suavizar la entrada. ¿Qué ajuste probarás en la próxima vuelta?\n\n#simracing #telemetria #tips #app #carreras\n\n🎵 «Epic Hip-Hop» de Soundrider/Dope (CC BY 3.0)",
+    "tipo": "historia",
+    "tema": "Mito del pedal de freno de dos piezas",
+    "publishAt": "2026-11-24T09:30:00+01:00",
+    "caption": "",
     "media": [
-      "media/u_4163e9db06d1/2026-11-18/2026-11-18-05-reel/video.mp4"
+      "media/u_4163e9db06d1/2026-11-18/2026-11-18-05-historia/video.mp4"
     ],
     "status": "prueba",
     "attempts": 0,
-    "cover": "media/u_4163e9db06d1/2026-11-18/2026-11-18-05-reel/cover.jpg",
+    "cover": "media/u_4163e9db06d1/2026-11-18/2026-11-18-05-historia/cover.jpg",
     "veo": {
       "clips": [
         {
-          "t": "¿Sabías que tu trazado esconde errores que la telemetría detecta? Abre la app y visualiza velocidad y trazada en tiempo real.",
-          "prompt": "Aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a large monitor showing a racing game, not a real car interior. The driver sits at the sim rig, facing the monitor, pointing at a colored telemetry line on the screen. Then: The driver opens the mobile app on a tablet, viewing a real‑time speed and racing line graph on the screen. smooth natural camera movement, vertical 9:16 video, photorealistic, bright natural light, sharp focus, no text, no captions, no logos, no brand names, no watermark",
+          "t": "¿Piensas que un pedal de freno de dos piezas te brinda ventaja? El secreto está en regular la presión, no en cuántas piezas tiene.",
+          "prompt": "Aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a large monitor showing a racing game, not a real car interior. The driver examines a two‑piece brake pedal on the rig, front view, hand hovering, bright gaming room. Then: The driver turns the brake pressure dial on the pedal, close‑up, front view. smooth natural camera movement, vertical 9:16 video, photorealistic, bright natural light, sharp focus, no text, no captions, no logos, no brand names, no watermark",
           "dur": 8
         },
         {
-          "t": "Busca el punto donde frenas antes del pilar y registra la distancia. Compárala con la frenada en recta, donde el pico de presión aparece al inicio.",
-          "prompt": "Aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a large monitor showing a racing game, not a real car interior. The driver presses the brake pedal while the monitor highlights a red marker just before a virtual pillar, indicating the braking point distance. Then: The driver watches a split‑screen telemetry view comparing braking on a corner with straight‑line braking, showing an early pressure peak. smooth natural camera movement, vertical 9:16 video, photorealistic, bright natural light, sharp focus, no text, no captions, no logos, no brand names, no watermark",
-          "dur": 8
-        },
-        {
-          "t": "Si frenas demasiado pronto, acorta la distancia y vuelve a intentarlo.",
-          "prompt": "Aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a large monitor showing a racing game, not a real car interior. The driver releases the brake slightly later, and the monitor updates the distance marker to a shorter value. smooth natural camera movement, vertical 9:16 video, photorealistic, bright natural light, sharp focus, no text, no captions, no logos, no brand names, no watermark",
+          "t": "Un pedal con célula de carga controla la presión con gran precisión.",
+          "prompt": "Aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a large monitor showing a racing game, not a real car interior. A close‑up shows the brake pedal with a load‑cell sensor glowing, front view, on the rig. smooth natural camera movement, vertical 9:16 video, photorealistic, bright natural light, sharp focus, no text, no captions, no logos, no brand names, no watermark",
           "dur": 6
         },
         {
-          "t": "Ajusta la entrada para soltar el freno suavemente mientras giras, usando trail‑braking. Observa la salida: acelera progresivamente al abrir el volante y evita el sobreviraje.",
-          "prompt": "Aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a large monitor showing a racing game, not a real car interior. The driver turns the steering wheel while gently lifting off the brake, and the telemetry line smooths through the corner. Then: The driver presses the accelerator as the car exits the corner, and the screen displays a steady acceleration curve without oversteer. smooth natural camera movement, vertical 9:16 video, photorealistic, bright natural light, sharp focus, no text, no captions, no logos, no brand names, no watermark",
-          "dur": 8
-        },
-        {
-          "t": "Registra nuevamente la telemetría y verifica que la velocidad aumenta antes del vértice. Si notas la mejora, sigue nuestra cuenta para más trucos de telemetría.",
-          "prompt": "Aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a large monitor showing a racing game, not a real car interior. The driver taps the record button, and the telemetry replay shows speed rising before the apex point. Then: The driver gives a thumbs‑up at the rig, while the monitor displays a green check icon confirming improvement. smooth natural camera movement, vertical 9:16 video, photorealistic, bright natural light, sharp focus, no text, no captions, no logos, no brand names, no watermark",
+          "t": "Frena fuerte al inicio de la recta y suelta suavemente al girar. Mantén esa presión inicial y suéltala progresivamente para mejorar la trazada.",
+          "prompt": "Aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a large monitor showing a racing game, not a real car interior. The driver slams the brake pedal at the start of a straight, then eases off while turning the wheel. Then: The driver keeps initial pressure on the brake pedal, then slowly releases, foot moving upward, front view. smooth natural camera movement, vertical 9:16 video, photorealistic, bright natural light, sharp focus, no text, no captions, no logos, no brand names, no watermark",
           "dur": 8
         }
       ],
       "voz": "es-ES-AlvaroNeural",
-      "ritmo": "+8%",
-      "musica": "hiphop",
-      "hashtags": "#simracing #telemetria #tips #app #carreras"
+      "ritmo": "-4%",
+      "musica": "chill",
+      "hashtags": ""
     }
   }
 ]
