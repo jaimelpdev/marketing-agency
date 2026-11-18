@@ -1,165 +1,206 @@
 {
   "date": "2026-11-18",
-  "estrategia": "Publicamos dos reels de tips los lunes y jueves, un carrusel de llamado a acción el sábado, un post motivador el domingo, y una historia de pregunta el martes. Descansamos viernes y la noche del sábado para no saturar a la audiencia.",
+  "estrategia": "Publicamos en los días 1,2,3 y 6: reels en horarios pico para alcance, carrusel para comunidad y una historia para interacción. Descansamos el resto de días para evitar saturar la audiencia y respetar la frecuencia recomendada.",
   "piezas": [
     {
-      "id": "pmwmhlu34_0",
+      "id": "pmwmi40it_0",
       "dia": 1,
-      "hora": "19:30",
+      "hora": "19:45",
       "tipo": "reel",
       "objetivo": "alcance",
-      "razon": "Tip rápido para captar audiencia",
-      "tema": "Línea de salida",
-      "formato": "reel",
-      "gancho": "¿Sabes por qué la línea de salida importa?",
-      "visual": "close-up of a racing car at the start line, bright colors",
+      "razon": "Lanzar tip rápido para generar interacción y alcance",
+      "tema": "Presión de neumáticos",
+      "formato": "Tip rápido del día",
+      "gancho": "¿Por qué pierdes 0.5 s con presión baja?",
+      "visual": "close‑up of wheel pressure gauge",
       "escenas": [
         {
-          "titulo": "Línea de salida",
-          "texto": "El punto exacto cambia tu tiempo",
+          "titulo": "Presión perfecta",
+          "texto": "El 80 % de los errores de tiempo están en los neumáticos",
           "emoji": "",
-          "visual": "car at the start line",
+          "visual": "wheel pressure gauge",
           "visuales": [
-            "car at start line"
-          ],
-          "foto": "",
-          "grafico": {
-            "tipo": "checklist",
-            "items": [
-              "punto de partida",
-              "velocidad"
-            ]
-          }
-        },
-        {
-          "titulo": "Velocidad",
-          "texto": "Arranca 5 km/h más rápido",
-          "emoji": "",
-          "visual": "speedometer needle moving",
-          "visuales": [
+            "tire gauge",
             "speedometer"
           ],
           "foto": "",
           "grafico": {
-            "tipo": "progreso",
-            "valor": 5,
-            "etiqueta": "km/h"
+            "tipo": "checklist",
+            "items": [
+              "Presión adecuada",
+              "Temperatura de la pista",
+              "Tipo de neumático"
+            ]
           }
         },
         {
-          "titulo": "Resultado",
-          "texto": "Reduce 0.2s en la primera curva",
+          "titulo": "Lo que se hace mal",
+          "texto": "Presión por debajo de 30 PSI es un gran error",
           "emoji": "",
-          "visual": "time counter",
+          "visual": "low pressure gauge",
           "visuales": [
-            "time counter"
+            "low pressure gauge",
+            "car interior"
           ],
           "foto": "",
           "grafico": {
-            "tipo": "contador",
-            "valor": 0,
-            "unidad": "s"
+            "tipo": "comparacion",
+            "mal": "30 PSI",
+            "bien": "35 PSI"
+          }
+        },
+        {
+          "titulo": "Lo correcto",
+          "texto": "Ajustar a 35 PSI reduce 0.5 s por vuelta",
+          "emoji": "",
+          "visual": "high pressure gauge",
+          "visuales": [
+            "high pressure gauge",
+            "car racing"
+          ],
+          "foto": "",
+          "grafico": {
+            "tipo": "progreso",
+            "valor": 50,
+            "etiqueta": "Reducción de tiempo"
+          }
+        },
+        {
+          "titulo": "Aplica y gana",
+          "texto": "Guarda este tip y prueba en tu próxima carrera",
+          "emoji": "",
+          "visual": "car racing",
+          "visuales": [
+            "car on track",
+            "checkmark"
+          ],
+          "foto": "",
+          "grafico": {
+            "tipo": "objetivo",
+            "etiqueta": "Mejorar tiempo"
           }
         }
       ],
-      "cta": "Comenta LINEA y descubre más tips",
+      "cta": "Guarda y comparte",
       "sticker": null,
       "fondo": "ia",
       "estilo": "racing",
-      "caption": "El secreto de la línea de salida: un punto exacto y 5 km/h extra pueden ahorrarte 0,2 s en la primera curva. ¿Ya lo has probado? #simracing #tips #racetime",
-      "hashtags": "#simracing #tips #racetime #racing #motivation",
+      "caption": "Ajustar la presión de los neumáticos ligeramente puede mejorar tu tiempo por vuelta. ¿Qué presión usas tú?",
+      "hashtags": "#Simracing #Tips #Racing",
       "audio": "voz_y_musica",
-      "voz": "hombre",
+      "voz": "mujer",
       "ritmo_voz": "energico",
       "musica": "energetica",
       "guion": [
-        "Nadie te dice que la posición exacta en la salida cambia todo",
-        "Arrancas con menos arrastre y ganas velocidad desde el primer kilómetro",
-        "Una línea ligeramente adelantada te permite acelerar unos metros antes",
-        "Antes de la carrera, marca la zona de referencia en tu pantalla",
-        "Practica lanzarte justo cuando el semáforo pasa a verde, sin frenar",
-        "Ajusta la sensibilidad del acelerador para que responda al instante",
-        "Verás tus tiempos bajar y la primera curva más estable",
-        "Descubre más lecciones en el enlace de mi perfil"
+        "¿Sabías que perder tiempo en una vuelta puede ser tan sencillo?",
+        "La mayoría de los tiempos perdidos vienen de una presión incorrecta.",
+        "Si tus neumáticos están insuficientemente inflados, el agarre disminuye notablemente.",
+        "En la pista típica, la presión ideal está dentro del rango recomendado.",
+        "Ajusta la presión ligeramente hacia arriba y sentirás la diferencia.",
+        "Ese pequeño ajuste puede recortar tiempo en cada vuelta rápidamente.",
+        "Comprueba la mejora haciendo una vuelta de referencia antes y después.",
+        "Si notas más estabilidad y menos deslizamiento, lo has hecho bien.",
+        "Sígueme para más trucos de simracing y afina tu rendimiento."
       ],
       "beats": [
         {
-          "t": "Nadie te dice que la posición exacta en la salida cambia todo",
-          "img": "modern home sim racing studio with aluminium rig, bucket seat, steering wheel and pedals inside a bright gaming room, large 4K monitor showing a racing game, not a real car interior. Driver’s hand places a tiny digital marker on the start line displayed on the monitor, rig and seat visible behind, highlighting exact launch position."
+          "t": "¿Sabías que perder tiempo en una vuelta puede ser tan sencillo?",
+          "img": "aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a big monitor showing a racing game, not a real car interior. Driver seated at the rig, looking at the monitor displaying a slow lap timer, frowning as the lap time lags behind"
         },
         {
-          "t": "Arrancas con menos arrastre y ganas velocidad desde el primer kilómetro",
-          "img": "modern home sim racing studio with aluminium rig, bucket seat, steering wheel and pedals inside a bright gaming room, large 4K monitor showing a racing game, not a real car interior. Driver’s foot fully depresses the accelerator pedal while the monitor shows the virtual car surging forward with clean airflow lines, indicating low drag."
+          "t": "La mayoría de los tiempos perdidos vienen de una presión incorrecta.",
+          "img": "aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a big monitor showing a racing game, not a real car interior. Driver’s hand holding a digital tire pressure gauge beside the steering wheel, gauge reading low pressure, rig and monitor visible"
         },
         {
-          "t": "Una línea ligeramente adelantada te permite acelerar unos metros antes",
-          "img": "modern home sim racing studio with aluminium rig, bucket seat, steering wheel and pedals inside a bright gaming room, large 4K monitor showing a racing game, not a real car interior. Driver’s hand drags the racing line forward on the screen, creating a slightly advanced trajectory highlighted in bright orange, ready for earlier acceleration."
+          "t": "Si tus neumáticos están insuficientemente inflados, el agarre disminuye notablemente.",
+          "img": "aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a big monitor showing a racing game, not a real car interior. Monitor shows the virtual car sliding on a corner with low‑pressure tires, driver’s expression shows concern"
         },
         {
-          "t": "Antes de la carrera, marca la zona de referencia en tu pantalla",
-          "img": "modern home sim racing studio with aluminium rig, bucket seat, steering wheel and pedals inside a bright gaming room, large 4K monitor showing a racing game, not a real car interior. Driver’s cursor clicks to set a bright green reference zone on the racing track displayed on the monitor, rig background visible."
+          "t": "En la pista típica, la presión ideal está dentro del rango recomendado.",
+          "img": "aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a big monitor showing a racing game, not a real car interior. Driver glances at an on‑screen gauge displaying the recommended tire pressure range bar, rig background"
         },
         {
-          "t": "Practica lanzarte justo cuando el semáforo pasa a verde, sin frenar",
-          "img": "modern home sim racing studio with aluminium rig, bucket seat, steering wheel and pedals inside a bright gaming room, large 4K monitor showing a racing game, not a real car interior. Driver’s foot lifts from the brake and presses the accelerator as the on‑screen traffic light turns green, indicating a perfect launch."
+          "t": "Ajusta la presión ligeramente hacia arriba y sentirás la diferencia.",
+          "img": "aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a big monitor showing a racing game, not a real car interior. Driver adjusts the virtual setup UI, dragging the pressure slider slightly upward, hands centered on the steering wheel"
         },
         {
-          "t": "Ajusta la sensibilidad del acelerador para que responda al instante",
-          "img": "modern home sim racing studio with aluminium rig, bucket seat, steering wheel and pedals inside a bright gaming room, large 4K monitor showing a racing game, not a real car interior. Driver’s hand turns the small throttle‑sensitivity knob on the rig, fingers close to the dial, implying instant response adjustment."
+          "t": "Ese pequeño ajuste puede recortar tiempo en cada vuelta rápidamente.",
+          "img": "aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a big monitor showing a racing game, not a real car interior. Side‑by‑side screen comparison shows a faster lap time after the pressure tweak, driver smiling"
         },
         {
-          "t": "Verás tus tiempos bajar y la primera curva más estable",
-          "img": "modern home sim racing studio with aluminium rig, bucket seat, steering wheel and pedals inside a bright gaming room, large 4K monitor showing a racing game, not a real car interior. Monitor displays a descending lap‑time graph and the virtual car smoothly hugging the first corner, illustrating faster, more stable handling."
+          "t": "Comprueba la mejora haciendo una vuelta de referencia antes y después.",
+          "img": "aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a big monitor showing a racing game, not a real car interior. Driver presses the record button on the monitor, then starts a reference lap, focus on hands"
         },
         {
-          "t": "Descubre más lecciones en el enlace de mi perfil",
-          "img": "modern home sim racing studio with aluminium rig, bucket seat, steering wheel and pedals inside a bright gaming room, large 4K monitor showing a racing game, not a real car interior. Driver’s hand taps a glowing profile icon on the monitor, indicating where to find additional lessons, with rig and room bright."
+          "t": "Si notas más estabilidad y menos deslizamiento, lo has hecho bien.",
+          "img": "aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a big monitor showing a racing game, not a real car interior. Monitor displays the car stable through a high‑speed corner, tire grip indicator green, driver looks satisfied"
+        },
+        {
+          "t": "Sígueme para más trucos de simracing y afina tu rendimiento.",
+          "img": "aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a big monitor showing a racing game, not a real car interior. Driver points toward the camera with a friendly gesture, seated at the rig, inviting viewers to follow"
         }
       ],
-      "estilo_visual": "bright, high‑key lighting, vivid colors, sharp focus, no motion blur, consistent crisp photography",
-      "visual_cierre": "car crossing finish line",
-      "cierre_bio": "Descubre más lecciones en el enlace de mi perfil",
+      "estilo_visual": "bright, crisp lighting with vivid colors, sharp focus, no blur",
+      "visual_cierre": "wheel gauge at 30 PSI",
+      "cierre_bio": "Visita el enlace del perfil para más trucos de simracing",
       "foto": "",
       "anim": "pop",
       "serie": "Tip rápido del día",
       "episodio": 1,
-      "look": 22,
-      "plantilla": 648,
+      "look": 133,
+      "plantilla": 979,
       "layout": "faceless",
       "stickers": []
     },
     {
-      "id": "pmwmhlu34_1",
-      "dia": 5,
-      "hora": "19:30",
+      "id": "pmwmi40iu_3",
+      "dia": 6,
+      "hora": "20:00",
       "tipo": "reel",
-      "objetivo": "alcance",
-      "razon": "Tip rápido para optimizar la sensibilidad del volante",
-      "tema": "Sensibilidad del volante",
-      "formato": "reel",
-      "gancho": "¿Tu coche se desvía al girar?",
-      "visual": "close-up of a racing wheel, neon lights",
+      "objetivo": "confianza",
+      "razon": "Mostrar funcionalidad de la app para generar confianza",
+      "tema": "IA ajusta tu setup al vuelo",
+      "formato": "Detrás de la app",
+      "gancho": "¿Sabías que la IA ya ajusta tu coche en segundos?",
+      "visual": "screen showing app interface with AI icon",
       "escenas": [
         {
-          "titulo": "Giro suave",
-          "texto": "Ajusta la sensibilidad para curvas cerradas",
+          "titulo": "App en acción",
+          "texto": "La IA analiza tu data en tiempo real",
           "emoji": "",
-          "visual": "wheel turning",
+          "visual": "app screen with graphs",
           "visuales": [
-            "wheel turning"
+            "app screen",
+            "graphs"
+          ],
+          "foto": "",
+          "grafico": {
+            "tipo": "progreso",
+            "valor": 70,
+            "etiqueta": "Análisis"
+          }
+        },
+        {
+          "titulo": "Ajuste automático",
+          "texto": "Se recalibran los parámetros con un click",
+          "emoji": "",
+          "visual": "settings menu",
+          "visuales": [
+            "settings screen"
           ],
           "foto": "",
           "grafico": {
             "tipo": "checklist",
             "items": [
-              "sensibilidad",
-              "curvas"
+              "Suspensión",
+              "Aceleración",
+              "Frenado"
             ]
           }
         },
         {
-          "titulo": "Velocidad",
-          "texto": "Reduce el tiempo de respuesta 10%",
+          "titulo": "Resultado instantáneo",
+          "texto": "Verás tu tiempo mejorar en minutos",
           "emoji": "",
           "visual": "speedometer",
           "visuales": [
@@ -167,80 +208,90 @@
           ],
           "foto": "",
           "grafico": {
-            "tipo": "progreso",
-            "valor": 10,
-            "etiqueta": "%"
+            "tipo": "objetivo",
+            "etiqueta": "Tiempo reducido"
           }
+        },
+        {
+          "titulo": "¿Listo para subir la pista?",
+          "texto": "Descarga la app y prueba hoy",
+          "emoji": "",
+          "visual": "download button",
+          "visuales": [
+            "download icon"
+          ],
+          "foto": "",
+          "grafico": null
         }
       ],
-      "cta": "Guarda este tip y mejora tu tiempo",
+      "cta": "Descarga la app y prueba hoy",
       "sticker": null,
       "fondo": "ia",
       "estilo": "pop",
-      "caption": "¿Sientes que tu volante reacciona demasiado rápido? Ajusta la sensibilidad y ahorra tiempo en cada curva. #simracing #tips #sensibilidad",
-      "hashtags": "#simracing #tips #sensibilidad #racing",
+      "caption": "Usa la IA para analizar tu telemetría y ajustar el setup al vuelo. ¿Qué ajustes te han funcionado mejor?",
+      "hashtags": "#Simracing #IA #App",
       "audio": "voz_y_musica",
-      "voz": "hombre",
+      "voz": "mujer",
       "ritmo_voz": "energico",
-      "musica": "hiphop",
+      "musica": "energetica",
       "guion": [
-        "¿Tu coche se desvía al girar en cada curva?",
-        "Eso ocurre cuando la sensibilidad del volante está demasiado alta.",
-        "Con una sensibilidad alta, el juego reacciona antes de que muevas el volante.",
-        "Baja la sensibilidad en la configuración del simulador para ganar control.",
-        "Reduce también la zona muerta, ese espacio donde el volante no responde.",
-        "Ajusta el ángulo máximo a la mitad de tu rango habitual.",
-        "Practica una curva cerrada y siente la respuesta más suave y predecible.",
-        "Cuando el coche siga la línea sin tirones, habrás conseguido la configuración ideal.",
-        "Sígueme para más trucos de simracing y mejora tu tiempo"
+        "¿Sabías que la IA puede afinar tu setup en segundos?",
+        "Primero, exporta tu telemetría después de cada vuelta.",
+        "Importa ese archivo a una herramienta de IA que analice el agarre.",
+        "La IA te sugiere ajustes de presión de neumáticos y ángulo de caída.",
+        "Aplica esos cambios en la configuración del simulador y guarda.",
+        "Vuelve a correr una vuelta y comprueba la mejora en los tiempos.",
+        "Si notas más tracción y menos subviraje, el ajuste funciona.",
+        "Repite el proceso cada semana para seguir afinando tu coche virtual.",
+        "Descubre más herramientas en el enlace de mi perfil."
       ],
       "beats": [
         {
-          "t": "¿Tu coche se desvía al girar en cada curva?",
-          "img": "Aluminium sim racing rig with bucket seat, steering wheel, pedals and a large monitor displaying a racing game, inside a bright home gaming room, not a real car interior. Driver gripping steering wheel tightly, eyes on monitor where the virtual car slides outward on a tight corner"
+          "t": "¿Sabías que la IA puede afinar tu setup en segundos?",
+          "img": "aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a big monitor showing a racing game, not a real car interior. The rider sits in the sim rig, looking at the monitor displaying colorful AI data visualizations, hand hovering over keyboard, bright room."
         },
         {
-          "t": "Eso ocurre cuando la sensibilidad del volante está demasiado alta.",
-          "img": "Aluminium sim racing rig with bucket seat, steering wheel, pedals and a large monitor displaying a racing game, inside a bright home gaming room, not a real car interior. Hand turning a bright on‑screen sensitivity slider to the far right, indicator glowing intensely"
+          "t": "Primero, exporta tu telemetría después de cada vuelta.",
+          "img": "aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a big monitor showing a racing game, not a real car interior. Close-up of the rider’s hand dragging a telemetry file icon from the monitor to a USB drive on the desk, rig visible behind."
         },
         {
-          "t": "Con una sensibilidad alta, el juego reacciona antes de que muevas el volante.",
-          "img": "Aluminium sim racing rig with bucket seat, steering wheel, pedals and a large monitor displaying a racing game, inside a bright home gaming room, not a real car interior. Driver’s hand still, while the on‑screen steering wheel spins ahead, showing early reaction"
+          "t": "Importa ese archivo a una herramienta de IA que analice el agarre.",
+          "img": "aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a big monitor showing a racing game, not a real car interior. The rider drops the telemetry file into an AI analysis window on the monitor, screen shows grip heatmap, rig illuminated."
         },
         {
-          "t": "Baja la sensibilidad en la configuración del simulador para ganar control.",
-          "img": "Aluminium sim racing rig with bucket seat, steering wheel, pedals and a large monitor displaying a racing game, inside a bright home gaming room, not a real car interior. Hand sliding the sensitivity slider downwards to a lower level, calm blue glow indicating control"
+          "t": "La IA te sugiere ajustes de presión de neumáticos y ángulo de caída.",
+          "img": "aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a big monitor showing a racing game, not a real car interior. The monitor displays animated tire pressure sliders and camber angle dials, rider’s eyes focused, rig illuminated."
         },
         {
-          "t": "Reduce también la zona muerta, ese espacio donde el volante no responde.",
-          "img": "Aluminium sim racing rig with bucket seat, steering wheel, pedals and a large monitor displaying a racing game, inside a bright home gaming room, not a real car interior. Hand adjusting a circular deadzone ring on the screen, shrinking its size around the virtual steering wheel"
+          "t": "Aplica esos cambios en la configuración del simulador y guarda.",
+          "img": "aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a big monitor showing a racing game, not a real car interior. The rider uses the steering wheel’s button panel to tweak tire pressure values on the screen, then clicks a save icon."
         },
         {
-          "t": "Ajusta el ángulo máximo a la mitad de tu rango habitual.",
-          "img": "Aluminium sim racing rig with bucket seat, steering wheel, pedals and a large monitor displaying a racing game, inside a bright home gaming room, not a real car interior. Driver moving the max‑angle knob to the midpoint, gauge needle pointing at half of the usual range"
+          "t": "Vuelve a correr una vuelta y comprueba la mejora en los tiempos.",
+          "img": "aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a big monitor showing a racing game, not a real car interior. The rider steers intensely on the rig, monitor shows a new lap time counter decreasing, bright green highlight."
         },
         {
-          "t": "Practica una curva cerrada y siente la respuesta más suave y predecible.",
-          "img": "Aluminium sim racing rig with bucket seat, steering wheel, pedals and a large monitor displaying a racing game, inside a bright home gaming room, not a real car interior. Driver smoothly steering through a tight virtual corner, monitor showing a clean racing line and stable car"
+          "t": "Si notas más tracción y menos subviraje, el ajuste funciona.",
+          "img": "aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a big monitor showing a racing game, not a real car interior. The rider’s confident expression appears as the monitor displays a grip heatmap with larger blue zones, indicating better traction."
         },
         {
-          "t": "Cuando el coche siga la línea sin tirones, habrás conseguido la configuración ideal.",
-          "img": "Aluminium sim racing rig with bucket seat, steering wheel, pedals and a large monitor displaying a racing game, inside a bright home gaming room, not a real car interior. Driver smiling as the on‑screen car follows the racing line flawlessly, no jitter visible"
+          "t": "Repite el proceso cada semana para seguir afinando tu coche virtual.",
+          "img": "aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a big monitor showing a racing game, not a real car interior. The rider points at a weekly calendar overlay on the monitor, ticking a box, rig and screen remain focused."
         },
         {
-          "t": "Sígueme para más trucos de simracing y mejora tu tiempo",
-          "img": "Aluminium sim racing rig with bucket seat, steering wheel, pedals and a large monitor displaying a racing game, inside a bright home gaming room, not a real car interior. Driver looking directly at camera, raising a finger in a follow gesture, racing rig background"
+          "t": "Descubre más herramientas en el enlace de mi perfil.",
+          "img": "aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a big monitor showing a racing game, not a real car interior. The rider holds a smartphone showing a profile page icon, thumb tapping, rig and monitor in background."
         }
       ],
-      "estilo_visual": "Bright, crisp photography with vivid colors, sharp focus, even lighting, no motion blur, realistic rendering, consistent angle, neutral background",
-      "visual_cierre": "wheel accelerating",
-      "cierre_bio": "Descubre más consejos en el enlace de mi perfil",
+      "estilo_visual": "Bright, sharp lighting with vivid colors, clear focus, no blur, consistent throughout",
+      "visual_cierre": "app screen with AI icon",
+      "cierre_bio": "Descubre más herramientas en el enlace de mi perfil",
       "foto": "",
       "anim": "fade",
-      "serie": "Tip rápido del día",
-      "episodio": 2,
+      "serie": "Detrás de la app",
+      "episodio": 1,
       "look": 207,
-      "plantilla": 1048,
+      "plantilla": 627,
       "layout": "faceless",
       "stickers": []
     }

@@ -131,6 +131,50 @@
       "look": 207,
       "serie": "Tip rápido del día",
       "objetivo": "alcance"
+    },
+    {
+      "date": "2026-11-19",
+      "tema": "Presión de neumáticos",
+      "formato": "Tip rápido del día",
+      "tipo": "reel",
+      "layout": "faceless",
+      "plantilla": 979,
+      "look": 133,
+      "serie": "Tip rápido del día",
+      "objetivo": "alcance"
+    },
+    {
+      "date": "2026-11-20",
+      "tema": "ABS mejora tiempos",
+      "formato": "Mito o realidad",
+      "tipo": "historia",
+      "layout": "faceless",
+      "plantilla": 1932,
+      "look": 243,
+      "serie": "Mito o realidad",
+      "objetivo": "comunidad"
+    },
+    {
+      "date": "2026-11-21",
+      "tema": "Setup del seguidor #2",
+      "formato": "Setup del seguidor",
+      "tipo": "carrusel",
+      "layout": "tarjeta",
+      "plantilla": 1025,
+      "look": 97,
+      "serie": "Setup del seguidor",
+      "objetivo": "comunidad"
+    },
+    {
+      "date": "2026-11-24",
+      "tema": "IA ajusta tu setup al vuelo",
+      "formato": "Detrás de la app",
+      "tipo": "reel",
+      "layout": "faceless",
+      "plantilla": 627,
+      "look": 207,
+      "serie": "Detrás de la app",
+      "objetivo": "confianza"
     }
   ]
 }
