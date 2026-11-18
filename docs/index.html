@@ -784,7 +784,8 @@ $("#genBtn").addEventListener("click",async()=>{
     const data=parseJSON(res.text);
     const raw=Array.isArray(data.piezas)?data.piezas:Array.isArray(data.videos)?data.videos:[];
     // una pieza vale si tiene contenido: escenas, o frases para el vídeo faceless (beats/guion)
-    let vids=raw.filter(v=>v&&v.gancho).map(normPiece).map(salvage).filter(p=>p.tipo==="post"||p.escenas.length||(TYPES[p.tipo]&&TYPES[p.tipo].video&&p.beats.length>=2));
+    window.__planDrop=[];
+    let vids=raw.filter(v=>{if(v&&v.gancho)return true;window.__planDrop.push((v&&(v.tipo+" «"+(v.tema||"")+"»"))+": sin gancho");return false;}).map(normPiece).map(salvage).filter(p=>{const ok=p.tipo==="post"||p.escenas.length||(TYPES[p.tipo]&&TYPES[p.tipo].video&&p.beats.length>=2);if(!ok)window.__planDrop.push(p.tipo+" «"+p.tema+"»: sin escenas ni frases");return ok;});
     window.__planRaw=raw.length;
     vids=enforceLimits(vids);diversify(vids);
     if(!vids.length&&n!=="auto")throw new Error("no llegó el plan");
@@ -860,9 +861,10 @@ function enforceLimits(vids){
   const out=[];const perDay={};const isFeed=p=>p.tipo!=="historia";let lastFeed=null;
   vids.sort((a,b)=>a.dia-b.dia||String(a.hora).localeCompare(String(b.hora)));
   for(const p of vids){
-    if(out.length>=PLAN_LIMITS.maxSemana)break;
-    if((perDay[p.dia]||0)>=PLAN_LIMITS.maxDia)continue;
-    if(isFeed(p)){const hm=(p.hora||"19:30").split(":");const t=p.dia*24+(+hm[0]||0)+(+hm[1]||0)/60;if(lastFeed!=null&&t-lastFeed<12)continue;lastFeed=t;}
+    if(out.length>=PLAN_LIMITS.maxSemana){(window.__planDrop=window.__planDrop||[]).push(p.tipo+" «"+p.tema+"»: ya hay "+PLAN_LIMITS.maxSemana+" en la semana");continue;}
+    const drop=w=>{(window.__planDrop=window.__planDrop||[]).push(p.tipo+" «"+p.tema+"» (día "+p.dia+" "+(p.hora||"")+"): "+w);};
+    if((perDay[p.dia]||0)>=PLAN_LIMITS.maxDia){drop("ya hay "+PLAN_LIMITS.maxDia+" ese día");continue;}
+    if(isFeed(p)){const hm=(p.hora||"19:30").split(":");const t=p.dia*24+(+hm[0]||0)+(+hm[1]||0)/60;if(lastFeed!=null&&t-lastFeed<12){drop("a menos de 12 h de otra publicación");continue;}lastFeed=t;}
     perDay[p.dia]=(perDay[p.dia]||0)+1;out.push(p);
   }
   return out;

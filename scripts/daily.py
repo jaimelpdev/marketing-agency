@@ -659,6 +659,8 @@ def plan_user(browser, user, key, force=False, redo=None):
         _pt = os.environ.get("POLLINATIONS_TOKEN", "").strip()
         log("  Motor de imágenes de reserva: " + ("Pollinations con clave nueva (FLUX)" if _pt[:3] == "sk_" else "Pollinations con token antiguo" if _pt else "Pollinations ANÓNIMO (mala calidad: falta POLLINATIONS_TOKEN)"))
         raw_n = page.evaluate("()=>window.__planRaw||0")
+        for why in page.evaluate("()=>window.__planDrop||[]") or []:
+            log(f"    ✗ Descartada: {why}")
         log(f"  {n} piezas" + (f" (la IA propuso {raw_n}; {raw_n - n} descartadas por venir incompletas)" if raw_n and raw_n > n else "") + ". Generando imágenes…")
         page.evaluate("prefetchAll()")
         page.wait_for_function("typeof pendingA==='undefined' || pendingA.size===0", timeout=2_700_000, polling=2000)
