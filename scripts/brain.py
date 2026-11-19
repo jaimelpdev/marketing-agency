@@ -97,6 +97,13 @@ def groq_json(prompt, key, log=print, tries=4):
         except Exception as e:  # noqa: BLE001
             last = e
             time.sleep(5)
+    txt = gemini_text(prompt, log)
+    if txt:
+        a, b = txt.find("{"), txt.rfind("}")
+        try:
+            return json.loads(txt[a:b + 1])
+        except Exception as e:  # noqa: BLE001
+            last = e
     raise RuntimeError(f"El estratega no ha podido pensar ({last})")
 
 
@@ -129,6 +136,31 @@ def gemini_models(gk, log=print):
     best = lite[:1] + [m for m in cand if "lite" not in m][:1]
     log(f"    🤖 Redacción con Gemini: {', '.join(best) or 'ninguno disponible'}")
     return best
+
+
+def gemini_text(prompt, log=print, system=""):
+    """Texto JSON de Gemini (gratis) o "" si no hay clave o no responde. Lo usa el plan cuando Groq se queda sin cupo."""
+    gk = os.environ.get("GEMINI_API_KEY", "").strip()
+    if not gk or WRITER["gemini_ok"] is False:
+        return ""
+    if not WRITER.get("models"):
+        WRITER["models"] = gemini_models(gk, log)
+    for i, model in enumerate((WRITER.get("models") or [])[:2] * 2):
+        try:
+            msgs = ([{"role": "system", "content": system}] if system else []) + [{"role": "user", "content": prompt}]
+            r = requests.post(GEMINI + "/chat/completions", timeout=150,
+                              headers={"authorization": "Bearer " + gk, "content-type": "application/json"},
+                              json={"model": model, "temperature": 0.8, "response_format": {"type": "json_object"},
+                                    "reasoning_effort": "low", "messages": msgs})
+            if r.status_code in (429, 500, 502, 503, 504):
+                time.sleep(15 + 10 * i)
+                continue
+            r.raise_for_status()
+            return r.json()["choices"][0]["message"]["content"] or ""
+        except Exception as e:  # noqa: BLE001
+            log(f"    ⚠ Gemini ({model}): {str(e)[:100]}")
+            time.sleep(5)
+    return ""
 
 
 def writer_json(prompt, key, log=print):

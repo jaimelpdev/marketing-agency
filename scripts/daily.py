@@ -609,6 +609,19 @@ def plan_user(browser, user, key, force=False, redo=None):
             "\nTEMAS CON BASE VERIFICADA (los consejos de la semana deben salir de estos temas o de algo muy cercano; "
             "así no se inventa nada): " + "; ".join(temas_saber) if temas_saber else ""))
         log("  Pidiendo el plan a la IA…")
+        if os.environ.get("GEMINI_API_KEY"):
+            # si Groq se queda sin cupo gratis, el plan se pide a Gemini (también gratis)
+            try:
+                page.expose_function("__geminiText", lambda pr, sy="": brain.gemini_text(pr, lambda *a: log(*a), sy))
+            except Exception:
+                pass
+            page.evaluate("""()=>{ if(window.__gsWrapped) return; window.__gsWrapped=true; const orig=window.groqSample;
+              window.groqSample=async function(prompt,opts,retried){
+                try{ return await orig(prompt,opts,retried); }
+                catch(e){ if(e&&e.code==="rate_limited"&&window.__geminiText){
+                    const t=await window.__geminiText(prompt,"Eres un experto en marketing de Instagram en español. Respondes siempre SOLO con JSON válido.");
+                    if(t){ console.log("plan con Gemini"); return {text:t}; } }
+                  throw e; } }; }""")
         for intento in range(4):
             page.click("#genBtn")
             page.wait_for_function("!document.querySelector('#genBtn').disabled", timeout=300_000)
