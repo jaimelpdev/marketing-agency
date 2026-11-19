@@ -42,12 +42,21 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
+          cache: pip
 
       - name: Instalar dependencias
         run: |
-          pip install -r requirements.txt
-          python -m playwright install --with-deps chromium
-          sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg fonts-noto-color-emoji
+          pip install -q -r requirements.txt
+          # el runner ya trae Google Chrome: se usa ese y no se descarga otro navegador (ahorra mucho tiempo)
+          if [ -x /usr/bin/google-chrome ]; then echo "CHROME_PATH=/usr/bin/google-chrome" >> "$GITHUB_ENV"; else python -m playwright install --with-deps chromium; fi
+          need=""
+          command -v ffmpeg >/dev/null || need="$need ffmpeg"
+          fc-list | grep -qi "Noto Color Emoji" || need="$need fonts-noto-color-emoji"
+          if [ -n "$need" ]; then
+            sudo apt-get -o Acquire::Retries=3 -o Acquire::http::Timeout=20 update -qq || true
+            sudo apt-get install -y -qq --no-install-recommends $need
+          fi
+          ffmpeg -version | head -1
 
       - name: Planificar y renderizar
         env:
