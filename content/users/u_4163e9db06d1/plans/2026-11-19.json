@@ -1,0 +1,590 @@
+{
+  "date": "2026-11-19",
+  "estrategia": "Publicamos 5 piezas en 7 días: reels de Tip rápido los lunes y jueves, historia de Mito el viernes, post checklist el domingo y reel Detrás de la app el martes. Descansamos sábado y miércoles para no saturar y respetar el límite de 2 piezas/día.",
+  "piezas": [
+    {
+      "id": "pmwnf90oi_0",
+      "dia": 0,
+      "hora": "19:30",
+      "tipo": "reel",
+      "objetivo": "alcance",
+      "razon": "Tip rápido para reducir tiempo en la curva Eau Roue",
+      "tema": "Frenada tardía en Eau Roue",
+      "formato": "reel",
+      "gancho": "Nadie te dice por qué frenas demasiado pronto en Eau Roue",
+      "visual": "close-up of racing wheel hand position on a virtual track",
+      "escenas": [
+        {
+          "titulo": "Freno pronto",
+          "texto": "Frenar antes del vértice pierde tracción",
+          "emoji": "",
+          "visual": "wide shot of car braking early into Eau Roue corner",
+          "visuales": [],
+          "foto": "",
+          "grafico": {
+            "tipo": "comparacion",
+            "mal": "freno pronto",
+            "bien": "freno tardío"
+          }
+        },
+        {
+          "titulo": "Reduce presión",
+          "texto": "Usa el 80 % del freno máximo",
+          "emoji": "",
+          "visual": "close-up of brake pedal indicator at 80 %",
+          "visuales": [],
+          "foto": "",
+          "grafico": {
+            "tipo": "checklist",
+            "items": [
+              "80 % presión",
+              "mantén línea",
+              "suaviza pedal"
+            ]
+          }
+        },
+        {
+          "titulo": "Mantén línea",
+          "texto": "Sigue la trayectoria interior hasta el vértice",
+          "emoji": "",
+          "visual": "overhead view of ideal racing line through Eau Roue",
+          "visuales": [],
+          "foto": "",
+          "grafico": {
+            "tipo": "objetivo",
+            "etiqueta": "línea perfecta"
+          }
+        },
+        {
+          "titulo": "Último consejo",
+          "texto": "Suaviza el pedal y gana 0,3 s",
+          "emoji": "",
+          "visual": "side view of car exiting curve with smooth throttle",
+          "visuales": [],
+          "foto": "",
+          "grafico": {
+            "tipo": "contador",
+            "valor": 3,
+            "unidad": "segundos"
+          }
+        }
+      ],
+      "cta": "Guarda este reel y prueba el tip en tu próxima vuelta",
+      "sticker": null,
+      "fondo": "ia",
+      "estilo": "racing",
+      "caption": "Frena un poco más tarde y suelta el freno progresivamente mientras giras. Así mantienes peso delantero y aumentas la velocidad en la salida. ¿Qué cambios notas en tu tiempo de vuelta?",
+      "hashtags": "#simracing #EauRoue #tipsdepiloto #racing #gaming #lapriq",
+      "audio": "voz_y_musica",
+      "voz": "hombre",
+      "ritmo_voz": "energetico",
+      "musica": "energetica",
+      "guion": [
+        "Nadie te dice por qué frenas demasiado pronto en Eau Roue",
+        "Al frenar antes del punto de referencia, pierdes velocidad crucial",
+        "Usa el pico de presión al llegar al cartel y suelta suavemente",
+        "Mantén el volante girado mientras sueltas, así el coche gira con peso delantero",
+        "Apunta la vista al vértice interior y a la salida simultáneamente",
+        "Al salir, abre el volante y acelera progresivamente, sin pisar a fondo",
+        "Escucharás menos chirridos y ganarás distancia antes de la recta",
+        "Prueba este ajuste en la siguiente vuelta y siente la diferencia",
+        "Sígueme para más trucos de simracing y mejora cada curva"
+      ],
+      "beats": [
+        {
+          "t": "Nadie te dice por qué frenas demasiado pronto en Eau Roue",
+          "img": "Aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a large monitor displaying a racing game, not a real car interior. The racer sits upright, foot lightly on the brake pedal before the Eau Roue turn, monitor showing the track, bright home gaming room"
+        },
+        {
+          "t": "Al frenar antes del punto de referencia, pierdes velocidad crucial",
+          "img": "Aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a large monitor displaying a racing game, not a real car interior. The driver presses the brake pedal early, speed gauge on the monitor dips sharply, emphasizing lost velocity, within the same rig"
+        },
+        {
+          "t": "Usa el pico de presión al llegar al cartel y suelta suavemente",
+          "img": "Aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a large monitor displaying a racing game, not a real car interior. The racer pushes the brake pedal to its peak as the marker sign appears on the monitor, then eases off smoothly, seen from a side angle"
+        },
+        {
+          "t": "Mantén el volante girado mientras sueltas, así el coche gira con peso delantero",
+          "img": "Aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a large monitor displaying a racing game, not a real car interior. The driver keeps the steering wheel turned left while lifting the foot off the brake, the on‑screen car leans forward, captured frontally"
+        },
+        {
+          "t": "Apunta la vista al vértice interior y a la salida simultáneamente",
+          "img": "Aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a large monitor displaying a racing game, not a real car interior. The driver’s gaze follows the highlighted apex and exit point on the monitor simultaneously, head turned slightly, rig lighting bright"
+        },
+        {
+          "t": "Al salir, abre el volante y acelera progresivamente, sin pisar a fondo",
+          "img": "Aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a large monitor displaying a racing game, not a real car interior. The racer opens the steering wheel outward and presses the accelerator pedal gradually, never fully, as the car exits the turn on screen"
+        },
+        {
+          "t": "Escucharás menos chirridos y ganarás distancia antes de la recta",
+          "img": "Aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a large monitor displaying a racing game, not a real car interior. The driver watches the monitor where tire‑squeal icons fade and the car’s distance marker extends further down the straight"
+        },
+        {
+          "t": "Prueba este ajuste en la siguiente vuelta y siente la diferencia",
+          "img": "Aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a large monitor displaying a racing game, not a real car interior. The racer taps the app tablet to apply the new brake setting, then the on‑screen lap timer shows a faster lap"
+        },
+        {
+          "t": "Sígueme para más trucos de simracing y mejora cada curva",
+          "img": "Aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a large monitor displaying a racing game, not a real car interior. The driver points toward the camera with a friendly smile, background monitor displays multiple racing curves, inviting viewers to follow"
+        }
+      ],
+      "estilo_visual": "Bright, crisp photography with vivid colors, sharp focus, even lighting, no blur or darkness, consistent across all shots",
+      "visual_cierre": "close-up of virtual lap time improving on screen",
+      "cierre_bio": "Descubre más consejos en el enlace de mi perfil",
+      "foto": "",
+      "anim": "pop",
+      "serie": "Tip rápido del día",
+      "episodio": 14,
+      "look": 164,
+      "plantilla": 1398,
+      "layout": "faceless",
+      "stickers": [
+        "🏎️",
+        "⚡",
+        "🛞"
+      ]
+    },
+    {
+      "id": "pmwnf90oi_1",
+      "dia": 1,
+      "hora": "09:00",
+      "tipo": "historia",
+      "objetivo": "",
+      "razon": "Desmentir mito sobre force feedback alto",
+      "tema": "Force feedback",
+      "formato": "historia",
+      "gancho": "¿Crees que más force feedback siempre mejora el control?",
+      "visual": "close-up of racing wheel vibrating strongly",
+      "escenas": [
+        {
+          "titulo": "Mito frecuente",
+          "texto": "Muchos piensan que mayor fuerza siempre mejora el control",
+          "emoji": "",
+          "visual": "side view of driver struggling with over‑strong wheel feedback",
+          "visuales": [],
+          "foto": "",
+          "grafico": {
+            "tipo": "checklist",
+            "items": [
+              "más fuerza",
+              "menos precisión",
+              "fatiga"
+            ]
+          }
+        }
+      ],
+      "cta": "",
+      "sticker": null,
+      "fondo": "color",
+      "estilo": "neon",
+      "caption": "Ajustar el force feedback a un nivel medio evita que la información se pierda en curvas intensas. Sentirás cada cambio de agarre sin sobresaturar el volante. ¿Cómo configuras tú tu FFB?",
+      "hashtags": "",
+      "audio": "voz_y_musica",
+      "voz": "hombre",
+      "ritmo_voz": "normal",
+      "musica": "chill",
+      "guion": [
+        "¿Crees que más force feedback siempre mejora el control?",
+        "Cuando el FFB llega al máximo se corta la información.",
+        "Ajusta la fuerza a un nivel medio, sin que el volante se sature.",
+        "Prueba curvas exigentes y verifica que sientes cada cambio de agarre.",
+        "Cuando lo haces bien, el wheel transmite la carga del coche de forma suave.",
+        "Sigue mi cuenta para descubrir más trucos de simracing."
+      ],
+      "beats": [
+        {
+          "t": "¿Crees que más force feedback siempre mejora el control?",
+          "img": "aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a big monitor showing a racing game, not a real car interior. Driver grips the steering wheel firmly, front view, bright home gaming room, monitor shows a red force‑feedback bar at maximum, indicating overload"
+        },
+        {
+          "t": "Cuando el FFB llega al máximo se corta la información.",
+          "img": "aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a big monitor showing a racing game, not a real car interior. Driver turns the wheel, but the monitor displays a broken waveform and frozen race telemetry, illustrating lost feedback"
+        },
+        {
+          "t": "Ajusta la fuerza a un nivel medio, sin que el volante se sature.",
+          "img": "aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a big monitor showing a racing game, not a real car interior. Driver slides the force‑feedback dial to the middle, wheel glows soft blue, indicating balanced strength"
+        },
+        {
+          "t": "Prueba curvas exigentes y verifica que sientes cada cambio de agarre.",
+          "img": "aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a big monitor showing a racing game, not a real car interior. Driver steers through a tight corner on the monitor, wheel vibrates subtly, his hand follows each grip change"
+        },
+        {
+          "t": "Cuando lo haces bien, el wheel transmite la carga del coche de forma suave.",
+          "img": "aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a big monitor showing a racing game, not a real car interior. Driver holds the wheel smoothly as the monitor shows a steady acceleration curve, wheel transmitting car load gently"
+        },
+        {
+          "t": "Sigue mi cuenta para descubrir más trucos de simracing.",
+          "img": "aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a big monitor showing a racing game, not a real car interior. Driver holds a smartphone displaying the academy app’s home screen, giving a thumbs‑up toward the camera"
+        }
+      ],
+      "estilo_visual": "bright, crisp lighting with vivid colors, high resolution, no blur",
+      "visual_cierre": "close-up of wheel with moderate feedback",
+      "cierre_bio": "Visita mi perfil para más consejos y trucos de simracing.",
+      "foto": "",
+      "anim": "slide",
+      "serie": "",
+      "episodio": 0,
+      "look": 18,
+      "plantilla": 143,
+      "layout": "faceless",
+      "stickers": []
+    },
+    {
+      "id": "pmwnf90oj_2",
+      "dia": 3,
+      "hora": "13:30",
+      "tipo": "post",
+      "objetivo": "",
+      "razon": "Checklist rápido para configurar Eau Roue y generar valor guardable",
+      "tema": "Checklist de configuración Eau Roue",
+      "formato": "post",
+      "gancho": "Checklist definitiva para dominar Eau Roue",
+      "visual": "Aluminium sim racing rig with bucket seat, steering wheel, pedals and a large monitor showing a racing game inside a bright home gaming room, not a real car interior. The presenter holds a tablet showing a checklist UI with icons, seated at the aluminium sim racing rig, front view, bright room",
+      "escenas": [
+        {
+          "titulo": "Presión de neumáticos equilibrada",
+          "texto": "Ajusta la presión del delantero un poco más alta que la trasera para mayor agarre al frenar.",
+          "emoji": "",
+          "visual": "Aluminium sim racing rig with bucket seat, steering wheel, pedals and a large monitor showing a racing game inside a bright home gaming room, not a real car interior. The presenter’s hand turns a tire pressure gauge on the front wheel, gauge needle higher than the rear gauge, within the same rig",
+          "visuales": [],
+          "foto": "",
+          "grafico": {
+            "tipo": "checklist",
+            "items": [
+              "23 psi delantero",
+              "20 psi trasero"
+            ]
+          }
+        },
+        {
+          "titulo": "Distribución de frenada adecuada",
+          "texto": "Coloca más carga de freno en el eje delantero para estabilidad y controla el derrape.",
+          "emoji": "",
+          "visual": "Aluminium sim racing rig with bucket seat, steering wheel, pedals and a large monitor showing a racing game inside a bright home gaming room, not a real car interior. The presenter slides the brake bias lever on the steering wheel toward the front, showing more front brake force, captured from the driver’s seat",
+          "visuales": [],
+          "foto": "",
+          "grafico": null
+        },
+        {
+          "titulo": "Ángulo de volante óptimo",
+          "texto": "Utiliza un ángulo suficiente para respuesta sin sobre girar, manteniendo la suavidad.",
+          "emoji": "",
+          "visual": "Aluminium sim racing rig with bucket seat, steering wheel, pedals and a large monitor showing a racing game inside a bright home gaming room, not a real car interior. The presenter turns the steering wheel to a moderate angle, wheel centered, with a subtle arc gauge indicating optimal steering angle, bright lighting",
+          "visuales": [],
+          "foto": "",
+          "grafico": null
+        }
+      ],
+      "cta": "Guarda este post y ajusta tu coche antes de la próxima carrera",
+      "sticker": null,
+      "fondo": "ia",
+      "estilo": "racing",
+      "caption": "Una configuración equilibrada mejora la trazada y la confianza en Eau Roue. Ajusta presión, freno y volante para sentir cada movimiento. ¿Listo para probar el nuevo setup?",
+      "hashtags": "#simracing #setup #EauRoue #lapriq #racing",
+      "audio": "solo_musica",
+      "voz": "hombre",
+      "ritmo_voz": "tranquilo",
+      "musica": "ambiental",
+      "guion": [],
+      "beats": [],
+      "estilo_visual": "cinematic 35mm photo, bright natural light, vivid colors",
+      "visual_cierre": "photo of a fast lap time on screen",
+      "cierre_bio": "",
+      "foto": "",
+      "anim": "fade",
+      "serie": "",
+      "episodio": 0,
+      "look": 128,
+      "plantilla": 2065,
+      "layout": "tarjeta",
+      "stickers": [
+        "📋",
+        "✅",
+        "🏁"
+      ]
+    },
+    {
+      "id": "pmwnf90oj_3",
+      "dia": 4,
+      "hora": "19:45",
+      "tipo": "reel",
+      "objetivo": "alcance",
+      "razon": "Tip rápido del día 15: pedal de freno en curvas rápidas",
+      "tema": "Uso del pedal de freno en curvas rápidas",
+      "formato": "reel",
+      "gancho": "Nadie te cuenta cómo el trail‑braking ahorra segundos",
+      "visual": "close-up of foot pressing brake pedal on sim rig",
+      "escenas": [
+        {
+          "titulo": "Freno al entrar",
+          "texto": "Aplica el freno justo antes del punto de frenado",
+          "emoji": "",
+          "visual": "side view of car braking late into fast corner",
+          "visuales": [],
+          "foto": "",
+          "grafico": {
+            "tipo": "comparacion",
+            "mal": "freno temprano",
+            "bien": "freno tardío"
+          }
+        },
+        {
+          "titulo": "Modulación",
+          "texto": "Reduce presión al 70 % mientras giras",
+          "emoji": "",
+          "visual": "close-up of brake pressure gauge at 70 %",
+          "visuales": [],
+          "foto": "",
+          "grafico": {
+            "tipo": "checklist",
+            "items": [
+              "70 % presión",
+              "modula al girar"
+            ]
+          }
+        },
+        {
+          "titulo": "Suelta progresiva",
+          "texto": "Libera el freno suavemente al alcanzar el vértice",
+          "emoji": "",
+          "visual": "hand releasing brake pedal gradually",
+          "visuales": [],
+          "foto": "",
+          "grafico": {
+            "tipo": "objetivo",
+            "etiqueta": "suavidad"
+          }
+        },
+        {
+          "titulo": "Resultado final",
+          "texto": "Ganas 0,4 s y mantienes tracción",
+          "emoji": "",
+          "visual": "lap time screen showing -0.4 s",
+          "visuales": [],
+          "foto": "",
+          "grafico": {
+            "tipo": "contador",
+            "valor": 4,
+            "unidad": "decisegundos"
+          }
+        }
+      ],
+      "cta": "Guarda el reel y prueba la técnica en tu próxima curva",
+      "sticker": null,
+      "fondo": "ia",
+      "estilo": "pop",
+      "caption": "El trail‑braking te permite entrar más rápido y salir con tracción. ¿Ya lo aplicas en tus curvas?",
+      "hashtags": "#simracing #tipsdepiloto #racing #lapriq #gaming",
+      "audio": "voz_y_musica",
+      "voz": "hombre",
+      "ritmo_voz": "energetico",
+      "musica": "energetica",
+      "guion": [
+        "Nadie te cuenta cómo el trail‑braking ahorra segundos",
+        "Al frenar en línea recta cargas las ruedas delanteras al máximo",
+        "Pisá fuerte el freno justo antes del punto de referencia",
+        "Mientras giras, suelta el freno suavemente, reduciendo presión",
+        "Mantén una presión moderada al iniciar la curva",
+        "Sentirás el coche girar sin que el morro se quede quieto",
+        "No sueltes el freno de golpe ni lo mantengas demasiado",
+        "Ganarás tiempo en la salida y mantendrás mejor tracción",
+        "Sígueme para descubrir más trucos de pista"
+      ],
+      "beats": [
+        {
+          "t": "Nadie te cuenta cómo el trail‑braking ahorra segundos",
+          "img": "Aluminium sim racing rig with bucket seat, steering wheel, pedals, and a large racing monitor in a bright home gaming room, not a real car interior. The driver leans into a corner, right foot pressing the brake pedal while the steering wheel is turned, racing game on monitor showing a split‑second time drop"
+        },
+        {
+          "t": "Al frenar en línea recta cargas las ruedas delanteras al máximo",
+          "img": "Aluminium sim racing rig with bucket seat, steering wheel, pedals, and a large racing monitor in a bright home gaming room, not a real car interior. The driver sits upright on the rig, firmly pressing the brake pedal on a straight‑line segment, front wheels of the virtual car glowing on the monitor"
+        },
+        {
+          "t": "Pisá fuerte el freno justo antes del punto de referencia",
+          "img": "Aluminium sim racing rig with bucket seat, steering wheel, pedals, and a large racing monitor in a bright home gaming room, not a real car interior. The driver slams the brake pedal hard just before a bright corner marker appears on the game screen, hands gripping the wheel tightly"
+        },
+        {
+          "t": "Mientras giras, suelta el freno suavemente, reduciendo presión",
+          "img": "Aluminium sim racing rig with bucket seat, steering wheel, pedals, and a large racing monitor in a bright home gaming room, not a real car interior. The driver smoothly lifts his foot off the brake pedal while the steering wheel turns left, the monitor showing a gentle deceleration curve"
+        },
+        {
+          "t": "Mantén una presión moderada al iniciar la curva",
+          "img": "Aluminium sim racing rig with bucket seat, steering wheel, pedals, and a large racing monitor in a bright home gaming room, not a real car interior. The driver applies a moderate press on the brake pedal as he begins the curve, the on‑screen car tilting slightly with balanced grip"
+        },
+        {
+          "t": "Sentirás el coche girar sin que el morro se quede quieto",
+          "img": "Aluminium sim racing rig with bucket seat, steering wheel, pedals, and a large racing monitor in a bright home gaming room, not a real car interior. The driver feels the virtual car rotate smoothly, front wheels turning sharply while the chassis stays stable on the monitor display"
+        },
+        {
+          "t": "No sueltes el freno de golpe ni lo mantengas demasiado",
+          "img": "Aluminium sim racing rig with bucket seat, steering wheel, pedals, and a large racing monitor in a bright home gaming room, not a real car interior. The driver releases the brake pedal gradually, avoiding a sudden lift, his hand steady on the wheel, the screen showing a steady speed line"
+        },
+        {
+          "t": "Ganarás tiempo en la salida y mantendrás mejor tracción",
+          "img": "Aluminium sim racing rig with bucket seat, steering wheel, pedals, and a large racing monitor in a bright home gaming room, not a real car interior. The driver accelerates out of the corner with the foot on the throttle, the monitor displaying a faster lap time and tire grip visual"
+        },
+        {
+          "t": "Sígueme para descubrir más trucos de pista",
+          "img": "Aluminium sim racing rig with bucket seat, steering wheel, pedals, and a large racing monitor in a bright home gaming room, not a real car interior. The driver looks at the camera, pointing forward, while the app’s dashboard glows on the monitor, inviting viewers to follow"
+        }
+      ],
+      "estilo_visual": "Bright, sharp photography with vivid colors, high contrast, clear focus, no motion blur",
+      "visual_cierre": "close-up of wheel and footwork in perfect sync",
+      "cierre_bio": "Visita mi perfil para más consejos de simracing",
+      "foto": "",
+      "anim": "pop",
+      "serie": "Tip rápido del día",
+      "episodio": 15,
+      "look": 238,
+      "plantilla": 1032,
+      "layout": "faceless",
+      "stickers": [
+        "🏎️",
+        "⚡",
+        "🛞"
+      ]
+    },
+    {
+      "id": "pmwnf90oj_4",
+      "dia": 5,
+      "hora": "19:00",
+      "tipo": "reel",
+      "objetivo": "confianza",
+      "razon": "Detrás de la app: telemetría en tiempo real para Eau Roue",
+      "tema": "Telemetría en la app",
+      "formato": "reel",
+      "gancho": "Nadie te cuenta que la app revela cada milisegundo de frenada",
+      "visual": "screen recording of the app telemetry overlay on a virtual race",
+      "escenas": [
+        {
+          "titulo": "Datos en vivo",
+          "texto": "Velocidad, frenos y ángulo de volante al instante",
+          "emoji": "",
+          "visual": "app screen with live telemetry bars",
+          "visuales": [],
+          "foto": "",
+          "grafico": {
+            "tipo": "ruta",
+            "desde": "inicio",
+            "hasta": "vértice"
+          }
+        },
+        {
+          "titulo": "Sector 1",
+          "texto": "Identifica los 0,2 s perdidos en la primera curva",
+          "emoji": "",
+          "visual": "zoom on sector time breakdown",
+          "visuales": [],
+          "foto": "",
+          "grafico": {
+            "tipo": "contador",
+            "valor": 2,
+            "unidad": "segundos"
+          }
+        },
+        {
+          "titulo": "Ajuste rápido",
+          "texto": "Modifica presión de freno desde la app en pausa",
+          "emoji": "",
+          "visual": "hand tapping brake pressure slider in app",
+          "visuales": [],
+          "foto": "",
+          "grafico": {
+            "tipo": "checklist",
+            "items": [
+              "presión freno",
+              "ajuste rápido"
+            ]
+          }
+        },
+        {
+          "titulo": "Mejora continua",
+          "texto": "Guarda la sesión y compárala con la anterior",
+          "emoji": "",
+          "visual": "app showing saved lap comparison chart",
+          "visuales": [],
+          "foto": "",
+          "grafico": {
+            "tipo": "progreso",
+            "valor": 75,
+            "etiqueta": "mejora"
+          }
+        }
+      ],
+      "cta": "Descarga la app y prueba la telemetría en tu próxima vuelta",
+      "sticker": null,
+      "fondo": "animado",
+      "estilo": "racing",
+      "caption": "Usa la telemetría de la app para afinar tu frenada y ganar décimas. ¿Qué diferencia notas en tu próxima vuelta?",
+      "hashtags": "#simracing #app #telemetria #lapriq #racing",
+      "audio": "voz_y_musica",
+      "voz": "hombre",
+      "ritmo_voz": "normal",
+      "musica": "electronica",
+      "guion": [
+        "Nadie te cuenta que la app muestra la presión de frenado en tiempo real",
+        "Mira la telemetría y verás la presión de freno al instante",
+        "Compara tu vuelta con la referencia y detecta el pico de frenada tardío",
+        "Si el pico aparece después del punto de frenado, pierdes tiempo",
+        "Ajusta la presión desde la app en pausa y frena un poco antes",
+        "Practica trail braking soltando el freno progresivamente mientras giras",
+        "Observa en la telemetría cómo la presión disminuye suavemente al entrar",
+        "Al salir de la curva vuelve a presionar y acelera progresivamente",
+        "Guarda la sesión, compárala y sigue la cuenta para más trucos"
+      ],
+      "beats": [
+        {
+          "t": "Nadie te cuenta que la app muestra la presión de frenado en tiempo real",
+          "img": "aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a big monitor showing a racing game, not a real car interior. The racer glances at a tablet on the rig, displaying a colorful brake‑pressure graph in real‑time, bright monitor behind, no text visible."
+        },
+        {
+          "t": "Mira la telemetría y verás la presión de freno al instante",
+          "img": "aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a big monitor showing a racing game, not a real car interior. The racer points at the monitor’s telemetry screen, where a vivid brake‑pressure bar spikes instantly as he presses the pedal."
+        },
+        {
+          "t": "Compara tu vuelta con la referencia y detecta el pico de frenada tardío",
+          "img": "aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a big monitor showing a racing game, not a real car interior. The racer watches a split‑screen on the monitor, comparing his lap line to a reference and noticing a delayed red brake‑pressure peak."
+        },
+        {
+          "t": "Si el pico aparece después del punto de frenado, pierdes tiempo",
+          "img": "aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a big monitor showing a racing game, not a real car interior. The racer sees on the monitor a timeline where the brake‑pressure peak occurs after the braking zone marker, indicating lost time."
+        },
+        {
+          "t": "Ajusta la presión desde la app en pausa y frena un poco antes",
+          "img": "aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a big monitor showing a racing game, not a real car interior. The racer pauses the sim and slides the brake‑pressure slider on the tablet app, lowering the value to brake earlier."
+        },
+        {
+          "t": "Practica trail braking soltando el freno progresivamente mientras giras",
+          "img": "aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a big monitor showing a racing game, not a real car interior. The racer progressively releases the brake pedal with his foot while turning the steering wheel, telemetry showing a smooth pressure drop."
+        },
+        {
+          "t": "Observa en la telemetría cómo la presión disminuye suavemente al entrar",
+          "img": "aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a big monitor showing a racing game, not a real car interior. The racer watches the telemetry curve on the monitor, seeing the brake‑pressure line smoothly descend as he enters the corner."
+        },
+        {
+          "t": "Al salir de la curva vuelve a presionar y acelera progresivamente",
+          "img": "aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a big monitor showing a racing game, not a real car interior. The racer re‑applies the brake then presses the accelerator, telemetry showing pressure rising steadily as he exits the corner."
+        },
+        {
+          "t": "Guarda la sesión, compárala y sigue la cuenta para más trucos",
+          "img": "aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a big monitor showing a racing game, not a real car interior. The racer taps the save icon on the tablet, then clicks compare, and gives a thumbs‑up, indicating more tricks to follow."
+        }
+      ],
+      "estilo_visual": "Bright, crisp photography with vivid colors, sharp focus, even lighting, no blur",
+      "visual_cierre": "phone screen with app logo and link in bio",
+      "cierre_bio": "Encuentra más trucos en el enlace de mi perfil",
+      "foto": "",
+      "anim": "slide",
+      "serie": "Detrás de la app",
+      "episodio": 6,
+      "look": 92,
+      "plantilla": 2303,
+      "layout": "faceless",
+      "stickers": [
+        "📊",
+        "🚀",
+        "🔧"
+      ]
+    }
+  ]
+}

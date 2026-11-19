@@ -384,6 +384,61 @@
       "look": 61,
       "serie": "",
       "objetivo": ""
+    },
+    {
+      "date": "2026-11-19",
+      "tema": "Frenada tardía en Eau Roue",
+      "formato": "reel",
+      "tipo": "reel",
+      "layout": "faceless",
+      "plantilla": 1398,
+      "look": 164,
+      "serie": "Tip rápido del día",
+      "objetivo": "alcance"
+    },
+    {
+      "date": "2026-11-20",
+      "tema": "Force feedback",
+      "formato": "historia",
+      "tipo": "historia",
+      "layout": "faceless",
+      "plantilla": 143,
+      "look": 18,
+      "serie": "",
+      "objetivo": ""
+    },
+    {
+      "date": "2026-11-22",
+      "tema": "Checklist de configuración Eau Roue",
+      "formato": "post",
+      "tipo": "post",
+      "layout": "tarjeta",
+      "plantilla": 2065,
+      "look": 128,
+      "serie": "",
+      "objetivo": ""
+    },
+    {
+      "date": "2026-11-23",
+      "tema": "Uso del pedal de freno en curvas rápidas",
+      "formato": "reel",
+      "tipo": "reel",
+      "layout": "faceless",
+      "plantilla": 1032,
+      "look": 238,
+      "serie": "Tip rápido del día",
+      "objetivo": "alcance"
+    },
+    {
+      "date": "2026-11-24",
+      "tema": "Telemetría en la app",
+      "formato": "reel",
+      "tipo": "reel",
+      "layout": "faceless",
+      "plantilla": 2303,
+      "look": 92,
+      "serie": "Detrás de la app",
+      "objetivo": "confianza"
     }
   ]
 }
