@@ -617,12 +617,13 @@ REGLAS
 2. Cada "img": en INGLÉS sencillo, máximo 28 palabras, EMPEZANDO por el tipo de plano en inglés ("extreme close-up of…", "close-up of hands…", "medium shot of…", "over-the-shoulder view of…") y luego qué se ve y qué está haciendo quién, con el SUJETO principal que se vea grande, nítido y de frente. Una sola idea por imagen. Debe mostrar literalmente la acción u objeto de la frase dentro del "mundo".
 2b. PROHIBIDO lo genérico: nada de "a car", "a sports car on a road", "a person smiling", "a city", paisajes ni planos de recurso que valdrían para cualquier vídeo. Cada imagen tiene que contener algo que SOLO tiene sentido con esa frase y con este negocio: la persona del vídeo haciendo esa acción concreta con el equipo o el producto del negocio, el objeto exacto del que se habla en primer plano, o la pantalla/el lugar exacto. Si una imagen podría ilustrar otra frase del vídeo, cámbiala.
 3. Si la frase es abstracta o técnica (datos, ajustes, una sensación, un consejo), tradúcela a algo fotografiable: un objeto o una pantalla con gráficos de colores sin texto legible, una mano haciendo la acción, una cara con la emoción, un antes/después visible. Nunca dejes conceptos sin cuerpo como "pressure" o "balance" sin un objeto que los muestre.
-4. Sin texto, letras, números ni logos en la imagen. Sin famosos. Las personas son anónimas y consistentes (misma persona en todo el vídeo).
+4. Sin texto, letras, números ni logos en la imagen: las pantallas solo muestran imagen del juego o gráficos de colores, NUNCA webs, perfiles, menús ni apps con texto. Para frases de cierre ("sígueme", "enlace del perfil") muestra a la persona sonriendo a cámara o un gesto, no una pantalla. Sin famosos. Las personas son anónimas y consistentes (misma persona en todo el vídeo).
 5. "estilo": en INGLÉS, la misma fotografía para todo el vídeo: luz brillante y nítida, colores vivos, nada de desenfoques ni oscuridad.
 
+7. "evitar": en INGLÉS, máximo 10 palabras, con qué se podría confundir la imagen y no debe parecerse (por ejemplo "not a real car interior, no dashboard").
 6. "persona": en INGLÉS, máximo 12 palabras, cómo es la persona del vídeo (edad aproximada, pelo, ropa), para que sea siempre la misma.
 
-Responde SOLO con JSON: {{"mundo":"…","persona":"…","estilo":"…","imgs":["…", …]}} con exactamente {len(beats)} elementos en "imgs"."""
+Responde SOLO con JSON: {{"mundo":"…","persona":"…","evitar":"…","estilo":"…","imgs":["…", …]}} con exactamente {len(beats)} elementos en "imgs"."""
     try:
         j = writer_json(prompt, key, log)
     except Exception as e:
@@ -634,10 +635,11 @@ Responde SOLO con JSON: {{"mundo":"…","persona":"…","estilo":"…","imgs":["
         return False
     mundo = str(j.get("mundo") or "").strip()[:160]
     persona = str(j.get("persona") or "").strip()[:90]
+    mundo_no = str(j.get("evitar") or "").strip()[:90]
     for b, im in zip(beats, imgs):
         # el plano y el sujeto primero (si el escenario va delante, todas salen como plano general); el escenario después
         who = ("; the person is " + persona) if persona and re.search(r"\b(person|man|woman|gamer|driver|he|she|his|her|hands?|feet|foot|face|racer|player)\b", im, re.I) else ""
-        b["img"] = (im.rstrip(".") + who + (". Setting: " + mundo if mundo else ""))[:460]
+        b["img"] = (im.rstrip(".") + who + (". Setting: " + mundo if mundo else "") + (". " + mundo_no if mundo_no else ""))[:480]
     if j.get("estilo"):
         piece["estilo_visual"] = str(j["estilo"])[:200]
     return True
