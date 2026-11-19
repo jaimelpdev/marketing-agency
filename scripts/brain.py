@@ -125,7 +125,8 @@ def gemini_models(gk, log=print):
         return (float(v.group(1)) if v else 0, "lite" not in m, "preview" not in m and "exp" not in m, -len(m))
     cand.sort(key=rank, reverse=True)
     lite = [m for m in cand if "lite" in m]
-    best = [m for m in cand if "lite" not in m][:1] + lite[:1]
+    # primero el «lite»: en el plan gratuito responde siempre y escribe bien; el grande se satura a menudo
+    best = lite[:1] + [m for m in cand if "lite" not in m][:1]
     log(f"    🤖 Redacción con Gemini: {', '.join(best) or 'ninguno disponible'}")
     return best
 
@@ -141,7 +142,7 @@ def writer_json(prompt, key, log=print):
     if gk and WRITER["gemini_ok"] is not False:
         for i, model in enumerate(WRITER["models"][:2] * 2):
             try:
-                r = requests.post(GEMINI + "/chat/completions", timeout=240,
+                r = requests.post(GEMINI + "/chat/completions", timeout=100,
                                   headers={"authorization": "Bearer " + gk, "content-type": "application/json"},
                                   json={"model": model, "temperature": 0.6, "response_format": {"type": "json_object"},
                                         "reasoning_effort": "low",
@@ -397,6 +398,9 @@ Responde SOLO con JSON: {{"frases":["…"],"caption":"…","cambios":["qué corr
     log(f"    🔎 Revisor: {len(cambios)} corrección(es)" + (f" — {'; '.join(cambios)[:220]}" if cambios else ""))
 
 
+USED = {}  # entradas del conocimiento ya usadas en esta ejecución, para no repetir tema en la semana
+
+
 def write_script(piece, user, key, log=print):
     """Guionista: reescribe la narración de un vídeo faceless como una explicación útil y concreta,
     frase a frase, con la duración que toca. Una llamada dedicada por vídeo da mucho mejor guion
@@ -418,6 +422,8 @@ CONOCIMIENTO VERIFICADO DEL SECTOR (tu base técnica: el consejo tiene que salir
 {saber}
 """ if saber else "") + f"""
 CÓMO TIENE QUE SER
+0a. No menciones circuitos, curvas, coches ni pilotos concretos (nada de "en Eau Rouge"): el consejo vale para cualquier pista.
+0b. Esta semana ya hay vídeos sobre: {', '.join(USED.get(user.get('id'), [])) or 'nada todavía'}. Elige una entrada DISTINTA.
 0. Si hay CONOCIMIENTO VERIFICADO: elige UNA entrada concreta que corresponda al TEMA. Si el tema no está cubierto o contradice el conocimiento, elige la entrada más cercana y cambia el tema y el gancho para que encajen. Todo lo técnico del vídeo sale de esa entrada (puedes explicarla con tus palabras y con ejemplos, nunca añadir afirmaciones técnicas nuevas).
 1. UNA sola idea por vídeo, explicada de principio a fin: gancho → por qué pasa → qué hacer exactamente (pasos concretos que el espectador puede aplicar hoy) → qué nota cuando lo hace bien → cierre.
 2. Entre {nmin} y {nmax} frases y entre {wmin} y {wmax} palabras en total. Cada frase de 6 a 14 palabras, una idea y UNA imagen posible por frase (algo que se pueda ver: una acción, un objeto, un lugar).
@@ -469,6 +475,7 @@ Responde SOLO con JSON: {{"entrada":"la entrada del conocimiento que explicas (o
                     piece[k] = v
             if j.get("entrada"):
                 log(f"    📚 Basado en: {str(j['entrada'])[:90]}")
+                USED.setdefault(user.get("id"), []).append(str(j["entrada"]).split(":")[0][:60])
             review_script(piece, negocio, key, log, saber)
             return True
         extra = f"\n\nTu respuesta anterior tenía {len(fr)} frases y {words} palabras: NO cumple. Escribe entre {nmin} y {nmax} frases y al menos {wmin} palabras."
@@ -500,7 +507,7 @@ REGLAS
 - {'La primera diapositiva engancha (error común o pregunta); las siguientes explican el porqué y el cómo paso a paso; la última resume y anima a guardar o comentar.' if carr else 'Una idea clara y aplicable.'}
 - Español de España, tuteo, sin voseo y sin palabras de Latinoamérica (di coche, no carro).
 - Nada de cifras, tiempos, porcentajes, ofertas, testimonios ni funciones del negocio que no estén en NEGOCIO o en el CONOCIMIENTO.
-- Sin emojis ni hashtags.
+- Sin emojis ni hashtags. No menciones circuitos, curvas, coches ni pilotos concretos.
 - "caption": 2-3 frases que resumen el consejo y acaban con una pregunta.
 
 Responde SOLO con JSON: {{"tema":"…","gancho":"…","escenas":[{{"titulo":"…","texto":"…"}}],"caption":"…"}}"""
