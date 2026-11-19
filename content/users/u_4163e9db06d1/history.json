@@ -439,6 +439,61 @@
       "look": 92,
       "serie": "Detrás de la app",
       "objetivo": "confianza"
+    },
+    {
+      "date": "2026-11-19",
+      "tema": "Mira lejos para anticipar frenada",
+      "formato": "reel",
+      "tipo": "reel",
+      "layout": "faceless",
+      "plantilla": 1827,
+      "look": 237,
+      "serie": "Tip rápido del día",
+      "objetivo": "alcance"
+    },
+    {
+      "date": "2026-11-20",
+      "tema": "Los neumáticos duros siempre son más rápidos",
+      "formato": "historia",
+      "tipo": "historia",
+      "layout": "faceless",
+      "plantilla": 794,
+      "look": 18,
+      "serie": "Mito o realidad",
+      "objetivo": ""
+    },
+    {
+      "date": "2026-11-23",
+      "tema": "Vértice tardío para ganar tiempo",
+      "formato": "reel",
+      "tipo": "reel",
+      "layout": "faceless",
+      "plantilla": 1192,
+      "look": 128,
+      "serie": "Tip rápido del día",
+      "objetivo": "alcance"
+    },
+    {
+      "date": "2026-11-24",
+      "tema": "Replays de vueltas para comparar y mejorar",
+      "formato": "reel",
+      "tipo": "reel",
+      "layout": "faceless",
+      "plantilla": 2241,
+      "look": 238,
+      "serie": "Detrás de la app",
+      "objetivo": "confianza"
+    },
+    {
+      "date": "2026-11-25",
+      "tema": "Llamada a envío de setup para Eau Roue",
+      "formato": "carrusel",
+      "tipo": "carrusel",
+      "layout": "cine",
+      "plantilla": 986,
+      "look": 92,
+      "serie": "Setup del seguidor",
+      "objetivo": "comunidad"
     }
   ]
 }

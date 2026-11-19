@@ -1,13 +1,13 @@
 {
  "version": 1,
  "creada": "2026-11-18T17:28:47",
- "actualizada": "2026-11-19T10:41:41",
- "semana": 9,
+ "actualizada": "2026-11-19T11:06:10",
+ "semana": 10,
  "fase": "comunidad",
  "objetivo_mes": "Generar reconocimiento de marca y captar a entusiastas del simracing",
  "arco_semana": {
-  "tema": "Desafío semanal: domina la curva Eau Roue en el circuito de Spa‑Francorchamps",
-  "porque": "Fomentar la participación activa, generar contenido de usuarios que muestren sus tiempos y crear conversación alrededor de una sección icónica del simracing"
+  "tema": "Desafío semanal: mejora tu tiempo en la curva Eau Roue con técnicas avanzadas",
+  "porque": "Mantener la conversación activa alrededor de una sección icónica, incentivar la generación de contenido de usuarios y reforzar el sentido de comunidad"
  },
  "mezcla": {
   "alcance": 20,
@@ -21,28 +21,28 @@
    "formato": "reel",
    "cuando": "lunes y jueves",
    "descripcion": "Consejo breve y práctico para mejorar en pista o configurar el coche",
-   "episodios": 15
+   "episodios": 24
   },
   {
    "nombre": "Setup del seguidor",
    "formato": "carrusel",
    "cuando": "miércoles",
    "descripcion": "Revisamos el setup enviado por un seguidor y damos ajustes profesionales",
-   "episodios": 5
+   "episodios": 9
   },
   {
    "nombre": "Mito o realidad",
    "formato": "historia",
    "cuando": "viernes",
    "descripcion": "Desmentimos ideas comunes del simracing con datos y ejemplos",
-   "episodios": 3
+   "episodios": 6
   },
   {
    "nombre": "Detrás de la app",
    "formato": "reel",
    "cuando": "martes",
    "descripcion": "Mostramos funcionalidades de la app y cómo sacarle el máximo provecho a los alumnos",
-   "episodios": 7
+   "episodios": 11
   }
  ],
  "aprendizajes": [
@@ -50,7 +50,8 @@
   "El carrusel \"Setup del seguidor\" genera muchos comentarios y fomenta interacción",
   "Las historias \"Mito o realidad\" crean conversaciones sin polémica innecesaria",
   "Los reels \"Detrás de la app\" mantienen alto tiempo de visualización y curiosidad por la IA",
-  "Publicar fuera del rango 18‑22 h reduce significativamente el alcance"
+  "Publicar fuera del rango 18‑22 h reduce significativamente el alcance",
+  "Los reels del desafío semanal aumentan la participación de usuarios en los comentarios"
  ],
  "que_evitar": [
   "Ventas directas en los primeros contenidos",
@@ -65,7 +66,8 @@
   "Video corto mostrando la interfaz de la app y sus funciones principales",
   "Live Q&A sobre setups y estrategias (promover participación previa)",
   "Colaboración con influencer de simracing para un challenge conjunto en la pista de Spa",
-  "Crear plantilla de desafío semanal para que los usuarios suban sus mejores vueltas y etiqueten la cuenta"
+  "Crear plantilla de desafío semanal para que los usuarios suban sus mejores vueltas y etiqueten la cuenta",
+  "Mini tutorial de análisis de telemetría en la app"
  ],
  "tono_comunidad": "Energético, motivador y cercano; habla como un compañero de pista que celebra cada progreso y anima a compartir experiencias",
  "hitos": [
@@ -76,5 +78,5 @@
   "Realizar el primer Live Q&A con 100 espectadores"
  ],
  "metricas": {},
- "resumen_para_dueño": "Esta semana reforzamos la fase de comunidad con el desafío Eau Roue, potenciamos las series que ya generan interacción y añadimos contenido de alto valor (presentación del fundador, demo de la app y un Live Q&A) para seguir construyendo confianza y cercanía sin ventas directas."
+ "resumen_para_dueño": "Continuamos la fase de comunidad reforzando el desafío Eau Roue y potenciando las series que ya generan interacción. Añadimos contenido de alto valor (presentación del fundador, demo de la app y un Live Q&A) para seguir construyendo confianza y cercanía sin ventas directas."
 }
