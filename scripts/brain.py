@@ -598,7 +598,8 @@ def art_direct(piece, user, key, log=print, beats=None):
     negocio = json.dumps({k: marca.get(k) for k in ("name", "about", "aud", "pillars") if marca.get(k)}, ensure_ascii=False)[:1200]
     # variedad de planos, como un vídeo editado de verdad: casi todo cerca y como mucho un plano general
     close = SHOTS[1:]
-    plan = [close[(i * 2) % len(close)] for i in range(len(beats))]
+    order = [0, 2, 3, 1, 4, 5]  # detalle, manos, cara, pantalla, pies, cenital
+    plan = [close[order[i % len(order)]] for i in range(len(beats))]
     if len(beats) > 3:
         plan[0] = SHOTS[0]
     frases = "\n".join(f"{i + 1}. [PLANO: {plan[i]}] {b.get('t', '')}" for i, b in enumerate(beats))
