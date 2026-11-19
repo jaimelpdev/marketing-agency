@@ -105,12 +105,41 @@ GEMINI_MODELS = ["gemini-2.5-flash", "gemini-2.5-flash-lite"]
 WRITER = {"gemini_ok": None}
 
 
+def gemini_models(gk, log=print):
+    """Los nombres de los modelos cambian con cada generación: se pregunta a Google cuáles hay y se elige el mejor «flash»."""
+    try:
+        r = requests.get(GEMINI + "/models", timeout=30, headers={"authorization": "Bearer " + gk})
+        if r.status_code in (401, 403):
+            log(f"    ⚠ Gemini rechaza la clave ({r.status_code}); uso Groq")
+            return []
+        r.raise_for_status()
+        ids = [str(m.get("id", "")).replace("models/", "") for m in r.json().get("data", [])]
+    except Exception as e:  # noqa: BLE001
+        log(f"    ⚠ No pude listar los modelos de Gemini ({str(e)[:100]}); pruebo los conocidos")
+        return GEMINI_MODELS
+    bad = ("image", "tts", "audio", "live", "embedding", "aqa", "vision", "thinking-exp", "learnlm", "gemma", "robotics", "computer")
+    cand = [m for m in ids if m.startswith("gemini-") and "flash" in m and not any(b in m for b in bad)]
+
+    def rank(m):
+        v = re.search(r"gemini-(\d+(?:\.\d+)?)", m)
+        return (float(v.group(1)) if v else 0, "lite" not in m, "preview" not in m and "exp" not in m, -len(m))
+    cand.sort(key=rank, reverse=True)
+    lite = [m for m in cand if "lite" in m]
+    best = [m for m in cand if "lite" not in m][:1] + lite[:1]
+    log(f"    🤖 Redacción con Gemini: {', '.join(best) or 'ninguno disponible'}")
+    return best
+
+
 def writer_json(prompt, key, log=print):
     """Redacción (guiones, revisión, diapositivas): Gemini gratis si hay GEMINI_API_KEY (escribe y sabe bastante
     más que los modelos de Groq); si no está o falla, Groq."""
     gk = os.environ.get("GEMINI_API_KEY", "").strip()
+    if gk and WRITER["gemini_ok"] is not False and not WRITER.get("models"):
+        WRITER["models"] = gemini_models(gk, log)
+        if not WRITER["models"]:
+            WRITER["gemini_ok"] = False
     if gk and WRITER["gemini_ok"] is not False:
-        for i, model in enumerate(GEMINI_MODELS * 2):
+        for i, model in enumerate(WRITER["models"][:2] * 2):
             try:
                 r = requests.post(GEMINI + "/chat/completions", timeout=120,
                                   headers={"authorization": "Bearer " + gk, "content-type": "application/json"},
@@ -130,6 +159,10 @@ def writer_json(prompt, key, log=print):
                 return json.loads(txt[a:b + 1])
             except Exception as e:  # noqa: BLE001
                 log(f"    ⚠ Gemini ({model}): {str(e)[:120]}")
+                WRITER["fails"] = WRITER.get("fails", 0) + 1
+                if WRITER["fails"] >= 6 and not WRITER.get("gemini_ok"):
+                    WRITER["gemini_ok"] = False
+                    break
                 time.sleep(5)
     return groq_json(prompt, key, log)
 
