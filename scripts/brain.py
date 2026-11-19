@@ -577,6 +577,17 @@ def beats_of(piece):
     return [b for b in out if b["t"]]
 
 
+SHOTS = [
+    "plano general que sitúa: la persona y el lugar completos (solo este uno en todo el vídeo)",
+    "primerísimo plano de detalle del objeto o pieza exacta de la que se habla",
+    "primer plano de las manos haciendo la acción",
+    "plano medio de la persona de frente, con la cara y la expresión que pide la frase",
+    "vista por encima del hombro hacia la pantalla o lo que mira la persona",
+    "primer plano de los pies o de otra parte del cuerpo haciendo la acción",
+    "plano cenital o lateral cercano del equipo en uso",
+]
+
+
 def art_direct(piece, user, key, log=print, beats=None):
     """Director de arte: convierte cada frase hablada de un vídeo faceless en una imagen concreta,
     fotografiable y anclada al mundo del negocio, para que lo que se ve sea lo que se dice."""
@@ -585,7 +596,12 @@ def art_direct(piece, user, key, log=print, beats=None):
         return False
     marca = ((user.get("config") or {}).get("marca") or {})
     negocio = json.dumps({k: marca.get(k) for k in ("name", "about", "aud", "pillars") if marca.get(k)}, ensure_ascii=False)[:1200]
-    frases = "\n".join(f"{i + 1}. {b.get('t', '')}" for i, b in enumerate(beats))
+    # variedad de planos, como un vídeo editado de verdad: casi todo cerca y como mucho un plano general
+    close = SHOTS[1:]
+    plan = [close[(i * 2) % len(close)] for i in range(len(beats))]
+    if len(beats) > 3:
+        plan[0] = SHOTS[0]
+    frases = "\n".join(f"{i + 1}. [PLANO: {plan[i]}] {b.get('t', '')}" for i, b in enumerate(beats))
     prompt = f"""Eres director de arte de vídeos cortos faceless (todo con imágenes generadas por IA). Para cada frase hablada eliges UNA imagen que la ilustre de forma que cualquiera entienda la relación al instante.
 
 NEGOCIO: {negocio}
@@ -595,8 +611,9 @@ FRASES (en orden):
 {frases}
 
 REGLAS
-1. "mundo": en INGLÉS, el escenario concreto y reconocible de este negocio que aparece en TODAS las imágenes, diciendo SIEMPRE en qué SALA o LUGAR está y con qué NO debe confundirse (por ejemplo, para simracing: "aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a big monitor showing a racing game, not a real car interior"; para una tienda de deporte: "sports store with football boots and jerseys on display"; para un hotel: "bright seaside boutique hotel in Mallorca"). Si la imagen pudiera parecer otra cosa genérica (un coche real, una tienda cualquiera), el "mundo" debe dejar claro la diferencia.
-2. Cada "img": en INGLÉS sencillo, máximo 28 palabras, describiendo qué se ve, desde dónde (plano) y qué está haciendo quién, empezando por el SUJETO principal, que se vea grande, nítido y de frente. Una sola idea por imagen. Debe mostrar literalmente la acción u objeto de la frase dentro del "mundo".
+0. Cada frase trae el PLANO que le toca: respétalo (así el vídeo cambia de plano en cada frase y no son todas iguales). Si el plano no encaja con la frase, usa el más cercano que sí encaje, pero NUNCA otro plano general.
+1. "mundo": en INGLÉS y en MÁXIMO 18 palabras, el escenario concreto y reconocible de este negocio que aparece en TODAS las imágenes, diciendo SIEMPRE en qué SALA o LUGAR está y con qué NO debe confundirse (por ejemplo, para simracing: "aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a big monitor showing a racing game, not a real car interior"; para una tienda de deporte: "sports store with football boots and jerseys on display"; para un hotel: "bright seaside boutique hotel in Mallorca"). Si la imagen pudiera parecer otra cosa genérica (un coche real, una tienda cualquiera), el "mundo" debe dejar claro la diferencia.
+2. Cada "img": en INGLÉS sencillo, máximo 28 palabras, EMPEZANDO por el tipo de plano en inglés ("extreme close-up of…", "close-up of hands…", "medium shot of…", "over-the-shoulder view of…") y luego qué se ve y qué está haciendo quién, con el SUJETO principal que se vea grande, nítido y de frente. Una sola idea por imagen. Debe mostrar literalmente la acción u objeto de la frase dentro del "mundo".
 2b. PROHIBIDO lo genérico: nada de "a car", "a sports car on a road", "a person smiling", "a city", paisajes ni planos de recurso que valdrían para cualquier vídeo. Cada imagen tiene que contener algo que SOLO tiene sentido con esa frase y con este negocio: la persona del vídeo haciendo esa acción concreta con el equipo o el producto del negocio, el objeto exacto del que se habla en primer plano, o la pantalla/el lugar exacto. Si una imagen podría ilustrar otra frase del vídeo, cámbiala.
 3. Si la frase es abstracta o técnica (datos, ajustes, una sensación, un consejo), tradúcela a algo fotografiable: un objeto o una pantalla con gráficos de colores sin texto legible, una mano haciendo la acción, una cara con la emoción, un antes/después visible. Nunca dejes conceptos sin cuerpo como "pressure" o "balance" sin un objeto que los muestre.
 4. Sin texto, letras, números ni logos en la imagen. Sin famosos. Las personas son anónimas y consistentes (misma persona en todo el vídeo).
@@ -612,9 +629,10 @@ Responde SOLO con JSON: {{"mundo":"…","estilo":"…","imgs":["…", …]}} con
     if len(imgs) < len(beats):
         log(f"    ⚠ Director de arte: devolvió {len(imgs)} de {len(beats)} imágenes; se mantienen las originales")
         return False
-    mundo = str(j.get("mundo") or "").strip()[:240]
+    mundo = str(j.get("mundo") or "").strip()[:160]
     for b, im in zip(beats, imgs):
-        b["img"] = ((mundo + ". " if mundo else "") + im)[:420]  # el mundo del negocio primero: es lo que más pesa en la imagen
+        # el plano y el sujeto primero (si el escenario va delante, todas salen como plano general); el escenario después
+        b["img"] = (im.rstrip(".") + (". Setting: " + mundo if mundo else ""))[:420]
     if j.get("estilo"):
         piece["estilo_visual"] = str(j["estilo"])[:200]
     return True
