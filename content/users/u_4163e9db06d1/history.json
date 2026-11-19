@@ -494,6 +494,61 @@
       "look": 92,
       "serie": "Setup del seguidor",
       "objetivo": "comunidad"
+    },
+    {
+      "date": "2026-11-19",
+      "tema": "Vértice tardío en Eau Roue",
+      "formato": "lista",
+      "tipo": "reel",
+      "layout": "faceless",
+      "plantilla": 407,
+      "look": 237,
+      "serie": "Tip rápido del día",
+      "objetivo": "alcance"
+    },
+    {
+      "date": "2026-11-20",
+      "tema": "Force feedback y tiempos de vuelta",
+      "formato": "mito vs realidad",
+      "tipo": "historia",
+      "layout": "faceless",
+      "plantilla": 587,
+      "look": 18,
+      "serie": "Mito o realidad",
+      "objetivo": "comunidad"
+    },
+    {
+      "date": "2026-11-23",
+      "tema": "Trail braking en Eau Roue",
+      "formato": "lista",
+      "tipo": "reel",
+      "layout": "faceless",
+      "plantilla": 4,
+      "look": 128,
+      "serie": "Tip rápido del día",
+      "objetivo": "alcance"
+    },
+    {
+      "date": "2026-11-24",
+      "tema": "Analiza telemetría en tiempo real con la app",
+      "formato": "mini tutorial",
+      "tipo": "reel",
+      "layout": "faceless",
+      "plantilla": 633,
+      "look": 238,
+      "serie": "Detrás de la app",
+      "objetivo": "confianza"
+    },
+    {
+      "date": "2026-11-25",
+      "tema": "Llamada a envío de setup para Eau Roue",
+      "formato": "guía paso a paso",
+      "tipo": "carrusel",
+      "layout": "cine",
+      "plantilla": 1915,
+      "look": 92,
+      "serie": "",
+      "objetivo": "comunidad"
     }
   ]
 }

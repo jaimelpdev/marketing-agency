@@ -1,8 +1,8 @@
 {
  "version": 1,
  "creada": "2026-11-18T17:28:47",
- "actualizada": "2026-11-19T11:06:10",
- "semana": 10,
+ "actualizada": "2026-11-19T12:00:48",
+ "semana": 11,
  "fase": "comunidad",
  "objetivo_mes": "Generar reconocimiento de marca y captar a entusiastas del simracing",
  "arco_semana": {
@@ -21,7 +21,7 @@
    "formato": "reel",
    "cuando": "lunes y jueves",
    "descripcion": "Consejo breve y práctico para mejorar en pista o configurar el coche",
-   "episodios": 24
+   "episodios": 26
   },
   {
    "nombre": "Setup del seguidor",
@@ -35,14 +35,14 @@
    "formato": "historia",
    "cuando": "viernes",
    "descripcion": "Desmentimos ideas comunes del simracing con datos y ejemplos",
-   "episodios": 6
+   "episodios": 7
   },
   {
    "nombre": "Detrás de la app",
    "formato": "reel",
    "cuando": "martes",
    "descripcion": "Mostramos funcionalidades de la app y cómo sacarle el máximo provecho a los alumnos",
-   "episodios": 11
+   "episodios": 12
   }
  ],
  "aprendizajes": [
@@ -78,5 +78,5 @@
   "Realizar el primer Live Q&A con 100 espectadores"
  ],
  "metricas": {},
- "resumen_para_dueño": "Continuamos la fase de comunidad reforzando el desafío Eau Roue y potenciando las series que ya generan interacción. Añadimos contenido de alto valor (presentación del fundador, demo de la app y un Live Q&A) para seguir construyendo confianza y cercanía sin ventas directas."
+ "resumen_para_dueño": "Esta semana reforzamos el desafío Eau Roue con contenido puntual en todas las series, manteniendo la mezcla enfocada en comunidad y confianza. Aprovechamos los formatos que ya generan interacción (reels de tips, carruseles de setups y historias de mito) y preparamos el Live Q&A para seguir construyendo confianza sin ventas directas."
 }
