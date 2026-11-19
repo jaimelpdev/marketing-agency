@@ -549,6 +549,50 @@
       "look": 92,
       "serie": "",
       "objetivo": "comunidad"
+    },
+    {
+      "date": "2026-11-19",
+      "tema": "Mira lejos",
+      "formato": "reel",
+      "tipo": "reel",
+      "layout": "faceless",
+      "plantilla": 564,
+      "look": 237,
+      "serie": "Tip rápido del día",
+      "objetivo": "alcance"
+    },
+    {
+      "date": "2026-11-20",
+      "tema": "Mito o realidad: El uso del pedal de freno en curvas rápidas",
+      "formato": "historia",
+      "tipo": "historia",
+      "layout": "faceless",
+      "plantilla": 914,
+      "look": 18,
+      "serie": "",
+      "objetivo": ""
+    },
+    {
+      "date": "2026-11-21",
+      "tema": "Subir de marcha suavemente",
+      "formato": "post",
+      "tipo": "post",
+      "layout": "clasico",
+      "plantilla": 1161,
+      "look": 128,
+      "serie": "",
+      "objetivo": ""
+    },
+    {
+      "date": "2026-11-23",
+      "tema": "Setup del seguidor #3 - Ajuste de suspensión",
+      "formato": "carrusel",
+      "tipo": "carrusel",
+      "layout": "cine",
+      "plantilla": 2282,
+      "look": 238,
+      "serie": "",
+      "objetivo": "comunidad"
     }
   ]
 }

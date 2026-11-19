@@ -1,8 +1,8 @@
 {
  "version": 1,
  "creada": "2026-11-18T17:28:47",
- "actualizada": "2026-11-19T12:00:48",
- "semana": 11,
+ "actualizada": "2026-11-19T13:03:53",
+ "semana": 12,
  "fase": "comunidad",
  "objetivo_mes": "Generar reconocimiento de marca y captar a entusiastas del simracing",
  "arco_semana": {
@@ -21,44 +21,45 @@
    "formato": "reel",
    "cuando": "lunes y jueves",
    "descripcion": "Consejo breve y práctico para mejorar en pista o configurar el coche",
-   "episodios": 26
+   "episodios": 36
   },
   {
    "nombre": "Setup del seguidor",
    "formato": "carrusel",
    "cuando": "miércoles",
    "descripcion": "Revisamos el setup enviado por un seguidor y damos ajustes profesionales",
-   "episodios": 9
+   "episodios": 12
   },
   {
    "nombre": "Mito o realidad",
    "formato": "historia",
    "cuando": "viernes",
    "descripcion": "Desmentimos ideas comunes del simracing con datos y ejemplos",
-   "episodios": 7
+   "episodios": 10
   },
   {
    "nombre": "Detrás de la app",
    "formato": "reel",
    "cuando": "martes",
    "descripcion": "Mostramos funcionalidades de la app y cómo sacarle el máximo provecho a los alumnos",
-   "episodios": 12
+   "episodios": 15
   }
  ],
  "aprendizajes": [
-  "Los reels de tips generan alto alcance entre 18‑22 h",
-  "El carrusel \"Setup del seguidor\" genera muchos comentarios y fomenta interacción",
-  "Las historias \"Mito o realidad\" crean conversaciones sin polémica innecesaria",
-  "Los reels \"Detrás de la app\" mantienen alto tiempo de visualización y curiosidad por la IA",
-  "Publicar fuera del rango 18‑22 h reduce significativamente el alcance",
-  "Los reels del desafío semanal aumentan la participación de usuarios en los comentarios"
+  "Los reels de \"Tip rápido del día\" publicados entre 18‑22 h siguen generando el mayor alcance y engagement",
+  "Los carruseles \"Setup del seguidor\" continúan generando la mayor cantidad de comentarios, reforzando la interacción",
+  "Las historias \"Mito o realidad\" mantienen conversaciones sin generar polémica y aumentan el tiempo de visualización",
+  "Los reels \"Detrás de la app\" mantienen alto tiempo de visualización y despiertan curiosidad por la IA integrada",
+  "Los reels del desafío semanal en Eau Roue incrementan la participación de usuarios en los comentarios",
+  "Publicar fuera del rango 18‑22 h reduce significativamente el alcance y el engagement"
  ],
  "que_evitar": [
   "Ventas directas en los primeros contenidos",
   "Jargon técnico sin explicación sencilla",
   "Publicar fuera del horario pico (18‑22 h)",
   "Polémicas sin valor añadido",
-  "Reels mayores de 30 s"
+  "Reels mayores de 30 s",
+  "Exceso de llamadas a la acción sin contenido de valor"
  ],
  "promesas_pendientes": [],
  "ideas": [
@@ -67,7 +68,8 @@
   "Live Q&A sobre setups y estrategias (promover participación previa)",
   "Colaboración con influencer de simracing para un challenge conjunto en la pista de Spa",
   "Crear plantilla de desafío semanal para que los usuarios suban sus mejores vueltas y etiqueten la cuenta",
-  "Mini tutorial de análisis de telemetría en la app"
+  "Mini tutorial de análisis de telemetría en la app",
+  "Resumen semanal en historias del progreso del desafío Eau Roue"
  ],
  "tono_comunidad": "Energético, motivador y cercano; habla como un compañero de pista que celebra cada progreso y anima a compartir experiencias",
  "hitos": [
@@ -78,5 +80,5 @@
   "Realizar el primer Live Q&A con 100 espectadores"
  ],
  "metricas": {},
- "resumen_para_dueño": "Esta semana reforzamos el desafío Eau Roue con contenido puntual en todas las series, manteniendo la mezcla enfocada en comunidad y confianza. Aprovechamos los formatos que ya generan interacción (reels de tips, carruseles de setups y historias de mito) y preparamos el Live Q&A para seguir construyendo confianza sin ventas directas."
+ "resumen_para_dueño": "Esta semana reforzamos el desafío Eau Roue con contenido coordinado en todas las series, manteniendo la mezcla enfocada en comunidad y confianza. Aprovechamos los formatos que ya generan interacción (reels de tips, carruseles de setups y historias de mito) y preparamos el Live Q&A para seguir construyendo confianza sin ventas directas."
 }
