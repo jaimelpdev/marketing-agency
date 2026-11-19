@@ -593,6 +593,61 @@
       "look": 238,
       "serie": "",
       "objetivo": "comunidad"
+    },
+    {
+      "date": "2026-11-19",
+      "tema": "Vértice tardío en la chicane de Spa",
+      "formato": "secreto",
+      "tipo": "reel",
+      "layout": "faceless",
+      "plantilla": 2232,
+      "look": 164,
+      "serie": "Tip rápido del día",
+      "objetivo": "alcance"
+    },
+    {
+      "date": "2026-11-20",
+      "tema": "¿El force feedback siempre ayuda en la chicane de Spa?",
+      "formato": "mito vs realidad",
+      "tipo": "historia",
+      "layout": "faceless",
+      "plantilla": 1937,
+      "look": 18,
+      "serie": "Mito o realidad",
+      "objetivo": ""
+    },
+    {
+      "date": "2026-11-21",
+      "tema": "Telemetría en tiempo real para la chicane de Spa",
+      "formato": "detalles detrás de cámaras",
+      "tipo": "reel",
+      "layout": "faceless",
+      "plantilla": 610,
+      "look": 128,
+      "serie": "Detrás de la app",
+      "objetivo": "confianza"
+    },
+    {
+      "date": "2026-11-23",
+      "tema": "Setup del seguidor para la chicane de Spa",
+      "formato": "guía paso a paso",
+      "tipo": "carrusel",
+      "layout": "cine",
+      "plantilla": 965,
+      "look": 238,
+      "serie": "Setup del seguidor",
+      "objetivo": "comunidad"
+    },
+    {
+      "date": "2026-11-24",
+      "tema": "30 % del tiempo se pierde en la chicane de Spa",
+      "formato": "checklist para guardar",
+      "tipo": "post",
+      "layout": "cine",
+      "plantilla": 1630,
+      "look": 92,
+      "serie": "",
+      "objetivo": ""
     }
   ]
 }

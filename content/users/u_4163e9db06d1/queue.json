@@ -4,9 +4,9 @@
     "date": "2026-11-19",
     "source": "auto",
     "tipo": "reel",
-    "tema": "Mira lejos en las curvas",
-    "publishAt": "2026-11-19T19:30:00+01:00",
-    "caption": "Dejar de mirar al suelo es clave para ganar velocidad en la pista. ¿A dónde sueles fijar la vista cuando conduces?\n\n#simracing #técnicas #pitstop #circuito #drift\n\n🎵 «AleXZavesa - Lo squalo (EDM)» de AlexZavesa (CC BY 3.0)",
+    "tema": "Vértice tardío en curvas rápidas",
+    "publishAt": "2026-11-19T20:36:20.960213+01:00",
+    "caption": "Retrasar el vértice de la curva te permite acelerar antes y con más seguridad. ¿En qué curva te cuesta más mantener el control?\n\n#simracing #Spa #TipRápido #Telemetría #PilotoVirtual\n\n🎵 «Super Power Pop Rock» de Kara Square (CC BY 3.0)",
     "media": [
       "media/u_4163e9db06d1/2026-11-19/2026-11-19-01-reel/video.mp4"
     ],
@@ -16,30 +16,35 @@
     "veo": {
       "clips": [
         {
-          "t": "Mirar justo delante del morro de tu coche arruina tus tiempos. Tus manos siguen siempre de forma natural hacia donde dirige la vista.",
-          "prompt": "an aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a big monitor showing a racing game, not a real car interior. driver's face close‑up, eyes fixed on the virtual car's nose on the monitor, missing the track ahead. Then: driver's hands on steering wheel turning naturally toward the area where his gaze is directed. smooth natural camera movement, vertical 9:16 video, photorealistic, bright natural light, sharp focus, no text, no captions, no logos, no brand names, no watermark",
+          "t": "Muchos pilotos entran demasiado pronto al interior de la curva. Eso te obliga a girar el volante con fuerza al acelerar.",
+          "prompt": "wide shot of a gamer sitting in an aluminium sim racing rig with a bucket seat, steering wheel and pedals inside a bright home gaming room, a big monitor showing a racing game, looking intently at the screen. Setting: aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a big monitor showing a racing game, not a real car inter. Then: Setting: aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a big monitor showing a racing game, not a real car inter. smooth natural camera movement, vertical 9:16 video, photorealistic, bright natural light, sharp focus, no text, no captions, no logos, no brand names, no watermark",
           "dur": 8
         },
         {
-          "t": "Si miras al suelo, vas a reaccionar tarde en cada giro. Levanta la vista y busca el vértice antes de llegar a la curva.",
-          "prompt": "an aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a big monitor showing a racing game, not a real car interior. driver's head tilted down, eyes on floor, missing the track curvature. Then: driver lifts head, eyes scanning ahead toward the upcoming curve's apex on the monitor. smooth natural camera movement, vertical 9:16 video, photorealistic, bright natural light, sharp focus, no text, no captions, no logos, no brand names, no watermark",
+          "t": "El coche se descontrola y pierdes valioso tiempo en la recta. La solución es buscar un vértice algo más tardío de lo habitual.",
+          "prompt": "over-the-shoulder view towards the monitor showing a virtual racing car losing control and spinning out on a track. Setting: aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a big monitor showing a racing game, not a real car inter. Then: Setting: aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a big monitor showing a racing game, not a real car inter. smooth natural camera movement, vertical 9:16 video, photorealistic, bright natural light, sharp focus, no text, no captions, no logos, no brand names, no watermark",
           "dur": 8
         },
         {
-          "t": "Anticipa siempre la salida de la curva con suficiente antelación.",
-          "prompt": "an aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a big monitor showing a racing game, not a real car interior. driver gazes ahead, eyes on the curve exit point, preparing to accelerate. smooth natural camera movement, vertical 9:16 video, photorealistic, bright natural light, sharp focus, no text, no captions, no logos, no brand names, no watermark",
+          "t": "Retrasar el punto de giro te permite abrir antes las ruedas.",
+          "prompt": "close-up of feet on the racing pedals, showing sudden braking action. Setting: aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a big monitor showing a racing game, not a real car inter. smooth natural camera movement, vertical 9:16 video, photorealistic, bright natural light, sharp focus, no text, no captions, no logos, no brand names, no watermark",
           "dur": 6
         },
         {
-          "t": "Notas que el coche fluye con mayor suavidad y total control. Sígueme para aprender más trucos de pilotaje en simuladores.",
-          "prompt": "an aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a big monitor showing a racing game, not a real car interior. driver smiles, hands relaxed on wheel, virtual car gliding smoothly along the track. Then: driver waves hand toward camera, inviting viewers, with the sim rig in background. smooth natural camera movement, vertical 9:16 video, photorealistic, bright natural light, sharp focus, no text, no captions, no logos, no brand names, no watermark",
+          "t": "Así puedes enderezar antes la dirección hacia la salida. Acelera de forma progresiva con el coche ya recto.",
+          "prompt": "top-down shot of the sim racing rig setup, focusing on the steering wheel alignment during a turn. Setting: aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a big monitor showing a racing game, not a real car inter. Then: Setting: aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a big monitor showing a racing game, not a real car inter. smooth natural camera movement, vertical 9:16 video, photorealistic, bright natural light, sharp focus, no text, no captions, no logos, no brand names, no watermark",
           "dur": 8
+        },
+        {
+          "t": "Notarás que sales con mucha más velocidad punta. Sígueme para descubrir más trucos de conducción.",
+          "prompt": "medium shot of the gamer from the front, smiling with satisfaction and confidence. Setting: aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a big monitor showing a racing game, not a real car inter. Then: Setting: aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a big monitor showing a racing game, not a real car inter. smooth natural camera movement, vertical 9:16 video, photorealistic, bright natural light, sharp focus, no text, no captions, no logos, no brand names, no watermark",
+          "dur": 6
         }
       ],
       "voz": "es-ES-AlvaroNeural",
-      "ritmo": "+16%",
+      "ritmo": "+8%",
       "musica": "energetica",
-      "hashtags": "#simracing #técnicas #pitstop #circuito #drift"
+      "hashtags": "#simracing #Spa #TipRápido #Telemetría #PilotoVirtual"
     }
   },
   {
@@ -85,7 +90,7 @@
     "date": "2026-11-19",
     "source": "auto",
     "tipo": "historia",
-    "tema": "Cómo usar el freno en curvas rápidas",
+    "tema": "El force feedback en curvas",
     "publishAt": "2026-11-20T09:00:00+01:00",
     "caption": "",
     "media": [
@@ -97,40 +102,26 @@
     "veo": {
       "clips": [
         {
-          "t": "¿Usas freno de mano en curvas rápidas? Eso hace que el coche pierda todo el control.",
-          "prompt": "an aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a large monitor displaying a racing game, not a real car interior. A hand gripping the handbrake on the aluminium sim racing rig, the rig in a bright home gaming room with a large monitor showing a racing track. Then: Wheel turned sharply, hand on steering wheel, rig in bright home gaming room, monitor showing car sliding off track. smooth natural camera movement, vertical 9:16 video, photorealistic, bright natural light, sharp focus, no text, no captions, no logos, no brand names, no watermark",
+          "t": "¿El force feedback siempre te salva en las curvas? Muchos suben al máximo la fuerza del volante para notar más.",
+          "prompt": "wide shot of the sim racing rig with the person seated, looking at the monitor, hands on wheel, in the home gaming room. Setting: sim racing rig with seat, wheel and pedals in home gaming room, monitor shows race, not real car. Then: Setting: sim racing rig with seat, wheel and pedals in home gaming room, monitor shows race, not real car. smooth natural camera movement, vertical 9:16 video, photorealistic, bright natural light, sharp focus, no text, no captions, no logos, no brand names, no watermark",
           "dur": 8
         },
         {
-          "t": "Frena fuerte en recta y suelta el pedal despacio al girar.",
-          "prompt": "an aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a large monitor displaying a racing game, not a real car interior. Hand on brake pedal, foot pressing strongly, rig in bright gaming room, monitor showing straight line with brake light effect. smooth natural camera movement, vertical 9:16 video, photorealistic, bright natural light, sharp focus, no text, no captions, no logos, no brand names, no watermark",
+          "t": "Un force feedback saturado esconde la pérdida de agarre real.",
+          "prompt": "over-the-shoulder view of the monitor displaying a racing game with a saturated force feedback warning graphic, the person’s hand on wheel. Setting: sim racing rig with seat, wheel and pedals in home gaming room, monitor shows race, not real car. smooth natural camera movement, vertical 9:16 video, photorealistic, bright natural light, sharp focus, no text, no captions, no logos, no brand names, no watermark",
           "dur": 6
         },
         {
-          "t": "Así mantienes el agarre y el morro entra perfecto. Sígueme para mejorar tus tiempos en cada circuito.",
-          "prompt": "an aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a large monitor displaying a racing game, not a real car interior. Wheel turning smoothly, hand on wheel, rig in bright gaming room, monitor showing car nose entering corner with perfect grip. Then: Hand pointing to monitor, rig in bright gaming room, screen showing a downward trending lap time graph. smooth natural camera movement, vertical 9:16 video, photorealistic, bright natural light, sharp focus, no text, no captions, no logos, no brand names, no watermark",
+          "t": "Ajusta la intensidad para notar cada deslizamiento sin recortar información. Sigue nuestra cuenta para dominar tu simulador con la app.",
+          "prompt": "close-up of hands turning the wheel gently, adjusting force feedback intensity knob on the wheel controller. Setting: sim racing rig with seat, wheel and pedals in home gaming room, monitor shows race, not real car. Then: Setting: sim racing rig with seat, wheel and pedals in home gaming room, monitor shows race, not real car. smooth natural camera movement, vertical 9:16 video, photorealistic, bright natural light, sharp focus, no text, no captions, no logos, no brand names, no watermark",
           "dur": 8
         }
       ],
       "voz": "es-ES-ElviraNeural",
       "ritmo": "+8%",
-      "musica": "divertida",
+      "musica": "chill",
       "hashtags": ""
     }
-  },
-  {
-    "id": "2026-11-19-03-post",
-    "date": "2026-11-19",
-    "source": "auto",
-    "tipo": "post",
-    "tema": "Subir de marcha suavemente",
-    "publishAt": "2026-11-21T13:00:00+01:00",
-    "caption": "Mantener la estabilidad al cambiar de marcha es clave para no perder velocidad en tus trazadas. ¿Sueles cuidar la suavidad al subir de marcha en pista?\n\n#simracing #subirdeMarcha #circuito #tiempo",
-    "media": [
-      "media/u_4163e9db06d1/2026-11-19/2026-11-19-03-post/01.jpg"
-    ],
-    "status": "prueba",
-    "attempts": 0
   },
   {
     "id": "2026-11-18-02-reel",
@@ -181,6 +172,54 @@
     }
   },
   {
+    "id": "2026-11-19-03-reel",
+    "date": "2026-11-19",
+    "source": "auto",
+    "tipo": "reel",
+    "tema": "Frenada degresiva para girar mejor",
+    "publishAt": "2026-11-21T20:00:00+01:00",
+    "caption": "Aprende a soltar el freno de forma progresiva mientras giras el volante para mejorar el paso por curva. ¿Qué curva te cuesta más trazar?\n\n#simracing #Telemetría #Spa #App #Racing\n\n🎵 «Spencer Newton - Energy (Original Mix)(Electro House)» de Spencer Newton (CC BY 3.0)",
+    "media": [
+      "media/u_4163e9db06d1/2026-11-19/2026-11-19-03-reel/video.mp4"
+    ],
+    "status": "prueba",
+    "attempts": 0,
+    "cover": "media/u_4163e9db06d1/2026-11-19/2026-11-19-03-reel/cover.jpg",
+    "veo": {
+      "clips": [
+        {
+          "t": "Muchos pilotos sueltan el freno de golpe al girar. Eso hace que el morro pierda agarre y el coche subvira.",
+          "prompt": "wide shot of a man sitting in an aluminium sim racing rig inside a bright home gaming room, looking frustrated at the monitor showing a racing game. Setting: aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a big monitor showing a racing game, not a real car inter. Then: Setting: aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a big monitor showing a racing game, not a real car inter. smooth natural camera movement, vertical 9:16 video, photorealistic, bright natural light, sharp focus, no text, no captions, no logos, no brand names, no watermark",
+          "dur": 8
+        },
+        {
+          "t": "La clave es la frenada degresiva o trail braking. Empiezas frenando fuerte con el coche totalmente recto.",
+          "prompt": "over-the-shoulder view looking at a big monitor showing a racing game track from a driver perspective. Setting: aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a big monitor showing a racing game, not a real car inter. Then: Setting: aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a big monitor showing a racing game, not a real car inter. smooth natural camera movement, vertical 9:16 video, photorealistic, bright natural light, sharp focus, no text, no captions, no logos, no brand names, no watermark",
+          "dur": 8
+        },
+        {
+          "t": "Al girar el volante, vas soltando el pedal muy despacio.",
+          "prompt": "close-up of feet pressing down hard on simulator pedals in a gaming setup. Setting: aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a big monitor showing a racing game, not a real car inter. smooth natural camera movement, vertical 9:16 video, photorealistic, bright natural light, sharp focus, no text, no captions, no logos, no brand names, no watermark",
+          "dur": 6
+        },
+        {
+          "t": "Cuanto más giras las ruedas, menos presión mantienes. Ese peso extra en las ruedas delanteras ayuda a que el coche gire.",
+          "prompt": "overhead close-up of a racing steering wheel being turned smoothly to the side. Setting: aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a big monitor showing a racing game, not a real car inter. Then: Setting: aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a big monitor showing a racing game, not a real car inter. smooth natural camera movement, vertical 9:16 video, photorealistic, bright natural light, sharp focus, no text, no captions, no logos, no brand names, no watermark",
+          "dur": 8
+        },
+        {
+          "t": "Notarás que el paso por curva es mucho más limpio. Prueba esto hoy en tu simulador para mejorar tus trazadas.",
+          "prompt": "medium shot of a man in front, smiling and looking satisfied while sitting in his racing simulator. Setting: aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a big monitor showing a racing game, not a real car inter. Then: Setting: aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a big monitor showing a racing game, not a real car inter. smooth natural camera movement, vertical 9:16 video, photorealistic, bright natural light, sharp focus, no text, no captions, no logos, no brand names, no watermark",
+          "dur": 8
+        }
+      ],
+      "voz": "es-ES-AlvaroNeural",
+      "ritmo": "+8%",
+      "musica": "energetica",
+      "hashtags": "#simracing #Telemetría #Spa #App #Racing"
+    }
+  },
+  {
     "id": "2026-11-18-03-carrusel",
     "date": "2026-11-18",
     "source": "auto",
@@ -206,9 +245,9 @@
     "date": "2026-11-19",
     "source": "auto",
     "tipo": "carrusel",
-    "tema": "Setup del seguidor #3 - Ajuste de suspensión",
-    "publishAt": "2026-11-23T14:00:00+01:00",
-    "caption": "Aprende a configurar tu coche paso a paso sin cambiar demasiadas cosas a la vez para notar mejoras reales. ¿Qué parámetro sueles ajustar primero en tu setup?",
+    "tema": "Setup del coche y técnica",
+    "publishAt": "2026-11-23T13:00:00+01:00",
+    "caption": "Mejora tus tiempos aplicando estos consejos básicos de configuración y técnica en tus entrenamientos. ¿Qué parámetro sueles cambiar primero en tu coche?\n\n#simracing #Setup #Spa #Comunidad #Racing",
     "media": [
       "media/u_4163e9db06d1/2026-11-19/2026-11-19-04-carrusel/01.jpg",
       "media/u_4163e9db06d1/2026-11-19/2026-11-19-04-carrusel/02.jpg",
@@ -272,5 +311,19 @@
       "musica": "chill",
       "hashtags": ""
     }
+  },
+  {
+    "id": "2026-11-19-05-post",
+    "date": "2026-11-19",
+    "source": "auto",
+    "tipo": "post",
+    "tema": "El tiempo se escapa en la chicane",
+    "publishAt": "2026-11-24T12:00:00+01:00",
+    "caption": "Pequeños errores en la trazada y en el uso del freno te hacen perder valiosas décimas por vuelta. ¿En qué parte del circuito te cuesta más mantener el coche estable?\n\n#simracing #Spa #DatoCurioso #RacingTips #Pilotos",
+    "media": [
+      "media/u_4163e9db06d1/2026-11-19/2026-11-19-05-post/01.jpg"
+    ],
+    "status": "prueba",
+    "attempts": 0
   }
 ]
