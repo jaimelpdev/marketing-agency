@@ -141,10 +141,20 @@ def writer_json(prompt, key, log=print):
     if gk and WRITER["gemini_ok"] is not False:
         for i, model in enumerate(WRITER["models"][:2] * 2):
             try:
-                r = requests.post(GEMINI + "/chat/completions", timeout=120,
+                r = requests.post(GEMINI + "/chat/completions", timeout=240,
                                   headers={"authorization": "Bearer " + gk, "content-type": "application/json"},
                                   json={"model": model, "temperature": 0.6, "response_format": {"type": "json_object"},
+                                        "reasoning_effort": "low",
                                         "messages": [{"role": "user", "content": prompt}]})
+                if r.status_code == 400 and "reasoning" in r.text.lower():  # modelo sin ese ajuste
+                    r = requests.post(GEMINI + "/chat/completions", timeout=240,
+                                      headers={"authorization": "Bearer " + gk, "content-type": "application/json"},
+                                      json={"model": model, "temperature": 0.6, "response_format": {"type": "json_object"},
+                                            "messages": [{"role": "user", "content": prompt}]})
+                if r.status_code in (500, 502, 503, 504):  # saturado: esperar y probar el siguiente
+                    log(f"    ⏳ Gemini ({model}) saturado ({r.status_code}), reintento…")
+                    time.sleep(15 + 10 * i)
+                    continue
                 if r.status_code in (401, 403):
                     WRITER["gemini_ok"] = False
                     log(f"    ⚠ Gemini rechaza la clave ({r.status_code}); uso Groq")
@@ -155,6 +165,8 @@ def writer_json(prompt, key, log=print):
                 r.raise_for_status()
                 txt = r.json()["choices"][0]["message"]["content"]
                 a, b = txt.find("{"), txt.rfind("}")
+                if not WRITER.get("gemini_ok"):
+                    log(f"    ✅ Gemini responde ({model})")
                 WRITER["gemini_ok"] = True
                 return json.loads(txt[a:b + 1])
             except Exception as e:  # noqa: BLE001
