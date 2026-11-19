@@ -612,7 +612,7 @@ FRASES (en orden):
 {frases}
 
 REGLAS
-0. Cada frase trae el PLANO que le toca: respétalo (así el vídeo cambia de plano en cada frase y no son todas iguales). Si el plano no encaja con la frase, usa el más cercano que sí encaje, pero NUNCA otro plano general.
+0. Cada frase trae un PLANO SUGERIDO para que el vídeo cambie de plano en cada frase. Lo primero es que la imagen muestre LO QUE DICE LA FRASE (si habla de girar el volante, manos en el volante; de frenar, el pie en el freno; de ver la curva, la pantalla). Si el plano sugerido no encaja, elige otro de cerca que sí encaje, sin repetir el plano de la frase anterior y sin más planos generales. Si la frase describe un error, muestra el error; si describe la solución, muestra la solución hecha bien.
 1. "mundo": en INGLÉS y en MÁXIMO 18 palabras, el escenario concreto y reconocible de este negocio que aparece en TODAS las imágenes, diciendo SIEMPRE en qué SALA o LUGAR está y con qué NO debe confundirse (por ejemplo, para simracing: "aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a big monitor showing a racing game, not a real car interior"; para una tienda de deporte: "sports store with football boots and jerseys on display"; para un hotel: "bright seaside boutique hotel in Mallorca"). Si la imagen pudiera parecer otra cosa genérica (un coche real, una tienda cualquiera), el "mundo" debe dejar claro la diferencia.
 2. Cada "img": en INGLÉS sencillo, máximo 28 palabras, EMPEZANDO por el tipo de plano en inglés ("extreme close-up of…", "close-up of hands…", "medium shot of…", "over-the-shoulder view of…") y luego qué se ve y qué está haciendo quién, con el SUJETO principal que se vea grande, nítido y de frente. Una sola idea por imagen. Debe mostrar literalmente la acción u objeto de la frase dentro del "mundo".
 2b. PROHIBIDO lo genérico: nada de "a car", "a sports car on a road", "a person smiling", "a city", paisajes ni planos de recurso que valdrían para cualquier vídeo. Cada imagen tiene que contener algo que SOLO tiene sentido con esa frase y con este negocio: la persona del vídeo haciendo esa acción concreta con el equipo o el producto del negocio, el objeto exacto del que se habla en primer plano, o la pantalla/el lugar exacto. Si una imagen podría ilustrar otra frase del vídeo, cámbiala.
@@ -620,7 +620,9 @@ REGLAS
 4. Sin texto, letras, números ni logos en la imagen. Sin famosos. Las personas son anónimas y consistentes (misma persona en todo el vídeo).
 5. "estilo": en INGLÉS, la misma fotografía para todo el vídeo: luz brillante y nítida, colores vivos, nada de desenfoques ni oscuridad.
 
-Responde SOLO con JSON: {{"mundo":"…","estilo":"…","imgs":["…", …]}} con exactamente {len(beats)} elementos en "imgs"."""
+6. "persona": en INGLÉS, máximo 12 palabras, cómo es la persona del vídeo (edad aproximada, pelo, ropa), para que sea siempre la misma.
+
+Responde SOLO con JSON: {{"mundo":"…","persona":"…","estilo":"…","imgs":["…", …]}} con exactamente {len(beats)} elementos en "imgs"."""
     try:
         j = writer_json(prompt, key, log)
     except Exception as e:
@@ -631,9 +633,11 @@ Responde SOLO con JSON: {{"mundo":"…","estilo":"…","imgs":["…", …]}} con
         log(f"    ⚠ Director de arte: devolvió {len(imgs)} de {len(beats)} imágenes; se mantienen las originales")
         return False
     mundo = str(j.get("mundo") or "").strip()[:160]
+    persona = str(j.get("persona") or "").strip()[:90]
     for b, im in zip(beats, imgs):
         # el plano y el sujeto primero (si el escenario va delante, todas salen como plano general); el escenario después
-        b["img"] = (im.rstrip(".") + (". Setting: " + mundo if mundo else ""))[:420]
+        who = ("; the person is " + persona) if persona and re.search(r"\b(person|man|woman|gamer|driver|he|she|his|her|hands?|feet|foot|face|racer|player)\b", im, re.I) else ""
+        b["img"] = (im.rstrip(".") + who + (". Setting: " + mundo if mundo else ""))[:460]
     if j.get("estilo"):
         piece["estilo_visual"] = str(j["estilo"])[:200]
     return True
