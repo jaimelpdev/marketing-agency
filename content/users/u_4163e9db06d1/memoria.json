@@ -24,13 +24,6 @@
    "episodios": 36
   },
   {
-   "nombre": "Setup del seguidor",
-   "formato": "carrusel",
-   "cuando": "miércoles",
-   "descripcion": "Revisamos el setup enviado por un seguidor y damos ajustes profesionales",
-   "episodios": 12
-  },
-  {
    "nombre": "Mito o realidad",
    "formato": "historia",
    "cuando": "viernes",

@@ -604,7 +604,7 @@ REGLAS
 
 Responde SOLO con JSON: {{"mundo":"…","estilo":"…","imgs":["…", …]}} con exactamente {len(beats)} elementos en "imgs"."""
     try:
-        j = groq_json(prompt, key, log)
+        j = writer_json(prompt, key, log)
     except Exception as e:
         log(f"    ⚠ Director de arte: {e}")
         return False
