@@ -648,6 +648,61 @@
       "look": 92,
       "serie": "",
       "objetivo": ""
+    },
+    {
+      "date": "2026-11-19",
+      "tema": "Frenado tardío en curva Eau Roue",
+      "formato": "error que cuesta tiempo",
+      "tipo": "reel",
+      "layout": "faceless",
+      "plantilla": 1349,
+      "look": 237,
+      "serie": "Tip rápido del día",
+      "objetivo": "alcance"
+    },
+    {
+      "date": "2026-11-20",
+      "tema": "Mito del ABS en simracing",
+      "formato": "mito vs realidad",
+      "tipo": "historia",
+      "layout": "faceless",
+      "plantilla": 1936,
+      "look": 18,
+      "serie": "Mito o realidad",
+      "objetivo": "comunidad"
+    },
+    {
+      "date": "2026-11-21",
+      "tema": "IA ajusta tu setup al vuelo",
+      "formato": "secreto",
+      "tipo": "reel",
+      "layout": "faceless",
+      "plantilla": 1642,
+      "look": 128,
+      "serie": "Detrás de la app",
+      "objetivo": "confianza"
+    },
+    {
+      "date": "2026-11-22",
+      "tema": "Desafío Eau Roue – comparación de setups",
+      "formato": "comparativa A vs B",
+      "tipo": "carrusel",
+      "layout": "cine",
+      "plantilla": 2139,
+      "look": 238,
+      "serie": "Setup del seguidor",
+      "objetivo": "comunidad"
+    },
+    {
+      "date": "2026-11-23",
+      "tema": "Telemetría: identifica el punto de frenado óptimo",
+      "formato": "tutorial paso a paso",
+      "tipo": "post",
+      "layout": "cine",
+      "plantilla": 1052,
+      "look": 92,
+      "serie": "",
+      "objetivo": ""
     }
   ]
 }
