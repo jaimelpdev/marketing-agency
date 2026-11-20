@@ -1,6 +1,7 @@
 """Modo Veo (gratis): la agencia prepara los clips que hay que generar en Google Flow (Veo 3.1 Lite),
 la persona los sube desde la app y aquí se montan con la voz, los subtítulos y la música de la agencia."""
 import math
+import re
 import subprocess
 import tempfile
 import urllib.request
@@ -13,6 +14,19 @@ MAX_CLIPS = {"reel": 5, "historia": 3}  # 50 créditos gratis al día en Flow = 
 TAIL = ("smooth natural camera movement, vertical 9:16 video, photorealistic, bright natural light, sharp focus, "
         "no text, no captions, no logos, no brand names, no watermark")
 WORDS_PER_S = 2.7
+
+
+def _action(b):
+    """La acción de una imagen del director de arte, sin el escenario ni la lista de qué evitar."""
+    im = str(b.get("img") or "").strip()
+    im = re.split(r"\.\s*Setting:", im)[0]
+    im = re.split(r";\s*the person is", im)[0]
+    return im.strip().rstrip(".")
+
+
+def _setting(b):
+    m = re.search(r"Setting:\s*(.+)$", str(b.get("img") or ""))
+    return m.group(1).strip().rstrip(".")[:260] if m else ""
 
 
 def plan_clips(piece):
@@ -34,12 +48,12 @@ def plan_clips(piece):
         text = " ".join(str(b["t"]).strip() for b in g)
         est = len(text.split()) / WORDS_PER_S + 0.5
         dur = 4 if est <= 4.2 else 6 if est <= 6.2 else 8
-        img = str(g[0].get("img") or g[0]["t"]).strip().rstrip(".")
-        if len(g) > 1 and g[-1].get("img"):
-            # la segunda frase del grupo aporta la acción final del clip
-            last = str(g[-1]["img"]).split(". ")[-1].strip().rstrip(".")
-            img += f". Then: {last}"
-        clips.append({"t": text, "prompt": f"{img}. {TAIL}"[:1400], "dur": dur})
+        acts = [_action(b) for b in g if _action(b)]
+        setting = _setting(g[0])
+        img = acts[0] if acts else str(g[0]["t"])
+        if len(acts) > 1:
+            img += ". Then the camera moves to: " + acts[-1]  # la última frase del grupo aporta el final del clip
+        clips.append({"t": text, "prompt": (img + (". Setting: " + setting if setting else "") + ". " + TAIL)[:1400], "dur": dur})
     return clips
 
 
