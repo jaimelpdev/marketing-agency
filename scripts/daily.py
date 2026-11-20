@@ -557,7 +557,7 @@ def plan_user(browser, user, key, force=False, redo=None):
             log("  ⚠ El estratega no pudo actualizar la memoria (se usa la anterior):", e)
     allowed = plan_conf.get("formatos") or ["reel", "historia", "post", "carrusel"]
     nets = {a.get("platform") for a in (user.get("social") or [])}
-    if not (user.get("ig") or {}).get("connected") and "instagram" not in nets and (nets or not os.environ.get("PRUEBA")):
+    if not (user.get("ig") or {}).get("connected") and "instagram" not in nets and (nets or not (os.environ.get("PRUEBA") or user.get("_prueba"))):
         allowed = [f for f in allowed if f == "reel"] or ["reel"]  # solo TikTok/YouTube: solo vídeo
     voices = {**VOICES, **conf.get("voces", {}), "_elegida": plan_conf.get("voz_elegida") or ""}
     cfg = dict(conf.get("marca", {}))
@@ -932,7 +932,7 @@ def reset_user(user):
 def ready(u):
     conf = u.get("config") or {}
     marca = conf.get("marca") or {}
-    return bool((marca.get("name") or marca.get("about")) and ((u.get("ig") or {}).get("connected") or u.get("social") or os.environ.get("PRUEBA")))
+    return bool((marca.get("name") or marca.get("about")) and ((u.get("ig") or {}).get("connected") or u.get("social") or os.environ.get("PRUEBA") or u.get("_prueba")))
 
 
 def expire_veo(user, queue, udir, tz):
@@ -1263,6 +1263,10 @@ def main():
         browser = pw.chromium.launch(args=["--no-sandbox", "--autoplay-policy=no-user-gesture-required"],
                                      executable_path=os.environ.get("CHROME_PATH") or None)
         if has_requests:
+            for u in users:  # sin redes y pidiendo algo desde la app: se hace en modo prueba (no se publica nada)
+                if u.get("requests") and not u.get("social") and not (u.get("ig") or {}).get("connected"):
+                    u["_prueba"] = True
+                    log(f"🧪 {u.get('name')}: sin redes conectadas — lo que ha pedido se crea en modo prueba, sin publicar.")
             errors += process_requests(browser, users, key)
             users = api("GET", "/admin/users").get("users", [])
         for u in users:  # red de seguridad: nada borrado o sustituido sigue programado en las redes
