@@ -703,6 +703,61 @@
       "look": 92,
       "serie": "",
       "objetivo": ""
+    },
+    {
+      "date": "2026-11-20",
+      "tema": "Force feedback siempre ayuda",
+      "formato": "mito o realidad",
+      "tipo": "historia",
+      "layout": "faceless",
+      "plantilla": 512,
+      "look": 78,
+      "serie": "",
+      "objetivo": ""
+    },
+    {
+      "date": "2026-11-21",
+      "tema": "Telemetría en la app",
+      "formato": "mini tutorial",
+      "tipo": "reel",
+      "layout": "faceless",
+      "plantilla": 1561,
+      "look": 188,
+      "serie": "Detrás de la app",
+      "objetivo": "confianza"
+    },
+    {
+      "date": "2026-11-22",
+      "tema": "Llamada a envío de setup para Eau Roue",
+      "formato": "call to action",
+      "tipo": "carrusel",
+      "layout": "tarjeta",
+      "plantilla": 306,
+      "look": 42,
+      "serie": "Setup del seguidor",
+      "objetivo": "comunidad"
+    },
+    {
+      "date": "2026-11-23",
+      "tema": "Trail braking en fases",
+      "formato": "top",
+      "tipo": "reel",
+      "layout": "faceless",
+      "plantilla": 1355,
+      "look": 152,
+      "serie": "Tip rápido del día",
+      "objetivo": "alcance"
+    },
+    {
+      "date": "2026-11-26",
+      "tema": "Setup destacado de Eau Roue",
+      "formato": "opinion polémica",
+      "tipo": "post",
+      "layout": "cine",
+      "plantilla": 100,
+      "look": 6,
+      "serie": "",
+      "objetivo": "comunidad"
     }
   ]
 }

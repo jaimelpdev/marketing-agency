@@ -21,7 +21,7 @@
    "formato": "reel",
    "cuando": "lunes y jueves",
    "descripcion": "Consejo breve y práctico para mejorar en pista o configurar el coche",
-   "episodios": 40
+   "episodios": 41
   },
   {
    "nombre": "Mito o realidad",
@@ -35,14 +35,14 @@
    "formato": "reel",
    "cuando": "martes",
    "descripcion": "Mostramos funcionalidades de la app y cómo sacarle el máximo provecho a los alumnos",
-   "episodios": 18
+   "episodios": 19
   },
   {
    "nombre": "Setup del seguidor",
    "formato": "carrusel",
    "cuando": "miércoles",
    "descripcion": "Guías paso a paso de setups enviados por la comunidad, con llamado a participar",
-   "episodios": 15
+   "episodios": 16
   }
  ],
  "aprendizajes": [
