@@ -341,7 +341,7 @@ async function handle(req, env) {
     // ===== vale de subida (1 hora) para mandar clips directamente desde Google Flow sin la clave de la cuenta =====
     const tkm = p.match(/^\/api\/clips\/([\w-]+)\/ticket$/);
     if (tkm && method === "POST") {
-      const item = ((u.status && u.status.queue) || []).find(q => q.id === tkm[1]);
+      const item = veoItem(u, tkm[1]);
       if (!item || !item.veo) return err(404, "not_found", "Esa pieza no tiene clips de Veo.");
       const t = randomId(18);
       await env.KV.put(`ticket:${t}`, JSON.stringify({ uid: u.id, iid: tkm[1] }), { expirationTtl: 3600 });
@@ -351,7 +351,7 @@ async function handle(req, env) {
     const clm = p.match(/^\/api\/clips\/([\w-]+)\/(\d)$/);
     if (clm) {
       const iid = clm[1], k = Number(clm[2]);
-      const item = ((u.status && u.status.queue) || []).find(q => q.id === iid);
+      const item = veoItem(u, iid);
       if (!item || !item.veo || !Array.isArray(item.veo.clips) || k >= item.veo.clips.length) return err(404, "not_found", "Esa pieza no tiene ese clip.");
       u.veo = u.veo || {};
       const have = new Set(u.veo[iid] || []);
@@ -634,7 +634,8 @@ async function handle(req, env) {
       if (!u) return err(404, "not_found", "Usuario no encontrado.");
       const b = await req.json().catch(() => ({}));
       const memoria = b.memoria && typeof b.memoria === "object" ? JSON.parse(JSON.stringify(b.memoria).slice(0, 20000) || "null") : (u.status && u.status.memoria) || null;
-      u.status = { updated: new Date().toISOString(), memoria, estrategia: String(b.estrategia || (u.status && u.status.estrategia) || ""), queue: (Array.isArray(b.queue) ? b.queue.slice(0, 60) : []).filter(x => !new Set((u.requests && u.requests.remove) || []).has(x && x.id)) }; // las eliminadas no vuelven
+      u.status = { updated: new Date().toISOString(), memoria, estrategia: String(b.estrategia || (u.status && u.status.estrategia) || ""), queue: (Array.isArray(b.queue) ? b.queue.slice(0, 60) : []).filter(x => !new Set((u.requests && u.requests.remove) || []).has(x && x.id)), // las eliminadas no vuelven
+        bolsa: Array.isArray(b.bolsa) ? b.bolsa.slice(0, 40) : ((u.status && u.status.bolsa) || []) };  // guiones de vídeo esperando sus clips de Veo
       await putUser(env, u);
       return json({ ok: true });
     }
@@ -652,10 +653,16 @@ async function handle(req, env) {
   return err(404, "not_found", "Ruta no encontrada.");
 }
 
+// Pieza con clips de Veo: de lo programado o de la bolsa de guiones de vídeo
+function veoItem(u, id) {
+  const st = u.status || {};
+  return (st.queue || []).find(q => q.id === id) || (st.bolsa || []).find(q => q.id === id) || null;
+}
+
 // Guarda un clip de Veo y, cuando están todos los de la pieza, pide a la agencia que la monte.
 async function storeClip(env, u, item, k, buf) {
   const iid = item.id;
-  if (new Date(item.publishAt) < new Date(Date.now() + 15 * 60e3)) return err(400, "bad_request", "Esta pieza ya se publica en nada; no da tiempo a montarla.");
+  if (item.publishAt && new Date(item.publishAt) < new Date(Date.now() + 15 * 60e3)) return err(400, "bad_request", "Esta pieza ya se publica en nada; no da tiempo a montarla.");
   if (buf.byteLength < 10000) return err(400, "bad_request", "El vídeo está vacío o no es válido.");
   if (buf.byteLength > 24 * 1024 * 1024) return err(413, "too_large", "El clip pesa más de 24 MB. Descárgalo en 720p.");
   await env.KV.put(`clip:${u.id}:${iid}:${k}`, buf, { expirationTtl: 30 * 86400 });
@@ -680,7 +687,7 @@ async function handleTicket(req, env, t, k) {
   if (!tk) return err(401, "unauthorized", "El vale de subida no existe o ha caducado.");
   const u = await getUser(env, tk.uid);
   if (!u) return err(404, "not_found", "Cuenta no encontrada.");
-  const item = ((u.status && u.status.queue) || []).find(q => q.id === tk.iid);
+  const item = veoItem(u, tk.iid);
   if (!item || !item.veo || !Array.isArray(item.veo.clips) || k >= item.veo.clips.length) return err(404, "not_found", "Esa pieza no tiene ese clip.");
   return storeClip(env, u, item, k, await req.arrayBuffer());
 }

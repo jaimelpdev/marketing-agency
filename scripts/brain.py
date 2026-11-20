@@ -410,7 +410,9 @@ Comprueba cada frase como lo haría un profesional del sector:
 - Mantén el mismo número de frases, el orden, el tono, el tuteo en español de España y una longitud parecida por frase (6-14 palabras).
 - Revisa también el texto de la publicación con las mismas reglas.
 
-Responde SOLO con JSON: {{"frases":["…"],"caption":"…","cambios":["qué corregiste y por qué, muy breve"]}}"""
+Por último, puntúa de 1 a 10 el vídeo YA CORREGIDO como pieza para publicar (gancho que para el scroll, utilidad real, claridad); sé exigente: 8+ solo si de verdad destaca.
+
+Responde SOLO con JSON: {{"frases":["…"],"caption":"…","cambios":["qué corregiste y por qué, muy breve"],"nota":7}}"""
     try:
         j = writer_json(prompt, key, log)
     except Exception as e:  # noqa: BLE001
@@ -426,8 +428,12 @@ Responde SOLO con JSON: {{"frases":["…"],"caption":"…","cambios":["qué corr
     cap = de_voseo(str(j.get("caption") or "").strip())
     if len(cap) > 40:
         piece["caption"] = cap[:600]
+    try:
+        piece["nota"] = max(1.0, min(10.0, float(j.get("nota"))))
+    except (TypeError, ValueError):
+        pass
     cambios = [str(c) for c in (j.get("cambios") or []) if str(c).strip()]
-    log(f"    🔎 Revisor: {len(cambios)} corrección(es)" + (f" — {'; '.join(cambios)[:220]}" if cambios else ""))
+    log(f"    🔎 Revisor (nota {piece.get('nota', '-')}): {len(cambios)} corrección(es)" + (f" — {'; '.join(cambios)[:220]}" if cambios else ""))
 
 
 USED = {}  # entradas del conocimiento ya usadas en esta ejecución, para no repetir tema en la semana

@@ -1956,7 +1956,7 @@ function confFromState() {
 function showLogin(msg) { $("#loginOv").classList.add("on"); setStatus($("#lgStatus"), msg || "", msg ? "err" : ""); }
 function logout(expired) { HOST.key = ""; HOST.me = null; ls("ma_key", ""); try { localStorage.removeItem("ma_key"); localStorage.removeItem("ma_cfg"); localStorage.removeItem("ma_today"); localStorage.removeItem("ma_hist"); } catch (e) { } $("#acctModal").classList.remove("on"); showLogin(expired ? "Tu sesión ha caducado. Vuelve a entrar." : ""); }
 function fmtWhen(iso) { try { const d = new Date(iso); return d.toLocaleDateString("es-ES", { weekday: "short", day: "numeric" }) + " " + d.toLocaleTimeString("es-ES", { hour: "2-digit", minute: "2-digit" }); } catch (e) { return iso; } }
-const QSTATE = { scheduled: ["📅 programado", "var(--ok)"], pending: ["🕒 programado", "var(--muted)"], published: ["✅ publicado", "var(--ok)"], failed: ["⚠️ falló", "#ff6b61"], expired: ["⏭ omitido", "var(--muted)"], esperando_veo: ["🎥 esperando vídeo", "var(--accent)"], sin_veo: ["⏭ sin vídeo: no salió", "var(--muted)"], prueba: ["🧪 prueba", "var(--muted)"] };
+const QSTATE = { scheduled: ["📅 programado", "var(--ok)"], pending: ["🕒 programado", "var(--muted)"], published: ["✅ publicado", "var(--ok)"], failed: ["⚠️ falló", "#ff6b61"], expired: ["⏭ omitido", "var(--muted)"], esperando_veo: ["🎥 esperando vídeo", "var(--accent)"], sin_veo: ["⏭ sin vídeo: no salió", "var(--muted)"], prueba: ["🧪 prueba", "var(--muted)"], hueco: ["🎥 hueco: el mejor vídeo listo", "var(--accent)"] };
 function reqs() { return (HOST.me && HOST.me.requests) || {}; }
 async function askRedo(it) {
   const st = $("#acStatus");
@@ -2011,7 +2011,7 @@ function queueList(box, q) {
   if (!q || !q.length) { box.appendChild(el("div", { class: "note", text: isConnected() ? "Aún no hay nada programado. La agencia planifica cada mañana." : "Conecta tus redes y la agencia empezará a planificar y publicar." })); return; }
   const R = reqs(), redoing = R.redo || [];
   q.forEach(it => {
-    const upcoming = (it.status === "pending" || it.status === "scheduled" || it.status === "esperando_veo") && new Date(it.publishAt) > new Date();
+    const upcoming = (it.status === "pending" || it.status === "scheduled" || it.status === "esperando_veo" || it.status === "hueco" || it.status === "prueba") && new Date(it.publishAt) > new Date();
     const busy = redoing.includes(it.id) || (R.replan && upcoming);
     const st = busy ? ["🔄 rehaciendo…", "var(--accent2)"] : (QSTATE[it.status] || [it.status, "var(--muted)"]);
     const thumb = it.cover || (it.media && it.media[0] && !/\.mp4$/i.test(it.media[0]) ? it.media[0] : "");
@@ -2051,15 +2051,25 @@ function renderSocial() {
 }
 function renderSchedule() {
   const b = $("#schedBox"); b.innerHTML = ""; const me = HOST.me; if (!me) return;
-  const q = (me.status && me.status.queue) || [];
-  if (!isConnected()) { b.appendChild(el("div", { class: "sched" }, [el("h3", { text: "📲 Falta un paso" }), el("p", { style: "margin:0 0 10px", text: "Conecta tu Instagram, TikTok o YouTube para que la agencia publique sola." }), el("button", { class: "pill", text: "Conectar redes", onclick: () => openAcct() })])); return; }
+  const q = (me.status && me.status.queue) || [], bol = (me.status && me.status.bolsa) || [];
+  if (!isConnected() && !bol.length && !q.some(x => x.status === "prueba" || x.status === "hueco")) { b.appendChild(el("div", { class: "sched" }, [el("h3", { text: "📲 Falta un paso" }), el("p", { style: "margin:0 0 10px", text: "Conecta tu Instagram, TikTok o YouTube para que la agencia publique sola." }), el("button", { class: "pill", text: "Conectar redes", onclick: () => openAcct() })])); return; }
   if (!q.length) {
     const R0 = reqs();
     const msg = R0.reset ? "♻️ Reiniciando la cuenta: en unos minutos se anula lo programado y se borran los archivos." : R0.replan ? "🚀 La agencia está creando tus vídeos y programándolos en tus redes. Tarda entre 20 y 40 minutos; no tienes que hacer nada." : "La agencia crea y publica sola cada semana. Pulsa el botón para que empiece ya.";
     b.appendChild(el("div", { class: "sched" }, [el("h3", { text: "🤖 Piloto automático" }), el("div", { class: "busy-note", text: msg })])); return;
   }
-  const box = el("div"); queueList(box, q.filter(x => x.status === "pending" || x.status === "scheduled" || x.status === "esperando_veo").slice(0, 6).concat(q.filter(x => x.status !== "pending" && x.status !== "scheduled" && x.status !== "esperando_veo").slice(-3)));
+  const box = el("div"); queueList(box, q.filter(x => x.status === "pending" || x.status === "scheduled" || x.status === "esperando_veo" || x.status === "hueco" || x.status === "prueba").slice(0, 6).concat(q.filter(x => x.status !== "pending" && x.status !== "scheduled" && x.status !== "esperando_veo" && x.status !== "hueco" && x.status !== "prueba").slice(-3)));
   const R = reqs(), nc = (R.create || []).length;
+  if (bol.length) {
+    const bb = el("div"); const lis = bol.filter(x => x.status === "lista").length, pen = bol.filter(x => x.status === "pendiente");
+    pen.slice(0, 8).forEach(it => {
+      const nHave = ((me.veo || {})[it.id] || []).length, nAll = (it.veo && it.veo.clips || []).length;
+      const row = el("div", { class: "qitem" }, [el("span", { class: "w", text: "nota " + (it.nota || "-") }), el("span", { text: (TYPES[it.tipo] ? TYPES[it.tipo].icon + " " : "") + (it.tema || "") }), el("span", { class: "s", text: (reqs().veo || []).includes(it.id) ? "🎬 montando…" : "🎬 " + nHave + "/" + nAll + " clips" })]);
+      if (nAll) { row.classList.add("clk"); row.addEventListener("click", () => toggleVeo(row, it)); }
+      bb.appendChild(row);
+    });
+    b.appendChild(el("div", { class: "sched" }, [el("h3", { text: "🎥 Bolsa de vídeos Veo" }), el("p", { style: "margin:0 0 8px;font-size:14px", text: lis + " vídeo(s) listos para los próximos huecos · " + pen.length + " guion(es) esperando clips. Cada día se generan los clips que da el cupo gratis y en cada hueco sale el mejor vídeo listo." }), bb]));
+  }
   b.appendChild(el("div", { class: "sched" }, [el("h3", { text: "🤖 Piloto automático" + (HOST.plan.auto === false ? " (en pausa)" : "") }), nc ? el("div", { class: "busy-note", text: "📝 Creando " + (nc === 1 ? "la publicación" : nc + " publicaciones") + " que pediste en el chat…" }) : null, R.replan ? el("div", { class: "busy-note", text: "🔄 Rehaciendo la semana… estará lista en 20-40 minutos." }) : null, me.status.estrategia ? el("p", { style: "margin:0 0 8px;font-size:14px", text: me.status.estrategia }) : null, box]));
 }
 function chipRow(box, items, isOn, onClick) { box.innerHTML = ""; items.forEach(([v, t]) => { const b = el("button", { class: "chip sm" + (isOn(v) ? " on" : ""), text: t }); b.addEventListener("click", () => onClick(v)); box.appendChild(b); }); }
@@ -2232,7 +2242,7 @@ async function delPiece(it, b) {
   try { const j = await api("/api/delete", { method: "POST", body: { id: it.id } }); HOST.me.requests = j.requests; if (j.status) HOST.me.status = j.status; renderSchedule(); setStatus($("#genStatus"), "🗑 Eliminada «" + (it.tema || it.tipo) + "». Ya no se publicará.", "ok"); }
   catch (er) { b.disabled = false; b.textContent = old; setStatus($("#genStatus"), er.message, "err"); }
 }
-function upcomingQ() { const q = (HOST.me && HOST.me.status && HOST.me.status.queue) || []; return q.filter(x => (x.status === "pending" || x.status === "scheduled" || x.status === "esperando_veo") && new Date(x.publishAt) > new Date()).sort((a, b) => new Date(a.publishAt) - new Date(b.publishAt)); }
+function upcomingQ() { const q = (HOST.me && HOST.me.status && HOST.me.status.queue) || []; return q.filter(x => (x.status === "pending" || x.status === "scheduled" || x.status === "esperando_veo" || x.status === "hueco" || x.status === "prueba") && new Date(x.publishAt) > new Date()).sort((a, b) => new Date(a.publishAt) - new Date(b.publishAt)); }
 function thumbOf(it, cls) { const src = it.cover || (it.media && it.media[0] && !/\.mp4$/i.test(it.media[0]) ? it.media[0] : ""); return src ? el("img", { class: cls, src, alt: "", loading: "lazy" }) : el("div", { class: cls + " ph", text: (TYPES[it.tipo] || {}).icon || "🎬" }); }
 function relWhen(iso) { const d = (new Date(iso) - new Date()) / 36e5; if (d < 1) return "en menos de 1 hora"; if (d < 24) return "en " + Math.round(d) + " h"; const n = Math.round(d / 24); return "en " + n + (n === 1 ? " día" : " días"); }
 function busyNotes() {
@@ -2273,7 +2283,7 @@ function renderCal() {
     el("div", { class: "quick" }, [el("button", { class: "main", text: R.replan ? "🔄 Rehaciendo la semana…" : "🔄 Rehacer toda la semana", onclick: async e => { e.currentTarget.disabled = true; try { const j = await api("/api/replan", { method: "POST" }); HOST.me.requests = j.requests; renderSchedule(); setStatus($("#genStatus"), "🔄 Rehaciendo la semana. Lo nuevo sustituye a lo programado en unos minutos.", "ok"); } catch (er) { setStatus($("#genStatus"), er.message, "err"); } } })])]);
   { const rb = head.querySelector(".quick .main"); rb.disabled = !!R.replan || !isConnected(); }
   box.appendChild(head); busyNotes().forEach(t => box.appendChild(el("div", { class: "pcard busy-note", style: "margin-bottom:10px", text: t })));
-  const up = q.filter(x => (x.status === "pending" || x.status === "scheduled" || x.status === "esperando_veo" || x.status === "failed") && new Date(x.publishAt) > new Date(Date.now() - 864e5) && x.status !== "published");
+  const up = q.filter(x => (x.status === "pending" || x.status === "scheduled" || x.status === "esperando_veo" || x.status === "hueco" || x.status === "prueba" || x.status === "failed") && new Date(x.publishAt) > new Date(Date.now() - 864e5) && x.status !== "published");
   const past = q.filter(x => !up.includes(x)).reverse();
   if (!up.length) box.appendChild(el("div", { class: "pcard note", style: "margin-top:0", text: "No hay nada programado. Pulsa «Rehacer toda la semana» o pídele algo al chat." }));
   let lastDay = "";
@@ -2289,7 +2299,7 @@ function renderCal() {
       c.after(el("div", { class: "pv" }, it.media.map(m => /\.mp4$/i.test(m) ? el("video", { src: m, controls: "", playsinline: "", preload: "metadata", ...(it.cover ? { poster: it.cover } : {}) }) : el("img", { src: m, loading: "lazy" })))); };
     th.addEventListener("click", toggle);
     if (it.media && it.media.length) ac.appendChild(el("button", { text: "▶ Ver", onclick: toggle }));
-    const canEdit = !isPast && (it.status === "pending" || it.status === "scheduled" || it.status === "esperando_veo") && new Date(it.publishAt) > new Date() && !st[0].includes("rehaciendo");
+    const canEdit = !isPast && (it.status === "pending" || it.status === "scheduled" || it.status === "esperando_veo" || it.status === "hueco" || it.status === "prueba") && new Date(it.publishAt) > new Date() && !st[0].includes("rehaciendo");
     if (canEdit) ac.appendChild(el("button", { text: "🔄 Rehacer", onclick: () => askRedo(it) }));
     if (!isPast && (canEdit || it.status === "failed")) { let armed = 0; ac.appendChild(el("button", { class: "danger", text: "🗑 Eliminar", onclick: e => { const b = e.currentTarget; if (Date.now() - armed > 5000) { armed = Date.now(); b.textContent = "¿Seguro? Toca otra vez"; setTimeout(() => { if (Date.now() - armed >= 5000) b.textContent = "🗑 Eliminar"; }, 5100); return; } delPiece(it, b); } })); }
     return c;

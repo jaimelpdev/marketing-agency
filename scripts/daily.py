@@ -526,13 +526,15 @@ def plan_user(browser, user, key, force=False, redo=None):
             api("PUT", f"/admin/status/{user['id']}", {"queue": summarize(queue)})
         except Exception as e:
             log("  ⚠ No se pudo avisar a la app:", e)
+    if (udir / "bolsa.json").exists():
+        fill_bolsa(user, queue)
     if not (force or redo or os.environ.get("FORCE")):
         backfill_veo(user, queue, udir, tz)
-        if any(q.get("date") == today and q.get("source") == "auto" for q in queue):
+        if any(q.get("date") == today and q.get("source") == "auto" for q in queue) or (udir / "plans" / f"{today}.json").exists():
             log("  Ya se planificó hoy.")
             think_only(user, key, queue)
             return False
-        future = [q for q in queue if q.get("status") in ("pending", "scheduled", "esperando_veo") and datetime.fromisoformat(q["publishAt"]) > now + timedelta(hours=24)]
+        future = [q for q in queue if q.get("status") in ("pending", "scheduled", "esperando_veo", "hueco") and datetime.fromisoformat(q["publishAt"]) > now + timedelta(hours=24)]
         if modo == "smart" and future:
             log(f"  Plan en marcha ({len(future)} piezas más allá de mañana). Hoy no hace falta planificar.")
             think_only(user, key, queue)
@@ -683,6 +685,22 @@ def plan_user(browser, user, key, force=False, redo=None):
                 if len(bs) >= 2 and brain.art_direct(vp, user, key, lambda *a: log(*a), beats=bs):
                     page.evaluate("""a=>{const p=S.today.videos[a[0]];const b=a[1];p.visual=b[0].img;(p.escenas||[]).forEach((e,i)=>{if(b[i+1])e.visual=b[i+1].img;});}""", [vi, bs])
                     log(f"    🎨 Imágenes dirigidas para «{vp.get('tema', '')}»: {bs[0]['img'][:90]}…")
+        # 🎥 modo «Veo obligatorio»: los vídeos no se renderizan con imágenes; van a la bolsa y el calendario guarda su hueco
+        huecos, bolsa_pieces = [], []
+        if str(plan_conf.get("veo_modo", "si_hay")) == "obligatorio" and not redo:
+            import bolsa
+            import veo
+            keep = []
+            for vi, vp in enumerate(vids):
+                if vp.get("layout") == "faceless" and TYPES_VIDEO(vp) and len(vp.get("beats") or []) >= 2 and veo.plan_clips(vp):
+                    huecos.append({"tipo": vp["tipo"], "dia": vp.get("dia", 0), "hora": vp.get("hora"), "idx": vi})
+                    bolsa_pieces.append(vp)
+                else:
+                    keep.append(vi)
+            if bolsa_pieces:
+                bolsa.add(user, bolsa_pieces, today, lambda *a: log(*a))
+                page.evaluate("k=>{S.today.videos=k.map(i=>S.today.videos[i]);}", keep)
+                n = len(keep)
         _pt = os.environ.get("POLLINATIONS_TOKEN", "").strip()
         log("  Motor de imágenes de reserva: " + ("Pollinations con clave nueva (FLUX)" if _pt[:3] == "sk_" else "Pollinations con token antiguo" if _pt else "Pollinations ANÓNIMO (mala calidad: falta POLLINATIONS_TOKEN)"))
         raw_n = page.evaluate("()=>window.__planRaw||0")
@@ -797,6 +815,19 @@ def plan_user(browser, user, key, force=False, redo=None):
                 **({"cover": str((folder / "cover.jpg").relative_to(DOCS))} if (folder / "cover.jpg").exists() else {}),
                 **({"veo": veo_plan} if veo_plan else {}),
             })
+        for h in huecos:  # el hueco: tipo y hora; el vídeo lo pone luego la bolsa (el mejor que esté listo)
+            when = publish_time(today, h["dia"], h["hora"], tz, h["idx"])
+            floor = publish_floor(user, tz)
+            if floor and when < floor:
+                log(f"    ⏸ Hueco de {h['tipo']} del {when.strftime('%d/%m %H:%M')} descartado (no publicar antes de {floor.strftime('%d/%m %H:%M')})")
+                continue
+            if when < now + timedelta(hours=1):
+                continue
+            new_items.append({"id": f"{today}-{h['idx'] + 1:02d}-{h['tipo']}", "date": today, "source": "auto", "tipo": h["tipo"], "tema": "",
+                              "publishAt": when.isoformat(), "caption": "", "media": [], "status": "hueco", "attempts": 0})
+        if huecos:
+            log(f"  🎥 {len(bolsa_pieces)} guion(es) de vídeo a la bolsa de Veo · {sum(1 for it in new_items if it['status'] == 'hueco')} hueco(s) en el calendario")
+        pieces = pieces + bolsa_pieces
         hist = page.evaluate("S.hist")
         estrategia = page.evaluate("S.today.estrategia")
     finally:
@@ -806,9 +837,9 @@ def plan_user(browser, user, key, force=False, redo=None):
     if redo:
         replaced = [q for q in queue if q.get("id") == redo["id"]]
     elif force:
-        replaced = [q for q in queue if q.get("status") in ("pending", "scheduled", "esperando_veo") and datetime.fromisoformat(q["publishAt"]) > now]
+        replaced = [q for q in queue if q.get("status") in ("pending", "scheduled", "esperando_veo", "hueco") and datetime.fromisoformat(q["publishAt"]) > now]
     else:
-        replaced = [q for q in queue if q.get("date") == today and q.get("source") == "auto" and q.get("status") in ("pending", "scheduled", "esperando_veo")]
+        replaced = [q for q in queue if q.get("date") == today and q.get("source") == "auto" and q.get("status") in ("pending", "scheduled", "esperando_veo", "hueco")]
     for q in replaced:
         zernio_cancel(q)
     gone = {q["id"] for q in replaced}
@@ -820,7 +851,7 @@ def plan_user(browser, user, key, force=False, redo=None):
         log(f"  🎥 {sum(1 for it in new_items if it.get('status') == 'esperando_veo')} pieza(s) esperando sus clips de Veo (sin ellos no se publican)")
     if user.get("social"):
         for it, piece in zip(new_items, pieces):
-            if it.get("status") == "esperando_veo":
+            if it.get("status") in ("esperando_veo", "hueco"):
                 continue
             try:
                 pid_z = zernio_schedule(user, it, piece, tz)
@@ -847,7 +878,11 @@ def plan_user(browser, user, key, force=False, redo=None):
     mem = brain.after_plan(mem, pieces)
     brain.save(mem_path, mem)
     try:
-        api("PUT", f"/admin/status/{uid}", {"estrategia": "" if redo else estrategia, "queue": summarize(queue), "memoria": brain.public(mem)})
+        extra = {}
+        if (udir / "bolsa.json").exists():
+            import bolsa
+            extra["bolsa"] = bolsa.summary(uid)
+        api("PUT", f"/admin/status/{uid}", {"estrategia": "" if redo else estrategia, "queue": summarize(queue), "memoria": brain.public(mem), **extra})
     except Exception as e:
         log("  ⚠ No se pudo avisar a la app:", e)
 
@@ -943,6 +978,29 @@ def backfill_veo(user, queue, udir, tz):
             log("  ⚠ No se pudo avisar a la app:", e)
 
 
+def fill_bolsa(user, queue=None):
+    """Pone en los huecos de vídeo del calendario los mejores vídeos ya montados y avisa a la app."""
+    import bolsa
+    uid = user["id"]
+    qpath = CONTENT / "users" / uid / "queue.json"
+    if queue is None:
+        queue = load_json(qpath, [])
+    tz = ZoneInfo(((user.get("config") or {}).get("plan") or {}).get("zona_horaria", "Europe/Madrid"))
+    b = bolsa.load(uid)
+    pruned = bolsa.prune(b, datetime.now(tz).date().isoformat())
+    if len(pruned) != len(b):
+        bolsa.save(uid, pruned)
+    changed = bolsa.fill(user, queue, tz, lambda *a: log(*a))
+    if changed:
+        save_json(qpath, queue)
+    if changed or (CONTENT / "users" / uid / "bolsa.json").exists():
+        try:
+            api("PUT", f"/admin/status/{uid}", {"queue": summarize(queue), "bolsa": bolsa.summary(uid)})
+        except Exception as e:
+            log("  ⚠ No se pudo avisar a la app:", e)
+    return changed
+
+
 def fetch_clip(uid, iid, k, path):
     base = os.environ.get("AGENCIA_API", "").strip().rstrip("/")
     token = os.environ.get("AGENCIA_ADMIN_TOKEN", "").strip()
@@ -1018,10 +1076,19 @@ def process_requests(browser, users, key):
         if r.get("veo") and not r.get("reset"):
             for iid in r["veo"]:
                 try:
-                    assemble_veo(u, iid)
+                    if str(iid).startswith("b-"):
+                        import bolsa
+                        bolsa.assemble(u, iid, lambda *a: log(*a))
+                    else:
+                        assemble_veo(u, iid)
                 except Exception as e:
                     errors += 1
                     log(f"  ✗ No se pudo montar {iid} con Veo:", e)
+            if any(str(x).startswith("b-") for x in r["veo"]):
+                try:
+                    fill_bolsa(u)
+                except Exception as e:
+                    log("  ⚠ No se pudieron rellenar los huecos con la bolsa:", e)
             try:
                 api("POST", f"/admin/requests/{u['id']}/done", {"veo": r["veo"]})
             except Exception as e:

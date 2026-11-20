@@ -38,7 +38,7 @@ def summarize(queue):
     """Resumen de la cola para mostrar en la app (sin textos largos)."""
     from datetime import datetime, timezone
     now = datetime.now(timezone.utc)
-    upcoming = lambda q: q.get("status") in ("pending", "scheduled", "esperando_veo", "prueba") and datetime.fromisoformat(q["publishAt"]) > now
+    upcoming = lambda q: q.get("status") in ("pending", "scheduled", "esperando_veo", "prueba", "hueco") and datetime.fromisoformat(q["publishAt"]) > now
     pend = [q for q in queue if upcoming(q)]
     done = [q for q in queue if not upcoming(q)][-8:]
     out = []

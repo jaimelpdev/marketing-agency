@@ -142,6 +142,16 @@ r = await call("POST", "/admin/requests/" + uid + "/done", { key: "admin123", bo
   r = await call("GET", "/api/me", { key }); assert.deepEqual(r.j.user ? r.j.user.veo.v1 : r.j.veo.v1, [0, 1]);
   r = await call("POST", "/admin/requests/" + uid + "/done", { key: "admin123", body: { veo: ["v1"] } }); assert.equal(r.j.requests, null);
 }
+{ // bolsa de vídeos (Veo obligatorio): los clips se acumulan para guiones sin fecha
+  await call("PUT", "/admin/status/" + uid, { key: "admin123", body: { queue: [{ id: "h1", tipo: "reel", status: "hueco", publishAt: fut }], bolsa: [{ id: "b-x-01-reel", tipo: "reel", status: "pendiente", veo: { clips: [{ t: "a", prompt: "p", dur: 8 }, { t: "b", prompt: "q", dur: 8 }] } }] } });
+  const up = (k) => worker.fetch(new Request(B + "/api/clips/b-x-01-reel/" + k, { method: "POST", headers: { authorization: "Bearer " + key, "content-type": "video/mp4", Origin: "https://x.github.io" }, body: new Uint8Array(20000) }), env).then(async x => ({ s: x.status, j: await x.json() }));
+  let u1 = await up(0); assert.equal(u1.s, 200); assert.deepEqual(u1.j.veo["b-x-01-reel"], [0]);
+  r = await call("PUT", "/admin/status/" + uid, { key: "admin123", body: { queue: [] } }); // sin «bolsa»: se conserva
+  r = await call("GET", "/api/me", { key }); const st = (r.j.user || r.j).status; assert.equal(st.bolsa.length, 1);
+  u1 = await up(1); assert.equal(u1.s, 200); assert.deepEqual(u1.j.requests.veo, ["b-x-01-reel"]);
+  r = await call("POST", "/admin/requests/" + uid + "/done", { key: "admin123", body: { veo: ["b-x-01-reel"] } });
+  await call("PUT", "/admin/status/" + uid, { key: "admin123", body: { queue: [{ id: "v1", tipo: "reel", status: "scheduled", publishAt: fut, veo: { clips: [{ t: "a", prompt: "p", dur: 4 }, { t: "b", prompt: "q", dur: 6 }] } }], bolsa: [] } });
+}
 { // vale de subida desde Google Flow
   r = await call("POST", "/api/clips/v1/ticket", { key }); assert.equal(r.s, 200); assert.ok(r.j.ticket);
   const tk = r.j.ticket;
