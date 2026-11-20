@@ -67,8 +67,13 @@ def metrics(published):
 
 
 def needs_reflection(mem, force=False):
-    if force or not mem.get("actualizada"):
+    if not mem.get("actualizada"):
         return True
+    if force:  # rehacer la semana no es una semana nueva: como mucho una revisión al día
+        try:
+            return datetime.fromisoformat(mem["actualizada"]) < datetime.now() - timedelta(hours=20)
+        except Exception:
+            return True
     try:
         return datetime.fromisoformat(mem["actualizada"]) < datetime.now() - timedelta(days=6)
     except Exception:
@@ -240,11 +245,12 @@ LO PUBLICADO Y PROGRAMADO (más reciente al final)
 CÓMO PIENSAS
 1. Fases de la marca (avanza solo cuando toque; semana actual {mem.get('semana', 0) + 1}): "descubrimiento" (alcance: ganchos, tips virales, quién eres), "confianza" (enseñar con profundidad, resultados, detrás de las cámaras), "comunidad" (series, retos, preguntas, responder a la audiencia, que la gente se sienta parte), "conversion" (sin perder valor: casos, beneficios, ofertas y llamadas claras al producto). Las 2-3 primeras semanas casi todo es descubrimiento y confianza.
 2. La "mezcla" (porcentaje de piezas según objetivo, suma 100) sube la conversión de forma gradual: 0-10% el primer mes, hasta 20-25% cuando ya hay comunidad. Siempre mínimo un 15% de comunidad.
-3. Crea 2-4 SERIES recurrentes que den identidad y hábito (por ejemplo "El error de la semana", "Setup del seguidor", "Mito o realidad"), con su formato y día. Mantén las que funcionan y numera los episodios.
+3. Crea 2-4 SERIES recurrentes que den identidad y hábito (por ejemplo "El error de la semana", "Mito o realidad", "Tip rápido"), con su formato y día. Mantén las que funcionan y numera los episodios.
 4. Aprende de los resultados: qué formatos, temas, ganchos y horas funcionan mejor, y qué evitar. Sé concreto ("los reels de errores tienen 3× más comentarios que los posts de app").
 5. Lleva una lista de promesas pendientes (si se dijo "comenta X y te paso la guía", o "el próximo vídeo…", hay que cumplirlo) y de ideas para próximas semanas.
 6b. No propongas series que dependan de que los seguidores envíen cosas (setups, vídeos, preguntas) salvo que las notas del dueño digan que ya las envían.
 6. No inventes nada: ni seguidores, ni testimonios, ni ofertas, descuentos, precios o lanzamientos, ni funciones, apps, IA o servicios del negocio que no estén en la marca o en las notas del dueño. Las series que dependan de la comunidad empiezan pidiendo participación.
+4b. Si en RESULTADOS REALES pone "(aún sin datos)", NO hay nada publicado todavía: no escribas aprendizajes sobre resultados (alcance, comentarios, horas que funcionan…), ni hitos con cifras de seguidores o visualizaciones, ni retos o desafíos con participación de usuarios. "aprendizajes" debe ir vacío salvo lo que digan las notas del dueño.
 7. Define el arco de la semana: un tema o historia que conecte las piezas de la semana para que la gente quiera ver la siguiente.
 
 Responde SOLO con JSON válido:
@@ -271,13 +277,22 @@ Responde SOLO con JSON válido:
                 continue
             old = prev.get(str(s["nombre"]).lower(), {})
             ser.append({"nombre": str(s["nombre"])[:60], "formato": str(s.get("formato", "reel"))[:12], "cuando": str(s.get("cuando", ""))[:60],
-                        "descripcion": str(s.get("descripcion", ""))[:200], "episodios": max(int(old.get("episodios", 0) or 0), int(s.get("episodios", 0) or 0))})
+                        "descripcion": str(s.get("descripcion", ""))[:200], "episodios": int(old.get("episodios", 0) or 0)})  # los cuenta la agencia, no la IA
         out["series"] = ser
     for k, n in (("aprendizajes", 10), ("que_evitar", 8), ("promesas_pendientes", 8), ("ideas", 12), ("hitos", 5)):
         if isinstance(j.get(k), list):
             out[k] = [str(x)[:220] for x in j[k] if str(x).strip()][:n]
+    if not met:  # nada publicado aún: ni aprendizajes ni hitos inventados, ni series que dependan de seguidores
+        own = " ".join(str(n.get("t", n) if isinstance(n, dict) else n) for n in notas).lower()
+        out["aprendizajes"] = [a for a in out.get("aprendizajes", []) if any(w in own for w in re.findall(r"\w{6,}", a.lower())[:3])][:3] if own else []
+        out["hitos"] = [h for h in out.get("hitos", []) if not re.search(r"\d", h)]
+        if "seguidor" not in own:
+            out["series"] = [x for x in out.get("series", []) if not re.search(r"seguidor|comunidad env|vuestr|tus setups", x["nombre"] + " " + x["descripcion"], re.I)]
     now = datetime.now().isoformat(timespec="seconds")
-    out["semana"] = int(mem.get("semana", 0) or 0) + 1
+    try:
+        out["semana"] = max(1, (datetime.now() - datetime.fromisoformat(mem.get("creada") or now)).days // 7 + 1)
+    except ValueError:
+        out["semana"] = 1
     out["creada"] = mem.get("creada") or now
     out["actualizada"] = now
     out["metricas"] = met

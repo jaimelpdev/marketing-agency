@@ -793,8 +793,10 @@ def plan_user(browser, user, key, force=False, redo=None):
                 if when < now + timedelta(minutes=20):
                     when = now + timedelta(minutes=30)
             floor = publish_floor(user, tz)
-            if floor and when < floor:  # el dueño ha pedido no publicar antes de esa fecha
-                when = floor + timedelta(minutes=50 * i)
+            if floor and when < floor:  # el dueño ha pedido no publicar antes de esa fecha: mismo hora, primer día permitido
+                when = when.replace(year=floor.year, month=floor.month, day=floor.day)
+                while when < floor:
+                    when += timedelta(days=1)
                 log(f"    ⏸ Se retrasa hasta {when.strftime('%d/%m %H:%M')} (no publicar antes de {floor.strftime('%d/%m %H:%M')})")
             veo_plan = None
             if info["video"] and p.get("layout") == "faceless":
@@ -837,7 +839,7 @@ def plan_user(browser, user, key, force=False, redo=None):
     if redo:
         replaced = [q for q in queue if q.get("id") == redo["id"]]
     elif force:
-        replaced = [q for q in queue if q.get("status") in ("pending", "scheduled", "esperando_veo", "hueco") and datetime.fromisoformat(q["publishAt"]) > now]
+        replaced = [q for q in queue if q.get("status") in ("pending", "scheduled", "esperando_veo", "hueco", "prueba") and datetime.fromisoformat(q["publishAt"]) > now]
     else:
         replaced = [q for q in queue if q.get("date") == today and q.get("source") == "auto" and q.get("status") in ("pending", "scheduled", "esperando_veo", "hueco")]
     for q in replaced:
