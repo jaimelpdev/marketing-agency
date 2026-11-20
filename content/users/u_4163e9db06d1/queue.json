@@ -45,6 +45,45 @@
   "cover": "media/u_4163e9db06d1/2026-11-19/2026-11-19-02-historia/cover.jpg"
  },
  {
+  "id": "2026-11-18-05-historia",
+  "date": "2026-11-18",
+  "source": "auto",
+  "tipo": "historia",
+  "tema": "FOV correcto",
+  "publishAt": "2026-11-24T08:30:00+01:00",
+  "caption": "",
+  "media": [
+   "media/u_4163e9db06d1/2026-11-18/2026-11-18-05-historia-veo/video.mp4"
+  ],
+  "status": "prueba",
+  "attempts": 0,
+  "cover": "media/u_4163e9db06d1/2026-11-18/2026-11-18-05-historia-veo/cover.jpg",
+  "veo": {
+   "clips": [
+    {
+     "t": "Un FOV muy abierto te hace sentir que vas lento. Un FOV ajustado a tu pantalla y distancia mejora la percepción de velocidad.",
+     "prompt": "bright home gaming room, aluminium sim racing rig with bucket seat, steering wheel and pedals, big monitor displaying a racing game, not a real car interior. Front view of a driver on a bucket seat, eyes fixed on a large monitor displaying a wide-angle track view, expression of slow feeling, bright gaming room background. Then the camera moves to: bright home gaming room, aluminium sim racing rig with bucket seat, steering wheel and pedals, big monitor displaying a racing game, not a real car interior. Close-up of a hand sliding a FOV control on software overlay, monitor showing a narrowed track view, driver’s face showing satisfied speed perception, bright room. smooth natural camera movement, vertical 9:16 video, photorealistic, bright natural light, sharp focus, no text, no captions, no logos, no brand names, no watermark",
+     "dur": 8
+    },
+    {
+     "t": "Para encontrar ese ajuste, prueba con la pantalla lo más cerca posible.",
+     "prompt": "bright home gaming room, aluminium sim racing rig with bucket seat, steering wheel and pedals, big monitor displaying a racing game, not a real car interior. Side view of a driver pulling a large monitor closer to the face, hand adjusting distance, eyes focused on screen, bright gaming room. smooth natural camera movement, vertical 9:16 video, photorealistic, bright natural light, sharp focus, no text, no captions, no logos, no brand names, no watermark",
+     "dur": 6
+    },
+    {
+     "t": "Mira el coche y la pista, no solo el horizonte. Con un FOV correcto, frenas más temprano y aceleras mejor.",
+     "prompt": "bright home gaming room, aluminium sim racing rig with bucket seat, steering wheel and pedals, big monitor displaying a racing game, not a real car interior. Close-up of a monitor displaying a car and track details, driver’s gaze focused on them, ignoring distant horizon, bright room. Then the camera moves to: bright home gaming room, aluminium sim racing rig with bucket seat, steering wheel and pedals, big monitor displaying a racing game, not a real car interior. Front view of a driver’s hands gripping wheel, accelerator and brake pressed, monitor showing a tight corner, expression of precise control, bright room. smooth natural camera movement, vertical 9:16 video, photorealistic, bright natural light, sharp focus, no text, no captions, no logos, no brand names, no watermark",
+     "dur": 8
+    }
+   ],
+   "voz": "es-ES-ElviraNeural",
+   "ritmo": "-4%",
+   "musica": "chill",
+   "hashtags": "",
+   "done": "2026-11-20T10:44:41.483376+01:00"
+  }
+ },
+ {
   "id": "2026-11-20-05-reel",
   "date": "2026-11-20",
   "source": "auto",
