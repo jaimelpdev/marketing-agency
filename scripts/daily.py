@@ -923,7 +923,7 @@ def backfill_veo(user, queue, udir, tz):
         pieces += (load_json(Path(f), {}) or {}).get("piezas") or []
     n = 0
     for q in queue:
-        if q.get("veo") or q.get("tipo") not in ("reel", "historia") or q.get("status") not in ("pending", "scheduled"):
+        if q.get("veo") or q.get("tipo") not in ("reel", "historia") or q.get("status") not in ("pending", "scheduled", "prueba"):
             continue
         if datetime.fromisoformat(q["publishAt"]) < now + timedelta(hours=1):
             continue
@@ -961,7 +961,7 @@ def assemble_veo(user, iid):
     queue = load_json(queue_path, [])
     tz = ZoneInfo(((user.get("config") or {}).get("plan") or {}).get("zona_horaria", "Europe/Madrid"))
     item = next((q for q in queue if q.get("id") == iid), None)
-    if not item or not item.get("veo") or item.get("status") not in ("pending", "scheduled", "failed", "esperando_veo"):
+    if not item or not item.get("veo") or item.get("status") not in ("pending", "scheduled", "failed", "esperando_veo", "prueba"):
         log(f"  — {iid}: ya no se puede montar con Veo.")
         return False
     if datetime.fromisoformat(item["publishAt"]) < datetime.now(tz) + timedelta(minutes=12):
@@ -985,11 +985,11 @@ def assemble_veo(user, iid):
     item["media"] = [str((folder / "video.mp4").relative_to(DOCS))]
     if (folder / "cover.jpg").exists():
         item["cover"] = str((folder / "cover.jpg").relative_to(DOCS))
-    item["status"] = "pending"
+    item["status"] = "pending" if item.get("status") != "prueba" else "prueba"
     item.pop("zernioPostId", None)
     item.pop("error", None)
     v["done"] = datetime.now(tz).isoformat()
-    if user.get("social"):
+    if user.get("social") and item["status"] != "prueba":
         try:
             pid_z = zernio_schedule(user, item, {"tema": item.get("tema"), "hashtags": v.get("hashtags", "")}, tz)
             if pid_z:
