@@ -1,8 +1,8 @@
 {
  "version": 1,
  "creada": "2026-11-18T17:28:47",
- "actualizada": "2026-11-19T19:47:45",
- "semana": 14,
+ "actualizada": "2026-11-20T10:14:47",
+ "semana": 15,
  "fase": "comunidad",
  "objetivo_mes": "Generar reconocimiento de marca y captar a entusiastas del simracing",
  "arco_semana": {
@@ -21,28 +21,28 @@
    "formato": "reel",
    "cuando": "lunes y jueves",
    "descripcion": "Consejo breve y práctico para mejorar en pista o configurar el coche",
-   "episodios": 41
+   "episodios": 44
   },
   {
    "nombre": "Mito o realidad",
    "formato": "historia",
    "cuando": "viernes",
    "descripcion": "Desmentimos ideas comunes del simracing con datos y ejemplos",
-   "episodios": 13
+   "episodios": 14
   },
   {
    "nombre": "Detrás de la app",
    "formato": "reel",
    "cuando": "martes",
    "descripcion": "Mostramos funcionalidades de la app y cómo sacarle el máximo provecho a los alumnos",
-   "episodios": 19
+   "episodios": 21
   },
   {
    "nombre": "Setup del seguidor",
    "formato": "carrusel",
    "cuando": "miércoles",
    "descripcion": "Guías paso a paso de setups enviados por la comunidad, con llamado a participar",
-   "episodios": 16
+   "episodios": 18
   }
  ],
  "aprendizajes": [
@@ -89,5 +89,5 @@
   "Realizar el primer Live Q&A con 100 espectadores"
  ],
  "metricas": {},
- "resumen_para_dueño": "Esta semana reforzamos el desafío de la curva Eau Roue con contenido coordinado en todas las series, manteniendo la mezcla enfocada en comunidad y confianza. Publicaremos en los horarios pico (18‑22 h) y prepararemos el primer Live Q&A para seguir construyendo confianza sin ventas directas."
+ "resumen_para_dueño": "Esta semana reforzamos el desafío de la curva Eau Roue con contenido coordinado en todas las series, manteniendo la publicación en el horario pico (18‑22 h). Se avanza en la fase de comunidad, cumpliendo promesas pendientes y preparando el Live Q&A para seguir construyendo confianza sin ventas directas."
 }

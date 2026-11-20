@@ -758,6 +758,105 @@
       "look": 6,
       "serie": "",
       "objetivo": "comunidad"
+    },
+    {
+      "date": "2026-11-20",
+      "tema": "Tutoriales de conducción",
+      "formato": "top o lista",
+      "tipo": "reel",
+      "layout": "faceless",
+      "plantilla": 569,
+      "look": 103,
+      "serie": "Tip rápido del día",
+      "objetivo": "alcance"
+    },
+    {
+      "date": "2026-11-22",
+      "tema": "Guías de setup de coches",
+      "formato": "tutorial paso a paso",
+      "tipo": "carrusel",
+      "layout": "cine",
+      "plantilla": 1840,
+      "look": 188,
+      "serie": "Setup del seguidor",
+      "objetivo": "comunidad"
+    },
+    {
+      "date": "2026-11-24",
+      "tema": "Novedades y funciones de la app",
+      "formato": "detrás de las cámaras",
+      "tipo": "reel",
+      "layout": "faceless",
+      "plantilla": 807,
+      "look": 42,
+      "serie": "Detrás de la app",
+      "objetivo": "confianza"
+    },
+    {
+      "date": "2026-11-25",
+      "tema": "Tutoriales de conducción",
+      "formato": "mito vs realidad",
+      "tipo": "historia",
+      "layout": "faceless",
+      "plantilla": 2078,
+      "look": 152,
+      "serie": "Mito o realidad",
+      "objetivo": "comunidad"
+    },
+    {
+      "date": "2026-11-20",
+      "tema": "Mito o realidad sobre pedal de gas sensible",
+      "formato": "pregunta",
+      "tipo": "historia",
+      "layout": "faceless",
+      "plantilla": 2017,
+      "look": 78,
+      "serie": "",
+      "objetivo": "conversion"
+    },
+    {
+      "date": "2026-11-23",
+      "tema": "Puntos de referencia en Eau Roue",
+      "formato": "error que cuesta tiempo",
+      "tipo": "reel",
+      "layout": "faceless",
+      "plantilla": 1435,
+      "look": 188,
+      "serie": "Tip rápido del día",
+      "objetivo": "alcance"
+    },
+    {
+      "date": "2026-11-24",
+      "tema": "Mini tutorial de análisis de telemetría en la app",
+      "formato": "mini tutorial",
+      "tipo": "reel",
+      "layout": "faceless",
+      "plantilla": 1140,
+      "look": 42,
+      "serie": "Detrás de la app",
+      "objetivo": "confianza"
+    },
+    {
+      "date": "2026-11-25",
+      "tema": "Setup del seguidor para Nürburgring",
+      "formato": "guía paso a paso",
+      "tipo": "carrusel",
+      "layout": "cine",
+      "plantilla": 719,
+      "look": 152,
+      "serie": "Setup del seguidor",
+      "objetivo": "comunidad"
+    },
+    {
+      "date": "2026-11-26",
+      "tema": "Acelerador progresivo en curvas",
+      "formato": "secreto",
+      "tipo": "reel",
+      "layout": "faceless",
+      "plantilla": 1045,
+      "look": 6,
+      "serie": "Tip rápido del día",
+      "objetivo": "comunidad"
     }
   ]
 }
