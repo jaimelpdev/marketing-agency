@@ -15,7 +15,9 @@ import requests
 
 API = "https://generativelanguage.googleapis.com/v1beta"
 # voces de Gemini por género: enérgicas pero naturales (se pueden cambiar con GEMINI_VOZ_HOMBRE / GEMINI_VOZ_MUJER)
-VOCES = {"hombre": os.environ.get("GEMINI_VOZ_HOMBRE", "Puck"), "mujer": os.environ.get("GEMINI_VOZ_MUJER", "Zephyr")}
+# voz elegida por Jaime: Charon para todos los vídeos (la de mujer queda en Zephyr si algún día se separa por género)
+VOZ_FIJA = os.environ.get("GEMINI_VOZ", "Charon")
+VOCES = {"hombre": VOZ_FIJA or "Charon", "mujer": VOZ_FIJA or os.environ.get("GEMINI_VOZ_MUJER", "Zephyr")}
 ESTILO = {  # instrucción corta en inglés y con dos puntos: es el formato que Gemini entiende como dirección, no como texto a leer
     "tranquilo": "a calm, warm and confident tone",
     "normal": "a friendly, energetic content-creator tone",
