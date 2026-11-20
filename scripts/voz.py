@@ -16,10 +16,10 @@ import requests
 API = "https://generativelanguage.googleapis.com/v1beta"
 # voces de Gemini por género: enérgicas pero naturales (se pueden cambiar con GEMINI_VOZ_HOMBRE / GEMINI_VOZ_MUJER)
 VOCES = {"hombre": os.environ.get("GEMINI_VOZ_HOMBRE", "Puck"), "mujer": os.environ.get("GEMINI_VOZ_MUJER", "Zephyr")}
-ESTILO = {
-    "tranquilo": "con calma, cercano y seguro, como quien explica algo a un amigo",
-    "normal": "cercano y con energía, como un creador de contenido que explica un truco útil a cámara",
-    "energico": "con mucha energía y ritmo ágil, entusiasmado, como un creador de contenido que engancha desde la primera frase",
+ESTILO = {  # instrucción corta en inglés y con dos puntos: es el formato que Gemini entiende como dirección, no como texto a leer
+    "tranquilo": "a calm, warm and confident tone",
+    "normal": "a friendly, energetic content-creator tone",
+    "energico": "an upbeat, high-energy content-creator tone",
 }
 STATE = {"models": None, "off": False, "err": ""}
 
@@ -125,15 +125,22 @@ def lines(texts, gender, ritmo, outdir, log=print):
         return [None] * len(texts)
     voice = VOCES.get(gender, VOCES["mujer"])
     guion = "\n".join(texts[k].strip() for k in idx)
-    prompt = ("Lee en voz alta este guion de un vídeo corto de Instagram, en español de España (acento castellano peninsular, "
-              f"tuteando), {ESTILO.get(ritmo, ESTILO['normal'])}. Entonación natural, nada robótica, sin exagerar. "
-              "Haz una pausa clara de un segundo al final de cada línea. Lee solo el texto, sin añadir nada.\n\n" + guion)
-    pcm, model = _pcm(prompt, voice, log)
+    words_n = len(guion.split())
+    prompts = [f"Read aloud in {ESTILO.get(ritmo, ESTILO['normal'])}, with a natural accent from Spain, pausing briefly between lines:\n" + guion,
+               "Say:\n" + guion]
     outdir = Path(outdir)
     outdir.mkdir(parents=True, exist_ok=True)
     wav = outdir / "gemini_full.wav"
-    subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-f", "s16le", "-ar", "24000", "-ac", "1", "-i", "-", str(wav)], input=pcm, check=True)
-    total = _dur(wav)
+    for prompt in prompts:
+        pcm, model = _pcm(prompt, voice, log)
+        subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-f", "s16le", "-ar", "24000", "-ac", "1", "-i", "-", str(wav)], input=pcm, check=True)
+        total = _dur(wav)
+        # ~2,6 palabras por segundo + pausas: si dura mucho más, ha leído también la instrucción
+        if total <= words_n / 2.6 * 1.45 + 0.9 * len(idx) + 1.5:
+            break
+        log(f"    ⚠ La voz de Gemini dura demasiado ({total:.0f} s para {words_n} palabras); repito con otra indicación")
+    else:
+        raise RuntimeError(f"la toma dura {total:.0f} s para {words_n} palabras")
     n = len(idx)
     sil = [s for s in _silences(wav) if s[0] > 0.2 and s[1] < total - 0.1]
     cuts = sorted(sorted(sil, key=lambda s: s[1] - s[0], reverse=True)[:n - 1])
@@ -150,5 +157,5 @@ def lines(texts, gender, ritmo, outdir, log=print):
         subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-ss", f"{bounds[j]:.3f}", "-to", f"{bounds[j + 1]:.3f}", "-i", str(wav),
                         "-af", af, "-ar", "44100", "-ac", "1", "-b:a", "160k", str(mp3)], check=True)
         res[k] = (mp3, _words(texts[k], _dur(mp3)))
-    log(f"    🎙 Voz de Gemini «{voice}» ({model}): {n} frases en una sola toma")
+    log(f"    🎙 Voz de Gemini «{voice}» ({model}): {n} frases en una sola toma de {total:.1f} s ({words_n} palabras)")
     return res
