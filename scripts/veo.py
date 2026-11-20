@@ -1,6 +1,7 @@
 """Modo Veo (gratis): la agencia prepara los clips que hay que generar en Google Flow (Veo 3.1 Lite),
 la persona los sube desde la app y aquí se montan con la voz, los subtítulos y la música de la agencia."""
 import math
+import os
 import re
 import subprocess
 import tempfile
@@ -78,9 +79,23 @@ def compose(segments, voice, rate, mood, out, log=print, music_free_only=False):
     tmp = Path(tempfile.mkdtemp())
     fonts, font, bold = _font(tmp)
     segs, t0 = [], 0.0
+    texts = [daily.clean_speech(s["t"]) for s in segments]
+    gem = None
+    if os.environ.get("VOICE_ENGINE", "gemini") != "edge":
+        try:
+            import voz
+            gender = "mujer" if any(x in str(voice) for x in ("Elvira", "Ximena", "Dalia", "Ava", "Emma", "mujer")) else "hombre"
+            ritmo = {"-4%": "tranquilo", "+16%": "energico"}.get(str(rate), "normal")
+            gem = voz.lines(texts, gender, ritmo, tmp, log)
+        except Exception as e:  # noqa: BLE001
+            log(f"    ⚠ Voz de Gemini no disponible ({str(e)[:120]}); uso edge-tts")
+            gem = None
     for i, s in enumerate(segments):
         mp3 = tmp / f"v{i}.mp3"
-        words = daily.tts(daily.clean_speech(s["t"]), voice, rate, mp3, fallback="es-ES-ElviraNeural")
+        if gem is not None and gem[i]:
+            mp3, words = gem[i]
+        else:
+            words = daily.tts(texts[i], voice, rate, mp3, fallback="es-ES-ElviraNeural")
         speech = daily.probe_duration(mp3)
         cd = daily.probe_duration(s["clip"])
         L = speech + 0.45  # cada clip dura lo que su frase: ni huecos ni cortes

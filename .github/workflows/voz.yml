@@ -1,0 +1,35 @@
+name: 🎙 Muestras de voz
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  demo:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Instalar dependencias
+        run: |
+          pip install -r requirements.txt
+          if ! command -v ffmpeg >/dev/null; then
+            mkdir -p "$HOME/ffbin" && curl -sSL --retry 3 https://github.com/BtbN/FFmpeg-Builds/releases/download/latest/ffmpeg-master-latest-linux64-gpl.tar.xz | tar -xJ -C "$HOME/ffbin" --strip-components=2 --wildcards '*/bin/ffmpeg' '*/bin/ffprobe'
+            echo "$HOME/ffbin" >> "$GITHUB_PATH"
+          fi
+      - name: Generar las muestras
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: python scripts/demo_voz.py
+      - name: Guardar
+        run: |
+          git config user.name "agencia-bot"
+          git config user.email "agencia-bot@users.noreply.github.com"
+          git add docs/demo/voz || true
+          git diff --cached --quiet || git commit -m "🎙 Muestras de voz"
+          for i in 1 2 3 4 5; do git pull --rebase -X theirs && git push && break; sleep 8; done

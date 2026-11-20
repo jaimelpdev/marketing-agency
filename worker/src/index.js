@@ -407,7 +407,7 @@ async function handle(req, env) {
       const q = (u.status && u.status.queue) || [];
       const item = q.find(x => x.id === id);
       if (!item) return err(404, "not_found", "No encuentro esa pieza.");
-      if (!["pending", "scheduled", "failed"].includes(item.status)) return err(400, "bad_request", "Esa pieza ya está publicada; bórrala desde la propia red social.");
+      if (!["pending", "scheduled", "failed", "prueba", "hueco", "esperando_veo", "sin_veo"].includes(item.status)) return err(400, "bad_request", "Esa pieza ya está publicada; bórrala desde la propia red social.");
       if (!(await cancelPost(env, item))) return err(502, "upstream", "Zernio no ha podido anular la publicación. Prueba otra vez.");
       u.status.queue = q.filter(x => x.id !== id);
       u.requests = u.requests || {};

@@ -254,7 +254,27 @@ def make_voice(page, i, p, workdir, voices):
     rate = RATES.get(p.get("ritmo_voz") or "normal", "+8%")
     pitch = PITCH.get(p.get("ritmo_voz") or "normal", "+0Hz")
     clips, durs, caps = [], [], []
+    gem = None
+    if os.environ.get("VOICE_ENGINE", "gemini") != "edge":
+        try:
+            import voz
+            gem = voz.lines(lines, gender, p.get("ritmo_voz") or "normal", workdir, lambda *a: log(*a))
+            voice = "Gemini " + voz.VOCES.get(gender, "")
+        except Exception as e:  # noqa: BLE001
+            log(f"    ⚠ Voz de Gemini no disponible ({str(e)[:120]}); uso edge-tts")
+            gem = None
     for k, line in enumerate(lines):
+        if gem is not None:
+            if not gem[k]:
+                clips.append(None)
+                durs.append(0)
+                caps.append([])
+                continue
+            out, wb = gem[k]
+            caps.append([{"t": round(a + 0.18, 3), "d": round(b, 3), "w": w} for a, b, w in wb if str(w).strip()])
+            clips.append(out)
+            durs.append(round(probe_duration(out) + 0.55, 3))
+            continue
         if not line:
             clips.append(None)
             durs.append(0)
