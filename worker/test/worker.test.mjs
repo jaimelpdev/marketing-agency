@@ -142,6 +142,16 @@ r = await call("POST", "/admin/requests/" + uid + "/done", { key: "admin123", bo
   r = await call("GET", "/api/me", { key }); assert.deepEqual(r.j.user ? r.j.user.veo.v1 : r.j.veo.v1, [0, 1]);
   r = await call("POST", "/admin/requests/" + uid + "/done", { key: "admin123", body: { veo: ["v1"] } }); assert.equal(r.j.requests, null);
 }
+{ // vale de subida desde Google Flow
+  r = await call("POST", "/api/clips/v1/ticket", { key }); assert.equal(r.s, 200); assert.ok(r.j.ticket);
+  const tk = r.j.ticket;
+  const up = (t, k, n, origin) => worker.fetch(new Request(B + "/clip-ticket/" + t + "/" + k, { method: "POST", headers: { "content-type": "video/mp4", Origin: origin || "https://labs.google" }, body: new Uint8Array(n) }), env);
+  let x = await up("malo", 0, 20000); assert.equal(x.status, 401, "vale falso");
+  x = await up(tk, 0, 20000); assert.equal(x.status, 200); assert.equal(x.headers.get("access-control-allow-origin"), "https://labs.google");
+  x = await up(tk, 1, 20000); const jj = await x.json(); assert.deepEqual(jj.requests.veo, ["v1"]);
+  r = await call("POST", "/api/clips/nada/ticket", { key }); assert.equal(r.s, 404);
+  r = await call("POST", "/admin/requests/" + uid + "/done", { key: "admin123", body: { veo: ["v1"] } });
+}
 r = await call("POST", "/api/replan", { key }); const rp = r.j.requests.replan; assert.ok(rp);
 r = await call("POST", "/api/cancel-request", { key, body: {} }); assert.equal(r.j.requests.replan, undefined);
 r = await call("POST", "/api/create", { key, body: {} }); assert.equal(r.s, 400);

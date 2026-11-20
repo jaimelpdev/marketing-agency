@@ -521,8 +521,14 @@ def plan_user(browser, user, key, force=False, redo=None):
     today = now.date().isoformat()
     queue = load_json(queue_path, [])
     modo = str(plan_conf.get("modo", "smart"))
+    changed = expire_veo(user, queue, udir, tz)
     if not (force or redo or os.environ.get("FORCE")):
         backfill_veo(user, queue, udir, tz)
+    if changed:
+        try:
+            api("PUT", f"/admin/status/{user['id']}", {"queue": summarize(queue)})
+        except Exception as e:
+            log("  ⚠ No se pudo avisar a la app:", e)
         if any(q.get("date") == today and q.get("source") == "auto" for q in queue):
             log("  Ya se planificó hoy.")
             think_only(user, key, queue)
@@ -801,14 +807,22 @@ def plan_user(browser, user, key, force=False, redo=None):
     if redo:
         replaced = [q for q in queue if q.get("id") == redo["id"]]
     elif force:
-        replaced = [q for q in queue if q.get("status") in ("pending", "scheduled") and datetime.fromisoformat(q["publishAt"]) > now]
+        replaced = [q for q in queue if q.get("status") in ("pending", "scheduled", "esperando_veo") and datetime.fromisoformat(q["publishAt"]) > now]
     else:
-        replaced = [q for q in queue if q.get("date") == today and q.get("source") == "auto" and q.get("status") in ("pending", "scheduled")]
+        replaced = [q for q in queue if q.get("date") == today and q.get("source") == "auto" and q.get("status") in ("pending", "scheduled", "esperando_veo")]
     for q in replaced:
         zernio_cancel(q)
     gone = {q["id"] for q in replaced}
+    veo_modo = str(plan_conf.get("veo_modo", "si_hay"))
+    for it in new_items:
+        if veo_modo == "obligatorio" and it.get("veo") and it.get("status") == "pending":
+            it["status"] = "esperando_veo"  # no se programa hasta tener los clips de Veo; si no llegan, no sale
+    if veo_modo == "obligatorio" and any(it.get("status") == "esperando_veo" for it in new_items):
+        log(f"  🎥 {sum(1 for it in new_items if it.get('status') == 'esperando_veo')} pieza(s) esperando sus clips de Veo (sin ellos no se publican)")
     if user.get("social"):
         for it, piece in zip(new_items, pieces):
+            if it.get("status") == "esperando_veo":
+                continue
             try:
                 pid_z = zernio_schedule(user, it, piece, tz)
                 if pid_z:
@@ -887,6 +901,19 @@ def ready(u):
     return bool((marca.get("name") or marca.get("about")) and ((u.get("ig") or {}).get("connected") or u.get("social") or os.environ.get("PRUEBA")))
 
 
+def expire_veo(user, queue, udir, tz):
+    """Piezas que esperaban sus clips de Veo y ya pasó su hora: no se publican (modo «obligatorio»)."""
+    now = datetime.now(tz)
+    gone = [q for q in queue if q.get("status") == "esperando_veo" and datetime.fromisoformat(q["publishAt"]) < now + timedelta(minutes=10)]
+    for q in gone:
+        q["status"] = "sin_veo"
+        q["error"] = "No llegaron los clips de Veo a tiempo; no se publica."
+        log(f"  ⏭ «{q.get('tema', '')}» no sale: no se generaron sus clips de Veo a tiempo")
+    if gone:
+        save_json(udir / "queue.json", queue)
+    return bool(gone)
+
+
 def backfill_veo(user, queue, udir, tz):
     """Piezas ya programadas antes del modo Veo: se les preparan los clips a partir de su plan."""
     import glob
@@ -935,7 +962,7 @@ def assemble_veo(user, iid):
     queue = load_json(queue_path, [])
     tz = ZoneInfo(((user.get("config") or {}).get("plan") or {}).get("zona_horaria", "Europe/Madrid"))
     item = next((q for q in queue if q.get("id") == iid), None)
-    if not item or not item.get("veo") or item.get("status") not in ("pending", "scheduled", "failed"):
+    if not item or not item.get("veo") or item.get("status") not in ("pending", "scheduled", "failed", "esperando_veo"):
         log(f"  — {iid}: ya no se puede montar con Veo.")
         return False
     if datetime.fromisoformat(item["publishAt"]) < datetime.now(tz) + timedelta(minutes=12):

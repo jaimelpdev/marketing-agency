@@ -23,7 +23,8 @@ const FALLBACK_MODELS = ["openai/gpt-oss-120b", "openai/gpt-oss-20b", "qwen/qwen
 function corsHeaders(req, env) {
   const origin = req.headers.get("Origin") || "";
   const allowed = String(env.APP_ORIGINS || "").split(",").map(s => s.trim()).filter(Boolean);
-  const ok = !allowed.length || allowed.includes(origin) || origin === "null";
+  const ticketRoute = /^\/clip-ticket\//.test(new URL(req.url).pathname);  // subida con vale: desde Google Flow
+  const ok = !allowed.length || allowed.includes(origin) || origin === "null" || (ticketRoute && origin === "https://labs.google") || (ticketRoute && origin === "https://flow.google.com");
   return {
     "access-control-allow-origin": ok ? (origin || "*") : allowed[0],
     "access-control-allow-headers": "authorization,content-type",
@@ -337,6 +338,15 @@ async function handle(req, env) {
       await putUser(env, u);
       return json({ ok: true, item, requests: u.requests, started: await kickAgency(env) });
     }
+    // ===== vale de subida (1 hora) para mandar clips directamente desde Google Flow sin la clave de la cuenta =====
+    const tkm = p.match(/^\/api\/clips\/([\w-]+)\/ticket$/);
+    if (tkm && method === "POST") {
+      const item = ((u.status && u.status.queue) || []).find(q => q.id === tkm[1]);
+      if (!item || !item.veo) return err(404, "not_found", "Esa pieza no tiene clips de Veo.");
+      const t = randomId(18);
+      await env.KV.put(`ticket:${t}`, JSON.stringify({ uid: u.id, iid: tkm[1] }), { expirationTtl: 3600 });
+      return json({ ticket: t, upload: `/clip-ticket/${t}/` });
+    }
     // ===== clips de vídeo generados con Veo (Google Flow) para montar una pieza =====
     const clm = p.match(/^\/api\/clips\/([\w-]+)\/(\d)$/);
     if (clm) {
@@ -345,24 +355,7 @@ async function handle(req, env) {
       if (!item || !item.veo || !Array.isArray(item.veo.clips) || k >= item.veo.clips.length) return err(404, "not_found", "Esa pieza no tiene ese clip.");
       u.veo = u.veo || {};
       const have = new Set(u.veo[iid] || []);
-      if (method === "POST") {
-        if (new Date(item.publishAt) < new Date(Date.now() + 15 * 60e3)) return err(400, "bad_request", "Esta pieza ya se publica en nada; no da tiempo a montarla.");
-        const buf = await req.arrayBuffer();
-        if (buf.byteLength < 10000) return err(400, "bad_request", "El vídeo está vacío o no es válido.");
-        if (buf.byteLength > 24 * 1024 * 1024) return err(413, "too_large", "El clip pesa más de 24 MB. Descárgalo en 720p.");
-        await env.KV.put(`clip:${u.id}:${iid}:${k}`, buf, { expirationTtl: 30 * 86400 });
-        have.add(k);
-        u.veo[iid] = [...have].sort();
-        let started = false;
-        if (u.veo[iid].length >= item.veo.clips.length) {  // ya están todos: a montar
-          u.requests = u.requests || {};
-          u.requests.veo = (u.requests.veo || []).filter(x => x !== iid).concat(iid);
-          started = true;
-        }
-        await putUser(env, u);
-        if (started) started = await kickAgency(env);
-        return json({ ok: true, veo: u.veo, requests: u.requests || null, started });
-      }
+      if (method === "POST") return storeClip(env, u, item, k, await req.arrayBuffer());
       if (method === "DELETE") {
         await env.KV.delete(`clip:${u.id}:${iid}:${k}`);
         have.delete(k);
@@ -659,12 +652,46 @@ async function handle(req, env) {
   return err(404, "not_found", "Ruta no encontrada.");
 }
 
+// Guarda un clip de Veo y, cuando están todos los de la pieza, pide a la agencia que la monte.
+async function storeClip(env, u, item, k, buf) {
+  const iid = item.id;
+  if (new Date(item.publishAt) < new Date(Date.now() + 15 * 60e3)) return err(400, "bad_request", "Esta pieza ya se publica en nada; no da tiempo a montarla.");
+  if (buf.byteLength < 10000) return err(400, "bad_request", "El vídeo está vacío o no es válido.");
+  if (buf.byteLength > 24 * 1024 * 1024) return err(413, "too_large", "El clip pesa más de 24 MB. Descárgalo en 720p.");
+  await env.KV.put(`clip:${u.id}:${iid}:${k}`, buf, { expirationTtl: 30 * 86400 });
+  u.veo = u.veo || {};
+  const have = new Set(u.veo[iid] || []);
+  have.add(k);
+  u.veo[iid] = [...have].sort();
+  let started = false;
+  if (u.veo[iid].length >= item.veo.clips.length) {  // ya están todos: a montar
+    u.requests = u.requests || {};
+    u.requests.veo = (u.requests.veo || []).filter(x => x !== iid).concat(iid);
+    started = true;
+  }
+  await putUser(env, u);
+  if (started) started = await kickAgency(env);
+  return json({ ok: true, veo: u.veo, requests: u.requests || null, started });
+}
+
+async function handleTicket(req, env, t, k) {
+  if (req.method !== "POST") return err(405, "method", "Usa POST.");
+  const tk = await env.KV.get(`ticket:${t}`, "json");
+  if (!tk) return err(401, "unauthorized", "El vale de subida no existe o ha caducado.");
+  const u = await getUser(env, tk.uid);
+  if (!u) return err(404, "not_found", "Cuenta no encontrada.");
+  const item = ((u.status && u.status.queue) || []).find(q => q.id === tk.iid);
+  if (!item || !item.veo || !Array.isArray(item.veo.clips) || k >= item.veo.clips.length) return err(404, "not_found", "Esa pieza no tiene ese clip.");
+  return storeClip(env, u, item, k, await req.arrayBuffer());
+}
+
 export default {
   async fetch(req, env) {
     const cors = corsHeaders(req, env);
     if (req.method === "OPTIONS") return new Response(null, { status: 204, headers: cors });
     let res;
-    try { res = await handle(req, env); }
+    const tm = new URL(req.url).pathname.match(/^\/clip-ticket\/([\w-]+)\/(\d)$/);
+    try { res = tm ? await handleTicket(req, env, tm[1], Number(tm[2])) : await handle(req, env); }
     catch (e) { res = err(500, "server_error", String(e.message || e)); }
     if (res.status >= 300 && res.status < 400) return res; // redirecciones
     const h = new Headers(res.headers);
