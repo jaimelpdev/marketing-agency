@@ -342,11 +342,11 @@
     "publishAt": "2026-11-24T08:30:00+01:00",
     "caption": "",
     "media": [
-      "media/u_4163e9db06d1/2026-11-18/2026-11-18-05-historia/video.mp4"
+      "media/u_4163e9db06d1/2026-11-18/2026-11-18-05-historia-veo/video.mp4"
     ],
     "status": "prueba",
     "attempts": 0,
-    "cover": "media/u_4163e9db06d1/2026-11-18/2026-11-18-05-historia/cover.jpg",
+    "cover": "media/u_4163e9db06d1/2026-11-18/2026-11-18-05-historia-veo/cover.jpg",
     "veo": {
       "clips": [
         {
@@ -368,7 +368,8 @@
       "voz": "es-ES-ElviraNeural",
       "ritmo": "-4%",
       "musica": "chill",
-      "hashtags": ""
+      "hashtags": "",
+      "done": "2026-11-20T10:44:41.483376+01:00"
     }
   },
   {
