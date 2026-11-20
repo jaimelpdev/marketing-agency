@@ -654,13 +654,14 @@ Responde SOLO con JSON: {{"mundo":"…","persona":"…","evitar":"…","estilo":
     if len(imgs) < len(beats):
         log(f"    ⚠ Director de arte: devolvió {len(imgs)} de {len(beats)} imágenes; se mantienen las originales")
         return False
-    mundo = str(j.get("mundo") or "").strip()[:160]
-    persona = str(j.get("persona") or "").strip()[:90]
-    mundo_no = str(j.get("evitar") or "").strip()[:90]
+    mundo = str(j.get("mundo") or "").strip()[:260]
+    persona = str(user.get("persona_veo") or j.get("persona") or "").strip()[:110]  # presentador fijo de la marca, si lo tiene
+    piece["persona"] = persona
+    mundo_no = str(j.get("evitar") or "").strip()[:160]
     for b, im in zip(beats, imgs):
         # el plano y el sujeto primero (si el escenario va delante, todas salen como plano general); el escenario después
         who = ("; the person is " + persona) if persona and re.search(r"\b(person|man|woman|gamer|driver|he|she|his|her|hands?|feet|foot|face|racer|player)\b", im, re.I) else ""
-        b["img"] = (im.rstrip(".") + who + (". Setting: " + mundo if mundo else "") + (". " + mundo_no if mundo_no else ""))[:480]
+        b["img"] = (im.rstrip(".") + who + (". Setting: " + mundo if mundo else "") + (". " + mundo_no if mundo_no else ""))[:800]
     if j.get("estilo"):
         piece["estilo_visual"] = str(j["estilo"])[:200]
     return True

@@ -691,6 +691,7 @@ def plan_user(browser, user, key, force=False, redo=None):
                     page.evaluate("a=>{const p=S.today.videos[a[0]];p.beats=a[1];p.guion=a[1].map(b=>b.t);p.cierre_bio=a[2]||p.cierre_bio;if(a[3])p.caption=a[3];if(a[4])p.tema=a[4];if(a[5])p.gancho=a[5];}", [vi, vp["beats"], vp.get("cierre_bio", ""), vp.get("caption", ""), vp.get("tema", ""), vp.get("gancho", "")])
                     log(f"    ✍️ Guion de «{vp.get('tema', '')}»: {len(vp['beats'])} frases, {sum(len(b['t'].split()) for b in vp['beats'])} palabras")
             if vp.get("layout") == "faceless" and len(vp.get("beats") or []) >= 2:
+                user["persona_veo"] = load_json(CONTENT / "users" / user["id"] / "ajustes.json", {}).get("persona_veo", "")
                 if brain.art_direct(vp, user, key, lambda *a: log(*a)):
                     page.evaluate("a=>{const p=S.today.videos[a[0]];p.beats=a[1];p.estilo_visual=a[2];}", [vi, vp["beats"], vp.get("estilo_visual", "")])
                     log(f"    🎨 Imágenes dirigidas para «{vp.get('tema', '')}»: {vp['beats'][-1]['img'][:90]}…")
@@ -1059,7 +1060,7 @@ def assemble_veo(user, iid):
         if folder.exists():
             shutil.rmtree(folder)
         total, meta = veo.compose(segs, v.get("voz") or VOICES["hombre"], v.get("ritmo") or "+8%", v.get("musica") or "energetica",
-                                  folder / "video.mp4", log, music_free_only=item["tipo"] == "historia")
+                                  folder / "video.mp4", log, music_free_only=item["tipo"] == "historia", hook=item.get("gancho", "") if isinstance(item, dict) else "")
     log(f"    ✓ {total:.1f}s · música: {(meta or {}).get('title', 'ninguna')}")
     zernio_cancel(item)
     item["media"] = [str((folder / "video.mp4").relative_to(DOCS))]

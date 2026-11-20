@@ -105,7 +105,7 @@ def assemble(user, bid, log=print):
         if folder.exists():
             shutil.rmtree(folder)
         total, meta = veo.compose(segs, v.get("voz") or daily.VOICES["hombre"], v.get("ritmo") or "+8%", v.get("musica") or "energetica",
-                                  folder / "video.mp4", log, music_free_only=b["tipo"] == "historia")
+                                  folder / "video.mp4", log, music_free_only=b["tipo"] == "historia", hook=b.get("gancho", ""))
     import music_lib
     credit = music_lib.credit((meta or {}).get("track") if isinstance(meta, dict) else None) if b["tipo"] != "historia" else ""
     b["media"] = [str((folder / "video.mp4").relative_to(daily.DOCS))]

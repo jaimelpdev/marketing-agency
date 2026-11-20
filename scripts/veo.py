@@ -26,8 +26,35 @@ def _action(b):
 
 
 def _setting(b):
-    m = re.search(r"Setting:\s*(.+)$", str(b.get("img") or ""))
-    return m.group(1).strip().rstrip(".")[:260] if m else ""
+    """El escenario (sin la lista de qué evitar ni recortes a medias)."""
+    m = re.search(r"Setting:\s*(.+?)(?:\.\s|\.$|$)", str(b.get("img") or ""))
+    st = m.group(1).strip().rstrip(".") if m else ""
+    parts = [x.strip() for x in st.split(",")]
+    if len(parts) > 1 and len(parts[-1].split()[-1]) <= 3 and len(parts[-1]) < 20:  # trozo cortado al final ("not a real ca")
+        st = ", ".join(parts[:-1])
+    return st
+
+
+def _avoid(b):
+    m = re.search(r"Setting:\s*.+?\.\s+(.+)$", str(b.get("img") or ""))
+    avoid = m.group(1).strip().rstrip(".") if m else ""
+    words = avoid.split()
+    if words and len(words[-1]) <= 2:  # palabra cortada al final ("no r")
+        avoid = " ".join(words[:-1]).rstrip(",")
+    return avoid
+
+
+def _persona(piece, beats):
+    if piece.get("persona"):
+        return str(piece["persona"]).strip().rstrip(".")
+    for b in beats:
+        m = re.search(r";\s*the person is\s*(.+?)(?:\.\s*Setting:|$)", str(b.get("img") or ""))
+        if m:
+            return m.group(1).strip().rstrip(".")
+    return ""
+
+
+PERSON = re.compile(r"\b(person|man|woman|gamer|driver|he|she|his|her|hands?|feet|foot|face|racer|player|guy|someone)\b", re.I)
 
 
 def plan_clips(piece):
@@ -42,6 +69,9 @@ def plan_clips(piece):
     n = min(MAX_CLIPS.get(piece.get("tipo"), 4), max(2, math.ceil(len(beats) / 2)))
     size = len(beats) / n
     groups = [beats[round(k * size):round((k + 1) * size)] for k in range(n)]
+    persona = _persona(piece, beats)
+    setting = next((_setting(b) for b in beats if _setting(b)), "")
+    avoid = next((_avoid(b) for b in beats if _avoid(b)), "")
     clips = []
     for g in groups:
         if not g:
@@ -50,11 +80,13 @@ def plan_clips(piece):
         est = len(text.split()) / WORDS_PER_S + 0.5
         dur = 4 if est <= 4.2 else 6 if est <= 6.2 else 8
         acts = [_action(b) for b in g if _action(b)]
-        setting = _setting(g[0])
         img = acts[0] if acts else str(g[0]["t"])
         if len(acts) > 1:
             img += ". Then the camera moves to: " + acts[-1]  # la última frase del grupo aporta el final del clip
-        clips.append({"t": text, "prompt": (img + (". Setting: " + setting if setting else "") + ". " + TAIL)[:1400], "dur": dur})
+        # la misma persona y el mismo sitio, con las mismas palabras, en todos los clips: así Veo no cambia de protagonista
+        who = f". The person is always the same: {persona}" if persona and PERSON.search(img) else ""
+        prompt = img + who + (". Setting: " + setting if setting else "") + (". Avoid: " + avoid if avoid else "") + ". " + TAIL
+        clips.append({"t": text, "prompt": prompt[:1400], "dur": dur})
     return clips
 
 
@@ -73,8 +105,32 @@ def _font(tmp):
         return fonts, "DejaVu Sans", -1
 
 
-def compose(segments, voice, rate, mood, out, log=print, music_free_only=False):
-    """segments: [{"clip": ruta mp4, "t": frase}]. Monta un vídeo vertical 1080x1920 con voz, subtítulos y música."""
+def _subcuts(s, every=2.4):
+    """Puntos (en segundos desde el inicio del tramo) donde meter un corte de encuadre: en el arranque de una palabra."""
+    starts = [0.15 + a for a, d, w in s["words"] if str(w).strip()]
+    cuts, last = [], 0.0
+    for t in starts:
+        if t - last >= every and s["L"] - t >= 1.2:
+            cuts.append(round(t - 0.05, 3))
+            last = t
+    return cuts
+
+
+def _sfx(tmp):
+    """Efectos sintetizados (sin licencias): un «whoosh» para los cambios de plano y un «pop» para el título."""
+    wh, pop = tmp / "whoosh.wav", tmp / "pop.wav"
+    subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-f", "lavfi", "-i", "anoisesrc=color=pink:amplitude=0.7:d=0.5:r=48000",
+                    "-af", "highpass=f=500,lowpass=f=6000,afade=t=in:d=0.3:curve=exp,afade=t=out:st=0.3:d=0.2,volume=0.55",
+                    "-ac", "2", str(wh)], check=True)
+    subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-f", "lavfi", "-i", "sine=f=660:d=0.12:r=48000",
+                    "-af", "afade=t=out:st=0.02:d=0.1,volume=0.35", "-ac", "2", str(pop)], check=True)
+    return wh, pop
+
+
+def compose(segments, voice, rate, mood, out, log=print, music_free_only=False, hook=""):
+    """segments: [{"clip": ruta mp4, "t": frase}]. Monta un vídeo vertical 1080x1920 con voz, subtítulos y música.
+    Montaje: un cambio de encuadre (plano normal / acercado) cada ~2,4 s, título del gancho al principio y efectos
+    de sonido en los cambios de clip."""
     import daily  # aquí para evitar la importación circular
     tmp = Path(tempfile.mkdtemp())
     fonts, font, bold = _font(tmp)
@@ -113,6 +169,15 @@ def compose(segments, voice, rate, mood, out, log=print, music_free_only=False):
                 txt = " ".join(("{\\c" + YELLOW + "\\fscx108\\fscy108}" + x.upper() + "{\\c&H00FFFFFF&\\fscx100\\fscy100}") if m == j else x.upper()
                                for m, (_, _, x) in enumerate(chunk))
                 ev.append(f"Dialogue: 0,{_ts(a)},{_ts(end)},Cap,,0,0,0,,{{\\pos({W // 2},{int(H * 0.62)})}}{txt}")
+    hook = re.sub(r"\s+", " ", str(hook or "")).strip()
+    if hook and len(hook.split()) <= 9:
+        h = hook.upper().replace("{", "(").replace("}", ")")
+        if len(h) > 16:  # en dos líneas, partido por la palabra más cercana a la mitad
+            ws = h.split()
+            cut = min(range(1, len(ws)), key=lambda k: abs(len(" ".join(ws[:k])) - len(h) / 2))
+            h = " ".join(ws[:cut]) + "\\N" + " ".join(ws[cut:])
+        hend = min(2.6, segs[0]["L"] if segs else 2.6)
+        ev.append(f"Dialogue: 1,{_ts(0)},{_ts(hend)},Hook,,0,0,0,,{{\\pos({W // 2},{int(H * 0.2)})\\fad(0,180)\\fscx70\\fscy70\\t(0,160,\\fscx108\\fscy108)\\t(160,260,\\fscx100\\fscy100)}}{h}")
     ass = tmp / "subs.ass"
     ass.write_text(f"""[Script Info]
 ScriptType: v4.00+
@@ -123,6 +188,7 @@ WrapStyle: 2
 [V4+ Styles]
 Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
 Style: Cap,{font},104,&H00FFFFFF,&H00FFFFFF,&H00000000,&H64000000,{bold},0,0,0,100,100,1,0,1,9,3,5,60,60,0,1
+Style: Hook,{font},86,&H00000000,&H00000000,&H000AD6FF,&H000AD6FF,{bold},0,0,0,100,100,1,0,3,22,0,5,90,90,0,1
 
 [Events]
 Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
@@ -142,12 +208,30 @@ Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
         cmd += ["-i", str(s["mp3"])]
     cmd += (["-stream_loop", "-1", "-i", str(music)] if music else ["-f", "lavfi", "-i", "anullsrc=r=48000:cl=stereo"])
     n = len(segs)
+    try:
+        wh, pop = _sfx(tmp)
+        cmd += ["-i", str(wh), "-i", str(pop)]
+        fx = True
+    except Exception as e:  # noqa: BLE001
+        log("    ⚠ sin efectos de sonido:", e)
+        fx = False
     parts, cat = [], ""
     for i, s in enumerate(segs):
         # si la frase es más larga que el clip, se ralentiza un poco (hasta 1,35x) y, si aún falta, se congela el final
         f = min(1.35, max(1.0, s["L"] / s["cd"]))
         parts.append(f"[{i}:v]scale={W}:{H}:force_original_aspect_ratio=increase:flags=lanczos,crop={W}:{H},setsar=1,"
-                     f"setpts=(PTS-STARTPTS)*{f:.4f},fps={FPS},tpad=stop_mode=clone:stop_duration=10,trim=0:{s['L']:.3f},setpts=PTS-STARTPTS[c{i}]")
+                     f"setpts=(PTS-STARTPTS)*{f:.4f},fps={FPS},tpad=stop_mode=clone:stop_duration=10,trim=0:{s['L']:.3f},setpts=PTS-STARTPTS[r{i}]")
+        cuts = _subcuts(s)
+        if cuts:  # cortes de encuadre: plano normal y acercado (1,15x, centrado un poco arriba, donde suele estar la cara)
+            b = [0.0] + cuts + [s["L"]]
+            k = len(b) - 1
+            parts.append(f"[r{i}]split={k}" + "".join(f"[r{i}s{j}]" for j in range(k)))
+            for j in range(k):
+                zoom = ",scale=iw*1.15:ih*1.15:flags=lanczos,crop={W}:{H}:(iw-{W})/2:(ih-{H})*0.38".format(W=W, H=H) if j % 2 else ""
+                parts.append(f"[r{i}s{j}]trim={b[j]:.3f}:{b[j + 1]:.3f},setpts=PTS-STARTPTS{zoom},setsar=1[r{i}p{j}]")
+            parts.append("".join(f"[r{i}p{j}]" for j in range(k)) + f"concat=n={k}:v=1:a=0[c{i}]")
+        else:
+            parts.append(f"[r{i}]null[c{i}]")
         parts.append(f"[{i}:a]aresample=48000,aformat=channel_layouts=stereo,atempo={1 / f:.4f},apad,atrim=0:{s['L']:.3f},asetpts=PTS-STARTPTS[o{i}]")
         cat += f"[c{i}][o{i}]"
     parts.append(f"{cat}concat=n={n}:v=1:a=1[vc][amb]")
@@ -162,7 +246,20 @@ Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
                  f"afade=t=in:d=0.6,afade=t=out:st={max(0.0, total - 1.2):.2f}:d=1.2[mu]")
     parts.append("[mu][vsc]sidechaincompress=threshold=0.03:ratio=9:attack=15:release=350:makeup=1[mud]")
     parts.append("[amb]volume=0.12[ambl]")  # el sonido propio de los clips, muy bajo
-    parts.append("[vox][mud][ambl]amix=inputs=3:normalize=0:duration=longest,alimiter=limit=0.84:attack=3:release=60:level=false[aout]")
+    mixin = "[vox][mud][ambl]"
+    if fx:
+        times = [max(0.0, s["start"] - 0.28) for s in segs[1:]]  # el whoosh termina justo en el corte
+        if times:
+            parts.append(f"[{2 * n + 1}:a]asplit={len(times)}" + "".join(f"[w{j}]" for j in range(len(times))))
+            for j, t in enumerate(times):
+                parts.append(f"[w{j}]adelay={int(t * 1000)}:all=1[wd{j}]")
+            parts.append("".join(f"[wd{j}]" for j in range(len(times))) + f"amix=inputs={len(times)}:normalize=0[whs]")
+            mixin += "[whs]"
+        if hook and "Hook," in "\n".join(ev):
+            parts.append(f"[{2 * n + 2}:a]adelay=40:all=1[pp]")
+            mixin += "[pp]"
+    k_in = mixin.count("[")
+    parts.append(f"{mixin}amix=inputs={k_in}:normalize=0:duration=longest,alimiter=limit=0.84:attack=3:release=60:level=false[aout]")
     Path(out).parent.mkdir(parents=True, exist_ok=True)
     cmd += ["-filter_complex", ";".join(parts), "-map", "[vout]", "-map", "[aout]", "-t", f"{total:.3f}",
             "-c:v", "libx264", "-preset", "medium", "-crf", "19", "-pix_fmt", "yuv420p", "-profile:v", "high", "-r", str(FPS),
