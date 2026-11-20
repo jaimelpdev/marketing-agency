@@ -521,19 +521,18 @@ def plan_user(browser, user, key, force=False, redo=None):
     today = now.date().isoformat()
     queue = load_json(queue_path, [])
     modo = str(plan_conf.get("modo", "smart"))
-    changed = expire_veo(user, queue, udir, tz)
-    if not (force or redo or os.environ.get("FORCE")):
-        backfill_veo(user, queue, udir, tz)
-    if changed:
+    if expire_veo(user, queue, udir, tz):
         try:
             api("PUT", f"/admin/status/{user['id']}", {"queue": summarize(queue)})
         except Exception as e:
             log("  ⚠ No se pudo avisar a la app:", e)
+    if not (force or redo or os.environ.get("FORCE")):
+        backfill_veo(user, queue, udir, tz)
         if any(q.get("date") == today and q.get("source") == "auto" for q in queue):
             log("  Ya se planificó hoy.")
             think_only(user, key, queue)
             return False
-        future = [q for q in queue if q.get("status") in ("pending", "scheduled") and datetime.fromisoformat(q["publishAt"]) > now + timedelta(hours=24)]
+        future = [q for q in queue if q.get("status") in ("pending", "scheduled", "esperando_veo") and datetime.fromisoformat(q["publishAt"]) > now + timedelta(hours=24)]
         if modo == "smart" and future:
             log(f"  Plan en marcha ({len(future)} piezas más allá de mañana). Hoy no hace falta planificar.")
             think_only(user, key, queue)
