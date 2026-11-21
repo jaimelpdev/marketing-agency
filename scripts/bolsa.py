@@ -45,7 +45,7 @@ def add(user, pieces, today, log=print):
         caption = (str(p.get("caption", "")) + "\n\n" + str(p.get("hashtags", ""))).strip() if p["tipo"] != "historia" else ""
         bolsa.append({
             "id": bid, "tipo": p["tipo"], "tema": p.get("tema", ""), "gancho": p.get("gancho", ""),
-            "caption": caption[:2200], "nota": p.get("nota") or 6, "created": today, "status": "pendiente",
+            "caption": caption[:2200], "nota": p.get("nota") or 6, "created": today, "status": "pendiente", "dir": DIRECCION,
             "veo": {"clips": clips,
                     "voz": daily.VOICES.get(p.get("voz") if p.get("voz") in ("mujer", "hombre") else "mujer"),
                     "ritmo": daily.RATES.get(p.get("ritmo_voz") or "normal", "+8%"),
@@ -59,6 +59,40 @@ def add(user, pieces, today, log=print):
     drop = {b["id"] for b in pend[MAX_PEND:]}
     bolsa = [b for b in bolsa if b["id"] not in drop]
     save(uid, bolsa)
+    return n
+
+
+DIRECCION = 2  # versión de la dirección de arte de los clips (planos según lo que dice cada frase)
+
+
+def redirect(user, key, log=print):
+    """Rehace los prompts de los guiones de la bolsa que aún no tienen ningún clip, con la dirección de arte actual."""
+    import re
+    import brain
+    import veo
+    if "veo" not in user:  # el servidor aún no dice qué clips hay subidos: mejor no tocar nada
+        return 0
+    uid = user["id"]
+    bolsa = load(uid)
+    have = user.get("veo") or {}
+    n = 0
+    for b in bolsa:
+        if b.get("status") != "pendiente" or b.get("dir", 1) >= DIRECCION or have.get(b["id"]):
+            continue
+        frases = [f.strip() for c in b["veo"]["clips"] for f in re.split(r"(?<=[.!?])\s+", c["t"]) if f.strip()]
+        piece = {"tipo": b["tipo"], "tema": b.get("tema", ""), "beats": [{"t": f} for f in frases]}
+        try:
+            if brain.art_direct(piece, user, key, log):
+                clips = veo.plan_clips(piece)
+                if clips:
+                    b["veo"]["clips"] = clips
+                    b["dir"] = DIRECCION
+                    n += 1
+                    log(f"    🎯 Planos rehechos para «{b.get('tema', '')}» ({len(clips)} clips)")
+        except Exception as e:  # noqa: BLE001
+            log(f"    ⚠ No se pudieron rehacer los planos de «{b.get('tema', '')}»: {e}")
+    if n:
+        save(uid, bolsa)
     return n
 
 

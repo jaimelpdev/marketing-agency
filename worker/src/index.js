@@ -572,7 +572,7 @@ async function handle(req, env) {
         if (!u) continue;
         let social = [];
         try { social = await socialAccounts(env, u); } catch (e) { }
-        out.push({ id: u.id, name: u.name, config: u.config, requests: u.requests || null, ig: { connected: !!(u.ig && u.ig.token), username: u.ig && u.ig.username }, zernioProfileId: u.zernioProfileId || null, social });
+        out.push({ id: u.id, name: u.name, config: u.config, requests: u.requests || null, veo: u.veo || {}, ig: { connected: !!(u.ig && u.ig.token), username: u.ig && u.ig.username }, zernioProfileId: u.zernioProfileId || null, social });
       }
       return json({ users: out });
     }

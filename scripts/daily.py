@@ -547,6 +547,10 @@ def plan_user(browser, user, key, force=False, redo=None):
         except Exception as e:
             log("  ⚠ No se pudo avisar a la app:", e)
     if (udir / "bolsa.json").exists():
+        import bolsa
+        user["persona_veo"] = load_json(udir / "ajustes.json", {}).get("persona_veo", "")
+        if bolsa.redirect(user, key, lambda *a: log(*a)):
+            log("  🎯 Bolsa: planos de Veo actualizados")
         fill_bolsa(user, queue)
     if not (force or redo or os.environ.get("FORCE")):
         backfill_veo(user, queue, udir, tz)

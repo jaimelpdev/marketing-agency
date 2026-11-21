@@ -79,10 +79,18 @@ def plan_clips(piece):
         text = " ".join(str(b["t"]).strip() for b in g)
         est = len(text.split()) / WORDS_PER_S + 0.5
         dur = 4 if est <= 4.2 else 6 if est <= 6.2 else 8
-        acts = [_action(b) for b in g if _action(b)]
-        img = acts[0] if acts else str(g[0]["t"])
-        if len(acts) > 1:
-            img += ". Then the camera moves to: " + acts[-1]  # la última frase del grupo aporta el final del clip
+        acts = [_action(b) or str(b["t"]) for b in g]
+        if len(acts) == 1:
+            img = acts[0]
+        else:
+            # un plano por frase, con su tramo de tiempo según lo que dura cada frase: lo que se ve cambia cuando cambia lo que se dice
+            ws = [max(1, len(str(b["t"]).split())) for b in g]
+            tot, t0, shots = sum(ws), 0.0, []
+            for k, (a, w) in enumerate(zip(acts, ws)):
+                t1 = dur if k == len(acts) - 1 else round(t0 + dur * w / tot)
+                shots.append(f"Shot {k + 1} ({t0:.0f}-{t1:.0f} s): {a}")
+                t0 = t1
+            img = f"{len(acts)} shots with hard cuts between them. " + ". ".join(shots)
         # la misma persona y el mismo sitio, con las mismas palabras, en todos los clips: así Veo no cambia de protagonista
         who = f". The person is always the same: {persona}" if persona and PERSON.search(img) else ""
         prompt = img + who + (". Setting: " + setting if setting else "") + (". Avoid: " + avoid if avoid else "") + ". " + TAIL
@@ -170,6 +178,9 @@ def compose(segments, voice, rate, mood, out, log=print, music_free_only=False, 
                                for m, (_, _, x) in enumerate(chunk))
                 ev.append(f"Dialogue: 0,{_ts(a)},{_ts(end)},Cap,,0,0,0,,{{\\pos({W // 2},{int(H * 0.62)})}}{txt}")
     hook = re.sub(r"\s+", " ", str(hook or "")).strip()
+    if len(hook.split()) > 9:  # gancho largo: su primera parte, si se entiende sola
+        first = re.split(r"(?<=[?!.,:])\s+", hook)[0].strip(" ,:")
+        hook = first if 2 <= len(first.split()) <= 9 else ""
     if hook and len(hook.split()) <= 9:
         h = hook.upper().replace("{", "(").replace("}", ")")
         if len(h) > 16:  # en dos líneas, partido por la palabra más cercana a la mitad
@@ -218,7 +229,7 @@ Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
     parts, cat = [], ""
     for i, s in enumerate(segs):
         # si la frase es más larga que el clip, se ralentiza un poco (hasta 1,35x) y, si aún falta, se congela el final
-        f = min(1.35, max(1.0, s["L"] / s["cd"]))
+        f = min(1.35, max(0.8, s["L"] / s["cd"]))  # el clip se ajusta a lo que dura la frase: sus planos caen con lo que se dice
         parts.append(f"[{i}:v]scale={W}:{H}:force_original_aspect_ratio=increase:flags=lanczos,crop={W}:{H},setsar=1,"
                      f"setpts=(PTS-STARTPTS)*{f:.4f},fps={FPS},tpad=stop_mode=clone:stop_duration=10,trim=0:{s['L']:.3f},setpts=PTS-STARTPTS[r{i}]")
         cuts = _subcuts(s)

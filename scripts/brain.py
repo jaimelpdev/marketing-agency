@@ -609,6 +609,32 @@ SHOTS = [
 ]
 
 
+def shot_rules(user):
+    """Planos obligados por el contenido de la frase (del banco de conocimiento del sector, «planos:»).
+    Devuelve [(regex, plano en inglés)]: si la frase habla de los pedales, se ven los pies; del volante, las manos…"""
+    marca = ((user.get("config") or {}).get("marca") or {})
+    hay = " ".join(str(marca.get(k, "")) for k in ("name", "about", "aud", "pillars", "tone")).lower()
+    out = []
+    for f in sorted(KNOW_DIR.glob("*.md")):
+        txt = f.read_text(encoding="utf-8")
+        m = re.search(r"claves:\s*\[(.*?)\]", txt)
+        claves = [c.strip().lower() for c in (m.group(1).split(",") if m else []) if c.strip()]
+        if not any(c and c in hay for c in claves):
+            continue
+        for line in re.findall(r'^\s*-\s*"(.+?=>.+?)"\s*$', txt.split("\n---", 1)[0], re.M):
+            keys, shot = line.split("=>", 1)
+            out.append((re.compile(r"\b(" + keys.strip() + r")", re.I), shot.strip()))
+    return out
+
+
+def shot_for(text, rules):
+    """El plano que pide la frase: la primera regla (en orden de prioridad del banco) cuya palabra clave aparece."""
+    for rx, shot in rules:
+        if rx.search(text):
+            return shot
+    return ""
+
+
 def art_direct(piece, user, key, log=print, beats=None):
     """Director de arte: convierte cada frase hablada de un vídeo faceless en una imagen concreta,
     fotografiable y anclada al mundo del negocio, para que lo que se ve sea lo que se dice."""
@@ -623,7 +649,9 @@ def art_direct(piece, user, key, log=print, beats=None):
     plan = [close[order[i % len(order)]] for i in range(len(beats))]
     if len(beats) > 3:
         plan[0] = SHOTS[0]
-    frases = "\n".join(f"{i + 1}. [PLANO: {plan[i]}] {b.get('t', '')}" for i, b in enumerate(beats))
+    rules = shot_rules(user)
+    forced = [shot_for(str(b.get("t", "")), rules) for b in beats]
+    frases = "\n".join(f"{i + 1}. [PLANO {'OBLIGATORIO' if forced[i] else 'SUGERIDO'}: {forced[i] or plan[i]}] {b.get('t', '')}" for i, b in enumerate(beats))
     prompt = f"""Eres director de arte de vídeos cortos faceless (todo con imágenes generadas por IA). Para cada frase hablada eliges UNA imagen que la ilustre de forma que cualquiera entienda la relación al instante.
 
 NEGOCIO: {negocio}
@@ -633,7 +661,7 @@ FRASES (en orden):
 {frases}
 
 REGLAS
-0. Cada frase trae un PLANO SUGERIDO para que el vídeo cambie de plano en cada frase. Lo primero es que la imagen muestre LO QUE DICE LA FRASE (si habla de girar el volante, manos en el volante; de frenar, el pie en el freno; de ver la curva, la pantalla). Si el plano sugerido no encaja, elige otro de cerca que sí encaje, sin repetir el plano de la frase anterior y sin más planos generales. Si la frase describe un error, muestra el error; si describe la solución, muestra la solución hecha bien.
+0. Cada frase trae un PLANO. Si es OBLIGATORIO, la imagen empieza EXACTAMENTE por ese plano (cópialo en inglés tal cual) y luego dices qué hace en ese momento, según la frase (por ejemplo "…, slowly easing off the brake pedal while turning in"). Si es SUGERIDO, sirve para que el vídeo cambie de plano en cada frase. Lo primero es que la imagen muestre LO QUE DICE LA FRASE (si habla de girar el volante, manos en el volante; de frenar, el pie en el freno; de ver la curva, la pantalla). Si el plano sugerido no encaja, elige otro de cerca que sí encaje, sin repetir el plano de la frase anterior y sin más planos generales. Si la frase describe un error, muestra el error; si describe la solución, muestra la solución hecha bien.
 1. "mundo": en INGLÉS y en MÁXIMO 18 palabras, el escenario concreto y reconocible de este negocio que aparece en TODAS las imágenes, diciendo SIEMPRE en qué SALA o LUGAR está y con qué NO debe confundirse (por ejemplo, para simracing: "aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a big monitor showing a racing game, not a real car interior"; para una tienda de deporte: "sports store with football boots and jerseys on display"; para un hotel: "bright seaside boutique hotel in Mallorca"). Si la imagen pudiera parecer otra cosa genérica (un coche real, una tienda cualquiera), el "mundo" debe dejar claro la diferencia.
 2. Cada "img": en INGLÉS sencillo, máximo 28 palabras, EMPEZANDO por el tipo de plano en inglés ("extreme close-up of…", "close-up of hands…", "medium shot of…", "over-the-shoulder view of…") y luego qué se ve y qué está haciendo quién, con el SUJETO principal que se vea grande, nítido y de frente. Una sola idea por imagen. Debe mostrar literalmente la acción u objeto de la frase dentro del "mundo".
 2b. PROHIBIDO lo genérico: nada de "a car", "a sports car on a road", "a person smiling", "a city", paisajes ni planos de recurso que valdrían para cualquier vídeo. Cada imagen tiene que contener algo que SOLO tiene sentido con esa frase y con este negocio: la persona del vídeo haciendo esa acción concreta con el equipo o el producto del negocio, el objeto exacto del que se habla en primer plano, o la pantalla/el lugar exacto. Si una imagen podría ilustrar otra frase del vídeo, cámbiala.
@@ -658,7 +686,10 @@ Responde SOLO con JSON: {{"mundo":"…","persona":"…","evitar":"…","estilo":
     persona = str(user.get("persona_veo") or j.get("persona") or "").strip()[:110]  # presentador fijo de la marca, si lo tiene
     piece["persona"] = persona
     mundo_no = str(j.get("evitar") or "").strip()[:160]
-    for b, im in zip(beats, imgs):
+    for k, (b, im) in enumerate(zip(beats, imgs)):
+        if forced[k] and forced[k].split(" of ")[0].lower() not in im.lower()[:60]:
+            log(f"    ↺ Plano corregido en la frase {k + 1}: debía ser «{forced[k][:50]}…»")
+            im = forced[k] + ", " + re.sub(r"^(extreme )?(close-up|medium shot|wide shot|over-the-shoulder view|top-down view|side view)( of)?\s*", "", im, flags=re.I)
         # el plano y el sujeto primero (si el escenario va delante, todas salen como plano general); el escenario después
         who = ("; the person is " + persona) if persona and re.search(r"\b(person|man|woman|gamer|driver|he|she|his|her|hands?|feet|foot|face|racer|player)\b", im, re.I) else ""
         b["img"] = (im.rstrip(".") + who + (". Setting: " + mundo if mundo else "") + (". " + mundo_no if mundo_no else ""))[:800]
