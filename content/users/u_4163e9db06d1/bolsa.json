@@ -1,278 +1,284 @@
 [
- {
-  "id": "b-2026-11-20-01-reel",
-  "tipo": "reel",
-  "tema": "Frenada degresiva en curva",
-  "gancho": "El error que te hace perder dos segundos por curva",
-  "caption": "Aprende a soltar el freno de forma progresiva mientras giras el volante para ganar velocidad en cada curva. ¿Te cuesta encontrar el punto exacto de frenada?\n\n#simracing #setup #simdriver #acelera #telemetria",
-  "nota": 9.0,
-  "created": "2026-11-20",
-  "status": "pendiente",
-  "veo": {
-   "clips": [
-    {
-     "t": "El error que te hace perder tiempo en cada curva es soltar el freno demasiado pronto. Frenas fuerte con el coche recto al inicio de la maniobra para aprovechar el agarre.",
-     "prompt": "wide shot of a young man sitting in an aluminium sim racing rig with a steering wheel and pedals inside a bright home gaming room, a big monitor showing a racing game, not a real car interior. Then the camera moves to: medium shot of the young man sitting in the sim racing rig looking frustrated at the big monitor showing a racing track, not a real car interior. Setting: aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a big monitor showing a racing game, not a real car interior. not a real car interior. smooth natural camera movement, vertical 9:16 video, photorealistic, bright natural light, sharp focus, no text, no captions, no logos, no brand names, no watermark",
-     "dur": 8
+  {
+    "id": "b-2026-11-20-01-reel",
+    "tipo": "reel",
+    "tema": "Frenada degresiva en curva",
+    "gancho": "El error que te hace perder dos segundos por curva",
+    "caption": "Aprende a soltar el freno de forma progresiva mientras giras el volante para ganar velocidad en cada curva. ¿Te cuesta encontrar el punto exacto de frenada?\n\n#simracing #setup #simdriver #acelera #telemetria",
+    "nota": 9.0,
+    "created": "2026-11-20",
+    "status": "usada",
+    "veo": {
+      "clips": [
+        {
+          "t": "El error que te hace perder tiempo en cada curva es soltar el freno demasiado pronto. Frenas fuerte con el coche recto al inicio de la maniobra para aprovechar el agarre.",
+          "prompt": "wide shot of a young man sitting in an aluminium sim racing rig with a steering wheel and pedals inside a bright home gaming room, a big monitor showing a racing game, not a real car interior. Then the camera moves to: medium shot of the young man sitting in the sim racing rig looking frustrated at the big monitor showing a racing track, not a real car interior. Setting: aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a big monitor showing a racing game, not a real car interior. not a real car interior. smooth natural camera movement, vertical 9:16 video, photorealistic, bright natural light, sharp focus, no text, no captions, no logos, no brand names, no watermark",
+          "dur": 8
+        },
+        {
+          "t": "Al empezar a girar el volante, debes ir soltando el pedal de forma muy suave. Esa suelta progresiva transfiere peso hacia el eje delantero para que el coche gire mejor.",
+          "prompt": "over-the-shoulder view of the young man looking at the big monitor showing a racing game curve while gently releasing the steering wheel, not a real car interior. Then the camera moves to: close-up of hands on a gaming steering wheel turning smoothly inside a bright home gaming room, not a real car interior. Setting: aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a big monitor showing a racing game, not a real car interior. not a real car interior, no road, no dashboard, no text. smooth natural camera movement, vertical 9:16 video, photorealistic, bright natural light, sharp focus, no text, no captions, no logos, no brand names, no watermark",
+          "dur": 8
+        },
+        {
+          "t": "Si levantas el pie de golpe, pierdes agarre y el morro se abrirá hacia fuera.",
+          "prompt": "close-up of feet pressing and abruptly lifting off gaming pedals on a sim racing rig, not a real car interior. Setting: aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a big monitor showing a racing game, not a real car interior. not a real car interior, no road, no dashboard, no text. smooth natural camera movement, vertical 9:16 video, photorealistic, bright natural light, sharp focus, no text, no captions, no logos, no brand names, no watermark",
+          "dur": 6
+        },
+        {
+          "t": "Mantén una ligera presión mientras buscas el vértice interior de la trazada. Notarás que el coche rota con mayor facilidad y mantiene la velocidad.",
+          "prompt": "close-up of hands maintaining light pressure on a gaming steering wheel while looking at a monitor with a racing apex, not a real car interior. Then the camera moves to: extreme close-up of a gaming steering wheel and glowing digital telemetry graphs on the screen showing rotation speed, not a real car interior. Setting: aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a big monitor showing a racing game, not a real car interior. not a real car interior, no road, no dashboard, no text. smooth natural camera movement, vertical 9:16 video, photorealistic, bright natural light, sharp focus, no text, no captions, no logos, no brand names, no watermark",
+          "dur": 8
+        },
+        {
+          "t": "Practica este gesto en tu próxima sesión para mejorar tus tiempos de inmediato. Sígueme para descubrir más consejos rápidos de simracing.",
+          "prompt": "medium shot of the young man sitting in the sim racing rig smiling and pointing confidently forward at the camera, not a real car interior. Then the camera moves to: over-the-shoulder view of the young man looking at the big monitor showing a sim racing menu, gesturing to subscribe, not a real car interior. Setting: aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a big monitor showing a racing game, not a real car interior. not a real car interior, no road, no dashboard, no text. smooth natural camera movement, vertical 9:16 video, photorealistic, bright natural light, sharp focus, no text, no captions, no logos, no brand names, no watermark",
+          "dur": 8
+        }
+      ],
+      "voz": "es-ES-AlvaroNeural",
+      "ritmo": "+16%",
+      "musica": "energetica",
+      "hashtags": "#simracing #setup #simdriver #acelera #telemetria"
     },
-    {
-     "t": "Al empezar a girar el volante, debes ir soltando el pedal de forma muy suave. Esa suelta progresiva transfiere peso hacia el eje delantero para que el coche gire mejor.",
-     "prompt": "over-the-shoulder view of the young man looking at the big monitor showing a racing game curve while gently releasing the steering wheel, not a real car interior. Then the camera moves to: close-up of hands on a gaming steering wheel turning smoothly inside a bright home gaming room, not a real car interior. Setting: aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a big monitor showing a racing game, not a real car interior. not a real car interior, no road, no dashboard, no text. smooth natural camera movement, vertical 9:16 video, photorealistic, bright natural light, sharp focus, no text, no captions, no logos, no brand names, no watermark",
-     "dur": 8
-    },
-    {
-     "t": "Si levantas el pie de golpe, pierdes agarre y el morro se abrirá hacia fuera.",
-     "prompt": "close-up of feet pressing and abruptly lifting off gaming pedals on a sim racing rig, not a real car interior. Setting: aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a big monitor showing a racing game, not a real car interior. not a real car interior, no road, no dashboard, no text. smooth natural camera movement, vertical 9:16 video, photorealistic, bright natural light, sharp focus, no text, no captions, no logos, no brand names, no watermark",
-     "dur": 6
-    },
-    {
-     "t": "Mantén una ligera presión mientras buscas el vértice interior de la trazada. Notarás que el coche rota con mayor facilidad y mantiene la velocidad.",
-     "prompt": "close-up of hands maintaining light pressure on a gaming steering wheel while looking at a monitor with a racing apex, not a real car interior. Then the camera moves to: extreme close-up of a gaming steering wheel and glowing digital telemetry graphs on the screen showing rotation speed, not a real car interior. Setting: aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a big monitor showing a racing game, not a real car interior. not a real car interior, no road, no dashboard, no text. smooth natural camera movement, vertical 9:16 video, photorealistic, bright natural light, sharp focus, no text, no captions, no logos, no brand names, no watermark",
-     "dur": 8
-    },
-    {
-     "t": "Practica este gesto en tu próxima sesión para mejorar tus tiempos de inmediato. Sígueme para descubrir más consejos rápidos de simracing.",
-     "prompt": "medium shot of the young man sitting in the sim racing rig smiling and pointing confidently forward at the camera, not a real car interior. Then the camera moves to: over-the-shoulder view of the young man looking at the big monitor showing a sim racing menu, gesturing to subscribe, not a real car interior. Setting: aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a big monitor showing a racing game, not a real car interior. not a real car interior, no road, no dashboard, no text. smooth natural camera movement, vertical 9:16 video, photorealistic, bright natural light, sharp focus, no text, no captions, no logos, no brand names, no watermark",
-     "dur": 8
+    "media": [
+      "media/u_4163e9db06d1/bolsa/b-2026-11-20-01-reel/video.mp4"
+    ],
+    "cover": "media/u_4163e9db06d1/bolsa/b-2026-11-20-01-reel/cover.jpg",
+    "listo": "2026-11-21T02:58",
+    "usada": "2026-11-20-05-reel"
+  },
+  {
+    "id": "b-2026-11-20-02-reel",
+    "tipo": "reel",
+    "tema": "Uso de la telemetría para mejorar",
+    "gancho": "Lo que la telemetría de la app hace por ti",
+    "caption": "Compara tus vueltas con la telemetría para descubrir dónde pierdes tiempo exactamente. ¿Analizas tus datos después de cada sesión de práctica?\n\n#simracing #telemetria #app #simdriver #mejuratutiempo",
+    "nota": 8.0,
+    "created": "2026-11-20",
+    "status": "pendiente",
+    "veo": {
+      "clips": [
+        {
+          "t": "La telemetría compara tus trazadas con una vuelta rápida de referencia. Muestra con exactitud dónde pierdes velocidad en cada frenada.",
+          "prompt": "wide shot of a young man sitting in an aluminium sim racing rig with a steering wheel and big monitor inside a bright home gaming room, looking at the screen. Then the camera moves to: medium shot of a young man sitting in the sim racing rig looking focused and serious at the monitor displaying a racing track. The person is always the same: a Spanish man in his late twenties with short dark hair, light stubble and a plain black t-shirt. Setting: aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a big monitor showing a racing game, not a real car interior. Avoid: not a real car interior, no text, no dashboard, no blurry. smooth natural camera movement, vertical 9:16 video, photorealistic, bright natural light, sharp focus, no text, no captions, no logos, no brand names, no watermark",
+          "dur": 8
+        },
+        {
+          "t": "Superpone las gráficas para ver el momento en que pisas el freno. Revela si aplicas el pico de presión de freno con el coche recto.",
+          "prompt": "over-the-shoulder view of a young man looking at a monitor displaying telemetry graphs and racing lines over a virtual circuit. Then the camera moves to: close-up of hands applying a hard peak of pressure on the brake pedal while the steering wheel is held completely straight. The person is always the same: a Spanish man in his late twenties with short dark hair, light stubble and a plain black t-shirt. Setting: aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a big monitor showing a racing game, not a real car interior. Avoid: not a real car interior, no text, no dashboard, no blurry background. smooth natural camera movement, vertical 9:16 video, photorealistic, bright natural light, sharp focus, no text, no captions, no logos, no brand names, no watermark",
+          "dur": 8
+        },
+        {
+          "t": "Destaca también si abres el acelerador demasiado pronto en la salida.",
+          "prompt": "close-up of feet on the racing pedals showing the accelerator being pressed down too early on the pedal travel. The person is always the same: a Spanish man in his late twenties with short dark hair, light stubble and a plain black t-shirt. Setting: aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a big monitor showing a racing game, not a real car interior. Avoid: not a real car interior, no text, no dashboard, no blurry background. smooth natural camera movement, vertical 9:16 video, photorealistic, bright natural light, sharp focus, no text, no captions, no logos, no brand names, no watermark",
+          "dur": 6
+        },
+        {
+          "t": "Analizar esos datos te permite corregir errores y mejorar tus tiempos. Consulta cómo usar la app en el enlace de la biografía.",
+          "prompt": "close-up of a young man analyzing data charts on a screen next to his sim racing steering wheel with intense concentration. Then the camera moves to: medium shot of a young man smiling directly at the camera inside his sim racing room, pointing towards the desk. The person is always the same: a Spanish man in his late twenties with short dark hair, light stubble and a plain black t-shirt. Setting: aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a big monitor showing a racing game, not a real car interior. Avoid: not a real car interior, no text, no dashboard, no blurry background. smooth natural camera movement, vertical 9:16 video, photorealistic, bright natural light, sharp focus, no text, no captions, no logos, no brand names, no watermark",
+          "dur": 8
+        }
+      ],
+      "voz": "es-ES-AlvaroNeural",
+      "ritmo": "+8%",
+      "musica": "chill",
+      "hashtags": "#simracing #telemetria #app #simdriver #mejuratutiempo"
     }
-   ],
-   "voz": "es-ES-AlvaroNeural",
-   "ritmo": "+16%",
-   "musica": "energetica",
-   "hashtags": "#simracing #setup #simdriver #acelera #telemetria"
-  }
- },
- {
-  "id": "b-2026-11-20-02-reel",
-  "tipo": "reel",
-  "tema": "Uso de la telemetría para mejorar",
-  "gancho": "Lo que la telemetría de la app hace por ti",
-  "caption": "Compara tus vueltas con la telemetría para descubrir dónde pierdes tiempo exactamente. ¿Analizas tus datos después de cada sesión de práctica?\n\n#simracing #telemetria #app #simdriver #mejuratutiempo",
-  "nota": 8.0,
-  "created": "2026-11-20",
-  "status": "pendiente",
-  "veo": {
-   "clips": [
-    {
-     "t": "La telemetría compara tus trazadas con una vuelta rápida de referencia. Muestra con exactitud dónde pierdes velocidad en cada frenada.",
-     "prompt": "wide shot of a young man sitting in an aluminium sim racing rig with a steering wheel and big monitor inside a bright home gaming room, looking at the screen. Then the camera moves to: medium shot of a young man sitting in the sim racing rig looking focused and serious at the monitor displaying a racing track. The person is always the same: a Spanish man in his late twenties with short dark hair, light stubble and a plain black t-shirt. Setting: aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a big monitor showing a racing game, not a real car interior. Avoid: not a real car interior, no text, no dashboard, no blurry. smooth natural camera movement, vertical 9:16 video, photorealistic, bright natural light, sharp focus, no text, no captions, no logos, no brand names, no watermark",
-     "dur": 8
-    },
-    {
-     "t": "Superpone las gráficas para ver el momento en que pisas el freno. Revela si aplicas el pico de presión de freno con el coche recto.",
-     "prompt": "over-the-shoulder view of a young man looking at a monitor displaying telemetry graphs and racing lines over a virtual circuit. Then the camera moves to: close-up of hands applying a hard peak of pressure on the brake pedal while the steering wheel is held completely straight. The person is always the same: a Spanish man in his late twenties with short dark hair, light stubble and a plain black t-shirt. Setting: aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a big monitor showing a racing game, not a real car interior. Avoid: not a real car interior, no text, no dashboard, no blurry background. smooth natural camera movement, vertical 9:16 video, photorealistic, bright natural light, sharp focus, no text, no captions, no logos, no brand names, no watermark",
-     "dur": 8
-    },
-    {
-     "t": "Destaca también si abres el acelerador demasiado pronto en la salida.",
-     "prompt": "close-up of feet on the racing pedals showing the accelerator being pressed down too early on the pedal travel. The person is always the same: a Spanish man in his late twenties with short dark hair, light stubble and a plain black t-shirt. Setting: aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a big monitor showing a racing game, not a real car interior. Avoid: not a real car interior, no text, no dashboard, no blurry background. smooth natural camera movement, vertical 9:16 video, photorealistic, bright natural light, sharp focus, no text, no captions, no logos, no brand names, no watermark",
-     "dur": 6
-    },
-    {
-     "t": "Analizar esos datos te permite corregir errores y mejorar tus tiempos. Consulta cómo usar la app en el enlace de la biografía.",
-     "prompt": "close-up of a young man analyzing data charts on a screen next to his sim racing steering wheel with intense concentration. Then the camera moves to: medium shot of a young man smiling directly at the camera inside his sim racing room, pointing towards the desk. The person is always the same: a Spanish man in his late twenties with short dark hair, light stubble and a plain black t-shirt. Setting: aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a big monitor showing a racing game, not a real car interior. Avoid: not a real car interior, no text, no dashboard, no blurry background. smooth natural camera movement, vertical 9:16 video, photorealistic, bright natural light, sharp focus, no text, no captions, no logos, no brand names, no watermark",
-     "dur": 8
+  },
+  {
+    "id": "b-2026-11-20-03-historia",
+    "tipo": "historia",
+    "tema": "Frenada en línea recta",
+    "gancho": "¿Por qué frenas tarde y te sales de la pista?",
+    "caption": "",
+    "nota": 9.0,
+    "created": "2026-11-20",
+    "status": "pendiente",
+    "veo": {
+      "clips": [
+        {
+          "t": "Muchos pilotos empiezan a pisar el freno con demasiada suavidad. El pico de presión debe ir siempre al principio de la frenada.",
+          "prompt": "wide shot of a young man sitting in an aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a big monitor showing a racing game, not a real car interior. Then the camera moves to: medium shot of the young man sitting in the rig facing forward with a focused expression, hands on the steering wheel, not a real car interior. The person is always the same: a Spanish man in his late twenties with short dark hair, light stubble and a plain black t-shirt. Setting: aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a big monitor showing a racing game, not a real car interior. Avoid: real car interiors, roads. smooth natural camera movement, vertical 9:16 video, photorealistic, bright natural light, sharp focus, no text, no captions, no logos, no brand names, no watermark",
+          "dur": 8
+        },
+        {
+          "t": "Hazlo con el coche totalmente recto para aprovechar el agarre delantero. Si aprietas más al final, bloqueas las ruedas y pierdes el control.",
+          "prompt": "over-the-shoulder view of the young man looking at the big monitor showing a racing game straight ahead, not a real car interior. Then the camera moves to: close-up of hands firmly pressing the steering wheel and paddle shifters in the sim rig, not a real car interior. The person is always the same: a Spanish man in his late twenties with short dark hair, light stubble and a plain black t-shirt. Setting: aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a big monitor showing a racing game, not a real car interior. Avoid: not a real car interior, no text, no logos. smooth natural camera movement, vertical 9:16 video, photorealistic, bright natural light, sharp focus, no text, no captions, no logos, no brand names, no watermark",
+          "dur": 8
+        },
+        {
+          "t": "Practica esta fuerza inicial hoy mismo y mejora tus tiempos por vuelta. Sígueme para descubrir más trucos y ganar velocidad en cada carrera.",
+          "prompt": "close-up of feet pressing the brake pedal hard on the aluminium sim rig, not a real car interior. Then the camera moves to: medium shot of the young man turning to the camera and smiling inside the bright home gaming room, not a real car interior. The person is always the same: a Spanish man in his late twenties with short dark hair, light stubble and a plain black t-shirt. Setting: aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a big monitor showing a racing game, not a real car interior. Avoid: not a real car interior, no text, no logos. smooth natural camera movement, vertical 9:16 video, photorealistic, bright natural light, sharp focus, no text, no captions, no logos, no brand names, no watermark",
+          "dur": 8
+        }
+      ],
+      "voz": "es-ES-AlvaroNeural",
+      "ritmo": "+8%",
+      "musica": "ambiental",
+      "hashtags": ""
     }
-   ],
-   "voz": "es-ES-AlvaroNeural",
-   "ritmo": "+8%",
-   "musica": "chill",
-   "hashtags": "#simracing #telemetria #app #simdriver #mejuratutiempo"
-  }
- },
- {
-  "id": "b-2026-11-20-03-historia",
-  "tipo": "historia",
-  "tema": "Frenada en línea recta",
-  "gancho": "¿Por qué frenas tarde y te sales de la pista?",
-  "caption": "",
-  "nota": 9.0,
-  "created": "2026-11-20",
-  "status": "pendiente",
-  "veo": {
-   "clips": [
-    {
-     "t": "Muchos pilotos empiezan a pisar el freno con demasiada suavidad. El pico de presión debe ir siempre al principio de la frenada.",
-     "prompt": "wide shot of a young man sitting in an aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a big monitor showing a racing game, not a real car interior. Then the camera moves to: medium shot of the young man sitting in the rig facing forward with a focused expression, hands on the steering wheel, not a real car interior. The person is always the same: a Spanish man in his late twenties with short dark hair, light stubble and a plain black t-shirt. Setting: aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a big monitor showing a racing game, not a real car interior. Avoid: real car interiors, roads. smooth natural camera movement, vertical 9:16 video, photorealistic, bright natural light, sharp focus, no text, no captions, no logos, no brand names, no watermark",
-     "dur": 8
-    },
-    {
-     "t": "Hazlo con el coche totalmente recto para aprovechar el agarre delantero. Si aprietas más al final, bloqueas las ruedas y pierdes el control.",
-     "prompt": "over-the-shoulder view of the young man looking at the big monitor showing a racing game straight ahead, not a real car interior. Then the camera moves to: close-up of hands firmly pressing the steering wheel and paddle shifters in the sim rig, not a real car interior. The person is always the same: a Spanish man in his late twenties with short dark hair, light stubble and a plain black t-shirt. Setting: aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a big monitor showing a racing game, not a real car interior. Avoid: not a real car interior, no text, no logos. smooth natural camera movement, vertical 9:16 video, photorealistic, bright natural light, sharp focus, no text, no captions, no logos, no brand names, no watermark",
-     "dur": 8
-    },
-    {
-     "t": "Practica esta fuerza inicial hoy mismo y mejora tus tiempos por vuelta. Sígueme para descubrir más trucos y ganar velocidad en cada carrera.",
-     "prompt": "close-up of feet pressing the brake pedal hard on the aluminium sim rig, not a real car interior. Then the camera moves to: medium shot of the young man turning to the camera and smiling inside the bright home gaming room, not a real car interior. The person is always the same: a Spanish man in his late twenties with short dark hair, light stubble and a plain black t-shirt. Setting: aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a big monitor showing a racing game, not a real car interior. Avoid: not a real car interior, no text, no logos. smooth natural camera movement, vertical 9:16 video, photorealistic, bright natural light, sharp focus, no text, no captions, no logos, no brand names, no watermark",
-     "dur": 8
+  },
+  {
+    "id": "b-2026-11-20-04-historia",
+    "tipo": "historia",
+    "tema": "Acelerador progresivo en salida de curva",
+    "gancho": "¿Un pedal de gas más sensible acelera más rápido?",
+    "caption": "",
+    "nota": 8.0,
+    "created": "2026-11-20",
+    "status": "pendiente",
+    "veo": {
+      "clips": [
+        {
+          "t": "¿Un pedal de gas más sensible acelera más rápido? No, pisar a fondo con el volante girado solo hace que patines.",
+          "prompt": "wide shot of a 30-year-old man with short brown hair wearing a casual black t-shirt sitting in an aluminium sim racing rig with bucket seat, looking confused at a big monitor showing a racing game, not a real car interior. Then the camera moves to: medium shot of a 30-year-old man with short brown hair wearing a casual black t-shirt sitting in a sim racing rig, looking frustrated at the steering wheel, not a real car interior. The person is always the same: a Spanish man in his late twenties with short dark hair, light stubble and a plain black t-shirt. Setting: aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a big monitor showing a racing game, not a real car interior. smooth natural camera movement, vertical 9:16 video, photorealistic, bright natural light, sharp focus, no text, no captions, no logos, no brand names, no watermark",
+          "dur": 8
+        },
+        {
+          "t": "Acelera de forma progresiva a medida que abres la dirección.",
+          "prompt": "over-the-shoulder view of a 30-year-old man looking at a big monitor showing a racing game while smoothly turning the steering wheel on an aluminium sim racing rig, not a real car interior. The person is always the same: a Spanish man in his late twenties with short dark hair, light stubble and a plain black t-shirt. Setting: aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a big monitor showing a racing game, not a real car interior. Avoid: not a real car interior, no dashboard. smooth natural camera movement, vertical 9:16 video, photorealistic, bright natural light, sharp focus, no text, no captions, no logos, no brand names, no watermark",
+          "dur": 6
+        },
+        {
+          "t": "Notarás que el coche gana velocidad sin perder adherencia atrás. Sigue nuestra cuenta si quieres dominar cada circuito.",
+          "prompt": "close-up of hands of a 30-year-old man gripping a steering wheel and pressing the pedal smoothly inside an aluminium sim racing rig, not a real car interior. Then the camera moves to: medium shot of a 30-year-old man with short brown hair wearing a casual black t-shirt smiling and pointing enthusiastically at the camera next to a sim racing rig, not a real car interior. The person is always the same: a Spanish man in his late twenties with short dark hair, light stubble and a plain black t-shirt. Setting: aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a big monitor showing a racing game, not a real car interior. Avoid: not a real car interior, no dashboard, no real road. smooth natural camera movement, vertical 9:16 video, photorealistic, bright natural light, sharp focus, no text, no captions, no logos, no brand names, no watermark",
+          "dur": 8
+        }
+      ],
+      "voz": "es-ES-ElviraNeural",
+      "ritmo": "+8%",
+      "musica": "energetica",
+      "hashtags": ""
     }
-   ],
-   "voz": "es-ES-AlvaroNeural",
-   "ritmo": "+8%",
-   "musica": "ambiental",
-   "hashtags": ""
-  }
- },
- {
-  "id": "b-2026-11-20-04-historia",
-  "tipo": "historia",
-  "tema": "Acelerador progresivo en salida de curva",
-  "gancho": "¿Un pedal de gas más sensible acelera más rápido?",
-  "caption": "",
-  "nota": 8.0,
-  "created": "2026-11-20",
-  "status": "pendiente",
-  "veo": {
-   "clips": [
-    {
-     "t": "¿Un pedal de gas más sensible acelera más rápido? No, pisar a fondo con el volante girado solo hace que patines.",
-     "prompt": "wide shot of a 30-year-old man with short brown hair wearing a casual black t-shirt sitting in an aluminium sim racing rig with bucket seat, looking confused at a big monitor showing a racing game, not a real car interior. Then the camera moves to: medium shot of a 30-year-old man with short brown hair wearing a casual black t-shirt sitting in a sim racing rig, looking frustrated at the steering wheel, not a real car interior. The person is always the same: a Spanish man in his late twenties with short dark hair, light stubble and a plain black t-shirt. Setting: aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a big monitor showing a racing game, not a real car interior. smooth natural camera movement, vertical 9:16 video, photorealistic, bright natural light, sharp focus, no text, no captions, no logos, no brand names, no watermark",
-     "dur": 8
-    },
-    {
-     "t": "Acelera de forma progresiva a medida que abres la dirección.",
-     "prompt": "over-the-shoulder view of a 30-year-old man looking at a big monitor showing a racing game while smoothly turning the steering wheel on an aluminium sim racing rig, not a real car interior. The person is always the same: a Spanish man in his late twenties with short dark hair, light stubble and a plain black t-shirt. Setting: aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a big monitor showing a racing game, not a real car interior. Avoid: not a real car interior, no dashboard. smooth natural camera movement, vertical 9:16 video, photorealistic, bright natural light, sharp focus, no text, no captions, no logos, no brand names, no watermark",
-     "dur": 6
-    },
-    {
-     "t": "Notarás que el coche gana velocidad sin perder adherencia atrás. Sigue nuestra cuenta si quieres dominar cada circuito.",
-     "prompt": "close-up of hands of a 30-year-old man gripping a steering wheel and pressing the pedal smoothly inside an aluminium sim racing rig, not a real car interior. Then the camera moves to: medium shot of a 30-year-old man with short brown hair wearing a casual black t-shirt smiling and pointing enthusiastically at the camera next to a sim racing rig, not a real car interior. The person is always the same: a Spanish man in his late twenties with short dark hair, light stubble and a plain black t-shirt. Setting: aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a big monitor showing a racing game, not a real car interior. Avoid: not a real car interior, no dashboard, no real road. smooth natural camera movement, vertical 9:16 video, photorealistic, bright natural light, sharp focus, no text, no captions, no logos, no brand names, no watermark",
-     "dur": 8
+  },
+  {
+    "id": "b-2026-11-20-05-reel",
+    "tipo": "reel",
+    "tema": "Puntos de referencia en curvas rápidas",
+    "gancho": "El error que te cuesta segundos en las curvas rápidas",
+    "caption": "Elegir bien tus puntos de referencia cambia por completo tus tiempos en pista. ¿Cuál es tu circuito favorito para entrenar?\n\n#simracing #EauRoue #tips #telemetria #racinglife",
+    "nota": 8.0,
+    "created": "2026-11-20",
+    "status": "pendiente",
+    "veo": {
+      "clips": [
+        {
+          "t": "El error que te cuesta segundos en las curvas rápidas es no usar referencias. Muchos pilotos intentan trazar de memoria sin fijarse en su entorno real.",
+          "prompt": "wide shot of a man in his late 20s sitting in an aluminium sim racing rig with bucket seat inside a bright home gaming room, looking frustrated at a big monitor showing a racing game. Then the camera moves to: medium shot of a man in his late 20s sitting in front of a racing simulator screen, looking thoughtful and confused. The person is always the same: a Spanish man in his late twenties with short dark hair, light stubble and a plain black t-shirt. Setting: aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a big curved monitor showing a racing game. Avoid: not a real car, no blurry backgrounds. smooth natural camera movement, vertical 9:16 video, photorealistic, bright natural light, sharp focus, no text, no captions, no logos, no brand names, no watermark",
+          "dur": 8
+        },
+        {
+          "t": "El secreto para ganar velocidad es elegir una referencia fija en la pista. Busca un cartel en el exterior o una marca clara sobre el asfalto.",
+          "prompt": "over-the-shoulder view of a man looking at a big monitor displaying a racing track with a corner. Then the camera moves to: close-up of hands gripping a steering wheel tightly inside a sim racing rig. The person is always the same: a Spanish man in his late twenties with short dark hair, light stubble and a plain black t-shirt. Setting: aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a big curved monitor showing a racing game. Avoid: not a real car, no blurry backgrounds, no text on screens. smooth natural camera movement, vertical 9:16 video, photorealistic, bright natural light, sharp focus, no text, no captions, no logos, no brand names, no watermark",
+          "dur": 8
+        },
+        {
+          "t": "Usa esa señal específica para saber exactamente cuándo debes empezar a frenar.",
+          "prompt": "close-up of a foot pressing down hard on a racing pedal inside a sim racing rig. The person is always the same: a Spanish man in his late twenties with short dark hair, light stubble and a plain black t-shirt. Setting: aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a big curved monitor showing a racing game. Avoid: not a real car, no blurry backgrounds, no text on screens. smooth natural camera movement, vertical 9:16 video, photorealistic, bright natural light, sharp focus, no text, no captions, no logos, no brand names, no watermark",
+          "dur": 6
+        },
+        {
+          "t": "Después busca otro punto diferente en el interior para marcar el giro. Mueve tu frenada poco a poco hacia adelante en cada nueva vuelta.",
+          "prompt": "high-angle medium shot of a man turning a steering wheel sharply while looking at a gaming monitor. Then the camera moves to: extreme close-up of a steering wheel button being pressed by a thumb. The person is always the same: a Spanish man in his late twenties with short dark hair, light stubble and a plain black t-shirt. Setting: aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a big curved monitor showing a racing game. Avoid: not a real car, no blurry backgrounds, no text on screens. smooth natural camera movement, vertical 9:16 video, photorealistic, bright natural light, sharp focus, no text, no captions, no logos, no brand names, no watermark",
+          "dur": 8
+        },
+        {
+          "t": "Comprueba cómo tu coche entra mucho más estable y sin perder tiempo. Sigue nuestra cuenta si quieres dominar todos los secretos de pilotaje.",
+          "prompt": "medium shot of a man sitting in a sim racing rig smiling confidently at the camera. Then the camera moves to: over-the-shoulder view of a man pointing at a gaming monitor showing a racing track. The person is always the same: a Spanish man in his late twenties with short dark hair, light stubble and a plain black t-shirt. Setting: aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a big curved monitor showing a racing game. Avoid: not a real car, no blurry backgrounds, no text on screens. smooth natural camera movement, vertical 9:16 video, photorealistic, bright natural light, sharp focus, no text, no captions, no logos, no brand names, no watermark",
+          "dur": 8
+        }
+      ],
+      "voz": "es-ES-AlvaroNeural",
+      "ritmo": "+16%",
+      "musica": "hiphop",
+      "hashtags": "#simracing #EauRoue #tips #telemetria #racinglife"
     }
-   ],
-   "voz": "es-ES-ElviraNeural",
-   "ritmo": "+8%",
-   "musica": "energetica",
-   "hashtags": ""
-  }
- },
- {
-  "id": "b-2026-11-20-05-reel",
-  "tipo": "reel",
-  "tema": "Puntos de referencia en curvas rápidas",
-  "gancho": "El error que te cuesta segundos en las curvas rápidas",
-  "caption": "Elegir bien tus puntos de referencia cambia por completo tus tiempos en pista. ¿Cuál es tu circuito favorito para entrenar?\n\n#simracing #EauRoue #tips #telemetria #racinglife",
-  "nota": 8.0,
-  "created": "2026-11-20",
-  "status": "pendiente",
-  "veo": {
-   "clips": [
-    {
-     "t": "El error que te cuesta segundos en las curvas rápidas es no usar referencias. Muchos pilotos intentan trazar de memoria sin fijarse en su entorno real.",
-     "prompt": "wide shot of a man in his late 20s sitting in an aluminium sim racing rig with bucket seat inside a bright home gaming room, looking frustrated at a big monitor showing a racing game. Then the camera moves to: medium shot of a man in his late 20s sitting in front of a racing simulator screen, looking thoughtful and confused. The person is always the same: a Spanish man in his late twenties with short dark hair, light stubble and a plain black t-shirt. Setting: aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a big curved monitor showing a racing game. Avoid: not a real car, no blurry backgrounds. smooth natural camera movement, vertical 9:16 video, photorealistic, bright natural light, sharp focus, no text, no captions, no logos, no brand names, no watermark",
-     "dur": 8
-    },
-    {
-     "t": "El secreto para ganar velocidad es elegir una referencia fija en la pista. Busca un cartel en el exterior o una marca clara sobre el asfalto.",
-     "prompt": "over-the-shoulder view of a man looking at a big monitor displaying a racing track with a corner. Then the camera moves to: close-up of hands gripping a steering wheel tightly inside a sim racing rig. The person is always the same: a Spanish man in his late twenties with short dark hair, light stubble and a plain black t-shirt. Setting: aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a big curved monitor showing a racing game. Avoid: not a real car, no blurry backgrounds, no text on screens. smooth natural camera movement, vertical 9:16 video, photorealistic, bright natural light, sharp focus, no text, no captions, no logos, no brand names, no watermark",
-     "dur": 8
-    },
-    {
-     "t": "Usa esa señal específica para saber exactamente cuándo debes empezar a frenar.",
-     "prompt": "close-up of a foot pressing down hard on a racing pedal inside a sim racing rig. The person is always the same: a Spanish man in his late twenties with short dark hair, light stubble and a plain black t-shirt. Setting: aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a big curved monitor showing a racing game. Avoid: not a real car, no blurry backgrounds, no text on screens. smooth natural camera movement, vertical 9:16 video, photorealistic, bright natural light, sharp focus, no text, no captions, no logos, no brand names, no watermark",
-     "dur": 6
-    },
-    {
-     "t": "Después busca otro punto diferente en el interior para marcar el giro. Mueve tu frenada poco a poco hacia adelante en cada nueva vuelta.",
-     "prompt": "high-angle medium shot of a man turning a steering wheel sharply while looking at a gaming monitor. Then the camera moves to: extreme close-up of a steering wheel button being pressed by a thumb. The person is always the same: a Spanish man in his late twenties with short dark hair, light stubble and a plain black t-shirt. Setting: aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a big curved monitor showing a racing game. Avoid: not a real car, no blurry backgrounds, no text on screens. smooth natural camera movement, vertical 9:16 video, photorealistic, bright natural light, sharp focus, no text, no captions, no logos, no brand names, no watermark",
-     "dur": 8
-    },
-    {
-     "t": "Comprueba cómo tu coche entra mucho más estable y sin perder tiempo. Sigue nuestra cuenta si quieres dominar todos los secretos de pilotaje.",
-     "prompt": "medium shot of a man sitting in a sim racing rig smiling confidently at the camera. Then the camera moves to: over-the-shoulder view of a man pointing at a gaming monitor showing a racing track. The person is always the same: a Spanish man in his late twenties with short dark hair, light stubble and a plain black t-shirt. Setting: aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a big curved monitor showing a racing game. Avoid: not a real car, no blurry backgrounds, no text on screens. smooth natural camera movement, vertical 9:16 video, photorealistic, bright natural light, sharp focus, no text, no captions, no logos, no brand names, no watermark",
-     "dur": 8
+  },
+  {
+    "id": "b-2026-11-20-06-reel",
+    "tipo": "reel",
+    "tema": "Cómo comparar tus vueltas para mejorar",
+    "gancho": "¿Quieres saber por qué no mejoras tus tiempos en pista?",
+    "caption": "Comparar tus vueltas paso a paso es la clave para dejar de perder décimas en pista. ¿Sueles revisar tus datos después de cada sesión?\n\n#simracing #telemetria #app #racingtips #evolución",
+    "nota": 8.0,
+    "created": "2026-11-20",
+    "status": "pendiente",
+    "veo": {
+      "clips": [
+        {
+          "t": "Muchos pilotos cambian cosas en el coche sin saber el motivo real. El secreto para avanzar es usar una vuelta limpia de referencia.",
+          "prompt": "wide shot of a spanish man in his late 20s sitting in an aluminium sim racing rig with triple monitors inside a bright modern home gaming room. Then the camera moves to: medium shot of a spanish man in his late 20s looking frustrated and confused while sitting in his racing simulator. The person is always the same: a Spanish man in his late twenties with short dark hair, light stubble and a plain black t-shirt. Setting: aluminium sim racing rig with bucket seat, steering wheel and triple monitors inside a bright modern home gaming room, not a real car interior. Avoid: not a real car interior, no real road, no text. smooth natural camera movement, vertical 9:16 video, photorealistic, bright natural light, sharp focus, no text, no captions, no logos, no brand names, no watermark",
+          "dur": 8
+        },
+        {
+          "t": "Entra en la app y selecciona tu mejor giro en circuito. Superpone tu trazada actual justo encima de esa referencia guardada.",
+          "prompt": "over-the-shoulder view of a spanish man looking at a large monitor showing a racing game circuit map. Then the camera moves to: close-up of hands overlaying a translucent racing ghost line on a steering wheel simulator. The person is always the same: a Spanish man in his late twenties with short dark hair, light stubble and a plain black t-shirt. Setting: aluminium sim racing rig with bucket seat, steering wheel and triple monitors inside a bright modern home gaming room, not a real car interior. Avoid: not a real car interior, no real road, no text. smooth natural camera movement, vertical 9:16 video, photorealistic, bright natural light, sharp focus, no text, no captions, no logos, no brand names, no watermark",
+          "dur": 8
+        },
+        {
+          "t": "Mira con atención dónde frenas antes o sueltas tarde el freno.",
+          "prompt": "close-up of feet on racing simulator pedals pressing hard in a home gaming room. The person is always the same: a Spanish man in his late twenties with short dark hair, light stubble and a plain black t-shirt. Setting: aluminium sim racing rig with bucket seat, steering wheel and triple monitors inside a bright modern home gaming room, not a real car interior. Avoid: not a real car interior, no real road, no text. smooth natural camera movement, vertical 9:16 video, photorealistic, bright natural light, sharp focus, no text, no captions, no logos, no brand names, no watermark",
+          "dur": 6
+        },
+        {
+          "t": "Modifica solo un parámetro de conducción en tu siguiente intento. Vuelve a la pantalla y comprueba si tu velocidad de salida ha subido.",
+          "prompt": "close-up of hands on a steering wheel making a slight rotation adjustment in a simulator rig. Then the camera moves to: extreme close-up of a monitor screen showing telemetry graphs with rising speed lines, no text. The person is always the same: a Spanish man in his late twenties with short dark hair, light stubble and a plain black t-shirt. Setting: aluminium sim racing rig with bucket seat, steering wheel and triple monitors inside a bright modern home gaming room, not a real car interior. Avoid: not a real car interior, no real road, no text. smooth natural camera movement, vertical 9:16 video, photorealistic, bright natural light, sharp focus, no text, no captions, no logos, no brand names, no watermark",
+          "dur": 8
+        },
+        {
+          "t": "Ese análisis visual te dirá si vas más rápido de verdad. Sigue nuestra cuenta para descubrir más trucos de pilotaje cada día.",
+          "prompt": "medium shot of a spanish man smiling confidently at his racing simulator setup. Then the camera moves to: over-the-shoulder view of a spanish man pointing at a screen showing a racing game track, inviting the viewer. The person is always the same: a Spanish man in his late twenties with short dark hair, light stubble and a plain black t-shirt. Setting: aluminium sim racing rig with bucket seat, steering wheel and triple monitors inside a bright modern home gaming room, not a real car interior. Avoid: not a real car interior, no real road, no text. smooth natural camera movement, vertical 9:16 video, photorealistic, bright natural light, sharp focus, no text, no captions, no logos, no brand names, no watermark",
+          "dur": 8
+        }
+      ],
+      "voz": "es-ES-AlvaroNeural",
+      "ritmo": "+8%",
+      "musica": "energetica",
+      "hashtags": "#simracing #telemetria #app #racingtips #evolución"
     }
-   ],
-   "voz": "es-ES-AlvaroNeural",
-   "ritmo": "+16%",
-   "musica": "hiphop",
-   "hashtags": "#simracing #EauRoue #tips #telemetria #racinglife"
-  }
- },
- {
-  "id": "b-2026-11-20-06-reel",
-  "tipo": "reel",
-  "tema": "Cómo comparar tus vueltas para mejorar",
-  "gancho": "¿Quieres saber por qué no mejoras tus tiempos en pista?",
-  "caption": "Comparar tus vueltas paso a paso es la clave para dejar de perder décimas en pista. ¿Sueles revisar tus datos después de cada sesión?\n\n#simracing #telemetria #app #racingtips #evolución",
-  "nota": 8.0,
-  "created": "2026-11-20",
-  "status": "pendiente",
-  "veo": {
-   "clips": [
-    {
-     "t": "Muchos pilotos cambian cosas en el coche sin saber el motivo real. El secreto para avanzar es usar una vuelta limpia de referencia.",
-     "prompt": "wide shot of a spanish man in his late 20s sitting in an aluminium sim racing rig with triple monitors inside a bright modern home gaming room. Then the camera moves to: medium shot of a spanish man in his late 20s looking frustrated and confused while sitting in his racing simulator. The person is always the same: a Spanish man in his late twenties with short dark hair, light stubble and a plain black t-shirt. Setting: aluminium sim racing rig with bucket seat, steering wheel and triple monitors inside a bright modern home gaming room, not a real car interior. Avoid: not a real car interior, no real road, no text. smooth natural camera movement, vertical 9:16 video, photorealistic, bright natural light, sharp focus, no text, no captions, no logos, no brand names, no watermark",
-     "dur": 8
-    },
-    {
-     "t": "Entra en la app y selecciona tu mejor giro en circuito. Superpone tu trazada actual justo encima de esa referencia guardada.",
-     "prompt": "over-the-shoulder view of a spanish man looking at a large monitor showing a racing game circuit map. Then the camera moves to: close-up of hands overlaying a translucent racing ghost line on a steering wheel simulator. The person is always the same: a Spanish man in his late twenties with short dark hair, light stubble and a plain black t-shirt. Setting: aluminium sim racing rig with bucket seat, steering wheel and triple monitors inside a bright modern home gaming room, not a real car interior. Avoid: not a real car interior, no real road, no text. smooth natural camera movement, vertical 9:16 video, photorealistic, bright natural light, sharp focus, no text, no captions, no logos, no brand names, no watermark",
-     "dur": 8
-    },
-    {
-     "t": "Mira con atención dónde frenas antes o sueltas tarde el freno.",
-     "prompt": "close-up of feet on racing simulator pedals pressing hard in a home gaming room. The person is always the same: a Spanish man in his late twenties with short dark hair, light stubble and a plain black t-shirt. Setting: aluminium sim racing rig with bucket seat, steering wheel and triple monitors inside a bright modern home gaming room, not a real car interior. Avoid: not a real car interior, no real road, no text. smooth natural camera movement, vertical 9:16 video, photorealistic, bright natural light, sharp focus, no text, no captions, no logos, no brand names, no watermark",
-     "dur": 6
-    },
-    {
-     "t": "Modifica solo un parámetro de conducción en tu siguiente intento. Vuelve a la pantalla y comprueba si tu velocidad de salida ha subido.",
-     "prompt": "close-up of hands on a steering wheel making a slight rotation adjustment in a simulator rig. Then the camera moves to: extreme close-up of a monitor screen showing telemetry graphs with rising speed lines, no text. The person is always the same: a Spanish man in his late twenties with short dark hair, light stubble and a plain black t-shirt. Setting: aluminium sim racing rig with bucket seat, steering wheel and triple monitors inside a bright modern home gaming room, not a real car interior. Avoid: not a real car interior, no real road, no text. smooth natural camera movement, vertical 9:16 video, photorealistic, bright natural light, sharp focus, no text, no captions, no logos, no brand names, no watermark",
-     "dur": 8
-    },
-    {
-     "t": "Ese análisis visual te dirá si vas más rápido de verdad. Sigue nuestra cuenta para descubrir más trucos de pilotaje cada día.",
-     "prompt": "medium shot of a spanish man smiling confidently at his racing simulator setup. Then the camera moves to: over-the-shoulder view of a spanish man pointing at a screen showing a racing game track, inviting the viewer. The person is always the same: a Spanish man in his late twenties with short dark hair, light stubble and a plain black t-shirt. Setting: aluminium sim racing rig with bucket seat, steering wheel and triple monitors inside a bright modern home gaming room, not a real car interior. Avoid: not a real car interior, no real road, no text. smooth natural camera movement, vertical 9:16 video, photorealistic, bright natural light, sharp focus, no text, no captions, no logos, no brand names, no watermark",
-     "dur": 8
+  },
+  {
+    "id": "b-2026-11-20-07-reel",
+    "tipo": "reel",
+    "tema": "Acelerador progresivo en curvas",
+    "gancho": "El secreto del acelerador que ahorra tiempo",
+    "caption": "Aprende a dosificar el gas en la salida de las curvas para ganar velocidad sin perder el control. ¿En qué curva te cuesta más mantener la trazada?\n\n#simracing #acelerador #tips #racing #comunidad",
+    "nota": 9.0,
+    "created": "2026-11-20",
+    "status": "pendiente",
+    "veo": {
+      "clips": [
+        {
+          "t": "Muchos pilotos pierden segundos preciosos al salir de las curvas. El error común es acelerar a fondo con las ruedas giradas.",
+          "prompt": "wide shot of a mid-30s man sitting in an aluminium sim racing rig inside a bright home gaming room, looking focused at a large monitor showing a racing track. Then the camera moves to: medium shot of a mid-30s man sitting in the sim racing rig, looking frustrated with hands gripping the steering wheel too tightly while steering hard. The person is always the same: a Spanish man in his late twenties with short dark hair, light stubble and a plain black t-shirt. Setting: aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a big monitor showing a racing game, not a real car interior. Avoid: not a real car interior, no text, no logos. smooth natural camera movement, vertical 9:16 video, photorealistic, bright natural light, sharp focus, no text, no captions, no logos, no brand names, no watermark",
+          "dur": 8
+        },
+        {
+          "t": "Eso provoca un patinazo y hace que el coche pierda tracción. La solución es abrir el volante mientras aumentas el gas.",
+          "prompt": "over-the-shoulder view of a mid-30s man looking at a large monitor showing a racing game with a car spinning out on track. Then the camera moves to: close-up of hands opening up the steering wheel smoothly while pressing the throttle pedal. The person is always the same: a Spanish man in his late twenties with short dark hair, light stubble and a plain black t-shirt. Setting: aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a big monitor showing a racing game, not a real car interior. Avoid: not a real car interior, no text, no logos. smooth natural camera movement, vertical 9:16 video, photorealistic, bright natural light, sharp focus, no text, no captions, no logos, no brand names, no watermark",
+          "dur": 8
+        },
+        {
+          "t": "Aplica presión de forma progresiva a medida que enderezas la dirección.",
+          "prompt": "close-up of feet on racing pedals, applying progressive pressure on the gas pedal. The person is always the same: a Spanish man in his late twenties with short dark hair, light stubble and a plain black t-shirt. Setting: aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a big monitor showing a racing game, not a real car interior. Avoid: not a real car interior, no text, no logos. smooth natural camera movement, vertical 9:16 video, photorealistic, bright natural light, sharp focus, no text, no captions, no logos, no brand names, no watermark",
+          "dur": 6
+        },
+        {
+          "t": "El motor entrega la potencia justa sin sobrecargar los neumáticos traseros. Notarás que el coche sale lanzado y con total estabilidad.",
+          "prompt": "medium close-up from the side of the sim racing rig showing the steering wheel and pedals in action. Then the camera moves to: extreme close-up of the steering wheel and hands turning it straight with precision. The person is always the same: a Spanish man in his late twenties with short dark hair, light stubble and a plain black t-shirt. Setting: aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a big monitor showing a racing game, not a real car interior. Avoid: not a real car interior, no text, no logos. smooth natural camera movement, vertical 9:16 video, photorealistic, bright natural light, sharp focus, no text, no captions, no logos, no brand names, no watermark",
+          "dur": 8
+        },
+        {
+          "t": "Practica este movimiento en tu próxima sesión de entrenamiento. Tienes más tutoriales avanzados en el enlace de mi perfil.",
+          "prompt": "medium shot of a mid-30s man sitting in the sim racing rig, smiling confidently at the camera. Then the camera moves to: over-the-shoulder view of a mid-30s man looking at a large monitor showing a racing game menu. The person is always the same: a Spanish man in his late twenties with short dark hair, light stubble and a plain black t-shirt. Setting: aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a big monitor showing a racing game, not a real car interior. Avoid: not a real car interior, no text, no logos. smooth natural camera movement, vertical 9:16 video, photorealistic, bright natural light, sharp focus, no text, no captions, no logos, no brand names, no watermark",
+          "dur": 8
+        }
+      ],
+      "voz": "es-ES-AlvaroNeural",
+      "ritmo": "+16%",
+      "musica": "divertida",
+      "hashtags": "#simracing #acelerador #tips #racing #comunidad"
     }
-   ],
-   "voz": "es-ES-AlvaroNeural",
-   "ritmo": "+8%",
-   "musica": "energetica",
-   "hashtags": "#simracing #telemetria #app #racingtips #evolución"
   }
- },
- {
-  "id": "b-2026-11-20-07-reel",
-  "tipo": "reel",
-  "tema": "Acelerador progresivo en curvas",
-  "gancho": "El secreto del acelerador que ahorra tiempo",
-  "caption": "Aprende a dosificar el gas en la salida de las curvas para ganar velocidad sin perder el control. ¿En qué curva te cuesta más mantener la trazada?\n\n#simracing #acelerador #tips #racing #comunidad",
-  "nota": 9.0,
-  "created": "2026-11-20",
-  "status": "pendiente",
-  "veo": {
-   "clips": [
-    {
-     "t": "Muchos pilotos pierden segundos preciosos al salir de las curvas. El error común es acelerar a fondo con las ruedas giradas.",
-     "prompt": "wide shot of a mid-30s man sitting in an aluminium sim racing rig inside a bright home gaming room, looking focused at a large monitor showing a racing track. Then the camera moves to: medium shot of a mid-30s man sitting in the sim racing rig, looking frustrated with hands gripping the steering wheel too tightly while steering hard. The person is always the same: a Spanish man in his late twenties with short dark hair, light stubble and a plain black t-shirt. Setting: aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a big monitor showing a racing game, not a real car interior. Avoid: not a real car interior, no text, no logos. smooth natural camera movement, vertical 9:16 video, photorealistic, bright natural light, sharp focus, no text, no captions, no logos, no brand names, no watermark",
-     "dur": 8
-    },
-    {
-     "t": "Eso provoca un patinazo y hace que el coche pierda tracción. La solución es abrir el volante mientras aumentas el gas.",
-     "prompt": "over-the-shoulder view of a mid-30s man looking at a large monitor showing a racing game with a car spinning out on track. Then the camera moves to: close-up of hands opening up the steering wheel smoothly while pressing the throttle pedal. The person is always the same: a Spanish man in his late twenties with short dark hair, light stubble and a plain black t-shirt. Setting: aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a big monitor showing a racing game, not a real car interior. Avoid: not a real car interior, no text, no logos. smooth natural camera movement, vertical 9:16 video, photorealistic, bright natural light, sharp focus, no text, no captions, no logos, no brand names, no watermark",
-     "dur": 8
-    },
-    {
-     "t": "Aplica presión de forma progresiva a medida que enderezas la dirección.",
-     "prompt": "close-up of feet on racing pedals, applying progressive pressure on the gas pedal. The person is always the same: a Spanish man in his late twenties with short dark hair, light stubble and a plain black t-shirt. Setting: aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a big monitor showing a racing game, not a real car interior. Avoid: not a real car interior, no text, no logos. smooth natural camera movement, vertical 9:16 video, photorealistic, bright natural light, sharp focus, no text, no captions, no logos, no brand names, no watermark",
-     "dur": 6
-    },
-    {
-     "t": "El motor entrega la potencia justa sin sobrecargar los neumáticos traseros. Notarás que el coche sale lanzado y con total estabilidad.",
-     "prompt": "medium close-up from the side of the sim racing rig showing the steering wheel and pedals in action. Then the camera moves to: extreme close-up of the steering wheel and hands turning it straight with precision. The person is always the same: a Spanish man in his late twenties with short dark hair, light stubble and a plain black t-shirt. Setting: aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a big monitor showing a racing game, not a real car interior. Avoid: not a real car interior, no text, no logos. smooth natural camera movement, vertical 9:16 video, photorealistic, bright natural light, sharp focus, no text, no captions, no logos, no brand names, no watermark",
-     "dur": 8
-    },
-    {
-     "t": "Practica este movimiento en tu próxima sesión de entrenamiento. Tienes más tutoriales avanzados en el enlace de mi perfil.",
-     "prompt": "medium shot of a mid-30s man sitting in the sim racing rig, smiling confidently at the camera. Then the camera moves to: over-the-shoulder view of a mid-30s man looking at a large monitor showing a racing game menu. The person is always the same: a Spanish man in his late twenties with short dark hair, light stubble and a plain black t-shirt. Setting: aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a big monitor showing a racing game, not a real car interior. Avoid: not a real car interior, no text, no logos. smooth natural camera movement, vertical 9:16 video, photorealistic, bright natural light, sharp focus, no text, no captions, no logos, no brand names, no watermark",
-     "dur": 8
-    }
-   ],
-   "voz": "es-ES-AlvaroNeural",
-   "ritmo": "+16%",
-   "musica": "divertida",
-   "hashtags": "#simracing #acelerador #tips #racing #comunidad"
-  }
- }
 ]
