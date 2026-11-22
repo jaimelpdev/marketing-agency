@@ -94,7 +94,7 @@
     "caption": "",
     "nota": 9.0,
     "created": "2026-11-20",
-    "status": "pendiente",
+    "status": "lista",
     "veo": {
       "clips": [
         {
@@ -117,7 +117,12 @@
       "ritmo": "+8%",
       "musica": "ambiental",
       "hashtags": ""
-    }
+    },
+    "media": [
+      "media/u_4163e9db06d1/bolsa/b-2026-11-20-03-historia/video.mp4"
+    ],
+    "cover": "media/u_4163e9db06d1/bolsa/b-2026-11-20-03-historia/cover.jpg",
+    "listo": "2026-11-22T17:54"
   },
   {
     "id": "b-2026-11-20-04-historia",
