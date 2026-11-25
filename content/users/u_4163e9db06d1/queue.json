@@ -151,40 +151,39 @@
     "zernioPostId": "6b070221a72eef9e866e5630"
   },
   {
-    "id": "2026-11-25-01-post",
-    "date": "2026-11-25",
-    "source": "auto",
+    "id": "2026-11-26-r002902-post",
+    "date": "2026-11-26",
+    "source": "redo",
     "tipo": "post",
-    "tema": "Checklist para la primera curva",
+    "tema": "Error común al abordar la primera curva",
     "publishAt": "2026-11-29T13:30:00+01:00",
-    "caption": "Domina la primera esquina con estos pasos y sentirás mayor control en cada vuelta. ¿Listo para probarlos?\n\n#simracing #checklist #firstcorner #racingtips #drivingskills",
+    "caption": "Evitar estos fallos al abordar una curva mejora drásticamente tus tiempos por vuelta. ¿Aplicas la frenada degresiva en tus sesiones de simracing?\n\n#simracing #primeracurva #consejossim #pilotosonline #academiaSim #mejoratuvelocidad #linkenbio",
     "media": [
-      "media/u_4163e9db06d1/2026-11-25/2026-11-25-01-post/01.jpg"
+      "media/u_4163e9db06d1/2026-11-26/2026-11-26-r002902-post/01.jpg"
     ],
     "status": "scheduled",
     "attempts": 0,
-    "zernioPostId": "6b07020ba72eef9e866e5588"
+    "zernioPostId": "6b07701d6bb242efc06beada"
   },
   {
-    "id": "2026-11-25-02-carrusel",
-    "date": "2026-11-25",
-    "source": "auto",
+    "id": "2026-11-26-r003312-carrusel",
+    "date": "2026-11-26",
+    "source": "redo",
     "tipo": "carrusel",
-    "tema": "Guía paso a paso para configurar el coche para la primera curva",
+    "tema": "Mira lejos en la primera curva",
     "publishAt": "2026-11-30T13:30:00+01:00",
-    "caption": "Con una referencia clara, trail braking y una ligera caída trasera, la primera curva será más fácil. ¿Qué ajuste probarás primero?\n\n#simracing #setup #firstcorner #racingtips #drivingskills",
+    "caption": "Aprende a mirar hacia adelante para ganar velocidad en cada giro. ¿A dónde sueles mirar cuando entras en una curva?\n\n#SimRacing #SimracingTips #MiraLejos #PrimeraCurva #CarreraVirtual",
     "media": [
-      "media/u_4163e9db06d1/2026-11-25/2026-11-25-02-carrusel/01.jpg",
-      "media/u_4163e9db06d1/2026-11-25/2026-11-25-02-carrusel/02.jpg",
-      "media/u_4163e9db06d1/2026-11-25/2026-11-25-02-carrusel/03.jpg",
-      "media/u_4163e9db06d1/2026-11-25/2026-11-25-02-carrusel/04.jpg",
-      "media/u_4163e9db06d1/2026-11-25/2026-11-25-02-carrusel/05.jpg",
-      "media/u_4163e9db06d1/2026-11-25/2026-11-25-02-carrusel/06.jpg",
-      "media/u_4163e9db06d1/2026-11-25/2026-11-25-02-carrusel/07.jpg",
-      "media/u_4163e9db06d1/2026-11-25/2026-11-25-02-carrusel/08.jpg"
+      "media/u_4163e9db06d1/2026-11-26/2026-11-26-r003312-carrusel/01.jpg",
+      "media/u_4163e9db06d1/2026-11-26/2026-11-26-r003312-carrusel/02.jpg",
+      "media/u_4163e9db06d1/2026-11-26/2026-11-26-r003312-carrusel/03.jpg",
+      "media/u_4163e9db06d1/2026-11-26/2026-11-26-r003312-carrusel/04.jpg",
+      "media/u_4163e9db06d1/2026-11-26/2026-11-26-r003312-carrusel/05.jpg",
+      "media/u_4163e9db06d1/2026-11-26/2026-11-26-r003312-carrusel/06.jpg",
+      "media/u_4163e9db06d1/2026-11-26/2026-11-26-r003312-carrusel/07.jpg"
     ],
     "status": "scheduled",
     "attempts": 0,
-    "zernioPostId": "6b0702175cb59c3984ca06a9"
+    "zernioPostId": "6b07725a9fcb1ba61d11dc80"
   }
 ]

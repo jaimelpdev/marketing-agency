@@ -224,7 +224,7 @@
     "caption": "Comparar tus vueltas paso a paso es la clave para dejar de perder décimas en pista. ¿Sueles revisar tus datos después de cada sesión?\n\n#simracing #telemetria #app #racingtips #evolución",
     "nota": 8.0,
     "created": "2026-11-20",
-    "status": "pendiente",
+    "status": "lista",
     "veo": {
       "clips": [
         {
@@ -257,7 +257,12 @@
       "ritmo": "+8%",
       "musica": "energetica",
       "hashtags": "#simracing #telemetria #app #racingtips #evolución"
-    }
+    },
+    "media": [
+      "media/u_4163e9db06d1/bolsa/b-2026-11-20-06-reel/video.mp4"
+    ],
+    "cover": "media/u_4163e9db06d1/bolsa/b-2026-11-20-06-reel/cover.jpg",
+    "listo": "2026-11-25T23:29"
   },
   {
     "id": "b-2026-11-20-07-reel",

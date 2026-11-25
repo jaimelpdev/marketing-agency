@@ -659,7 +659,7 @@
       "date": "2026-11-22",
       "tipo": "reel",
       "src": "red",
-      "tema": "[IG · ❤️102] En ACC, compara un clic de barra delantera en curvas medias: cambia solo ese ajuste y mide la salida. Guarda el método para tu próxima sesió"
+      "tema": "[IG · ❤️103] En ACC, compara un clic de barra delantera en curvas medias: cambia solo ese ajuste y mide la salida. Guarda el método para tu próxima sesió"
     },
     {
       "date": "2026-11-23",
@@ -987,6 +987,28 @@
       "objetivo": "comunidad"
     },
     {
+      "date": "2026-11-25",
+      "tema": "Análisis de la primera curva con la app",
+      "formato": "reel",
+      "tipo": "reel",
+      "layout": "faceless",
+      "plantilla": 939,
+      "look": 233,
+      "serie": "Detrás de la app",
+      "objetivo": "alcance"
+    },
+    {
+      "date": "2026-11-25",
+      "tema": "Error común al abordar la primera curva",
+      "formato": "el error que todos cometen",
+      "tipo": "post",
+      "layout": "cine",
+      "plantilla": 702,
+      "look": 154,
+      "serie": "",
+      "objetivo": "confianza"
+    },
+    {
       "date": "2026-11-26",
       "tema": "Setup destacado de Eau Roue",
       "formato": "opinion polémica",
@@ -1007,17 +1029,6 @@
       "look": 6,
       "serie": "Tip rápido del día",
       "objetivo": "comunidad"
-    },
-    {
-      "date": "2026-11-25",
-      "tema": "Análisis de la primera curva con la app",
-      "formato": "reel",
-      "tipo": "reel",
-      "layout": "faceless",
-      "plantilla": 939,
-      "look": 233,
-      "serie": "Detrás de la app",
-      "objetivo": "alcance"
     },
     {
       "date": "2026-11-26",
@@ -1062,6 +1073,17 @@
       "look": 161,
       "serie": "",
       "objetivo": "comunidad"
+    },
+    {
+      "date": "2026-11-25",
+      "tema": "Mira lejos en la primera curva",
+      "formato": "carrusel",
+      "tipo": "carrusel",
+      "layout": "cine",
+      "plantilla": 812,
+      "look": 154,
+      "serie": "",
+      "objetivo": ""
     }
   ]
 }
