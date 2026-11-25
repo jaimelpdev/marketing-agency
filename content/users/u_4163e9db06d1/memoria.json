@@ -1,13 +1,13 @@
 {
  "version": 1,
  "creada": "2026-11-18T17:28:47",
- "actualizada": "2026-11-20T10:14:47",
+ "actualizada": "2026-11-25T14:55:52",
  "semana": 1,
  "fase": "descubrimiento",
  "objetivo_mes": "Dar a conocer la academia con consejos útiles y verificados de simracing",
  "arco_semana": {
-  "tema": "",
-  "porque": ""
+  "tema": "Domina la primera curva: ajustes y técnicas",
+  "porque": "Los datos muestran que la primera curva es donde se pierden más décimas; ofrecer tips y setups concretos genera valor inmediato y engancha a novatos e intermedios"
  },
  "mezcla": {
   "alcance": 15,
@@ -21,27 +21,123 @@
    "formato": "reel",
    "cuando": "lunes y jueves",
    "descripcion": "Consejo breve y práctico para mejorar en pista o configurar el coche",
-   "episodios": 0
+   "episodios": 1
   },
   {
    "nombre": "Mito o realidad",
    "formato": "historia",
    "cuando": "viernes",
-   "descripcion": "Desmentimos ideas comunes del simracing con datos y ejemplos",
-   "episodios": 0
+   "descripcion": "Desmitificamos creencias comunes del simracing con datos y ejemplos",
+   "episodios": 1
+  },
+  {
+   "nombre": "Detrás de la app",
+   "formato": "reel",
+   "cuando": "lunes, miércoles y viernes",
+   "descripcion": "Muestra cómo la app ayuda a analizar telemetría, ajustar setups y mejorar tiempos",
+   "episodios": 1
   }
  ],
- "aprendizajes": [],
+ "aprendizajes": [
+  "Los reels de tips rápidos superan en engagement a posts y carruseles (media reel ≈ 90 eng vs post ≈ 3)",
+  "Los contenidos tipo \"Mito o realidad\" en historias generan más comentarios que los reels tradicionales",
+  "Los carruseles con llamada a participación tienen bajo engagement; es mejor enfocarse en formato corto y visual"
+ ],
  "que_evitar": [
   "Ventas directas en los primeros contenidos",
   "Jargon técnico sin explicación sencilla",
   "Polémicas sin valor añadido",
-  "Exceso de llamadas a la acción sin contenido de valor"
+  "Exceso de llamadas a la acción sin contenido de valor",
+  "Publicar posts estáticos con bajo valor percibido"
  ],
  "promesas_pendientes": [],
- "ideas": [],
+ "ideas": [
+  "Crear un reto semanal de tiempo en la pista Eau Roue y premiar al mejor setup",
+  "Lanzar una encuesta en historias para que la comunidad vote el próximo tema de tutorial",
+  "Publicar un carrusel paso a paso de setup para Spa con enlaces a la app",
+  "Colaborar con un piloto de simracing reconocido para una entrevista breve en reels"
+ ],
  "tono_comunidad": "Energético, motivador y cercano; habla como un compañero de pista que celebra cada progreso y anima a compartir experiencias",
- "hitos": [],
- "metricas": {},
- "resumen_para_dueño": "Memoria reiniciada: aún no hay nada publicado, así que no hay resultados de los que aprender."
+ "hitos": [
+  "Alcanzar 1 000 seguidores en Instagram",
+  "Publicar 10 reels de \"Tip rápido del día\" con >100 likes cada uno",
+  "Lanzar el primer desafío comunitario de tiempo en Eau Roue"
+ ],
+ "metricas": {
+  "publicaciones_medidas": 25,
+  "media_por_formato": {
+   "reel": 54.0,
+   "post": 3.0,
+   "carrusel": 4.0
+  },
+  "mejores": [
+   {
+    "tipo": "reel",
+    "date": "2026-11-22",
+    "eng": 102,
+    "likes": 102,
+    "com": 0,
+    "tema": "En ACC, compara un clic de barra delantera en curvas medias: cambia solo ese ajuste y mide la salida. Guarda e"
+   },
+   {
+    "tipo": "reel",
+    "date": "2026-10-11",
+    "eng": 97,
+    "likes": 97,
+    "com": 0,
+    "tema": "¿5 Nm o 12 Nm? La diferencia es clave en sensaciones, fatiga y control. Elige tu base con criterio y domina ca"
+   },
+   {
+    "tipo": "reel",
+    "date": "2026-10-22",
+    "eng": 92,
+    "likes": 92,
+    "com": 0,
+    "tema": "En Assetto Corsa, unos milímetros pueden evitar que la zaga golpee al atacar bordillos agresivos. Prueba el aj"
+   },
+   {
+    "tipo": "reel",
+    "date": "2026-10-29",
+    "eng": 87,
+    "likes": 87,
+    "com": 0,
+    "tema": "En Daytona, el rebufo puede darte la pasada o dejarte sin tracción. Aprende a elegir el momento y la línea par"
+   },
+   {
+    "tipo": "reel",
+    "date": "2026-11-12",
+    "eng": 75,
+    "likes": 75,
+    "com": 0,
+    "tema": "En iRacing, un prototipo más rápido no te obliga a abandonar tu trazada. Practica esta regla durante cinco vue"
+   }
+  ],
+  "peores": [
+   {
+    "tipo": "reel",
+    "date": "2026-11-12",
+    "eng": 4,
+    "likes": 4,
+    "com": 0,
+    "tema": "¿Sabes cómo el freno motor puede recortar décimas? Te explico el truco que usan los pilotos top. ¿Lo aplicaría"
+   },
+   {
+    "tipo": "carrusel",
+    "date": "2026-11-11",
+    "eng": 4,
+    "likes": 4,
+    "com": 0,
+    "tema": "¿Te cuesta ganar esos décimos? 🕒 Aquí tienes 4 ajustes críticos que pueden salvarte tiempo. Ponlos a prueba y "
+   },
+   {
+    "tipo": "post",
+    "date": "2026-11-14",
+    "eng": 3,
+    "likes": 3,
+    "com": 0,
+    "tema": "🚦 La zona de frenado que más te cuesta puede robarte décimas. Descubre cómo identificarla y ajustarla. ¿Cuál e"
+   }
+  ]
+ },
+ "resumen_para_dueño": "Esta semana seguimos en fase de descubrimiento, centrando el contenido en reels de alto rendimiento y reforzando nuestras series estrella. El arco de la semana gira alrededor de la primera curva para ofrecer valor inmediato y conectar los tips, mitos y la app. Evitamos ventas directas y mantenemos el tono energético y cercano para construir confianza y comunidad."
 }

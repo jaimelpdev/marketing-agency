@@ -1,0 +1,570 @@
+{
+  "date": "2026-11-25",
+  "estrategia": "Publicaremos dos reels (miércoles y jueves) para maximizar alcance, un post y un carrusel (domingo y lunes) para generar autoridad, y dos historias (miércoles y viernes) para fomentar interacción y comunidad. Los días sábado y martes quedarán sin publicaciones de feed para evitar saturación y dar tiempo a la audiencia de absorber el contenido.",
+  "piezas": [
+    {
+      "id": "pmww8yz0u_3",
+      "dia": 4,
+      "hora": "13:30",
+      "tipo": "post",
+      "objetivo": "confianza",
+      "razon": "proporcionar checklist práctico",
+      "tema": "Checklist para la primera curva",
+      "formato": "post",
+      "gancho": "Checklist definitivo para dominar la primera curva",
+      "visual": "over-the-shoulder view of the big monitor showing a race car in the game from the chase camera approaching the first corner. Setting: aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a big monitor showing a racing game, not a real car interior. not a real car interior, no dashboard, no real asphalt road",
+      "escenas": [
+        {
+          "titulo": "Prepara la salida",
+          "texto": "Elige un punto de referencia fijo y frena con presión máxima mientras el vehículo está recto",
+          "emoji": "",
+          "visual": "close-up of the driver's feet on the pedals of the sim racing rig, pressing the brake pedal firmly down while approaching a turn; the person is a Spanish man in his late twenties with short dark hair, light stubble and a plain black t-shirt. Setting: aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a big monitor showing a racing game, not a real car interior. not a real car interior, no dashboard, no real asphalt road",
+          "visuales": [
+            "checklist"
+          ],
+          "foto": "",
+          "grafico": {
+            "tipo": "checklist",
+            "items": [
+              "Salida",
+              "Línea",
+              "Freno",
+              "Aceleración"
+            ]
+          }
+        },
+        {
+          "emoji": "",
+          "visual": "close-up of the driver's feet on the pedals of the sim racing rig, slowly easing off the brake pedal while turning the steering wheel; the person is a Spanish man in his late twenties with short dark hair, light stubble and a plain black t-shirt. Setting: aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a big monitor showing a racing game, not a real car interior. not a real car interior, no dashboard, no real asphalt road",
+          "visuales": [],
+          "foto": "",
+          "grafico": null,
+          "titulo": "Aplica trail braking",
+          "texto": "Suelta el freno progresivamente al girar, manteniendo algo de presión para que el morro siga la trayectoria"
+        },
+        {
+          "emoji": "",
+          "visual": "close-up of the driver's feet on the pedals of the sim racing rig, smoothly pressing down the accelerator pedal as the car exits the turn; the person is a Spanish man in his late twenties with short dark hair, light stubble and a plain black t-shirt. Setting: aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a big monitor showing a racing game, not a real car interior. not a real car interior, no dashboard, no real asphalt road",
+          "visuales": [],
+          "foto": "",
+          "grafico": null,
+          "titulo": "Acelera suavemente",
+          "texto": "Al abrir el volante, aumenta el acelerador poco a poco para evitar sobreviraje y ganar velocidad de salida"
+        }
+      ],
+      "cta": "Guarda este post y ponlo en práctica",
+      "sticker": null,
+      "fondo": "ia",
+      "estilo": "pop",
+      "caption": "Domina la primera esquina con estos pasos y sentirás mayor control en cada vuelta. ¿Listo para probarlos?",
+      "hashtags": "#simracing #checklist #firstcorner #racingtips #drivingskills",
+      "audio": "",
+      "voz": "",
+      "ritmo_voz": "",
+      "musica": "",
+      "guion": [],
+      "beats": [],
+      "estilo_visual": "racing",
+      "visual_cierre": "car crossing finish line",
+      "cierre_bio": "Enlace en bio para más guías",
+      "foto": "",
+      "anim": "fade",
+      "serie": "",
+      "episodio": 0,
+      "look": 51,
+      "plantilla": 1782,
+      "layout": "cine",
+      "stickers": []
+    },
+    {
+      "id": "pmww8yz0u_4",
+      "dia": 5,
+      "hora": "13:30",
+      "tipo": "carrusel",
+      "objetivo": "comunidad",
+      "razon": "guía paso a paso para configurar el coche en la primera curva",
+      "tema": "Guía paso a paso para configurar el coche para la primera curva",
+      "formato": "carrusel",
+      "gancho": "Paso a paso: Configura tu coche para la primera curva",
+      "visual": "over-the-shoulder view of the big monitor showing a race car in the game from the chase camera, displaying a sharp turn on a virtual circuit. Setting: aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a big monitor showing a racing game, not a real car interior. not a real car interior, no dashboard, no text",
+      "escenas": [
+        {
+          "titulo": "¿Pierdes la primera curva?",
+          "texto": "Muchos frenan demasiado pronto y el coche no gira a tiempo.",
+          "emoji": "",
+          "visual": "close-up of the driver's feet on the pedals of the sim racing rig, pressing the brake pedal too hard and locking the wheels; the person is a Spanish man in his late twenties with short dark hair, light stubble and a plain black t-shirt. Setting: aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a big monitor showing a racing game, not a real car interior. not a real car interior, no dashboard, no text",
+          "visuales": [
+            "engine slider"
+          ],
+          "foto": "",
+          "grafico": null
+        },
+        {
+          "titulo": "Define tu punto de frenado",
+          "texto": "Escoge una referencia visual fija y frena justo antes de ella.",
+          "emoji": "",
+          "visual": "close-up of the driver's feet on the pedals of the sim racing rig, showing a precise foot placement on the brake pedal before the braking point; the person is a Spanish man in his late twenties with short dark hair, light stubble and a plain black t-shirt. Setting: aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a big monitor showing a racing game, not a real car interior. not a real car interior, no dashboard, no text",
+          "visuales": [
+            "suspension slider"
+          ],
+          "foto": "",
+          "grafico": null
+        },
+        {
+          "titulo": "Aplica trail braking",
+          "texto": "Frena fuerte en recta y suelta progresivamente mientras giras el volante.",
+          "emoji": "",
+          "visual": "close-up of the driver's feet on the pedals of the sim racing rig, performing a smooth trail braking motion by slowly releasing pressure; the person is a Spanish man in his late twenties with short dark hair, light stubble and a plain black t-shirt. Setting: aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a big monitor showing a racing game, not a real car interior. not a real car interior, no dashboard, no text",
+          "visuales": [
+            "brake slider"
+          ],
+          "foto": "",
+          "grafico": null
+        },
+        {
+          "titulo": "Ajusta la distribución de frenada",
+          "texto": "Coloca un poco más de freno atrás para ayudar al coche a girar.",
+          "emoji": "",
+          "visual": "close-up of the driver's feet on the pedals of the sim racing rig, resting lightly on the pedals while telemetry graphs glow on the screen; the person is a Spanish man in his late twenties with short dark hair, light stubble and a plain black t-shirt. Setting: aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a big monitor showing a racing game, not a real car interior. not a real car interior, no dashboard, no text",
+          "visuales": [
+            "car passing"
+          ],
+          "foto": "",
+          "grafico": null
+        },
+        {
+          "emoji": "",
+          "visual": "close-up of the driver's feet on the pedals of the sim racing rig, with a digital pedal adjustment overlay showing rear brake bias; the person is a Spanish man in his late twenties with short dark hair, light stubble and a plain black t-shirt. Setting: aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a big monitor showing a racing game, not a real car interior. not a real car interior, no dashboard, no text",
+          "visuales": [],
+          "foto": "",
+          "grafico": null,
+          "titulo": "Baja la altura trasera",
+          "texto": "Reduce ligeramente la suspensión trasera para aumentar la carga delantera al frenar."
+        },
+        {
+          "emoji": "",
+          "visual": "medium shot of the driver in the sim racing rig smiling and nodding at the camera, looking satisfied with the setup; the person is a Spanish man in his late twenties with short dark hair, light stubble and a plain black t-shirt. Setting: aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a big monitor showing a racing game, not a real car interior. not a real car interior, no dashboard, no text",
+          "visuales": [],
+          "foto": "",
+          "grafico": null,
+          "titulo": "Revisa y guarda",
+          "texto": "Prueba cada cambio, siente la diferencia y guarda la configuración para futuros entrenamientos."
+        }
+      ],
+      "cta": "Pasa la app y prueba la configuración",
+      "sticker": null,
+      "fondo": "color",
+      "estilo": "racing",
+      "caption": "Con una referencia clara, trail braking y una ligera caída trasera, la primera curva será más fácil. ¿Qué ajuste probarás primero?",
+      "hashtags": "#simracing #setup #firstcorner #racingtips #drivingskills",
+      "audio": "",
+      "voz": "",
+      "ritmo_voz": "",
+      "musica": "",
+      "guion": [],
+      "beats": [],
+      "estilo_visual": "racing",
+      "visual_cierre": "car passing first corner",
+      "cierre_bio": "Enlace en bio para más configuraciones",
+      "foto": "",
+      "anim": "pop",
+      "serie": "",
+      "episodio": 0,
+      "look": 161,
+      "plantilla": 527,
+      "layout": "cine",
+      "stickers": []
+    },
+    {
+      "id": "pmww8yz0t_0",
+      "dia": 0,
+      "hora": "19:30",
+      "tipo": "reel",
+      "objetivo": "alcance",
+      "razon": "presentar la app y generar curiosidad sobre telemetría",
+      "tema": "Primera curva: punto de referencia y trail braking",
+      "formato": "reel",
+      "gancho": "¿Te cuesta perder tiempo en la primera curva?",
+      "visual": "close-up of racing car in a virtual first corner, telemetry overlay",
+      "escenas": [
+        {
+          "titulo": "Velocidad antes de la curva",
+          "texto": "Mide la velocidad máxima antes de entrar",
+          "emoji": "",
+          "visual": "car accelerating, telemetry gauge",
+          "visuales": [
+            "car accelerating",
+            "speed gauge"
+          ],
+          "foto": "",
+          "grafico": {
+            "tipo": "checklist",
+            "items": [
+              "Velocidad máxima",
+              "Punto de frenado"
+            ]
+          }
+        },
+        {
+          "titulo": "Punto de frenado",
+          "texto": "Identifica el punto exacto para frenar",
+          "emoji": "",
+          "visual": "car braking, speed gauge",
+          "visuales": [
+            "car braking",
+            "braking gauge"
+          ],
+          "foto": "",
+          "grafico": null
+        },
+        {
+          "titulo": "Línea óptima",
+          "texto": "Selecciona la línea que reduce tiempo",
+          "emoji": "",
+          "visual": "track line overlay",
+          "visuales": [
+            "track line"
+          ],
+          "foto": "",
+          "grafico": {
+            "tipo": "checklist",
+            "items": [
+              "Línea recta",
+              "Ángulo de giro"
+            ]
+          }
+        },
+        {
+          "titulo": "Resultado",
+          "texto": "Aplica el cambio y gana décimas",
+          "emoji": "",
+          "visual": "car passing line, timer",
+          "visuales": [
+            "car passing",
+            "timer"
+          ],
+          "foto": "",
+          "grafico": null
+        }
+      ],
+      "cta": "Guarda y prueba tú mismo",
+      "sticker": null,
+      "fondo": "ia",
+      "estilo": "racing",
+      "caption": "Frena con un punto de referencia y suelta suavemente al girar. La mirada al vértice te ayuda a trazar la línea perfecta. ¿Cuál es tu referencia para la primera curva?",
+      "hashtags": "#simracing #firstcorner #telemetría #racingtips #app",
+      "audio": "voz_y_musica",
+      "voz": "hombre",
+      "ritmo_voz": "energico",
+      "musica": "energetica",
+      "guion": [
+        "¿Te cuesta no perder tiempo en la primera curva?",
+        "El error más frecuente es frenar demasiado tarde.",
+        "Usa un punto de referencia fijo para iniciar la frenada.",
+        "Busca un objeto visible en la recta, como un cartel.",
+        "Al llegar al punto, pisa el freno a fondo.",
+        "Suelta el freno suavemente mientras giras, aplicando trail braking.",
+        "Mantén la mirada en el vértice y en la salida anticipada.",
+        "Así la trazada será más fluida y ganarás velocidad al salir.",
+        "Prueba este método hoy y sigue la cuenta para más trucos."
+      ],
+      "beats": [
+        {
+          "t": "¿Te cuesta no perder tiempo en la primera curva?",
+          "img": "over-the-shoulder view of the big monitor showing a race car in the game from the chase camera, as the driver watches the first corner approach; the person is a Spanish man in his late twenties with short dark hair, light stubble and a plain black t-shirt. Setting: aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a big monitor showing a racing game, not a real car interior. not a real car interior, no text, no dashboard"
+        },
+        {
+          "t": "El error más frecuente es frenar demasiado tarde.",
+          "img": "close-up of the driver's feet on the pedals of the sim racing rig, pressing the brake pedal too late and too hard; the person is a Spanish man in his late twenties with short dark hair, light stubble and a plain black t-shirt. Setting: aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a big monitor showing a racing game, not a real car interior. not a real car interior, no text, no dashboard"
+        },
+        {
+          "t": "Usa un punto de referencia fijo para iniciar la frenada.",
+          "img": "close-up of the driver's feet on the pedals of the sim racing rig, pointing at a specific marker to initiate braking; the person is a Spanish man in his late twenties with short dark hair, light stubble and a plain black t-shirt. Setting: aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a big monitor showing a racing game, not a real car interior. not a real car interior, no text, no dashboard"
+        },
+        {
+          "t": "Busca un objeto visible en la recta, como un cartel.",
+          "img": "over-the-shoulder view of the big monitor showing a race car in the game from the chase camera, highlighting a visible trackside sign in the straight. Setting: aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a big monitor showing a racing game, not a real car interior. not a real car interior, no text, no dashboard"
+        },
+        {
+          "t": "Al llegar al punto, pisa el freno a fondo.",
+          "img": "close-up of the driver's feet on the pedals of the sim racing rig, pressing the brake pedal firmly at the exact reference point; the person is a Spanish man in his late twenties with short dark hair, light stubble and a plain black t-shirt. Setting: aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a big monitor showing a racing game, not a real car interior. not a real car interior, no text, no dashboard"
+        },
+        {
+          "t": "Suelta el freno suavemente mientras giras, aplicando trail braking.",
+          "img": "close-up of the driver's feet on the pedals of the sim racing rig, slowly easing off the brake pedal while turning the steering wheel; the person is a Spanish man in his late twenties with short dark hair, light stubble and a plain black t-shirt. Setting: aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a big monitor showing a racing game, not a real car interior. not a real car interior, no text, no dashboard"
+        },
+        {
+          "t": "Mantén la mirada en el vértice y en la salida anticipada.",
+          "img": "over-the-shoulder view of the big monitor showing a race car in the game from the chase camera, focusing on the track apex and exit. Setting: aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a big monitor showing a racing game, not a real car interior. not a real car interior, no text, no dashboard"
+        },
+        {
+          "t": "Así la trazada será más fluida y ganarás velocidad al salir.",
+          "img": "over-the-shoulder view of the big monitor showing a race car in the game from the chase camera, displaying a smooth racing line through the turn. Setting: aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a big monitor showing a racing game, not a real car interior. not a real car interior, no text, no dashboard"
+        },
+        {
+          "t": "Prueba este método hoy y sigue la cuenta para más trucos.",
+          "img": "medium shot of the driver in the sim racing rig smiling and nodding at the camera, ready to test the method; the person is a Spanish man in his late twenties with short dark hair, light stubble and a plain black t-shirt. Setting: aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a big monitor showing a racing game, not a real car interior. not a real car interior, no text, no dashboard"
+        }
+      ],
+      "estilo_visual": "bright and sharp photography, vivid colors, crisp focus, clean lighting",
+      "visual_cierre": "car crossing finish line",
+      "cierre_bio": "Si te ha servido, visita mi perfil para más consejos.",
+      "foto": "",
+      "anim": "pop",
+      "serie": "Detrás de la app",
+      "episodio": 0,
+      "look": 233,
+      "plantilla": 939,
+      "layout": "faceless",
+      "stickers": [],
+      "nota": 8.0,
+      "persona": "a Spanish man in his late twenties with short dark hair, light stubble and a plain black t-shirt"
+    },
+    {
+      "id": "pmww8yz0t_1",
+      "dia": 1,
+      "hora": "19:30",
+      "tipo": "reel",
+      "objetivo": "alcance",
+      "razon": "ofrecer consejo rápido y práctico",
+      "tema": "Ajustar línea de salida",
+      "formato": "reel",
+      "gancho": "Nadie te dice que la línea de salida decide el tiempo",
+      "visual": "car leaving straight, line overlay",
+      "escenas": [
+        {
+          "titulo": "Salida rápida",
+          "texto": "Enfócate en la salida antes de la curva",
+          "emoji": "",
+          "visual": "car accelerating",
+          "visuales": [
+            "car accelerating"
+          ],
+          "foto": "",
+          "grafico": null
+        },
+        {
+          "titulo": "Punto de entrada",
+          "texto": "Elige el punto de entrada más recto",
+          "emoji": "",
+          "visual": "track line overlay",
+          "visuales": [
+            "track line"
+          ],
+          "foto": "",
+          "grafico": null
+        },
+        {
+          "titulo": "Presión de freno",
+          "texto": "Frena justo antes de la línea",
+          "emoji": "",
+          "visual": "braking gauge",
+          "visuales": [
+            "braking gauge"
+          ],
+          "foto": "",
+          "grafico": null
+        },
+        {
+          "titulo": "Resultado",
+          "texto": "Acelera de nuevo y reduce tiempo",
+          "emoji": "",
+          "visual": "car accelerating through corner",
+          "visuales": [
+            "accelerator"
+          ],
+          "foto": "",
+          "grafico": null
+        }
+      ],
+      "cta": "Comenta FRENO y te paso la guía",
+      "sticker": null,
+      "fondo": "ia",
+      "estilo": "neon",
+      "caption": "Ajustar la línea de salida con trail braking te ahorra tiempo en la primera curva. Usa una referencia fija, frena fuerte y suelta al girar, y abre el volante al acelerar. ¿Cuál es tu truco favorito para la salida?",
+      "hashtags": "#simracing #tiprapido #firstcorner #racingtips #drivingskills",
+      "audio": "voz_y_musica",
+      "voz": "hombre",
+      "ritmo_voz": "energico",
+      "musica": "hiphop",
+      "guion": [
+        "Nadie te dice que la línea de salida determina tu tiempo",
+        "Si sales demasiado cerca del borde, pierdes tracción al acelerar",
+        "Primero, elige una referencia fija para frenar, como un cartel",
+        "Frena fuerte en recta y suelta el freno suavemente mientras giras",
+        "Mantén un poco de freno al entrar, así el coche gira sin subvirar",
+        "Apunta el volante para tocar el vértice justo antes del punto medio",
+        "Al salir, abre el volante y acelera progresivamente, siguiendo el ancho disponible",
+        "Notarás que el coche mantiene velocidad y la primera recta se vuelve más larga",
+        "Practica este trazado y sigue la cuenta para más trucos de carrera"
+      ],
+      "beats": [
+        {
+          "t": "Nadie te dice que la línea de salida determina tu tiempo",
+          "img": "over-the-shoulder view of the big monitor showing a race car in the game from the chase camera, highlighting the start line where time is decided. Setting: Aluminium sim racing rig with bucket seat, wheel, pedals in home gaming room, monitor shows game, not car. not a real car interior, no dashboard"
+        },
+        {
+          "t": "Si sales demasiado cerca del borde, pierdes tracción al acelerar",
+          "img": "close-up of the driver's feet on the pedals of the sim racing rig, foot pressing accelerator too early, losing traction at the edge; the person is a Spanish man in his late twenties with short dark hair, light stubble and a plain black t-shirt. Setting: Aluminium sim racing rig with bucket seat, wheel, pedals in home gaming room, monitor shows game, not car. not a real car interior, no dashboard"
+        },
+        {
+          "t": "Primero, elige una referencia fija para frenar, como un cartel",
+          "img": "close-up of the driver's feet on the pedals of the sim racing rig, hand pointing to a fixed reference sign on the monitor for braking; the person is a Spanish man in his late twenties with short dark hair, light stubble and a plain black t-shirt. Setting: Aluminium sim racing rig with bucket seat, wheel, pedals in home gaming room, monitor shows game, not car. not a real car interior, no dashboard"
+        },
+        {
+          "t": "Frena fuerte en recta y suelta el freno suavemente mientras giras",
+          "img": "close-up of the driver's feet on the pedals of the sim racing rig, driver brakes hard in straight then gently releases while turning; the person is a Spanish man in his late twenties with short dark hair, light stubble and a plain black t-shirt. Setting: Aluminium sim racing rig with bucket seat, wheel, pedals in home gaming room, monitor shows game, not car. not a real car interior, no dashboard"
+        },
+        {
+          "t": "Mantén un poco de freno al entrar, así el coche gira sin subvirar",
+          "img": "close-up of the driver's feet on the pedals of the sim racing rig, keeping slight brake pressure into corner so car rotates without understeer; the person is a Spanish man in his late twenties with short dark hair, light stubble and a plain black t-shirt. Setting: Aluminium sim racing rig with bucket seat, wheel, pedals in home gaming room, monitor shows game, not car. not a real car interior, no dashboard"
+        },
+        {
+          "t": "Apunta el volante para tocar el vértice justo antes del punto medio",
+          "img": "close-up of the driver's hands turning the steering wheel of the sim racing rig, aiming wheel to clip the apex just before midpoint; the person is a Spanish man in his late twenties with short dark hair, light stubble and a plain black t-shirt. Setting: Aluminium sim racing rig with bucket seat, wheel, pedals in home gaming room, monitor shows game, not car. not a real car interior, no dashboard"
+        },
+        {
+          "t": "Al salir, abre el volante y acelera progresivamente, siguiendo el ancho disponible",
+          "img": "close-up of the driver's feet on the pedals of the sim racing rig, driver releases brake, opens wheel and progressively presses accelerator following track width; the person is a Spanish man in his late twenties with short dark hair, light stubble and a plain black t-shirt. Setting: Aluminium sim racing rig with bucket seat, wheel, pedals in home gaming room, monitor shows game, not car. not a real car interior, no dashboard"
+        },
+        {
+          "t": "Notarás que el coche mantiene velocidad y la primera recta se vuelve más larga",
+          "img": "over-the-shoulder view of the big monitor showing a race car in the game from the chase camera, car maintains speed and longer first straight. Setting: Aluminium sim racing rig with bucket seat, wheel, pedals in home gaming room, monitor shows game, not car. not a real car interior, no dashboard"
+        },
+        {
+          "t": "Practica este trazado y sigue la cuenta para más trucos de carrera",
+          "img": "medium shot of the driver in the sim racing rig smiling and nodding at the camera, inviting viewers to practice and follow for more tricks; the person is a Spanish man in his late twenties with short dark hair, light stubble and a plain black t-shirt. Setting: Aluminium sim racing rig with bucket seat, wheel, pedals in home gaming room, monitor shows game, not car. not a real car interior, no dashboard"
+        }
+      ],
+      "estilo_visual": "Bright, crisp lighting with vivid colors, sharp focus, no motion blur",
+      "visual_cierre": "car accelerating through corner",
+      "cierre_bio": "Si quieres más consejos, visita el enlace en mi perfil",
+      "foto": "",
+      "anim": "pop",
+      "serie": "Tip rápido del día",
+      "episodio": 1,
+      "look": 87,
+      "plantilla": 1988,
+      "layout": "faceless",
+      "stickers": [],
+      "nota": 8.0,
+      "persona": "a Spanish man in his late twenties with short dark hair, light stubble and a plain black t-shirt"
+    },
+    {
+      "id": "pmww8yz0u_2",
+      "dia": 2,
+      "hora": "09:00",
+      "tipo": "historia",
+      "objetivo": "comunidad",
+      "razon": "iniciar debate y recoger dudas",
+      "tema": "Frenada progresiva en la primera curva",
+      "formato": "historia",
+      "gancho": "¿Frenas demasiado pronto en la primera curva?",
+      "visual": "close-up of foot on brake pedal",
+      "escenas": [
+        {
+          "titulo": "¿El pedal de freno en",
+          "texto": "la primera curva te hace perder tiempo?",
+          "emoji": "",
+          "visual": "close-up of foot on brake pedal",
+          "visuales": [],
+          "foto": "",
+          "grafico": null
+        },
+        {
+          "titulo": "Muchas veces frenamos demasiado pronto",
+          "texto": "y perdemos velocidad",
+          "emoji": "",
+          "visual": "close-up of foot on brake pedal",
+          "visuales": [],
+          "foto": "",
+          "grafico": null
+        },
+        {
+          "titulo": "El secreto está en frenar",
+          "texto": "justo antes de la línea",
+          "emoji": "",
+          "visual": "close-up of foot on brake pedal",
+          "visuales": [],
+          "foto": "",
+          "grafico": null
+        },
+        {
+          "titulo": "Esto te permite acelerar de",
+          "texto": "nuevo con más fuerza",
+          "emoji": "",
+          "visual": "close-up of foot on brake pedal",
+          "visuales": [],
+          "foto": "",
+          "grafico": null
+        },
+        {
+          "titulo": "Cuéntame cuál es tu mayor",
+          "texto": "reto al frenar",
+          "emoji": "",
+          "visual": "close-up of foot on brake pedal",
+          "visuales": [],
+          "foto": "",
+          "grafico": null
+        }
+      ],
+      "cta": "",
+      "sticker": {
+        "tipo": "pregunta",
+        "texto": "¿Qué te cuesta más al frenar en la primera curva?",
+        "opciones": [],
+        "auto": true
+      },
+      "fondo": "ia",
+      "estilo": "racing",
+      "caption": "Frenar fuerte al inicio y soltar el freno de forma progresiva mientras giras mantiene la carga delantera en el coche. ¿Cuál es tu mayor dificultad al aplicar trail braking?",
+      "hashtags": "#simracing #freno #firstcorner #community",
+      "audio": "voz_y_musica",
+      "voz": "",
+      "ritmo_voz": "",
+      "musica": "divertida",
+      "guion": [
+        "¿Frenas demasiado pronto en la primera curva?",
+        "Al frenar muy temprano pierdes carga en las ruedas delanteras.",
+        "Usa trail braking: frena fuerte en recta y suelta suave al girar.",
+        "Elige un punto fijo de referencia para frenar y mantén presión ligera.",
+        "Siente el morro girar y gana tiempo; sígueme para más trucos."
+      ],
+      "beats": [
+        {
+          "t": "¿Frenas demasiado pronto en la primera curva?",
+          "img": "close-up of the driver's feet on the pedals of the sim racing rig, foot pressing brake pedal too early before the first turn; the person is a Spanish man in his late twenties with short dark hair, light stubble and a plain black t-shirt. Setting: aluminium sim racing rig with bucket seat, wheel and pedals in home gaming room, not a real car. not a real car interior, no dashboard"
+        },
+        {
+          "t": "Al frenar muy temprano pierdes carga en las ruedas delanteras.",
+          "img": "close-up of the driver's feet on the pedals of the sim racing rig, foot holding brake while front wheels spin lightly on screen; the person is a Spanish man in his late twenties with short dark hair, light stubble and a plain black t-shirt. Setting: aluminium sim racing rig with bucket seat, wheel and pedals in home gaming room, not a real car. not a real car interior, no dashboard"
+        },
+        {
+          "t": "Usa trail braking: frena fuerte en recta y suelta suave al girar.",
+          "img": "close-up of the driver's feet on the pedals of the sim racing rig, foot braking hard then smoothly easing as wheel turns; the person is a Spanish man in his late twenties with short dark hair, light stubble and a plain black t-shirt. Setting: aluminium sim racing rig with bucket seat, wheel and pedals in home gaming room, not a real car. not a real car interior, no dashboard"
+        },
+        {
+          "t": "Elige un punto fijo de referencia para frenar y mantén presión ligera.",
+          "img": "close-up of the driver's feet on the pedals of the sim racing rig, foot applying light brake pressure while eyes focus on a fixed track marker; the person is a Spanish man in his late twenties with short dark hair, light stubble and a plain black t-shirt. Setting: aluminium sim racing rig with bucket seat, wheel and pedals in home gaming room, not a real car. not a real car interior, no dashboard"
+        },
+        {
+          "t": "Siente el morro girar y gana tiempo; sígueme para más trucos.",
+          "img": "medium shot of the driver in the sim racing rig smiling and nodding at the camera, showing confidence after mastering the braking technique; the person is a Spanish man in his late twenties with short dark hair, light stubble and a plain black t-shirt. Setting: aluminium sim racing rig with bucket seat, wheel and pedals in home gaming room, not a real car. not a real car interior, no dashboard"
+        }
+      ],
+      "estilo_visual": "bright, crisp lighting with vivid colors, sharp focus, no blur",
+      "visual_cierre": "",
+      "cierre_bio": "Encuentra más consejos en el enlace de mi perfil.",
+      "foto": "",
+      "anim": "slide",
+      "serie": "Mito o realidad",
+      "episodio": 0,
+      "look": 197,
+      "plantilla": 733,
+      "layout": "faceless",
+      "stickers": [],
+      "nota": 9.0,
+      "persona": "a Spanish man in his late twenties with short dark hair, light stubble and a plain black t-shirt"
+    }
+  ]
+}

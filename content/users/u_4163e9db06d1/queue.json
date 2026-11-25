@@ -84,19 +84,107 @@
     }
   },
   {
-    "id": "2026-11-20-05-reel",
-    "date": "2026-11-20",
+    "id": "2026-11-25-02-reel",
+    "date": "2026-11-25",
     "source": "auto",
     "tipo": "reel",
-    "tema": "Frenada degresiva en curva",
-    "publishAt": "2026-11-26T19:45:00+01:00",
-    "caption": "Aprende a soltar el freno de forma progresiva mientras giras el volante para ganar velocidad en cada curva. ¿Te cuesta encontrar el punto exacto de frenada?\n\n#simracing #setup #simdriver #acelera #telemetria",
+    "tema": "Acelerador progresivo en curvas",
+    "publishAt": "2026-11-26T19:30:00+01:00",
+    "caption": "Aprende a dosificar el gas en la salida de las curvas para ganar velocidad sin perder el control. ¿En qué curva te cuesta más mantener la trazada?\n\n#simracing #acelerador #tips #racing #comunidad",
     "media": [
-      "media/u_4163e9db06d1/bolsa/b-2026-11-20-01-reel/video.mp4"
+      "media/u_4163e9db06d1/bolsa/b-2026-11-20-07-reel/video.mp4"
     ],
-    "status": "prueba",
+    "status": "scheduled",
     "attempts": 0,
-    "bolsa": "b-2026-11-20-01-reel",
-    "cover": "media/u_4163e9db06d1/bolsa/b-2026-11-20-01-reel/cover.jpg"
+    "bolsa": "b-2026-11-20-07-reel",
+    "cover": "media/u_4163e9db06d1/bolsa/b-2026-11-20-07-reel/cover.jpg",
+    "zernioPostId": "6b07021d5cb59c3984ca06d4",
+    "veo": {
+      "clips": [
+        {
+          "t": "Muchos pilotos pierden segundos preciosos al salir de las curvas. El error común es acelerar a fondo con las ruedas giradas.",
+          "prompt": "2 shots with hard cuts between them. Shot 1 (0-4 s): wide shot of a mid-30s man sitting in an aluminium sim racing rig inside a bright home gaming room, looking focused at a large monitor showing a racing track. Shot 2 (4-8 s): medium shot of a mid-30s man sitting in the sim racing rig, looking frustrated with hands gripping the steering wheel too tightly while steering hard. The person is always the same: mid-30s man with short brown hair wearing a casual black t-shirt. Setting: aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a big monitor showing a racing game, not a real car inter. Avoid: not a real car interior, no text, no logos. smooth natural camera movement, vertical 9:16 video, photorealistic, bright natural light, sharp focus, no text, no captions, no logos, no brand names, no watermark",
+          "dur": 8
+        },
+        {
+          "t": "Eso provoca un patinazo y hace que el coche pierda tracción. La solución es abrir el volante mientras aumentas el gas.",
+          "prompt": "2 shots with hard cuts between them. Shot 1 (0-4 s): over-the-shoulder view of a mid-30s man looking at a large monitor showing a racing game with a car spinning out on track. Shot 2 (4-8 s): close-up of hands opening up the steering wheel smoothly while pressing the throttle pedal. The person is always the same: mid-30s man with short brown hair wearing a casual black t-shirt. Setting: aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a big monitor showing a racing game, not a real car inter. Avoid: not a real car interior, no text, no logos. smooth natural camera movement, vertical 9:16 video, photorealistic, bright natural light, sharp focus, no text, no captions, no logos, no brand names, no watermark",
+          "dur": 8
+        },
+        {
+          "t": "Aplica presión de forma progresiva a medida que enderezas la dirección.",
+          "prompt": "close-up of feet on racing pedals, applying progressive pressure on the gas pedal. The person is always the same: mid-30s man with short brown hair wearing a casual black t-shirt. Setting: aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a big monitor showing a racing game, not a real car inter. Avoid: not a real car interior, no text, no logos. smooth natural camera movement, vertical 9:16 video, photorealistic, bright natural light, sharp focus, no text, no captions, no logos, no brand names, no watermark",
+          "dur": 6
+        },
+        {
+          "t": "El motor entrega la potencia justa sin sobrecargar los neumáticos traseros. Notarás que el coche sale lanzado y con total estabilidad.",
+          "prompt": "2 shots with hard cuts between them. Shot 1 (0-4 s): medium close-up from the side of the sim racing rig showing the steering wheel and pedals in action. Shot 2 (4-8 s): extreme close-up of the steering wheel and hands turning it straight with precision. The person is always the same: mid-30s man with short brown hair wearing a casual black t-shirt. Setting: aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a big monitor showing a racing game, not a real car inter. Avoid: not a real car interior, no text, no logos. smooth natural camera movement, vertical 9:16 video, photorealistic, bright natural light, sharp focus, no text, no captions, no logos, no brand names, no watermark",
+          "dur": 8
+        },
+        {
+          "t": "Practica este movimiento en tu próxima sesión de entrenamiento. Tienes más tutoriales avanzados en el enlace de mi perfil.",
+          "prompt": "2 shots with hard cuts between them. Shot 1 (0-4 s): medium shot of a mid-30s man sitting in the sim racing rig, smiling confidently at the camera. Shot 2 (4-8 s): over-the-shoulder view of a mid-30s man looking at a large monitor showing a racing game menu. The person is always the same: mid-30s man with short brown hair wearing a casual black t-shirt. Setting: aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a big monitor showing a racing game, not a real car inter. Avoid: not a real car interior, no text, no logos. smooth natural camera movement, vertical 9:16 video, photorealistic, bright natural light, sharp focus, no text, no captions, no logos, no brand names, no watermark",
+          "dur": 8
+        }
+      ],
+      "voz": "es-ES-AlvaroNeural",
+      "ritmo": "+16%",
+      "musica": "divertida",
+      "hashtags": "#simracing #acelerador #tips #racing #comunidad"
+    }
+  },
+  {
+    "id": "2026-11-25-03-historia",
+    "date": "2026-11-25",
+    "source": "auto",
+    "tipo": "historia",
+    "tema": "Frenada en línea recta",
+    "publishAt": "2026-11-27T09:00:00+01:00",
+    "caption": "",
+    "media": [
+      "media/u_4163e9db06d1/bolsa/b-2026-11-20-03-historia/video.mp4"
+    ],
+    "status": "scheduled",
+    "attempts": 0,
+    "bolsa": "b-2026-11-20-03-historia",
+    "cover": "media/u_4163e9db06d1/bolsa/b-2026-11-20-03-historia/cover.jpg",
+    "zernioPostId": "6b070221a72eef9e866e5630"
+  },
+  {
+    "id": "2026-11-25-01-post",
+    "date": "2026-11-25",
+    "source": "auto",
+    "tipo": "post",
+    "tema": "Checklist para la primera curva",
+    "publishAt": "2026-11-29T13:30:00+01:00",
+    "caption": "Domina la primera esquina con estos pasos y sentirás mayor control en cada vuelta. ¿Listo para probarlos?\n\n#simracing #checklist #firstcorner #racingtips #drivingskills",
+    "media": [
+      "media/u_4163e9db06d1/2026-11-25/2026-11-25-01-post/01.jpg"
+    ],
+    "status": "scheduled",
+    "attempts": 0,
+    "zernioPostId": "6b07020ba72eef9e866e5588"
+  },
+  {
+    "id": "2026-11-25-02-carrusel",
+    "date": "2026-11-25",
+    "source": "auto",
+    "tipo": "carrusel",
+    "tema": "Guía paso a paso para configurar el coche para la primera curva",
+    "publishAt": "2026-11-30T13:30:00+01:00",
+    "caption": "Con una referencia clara, trail braking y una ligera caída trasera, la primera curva será más fácil. ¿Qué ajuste probarás primero?\n\n#simracing #setup #firstcorner #racingtips #drivingskills",
+    "media": [
+      "media/u_4163e9db06d1/2026-11-25/2026-11-25-02-carrusel/01.jpg",
+      "media/u_4163e9db06d1/2026-11-25/2026-11-25-02-carrusel/02.jpg",
+      "media/u_4163e9db06d1/2026-11-25/2026-11-25-02-carrusel/03.jpg",
+      "media/u_4163e9db06d1/2026-11-25/2026-11-25-02-carrusel/04.jpg",
+      "media/u_4163e9db06d1/2026-11-25/2026-11-25-02-carrusel/05.jpg",
+      "media/u_4163e9db06d1/2026-11-25/2026-11-25-02-carrusel/06.jpg",
+      "media/u_4163e9db06d1/2026-11-25/2026-11-25-02-carrusel/07.jpg",
+      "media/u_4163e9db06d1/2026-11-25/2026-11-25-02-carrusel/08.jpg"
+    ],
+    "status": "scheduled",
+    "attempts": 0,
+    "zernioPostId": "6b0702175cb59c3984ca06a9"
   }
 ]
