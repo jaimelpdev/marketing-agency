@@ -758,6 +758,12 @@ def shot_for(text, rules):
     return ""
 
 
+def _subject(shot):
+    """Lo esencial de un plano obligado (por ejemplo "feet on the pedals"), para comprobar que la imagen lo respeta."""
+    m = re.search(r"(?:of|showing)\s+(?:the\s+)?(?:driver's\s+)?(.+?)(?:\s+(?:of|in|from|at)\s|,|$)", shot.lower())
+    return (m.group(1) if m else shot.lower())[:30]
+
+
 def art_direct(piece, user, key, log=print, beats=None):
     """Director de arte: convierte cada frase hablada de un vídeo faceless en una imagen concreta,
     fotografiable y anclada al mundo del negocio, para que lo que se ve sea lo que se dice."""
@@ -774,12 +780,15 @@ def art_direct(piece, user, key, log=print, beats=None):
         plan[0] = SHOTS[0]
     rules = shot_rules(user)
     forced = [shot_for(str(b.get("t", "")), rules) for b in beats]
-    if piece.get("tipo") in ("post", "carrusel"):  # en diapositivas manda la variedad: nunca el mismo plano obligado dos veces
-        seen = set()
-        for k, f in enumerate(forced):
-            if f in seen:
-                forced[k] = ""
-            seen.add(f)
+    # si el mismo plano obligado se repite, se mantiene el sujeto (lo que se habla) pero cambia el ángulo o el momento
+    ANGULOS = ["", "side view, ", "low angle, ", "top-down view, ", "wide close-up, "]
+    vistos = {}
+    for k, f in enumerate(forced):
+        if f:
+            n = vistos.get(f, 0)
+            vistos[f] = n + 1
+            if n:
+                forced[k] = ANGULOS[n % len(ANGULOS)] + f
     frases = "\n".join(f"{i + 1}. [PLANO {'OBLIGATORIO' if forced[i] else 'SUGERIDO'}: {forced[i] or plan[i]}] {b.get('t', '')}" for i, b in enumerate(beats))
     prompt = f"""Eres director de arte de vídeos cortos faceless (todo con imágenes generadas por IA). Para cada frase hablada eliges UNA imagen que la ilustre de forma que cualquiera entienda la relación al instante.
 
@@ -790,7 +799,7 @@ FRASES (en orden):
 {frases}
 
 REGLAS
-0. Cada frase trae un PLANO. Si es OBLIGATORIO, la imagen empieza EXACTAMENTE por ese plano (cópialo en inglés tal cual) y luego dices qué hace en ese momento, según la frase (por ejemplo "…, slowly easing off the brake pedal while turning in"). Si es SUGERIDO, sirve para que el vídeo cambie de plano en cada frase. Lo primero es que la imagen muestre LO QUE DICE LA FRASE (si habla de girar el volante, manos en el volante; de frenar, el pie en el freno; de ver la curva, la pantalla). Si el plano sugerido no encaja, elige otro de cerca que sí encaje, sin repetir el plano de la frase anterior y sin más planos generales. Si la frase describe un error, muestra el error; si describe la solución, muestra la solución hecha bien.
+0. Cada frase trae un PLANO. Si es OBLIGATORIO, la imagen empieza EXACTAMENTE por ese plano (cópialo en inglés tal cual, con su ángulo) y luego dices qué se ve en ese momento, según la frase: si la frase habla de un error, que se vea el error (el coche saliéndose de la curva, el pie soltando de golpe); si habla de la solución, la acción bien hecha (por ejemplo "…, slowly easing off the brake pedal while turning in"). Si es SUGERIDO, sirve para que el vídeo cambie de plano en cada frase. Lo primero es que la imagen muestre LO QUE DICE LA FRASE (si habla de girar el volante, manos en el volante; de frenar, el pie en el freno; de ver la curva, la pantalla). Si el plano sugerido no encaja, elige otro de cerca que sí encaje, sin repetir el plano de la frase anterior y sin más planos generales. Si la frase describe un error, muestra el error; si describe la solución, muestra la solución hecha bien.
 1. "mundo": en INGLÉS y en MÁXIMO 18 palabras, el escenario concreto y reconocible de este negocio que aparece en TODAS las imágenes, diciendo SIEMPRE en qué SALA o LUGAR está y con qué NO debe confundirse (por ejemplo, para simracing: "aluminium sim racing rig with bucket seat, steering wheel and pedals inside a bright home gaming room, a big monitor showing a racing game, not a real car interior"; para una tienda de deporte: "sports store with football boots and jerseys on display"; para un hotel: "bright seaside boutique hotel in Mallorca"). Si la imagen pudiera parecer otra cosa genérica (un coche real, una tienda cualquiera), el "mundo" debe dejar claro la diferencia.
 2. Cada "img": en INGLÉS sencillo, máximo 28 palabras, EMPEZANDO por el tipo de plano en inglés ("extreme close-up of…", "close-up of hands…", "medium shot of…", "over-the-shoulder view of…") y luego qué se ve y qué está haciendo quién, con el SUJETO principal que se vea grande, nítido y de frente. Una sola idea por imagen. Debe mostrar literalmente la acción u objeto de la frase dentro del "mundo".
 2b. PROHIBIDO lo genérico: nada de "a car", "a sports car on a road", "a person smiling", "a city", paisajes ni planos de recurso que valdrían para cualquier vídeo. Cada imagen tiene que contener algo que SOLO tiene sentido con esa frase y con este negocio: la persona del vídeo haciendo esa acción concreta con el equipo o el producto del negocio, el objeto exacto del que se habla en primer plano, o la pantalla/el lugar exacto. Si una imagen podría ilustrar otra frase del vídeo, cámbiala.
@@ -811,14 +820,24 @@ Responde SOLO con JSON: {{"mundo":"…","persona":"…","evitar":"…","estilo":
     if len(imgs) < len(beats):
         log(f"    ⚠ Director de arte: devolvió {len(imgs)} de {len(beats)} imágenes; se mantienen las originales")
         return False
+    malas = [k for k in range(len(beats)) if forced[k] and _subject(forced[k]) not in imgs[k].lower()]
+    if malas:  # una segunda oportunidad, diciéndole exactamente qué imágenes no respetan su plano
+        try:
+            j2 = writer_json(prompt + "\n\nEn tu respuesta anterior, las imágenes " + ", ".join(str(k + 1) for k in malas)
+                             + " NO empezaban por su PLANO OBLIGATORIO. Rehaz la lista completa respetándolos.", key, log)
+            imgs2 = [str(x).strip() for x in (j2.get("imgs") or []) if str(x).strip()]
+            if len(imgs2) >= len(beats) and sum(1 for k in range(len(beats)) if forced[k] and _subject(forced[k]) not in imgs2[k].lower()) < len(malas):
+                j, imgs = {**j, **{k2: v for k2, v in j2.items() if v}}, imgs2
+        except Exception:  # noqa: BLE001
+            pass
     mundo = str(j.get("mundo") or "").strip()[:260]
     persona = str(user.get("persona_veo") or j.get("persona") or "").strip()[:110]  # presentador fijo de la marca, si lo tiene
     piece["persona"] = persona
     mundo_no = str(j.get("evitar") or "").strip()[:160]
     for k, (b, im) in enumerate(zip(beats, imgs)):
-        if forced[k] and forced[k].split(" of ")[0].lower() not in im.lower()[:60]:
+        if forced[k] and _subject(forced[k]) not in im.lower():
             log(f"    ↺ Plano corregido en la frase {k + 1}: debía ser «{forced[k][:50]}…»")
-            im = forced[k] + ", " + re.sub(r"^(extreme )?(close-up|medium shot|wide shot|over-the-shoulder view|top-down view|side view)( of)?\s*", "", im, flags=re.I)
+            im = forced[k]  # sin el resto: mejor un plano sencillo y correcto que uno que mezcle cosas que no van
         # el plano y el sujeto primero (si el escenario va delante, todas salen como plano general); el escenario después
         who = ("; the person is " + persona) if persona and re.search(r"\b(person|man|woman|gamer|driver|he|she|his|her|hands?|feet|foot|face|racer|player)\b", im, re.I) else ""
         b["img"] = (im.rstrip(".") + who + (". Setting: " + mundo if mundo else "") + (". " + mundo_no if mundo_no else ""))[:800]
