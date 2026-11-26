@@ -251,7 +251,9 @@ CÓMO PIENSAS
 6b. No propongas series que dependan de que los seguidores envíen cosas (setups, vídeos, preguntas) salvo que las notas del dueño digan que ya las envían.
 6. No inventes nada: ni seguidores, ni testimonios, ni ofertas, descuentos, precios o lanzamientos, ni funciones, apps, IA o servicios del negocio que no estén en la marca o en las notas del dueño. Las series que dependan de la comunidad empiezan pidiendo participación.
 4b. Si en RESULTADOS REALES pone "(aún sin datos)", NO hay nada publicado todavía: no escribas aprendizajes sobre resultados (alcance, comentarios, horas que funcionan…), ni hitos con cifras de seguidores o visualizaciones, ni retos o desafíos con participación de usuarios. "aprendizajes" debe ir vacío salvo lo que digan las notas del dueño.
-7. Define el arco de la semana: un tema o historia que conecte las piezas de la semana para que la gente quiera ver la siguiente.
+7. Define el arco de la semana: un PILAR amplio (por ejemplo "frenar mejor", "configurar el volante", "elegir y ajustar el equipo") que conecte piezas sobre temas DISTINTOS dentro de él; nunca una semana entera sobre un único detalle. El "porque" solo puede apoyarse en RESULTADOS REALES (cita qué publicación funcionó) o en las notas del dueño; si no hay datos, di que se elige por variedad. Nunca escribas "los datos muestran…" sin datos reales.
+8. Copia lo que ya funciona: mira las MEJORES y PEORES publicaciones reales y di en "aprendizajes" qué tienen en común las mejores (tipo de consejo, si nombran el simulador o el equipo, si es un ajuste concreto, cómo empieza el gancho) y qué tienen las peores. La semana debe parecerse a las mejores.
+9. Ni retos con premios, ni colaboraciones, ni sorteos, ni encuestas con promesas que la agencia no puede cumplir sola.
 
 Responde SOLO con JSON válido:
 {{"fase":"descubrimiento|confianza|comunidad|conversion","objetivo_mes":"…","arco_semana":{{"tema":"…","porque":"…"}},"mezcla":{{"alcance":0,"confianza":0,"comunidad":0,"conversion":0}},"series":[{{"nombre":"…","formato":"reel|historia|post|carrusel","cuando":"día o frecuencia","descripcion":"…","episodios":0}}],"aprendizajes":["…"],"que_evitar":["…"],"promesas_pendientes":["…"],"ideas":["…"],"tono_comunidad":"cómo hablarle a la comunidad","hitos":["próximos hitos de la marca"],"resumen_para_dueño":"2-3 frases explicando la estrategia de esta semana"}}"""
@@ -282,6 +284,11 @@ Responde SOLO con JSON válido:
     for k, n in (("aprendizajes", 10), ("que_evitar", 8), ("promesas_pendientes", 8), ("ideas", 12), ("hitos", 5)):
         if isinstance(j.get(k), list):
             out[k] = [str(x)[:220] for x in j[k] if str(x).strip()][:n]
+    PROMESA = re.compile(r"\b(reto|desaf[ií]o|premi|sorteo|colabora|entrevista|influencer|regal)", re.I)
+    out["ideas"] = [x for x in out.get("ideas", []) if not PROMESA.search(x)]
+    out["hitos"] = [x for x in out.get("hitos", []) if not PROMESA.search(x)]
+    if isinstance(out.get("arco_semana"), dict) and not met and re.search(r"los datos|datos muestran|estad[ií]stic", out["arco_semana"].get("porque", ""), re.I):
+        out["arco_semana"]["porque"] = "Elegido por variedad y por ser útil para quien empieza."
     if not met:  # nada publicado aún: ni aprendizajes ni hitos inventados, ni series que dependan de seguidores
         own = " ".join(str(n.get("t", n) if isinstance(n, dict) else n) for n in notas).lower()
         out["aprendizajes"] = [a for a in out.get("aprendizajes", []) if any(w in own for w in re.findall(r"\w{6,}", a.lower())[:3])][:3] if own else []
@@ -328,7 +335,41 @@ MEMORIA Y ESTRATEGIA DE MARCA (decidida por el director de estrategia; síguela)
 - NOTAS DEL DUEÑO (obligatorio respetarlas):
 {notes}
 - Promoción de la marca poco a poco: en piezas de alcance y confianza, la marca aparece de forma natural (un ejemplo, un detrás de las cámaras, una mención al final), nunca como anuncio. Solo las piezas de "conversion" llevan el producto al centro, y siempre aportando valor.
-- Comunidad: en cada semana debe haber al menos una pieza que haga sentir parte a la audiencia (responder a comentarios o dudas típicas, retos, "cuéntame tu…", destacar a seguidores, decisiones que vota la comunidad, rituales de la serie)."""
+- Comunidad: en cada semana debe haber al menos una pieza que haga sentir parte a la audiencia (responder a dudas típicas, "cuéntame cómo lo haces tú…", rituales de la serie), sin retos con premios ni promesas que haya que cumplir después."""
+
+
+def best_examples(mem, n=4):
+    """Las publicaciones reales que mejor funcionaron (para que el plan se parezca a ellas)."""
+    met = (mem or {}).get("metricas") or {}
+    best = [f"{b.get('tipo', '')} ({b.get('eng', 0)} interacciones): «{str(b.get('tema', ''))[:110]}»" for b in (met.get("mejores") or [])[:n]]
+    worst = [f"{b.get('tipo', '')} ({b.get('eng', 0)}): «{str(b.get('tema', ''))[:90]}»" for b in (met.get("peores") or [])[:3]]
+    if not best:
+        return ""
+    return ("\n- LO QUE MEJOR HA FUNCIONADO DE VERDAD en esta cuenta (haz piezas de este estilo: consejo concreto, a menudo un ajuste o una técnica en un simulador concreto):\n"
+            + "\n".join("  · " + x for x in best)
+            + ("\n- Lo que peor funcionó (no lo imites):\n" + "\n".join("  · " + x for x in worst) if worst else ""))
+
+
+def used_topics(udir, days=21):
+    """Temas ya publicados o preparados en las últimas semanas (cola, bolsa e historial), para no repetirse."""
+    lim = (datetime.now() - timedelta(days=days)).date().isoformat()
+    out = []
+    for name in ("queue.json", "bolsa.json"):
+        try:
+            for x in json.loads((udir / name).read_text(encoding="utf-8")):
+                d = str(x.get("date") or x.get("created") or x.get("publishAt") or "")[:10]
+                t = str(x.get("tema") or "").strip()
+                if t and d >= lim and x.get("status") not in ("removed",):
+                    out.append(t)
+        except Exception:  # noqa: BLE001
+            pass
+    seen, res = set(), []
+    for t in out:
+        k = t.lower()[:40]
+        if k not in seen:
+            seen.add(k)
+            res.append(t)
+    return res[-25:]
 
 
 def after_plan(mem, pieces):
@@ -475,7 +516,7 @@ CONOCIMIENTO VERIFICADO DEL SECTOR (tu base técnica: el consejo tiene que salir
 {saber}
 """ if saber else "") + f"""
 CÓMO TIENE QUE SER
-0a. No menciones circuitos, curvas, coches ni pilotos concretos (nada de "en Eau Rouge"): el consejo vale para cualquier pista.
+0a. No menciones circuitos, curvas, coches ni pilotos concretos (nada de "en Eau Rouge"): el consejo vale para cualquier pista. SÍ puedes nombrar el simulador (iRacing, ACC, Assetto Corsa, Le Mans Ultimate, Gran Turismo, F1) en el gancho si el consejo vale tal cual en él: es lo que mejor funciona en esta cuenta.
 0b. Esta semana ya hay vídeos sobre: {', '.join(USED.get(user.get('id'), [])) or 'nada todavía'}. Elige una entrada DISTINTA.
 0. Si hay CONOCIMIENTO VERIFICADO: elige UNA entrada concreta que corresponda al TEMA. Si el tema no está cubierto o contradice el conocimiento, elige la entrada más cercana y cambia el tema y el gancho para que encajen. Todo lo técnico del vídeo sale de esa entrada (puedes explicarla con tus palabras y con ejemplos, nunca añadir afirmaciones técnicas nuevas).
 1. UNA sola idea por vídeo, explicada de principio a fin: gancho → por qué pasa → qué hacer exactamente (pasos concretos que el espectador puede aplicar hoy) → qué nota cuando lo hace bien → cierre.
@@ -570,7 +611,7 @@ REGLAS
 - Todo lo que dices tiene que ser CORRECTO según el CONOCIMIENTO; si algo no aparece ahí, no lo digas.
 - Español de España, tuteo, sin voseo y sin palabras de Latinoamérica (di coche, no carro).
 - Nada de cifras, tiempos, porcentajes, ofertas, testimonios ni funciones del negocio que no estén en NEGOCIO o en el CONOCIMIENTO.
-- Sin emojis ni hashtags. No menciones circuitos, curvas, coches ni pilotos concretos.
+- Sin emojis ni hashtags. No menciones circuitos, curvas, coches ni pilotos concretos (sí puedes nombrar el simulador si el consejo vale tal cual en él).
 - "caption": 2-3 frases que resumen ESTE MISMO consejo (no otro tema) y acaban con una pregunta.
 
 Responde SOLO con JSON: {{"tema":"…","gancho":"…","escenas":[{{"titulo":"…","texto":"…"}}],"caption":"…"}}"""

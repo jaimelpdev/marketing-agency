@@ -636,9 +636,13 @@ def plan_user(browser, user, key, force=False, redo=None):
                 'UNA sola pieza de tipo "'+r.tipo+'" para el dia 0 a las '+r.hora+'. Sustituye a otra pieza que no gustó (tema: "'+r.tema+'"): haz algo claramente distinto y mejor, con otro gancho y otro enfoque.'); }""",
                           {"tipo": redo["tipo"], "hora": hora, "tema": redo.get("tema", "")})
         temas_saber = brain.knowledge_topics(user)
-        page.evaluate("t=>{window.__memText=t;}", brain.memory_text(mem, notas) + (
+        usados = brain.used_topics(udir)
+        page.evaluate("t=>{window.__memText=t;}", brain.memory_text(mem, notas) + brain.best_examples(mem) + (
             "\nTEMAS CON BASE VERIFICADA (los consejos de la semana deben salir de estos temas o de algo muy cercano; "
-            "así no se inventa nada): " + "; ".join(temas_saber) if temas_saber else ""))
+            "así no se inventa nada): " + "; ".join(temas_saber) if temas_saber else "") + (
+            "\nTEMAS YA TRATADOS EN LAS ÚLTIMAS 3 SEMANAS (no repitas ninguno ni lo reformules; elige otros de la lista verificada): "
+            + "; ".join(usados) if usados else "") +
+            "\nVARIEDAD: como mucho 2 piezas de la semana sobre el mismo subtema; mezcla técnica de pilotaje, configuración del volante y los pedales, ajustes del coche y equipo.")
         log("  Pidiendo el plan a la IA…")
         if os.environ.get("GEMINI_API_KEY"):
             # si Groq se queda sin cupo gratis, el plan se pide a Gemini (también gratis)

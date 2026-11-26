@@ -6,8 +6,8 @@
  "fase": "descubrimiento",
  "objetivo_mes": "Dar a conocer la academia con consejos útiles y verificados de simracing",
  "arco_semana": {
-  "tema": "Domina la primera curva: ajustes y técnicas",
-  "porque": "Los datos muestran que la primera curva es donde se pierden más décimas; ofrecer tips y setups concretos genera valor inmediato y engancha a novatos e intermedios"
+  "tema": "",
+  "porque": ""
  },
  "mezcla": {
   "alcance": 15,
@@ -52,16 +52,13 @@
  ],
  "promesas_pendientes": [],
  "ideas": [
-  "Crear un reto semanal de tiempo en la pista Eau Roue y premiar al mejor setup",
   "Lanzar una encuesta en historias para que la comunidad vote el próximo tema de tutorial",
-  "Publicar un carrusel paso a paso de setup para Spa con enlaces a la app",
-  "Colaborar con un piloto de simracing reconocido para una entrevista breve en reels"
+  "Publicar un carrusel paso a paso de setup para Spa con enlaces a la app"
  ],
  "tono_comunidad": "Energético, motivador y cercano; habla como un compañero de pista que celebra cada progreso y anima a compartir experiencias",
  "hitos": [
   "Alcanzar 1 000 seguidores en Instagram",
-  "Publicar 10 reels de \"Tip rápido del día\" con >100 likes cada uno",
-  "Lanzar el primer desafío comunitario de tiempo en Eau Roue"
+  "Publicar 10 reels de \"Tip rápido del día\" con >100 likes cada uno"
  ],
  "metricas": {
   "publicaciones_medidas": 25,
