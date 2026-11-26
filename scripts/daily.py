@@ -700,6 +700,8 @@ def plan_user(browser, user, key, force=False, redo=None):
                     page.evaluate("a=>{const p=S.today.videos[a[0]];p.beats=a[1];p.estilo_visual=a[2];}", [vi, vp["beats"], vp.get("estilo_visual", "")])
                     log(f"    🎨 Imágenes dirigidas para «{vp.get('tema', '')}»: {vp['beats'][-1]['img'][:90]}…")
             elif vp.get("tipo") in ("post", "carrusel"):  # también las imágenes de carruseles y posts
+                # siempre con foto generada, una por diapositiva (con fondo de color liso quedaban vacíos y todos iguales)
+                page.evaluate("i=>{const p=S.today.videos[i];p.fondo='ia';p.layout='cine';}", vi)
                 if brain.write_slides(vp, user, key, lambda *a: log(*a)):
                     page.evaluate("""a=>{const p=S.today.videos[a[0]];const es=a[1];
                       p.escenas=es.map((e,i)=>({...(p.escenas[i]||{emoji:"",visual:"",visuales:[],foto:"",grafico:null}),titulo:e.titulo,texto:e.texto}));

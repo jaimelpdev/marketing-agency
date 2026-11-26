@@ -538,10 +538,19 @@ Responde SOLO con JSON: {{"entrada":"la entrada del conocimiento que explicas (o
     return False
 
 
+FILLER = re.compile(r"\b(mejora tu|mejorar tu|practica|practicar|anticipa|conduce con|sigue practicando|no te rindas|la clave del éxito|ganar? tiempo|el secreto)\b", re.I)
+
+
+def _overlap(a, b):
+    wa = {w for w in re.findall(r"\w{4,}", a.lower())}
+    wb = {w for w in re.findall(r"\w{4,}", b.lower())}
+    return len(wa & wb) / max(1, min(len(wa), len(wb)))
+
+
 def write_slides(piece, user, key, log=print):
     """Redactor de carruseles y posts: diapositivas que enseñan una idea concreta, sacada del conocimiento verificado."""
     carr = piece.get("tipo") == "carrusel"
-    nmin, nmax = (5, 7) if carr else (1, 3)
+    nmin, nmax = (4, 7) if carr else (1, 1)
     marca = ((user.get("config") or {}).get("marca") or {})
     negocio = json.dumps({k: marca.get(k) for k in ("name", "about", "aud", "pillars", "tone") if marca.get(k)}, ensure_ascii=False)[:1500]
     saber = knowledge_for(user)
@@ -557,14 +566,15 @@ CONOCIMIENTO VERIFICADO DEL SECTOR (elige UNA entrada que encaje con el tema, o 
 """ if saber else "") + f"""
 REGLAS
 - Entre {nmin} y {nmax} {'diapositivas' if carr else 'bloques'}: cada una con "titulo" (2-6 palabras) y "texto" (8-20 palabras) que se pueda leer de un vistazo.
-- {'La primera diapositiva engancha (error común o pregunta); las siguientes explican el porqué y el cómo paso a paso; la última resume y anima a guardar o comentar.' if carr else 'Una idea clara y aplicable.'}
+- {'PORTADA (la 1ª): una promesa o un error CONCRETO del tema ("El error que te hace bloquear en cada frenada"), nada de "el secreto", "trucos" o "ganar tiempo" a secas; su texto dice qué vas a aprender. CONTENIDO (de la 2ª a la penúltima): cada diapositiva enseña UNA cosa DISTINTA y concreta sacada del CONOCIMIENTO: qué pasa, por qué pasa, cómo se hace paso a paso, cómo notar si lo haces bien, el error típico y su arreglo. PROHIBIDO rellenar: nada de diapositivas que solo motivan o repiten otra con otras palabras ("mejora tu pilotaje", "conduce con antelación", "practica cada día", "anticipa cada movimiento"). Si el conocimiento no da para más, haz MENOS diapositivas. CIERRE (la última): resume la idea en una frase y pide guardar el post o comentar.' if carr else 'Un solo bloque con una idea clara, concreta y aplicable sacada del CONOCIMIENTO: el título dice el error o el consejo y el texto explica el cómo. Nada de frases vagas ("mejora tus tiempos", "pierdes valioso tiempo").'}
+- Todo lo que dices tiene que ser CORRECTO según el CONOCIMIENTO; si algo no aparece ahí, no lo digas.
 - Español de España, tuteo, sin voseo y sin palabras de Latinoamérica (di coche, no carro).
 - Nada de cifras, tiempos, porcentajes, ofertas, testimonios ni funciones del negocio que no estén en NEGOCIO o en el CONOCIMIENTO.
 - Sin emojis ni hashtags. No menciones circuitos, curvas, coches ni pilotos concretos.
-- "caption": 2-3 frases que resumen el consejo y acaban con una pregunta.
+- "caption": 2-3 frases que resumen ESTE MISMO consejo (no otro tema) y acaban con una pregunta.
 
 Responde SOLO con JSON: {{"tema":"…","gancho":"…","escenas":[{{"titulo":"…","texto":"…"}}],"caption":"…"}}"""
-    for _ in range(2):
+    for _ in range(3):
         try:
             j = writer_json(prompt, key, log)
         except Exception as e:  # noqa: BLE001
@@ -574,7 +584,9 @@ Responde SOLO con JSON: {{"tema":"…","gancho":"…","escenas":[{{"titulo":"…
               for x in (j.get("escenas") or []) if isinstance(x, dict) and str(x.get("titulo", "")).strip()]
         txt = " ".join(e["titulo"] + " " + e["texto"] for e in es) + " " + str(j.get("gancho", ""))
         bad = [n for n in re.findall(r"\d+(?:[.,]\d+)?", txt) if n not in (saber or "")]
-        if nmin <= len(es) <= nmax + 1 and not bad:
+        relleno = [e["titulo"] for e in es[1:-1] if FILLER.search(e["titulo"] + " " + e["texto"]) and not re.search(r"\b(porque|si |cuando|para que)\b", e["texto"], re.I)]
+        dup = [es[k]["titulo"] for k in range(1, len(es)) for m in range(k) if _overlap(es[k]["titulo"] + " " + es[k]["texto"], es[m]["titulo"] + " " + es[m]["texto"]) > 0.6]
+        if nmin <= len(es) <= nmax + 1 and not bad and not relleno and not dup:
             prev = piece.get("escenas") or []
             piece["escenas"] = [{**(prev[k] if k < len(prev) else {}), **e} for k, e in enumerate(es[:nmax])]
             for k in ("tema", "gancho"):
@@ -585,7 +597,9 @@ Responde SOLO con JSON: {{"tema":"…","gancho":"…","escenas":[{{"titulo":"…
             if len(cap) > 40:
                 piece["caption"] = cap[:600]
             return True
-        prompt += f"\n\nTu respuesta anterior no cumplía (" + (f"cifras inventadas: {', '.join(bad[:4])}" if bad else f"{len(es)} diapositivas") + "). Corrígelo."
+        why = (f"cifras inventadas: {', '.join(bad[:4])}" if bad else f"diapositivas de relleno: {', '.join(relleno[:3])}" if relleno
+               else f"diapositivas repetidas: {', '.join(dup[:3])}" if dup else f"{len(es)} diapositivas")
+        prompt += f"\n\nTu respuesta anterior no cumplía ({why}). Corrígelo."
     log("    ⚠ Redactor: no cumplió las reglas; se mantiene el borrador")
     return False
 
@@ -651,6 +665,12 @@ def art_direct(piece, user, key, log=print, beats=None):
         plan[0] = SHOTS[0]
     rules = shot_rules(user)
     forced = [shot_for(str(b.get("t", "")), rules) for b in beats]
+    if piece.get("tipo") in ("post", "carrusel"):  # en diapositivas manda la variedad: nunca el mismo plano obligado dos veces
+        seen = set()
+        for k, f in enumerate(forced):
+            if f in seen:
+                forced[k] = ""
+            seen.add(f)
     frases = "\n".join(f"{i + 1}. [PLANO {'OBLIGATORIO' if forced[i] else 'SUGERIDO'}: {forced[i] or plan[i]}] {b.get('t', '')}" for i, b in enumerate(beats))
     prompt = f"""Eres director de arte de vídeos cortos faceless (todo con imágenes generadas por IA). Para cada frase hablada eliges UNA imagen que la ilustre de forma que cualquiera entienda la relación al instante.
 
