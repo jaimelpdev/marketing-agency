@@ -56,7 +56,7 @@
     "caption": "Compara tus vueltas con la telemetría para descubrir dónde pierdes tiempo exactamente. ¿Analizas tus datos después de cada sesión de práctica?\n\n#simracing #telemetria #app #simdriver #mejuratutiempo",
     "nota": 8.0,
     "created": "2026-11-20",
-    "status": "lista",
+    "status": "usada",
     "veo": {
       "clips": [
         {
@@ -89,7 +89,8 @@
       "media/u_4163e9db06d1/bolsa/b-2026-11-20-02-reel/video.mp4"
     ],
     "cover": "media/u_4163e9db06d1/bolsa/b-2026-11-20-02-reel/cover.jpg",
-    "listo": "2026-11-22T23:04"
+    "listo": "2026-11-22T23:04",
+    "usada": "2026-11-27-auto-reel"
   },
   {
     "id": "b-2026-11-20-03-historia",
@@ -138,7 +139,7 @@
     "caption": "",
     "nota": 8.0,
     "created": "2026-11-20",
-    "status": "lista",
+    "status": "usada",
     "veo": {
       "clips": [
         {
@@ -166,7 +167,8 @@
       "media/u_4163e9db06d1/bolsa/b-2026-11-20-04-historia/video.mp4"
     ],
     "cover": "media/u_4163e9db06d1/bolsa/b-2026-11-20-04-historia/cover.jpg",
-    "listo": "2026-11-24T01:28"
+    "listo": "2026-11-24T01:28",
+    "usada": "2026-11-28-auto-historia"
   },
   {
     "id": "b-2026-11-20-05-reel",
@@ -176,7 +178,7 @@
     "caption": "Elegir bien tus puntos de referencia cambia por completo tus tiempos en pista. ¿Cuál es tu circuito favorito para entrenar?\n\n#simracing #EauRoue #tips #telemetria #racinglife",
     "nota": 8.0,
     "created": "2026-11-20",
-    "status": "lista",
+    "status": "usada",
     "veo": {
       "clips": [
         {
@@ -214,7 +216,8 @@
       "media/u_4163e9db06d1/bolsa/b-2026-11-20-05-reel/video.mp4"
     ],
     "cover": "media/u_4163e9db06d1/bolsa/b-2026-11-20-05-reel/cover.jpg",
-    "listo": "2026-11-25T14:55"
+    "listo": "2026-11-25T14:55",
+    "usada": "2026-11-28-auto-reel"
   },
   {
     "id": "b-2026-11-20-06-reel",
