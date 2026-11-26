@@ -653,7 +653,7 @@ def plan_user(browser, user, key, force=False, redo=None):
             page.evaluate("""()=>{ if(window.__gsWrapped) return; window.__gsWrapped=true; const orig=window.groqSample;
               window.groqSample=async function(prompt,opts,retried){
                 try{ return await orig(prompt,opts,retried); }
-                catch(e){ if(e&&e.code==="rate_limited"&&window.__geminiText){
+                catch(e){ const msg=String((e&&(e.message||e.code))||""); if(e&&(e.code==="rate_limited"||/too large|tokens per minute|TPM|rate limit|429|413/i.test(msg))&&window.__geminiText){
                     const t=await window.__geminiText(prompt,"Eres un experto en marketing de Instagram en español. Respondes siempre SOLO con JSON válido.");
                     if(t){ console.log("plan con Gemini"); return {text:t}; } }
                   throw e; } }; }""")
