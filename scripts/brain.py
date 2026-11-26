@@ -830,7 +830,7 @@ Responde SOLO con JSON: {{"mundo":"…","persona":"…","evitar":"…","estilo":
                 j, imgs = {**j, **{k2: v for k2, v in j2.items() if v}}, imgs2
         except Exception:  # noqa: BLE001
             pass
-    mundo = str(j.get("mundo") or "").strip()[:260]
+    mundo = str(user.get("escenario_veo") or j.get("mundo") or "").strip()[:300]  # escenario fijo de la marca, si lo tiene
     persona = str(user.get("persona_veo") or j.get("persona") or "").strip()[:110]  # presentador fijo de la marca, si lo tiene
     piece["persona"] = persona
     mundo_no = str(j.get("evitar") or "").strip()[:160]
