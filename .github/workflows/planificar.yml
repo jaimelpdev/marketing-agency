@@ -81,7 +81,7 @@ jobs:
           for i in 1 2 3 4 5; do git pull --rebase && git push && break; sleep 8; done
 
       - uses: actions/configure-pages@v5
-      - uses: actions/upload-pages-artifact@v3
+      - uses: actions/upload-pages-artifact@v4
         with:
           path: docs
       - id: deploy
