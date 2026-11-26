@@ -170,10 +170,19 @@ def compose(segments, voice, rate, mood, out, log=print, music_free_only=False, 
     ev = []
     for s in segs:
         ws = [(s["start"] + 0.15 + a, d, w) for a, d, w in s["words"] if w.strip()]
-        for k in range(0, len(ws), 3):
-            chunk = ws[k:k + 3]
+        # trozos de hasta 3 palabras y ~16 letras: así nunca se salen de la pantalla («NEUMÁTICOS TRASEROS. NOTAR» se cortaba)
+        groups, cur = [], []
+        for x in ws:
+            if cur and (len(cur) >= 3 or len(" ".join(c[2] for c in cur + [x])) > 16):
+                groups.append(cur)
+                cur = []
+            cur.append(x)
+        if cur:
+            groups.append(cur)
+        for gi, chunk in enumerate(groups):
+            nxt = groups[gi + 1][0][0] if gi + 1 < len(groups) else None
             for j, (a, d, w) in enumerate(chunk):
-                end = chunk[j + 1][0] if j + 1 < len(chunk) else (ws[k + 3][0] if k + 3 < len(ws) else a + d + 0.25)
+                end = chunk[j + 1][0] if j + 1 < len(chunk) else (nxt if nxt is not None else a + d + 0.25)
                 txt = " ".join(("{\\c" + YELLOW + "\\fscx108\\fscy108}" + x.upper() + "{\\c&H00FFFFFF&\\fscx100\\fscy100}") if m == j else x.upper()
                                for m, (_, _, x) in enumerate(chunk))
                 ev.append(f"Dialogue: 0,{_ts(a)},{_ts(end)},Cap,,0,0,0,,{{\\pos({W // 2},{int(H * 0.62)})}}{txt}")
