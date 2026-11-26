@@ -3,8 +3,8 @@ claves: [simracing, sim racing, simulador de conducción, simulación de carrera
 planos:
   - "sígueme|sigueme|enlace|biografía|biografia|tu perfil|practica|prueba|pruébalo|próxima sesión|proxima sesion|cuéntame|comenta => medium shot of the driver in the sim racing rig smiling and nodding at the camera"
   - "telemetr|gráfica|grafica|gráficas|graficas|los datos|esos datos|cronómetro|cronometro|vuelta de referencia => over-the-shoulder view of the big monitor showing colourful telemetry graphs, no readable text"
-  - "pedal|aprietas|aprieta|bloque|freno|frena|frenad|frenar|acelerador|acelera|el pie|los pies|pisa|levantas|soltar el|sueltas|suelta => close-up of the driver's feet on the pedals of the sim racing rig"
-  - "volante|giras|girar|gira el|contravolante|las manos|agarra => close-up of the driver's hands turning the steering wheel of the sim racing rig"
+  - "pedal|aprietas|aprieta|bloque|freno|frena|frenad|frenar|acelerador|acelera|el pie|los pies|pisa|levantas|soltar el|sueltas|suelta => side close-up of the driver's feet on a sim racing pedal set (three metal pedals on an aluminium frame), black trainers"
+  - "volante|giras|girar|gira el|contravolante|las manos|agarra => close-up of the driver's hands on a sim racing steering wheel with buttons, mounted on an aluminium rig"
   - "curva|vértice|vertice|trazada|morro|subvira|sobrevira|derrap|trompo|se abre|se cierra|rota|rotar|agarre|salida de|recta|adelant => over-the-shoulder view of the big monitor showing a race car in the game from the chase camera"
 descripcion: Banco de conocimiento verificado de técnica y configuración en simracing (fuentes: guías de Driver61, Coach Dave Academy, VRS, Track Titan, SimRacingSetup).
 ---

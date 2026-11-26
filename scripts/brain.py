@@ -839,7 +839,14 @@ Responde SOLO con JSON: {{"mundo":"…","persona":"…","evitar":"…","estilo":
             log(f"    ↺ Plano corregido en la frase {k + 1}: debía ser «{forced[k][:50]}…»")
             im = forced[k]  # sin el resto: mejor un plano sencillo y correcto que uno que mezcle cosas que no van
         # el plano y el sujeto primero (si el escenario va delante, todas salen como plano general); el escenario después
-        who = ("; the person is " + persona) if persona and re.search(r"\b(person|man|woman|gamer|driver|he|she|his|her|hands?|feet|foot|face|racer|player)\b", im, re.I) else ""
+        detalle = re.search(r"\b(close-up|extreme close-up|macro)\b", im, re.I) and re.search(r"\b(feet|foot|hands?|pedals?|wheel|fingers?)\b", im, re.I)
+        if detalle:
+            # primer plano de pies o manos: nada de describir a la persona ni la sala entera (si no, la IA pinta un retrato
+            # y la sala, y el detalle del que se habla desaparece)
+            b["img"] = (im.rstrip(".") + ". Tight framing: only that detail fills the image, no face, no monitor, no room"
+                        + (". " + mundo_no if mundo_no else ""))[:800]
+            continue
+        who = ("; the person is " + persona) if persona and re.search(r"\b(person|man|woman|gamer|driver|he|she|his|her|face|racer|player)\b", im, re.I) else ""
         b["img"] = (im.rstrip(".") + who + (". Setting: " + mundo if mundo else "") + (". " + mundo_no if mundo_no else ""))[:800]
     if j.get("estilo"):
         piece["estilo_visual"] = str(j["estilo"])[:200]
