@@ -604,6 +604,72 @@ Responde SOLO con JSON: {{"tema":"…","gancho":"…","escenas":[{{"titulo":"…
     return False
 
 
+HASH_BAN = {"linkenbio", "linkinbio", "viral", "fyp", "foryou", "parati", "reels", "reel", "instagood", "instagram", "explore", "explorepage", "trending", "follow", "like4like"}
+
+
+def _tags(raw, marca_name):
+    out = []
+    for h in re.findall(r"#?([A-Za-zÁÉÍÓÚÜÑáéíóúüñ0-9_]{3,30})", str(raw or "")):
+        t = h.lower()
+        if t in HASH_BAN or t in out or t.isdigit():
+            continue
+        out.append(t)
+    brand = re.sub(r"[^a-z0-9ñ]", "", str(marca_name or "").lower())
+    if brand and 3 <= len(brand) <= 25:
+        out = [t for t in out if t != brand][:4] + [brand]
+    return " ".join("#" + t for t in out[:5])
+
+
+def write_caption(piece, user, key, log=print):
+    """Pie de foto que funciona por sí solo: primera línea que engancha, el consejo resumido (sirve aunque no veas
+    el vídeo), una llamada a la acción concreta y 3-5 hashtags relevantes."""
+    if piece.get("tipo") == "historia":
+        return False
+    marca = ((user.get("config") or {}).get("marca") or {})
+    negocio = json.dumps({k: marca.get(k) for k in ("name", "about", "aud", "tone") if marca.get(k)}, ensure_ascii=False)[:900]
+    if piece.get("beats"):
+        contenido = " ".join(str(b.get("t", "")) for b in piece["beats"])
+    else:
+        contenido = " | ".join(f"{e.get('titulo', '')}: {e.get('texto', '')}" for e in piece.get("escenas") or [])
+    saber = knowledge_for(user)
+    formato = {"reel": "un reel", "carrusel": "un carrusel", "post": "un post de imagen"}.get(piece.get("tipo"), "una publicación")
+    prompt = f"""Escribe el pie de foto (caption) de Instagram para {formato}.
+NEGOCIO: {negocio}
+TEMA: {piece.get('tema', '')}
+LO QUE DICE LA PUBLICACIÓN: {contenido[:1500]}
+
+REGLAS
+- Línea 1 (máximo 100 caracteres): engancha con el problema o el resultado, usando las palabras que alguien buscaría (por ejemplo "Si bloqueas al frenar, esto es lo que falla"). No empieces con "¿Sabías que", "Descubre" ni "En este vídeo".
+- Después, en 2-4 líneas cortas, el consejo resumido para que sirva aunque no vean la publicación: qué hacer y por qué. Puedes usar líneas que empiecen por "→". Solo cosas que dice la publicación; nada nuevo.
+- Última línea: UNA llamada a la acción concreta y relacionada (guardarlo para la próxima sesión, comentar cómo lo hacen ellos, o comentar una palabra). Nada de "link en la bio" ni "sígueme para más".
+- Español de España, tuteo, sin voseo. Como mucho 1 emoji en todo el texto. Nada de cifras que no estén en la publicación.
+- "hashtags": de 3 a 5, en minúsculas y sin tildes, relevantes para este tema (uno general del sector y el resto concretos del tema). Nada de #viral, #reels, #linkenbio ni parecidos.
+
+Responde SOLO con JSON: {{"caption":"…","hashtags":"#… #… #…"}}"""
+    for _ in range(2):
+        try:
+            j = writer_json(prompt, key, log)
+        except Exception as e:  # noqa: BLE001
+            log(f"    ⚠ Caption: {e}")
+            return False
+        cap = de_voseo(str(j.get("caption") or "").strip())
+        cap = re.sub(r"[ \t]+\n", "\n", cap)
+        cap = re.sub(r"\n{3,}", "\n\n", cap)
+        bad = [n for n in re.findall(r"\d+(?:[.,]\d+)?", cap) if n not in contenido and n not in (saber or "")]
+        first = cap.split("\n", 1)[0]
+        if 60 <= len(cap) <= 900 and len(first) <= 130 and not bad and not re.search(r"link en (la )?bio|sígueme para", cap, re.I):
+            piece["caption"] = cap
+            tags = _tags(j.get("hashtags"), marca.get("name"))
+            if tags:
+                piece["hashtags"] = tags
+            log(f"    🏷 Caption: «{first[:70]}» · {piece.get('hashtags', '')}")
+            return True
+        prompt += "\n\nTu respuesta anterior no cumplía las reglas (" + (f"cifras inventadas: {', '.join(bad[:3])}" if bad else "longitud o llamada a la acción") + "). Corrígelo."
+    log("    ⚠ Caption: no cumplió las reglas; se mantiene el anterior")
+    piece["hashtags"] = _tags(piece.get("hashtags"), marca.get("name")) or piece.get("hashtags", "")
+    return False
+
+
 def beats_of(piece):
     """Momentos de una pieza que no es faceless (gancho, escenas, cierre), para dirigir sus imágenes."""
     out = [{"t": piece.get("gancho", ""), "img": piece.get("visual", "")}]

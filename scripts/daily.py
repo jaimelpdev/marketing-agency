@@ -712,6 +712,10 @@ def plan_user(browser, user, key, force=False, redo=None):
                 if len(bs) >= 2 and brain.art_direct(vp, user, key, lambda *a: log(*a), beats=bs):
                     page.evaluate("""a=>{const p=S.today.videos[a[0]];const b=a[1];p.visual=b[0].img;(p.escenas||[]).forEach((e,i)=>{if(b[i+1])e.visual=b[i+1].img;});}""", [vi, bs])
                     log(f"    🎨 Imágenes dirigidas para «{vp.get('tema', '')}»: {bs[0]['img'][:90]}…")
+        # 🏷 pies de foto: por pieza, a partir de lo que de verdad dice (guion o diapositivas ya escritos)
+        for vi, vp in enumerate(vids):
+            if vp.get("tipo") != "historia" and brain.write_caption(vp, user, key, lambda *a: log(*a)):
+                page.evaluate("a=>{const p=S.today.videos[a[0]];p.caption=a[1];p.hashtags=a[2];}", [vi, vp["caption"], vp.get("hashtags", "")])
         # 🎥 modo «Veo obligatorio»: los vídeos no se renderizan con imágenes; van a la bolsa y el calendario guarda su hueco
         huecos, bolsa_pieces = [], []
         if str(plan_conf.get("veo_modo", "si_hay")) == "obligatorio" and not redo:
