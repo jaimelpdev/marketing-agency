@@ -151,39 +151,38 @@
     "zernioPostId": "6b070221a72eef9e866e5630"
   },
   {
-    "id": "2026-11-26-r002902-post",
+    "id": "2026-11-26-r100508-post",
     "date": "2026-11-26",
     "source": "redo",
     "tipo": "post",
-    "tema": "Error común al abordar la primera curva",
+    "tema": "Transferencia de peso en curvas",
     "publishAt": "2026-11-29T13:30:00+01:00",
-    "caption": "Evitar estos fallos al abordar una curva mejora drásticamente tus tiempos por vuelta. ¿Aplicas la frenada degresiva en tus sesiones de simracing?\n\n#simracing #primeracurva #consejossim #pilotosonline #academiaSim #mejoratuvelocidad #linkenbio",
+    "caption": "¿Subviras al entrar en curva y no sabes por qué te pasa?\n\n→ Usa el freno para girar.\n→ Frenar carga el eje delantero.\n→ Da más agarre al morro para entrar en la curva.\n\nGuarda este consejo para tu próxima sesión en el simulador 🏎️\n\n#simracing #transferenciadepeso #trailbraking #setup",
     "media": [
-      "media/u_4163e9db06d1/2026-11-26/2026-11-26-r002902-post/01.jpg"
+      "media/u_4163e9db06d1/2026-11-26/2026-11-26-r100508-post/01.jpg"
     ],
     "status": "scheduled",
     "attempts": 0,
-    "zernioPostId": "6b07701d6bb242efc06beada"
+    "zernioPostId": "6b07f6b37bb6a32b3fb8a875"
   },
   {
-    "id": "2026-11-26-r003312-carrusel",
+    "id": "2026-11-26-r100726-carrusel",
     "date": "2026-11-26",
     "source": "redo",
     "tipo": "carrusel",
-    "tema": "Mira lejos en la primera curva",
+    "tema": "Subviraje: detecta y corrige en 3 pasos",
     "publishAt": "2026-11-30T13:30:00+01:00",
-    "caption": "Aprende a mirar hacia adelante para ganar velocidad en cada giro. ¿A dónde sueles mirar cuando entras en una curva?\n\n#SimRacing #SimracingTips #MiraLejos #PrimeraCurva #CarreraVirtual",
+    "caption": "¿Tu coche no gira y se sale al tomar la curva? Eso es subviraje.\n\n→ Entras muy rápido, sueltas el freno de golpe o giras demasiado el volante.\n→ Usa el trail braking: mantén algo de freno al girar en lugar de soltarlo de golpe.\n→ Graba tu vuelta con nuestra app, compárala con la de referencia y practica.\n\nGuarda este post para tu próxima sesión en pista.\n\n#simracing #subviraje #trailbraking #esports",
     "media": [
-      "media/u_4163e9db06d1/2026-11-26/2026-11-26-r003312-carrusel/01.jpg",
-      "media/u_4163e9db06d1/2026-11-26/2026-11-26-r003312-carrusel/02.jpg",
-      "media/u_4163e9db06d1/2026-11-26/2026-11-26-r003312-carrusel/03.jpg",
-      "media/u_4163e9db06d1/2026-11-26/2026-11-26-r003312-carrusel/04.jpg",
-      "media/u_4163e9db06d1/2026-11-26/2026-11-26-r003312-carrusel/05.jpg",
-      "media/u_4163e9db06d1/2026-11-26/2026-11-26-r003312-carrusel/06.jpg",
-      "media/u_4163e9db06d1/2026-11-26/2026-11-26-r003312-carrusel/07.jpg"
+      "media/u_4163e9db06d1/2026-11-26/2026-11-26-r100726-carrusel/01.jpg",
+      "media/u_4163e9db06d1/2026-11-26/2026-11-26-r100726-carrusel/02.jpg",
+      "media/u_4163e9db06d1/2026-11-26/2026-11-26-r100726-carrusel/03.jpg",
+      "media/u_4163e9db06d1/2026-11-26/2026-11-26-r100726-carrusel/04.jpg",
+      "media/u_4163e9db06d1/2026-11-26/2026-11-26-r100726-carrusel/05.jpg",
+      "media/u_4163e9db06d1/2026-11-26/2026-11-26-r100726-carrusel/06.jpg"
     ],
     "status": "scheduled",
     "attempts": 0,
-    "zernioPostId": "6b07725a9fcb1ba61d11dc80"
+    "zernioPostId": "6b07f8b7f3fd1140a74b5bd4"
   }
 ]
