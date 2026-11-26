@@ -1075,6 +1075,17 @@
       "objetivo": "confianza"
     },
     {
+      "date": "2026-11-26",
+      "tema": "Trazada y frenada en la primera curva",
+      "formato": "dato curioso o sorprendente",
+      "tipo": "carrusel",
+      "layout": "cine",
+      "plantilla": 571,
+      "look": 8,
+      "serie": "",
+      "objetivo": ""
+    },
+    {
       "date": "2026-11-27",
       "tema": "¿El pedal de freno en la primera curva te hace perder tiempo?",
       "formato": "historia",
@@ -1109,14 +1120,14 @@
     },
     {
       "date": "2026-11-26",
-      "tema": "Trazada y frenada en la primera curva",
-      "formato": "dato curioso o sorprendente",
+      "tema": "Mira lejos: anticipación de la línea",
+      "formato": "checklist",
       "tipo": "carrusel",
       "layout": "cine",
-      "plantilla": 571,
+      "plantilla": 464,
       "look": 8,
       "serie": "",
-      "objetivo": ""
+      "objetivo": "confianza"
     }
   ]
 }
