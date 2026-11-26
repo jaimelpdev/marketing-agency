@@ -5,7 +5,7 @@ planos:
   - "telemetr|gráfica|grafica|gráficas|graficas|los datos|esos datos|cronómetro|cronometro|vuelta de referencia => over-the-shoulder view of the big monitor showing colourful telemetry graphs, no readable text"
   - "pedal|aprietas|aprieta|bloque|freno|frena|frenad|frenar|acelerador|acelera|el pie|los pies|pisa|levantas|soltar el|sueltas|suelta => side close-up of the driver's feet on a sim racing pedal set (three metal pedals on an aluminium frame), black trainers"
   - "volante|giras|girar|gira el|contravolante|las manos|agarra => close-up of the driver's hands on a sim racing steering wheel with buttons, mounted on an aluminium rig"
-  - "curva|vértice|vertice|trazada|morro|subvira|sobrevira|derrap|trompo|se abre|se cierra|rota|rotar|agarre|salida de|recta|adelant => over-the-shoulder view of the big monitor showing a race car in the game from the chase camera"
+  - "curva|vértice|vertice|trazada|morro|subvira|sobrevira|derrap|trompo|se abre|se cierra|rota|rotar|agarre|salida de|recta|adelant => over-the-shoulder view of the big monitor showing the game from the cockpit camera, the road and the corner ahead flowing smoothly towards the viewer, no car body visible"
 descripcion: Banco de conocimiento verificado de técnica y configuración en simracing (fuentes: guías de Driver61, Coach Dave Academy, VRS, Track Titan, SimRacingSetup).
 ---
 # Técnica de pilotaje

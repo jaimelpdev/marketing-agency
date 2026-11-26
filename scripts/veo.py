@@ -13,7 +13,8 @@ YELLOW = "&H000AD6FF&"  # #FFD60A en el orden BGR de los subtítulos ASS
 FONT_URL = "https://github.com/JulietaUla/Montserrat/raw/master/fonts/ttf/Montserrat-ExtraBold.ttf"
 MAX_CLIPS = {"reel": 5, "historia": 3}  # 50 créditos gratis al día en Flow = 5 clips de Veo 3.1 Lite
 TAIL = ("smooth natural camera movement, vertical 9:16 video, photorealistic, bright natural light, sharp focus, "
-        "no text, no captions, no logos, no brand names, no watermark")
+        "no text, no captions, no logos, no brand names, no watermark. Anything on a screen is seen from the driver's cockpit "
+        "and only moves forward along the road: no car spinning, sliding, turning around or facing the camera")
 WORDS_PER_S = 2.7
 
 
