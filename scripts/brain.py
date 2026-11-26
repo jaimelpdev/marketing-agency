@@ -608,7 +608,7 @@ CONOCIMIENTO VERIFICADO DEL SECTOR (elige UNA entrada que encaje con el tema, o 
 REGLAS
 - Entre {nmin} y {nmax} {'diapositivas' if carr else 'bloques'}: cada una con "titulo" (2-6 palabras) y "texto" (8-20 palabras) que se pueda leer de un vistazo.
 - {'PORTADA (la 1ª): una promesa o un error CONCRETO del tema ("El error que te hace bloquear en cada frenada"), nada de "el secreto", "trucos" o "ganar tiempo" a secas; su texto dice qué vas a aprender. CONTENIDO (de la 2ª a la penúltima): cada diapositiva enseña UNA cosa DISTINTA y concreta sacada del CONOCIMIENTO: qué pasa, por qué pasa, cómo se hace paso a paso, cómo notar si lo haces bien, el error típico y su arreglo. PROHIBIDO rellenar: nada de diapositivas que solo motivan o repiten otra con otras palabras ("mejora tu pilotaje", "conduce con antelación", "practica cada día", "anticipa cada movimiento"). Si el conocimiento no da para más, haz MENOS diapositivas. CIERRE (la última): resume la idea en una frase y pide guardar el post o comentar.' if carr else 'Un solo bloque con una idea clara, concreta y aplicable sacada del CONOCIMIENTO: el título dice el error o el consejo y el texto explica el cómo. Nada de frases vagas ("mejora tus tiempos", "pierdes valioso tiempo").'}
-- Todo lo que dices tiene que ser CORRECTO según el CONOCIMIENTO; si algo no aparece ahí, no lo digas.
+- Todo lo que dices tiene que ser CORRECTO según el CONOCIMIENTO; si algo no aparece ahí, no lo digas. Nada de exageraciones ("duplica", "triplica", "x2", "el truco definitivo") ni de decir qué hace la app o el producto del negocio si NEGOCIO no lo explica.
 - Español de España, tuteo, sin voseo y sin palabras de Latinoamérica (di coche, no carro).
 - Nada de cifras, tiempos, porcentajes, ofertas, testimonios ni funciones del negocio que no estén en NEGOCIO o en el CONOCIMIENTO.
 - Sin emojis ni hashtags. No menciones circuitos, curvas, coches ni pilotos concretos (sí puedes nombrar el simulador si el consejo vale tal cual en él).
@@ -627,6 +627,8 @@ Responde SOLO con JSON: {{"tema":"…","gancho":"…","escenas":[{{"titulo":"…
         bad = [n for n in re.findall(r"\d+(?:[.,]\d+)?", txt) if n not in (saber or "")]
         relleno = [e["titulo"] for e in es[1:-1] if FILLER.search(e["titulo"] + " " + e["texto"]) and not re.search(r"\b(porque|si |cuando|para que)\b", e["texto"], re.I)]
         dup = [es[k]["titulo"] for k in range(1, len(es)) for m in range(k) if _overlap(es[k]["titulo"] + " " + es[k]["texto"], es[m]["titulo"] + " " + es[m]["texto"]) > 0.6]
+        hype = [e["titulo"] for e in es if re.search(r"\b(duplica|triplica|multiplica|x2|definitiv)", e["titulo"] + " " + e["texto"], re.I)]
+        relleno += hype
         if nmin <= len(es) <= nmax + 1 and not bad and not relleno and not dup:
             prev = piece.get("escenas") or []
             piece["escenas"] = [{**(prev[k] if k < len(prev) else {}), **e} for k, e in enumerate(es[:nmax])]
@@ -683,7 +685,7 @@ REGLAS
 - Línea 1 (máximo 100 caracteres): engancha con el problema o el resultado, usando las palabras que alguien buscaría (por ejemplo "Si bloqueas al frenar, esto es lo que falla"). No empieces con "¿Sabías que", "Descubre" ni "En este vídeo".
 - Después, en 2-4 líneas cortas, el consejo resumido para que sirva aunque no vean la publicación: qué hacer y por qué. Puedes usar líneas que empiecen por "→". Solo cosas que dice la publicación; nada nuevo.
 - Última línea: UNA llamada a la acción concreta y relacionada (guardarlo para la próxima sesión, comentar cómo lo hacen ellos, o comentar una palabra). Nada de "link en la bio" ni "sígueme para más".
-- Español de España, tuteo, sin voseo. Como mucho 1 emoji en todo el texto. Nada de cifras que no estén en la publicación.
+- Español de España, tuteo, sin voseo. Como mucho 1 emoji en todo el texto. Nada de cifras que no estén en la publicación, ni exageraciones ("duplica", "x2"), ni funciones de la app o el producto que NEGOCIO no explique.
 - "hashtags": de 3 a 5, en minúsculas y sin tildes, relevantes para este tema (uno general del sector y el resto concretos del tema). Nada de #viral, #reels, #linkenbio ni parecidos.
 
 Responde SOLO con JSON: {{"caption":"…","hashtags":"#… #… #…"}}"""
