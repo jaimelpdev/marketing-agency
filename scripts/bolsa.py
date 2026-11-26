@@ -154,6 +154,40 @@ def assemble(user, bid, log=print):
     return True
 
 
+HORA = {"reel": "19:30", "historia": "09:00"}
+
+
+def add_slots(queue, bolsa, now, tz, log=print, days=3):
+    """Si hay vídeos montados esperando y en los próximos días no hay hueco de ese tipo, crea uno (un reel y una
+    historia al día como mucho, a la hora habitual de la cuenta): así lo que genera Veo cada día no se queda parado."""
+    from collections import Counter
+    listos = Counter(b["tipo"] for b in bolsa if b.get("status") == "lista")
+    huecos = Counter(q["tipo"] for q in queue if q.get("status") == "hueco")
+    added = False
+    for tipo in ("reel", "historia"):
+        libres = listos.get(tipo, 0) - huecos.get(tipo, 0)
+        if libres <= 0:
+            continue
+        horas = Counter(datetime.fromisoformat(q["publishAt"]).astimezone(tz).strftime("%H:%M") for q in queue if q.get("tipo") == tipo and q.get("publishAt"))
+        hora = horas.most_common(1)[0][0] if horas else HORA[tipo]
+        for d in range(1, days + 1):
+            if libres <= 0:
+                break
+            day = (now + timedelta(days=d)).date()
+            mismos = ("reel", "post", "carrusel") if tipo == "reel" else ("historia",)  # un solo contenido de feed al día
+            if any(q.get("tipo") in mismos and q.get("status") not in ("removed", "cancelled", "failed", "sin_veo")
+                   and datetime.fromisoformat(q["publishAt"]).astimezone(tz).date() == day for q in queue):
+                continue
+            hh, mm = map(int, hora.split(":"))
+            when = datetime(day.year, day.month, day.day, hh, mm, tzinfo=tz)
+            queue.append({"id": f"{day.isoformat()}-auto-{tipo}", "date": now.date().isoformat(), "source": "auto", "tipo": tipo, "tema": "",
+                          "publishAt": when.isoformat(), "caption": "", "media": [], "status": "hueco", "attempts": 0})
+            libres -= 1
+            added = True
+            log(f"  ➕ Hueco nuevo de {tipo} el {when.strftime('%d/%m %H:%M')} para un vídeo de Veo ya montado")
+    return added
+
+
 def fill(user, queue, tz, log=print):
     """Rellena los huecos de vídeo del calendario con los mejores vídeos ya montados de la bolsa.
     Los huecos cuya hora ya ha pasado sin vídeo se marcan como no publicados. Devuelve True si cambió algo."""
@@ -161,7 +195,7 @@ def fill(user, queue, tz, log=print):
     uid = user["id"]
     bolsa = load(uid)
     now = datetime.now(tz)
-    changed = False
+    changed = add_slots(queue, bolsa, now, tz, log)
     for h in sorted([q for q in queue if q.get("status") == "hueco"], key=lambda q: q["publishAt"]):
         when = datetime.fromisoformat(h["publishAt"])
         if when < now + timedelta(minutes=15):
