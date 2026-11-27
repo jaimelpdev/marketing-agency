@@ -13,6 +13,7 @@ concurrency:
 jobs:
   demo:
     runs-on: ubuntu-latest
+    environment: github-pages  # ahí están las claves de la agencia
     timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
