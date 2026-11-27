@@ -238,12 +238,41 @@
     "date": "2026-11-27",
     "source": "auto",
     "tipo": "historia",
-    "tema": "",
+    "tema": "Frenada progresiva en la primera curva",
     "publishAt": "2026-11-30T09:00:00+01:00",
     "caption": "",
-    "media": [],
-    "status": "hueco",
-    "attempts": 0
+    "media": [
+      "media/u_4163e9db06d1/bolsa/b-2026-11-25-03-historia/video.mp4"
+    ],
+    "status": "scheduled",
+    "attempts": 0,
+    "bolsa": "b-2026-11-25-03-historia",
+    "cover": "media/u_4163e9db06d1/bolsa/b-2026-11-25-03-historia/cover.jpg",
+    "zernioPostId": "6b0a0da267b73e0d1fd7684e",
+    "veo": {
+      "clips": [
+        {
+          "t": "¿Frenas demasiado pronto en la primera curva? Al frenar muy temprano pierdes carga en las ruedas delanteras.",
+          "prompt": "2 shots with hard cuts between them. Shot 1 (0-3 s): close-up of the driver's feet on the pedals of the sim racing rig, foot pressing brake pedal too early before the first turn. Shot 2 (3-8 s): close-up of the driver's feet on the pedals of the sim racing rig, foot holding brake while front wheels spin lightly on screen. The person is always the same: a Spanish man in his late twenties with short dark hair, light stubble and a plain black t-shirt. Setting: aluminium sim racing rig with bucket seat, wheel and pedals in home gaming room. Avoid: not a real car interior, no dashboard. smooth natural camera movement, vertical 9:16 video, photorealistic, bright natural light, sharp focus, no text, no captions, no logos, no brand names, no watermark. Anything on a screen is seen from the driver's cockpit and only moves forward along the road: no car spinning, sliding, turning around or facing the camera",
+          "dur": 8
+        },
+        {
+          "t": "Usa trail braking: frena fuerte en recta y suelta suave al girar.",
+          "prompt": "close-up of the driver's feet on the pedals of the sim racing rig, foot braking hard then smoothly easing as wheel turns. The person is always the same: a Spanish man in his late twenties with short dark hair, light stubble and a plain black t-shirt. Setting: aluminium sim racing rig with bucket seat, wheel and pedals in home gaming room. Avoid: not a real car interior, no dashboard. smooth natural camera movement, vertical 9:16 video, photorealistic, bright natural light, sharp focus, no text, no captions, no logos, no brand names, no watermark. Anything on a screen is seen from the driver's cockpit and only moves forward along the road: no car spinning, sliding, turning around or facing the camera",
+          "dur": 6
+        },
+        {
+          "t": "Elige un punto fijo de referencia para frenar y mantén presión ligera. Siente el morro girar y gana tiempo; sígueme para más trucos.",
+          "prompt": "2 shots with hard cuts between them. Shot 1 (0-4 s): close-up of the driver's feet on the pedals of the sim racing rig, foot applying light brake pressure while eyes focus on a fixed track marker. Shot 2 (4-8 s): medium shot of the driver in the sim racing rig smiling and nodding at the camera, showing confidence after mastering the braking technique. The person is always the same: a Spanish man in his late twenties with short dark hair, light stubble and a plain black t-shirt. Setting: aluminium sim racing rig with bucket seat, wheel and pedals in home gaming room. Avoid: not a real car interior, no dashboard. smooth natural camera movement, vertical 9:16 video, photorealistic, bright natural light, sharp focus, no text, no captions, no logos, no brand names, no watermark. Anything on a screen is seen from the driver's cockpit and only moves forward along the road: no car spinning, sliding, turning around or facing the camera",
+          "dur": 8
+        }
+      ],
+      "voz": "es-ES-ElviraNeural",
+      "ritmo": "+8%",
+      "musica": "divertida",
+      "hashtags": "#simracing #freno #firstcorner #community"
+    },
+    "revisada": true
   },
   {
     "id": "2026-11-27-r230238-carrusel",

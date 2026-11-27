@@ -423,7 +423,7 @@
     "caption": "",
     "nota": 9.0,
     "created": "2026-11-25",
-    "status": "pendiente",
+    "status": "usada",
     "dir": 2,
     "veo": {
       "clips": [
@@ -447,7 +447,14 @@
       "ritmo": "+8%",
       "musica": "divertida",
       "hashtags": "#simracing #freno #firstcorner #community"
-    }
+    },
+    "intentos": {},
+    "media": [
+      "media/u_4163e9db06d1/bolsa/b-2026-11-25-03-historia/video.mp4"
+    ],
+    "cover": "media/u_4163e9db06d1/bolsa/b-2026-11-25-03-historia/cover.jpg",
+    "listo": "2026-11-27T23:09",
+    "usada": "2026-11-27-04-historia"
   },
   {
     "id": "b-2026-11-27-01-historia",
