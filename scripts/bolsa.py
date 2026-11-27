@@ -40,6 +40,7 @@ def add(user, pieces, today, log=print):
         clips = veo.plan_clips(p)
         if not clips:
             continue
+        _, captura = veo.split_producto(p)
         seq = 1 + max([int(x["id"].split("-")[4]) for x in bolsa if x["id"].startswith(f"b-{today}-")] or [0])
         bid = f"b-{today}-{seq:02d}-{p['tipo']}"
         caption = (str(p.get("caption", "")) + "\n\n" + str(p.get("hashtags", ""))).strip() if p["tipo"] != "historia" else ""
@@ -49,7 +50,8 @@ def add(user, pieces, today, log=print):
             "veo": {"clips": clips,
                     "voz": daily.VOICES.get(p.get("voz") if p.get("voz") in ("mujer", "hombre") else "mujer"),
                     "ritmo": daily.RATES.get(p.get("ritmo_voz") or "normal", "+8%"),
-                    "musica": p.get("musica") or "", "hashtags": p.get("hashtags", "")},
+                    "musica": p.get("musica") or "", "hashtags": p.get("hashtags", ""),
+                    **({"captura": captura} if captura else {})},
         })
         n += 1
         log(f"    🎥 A la bolsa: {p['tipo']} «{p.get('tema', '')}» ({len(clips)} clips, nota {p.get('nota') or '-'})")
@@ -140,6 +142,12 @@ def assemble(user, bid, log=print):
         if malos:
             reject_clips(user, bolsa, b, malos, log)
             return False
+        if v.get("captura"):  # el final del vídeo de producto: captura real de la app
+            try:
+                segs.append({"clip": veo.image_clip(v["captura"]["url"], Path(td) / "captura.mp4"), "t": v["captura"]["t"]})
+                log("    📸 Final con captura real de la app")
+            except Exception as e:  # noqa: BLE001
+                log(f"    ⚠ No se pudo usar la captura ({e}); el vídeo acaba sin ella")
         folder = daily.DOCS / "media" / uid / "bolsa" / bid
         if folder.exists():
             shutil.rmtree(folder)

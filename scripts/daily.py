@@ -694,6 +694,16 @@ def plan_user(browser, user, key, force=False, redo=None):
         log("  Estrategia:", page.evaluate("S.today.estrategia"))
         # 🎨 director de arte: cada frase de los vídeos faceless con una imagen concreta del mundo del negocio
         vids = page.evaluate("JSON.parse(JSON.stringify(S.today.videos))")
+        # 🛒 piezas de producto: 1 de cada 3 reels/carruseles termina con lo que hace la app y dónde descargarla
+        _prod = brain.producto(user)
+        if _prod:
+            cand = [vp for vp in vids if vp.get("tipo") in ("reel", "carrusel")]
+            for k, vp in enumerate(cand):
+                if k % 3 == 1 or (len(cand) <= 2 and k == len(cand) - 1):
+                    vp["producto"] = True
+                    vp["producto_nombre"] = _prod["nombre"]
+                    vp["captura_url"] = brain.captura_para(_prod, str(vp.get("tema", "")) + " " + str(vp.get("gancho", "")))
+                    log(f"    🛒 Pieza de producto: {vp['tipo']} «{vp.get('tema', '')}»")
         for vi, vp in enumerate(vids):
             if vp.get("layout") == "faceless" and TYPES_VIDEO(vp):
                 if brain.write_script(vp, user, key, lambda *a: log(*a)):
@@ -718,6 +728,10 @@ def plan_user(browser, user, key, force=False, redo=None):
                 if len(bs) >= 2 and brain.art_direct(vp, user, key, lambda *a: log(*a), beats=bs):
                     page.evaluate("""a=>{const p=S.today.videos[a[0]];const b=a[1];p.visual=b[0].img;(p.escenas||[]).forEach((e,i)=>{if(b[i+1])e.visual=b[i+1].img;});}""", [vi, bs])
                     log(f"    🎨 Imágenes dirigidas para «{vp.get('tema', '')}»: {bs[0]['img'][:90]}…")
+                caps = [(k, e["captura"]) for k, e in enumerate(vp.get("escenas") or []) if e.get("captura")]
+                if caps:  # captura real de la app en la diapositiva del producto
+                    page.evaluate("""a=>{const p=S.today.videos[a[0]];a[1].forEach(([k,u])=>{if(p.escenas[k])p.escenas[k].visual='CAPTURA '+u;});}""", [vi, caps])
+                    log(f"    📸 Captura de la app en la diapositiva {caps[0][0] + 1}")
         # 🏷 pies de foto: por pieza, a partir de lo que de verdad dice (guion o diapositivas ya escritos)
         for vi, vp in enumerate(vids):
             if vp.get("tipo") != "historia" and brain.write_caption(vp, user, key, lambda *a: log(*a)):
@@ -1241,7 +1255,34 @@ def gen_pollinations(prompt, seed, log=print):
     return ""
 
 
+def gen_captura(url):
+    """Una captura real del producto (de su web), en vez de una imagen generada."""
+    r = requests.get(url, timeout=60, headers={"user-agent": "Mozilla/5.0 agencia"})
+    r.raise_for_status()
+    return "data:image/jpeg;base64," + base64.b64encode(vertical_captura(r.content)).decode()
+
+
+def vertical_captura(data, W=1080, H=1920):
+    """Una captura apaisada, en vertical: entera y nítida arriba, sobre un fondo desenfocado de ella misma
+    (abajo queda sitio para el texto de la diapositiva)."""
+    with tempfile.TemporaryDirectory() as td:
+        src, out = Path(td) / "c.img", Path(td) / "o.jpg"
+        src.write_bytes(data)
+        subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-i", str(src), "-filter_complex",
+                        f"[0]scale={W}:{H}:force_original_aspect_ratio=increase,crop={W}:{H},boxblur=30:3,eq=brightness=-0.25[bg];"
+                        f"[0]scale={W - 60}:-2[fg];[bg][fg]overlay=(W-w)/2:H*0.14,format=yuvj420p",
+                        "-frames:v", "1", "-q:v", "3", str(out)], check=True)
+        return out.read_bytes()
+
+
 def gen_image(prompt, seed, log=print):
+    m = re.search(r"CAPTURA (https?://\S+?\.(?:jpe?g|png|webp))", str(prompt))
+    if m:
+        try:
+            return gen_captura(m.group(1))
+        except Exception as e:  # noqa: BLE001
+            log(f"    ⚠ No se pudo bajar la captura ({e}); uso una imagen generada")
+            prompt = str(prompt).replace(m.group(0), "over-the-shoulder view of the big monitor showing a sim racing telemetry app")
     d = gen_image_worker(prompt, seed, log) or gen_pollinations(prompt, seed, log)
     if not d:
         return d

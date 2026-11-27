@@ -462,6 +462,28 @@ def de_voseo(text):
 KNOW_DIR = Path(__file__).resolve().parent.parent / "knowledge"
 
 
+def producto(user):
+    """Lo que el negocio vende, verificado (content/users/<id>/producto.md): nombre, llamada a la acción, texto y capturas."""
+    f = Path(__file__).resolve().parent.parent / "content" / "users" / str(user.get("id", "")) / "producto.md"
+    if not f.exists():
+        return None
+    txt = f.read_text(encoding="utf-8")
+    head = txt.split("\n---", 1)[0] if txt.startswith("---") else ""
+    get = lambda k: (re.search(rf"^{k}:\s*(.+)$", head, re.M) or [None, ""])[1].strip()  # noqa: E731
+    caps = [tuple(x.strip() for x in c.split("=>", 1)) for c in re.findall(r'^\s*-\s*"(https?://[^"]+?=>[^"]+)"', head, re.M)]
+    body = re.sub(r"^---.*?---\s*", "", txt, flags=re.S).strip()
+    return {"nombre": get("nombre"), "cta": get("cta"), "texto": body, "capturas": caps}
+
+
+def captura_para(prod, texto):
+    """La captura del producto que mejor encaja con un texto (por palabras en común); la primera si ninguna."""
+    if not prod or not prod.get("capturas"):
+        return ""
+    ws = set(re.findall(r"\w{5,}", texto.lower()))
+    best = max(prod["capturas"], key=lambda c: len(ws & set(re.findall(r"\w{5,}", c[1].lower()))))
+    return best[0]
+
+
 def knowledge_for(user):
     """Banco de conocimiento verificado del sector del negocio (knowledge/*.md, por palabras clave) + lo que el dueño haya escrito."""
     marca = ((user.get("config") or {}).get("marca") or {})
@@ -476,7 +498,10 @@ def knowledge_for(user):
     own = str(marca.get("conocimiento") or "").strip()
     if own:
         parts.insert(0, "# Del dueño del negocio\n" + own[:4000])
-    return "\n\n".join(parts)[:9000]
+    prod = producto(user)
+    if prod:
+        parts.insert(0, f"# El producto del negocio ({prod['nombre']}): lo ÚNICO que se puede decir de él\n" + prod["texto"][:2500])
+    return "\n\n".join(parts)[:11000]
 
 
 def knowledge_topics(user):
@@ -547,6 +572,7 @@ def write_script(piece, user, key, log=print):
     que pedir toda la semana de golpe."""
     story = piece.get("tipo") == "historia"
     nmin, nmax, wmin, wmax = (4, 6, 38, 65) if story else (8, 11, 75, 115)
+    prod = producto(user) if piece.get("producto") else None
     marca = ((user.get("config") or {}).get("marca") or {})
     negocio = json.dumps({k: marca.get(k) for k in ("name", "about", "aud", "pillars", "tone") if marca.get(k)}, ensure_ascii=False)[:1500]
     borrador = " ".join(str(b.get("t", "")) for b in (piece.get("beats") or [])) or " ".join(piece.get("guion") or [])
@@ -569,7 +595,8 @@ CÓMO TIENE QUE SER
 2. Entre {nmin} y {nmax} frases y entre {wmin} y {wmax} palabras en total. Cada frase de 6 a 14 palabras, una idea y UNA imagen posible por frase (algo que se pueda ver: una acción, un objeto, un lugar).
 3. Primera frase: gancho que atrapa en un segundo (error común, pregunta directa o "nadie te cuenta esto"). Sin saludar ni presentarte.
 4. Habla de tú, como un amigo que sabe del tema. Lenguaje llano; si usas un término técnico, lo explicas en la misma frase. Nada de frases vacías ("es muy importante", "marca la diferencia") ni relleno.
-5. Nada de vender: ni precios, ni ofertas, ni "apúntate". La última frase invita con naturalidad a seguir la cuenta para más consejos.
+5. Nada de vender: ni precios, ni ofertas, ni "apúntate". La última frase invita con naturalidad a seguir la cuenta para más consejos.""" + (f"""
+5b. ESTE VÍDEO ES DE PRODUCTO: el consejo se enseña igual de bien, pero la PENÚLTIMA frase empieza por "{prod['nombre']}" y dice qué función CONCRETA de las que pone EL PRODUCTO te ayuda justo con este consejo (por ejemplo "{prod['nombre']} te dice en qué curva sueltas el freno de golpe"), sin exagerar ni prometer resultados. La ÚLTIMA frase es exactamente: "{prod['cta']}." (esto sustituye a la regla 5).""" if prod else "") + f"""
 6. NO inventes cifras, porcentajes, tiempos, estudios, testimonios ni nombres. Si no estás seguro de un número, explica la idea sin número ("un poco antes", "con menos fuerza").
 6b. NO inventes funciones, apps, herramientas, IA ni servicios del negocio: del negocio solo puedes decir lo que pone en NEGOCIO. Si el tema o el borrador hablan de algo que NEGOCIO no menciona, reconviértelo en un consejo práctico del oficio sobre ese mismo asunto (qué hacer tú, paso a paso) sin atribuírselo al negocio.
 6c. Español de España: tuteo, NUNCA voseo (prohibido "aplicás", "tenés", "podés", "sabés", "querés", "mirá"…), vocabulario peninsular (coche, no carro; neumático, no llanta; conducir, no manejar).
@@ -597,10 +624,15 @@ Responde SOLO con JSON: {{"entrada":"la entrada del conocimiento que explicas (o
         if vos:
             extra = f"\n\nTu respuesta anterior usaba voseo ({', '.join(sorted(set(vos))[:6])}). Reescríbela en español de España, con tuteo."
             continue
-        if nmin - 1 <= len(fr) <= nmax + 2 and words >= wmin - 8:
+        if prod and not any(prod["nombre"].lower() in x.lower() for x in fr[-3:]):
+            extra = f"\n\nTu respuesta anterior no mencionaba {prod['nombre']} en la penúltima frase (regla 5b). Corrígelo."
+            continue
+        if prod and prod["cta"] and prod["cta"].lower()[:20] not in fr[-1].lower():
+            fr.append(prod["cta"].rstrip(".") + ".")
+        if nmin - 1 <= len(fr) <= nmax + 3 and words >= wmin - 8:
             old = piece.get("beats") or []
             bio = str(j.get("cierre_bio") or piece.get("cierre_bio") or "").strip()
-            if bio and old and piece.get("cierre_bio") and old[-1].get("t") == piece.get("cierre_bio"):
+            if bio and old and not prod and piece.get("cierre_bio") and old[-1].get("t") == piece.get("cierre_bio"):
                 fr[-1] = bio  # a este vídeo le tocaba cerrar con el enlace del perfil
             piece["beats"] = [{"t": de_voseo(x)[:220], "img": ""} for x in fr[:14]]
             piece["guion"] = [b["t"] for b in piece["beats"]]
@@ -638,6 +670,7 @@ def write_slides(piece, user, key, log=print):
     """Redactor de carruseles y posts: diapositivas que enseñan una idea concreta, sacada del conocimiento verificado."""
     carr = piece.get("tipo") == "carrusel"
     nmin, nmax = (4, 7) if carr else (1, 1)
+    prod = producto(user) if piece.get("producto") and carr else None
     marca = ((user.get("config") or {}).get("marca") or {})
     negocio = json.dumps({k: marca.get(k) for k in ("name", "about", "aud", "pillars", "tone") if marca.get(k)}, ensure_ascii=False)[:1500]
     saber = knowledge_for(user)
@@ -658,9 +691,10 @@ REGLAS
 - Español de España, tuteo, sin voseo y sin palabras de Latinoamérica (di coche, no carro).
 - Nada de cifras, tiempos, porcentajes, ofertas, testimonios ni funciones del negocio que no estén en NEGOCIO o en el CONOCIMIENTO.
 - Sin emojis ni hashtags. No menciones circuitos, curvas, coches ni pilotos concretos (sí puedes nombrar el simulador si el consejo vale tal cual en él).
-- "caption": 2-3 frases que resumen ESTE MISMO consejo (no otro tema) y acaban con una pregunta.
+- "caption": 2-3 frases que resumen ESTE MISMO consejo (no otro tema) y acaban con una pregunta.""" + (f"""
+- ESTE CARRUSEL ES DE PRODUCTO: la ÚLTIMA diapositiva (en vez del cierre normal) tiene "titulo": "Con {prod['nombre']} lo ves" (o parecido, 2-6 palabras) y "texto": qué función CONCRETA de las que pone EL PRODUCTO te ayuda justo con este consejo, terminando con "{prod['cta']}". Sin exagerar ni prometer resultados.""" if prod else "") + """
 
-Responde SOLO con JSON: {{"tema":"…","gancho":"…","escenas":[{{"titulo":"…","texto":"…"}}],"caption":"…"}}"""
+Responde SOLO con JSON: {"tema":"…","gancho":"…","escenas":[{"titulo":"…","texto":"…"}],"caption":"…"}"""
     for _ in range(3):
         try:
             j = writer_json(prompt, key, log)
@@ -678,6 +712,12 @@ Responde SOLO con JSON: {{"tema":"…","gancho":"…","escenas":[{{"titulo":"…
         if nmin <= len(es) <= nmax + 1 and not bad and not relleno and not dup:
             prev = piece.get("escenas") or []
             piece["escenas"] = [{**(prev[k] if k < len(prev) else {}), **e} for k, e in enumerate(es[:nmax])]
+            if prod:  # la última diapositiva lleva una captura real de la app, no una imagen inventada
+                last = piece["escenas"][-1]
+                if prod["nombre"].lower() not in (last.get("titulo", "") + last.get("texto", "")).lower():
+                    piece["escenas"].append({"titulo": f"Con {prod['nombre']} lo ves", "texto": prod["cta"]})
+                    last = piece["escenas"][-1]
+                last["captura"] = captura_para(prod, last.get("texto", "") + " " + piece.get("tema", ""))
             for k in ("tema", "gancho"):
                 v = de_voseo(str(j.get(k) or "").strip())
                 if 3 < len(v) < 120:
@@ -714,6 +754,9 @@ def write_caption(piece, user, key, log=print):
     el vídeo), una llamada a la acción concreta y 3-5 hashtags relevantes."""
     if piece.get("tipo") == "historia":
         return False
+    prod = producto(user) if piece.get("producto") else None
+    cta_regla = (f'la llamada a la acción es exactamente "{prod["cta"]}"; justo antes, en una línea, qué hace {prod["nombre"]} para este consejo (solo con lo que dice EL PRODUCTO, en el CONOCIMIENTO).'
+                 if prod else 'UNA llamada a la acción concreta y relacionada (guardarlo para la próxima sesión, comentar cómo lo hacen ellos, o comentar una palabra). Nada de "link en la bio" ni "sígueme para más".')
     marca = ((user.get("config") or {}).get("marca") or {})
     negocio = json.dumps({k: marca.get(k) for k in ("name", "about", "aud", "tone") if marca.get(k)}, ensure_ascii=False)[:900]
     if piece.get("beats"):
@@ -726,11 +769,12 @@ def write_caption(piece, user, key, log=print):
 NEGOCIO: {negocio}
 TEMA: {piece.get('tema', '')}
 LO QUE DICE LA PUBLICACIÓN: {contenido[:1500]}
+{("EL PRODUCTO (lo único que puedes decir de él): " + prod["texto"][:1200]) if prod else ""}
 
 REGLAS
 - Línea 1 (máximo 100 caracteres): engancha con el problema o el resultado, usando las palabras que alguien buscaría (por ejemplo "Si bloqueas al frenar, esto es lo que falla"). No empieces con "¿Sabías que", "Descubre" ni "En este vídeo".
 - Después, en 2-4 líneas cortas, el consejo resumido para que sirva aunque no vean la publicación: qué hacer y por qué. Puedes usar líneas que empiecen por "→". Solo cosas que dice la publicación; nada nuevo.
-- Última línea: UNA llamada a la acción concreta y relacionada (guardarlo para la próxima sesión, comentar cómo lo hacen ellos, o comentar una palabra). Nada de "link en la bio" ni "sígueme para más".
+- Última línea: {cta_regla}
 - Español de España, tuteo, sin voseo. Como mucho 1 emoji en todo el texto. Nada de cifras que no estén en la publicación, ni exageraciones ("duplica", "x2"), ni funciones de la app o el producto que NEGOCIO no explique.
 - "hashtags": de 3 a 5, en minúsculas y sin tildes, relevantes para este tema (uno general del sector y el resto concretos del tema). Nada de #viral, #reels, #linkenbio ni parecidos.
 
@@ -746,7 +790,7 @@ Responde SOLO con JSON: {{"caption":"…","hashtags":"#… #… #…"}}"""
         cap = re.sub(r"\n{3,}", "\n\n", cap)
         bad = [n for n in re.findall(r"\d+(?:[.,]\d+)?", cap) if n not in contenido and n not in (saber or "")]
         first = cap.split("\n", 1)[0]
-        if 60 <= len(cap) <= 900 and len(first) <= 130 and not bad and not re.search(r"link en (la )?bio|sígueme para", cap, re.I):
+        if 60 <= len(cap) <= 900 and len(first) <= 130 and not bad and (prod or not re.search(r"link en (la )?bio|sígueme para", cap, re.I)):
             piece["caption"] = cap
             tags = _tags(j.get("hashtags"), marca.get("name"))
             if tags:

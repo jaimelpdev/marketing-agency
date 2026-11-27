@@ -58,9 +58,25 @@ def _persona(piece, beats):
 PERSON = re.compile(r"\b(person|man|woman|gamer|driver|he|she|his|her|hands?|feet|foot|face|racer|player|guy|someone)\b", re.I)
 
 
+def split_producto(piece):
+    """En un vídeo de producto, las frases finales que hablan de la app (y la de descarga) no se piden a Veo:
+    se ven sobre una captura real de la app. Devuelve (frases para Veo, {"t", "url"} o None)."""
+    beats = [b for b in (piece.get("beats") or []) if str(b.get("t", "")).strip()]
+    nombre, url = str(piece.get("producto_nombre") or ""), str(piece.get("captura_url") or "")
+    if not (piece.get("producto") and nombre and url) or len(beats) < 4:
+        return beats, None
+    rx = re.compile(r"\b(" + re.escape(nombre) + r"|desc[aá]rga|enlace de la bio)", re.I)
+    k = len(beats)
+    while k > 0 and rx.search(str(beats[k - 1].get("t", ""))):
+        k -= 1
+    if k == len(beats) or k < 2:
+        return beats, None
+    return beats[:k], {"t": " ".join(str(b["t"]).strip() for b in beats[k:]), "url": url}
+
+
 def plan_clips(piece):
     """Agrupa las frases del guion en pocos clips (lo que da el cupo gratis) y escribe la descripción de cada uno."""
-    beats = [b for b in (piece.get("beats") or []) if str(b.get("t", "")).strip()]
+    beats, _cap = split_producto(piece)
     if len(beats) < 2:  # sin frases troceadas: el guion, con las imágenes del gancho y de las escenas
         imgs = [piece.get("visual")] + [e.get("visual") for e in piece.get("escenas") or []] + [piece.get("visual_cierre")]
         imgs = [str(x) for x in imgs if x]
@@ -134,6 +150,21 @@ def _sfx(tmp):
     subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-f", "lavfi", "-i", "sine=f=660:d=0.12:r=48000",
                     "-af", "afade=t=out:st=0.02:d=0.1,volume=0.35", "-ac", "2", str(pop)], check=True)
     return wh, pop
+
+
+def image_clip(url, out, dur=9.0):
+    """Un clip vertical con una captura real de la app: entera, con un acercamiento lento y sonido vacío."""
+    import daily
+    import requests
+    r = requests.get(url, timeout=60, headers={"user-agent": "Mozilla/5.0 agencia"})
+    r.raise_for_status()
+    img = Path(out).with_suffix(".jpg")
+    img.write_bytes(daily.vertical_captura(r.content, W, H))
+    frames = int(dur * FPS)
+    subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-loop", "1", "-i", str(img), "-f", "lavfi", "-i", "anullsrc=r=48000:cl=stereo",
+                    "-filter_complex", f"[0]scale={W * 2}:{H * 2},zoompan=z='min(1+0.0008*on,1.08)':x='iw/2-(iw/zoom/2)':y='ih/3-(ih/zoom/3)':d={frames}:s={W}x{H}:fps={FPS},format=yuv420p[v]",
+                    "-map", "[v]", "-map", "1:a", "-t", f"{dur:.2f}", "-c:v", "libx264", "-preset", "veryfast", "-crf", "20", "-c:a", "aac", "-shortest", str(out)], check=True)
+    return out
 
 
 def compose(segments, voice, rate, mood, out, log=print, music_free_only=False, hook=""):
