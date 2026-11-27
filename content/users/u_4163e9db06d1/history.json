@@ -1,24 +1,6 @@
 {
   "items": [
     {
-      "date": "2026-10-15",
-      "tipo": "reel",
-      "src": "red",
-      "tema": "[IG · ❤️34 💬3] ¿Pensando en tu próximo upgrade? Compara pedales de célula de carga y hidráulicos y elige lo que realmente necesitas en tu cockpit."
-    },
-    {
-      "date": "2026-10-18",
-      "tipo": "reel",
-      "src": "red",
-      "tema": "[IG · ❤️58] ¿Buscas mayor control en GT3? Triple pantalla vs VR: ventajas reales para tu próxima compra. Elige mejor tu equipo."
-    },
-    {
-      "date": "2026-10-20",
-      "tipo": "reel",
-      "src": "red",
-      "tema": "[IG · ❤️52] Direct Drive o correa: la diferencia no es solo potencia. Descubre qué cambia en el control y cuál encaja con tu forma de correr."
-    },
-    {
       "date": "2026-10-22",
       "tipo": "reel",
       "src": "red",
@@ -1114,34 +1096,6 @@
     },
     {
       "date": "2026-11-27",
-      "tipo": "reel",
-      "src": "red",
-      "tema": "[IG · ❤️9] Frena con un punto de referencia y suelta suavemente al girar. La mirada al vértice te ayuda a trazar la línea perfecta. ¿Cuál es tu referen"
-    },
-    {
-      "date": "2026-11-29",
-      "tema": "Checklist para la primera curva",
-      "formato": "post",
-      "tipo": "post",
-      "layout": "cine",
-      "plantilla": 1782,
-      "look": 51,
-      "serie": "",
-      "objetivo": "confianza"
-    },
-    {
-      "date": "2026-11-30",
-      "tema": "Guía paso a paso para configurar el coche para la primera curva",
-      "formato": "carrusel",
-      "tipo": "carrusel",
-      "layout": "cine",
-      "plantilla": 527,
-      "look": 161,
-      "serie": "",
-      "objetivo": "comunidad"
-    },
-    {
-      "date": "2026-11-27",
       "tema": "Mito o realidad: ¿El pedal de freno de dos piezas es siempre mejor?",
       "formato": "historia",
       "tipo": "historia",
@@ -1163,6 +1117,45 @@
       "objetivo": "alcance"
     },
     {
+      "date": "2026-11-27",
+      "tema": "Presión de neumáticos para mejorar la primera curva",
+      "formato": "POV",
+      "tipo": "reel",
+      "layout": "faceless",
+      "plantilla": 330,
+      "look": 39,
+      "serie": "",
+      "objetivo": "alcance"
+    },
+    {
+      "date": "2026-11-27",
+      "tema": "Lento dentro, rápido fuera",
+      "formato": "tarjeta",
+      "tipo": "post",
+      "layout": "cine",
+      "plantilla": 49,
+      "look": 39,
+      "serie": "",
+      "objetivo": "confianza"
+    },
+    {
+      "date": "2026-11-27",
+      "tipo": "reel",
+      "src": "red",
+      "tema": "[IG · ❤️10] Frena con un punto de referencia y suelta suavemente al girar. La mirada al vértice te ayuda a trazar la línea perfecta. ¿Cuál es tu referen"
+    },
+    {
+      "date": "2026-11-29",
+      "tema": "Checklist para la primera curva",
+      "formato": "post",
+      "tipo": "post",
+      "layout": "cine",
+      "plantilla": 1782,
+      "look": 51,
+      "serie": "",
+      "objetivo": "confianza"
+    },
+    {
       "date": "2026-11-29",
       "tema": "Subviraje: cómo detectarlo y corregirlo en 3 pasos",
       "formato": "post",
@@ -1172,6 +1165,17 @@
       "look": 3,
       "serie": "",
       "objetivo": "confianza"
+    },
+    {
+      "date": "2026-11-30",
+      "tema": "Guía paso a paso para configurar el coche para la primera curva",
+      "formato": "carrusel",
+      "tipo": "carrusel",
+      "layout": "cine",
+      "plantilla": 527,
+      "look": 161,
+      "serie": "",
+      "objetivo": "comunidad"
     },
     {
       "date": "2026-11-30",
@@ -1203,6 +1207,17 @@
       "layout": "lista",
       "plantilla": 659,
       "look": 77,
+      "serie": "",
+      "objetivo": ""
+    },
+    {
+      "date": "2026-11-27",
+      "tema": "Telemetría para afinar zona de frenado",
+      "formato": "enlace",
+      "tipo": "historia",
+      "layout": "faceless",
+      "plantilla": 523,
+      "look": 39,
       "serie": "",
       "objetivo": ""
     }
