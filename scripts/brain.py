@@ -657,6 +657,7 @@ Responde SOLO con JSON: {{"entrada":"la entrada del conocimiento que explicas (o
     return False
 
 
+CIRCUITOS = re.compile(r"\b(spa|francorchamps|monza|silverstone|n[uü]rburgring|nordschleife|suzuka|interlagos|imola|barcelona|montmel[oó]|jerez|aragon|le mans|daytona|sebring|bathurst|laguna seca|zandvoort|hungaroring|red bull ring|paul ricard|brands hatch|eau rouge)\b", re.I)
 FILLER = re.compile(r"\b(mejora tu|mejorar tu|practica|practicar|anticipa|conduce con|sigue practicando|no te rindas|la clave del éxito|ganar? tiempo|el secreto)\b", re.I)
 
 
@@ -747,6 +748,7 @@ Responde SOLO con JSON: {"tema":"…","gancho":"…","escenas":[{"titulo":"…",
         relleno = [e["titulo"] for e in es[1:-1] if FILLER.search(e["titulo"] + " " + e["texto"]) and not re.search(r"\b(porque|si |cuando|para que)\b", e["texto"], re.I)]
         dup = [es[k]["titulo"] for k in range(1, len(es)) for m in range(k) if _overlap(es[k]["titulo"] + " " + es[k]["texto"], es[m]["titulo"] + " " + es[m]["texto"]) > 0.6]
         hype = [e["titulo"] for e in es if re.search(r"\b(duplica|triplica|multiplica|x2|definitiv)", e["titulo"] + " " + e["texto"], re.I)]
+        hype += [e["titulo"] for e in es if CIRCUITOS.search(e["titulo"] + " " + e["texto"] + " " + str(j.get("tema", "")))]
         relleno += hype
         if nmin <= len(es) <= nmax + 1 and not bad and not relleno and not dup:
             prev = piece.get("escenas") or []
@@ -768,7 +770,7 @@ Responde SOLO con JSON: {"tema":"…","gancho":"…","escenas":[{"titulo":"…",
             return True
         why = (f"cifras inventadas: {', '.join(bad[:4])}" if bad else f"diapositivas de relleno: {', '.join(relleno[:3])}" if relleno
                else f"diapositivas repetidas: {', '.join(dup[:3])}" if dup else f"{len(es)} diapositivas")
-        prompt += f"\n\nTu respuesta anterior no cumplía ({why}). Corrígelo."
+        prompt += f"\n\nTu respuesta anterior no cumplía ({why}; recuerda: ni circuitos concretos ni exageraciones). Corrígelo."
     log("    ⚠ Redactor: no cumplió las reglas; se mantiene el borrador")
     return False
 

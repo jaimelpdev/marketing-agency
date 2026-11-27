@@ -728,6 +728,7 @@ def plan_user(browser, user, key, force=False, redo=None):
                 if len(bs) >= 2 and brain.art_direct(vp, user, key, lambda *a: log(*a), beats=bs):
                     page.evaluate("""a=>{const p=S.today.videos[a[0]];const b=a[1];p.visual=b[0].img;(p.escenas||[]).forEach((e,i)=>{if(b[i+1])e.visual=b[i+1].img;});}""", [vi, bs])
                     log(f"    🎨 Imágenes dirigidas para «{vp.get('tema', '')}»: {bs[0]['img'][:90]}…")
+                page.evaluate("i=>{const p=S.today.videos[i];if(!String(p.cta||'').trim())p.cta='Guárdalo para tu próxima sesión';}", vi)  # cierre nunca vacío
                 caps = [(k, e["captura"]) for k, e in enumerate(vp.get("escenas") or []) if e.get("captura")]
                 if caps:  # captura real de la app en la diapositiva del producto
                     page.evaluate("""a=>{const p=S.today.videos[a[0]];a[1].forEach(([k,u])=>{if(p.escenas[k])p.escenas[k].visual='CAPTURA '+u;});p.cta='Guárdalo para tu próxima sesión';}""", [vi, caps])
