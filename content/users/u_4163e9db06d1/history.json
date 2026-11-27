@@ -1,24 +1,6 @@
 {
   "items": [
     {
-      "date": "2026-10-08",
-      "tipo": "reel",
-      "src": "red",
-      "tema": "[IG · ❤️30] ¿Realismo extremo o fatiga innecesaria? Analizamos los simuladores de movimiento y sus efectos en el simracing."
-    },
-    {
-      "date": "2026-10-11",
-      "tipo": "reel",
-      "src": "red",
-      "tema": "[IG · ❤️97] ¿5 Nm o 12 Nm? La diferencia es clave en sensaciones, fatiga y control. Elige tu base con criterio y domina cada curva."
-    },
-    {
-      "date": "2026-10-13",
-      "tipo": "reel",
-      "src": "red",
-      "tema": "[IG · ❤️21] Optimiza tu ritmo en Spa con el Toyota GR010 en Le Mans Ultimate. Ajusta el reparto híbrido y gana tiempo en cada vuelta."
-    },
-    {
       "date": "2026-10-15",
       "tipo": "reel",
       "src": "red",
@@ -1086,6 +1068,29 @@
       "objetivo": ""
     },
     {
+      "date": "2026-11-26",
+      "tema": "Mira lejos: anticipación de la línea",
+      "formato": "checklist",
+      "tipo": "carrusel",
+      "layout": "cine",
+      "plantilla": 464,
+      "look": 8,
+      "serie": "",
+      "objetivo": "confianza"
+    },
+    {
+      "date": "2026-11-26",
+      "tipo": "reel",
+      "src": "red",
+      "tema": "[IG · ❤️33] Aprende a dosificar el gas en la salida de las curvas para ganar velocidad sin perder el control. ¿En qué curva te cuesta más mantener la tr"
+    },
+    {
+      "date": "2026-11-26",
+      "tipo": "reel",
+      "src": "red",
+      "tema": "[IG · ❤️76] En ACC y Spa, la lluvia vuelve resbaladiza la goma acumulada. Prueba una trazada alternativa, frena antes y compara vueltas limpias."
+    },
+    {
       "date": "2026-11-27",
       "tema": "¿El pedal de freno en la primera curva te hace perder tiempo?",
       "formato": "historia",
@@ -1095,6 +1100,12 @@
       "look": 197,
       "serie": "Mito o realidad",
       "objetivo": "comunidad"
+    },
+    {
+      "date": "2026-11-27",
+      "tipo": "reel",
+      "src": "red",
+      "tema": "[IG · ❤️9] Frena con un punto de referencia y suelta suavemente al girar. La mirada al vértice te ayuda a trazar la línea perfecta. ¿Cuál es tu referen"
     },
     {
       "date": "2026-11-29",
@@ -1119,15 +1130,15 @@
       "objetivo": "comunidad"
     },
     {
-      "date": "2026-11-26",
-      "tema": "Mira lejos: anticipación de la línea",
-      "formato": "checklist",
+      "date": "2026-11-27",
+      "tema": "Errores comunes de setup que te hacen perder tiempo",
+      "formato": "top",
       "tipo": "carrusel",
       "layout": "cine",
-      "plantilla": 464,
-      "look": 8,
+      "plantilla": 649,
+      "look": 72,
       "serie": "",
-      "objetivo": "confianza"
+      "objetivo": ""
     }
   ]
 }

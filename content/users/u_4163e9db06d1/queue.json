@@ -269,25 +269,23 @@
     "zernioPostId": "6b07f6b37bb6a32b3fb8a875"
   },
   {
-    "id": "2026-11-26-r110352-carrusel",
-    "date": "2026-11-26",
+    "id": "2026-11-27-r230238-carrusel",
+    "date": "2026-11-27",
     "source": "redo",
     "tipo": "carrusel",
-    "tema": "Mira lejos: anticipación de la línea",
+    "tema": "Errores comunes de setup que te hacen perder tiempo",
     "publishAt": "2026-11-30T13:30:00+01:00",
-    "caption": "¿Entras tarde en las curvas? Mirar solo delante de tu coche arruina tu trazada y te hace perder tiempo.\n\n→ Fija la vista en el horizonte, el vértice y la salida antes de llegar.\n→ Elige un objeto distante como referencia para alinear tu coche.\n\nGuarda este post para tu próxima sesión en pista 🏁\n\n#simracing #trazada #anticipacion #pilotaje",
+    "caption": "¿Perdiendo tiempo en pista? Evita estos fallos de setup.\n\n→ Frenar antes de la recta corta la tracción.\n→ Demasiada presión en los neumáticos provoca subviraje.\n→ Una suspensión muy dura hace perder estabilidad.\n\nLAPRIQ analiza tu telemetría curva a curva para detectar estos fallos. Descárgala gratis desde el enlace de la bio\n\n#simracing #setup #telemetria #assetto",
     "media": [
-      "media/u_4163e9db06d1/2026-11-26/2026-11-26-r110352-carrusel/01.jpg",
-      "media/u_4163e9db06d1/2026-11-26/2026-11-26-r110352-carrusel/02.jpg",
-      "media/u_4163e9db06d1/2026-11-26/2026-11-26-r110352-carrusel/03.jpg",
-      "media/u_4163e9db06d1/2026-11-26/2026-11-26-r110352-carrusel/04.jpg",
-      "media/u_4163e9db06d1/2026-11-26/2026-11-26-r110352-carrusel/05.jpg",
-      "media/u_4163e9db06d1/2026-11-26/2026-11-26-r110352-carrusel/06.jpg",
-      "media/u_4163e9db06d1/2026-11-26/2026-11-26-r110352-carrusel/07.jpg",
-      "media/u_4163e9db06d1/2026-11-26/2026-11-26-r110352-carrusel/08.jpg"
+      "media/u_4163e9db06d1/2026-11-27/2026-11-27-r230238-carrusel/01.jpg",
+      "media/u_4163e9db06d1/2026-11-27/2026-11-27-r230238-carrusel/02.jpg",
+      "media/u_4163e9db06d1/2026-11-27/2026-11-27-r230238-carrusel/03.jpg",
+      "media/u_4163e9db06d1/2026-11-27/2026-11-27-r230238-carrusel/04.jpg",
+      "media/u_4163e9db06d1/2026-11-27/2026-11-27-r230238-carrusel/05.jpg",
+      "media/u_4163e9db06d1/2026-11-27/2026-11-27-r230238-carrusel/06.jpg"
     ],
     "status": "scheduled",
     "attempts": 0,
-    "zernioPostId": "6b0808825124c8ea6927b651"
+    "zernioPostId": "6b0a00c560cf341e024b1898"
   }
 ]
