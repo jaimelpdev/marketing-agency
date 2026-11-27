@@ -666,6 +666,45 @@ def _overlap(a, b):
     return len(wa & wb) / max(1, min(len(wa), len(wb)))
 
 
+def review_slides(piece, user, key, log=print):
+    """Revisor experto de carruseles y posts: corrige lo falso, lo contradictorio o lo que no encaja con el tema."""
+    es = piece.get("escenas") or []
+    if not es:
+        return False
+    saber = knowledge_for(user)
+    txt = "\n".join(f"{k + 1}. {e.get('titulo', '')} — {e.get('texto', '')}" for k, e in enumerate(es))
+    prompt = f"""Eres un experto del sector que revisa un {'carrusel' if len(es) > 1 else 'post'} de Instagram antes de publicarlo.
+TEMA: {piece.get('tema', '')}
+DIAPOSITIVAS:
+{txt}
+
+CONOCIMIENTO VERIFICADO (la verdad):
+{saber[:7000]}
+
+Revisa CADA diapositiva y corrige solo lo que haga falta:
+- Lo que sea falso o dudoso según el conocimiento, o que un experto vería mal.
+- Título y texto que se contradicen (por ejemplo, el título dice "tarde" y el texto "antes").
+- Diapositivas que no encajan con el TEMA (si el tema es el setup, no metas técnica de pilotaje).
+- Promesas o cifras inventadas.
+Mantén el mismo número de diapositivas, el mismo orden y el estilo (títulos de 2-6 palabras, textos de 8-20). Si una está bien, déjala igual. Español de España, tuteo.
+
+Responde SOLO con JSON: {{"escenas":[{{"titulo":"…","texto":"…"}}],"cambios":["qué corregiste, muy breve"]}}"""
+    try:
+        j = writer_json(prompt, key, log)
+    except Exception as e:  # noqa: BLE001
+        log(f"    ⚠ Revisor de diapositivas: {e}")
+        return False
+    nuevas = [e for e in (j.get("escenas") or []) if isinstance(e, dict) and str(e.get("titulo", "")).strip()]
+    if len(nuevas) != len(es):
+        return False
+    for e, n in zip(es, nuevas):
+        e["titulo"] = de_voseo(str(n["titulo"]).strip())[:80]
+        e["texto"] = de_voseo(str(n.get("texto", e.get("texto", ""))).strip())[:220]
+    cambios = [str(c) for c in (j.get("cambios") or []) if str(c).strip()]
+    log(f"    🔎 Revisor de diapositivas: {'; '.join(cambios)[:200] if cambios else 'sin cambios'}")
+    return True
+
+
 def write_slides(piece, user, key, log=print):
     """Redactor de carruseles y posts: diapositivas que enseñan una idea concreta, sacada del conocimiento verificado."""
     carr = piece.get("tipo") == "carrusel"
@@ -712,6 +751,7 @@ Responde SOLO con JSON: {"tema":"…","gancho":"…","escenas":[{"titulo":"…",
         if nmin <= len(es) <= nmax + 1 and not bad and not relleno and not dup:
             prev = piece.get("escenas") or []
             piece["escenas"] = [{**(prev[k] if k < len(prev) else {}), **e} for k, e in enumerate(es[:nmax])]
+            review_slides(piece, user, key, log)
             if prod:  # la última diapositiva lleva una captura real de la app, no una imagen inventada
                 last = piece["escenas"][-1]
                 if prod["nombre"].lower() not in (last.get("titulo", "") + last.get("texto", "")).lower():

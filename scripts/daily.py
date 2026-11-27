@@ -730,7 +730,7 @@ def plan_user(browser, user, key, force=False, redo=None):
                     log(f"    🎨 Imágenes dirigidas para «{vp.get('tema', '')}»: {bs[0]['img'][:90]}…")
                 caps = [(k, e["captura"]) for k, e in enumerate(vp.get("escenas") or []) if e.get("captura")]
                 if caps:  # captura real de la app en la diapositiva del producto
-                    page.evaluate("""a=>{const p=S.today.videos[a[0]];a[1].forEach(([k,u])=>{if(p.escenas[k])p.escenas[k].visual='CAPTURA '+u;});}""", [vi, caps])
+                    page.evaluate("""a=>{const p=S.today.videos[a[0]];a[1].forEach(([k,u])=>{if(p.escenas[k])p.escenas[k].visual='CAPTURA '+u;});p.cta='Guárdalo para tu próxima sesión';}""", [vi, caps])
                     log(f"    📸 Captura de la app en la diapositiva {caps[0][0] + 1}")
         # 🏷 pies de foto: por pieza, a partir de lo que de verdad dice (guion o diapositivas ya escritos)
         for vi, vp in enumerate(vids):
