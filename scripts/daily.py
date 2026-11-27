@@ -889,13 +889,25 @@ def plan_user(browser, user, key, force=False, redo=None):
     # Lo que se sustituye: la pieza rehecha o, si se rehace la semana, todo lo que aún no se ha publicado
     if redo:
         replaced = [q for q in queue if q.get("id") == redo["id"]]
-    elif force:
-        replaced = [q for q in queue if q.get("status") in ("pending", "scheduled", "esperando_veo", "hueco", "prueba") and datetime.fromisoformat(q["publishAt"]) > now]
+    elif force:  # rehacer la semana: menos lo marcado como fijo y los vídeos de Veo ya revisados de la bolsa
+        replaced = [q for q in queue if q.get("status") in ("pending", "scheduled", "esperando_veo", "hueco", "prueba") and datetime.fromisoformat(q["publishAt"]) > now
+                    and not (q.get("fijo") or q.get("bolsa"))]
     else:
         replaced = [q for q in queue if q.get("date") == today and q.get("source") == "auto" and q.get("status") in ("pending", "scheduled", "esperando_veo", "hueco")]
     for q in replaced:
         zernio_cancel(q)
     gone = {q["id"] for q in replaced}
+    kept = [q for q in queue if (q.get("fijo") or q.get("bolsa")) and q.get("status") in ("pending", "scheduled", "prueba") and datetime.fromisoformat(q["publishAt"]) > now]
+    if kept and not redo:  # lo nuevo no puede caer el mismo día que algo que se queda (un contenido de feed y una historia al día)
+        def _clash(it):
+            g = "historia" if it["tipo"] == "historia" else "feed"
+            d = datetime.fromisoformat(it["publishAt"]).astimezone(tz).date()
+            return any(("historia" if k["tipo"] == "historia" else "feed") == g and datetime.fromisoformat(k["publishAt"]).astimezone(tz).date() == d for k in kept)
+        pares = [(it, pc) for it, pc in zip(new_items, pieces + [None] * (len(new_items) - len(pieces))) if not _clash(it)]
+        if len(pares) < len(new_items):
+            log(f"  ↷ {len(new_items) - len(pares)} pieza(s) nuevas movidas fuera: ese día ya hay algo que se queda")
+        new_items = [a for a, _ in pares]
+        pieces = [b for _, b in pares if b is not None]
     veo_modo = str(plan_conf.get("veo_modo", "si_hay"))
     for it in new_items:
         if veo_modo == "obligatorio" and it.get("veo") and it.get("status") == "pending":
@@ -921,7 +933,7 @@ def plan_user(browser, user, key, force=False, redo=None):
                     it["status"] = "failed"
                     it["error"] = str(e)[:300]
     if not redo:
-        gone |= {q["id"] for q in queue if q.get("date") == today and q.get("source") == "auto"}
+        gone |= {q["id"] for q in queue if q.get("date") == today and q.get("source") == "auto" and not (q.get("fijo") or q.get("bolsa"))}
     queue = [q for q in queue if q["id"] not in gone] + new_items
     queue.sort(key=lambda q: q["publishAt"])
     save_json(queue_path, queue)
