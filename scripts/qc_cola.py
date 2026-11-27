@@ -64,7 +64,7 @@ def main():
         print(f"▶ {user.get('name')}: revisando vídeos de Veo")
         # 1) los ya puestos en el calendario
         for it in queue:
-            if not it.get("bolsa") or it.get("status") not in ("pending", "scheduled", "prueba") or datetime.fromisoformat(it["publishAt"]) <= now:
+            if not it.get("bolsa") or it.get("revisada") or it.get("status") not in ("pending", "scheduled", "prueba") or datetime.fromisoformat(it["publishAt"]) <= now:
                 continue
             b = byid.get(it["bolsa"]) or {}
             texto = " ".join(c.get("t", "") for c in (b.get("veo") or {}).get("clips", []))
@@ -72,13 +72,14 @@ def main():
             if not path.exists():
                 continue
             fallos = review_video(path, texto, persona)
+            it["revisada"] = True
             if not fallos:
                 print(f"  ✓ {it['publishAt'][:16]} «{it.get('tema', '')}»: sin fallos graves")
                 continue
             print(f"  ✗ {it['publishAt'][:16]} «{it.get('tema', '')}»: {'; '.join(fallos)[:300]}")
             daily.zernio_cancel(it)
             it.update({"status": "hueco", "tema": "", "caption": "", "media": [], "attempts": 0})
-            for k in ("zernioPostId", "bolsa", "cover", "error"):
+            for k in ("zernioPostId", "bolsa", "cover", "error", "revisada"):
                 it.pop(k, None)
             if b:
                 b["status"], b["motivo"] = "descartada", "; ".join(fallos)[:300]
