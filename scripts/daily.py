@@ -1242,8 +1242,16 @@ def gen_pollinations(prompt, seed, log=print):
 
 
 def gen_image(prompt, seed, log=print):
-    d = gen_image_worker(prompt, seed, log)
-    return d or gen_pollinations(prompt, seed, log)
+    d = gen_image_worker(prompt, seed, log) or gen_pollinations(prompt, seed, log)
+    if not d:
+        return d
+    # control de calidad: si la imagen tiene un fallo grave, se repite una vez con otra semilla
+    ok, fallos = brain.vision_check([d], "Esta imagen es para una publicación de Instagram. Se pidió: «" + str(prompt)[:700] + "».\n\n" + brain.FALLOS_GRAVES, log)
+    if ok:
+        return d
+    log(f"    🔍 Imagen rechazada ({'; '.join(fallos)[:140]}); la repito")
+    d2 = gen_image_worker(prompt, int(seed or 0) + 7919, log) or gen_pollinations(prompt, int(seed or 0) + 7919, log)
+    return d2 or d
 
 
 def gen_image_worker(prompt, seed, log=print):

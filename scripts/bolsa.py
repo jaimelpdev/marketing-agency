@@ -110,6 +110,7 @@ def summary(uid, have=None):
     stock = {t: sum(1 for b in lista if b["tipo"] == t) for t in ("reel", "historia")}
     pend.sort(key=lambda b: (stock.get(b["tipo"], 0), -float(b.get("nota") or 0), b.get("created", "")))
     out = [{"id": b["id"], "tipo": b["tipo"], "tema": b.get("tema", ""), "nota": b.get("nota"), "status": "pendiente",
+            **({"rehacer": b["rehacer"]} if b.get("rehacer") else {}),
             "veo": {"clips": [{"t": c.get("t", "")[:300], "prompt": c.get("prompt", "")[:1400], "dur": c.get("dur", 8)} for c in b["veo"]["clips"]]}}
            for b in pend[:20]]
     out += [{"id": b["id"], "tipo": b["tipo"], "tema": b.get("tema", ""), "nota": b.get("nota"), "status": "lista",
@@ -135,6 +136,10 @@ def assemble(user, bid, log=print):
             path = Path(td) / f"c{k}.mp4"
             daily.fetch_clip(uid, bid, k, path)
             segs.append({"clip": path, "t": c["t"]})
+        malos = review_clips(user, b, segs, log)
+        if malos:
+            reject_clips(user, bolsa, b, malos, log)
+            return False
         folder = daily.DOCS / "media" / uid / "bolsa" / bid
         if folder.exists():
             shutil.rmtree(folder)
@@ -148,6 +153,7 @@ def assemble(user, bid, log=print):
     if credit and b.get("caption"):
         b["caption"] = (b["caption"] + "\n\n" + credit)[:2200]
     b["status"] = "lista"
+    b.pop("rehacer", None)
     b["listo"] = datetime.now().isoformat(timespec="minutes")
     save(uid, bolsa)
     log(f"    ✓ Listo para publicar: {total:.1f}s · música: {(meta or {}).get('title', 'ninguna')}")
@@ -186,6 +192,63 @@ def add_slots(queue, bolsa, now, tz, log=print, days=3):
             added = True
             log(f"  ➕ Hueco nuevo de {tipo} el {when.strftime('%d/%m %H:%M')} para un vídeo de Veo ya montado")
     return added
+
+
+MAX_REPETIR = 2  # cada clip se puede rechazar como mucho 2 veces; a la tercera se acepta (para no atascar la bolsa)
+
+
+def _frames(path, n=3):
+    import base64
+    import subprocess
+    try:
+        d = float(subprocess.run(["ffprobe", "-v", "error", "-show_entries", "format=duration", "-of", "csv=p=0", str(path)],
+                                 capture_output=True, text=True).stdout.strip() or 8)
+    except ValueError:
+        d = 8.0
+    out = []
+    for f in [0.15, 0.5, 0.85][:n]:
+        r = subprocess.run(["ffmpeg", "-loglevel", "error", "-ss", f"{d * f:.2f}", "-i", str(path), "-frames:v", "1",
+                            "-vf", "scale=360:-2", "-f", "image2", "-c:v", "mjpeg", "-"], capture_output=True)
+        if r.stdout:
+            out.append("data:image/jpeg;base64," + base64.b64encode(r.stdout).decode())
+    return out
+
+
+def review_clips(user, b, segs, log=print):
+    """Revisa con visión cada clip de Veo antes de montarlo. Devuelve los índices con un fallo grave."""
+    import brain
+    persona = str(user.get("persona_veo") or "")
+    intentos = b.setdefault("intentos", {})
+    malos = []
+    for k, s in enumerate(segs):
+        if int(intentos.get(str(k), 0)) >= MAX_REPETIR:
+            continue
+        frames = _frames(s["clip"])
+        pedido = b["veo"]["clips"][k].get("prompt", "")[:900]
+        ok, fallos = brain.vision_check(frames, (
+            "Son 3 fotogramas (principio, mitad y final) de un clip de vídeo vertical para un reel de Instagram.\n"
+            f"Mientras se ve, la voz dice: «{s['t'][:400]}»\nSe le pidió al generador de vídeo: «{pedido}»\n"
+            + (f"La persona debe ser siempre: {persona}.\n" if persona else "") + "\n" + brain.FALLOS_GRAVES), log)
+        if not ok:
+            malos.append(k)
+            log(f"    🔍 Clip {k + 1} rechazado: {'; '.join(fallos)[:160]}")
+    return malos
+
+
+def reject_clips(user, bolsa, b, malos, log=print):
+    """Borra del servidor los clips con fallos para que Flow los vuelva a generar, y deja el guion pendiente."""
+    import daily
+    intentos = b.setdefault("intentos", {})
+    for k in malos:
+        intentos[str(k)] = int(intentos.get(str(k), 0)) + 1
+        try:
+            daily.api("DELETE", f"/admin/clips/{user['id']}/{b['id']}/{k}")
+        except Exception as e:  # noqa: BLE001
+            log(f"    ⚠ No se pudo borrar el clip {k + 1} del servidor ({str(e)[:80]}); lo hará la tarea de Flow")
+    b["rehacer"] = sorted(set(b.get("rehacer", [])) | set(malos))
+    b["status"] = "pendiente"
+    save(user["id"], bolsa)
+    log(f"    ↺ «{b.get('tema', '')}»: {len(malos)} clip(s) a repetir en Flow; se montará cuando estén")
 
 
 def fill(user, queue, tz, log=print):

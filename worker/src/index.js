@@ -596,6 +596,15 @@ async function handle(req, env) {
       return json({ ok: true, requests: u.requests });
     }
     const acl = p.match(/^\/admin\/clips\/([\w-]+)\/([\w-]+)\/(\d)$/);
+    if (acl && method === "DELETE") {  // control de calidad: la agencia rechaza un clip y Flow lo vuelve a generar
+      const u = await getUser(env, acl[1]);
+      if (!u) return err(404, "not_found", "No existe ese usuario.");
+      await env.KV.delete(`clip:${acl[1]}:${acl[2]}:${acl[3]}`);
+      u.veo = u.veo || {};
+      u.veo[acl[2]] = (u.veo[acl[2]] || []).filter(x => x !== Number(acl[3]));
+      await putUser(env, u);
+      return json({ ok: true, veo: u.veo[acl[2]] });
+    }
     if (acl && method === "GET") {
       const buf = await env.KV.get(`clip:${acl[1]}:${acl[2]}:${acl[3]}`, "arrayBuffer");
       if (!buf) return err(404, "not_found", "No encuentro ese clip.");

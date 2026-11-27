@@ -168,6 +168,52 @@ def gemini_text(prompt, log=print, system=""):
     return ""
 
 
+VISION = {"n": 0, "rechazos": 0, "off": False}
+
+
+def vision_check(images, pregunta, log=print, max_calls=60):
+    """Control de calidad con visión (Gemini, gratis): enseña las imágenes (data URLs) y pregunta si hay un fallo
+    grave. Devuelve (ok, [fallos]). Si no hay Gemini o falla, da por buena la imagen (nunca bloquea la agencia)."""
+    gk = os.environ.get("GEMINI_API_KEY", "").strip()
+    if not gk or VISION["off"] or VISION["n"] >= max_calls or not images:
+        return True, []
+    if not WRITER.get("models"):
+        WRITER["models"] = gemini_models(gk, log)
+    content = [{"type": "text", "text": pregunta + '\n\nResponde SOLO con JSON: {"ok": true|false, "fallos": ["…"]}'}]
+    content += [{"type": "image_url", "image_url": {"url": im}} for im in images[:6]]
+    for i, model in enumerate((WRITER.get("models") or [])[:2] * 2):
+        try:
+            VISION["n"] += 1
+            r = requests.post(GEMINI + "/chat/completions", timeout=120,
+                              headers={"authorization": "Bearer " + gk, "content-type": "application/json"},
+                              json={"model": model, "temperature": 0.1, "response_format": {"type": "json_object"},
+                                    "reasoning_effort": "low", "messages": [{"role": "user", "content": content}]})
+            if r.status_code in (429, 500, 502, 503, 504):
+                time.sleep(10 + 10 * i)
+                continue
+            if r.status_code in (400, 404):
+                continue
+            r.raise_for_status()
+            j = json.loads(re.search(r"\{.*\}", r.json()["choices"][0]["message"]["content"] or "{}", re.S).group(0))
+            fallos = [str(f)[:160] for f in (j.get("fallos") or []) if str(f).strip()]
+            ok = bool(j.get("ok", True)) or not fallos
+            if not ok:
+                VISION["rechazos"] += 1
+            return ok, fallos
+        except Exception as e:  # noqa: BLE001
+            log(f"    ⚠ Revisión visual ({model}): {str(e)[:100]}")
+    return True, []
+
+
+FALLOS_GRAVES = """Marca ok=false SOLO si hay algún fallo GRAVE de estos (lo demás, aunque no sea perfecto, es ok=true):
+a) Lo que se ve no tiene nada que ver con lo que se pidió (por ejemplo, se pidió los pies en los pedales y salen las manos o una cara).
+b) Un coche del juego en una posición imposible: girando sobre sí mismo, de lado o mirando hacia la cámara cuando debería alejarse.
+c) Más de una pantalla, o la pantalla fuera de su sitio (no está delante del volante), flotando o deformada.
+d) Manos, dedos, pies o caras deformes o con partes de más o de menos.
+e) Texto legible inventado o logos de marcas reales grandes y visibles (Ferrari, Logitech…).
+f) Una persona distinta de la descrita, si se describe una."""
+
+
 def writer_json(prompt, key, log=print):
     """Redacción (guiones, revisión, diapositivas): Gemini gratis si hay GEMINI_API_KEY (escribe y sabe bastante
     más que los modelos de Groq); si no está o falla, Groq."""
