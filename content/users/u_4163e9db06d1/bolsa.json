@@ -448,5 +448,150 @@
       "musica": "divertida",
       "hashtags": "#simracing #freno #firstcorner #community"
     }
+  },
+  {
+    "id": "b-2026-11-27-01-historia",
+    "tipo": "historia",
+    "tema": "Pedal de freno de célula de carga",
+    "gancho": "¿Pedal de freno de dos piezas, mito o realidad?",
+    "caption": "",
+    "nota": 9.0,
+    "created": "2026-11-27",
+    "status": "pendiente",
+    "dir": 2,
+    "veo": {
+      "clips": [
+        {
+          "t": "Muchos creen que la frenada depende del recorrido del pedal. Pero la clave real es la presión que aplicas con el pie.",
+          "prompt": "2 shots with hard cuts between them. Shot 1 (0-4 s): side close-up of the driver's feet on a sim racing pedal set (three metal pedals on an aluminium frame), black trainers, pushing the throttle pedal abruptly, not a real car. Tight framing: only that detail fills the image, no face, no monitor, no room. not a real car interior, no dashboard, no real road. Shot 2 (4-8 s): side view, side close-up of the driver's feet on a sim racing pedal set (three metal pedals on an aluminium frame), black trainers, pressing heavily on the metal brake pedal, not a real car. Tight framing: only that detail fills the image, no face, no monitor, no room. not a real car interior, no dashboard, no real road. The person is always the same: a Spanish man in his late twenties with short dark hair, light stubble and a plain black t-shirt. Setting: a silver aluminium sim racing rig with a black bucket seat in a bright modern room with white walls; one single large curved monitor mounted on the rig directly in front of the steering wheel, centred at the driver's eye level, always in that same place. Avoid: not a real car interior, no dashboard, no real road. smooth natural camera movement, vertical 9:16 video, photorealistic, bright natural light, sharp focus, no text, no captions, no logos, no brand names, no watermark. Anything on a screen is seen from the driver's cockpit and only moves forward along",
+          "dur": 8
+        },
+        {
+          "t": "Un pedal con célula de carga mide esa fuerza con precisión.",
+          "prompt": "low angle, side close-up of the driver's feet on a sim racing pedal set (three metal pedals on an aluminium frame), black trainers, foot applying precise and steady force onto the load cell brake pedal. Tight framing: only that detail fills the image, no face, no monitor, no room. not a real car interior, no dashboard, no real road. The person is always the same: a Spanish man in his late twenties with short dark hair, light stubble and a plain black t-shirt. Setting: a silver aluminium sim racing rig with a black bucket seat in a bright modern room with white walls; one single large curved monitor mounted on the rig directly in front of the steering wheel, centred at the driver's eye level, always in that same place. Avoid: not a real car interior, no dashboard, no real road. smooth natural camera movement, vertical 9:16 video, photorealistic, bright natural light, sharp focus, no text, no captions, no logos, no brand names, no watermark. Anything on a screen is seen from the driver's cockpit and only moves forward along the road: no car spinning, sliding, turning around or facing the camera",
+          "dur": 6
+        },
+        {
+          "t": "Así consigues frenadas mucho más constantes y repetibles en pista. Sigue la cuenta para mejorar tus tiempos desde hoy.",
+          "prompt": "2 shots with hard cuts between them. Shot 1 (0-4 s): top-down view, side close-up of the driver's feet on a sim racing pedal set (three metal pedals on an aluminium frame), black trainers, smoothly releasing the brake pedal. Tight framing: only that detail fills the image, no face, no monitor, no room. not a real car interior, no dashboard, no real road. Shot 2 (4-8 s): medium shot of the driver sitting in the bucket seat, smiling and pointing at the camera, home gaming room background. The person is always the same: a Spanish man in his late twenties with short dark hair, light stubble and a plain black t-shirt. Setting: a silver aluminium sim racing rig with a black bucket seat in a bright modern room with white walls; one single large curved monitor mounted on the rig directly in front of the steering wheel, centred at the driver's eye level, always in that same place. Avoid: not a real car interior, no dashboard, no real road. smooth natural camera movement, vertical 9:16 video, photorealistic, bright natural light, sharp focus, no text, no captions, no logos, no brand names, no watermark. Anything on a screen is seen from the driver's cockpit and only moves forward along the road: no car spinning, sliding, turning around or facing the camera",
+          "dur": 8
+        }
+      ],
+      "voz": "es-ES-ElviraNeural",
+      "ritmo": "+8%",
+      "musica": "energetica",
+      "hashtags": ""
+    }
+  },
+  {
+    "id": "b-2026-11-27-02-reel",
+    "tipo": "reel",
+    "tema": "Cómo hacer trail braking para que el coche giré mejor",
+    "gancho": "En ACC, si tu coche subvira al girar, estás soltando mal el freno",
+    "caption": "¿Tu coche subvira al girar en ACC? Estás soltando mal el freno.\n\n→ Frenada fuerte en recta y suelta muy progresivo al girar el volante.\n→ A más giro de volante, menos presión en el pedal para cargar peso delante.\n→ Si lo sueltas de golpe, pierdes agarre delantero y te vas recto.\n\nGuarda este reel para aplicarlo en tu próxima sesión de entrenamiento 🏎️\n\n#simracing #trailbraking #assettocorsacompetizione #setupcoches",
+    "nota": 9.0,
+    "created": "2026-11-27",
+    "status": "pendiente",
+    "dir": 2,
+    "veo": {
+      "clips": [
+        {
+          "t": "En ACC, si tu coche subvira al girar, estás soltando mal el freno Empieza frenando con fuerza máxima mientras el coche va completamente recto",
+          "prompt": "2 shots with hard cuts between them. Shot 1 (0-4 s): side close-up of the driver's feet on a sim racing pedal set (three metal pedals on an aluminium frame), black trainers, pressing the brake pedal too quickly. Tight framing: only that detail fills the image, no face, no monitor, no room. not a real car interior, no dashboard, no text, no blurry images. Shot 2 (4-8 s): side view, side close-up of the driver's feet on a sim racing pedal set (three metal pedals on an aluminium frame), black trainers, pressing the brake pedal down with maximum force. Tight framing: only that detail fills the image, no face, no monitor, no room. not a real car interior, no dashboard, no text, no blurry images. The person is always the same: a Spanish man in his late twenties with short dark hair, light stubble and a plain black t-shirt. Setting: a silver aluminium sim racing rig with a black bucket seat in a bright modern room with white walls; one single large curved monitor mounted on the rig directly in front of the steering wheel, centred at the driver's eye level, always in that same place. Avoid: not a real car interior, no dashboard, no text, no blurry images. smooth natural camera movement, vertical 9:16 video, photorealistic, bright natural light, sharp focus, no text, no captions, no logos, no brand names, no watermark. Anything on a screen is seen from the driver's cockpit and only move",
+          "dur": 8
+        },
+        {
+          "t": "Al empezar a girar el volante, suelta el pedal de forma muy progresiva Cuanto más gires las ruedas hacia dentro, menos presión debes llevar en el pie",
+          "prompt": "2 shots with hard cuts between them. Shot 1 (0-4 s): low angle, side close-up of the driver's feet on a sim racing pedal set (three metal pedals on an aluminium frame), black trainers, progressively releasing the brake pedal. Tight framing: only that detail fills the image, no face, no monitor, no room. not a real car interior, no dashboard, no text, no blurry images. Shot 2 (4-8 s): top-down view, side close-up of the driver's feet on a sim racing pedal set (three metal pedals on an aluminium frame), black trainers, maintaining light pressure on the brake pedal. Tight framing: only that detail fills the image, no face, no monitor, no room. not a real car interior, no dashboard, no text, no blurry images. The person is always the same: a Spanish man in his late twenties with short dark hair, light stubble and a plain black t-shirt. Setting: a silver aluminium sim racing rig with a black bucket seat in a bright modern room with white walls; one single large curved monitor mounted on the rig directly in front of the steering wheel, centred at the driver's eye level, always in that same place. Avoid: not a real car interior, no dashboard, no text, no blurry images. smooth natural camera movement, vertical 9:16 video, photorealistic, bright natural light, sharp focus, no text, no captions, no logos, no brand names, no watermark. Anything on a screen is seen from the driver's cockpi",
+          "dur": 8
+        },
+        {
+          "t": "Ese pequeño resto de freno carga el peso delante y hace que el morro entre solo",
+          "prompt": "wide close-up, side close-up of the driver's feet on a sim racing pedal set (three metal pedals on an aluminium frame), black trainers, holding a tiny bit of pressure on the brake pedal. Tight framing: only that detail fills the image, no face, no monitor, no room. not a real car interior, no dashboard, no text, no blurry images. The person is always the same: a Spanish man in his late twenties with short dark hair, light stubble and a plain black t-shirt. Setting: a silver aluminium sim racing rig with a black bucket seat in a bright modern room with white walls; one single large curved monitor mounted on the rig directly in front of the steering wheel, centred at the driver's eye level, always in that same place. Avoid: not a real car interior, no dashboard, no text, no blurry images. smooth natural camera movement, vertical 9:16 video, photorealistic, bright natural light, sharp focus, no text, no captions, no logos, no brand names, no watermark. Anything on a screen is seen from the driver's cockpit and only moves forward along the road: no car spinning, sliding, turning around or facing the camera",
+          "dur": 8
+        },
+        {
+          "t": "Si sueltas el freno de golpe al girar, el coche pierde agarre delantero y se va recto Practica esta suelta gradual para mejorar en tus curvas lentas favoritas",
+          "prompt": "2 shots with hard cuts between them. Shot 1 (0-5 s): side close-up of the driver's feet on a sim racing pedal set (three metal pedals on an aluminium frame), black trainers, abruptly releasing the brake pedal completely. Tight framing: only that detail fills the image, no face, no monitor, no room. not a real car interior, no dashboard, no text, no blurry images. Shot 2 (5-8 s): medium shot of the driver in the sim racing rig smiling and nodding at the camera, wearing a black t-shirt. The person is always the same: a Spanish man in his late twenties with short dark hair, light stubble and a plain black t-shirt. Setting: a silver aluminium sim racing rig with a black bucket seat in a bright modern room with white walls; one single large curved monitor mounted on the rig directly in front of the steering wheel, centred at the driver's eye level, always in that same place. Avoid: not a real car interior, no dashboard, no text, no blurry images. smooth natural camera movement, vertical 9:16 video, photorealistic, bright natural light, sharp focus, no text, no captions, no logos, no brand names, no watermark. Anything on a screen is seen from the driver's cockpit and only moves forward along the road: no car spinning, sliding, turning around or facing the camera",
+          "dur": 8
+        },
+        {
+          "t": "Notarás que el coche gira mucho mejor sin forzar el volante Sígueme para aprender más técnicas avanzadas de simracing",
+          "prompt": "2 shots with hard cuts between them. Shot 1 (0-5 s): close-up of the driver's hands on a sim racing steering wheel with buttons, mounted on an aluminium rig, turning the wheel smoothly. Tight framing: only that detail fills the image, no face, no monitor, no room. not a real car interior, no dashboard, no text, no blurry images. Shot 2 (5-8 s): side view, medium shot of the driver in the sim racing rig smiling and nodding at the camera, pointing slightly forward. The person is always the same: a Spanish man in his late twenties with short dark hair, light stubble and a plain black t-shirt. Setting: a silver aluminium sim racing rig with a black bucket seat in a bright modern room with white walls; one single large curved monitor mounted on the rig directly in front of the steering wheel, centred at the driver's eye level, always in that same place. Avoid: not a real car interior, no dashboard, no text, no blurry images. smooth natural camera movement, vertical 9:16 video, photorealistic, bright natural light, sharp focus, no text, no captions, no logos, no brand names, no watermark. Anything on a screen is seen from the driver's cockpit and only moves forward along the road: no car spinning, sliding, turning around or facing the camera",
+          "dur": 8
+        }
+      ],
+      "voz": "es-ES-AlvaroNeural",
+      "ritmo": "+16%",
+      "musica": "hiphop",
+      "hashtags": "#simracing #trailbraking #assettocorsacompetizione #setupcoches"
+    }
+  },
+  {
+    "id": "b-2026-11-27-03-historia",
+    "tipo": "historia",
+    "tema": "Mirada en curva",
+    "gancho": "¿Por qué llegas tarde a las curvas en tus simuladores de carreras?",
+    "caption": "",
+    "nota": 8.0,
+    "created": "2026-11-27",
+    "status": "pendiente",
+    "dir": 2,
+    "veo": {
+      "clips": [
+        {
+          "t": "Mirar justo delante del capó hace que reacciones demasiado tarde. Debes mirar hacia el vértice y la salida antes de llegar.",
+          "prompt": "2 shots with hard cuts between them. Shot 1 (0-4 s): wide shot of a 30-year-old man sitting in an aluminium sim racing rig with a bucket seat inside a bright home gaming room, looking closely at a big monitor showing a racing game. Shot 2 (4-8 s): over-the-shoulder view of the big monitor showing the game from the cockpit camera, the road and the corner ahead flowing smoothly towards the viewer, no car body visible, with the virtual racing track curving sharply ahead. The person is always the same: a Spanish man in his late twenties with short dark hair, light stubble and a plain black t-shirt. Setting: a silver aluminium sim racing rig with a black bucket seat in a bright modern room with white walls; one single large curved monitor mounted on the rig directly in front of the steering wheel, centred at the driver's eye level, always in that same place. Avoid: not a real car interior, no dashboard, no blurry visuals, no text. smooth natural camera movement, vertical 9:16 video, photorealistic, bright natural light, sharp focus, no text, no captions, no logos, no brand names, no watermark. Anything on a screen is seen from the driver's cockpit and only moves forward along the road: no car spinning, sliding, turning around or facing the camera",
+          "dur": 8
+        },
+        {
+          "t": "Tus manos siguen siempre a tu vista de forma completamente natural. Anticipar la mirada te permite trazar con total suavidad.",
+          "prompt": "2 shots with hard cuts between them. Shot 1 (0-4 s): over-the-shoulder view of the big monitor showing the racing game from the cockpit camera, with the driver's virtual hands smoothly turning the steering wheel towards the apex of the corner. Shot 2 (4-8 s): close-up of hands smoothly turning the steering wheel on an aluminium sim racing rig, executing a precise and fluid steering motion inside a bright home gaming room. Tight framing: only that detail fills the image, no face, no monitor, no room. not a real car interior, no dashboard, no blurry visuals, no text. The person is always the same: a Spanish man in his late twenties with short dark hair, light stubble and a plain black t-shirt. Setting: a silver aluminium sim racing rig with a black bucket seat in a bright modern room with white walls; one single large curved monitor mounted on the rig directly in front of the steering wheel, centred at the driver's eye level, always in that same place. Avoid: not a real car interior, no dashboard, no blurry visuals, no text. smooth natural camera movement, vertical 9:16 video, photorealistic, bright natural light, sharp focus, no text, no captions, no logos, no brand names, no watermark. Anything on a screen is seen from the driver's cockpit and only moves forward along the road: no car spinning, sliding, turning around or facing the camera",
+          "dur": 8
+        }
+      ],
+      "voz": "es-ES-ElviraNeural",
+      "ritmo": "+8%",
+      "musica": "energetica",
+      "hashtags": ""
+    }
+  },
+  {
+    "id": "b-2026-11-27-04-reel",
+    "tipo": "reel",
+    "tema": "Optimiza tu línea de salida y frenada con puntos fijos",
+    "gancho": "En iRacing, optimiza tu salida al instante con este truco",
+    "caption": "Si frenas a ojo en iRacing, pierdes décimas valiosas en cada vuelta.\n\n→ Elige una referencia fija en la pista antes de cada frenada, como un cartel.\n→ Mueve tu punto de frenada poco a poco buscando la constancia antes que la velocidad.\n\nLAPRIQ analiza tu telemetría y te ayuda a mejorar.\nDescárgala gratis desde el enlace de la bio.\n\n#simracing #iracing #frenada #telemetria",
+    "nota": 8.0,
+    "created": "2026-11-27",
+    "status": "pendiente",
+    "dir": 2,
+    "veo": {
+      "clips": [
+        {
+          "t": "En iRacing, optimiza tu salida al instante con este truco. Muchos pilotos frenan a ojo y pierden décimas valiosas.",
+          "prompt": "2 shots with hard cuts between them. Shot 1 (0-4 s): wide shot of a man in his late 20s with short dark hair sitting in an aluminium sim racing rig with a big monitor showing a racing track, bright home gaming room. Shot 2 (4-8 s): side close-up of the driver's feet on a sim racing pedal set (three metal pedals on an aluminium frame), black trainers, pressing the brake pedal abruptly with a tense foot gesture. Tight framing: only that detail fills the image, no face, no monitor, no room. not a real car interior, no dashboard, no text. The person is always the same: a Spanish man in his late twenties with short dark hair, light stubble and a plain black t-shirt. Setting: a silver aluminium sim racing rig with a black bucket seat in a bright modern room with white walls; one single large curved monitor mounted on the rig directly in front of the steering wheel, centred at the driver's eye level, always in that same place. Avoid: not a real car interior, no dashboard, no text. smooth natural camera movement, vertical 9:16 video, photorealistic, bright natural light, sharp focus, no text, no captions, no logos, no brand names, no watermark. Anything on a screen is seen from the driver's cockpit and only moves forward along the road: no car spinning, sliding, turning around or facing the camera",
+          "dur": 8
+        },
+        {
+          "t": "Elige una referencia fija en la pista antes de cada frenada. Puede ser un cartel o una marca en el asfalto.",
+          "prompt": "2 shots with hard cuts between them. Shot 1 (0-4 s): side close-up of the driver's feet on a sim racing pedal set (three metal pedals on an aluminium frame), black trainers, resting calmly with one foot near a specific reference pedal marker. Tight framing: only that detail fills the image, no face, no monitor, no room. not a real car interior, no dashboard, no text. Shot 2 (4-8 s): close-up of hands on a steering wheel pointing at a trackside distance marker visible on the large monitor screen ahead. Tight framing: only that detail fills the image, no face, no monitor, no room. not a real car interior, no dashboard, no text. The person is always the same: a Spanish man in his late twenties with short dark hair, light stubble and a plain black t-shirt. Setting: a silver aluminium sim racing rig with a black bucket seat in a bright modern room with white walls; one single large curved monitor mounted on the rig directly in front of the steering wheel, centred at the driver's eye level, always in that same place. Avoid: not a real car interior, no dashboard, no text. smooth natural camera movement, vertical 9:16 video, photorealistic, bright natural light, sharp focus, no text, no captions, no logos, no brand names, no watermark. Anything on a screen is seen from the driver's cockpit and only moves forward along the road: no car spinning, sliding, turning around or facing the cam",
+          "dur": 8
+        },
+        {
+          "t": "Mueve tu punto de frenada poco a poco en cada vuelta. Busca la constancia antes de intentar buscar la velocidad máxima.",
+          "prompt": "2 shots with hard cuts between them. Shot 1 (0-4 s): side close-up of the driver's feet on a sim racing pedal set (three metal pedals on an aluminium frame), black trainers, adjusting foot position slightly on the brake pedal. Tight framing: only that detail fills the image, no face, no monitor, no room. not a real car interior, no dashboard, no text. Shot 2 (4-8 s): top-down close-up of hands holding a steering wheel smoothly negotiating a virtual corner displayed on the screen. Tight framing: only that detail fills the image, no face, no monitor, no room. not a real car interior, no dashboard, no text. The person is always the same: a Spanish man in his late twenties with short dark hair, light stubble and a plain black t-shirt. Setting: a silver aluminium sim racing rig with a black bucket seat in a bright modern room with white walls; one single large curved monitor mounted on the rig directly in front of the steering wheel, centred at the driver's eye level, always in that same place. Avoid: not a real car interior, no dashboard, no text. smooth natural camera movement, vertical 9:16 video, photorealistic, bright natural light, sharp focus, no text, no captions, no logos, no brand names, no watermark. Anything on a screen is seen from the driver's cockpit and only moves forward along the road: no car spinning, sliding, turning around or facing the camera",
+          "dur": 8
+        }
+      ],
+      "voz": "es-ES-AlvaroNeural",
+      "ritmo": "+16%",
+      "musica": "divertida",
+      "hashtags": "#simracing #iracing #frenada #telemetria",
+      "captura": {
+        "t": "La app de LAPRIQ analiza tu telemetría y te ayuda a mejorar. Descárgala gratis desde el enlace de la bio.",
+        "url": "https://lapriq.pages.dev/assets/img/telemetria.jpg"
+      }
+    }
   }
 ]

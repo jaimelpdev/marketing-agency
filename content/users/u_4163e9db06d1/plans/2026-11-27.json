@@ -1,0 +1,261 @@
+{
+  "date": "2026-11-27",
+  "estrategia": "Publicaremos 7 piezas entre viernes y miércoles, descansando sábado, domingo y jueves. Usaremos reels de alcance, stories de comunidad y un carrusel educativo para cumplir con la serie y la promesa pendiente.",
+  "piezas": [
+    {
+      "id": "pmwzjxgt5_2",
+      "dia": 2,
+      "hora": "13:30",
+      "tipo": "post",
+      "objetivo": "confianza",
+      "razon": "dar valor práctico sobre subviraje",
+      "tema": "Subviraje: cómo detectarlo y corregirlo en 3 pasos",
+      "formato": "post",
+      "gancho": "El error que te hace subvirar",
+      "visual": "over-the-shoulder view of the big monitor showing the game from the cockpit camera, the road and the corner ahead flowing smoothly towards the viewer, no car body visible, close-up of a mid-30s man with short brown hair looking at the screen with a focused expression; the person is a Spanish man in his late twenties with short dark hair, light stubble and a plain black t-shirt. Setting: a silver aluminium sim racing rig with a black bucket seat in a bright modern room with white walls; one single large curved monitor mounted on the rig directly in front of the steering wheel, centred at the driver's eye level, always in that same place. not a real car interior, no real road, no text",
+      "escenas": [
+        {
+          "titulo": "Soltar el freno demasiado pronto",
+          "texto": "No dejes de frenar de golpe al girar. Mantén una ligera presión para cargar el morro y evitar que el coche siga recto.",
+          "emoji": "",
+          "visual": "side close-up of the driver's feet on a sim racing pedal set with three metal pedals on an aluminium frame, black trainers, the right foot abruptly lifting off the brake pedal too fast while turning. Tight framing: only that detail fills the image, no face, no monitor, no room. not a real car interior, no real road, no text",
+          "visuales": [
+            "..."
+          ],
+          "foto": "",
+          "grafico": {
+            "tipo": "checklist",
+            "items": [
+              "Mira atrás",
+              "Siente resistencia",
+              "Frena menos"
+            ]
+          }
+        }
+      ],
+      "cta": "Guarda este post y prueba los pasos",
+      "sticker": null,
+      "fondo": "ia",
+      "estilo": "racing",
+      "caption": "¿El coche se va recto al girar? El truco está en los pedales 🏁\n\n→ No sueltes el freno de golpe al entrar en la curva.\n→ Mantén una ligera presión para cargar el morro.\n\nGuarda este consejo para aplicarlo en tu próxima sesión.",
+      "hashtags": "#simracing #subviraje #setupcoche #conducciondeportiva",
+      "audio": "",
+      "voz": "",
+      "ritmo_voz": "",
+      "musica": "",
+      "guion": [],
+      "beats": [],
+      "estilo_visual": "cinematic 35mm photo, bright natural light, vivid colors",
+      "visual_cierre": "",
+      "cierre_bio": "",
+      "foto": "",
+      "anim": "pop",
+      "serie": "",
+      "episodio": 0,
+      "look": 3,
+      "plantilla": 443,
+      "layout": "cine",
+      "stickers": [
+        "🏎️",
+        "⚡",
+        "🛞"
+      ]
+    },
+    {
+      "id": "pmwzjxgt5_5",
+      "dia": 4,
+      "hora": "13:00",
+      "tipo": "carrusel",
+      "objetivo": "",
+      "razon": "cumplir promesa de carrusel paso a paso de setup Spa",
+      "tema": "Setup paso a paso para Spa con enlaces a la app",
+      "formato": "carrusel",
+      "gancho": "Setup perfecto para Spa en 5 pasos",
+      "visual": "wide shot of a 30-year-old man with short brown hair wearing a grey t-shirt sitting in an aluminium sim racing rig inside a bright home gaming room, big monitor showing a virtual racing track, not a real car; the person is a Spanish man in his late twenties with short dark hair, light stubble and a plain black t-shirt. Setting: a silver aluminium sim racing rig with a black bucket seat in a bright modern room with white walls; one single large curved monitor mounted on the rig directly in front of the steering wheel, centred at the driver's eye level, always in that same place. not a real car interior, no dashboard, no text, no blurry background",
+      "escenas": [
+        {
+          "titulo": "Usa una base estable",
+          "texto": "Antes de tocar el setup, mejora tu técnica; un setup base estable es mejor para aprender.",
+          "emoji": "",
+          "visual": "medium shot of the man in the sim racing rig looking focused at the monitor, hands on the steering wheel, bright home gaming room; the person is a Spanish man in his late twenties with short dark hair, light stubble and a plain black t-shirt. Setting: a silver aluminium sim racing rig with a black bucket seat in a bright modern room with white walls; one single large curved monitor mounted on the rig directly in front of the steering wheel, centred at the driver's eye level, always in that same place. not a real car interior, no dashboard, no text, no blurry background",
+          "visuales": [
+            "..."
+          ],
+          "foto": "",
+          "grafico": {
+            "tipo": "checklist",
+            "items": [
+              "28psi delante",
+              "26psi atrás"
+            ]
+          }
+        },
+        {
+          "titulo": "Cambia un solo parámetro",
+          "texto": "Cambia un solo parámetro cada vez y pruébalo en varias vueltas para notar el resultado.",
+          "emoji": "",
+          "visual": "medium shot of the driver in the sim racing rig smiling and nodding at the camera, hands resting on the steering wheel; the person is a Spanish man in his late twenties with short dark hair, light stubble and a plain black t-shirt. Setting: a silver aluminium sim racing rig with a black bucket seat in a bright modern room with white walls; one single large curved monitor mounted on the rig directly in front of the steering wheel, centred at the driver's eye level, always in that same place. not a real car interior, no dashboard, no text, no blurry background",
+          "visuales": [
+            "..."
+          ],
+          "foto": "",
+          "grafico": null
+        },
+        {
+          "titulo": "Revisa presiones en caliente",
+          "texto": "La presión de neumáticos se mira en caliente tras unas vueltas, no en frío, para buscar su ventana ideal.",
+          "emoji": "",
+          "visual": "close-up of hands checking digital tire pressure data on a colorful telemetry graph displayed on a side monitor, bright gaming room. Tight framing: only that detail fills the image, no face, no monitor, no room. not a real car interior, no dashboard, no text, no blurry background",
+          "visuales": [
+            "..."
+          ],
+          "foto": "",
+          "grafico": null
+        },
+        {
+          "emoji": "",
+          "visual": "side close-up of the driver's feet on a sim racing pedal set (three metal pedals on an aluminium frame), black trainers pressing smoothly on the brake. Tight framing: only that detail fills the image, no face, no monitor, no room. not a real car interior, no dashboard, no text, no blurry background",
+          "visuales": [],
+          "foto": "",
+          "grafico": null,
+          "titulo": "Ajusta el reparto de frenada",
+          "texto": "Llevar más freno atrás ayuda a que el coche gire pero facilita bloquear las traseras."
+        }
+      ],
+      "cta": "",
+      "sticker": null,
+      "fondo": "ia",
+      "estilo": "minimal",
+      "caption": "Configura tu coche en Spa paso a paso para bajar tus tiempos por vuelta.\n\n→ Usa una base estable para aprender antes de tocar el setup.\n→ Cambia un solo parámetro cada vez y pruébalo en varias vueltas.\n→ Revisa las presiones de neumáticos en caliente tras unas vueltas.\n→ Ajusta el reparto de frenada para ayudar a que el coche gire 🏁\n\nGuarda este post para tu próxima sesión en pista.",
+      "hashtags": "#simracing #setup #spafrancorchamps #assettoemplace #iracing",
+      "audio": "",
+      "voz": "",
+      "ritmo_voz": "",
+      "musica": "",
+      "guion": [],
+      "beats": [],
+      "estilo_visual": "",
+      "visual_cierre": "",
+      "cierre_bio": "",
+      "foto": "",
+      "anim": "fade",
+      "serie": "",
+      "episodio": 0,
+      "look": 77,
+      "plantilla": 659,
+      "layout": "cine",
+      "stickers": []
+    },
+    {
+      "id": "pmwzjxgt5_1",
+      "dia": 0,
+      "hora": "08:45",
+      "tipo": "historia",
+      "objetivo": "comunidad",
+      "razon": "interacción temprana, lanzar encuesta",
+      "tema": "Pedal de freno de célula de carga",
+      "formato": "historia",
+      "gancho": "¿Pedal de freno de dos piezas, mito o realidad?",
+      "visual": "close-up of two-piece brake pedal on sim rig",
+      "escenas": [
+        {
+          "titulo": "¿Pedal de freno de 2",
+          "texto": "piezas, mito o realidad?",
+          "emoji": "",
+          "visual": "close-up of two-piece brake pedal on sim rig",
+          "visuales": [],
+          "foto": "",
+          "grafico": null
+        },
+        {
+          "titulo": "Muchos creen que siempre mejora",
+          "texto": "la frenada",
+          "emoji": "",
+          "visual": "close-up of two-piece brake pedal on sim rig",
+          "visuales": [],
+          "foto": "",
+          "grafico": null
+        },
+        {
+          "titulo": "Pero la diferencia depende de",
+          "texto": "tu rig y estilo",
+          "emoji": "",
+          "visual": "close-up of two-piece brake pedal on sim rig",
+          "visuales": [],
+          "foto": "",
+          "grafico": null
+        },
+        {
+          "titulo": "¿Qué opinas? Escríbeme por DM",
+          "texto": "",
+          "emoji": "",
+          "visual": "close-up of two-piece brake pedal on sim rig",
+          "visuales": [],
+          "foto": "",
+          "grafico": null
+        }
+      ],
+      "cta": "",
+      "sticker": {
+        "tipo": "pregunta",
+        "texto": "¿Crees que 2 piezas son mejores?",
+        "opciones": [],
+        "auto": true
+      },
+      "fondo": "ia",
+      "estilo": "racing",
+      "caption": "La clave de una buena frenada está en la presión que aplicas, no en cuánto se mueve el pedal. ¿Qué tipo de pedales usas en tu simulador?",
+      "hashtags": "",
+      "audio": "voz_y_musica",
+      "voz": "",
+      "ritmo_voz": "",
+      "musica": "energetica",
+      "guion": [
+        "Muchos creen que la frenada depende del recorrido del pedal.",
+        "Pero la clave real es la presión que aplicas con el pie.",
+        "Un pedal con célula de carga mide esa fuerza con precisión.",
+        "Así consigues frenadas mucho más constantes y repetibles en pista.",
+        "Sigue la cuenta para mejorar tus tiempos desde hoy."
+      ],
+      "beats": [
+        {
+          "t": "Muchos creen que la frenada depende del recorrido del pedal.",
+          "img": "side close-up of the driver's feet on a sim racing pedal set (three metal pedals on an aluminium frame), black trainers, pushing the throttle pedal abruptly, not a real car. Tight framing: only that detail fills the image, no face, no monitor, no room. not a real car interior, no dashboard, no real road"
+        },
+        {
+          "t": "Pero la clave real es la presión que aplicas con el pie.",
+          "img": "side view, side close-up of the driver's feet on a sim racing pedal set (three metal pedals on an aluminium frame), black trainers, pressing heavily on the metal brake pedal, not a real car. Tight framing: only that detail fills the image, no face, no monitor, no room. not a real car interior, no dashboard, no real road"
+        },
+        {
+          "t": "Un pedal con célula de carga mide esa fuerza con precisión.",
+          "img": "low angle, side close-up of the driver's feet on a sim racing pedal set (three metal pedals on an aluminium frame), black trainers, foot applying precise and steady force onto the load cell brake pedal. Tight framing: only that detail fills the image, no face, no monitor, no room. not a real car interior, no dashboard, no real road"
+        },
+        {
+          "t": "Así consigues frenadas mucho más constantes y repetibles en pista.",
+          "img": "top-down view, side close-up of the driver's feet on a sim racing pedal set (three metal pedals on an aluminium frame), black trainers, smoothly releasing the brake pedal. Tight framing: only that detail fills the image, no face, no monitor, no room. not a real car interior, no dashboard, no real road"
+        },
+        {
+          "t": "Sigue la cuenta para mejorar tus tiempos desde hoy.",
+          "img": "medium shot of the driver sitting in the bucket seat, smiling and pointing at the camera, home gaming room background; the person is a Spanish man in his late twenties with short dark hair, light stubble and a plain black t-shirt. Setting: a silver aluminium sim racing rig with a black bucket seat in a bright modern room with white walls; one single large curved monitor mounted on the rig directly in front of the steering wheel, centred at the driver's eye level, always in that same place. not a real car interior, no dashboard, no real road"
+        }
+      ],
+      "estilo_visual": "bright and sharp photography, vivid colors, realistic lighting, highly detailed",
+      "visual_cierre": "",
+      "cierre_bio": "Descubre cómo mejorar tu frenada con el enlace de la bio.",
+      "foto": "",
+      "anim": "pop",
+      "serie": "Mito o realidad",
+      "episodio": 1,
+      "look": 206,
+      "plantilla": 1216,
+      "layout": "faceless",
+      "stickers": [
+        "🏎️",
+        "🛞",
+        "❓"
+      ],
+      "nota": 9.0,
+      "persona": "a Spanish man in his late twenties with short dark hair, light stubble and a plain black t-shirt"
+    }
+  ]
+}

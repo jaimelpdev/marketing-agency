@@ -1103,6 +1103,17 @@
     },
     {
       "date": "2026-11-27",
+      "tema": "Errores comunes de setup que te hacen perder tiempo",
+      "formato": "top",
+      "tipo": "carrusel",
+      "layout": "cine",
+      "plantilla": 649,
+      "look": 72,
+      "serie": "",
+      "objetivo": ""
+    },
+    {
+      "date": "2026-11-27",
       "tipo": "reel",
       "src": "red",
       "tema": "[IG · ❤️9] Frena con un punto de referencia y suelta suavemente al girar. La mirada al vértice te ayuda a trazar la línea perfecta. ¿Cuál es tu referen"
@@ -1131,12 +1142,67 @@
     },
     {
       "date": "2026-11-27",
-      "tema": "Errores comunes de setup que te hacen perder tiempo",
-      "formato": "top",
+      "tema": "Mito o realidad: ¿El pedal de freno de dos piezas es siempre mejor?",
+      "formato": "historia",
+      "tipo": "historia",
+      "layout": "faceless",
+      "plantilla": 1216,
+      "look": 206,
+      "serie": "Mito o realidad",
+      "objetivo": "comunidad"
+    },
+    {
+      "date": "2026-11-27",
+      "tema": "Cómo la app muestra telemetría en tiempo real para afinar la línea en la primera curva",
+      "formato": "reel",
+      "tipo": "reel",
+      "layout": "faceless",
+      "plantilla": 183,
+      "look": 149,
+      "serie": "Detrás de la app",
+      "objetivo": "alcance"
+    },
+    {
+      "date": "2026-11-29",
+      "tema": "Subviraje: cómo detectarlo y corregirlo en 3 pasos",
+      "formato": "post",
+      "tipo": "post",
+      "layout": "tarjeta",
+      "plantilla": 443,
+      "look": 3,
+      "serie": "",
+      "objetivo": "confianza"
+    },
+    {
+      "date": "2026-11-30",
+      "tema": "Elige el próximo tip rápido del día",
+      "formato": "historia",
+      "tipo": "historia",
+      "layout": "faceless",
+      "plantilla": 1492,
+      "look": 113,
+      "serie": "",
+      "objetivo": "comunidad"
+    },
+    {
+      "date": "2026-11-30",
+      "tema": "Analiza tu línea de salida con la app en tiempo real",
+      "formato": "reel",
+      "tipo": "reel",
+      "layout": "faceless",
+      "plantilla": 1838,
+      "look": 223,
+      "serie": "Detrás de la app",
+      "objetivo": ""
+    },
+    {
+      "date": "2026-12-01",
+      "tema": "Setup paso a paso para Spa con enlaces a la app",
+      "formato": "carrusel",
       "tipo": "carrusel",
-      "layout": "cine",
-      "plantilla": 649,
-      "look": 72,
+      "layout": "lista",
+      "plantilla": 659,
+      "look": 77,
       "serie": "",
       "objetivo": ""
     }

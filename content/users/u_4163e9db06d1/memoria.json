@@ -1,18 +1,18 @@
 {
  "version": 1,
  "creada": "2026-11-18T17:28:47",
- "actualizada": "2026-11-25T14:55:52",
- "semana": 1,
+ "actualizada": "2026-11-27T22:25:45",
+ "semana": 2,
  "fase": "descubrimiento",
  "objetivo_mes": "Dar a conocer la academia con consejos útiles y verificados de simracing",
  "arco_semana": {
-  "tema": "",
-  "porque": ""
+  "tema": "Mejorar la primera curva y la trazada en distintas condiciones",
+  "porque": "Los reels con consejos concretos sobre la primera curva (ej. trail braking, referencia de frenado, lluvia) obtuvieron los mayores engagement (≥103) y generan valor inmediato para novatos e intermedios"
  },
  "mezcla": {
-  "alcance": 15,
-  "confianza": 20,
-  "comunidad": 55,
+  "alcance": 20,
+  "confianza": 25,
+  "comunidad": 45,
   "conversion": 10
  },
  "series": [
@@ -20,50 +20,56 @@
    "nombre": "Tip rápido del día",
    "formato": "reel",
    "cuando": "lunes y jueves",
-   "descripcion": "Consejo breve y práctico para mejorar en pista o configurar el coche",
+   "descripcion": "Consejo breve y práctico para mejorar en pista o ajustar el coche en segundos",
    "episodios": 1
   },
   {
    "nombre": "Mito o realidad",
    "formato": "historia",
    "cuando": "viernes",
-   "descripcion": "Desmitificamos creencias comunes del simracing con datos y ejemplos",
-   "episodios": 1
+   "descripcion": "Desmitificamos creencias comunes del simracing con datos y ejemplos claros",
+   "episodios": 2
   },
   {
    "nombre": "Detrás de la app",
    "formato": "reel",
    "cuando": "lunes, miércoles y viernes",
-   "descripcion": "Muestra cómo la app ayuda a analizar telemetría, ajustar setups y mejorar tiempos",
+   "descripcion": "Mostramos cómo la app ayuda a analizar telemetría, ajustar setups y mejorar tiempos en tiempo real",
    "episodios": 1
   }
  ],
  "aprendizajes": [
-  "Los reels de tips rápidos superan en engagement a posts y carruseles (media reel ≈ 90 eng vs post ≈ 3)",
-  "Los contenidos tipo \"Mito o realidad\" en historias generan más comentarios que los reels tradicionales",
-  "Los carruseles con llamada a participación tienen bajo engagement; es mejor enfocarse en formato corto y visual"
+  "Los reels con gancho que empieza con \"En [simulador]...\" y un ajuste concreto generan >90 engagement",
+  "Los contenidos visuales y accionables (ej. trail braking, lluvia) superan a textos estáticos",
+  "Los carruseles con llamada a participación tienen bajo engagement, mientras que los reels de tips generan más likes y comentarios",
+  "Los stories \"Mito o realidad\" generan más comentarios que los reels tradicionales"
  ],
  "que_evitar": [
   "Ventas directas en los primeros contenidos",
   "Jargon técnico sin explicación sencilla",
-  "Polémicas sin valor añadido",
-  "Exceso de llamadas a la acción sin contenido de valor",
-  "Publicar posts estáticos con bajo valor percibido"
+  "Publicar posts estáticos o carruseles con bajo valor percibido",
+  "Exceso de llamadas a la acción sin aportar contenido de valor",
+  "Polémicas sin valor añadido"
  ],
- "promesas_pendientes": [],
- "ideas": [
+ "promesas_pendientes": [
   "Lanzar una encuesta en historias para que la comunidad vote el próximo tema de tutorial",
   "Publicar un carrusel paso a paso de setup para Spa con enlaces a la app"
+ ],
+ "ideas": [
+  "Crear encuesta en historias para elegir el próximo tema de \"Tip rápido del día\"",
+  "Publicar carrusel de setup Spa con enlaces directos a la app",
+  "Incluir mini tutorial de análisis de telemetría en reels de 15 s"
  ],
  "tono_comunidad": "Energético, motivador y cercano; habla como un compañero de pista que celebra cada progreso y anima a compartir experiencias",
  "hitos": [
   "Alcanzar 1 000 seguidores en Instagram",
-  "Publicar 10 reels de \"Tip rápido del día\" con >100 likes cada uno"
+  "Publicar 10 reels de \"Tip rápido del día\" con >100 likes cada uno",
+  "Obtener al menos 20 comentarios en stories \"Mito o realidad\" durante la semana"
  ],
  "metricas": {
   "publicaciones_medidas": 25,
   "media_por_formato": {
-   "reel": 54.0,
+   "reel": 52.8,
    "post": 3.0,
    "carrusel": 4.0
   },
@@ -71,18 +77,10 @@
    {
     "tipo": "reel",
     "date": "2026-11-22",
-    "eng": 102,
-    "likes": 102,
+    "eng": 103,
+    "likes": 103,
     "com": 0,
     "tema": "En ACC, compara un clic de barra delantera en curvas medias: cambia solo ese ajuste y mide la salida. Guarda e"
-   },
-   {
-    "tipo": "reel",
-    "date": "2026-10-11",
-    "eng": 97,
-    "likes": 97,
-    "com": 0,
-    "tema": "¿5 Nm o 12 Nm? La diferencia es clave en sensaciones, fatiga y control. Elige tu base con criterio y domina ca"
    },
    {
     "tipo": "reel",
@@ -99,6 +97,14 @@
     "likes": 87,
     "com": 0,
     "tema": "En Daytona, el rebufo puede darte la pasada o dejarte sin tracción. Aprende a elegir el momento y la línea par"
+   },
+   {
+    "tipo": "reel",
+    "date": "2026-11-26",
+    "eng": 76,
+    "likes": 76,
+    "com": 0,
+    "tema": "En ACC y Spa, la lluvia vuelve resbaladiza la goma acumulada. Prueba una trazada alternativa, frena antes y co"
    },
    {
     "tipo": "reel",
@@ -136,5 +142,5 @@
    }
   ]
  },
- "resumen_para_dueño": "Esta semana seguimos en fase de descubrimiento, centrando el contenido en reels de alto rendimiento y reforzando nuestras series estrella. El arco de la semana gira alrededor de la primera curva para ofrecer valor inmediato y conectar los tips, mitos y la app. Evitamos ventas directas y mantenemos el tono energético y cercano para construir confianza y comunidad."
+ "resumen_para_dueño": "Esta semana reforzamos el pilar de la primera curva con reels de tips muy concretos, que ya demostraron mayor engagement. Mantendremos las series que funcionan (Tip rápido, Mito o realidad y Detrás de la app) y cumpliremos las promesas pendientes de encuesta y carrusel para seguir construyendo confianza y comunidad."
 }
