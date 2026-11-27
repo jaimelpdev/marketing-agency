@@ -56,7 +56,7 @@
     "caption": "Compara tus vueltas con la telemetría para descubrir dónde pierdes tiempo exactamente. ¿Analizas tus datos después de cada sesión de práctica?\n\n#simracing #telemetria #app #simdriver #mejuratutiempo",
     "nota": 8.0,
     "created": "2026-11-20",
-    "status": "usada",
+    "status": "descartada",
     "veo": {
       "clips": [
         {
@@ -90,7 +90,8 @@
     ],
     "cover": "media/u_4163e9db06d1/bolsa/b-2026-11-20-02-reel/cover.jpg",
     "listo": "2026-11-22T23:04",
-    "usada": "2026-11-27-auto-reel"
+    "usada": "2026-11-27-auto-reel",
+    "motivo": "Más de una pantalla, o la pantalla fuera de su sitio (aparece una segunda pantalla arriba)."
   },
   {
     "id": "b-2026-11-20-03-historia",
@@ -139,7 +140,7 @@
     "caption": "",
     "nota": 8.0,
     "created": "2026-11-20",
-    "status": "usada",
+    "status": "descartada",
     "veo": {
       "clips": [
         {
@@ -168,7 +169,8 @@
     ],
     "cover": "media/u_4163e9db06d1/bolsa/b-2026-11-20-04-historia/cover.jpg",
     "listo": "2026-11-24T01:28",
-    "usada": "2026-11-28-auto-historia"
+    "usada": "2026-11-28-auto-historia",
+    "motivo": "Logos de marcas reales grandes y visibles (Ferrari en el volante en el fotograma 6)"
   },
   {
     "id": "b-2026-11-20-05-reel",
@@ -227,7 +229,7 @@
     "caption": "Comparar tus vueltas paso a paso es la clave para dejar de perder décimas en pista. ¿Sueles revisar tus datos después de cada sesión?\n\n#simracing #telemetria #app #racingtips #evolución",
     "nota": 8.0,
     "created": "2026-11-20",
-    "status": "lista",
+    "status": "descartada",
     "veo": {
       "clips": [
         {
@@ -265,7 +267,9 @@
       "media/u_4163e9db06d1/bolsa/b-2026-11-20-06-reel/video.mp4"
     ],
     "cover": "media/u_4163e9db06d1/bolsa/b-2026-11-20-06-reel/cover.jpg",
-    "listo": "2026-11-25T23:29"
+    "listo": "2026-11-25T23:29",
+    "revisada": true,
+    "motivo": "c) Más de una pantalla, o la pantalla fuera de su sitio (no está delante del volante), flotando o deformada."
   },
   {
     "id": "b-2026-11-20-07-reel",
@@ -324,7 +328,7 @@
     "caption": "Frena con un punto de referencia y suelta suavemente al girar. La mirada al vértice te ayuda a trazar la línea perfecta. ¿Cuál es tu referencia para la primera curva?\n\n#simracing #firstcorner #telemetría #racingtips #app",
     "nota": 8.0,
     "created": "2026-11-25",
-    "status": "lista",
+    "status": "usada",
     "dir": 2,
     "veo": {
       "clips": [
@@ -363,7 +367,9 @@
       "media/u_4163e9db06d1/bolsa/b-2026-11-25-01-reel/video.mp4"
     ],
     "cover": "media/u_4163e9db06d1/bolsa/b-2026-11-25-01-reel/cover.jpg",
-    "listo": "2026-11-27T00:14"
+    "listo": "2026-11-27T00:14",
+    "revisada": true,
+    "usada": "2026-11-27-auto-reel"
   },
   {
     "id": "b-2026-11-25-02-reel",

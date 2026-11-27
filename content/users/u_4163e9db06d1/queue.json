@@ -155,34 +155,29 @@
     "date": "2026-11-26",
     "source": "auto",
     "tipo": "reel",
-    "tema": "Uso de la telemetría para mejorar",
+    "tema": "Primera curva: punto de referencia y trail braking",
     "publishAt": "2026-11-27T21:02:00+01:00",
-    "caption": "Compara tus vueltas con la telemetría para descubrir dónde pierdes tiempo exactamente. ¿Analizas tus datos después de cada sesión de práctica?\n\n#simracing #telemetria #app #simdriver #mejuratutiempo",
+    "caption": "Frena con un punto de referencia y suelta suavemente al girar. La mirada al vértice te ayuda a trazar la línea perfecta. ¿Cuál es tu referencia para la primera curva?\n\n#simracing #firstcorner #telemetría #racingtips #app",
     "media": [
-      "media/u_4163e9db06d1/bolsa/b-2026-11-20-02-reel/video.mp4"
+      "media/u_4163e9db06d1/bolsa/b-2026-11-25-01-reel/video.mp4"
     ],
     "status": "scheduled",
     "attempts": 0,
-    "bolsa": "b-2026-11-20-02-reel",
-    "cover": "media/u_4163e9db06d1/bolsa/b-2026-11-20-02-reel/cover.jpg",
-    "zernioPostId": "6b07fc10496c1f29bcbc7b4b"
+    "bolsa": "b-2026-11-25-01-reel",
+    "cover": "media/u_4163e9db06d1/bolsa/b-2026-11-25-01-reel/cover.jpg",
+    "zernioPostId": "6b099c3ba48f9636741dc515"
   },
   {
     "id": "2026-11-28-auto-historia",
     "date": "2026-11-26",
     "source": "auto",
     "tipo": "historia",
-    "tema": "Acelerador progresivo en salida de curva",
+    "tema": "",
     "publishAt": "2026-11-28T09:00:00+01:00",
     "caption": "",
-    "media": [
-      "media/u_4163e9db06d1/bolsa/b-2026-11-20-04-historia/video.mp4"
-    ],
-    "status": "scheduled",
+    "media": [],
+    "status": "hueco",
     "attempts": 0,
-    "bolsa": "b-2026-11-20-04-historia",
-    "cover": "media/u_4163e9db06d1/bolsa/b-2026-11-20-04-historia/cover.jpg",
-    "zernioPostId": "6b07fc1666f7af59520bb1cd",
     "veo": {
       "clips": [
         {
@@ -255,7 +250,8 @@
       "ritmo": "+16%",
       "musica": "hiphop",
       "hashtags": "#simracing #EauRoue #tips #telemetria #racinglife"
-    }
+    },
+    "revisada": true
   },
   {
     "id": "2026-11-26-r100508-post",
