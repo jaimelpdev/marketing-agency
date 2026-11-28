@@ -1,12 +1,6 @@
 {
   "items": [
     {
-      "date": "2026-10-22",
-      "tipo": "reel",
-      "src": "red",
-      "tema": "[IG · ❤️92] En Assetto Corsa, unos milímetros pueden evitar que la zaga golpee al atacar bordillos agresivos. Prueba el ajuste con método."
-    },
-    {
       "date": "2026-10-25",
       "tipo": "reel",
       "src": "red",
@@ -1140,6 +1134,17 @@
     },
     {
       "date": "2026-11-27",
+      "tema": "Telemetría para afinar zona de frenado",
+      "formato": "enlace",
+      "tipo": "historia",
+      "layout": "faceless",
+      "plantilla": 523,
+      "look": 39,
+      "serie": "",
+      "objetivo": ""
+    },
+    {
+      "date": "2026-11-27",
       "tipo": "reel",
       "src": "red",
       "tema": "[IG · ❤️10] Frena con un punto de referencia y suelta suavemente al girar. La mirada al vértice te ayuda a trazar la línea perfecta. ¿Cuál es tu referen"
@@ -1212,11 +1217,11 @@
     },
     {
       "date": "2026-11-27",
-      "tema": "Telemetría para afinar zona de frenado",
-      "formato": "enlace",
-      "tipo": "historia",
-      "layout": "faceless",
-      "plantilla": 523,
+      "tema": "Setup avanzado para Spa bajo lluvia y presión de neumáticos",
+      "formato": "antes y después",
+      "tipo": "carrusel",
+      "layout": "cine",
+      "plantilla": 930,
       "look": 39,
       "serie": "",
       "objetivo": ""

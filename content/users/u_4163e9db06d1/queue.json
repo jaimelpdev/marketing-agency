@@ -285,23 +285,23 @@
     "fijo": true
   },
   {
-    "id": "2026-11-27-02-carrusel",
-    "date": "2026-11-27",
-    "source": "auto",
+    "id": "2026-11-28-r005308-carrusel",
+    "date": "2026-11-28",
+    "source": "redo",
     "tipo": "carrusel",
-    "tema": "Setup paso a paso para Spa con enlaces a la app",
+    "tema": "Setup avanzado de presión de neumáticos para lluvia",
     "publishAt": "2026-12-01T13:00:00+01:00",
-    "caption": "Configura tu coche en Spa paso a paso para bajar tus tiempos por vuelta.\n\n→ Usa una base estable para aprender antes de tocar el setup.\n→ Cambia un solo parámetro cada vez y pruébalo en varias vueltas.\n→ Revisa las presiones de neumáticos en caliente tras unas vueltas.\n→ Ajusta el reparto de frenada para ayudar a que el coche gire 🏁\n\nGuarda este post para tu próxima sesión en pista.\n\n#simracing #setup #spafrancorchamps #assettoemplace #iracing",
+    "caption": "Llueve y pierdes el control? Domina la presión de los neumáticos en mojado.\n\n→ Cada neumático tiene una ventana de presiones en caliente para dar el mejor agarre en pista.\n→ Mide siempre tras dar vueltas completas, nunca en frío en el garaje.\n→ Modifica un solo parámetro del setup y comprueba si mejora el agarre.\n\nLAPRIQ analiza las presiones vuelta a vuelta para ayudarte a mejorar. Descárgala gratis desde el enlace de la bio\n\n#simracing #setup #lluvia #telemetria",
     "media": [
-      "media/u_4163e9db06d1/2026-11-27/2026-11-27-02-carrusel/01.jpg",
-      "media/u_4163e9db06d1/2026-11-27/2026-11-27-02-carrusel/02.jpg",
-      "media/u_4163e9db06d1/2026-11-27/2026-11-27-02-carrusel/03.jpg",
-      "media/u_4163e9db06d1/2026-11-27/2026-11-27-02-carrusel/04.jpg",
-      "media/u_4163e9db06d1/2026-11-27/2026-11-27-02-carrusel/05.jpg",
-      "media/u_4163e9db06d1/2026-11-27/2026-11-27-02-carrusel/06.jpg"
+      "media/u_4163e9db06d1/2026-11-28/2026-11-28-r005308-carrusel/01.jpg",
+      "media/u_4163e9db06d1/2026-11-28/2026-11-28-r005308-carrusel/02.jpg",
+      "media/u_4163e9db06d1/2026-11-28/2026-11-28-r005308-carrusel/03.jpg",
+      "media/u_4163e9db06d1/2026-11-28/2026-11-28-r005308-carrusel/04.jpg",
+      "media/u_4163e9db06d1/2026-11-28/2026-11-28-r005308-carrusel/05.jpg",
+      "media/u_4163e9db06d1/2026-11-28/2026-11-28-r005308-carrusel/06.jpg"
     ],
     "status": "scheduled",
     "attempts": 0,
-    "zernioPostId": "6b0a0d1fd0d11d6d5d1e389f"
+    "zernioPostId": "6b0a1a3e0c21d5e5d6f136d8"
   }
 ]
